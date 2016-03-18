@@ -1,21 +1,31 @@
 #include <QDebug>
 #include <QStylePainter>
 #include <QStyleOptionButton>
+#include <QMouseEvent>
 #include "flatbutton.h"
 
 FlatButton::FlatButton(QWidget *parent)
-    : QAbstractButton(parent)
+    : QAbstractButton(parent),
+      _overlay(new RippleOverlay(this))
 {
 }
 
 FlatButton::FlatButton(const QString &text, QWidget *parent)
-    : QAbstractButton(parent)
+    : QAbstractButton(parent),
+      _overlay(new RippleOverlay(this))
 {
     setText(text);
 }
 
 FlatButton::~FlatButton()
 {
+}
+
+void FlatButton::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event)
+
+    updateOverlayGeometry();
 }
 
 void FlatButton::paintEvent(QPaintEvent *event)
@@ -43,6 +53,18 @@ void FlatButton::paintEvent(QPaintEvent *event)
         painter.setOpacity(0.1);
         painter.fillRect(r, brush);
     }
+}
+
+void FlatButton::mousePressEvent(QMouseEvent *event)
+{
+    _overlay->addRipple(event->pos());
+}
+
+void FlatButton::mouseReleaseEvent(QMouseEvent *event)
+{
+    Q_UNUSED(event)
+
+    emit clicked();
 }
 
 void FlatButton::enterEvent(QEvent *event)
