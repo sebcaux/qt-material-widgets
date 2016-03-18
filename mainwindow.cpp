@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     FlatButton *flatButton = new FlatButton;
     flatButton->setText("My button");
+
     layout->addWidget(flatButton);
     flatButton->setMinimumHeight(40);
 
