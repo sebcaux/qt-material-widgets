@@ -2,6 +2,7 @@
 #define FLATBUTTON_H
 
 #include <QAbstractButton>
+#include <QStyleOptionButton>
 #include "rippleoverlay.h"
 
 class FlatButton : public QAbstractButton
@@ -13,6 +14,8 @@ public:
     explicit FlatButton(const QString &text, QWidget *parent = 0);
     ~FlatButton();
 
+    QSize sizeHint() const Q_DECL_OVERRIDE;
+
 protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
@@ -23,6 +26,7 @@ protected:
 
 private:
     inline void updateOverlayGeometry() { _overlay->setGeometry(rect()); }
+    QStyleOptionButton getStyleOption() const;
 
     RippleOverlay *const _overlay;
 };

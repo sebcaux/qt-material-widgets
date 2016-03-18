@@ -1,7 +1,7 @@
 #include <QDebug>
 #include <QStylePainter>
-#include <QStyleOptionButton>
 #include <QMouseEvent>
+#include <QApplication>
 #include "flatbutton.h"
 
 FlatButton::FlatButton(QWidget *parent)
@@ -21,6 +21,39 @@ FlatButton::~FlatButton()
 {
 }
 
+QSize FlatButton::sizeHint() const
+{
+    // Mostly lifted from QPushButton
+
+    ensurePolished();
+
+    int w = 0,
+        h = 0;
+
+    QStyleOptionButton opt = getStyleOption();
+
+#ifndef QT_NO_ICON
+    if (!icon().isNull()) {
+        int ih = opt.iconSize.height();
+        int iw = opt.iconSize.width() + 4;
+        w += iw;
+        h = qMax(h, ih);
+    }
+#endif
+    QString s(text());
+    bool empty = s.isEmpty();
+    if (empty)
+        s = QString::fromLatin1("XXXX");
+    QFontMetrics fm = fontMetrics();
+    QSize sz = fm.size(Qt::TextShowMnemonic, s);
+    if(!empty || !w)
+        w += sz.width();
+    if(!empty || !h)
+        h = qMax(h, sz.height());
+    return (style()->sizeFromContents(QStyle::CT_PushButton, &opt, QSize(w, h), this).
+            expandedTo(QApplication::globalStrut()));
+}
+
 void FlatButton::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event)
@@ -34,15 +67,7 @@ void FlatButton::paintEvent(QPaintEvent *event)
 
     QStylePainter painter(this);
 
-    QStyleOptionButton option;
-    option.initFrom(this);
-    option.features = QStyleOptionButton::None;
-    option.features |= QStyleOptionButton::Flat;
-    if (isChecked())
-        option.state |= QStyle::State_On;
-    option.text = text();
-    option.icon = icon();
-    option.iconSize = iconSize();
+    QStyleOptionButton option = getStyleOption();
 
     painter.drawControl(QStyle::CE_PushButton, option);
 
@@ -79,4 +104,18 @@ void FlatButton::leaveEvent(QEvent *event)
     Q_UNUSED(event)
 
     update();
+}
+
+QStyleOptionButton FlatButton::getStyleOption() const
+{
+    QStyleOptionButton option;
+    option.initFrom(this);
+    option.features = QStyleOptionButton::None;
+    option.features |= QStyleOptionButton::Flat;
+    if (isChecked())
+        option.state |= QStyle::State_On;
+    option.text = text();
+    option.icon = icon();
+    option.iconSize = iconSize();
+    return option;
 }
