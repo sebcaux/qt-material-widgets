@@ -40,15 +40,16 @@ QSize FlatButton::sizeHint() const
         h = qMax(h, ih);
     }
 #endif
+
     QString s(text());
     bool empty = s.isEmpty();
     if (empty)
         s = QString::fromLatin1("XXXX");
     QFontMetrics fm = fontMetrics();
     QSize sz = fm.size(Qt::TextShowMnemonic, s);
-    if(!empty || !w)
+    if (!empty || !w)
         w += sz.width();
-    if(!empty || !h)
+    if (!empty || !h)
         h = qMax(h, sz.height());
     return (style()->sizeFromContents(QStyle::CT_PushButton, &opt, QSize(w, h), this).
             expandedTo(QApplication::globalStrut()));
