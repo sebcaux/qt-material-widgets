@@ -19,10 +19,7 @@ AppBar::AppBar(QWidget *parent)
     QLabel *label = new QLabel("App");
     layout->addWidget(label);
 
-    QSizePolicy policy;
-    policy.setHorizontalPolicy(QSizePolicy::MinimumExpanding);
-    policy.setVerticalPolicy(QSizePolicy::Maximum);
-    setSizePolicy(policy);
+    setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Maximum));
 
     setMinimumHeight(64);
 }
