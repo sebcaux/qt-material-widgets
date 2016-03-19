@@ -87,7 +87,7 @@ void MainWindow::showWidget(QAction *action)
     } else if ("FlatButton" == text) {
         _layout->setCurrentWidget(_flatButtonExamples);
     } else if ("IconButton" == text) {
-        _layout->setCurrentWidget(_about);
+        _layout->setCurrentWidget(_iconButtonExamples);
     } else {
         _layout->setCurrentWidget(_about);
     }
@@ -100,6 +100,7 @@ void MainWindow::_initWidget()
 
     _layout->addWidget(_about);
     _layout->addWidget(_flatButtonExamples);
+    _layout->addWidget(_iconButtonExamples);
 
     setCentralWidget(widget);
 }
