@@ -4,9 +4,9 @@
 #include <QMenuBar>
 #include <QLabel>
 #include "mainwindow.h"
-#include "flatbutton.h"
-#include "iconbutton.h"
-#include "appbar.h"
+#include "components/flatbutton.h"
+#include "components/iconbutton.h"
+#include "components/appbar.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
