@@ -15,19 +15,20 @@ public:
     ~IconButton();
 
     QSize sizeHint() const Q_DECL_OVERRIDE;
+    void setGeometryWidget(QWidget *widget);
 
 protected:
-    void moveEvent(QMoveEvent *event) Q_DECL_OVERRIDE;
-    void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     bool event(QEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
 
 private:
     void updateOverlayGeometry();
     QStyleOptionButton getStyleOption() const;
 
     RippleOverlay *const _overlay;
+    QWidget       *_geometryWidget;
 };
 
 #endif // ICONBUTTON_H

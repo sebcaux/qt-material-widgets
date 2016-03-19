@@ -8,13 +8,16 @@
 
 IconButton::IconButton(const QIcon &icon, QWidget *parent)
     : QAbstractButton(parent),
-      _overlay(new RippleOverlay(parent))
+      _overlay(new RippleOverlay(parent)),
+      _geometryWidget(0)
 {
     setIcon(icon);
 
     QSizePolicy policy;
     policy.setWidthForHeight(true);
     setSizePolicy(policy);
+
+    setGeometryWidget(this);
 }
 
 IconButton::~IconButton()
@@ -32,17 +35,13 @@ QSize IconButton::sizeHint() const
             expandedTo(QApplication::globalStrut()));
 }
 
-void IconButton::moveEvent(QMoveEvent *event)
+void IconButton::setGeometryWidget(QWidget *widget)
 {
-    Q_UNUSED(event)
-
-    updateOverlayGeometry();
-}
-
-void IconButton::resizeEvent(QResizeEvent *event)
-{
-    Q_UNUSED(event)
-
+    if (_geometryWidget) {
+        _geometryWidget->removeEventFilter(this);
+    }
+    _geometryWidget = widget;
+    widget->installEventFilter(this);
     updateOverlayGeometry();
 }
 
@@ -62,28 +61,36 @@ void IconButton::mousePressEvent(QMouseEvent *event)
     if (!_overlay)
         return;
 
-    const QRect &size = geometry();
-    _overlay->addRipple(QPoint(size.width(), size.height()), iconSize().width());
+    QPoint p(_overlay->width(), _overlay->height());
+    _overlay->addRipple(p/2, iconSize().width());
 
     emit clicked();
 }
 
 bool IconButton::event(QEvent *event)
 {
-    if (QEvent::ParentChange == event->type()) {
+    if (QEvent::ParentChange == event->type() && parentWidget()) {
         _overlay->setParent(parentWidget());
     }
     return QAbstractButton::event(event);
 }
 
+bool IconButton::eventFilter(QObject *obj, QEvent *event)
+{
+    const QEvent::Type type = event->type();
+    if (QEvent::Resize == type || QEvent::Move == type) {
+        updateOverlayGeometry();
+    }
+    return QAbstractButton::eventFilter(obj, event);
+}
+
 void IconButton::updateOverlayGeometry()
 {
-    if (!_overlay)
+    if (!_overlay || !_geometryWidget)
         return;
 
-    int x, y, w, h;
-    geometry().getRect(&x, &y, &w, &h);
-    _overlay->setGeometry(x-w/2, y-h/2, w*2, h*2);
+    const int s = iconSize().width()/2;
+    _overlay->setGeometry(_geometryWidget->geometry().adjusted(-s, -s, s, s));
 }
 
 QStyleOptionButton IconButton::getStyleOption() const
