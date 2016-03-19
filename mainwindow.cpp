@@ -1,5 +1,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QMenu>
+#include <QMenuBar>
 #include <QLabel>
 #include "mainwindow.h"
 #include "flatbutton.h"
@@ -9,6 +11,19 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    QMenu *components = new QMenu("Components");
+    components->addAction("AppBar");
+
+    QMenu *buttons = new QMenu("Buttons");
+    components->addMenu(buttons);
+
+    buttons->addAction("FlatButton");
+    buttons->addAction("IconButton");
+
+    menuBar()->addMenu(components);
+
+    // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
+
     QVBoxLayout *layout = new QVBoxLayout;
     QWidget *widget = new QWidget;
     widget->setLayout(layout);
@@ -50,6 +65,8 @@ MainWindow::MainWindow(QWidget *parent)
     QPushButton *button2 = new QPushButton("Test #2");
     layout->addWidget(button2);
     button2->setIcon(icon);
+
+    // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 }
 
 MainWindow::~MainWindow()
