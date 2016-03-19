@@ -25,10 +25,9 @@ MainWindow::MainWindow(QWidget *parent)
     _initWidget();
     _initMenu();
 
+    /*
     // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 
-
-    /*
     QVBoxLayout *layout = new QVBoxLayout;
     QWidget *widget = new QWidget;
     widget->setLayout(layout);
