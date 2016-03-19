@@ -1,0 +1,4 @@
+#ifndef EXAMPLEVIEW_H
+#define EXAMPLEVIEW_H
+
+#endif // EXAMPLEVIEW_H
