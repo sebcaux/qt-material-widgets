@@ -22,7 +22,14 @@ SOURCES += main.cpp\
     components/textfield.cpp \
     components/table.cpp \
     lib/ripple.cpp \
-    lib/rippleoverlay.cpp
+    lib/rippleoverlay.cpp \
+    examples/frame.cpp \
+    examples/examplelist.cpp \
+    examples/flatbuttonexamples.cpp \
+    examples/exampleview.cpp \
+    examples/about.cpp \
+    examples/appbarexamples.cpp \
+    examples/iconbuttonexamples.cpp
 
 HEADERS  += mainwindow.h \
     style.h \
@@ -40,4 +47,11 @@ HEADERS  += mainwindow.h \
     components/textfield.h \
     components/table.h \
     lib/ripple.h \
-    lib/rippleoverlay.h
+    lib/rippleoverlay.h \
+    examples/frame.h \
+    examples/examplelist.h \
+    examples/flatbuttonexamples.h \
+    examples/exampleview.h \
+    examples/about.h \
+    examples/appbarexamples.h \
+    examples/iconbuttonexamples.h
