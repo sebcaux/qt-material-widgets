@@ -82,7 +82,7 @@ void MainWindow::showWidget(QAction *action)
 {
     QString text(action->text());
     if ("AppBar" == text) {
-        _layout->setCurrentWidget(_about);
+        _layout->setCurrentWidget(_appBarExamples);
     } else if ("FlatButton" == text) {
         _layout->setCurrentWidget(_flatButtonExamples);
     } else if ("IconButton" == text) {
@@ -100,6 +100,7 @@ void MainWindow::_initWidget()
     _layout->addWidget(_about);
     _layout->addWidget(_flatButtonExamples);
     _layout->addWidget(_iconButtonExamples);
+    _layout->addWidget(_appBarExamples);
 
     setCentralWidget(widget);
 }
