@@ -3,7 +3,7 @@
 
 #include <QAbstractButton>
 #include <QStyleOptionButton>
-#include "rippleoverlay.h"
+#include "../lib/rippleoverlay.h"
 
 class FlatButton : public QAbstractButton
 {

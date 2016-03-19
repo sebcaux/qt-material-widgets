@@ -4,7 +4,7 @@
 #include <QEvent>
 #include <QDebug>
 #include "iconbutton.h"
-#include "rippleoverlay.h"
+#include "../lib/rippleoverlay.h"
 
 IconButton::IconButton(const QIcon &icon, QWidget *parent)
     : QAbstractButton(parent),

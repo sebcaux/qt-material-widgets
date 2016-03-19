@@ -21,8 +21,8 @@ SOURCES += main.cpp\
     components/tabs.cpp \
     components/textfield.cpp \
     components/table.cpp \
-    ripple.cpp \
-    rippleoverlay.cpp
+    lib/ripple.cpp \
+    lib/rippleoverlay.cpp
 
 HEADERS  += mainwindow.h \
     style.h \
@@ -39,5 +39,5 @@ HEADERS  += mainwindow.h \
     components/tabs.h \
     components/textfield.h \
     components/table.h \
-    ripple.h \
-    rippleoverlay.h
+    lib/ripple.h \
+    lib/rippleoverlay.h
