@@ -11,6 +11,10 @@ IconButton::IconButton(const QIcon &icon, QWidget *parent)
       _overlay(new RippleOverlay(parent))
 {
     setIcon(icon);
+
+    QSizePolicy policy;
+    policy.setWidthForHeight(true);
+    setSizePolicy(policy);
 }
 
 IconButton::~IconButton()
