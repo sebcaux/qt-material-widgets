@@ -6,8 +6,8 @@ About::About(QWidget *parent)
     setFrameShape(QFrame::NoFrame);
     setText(
         "<center>"
-        "<h1>About</h1>"
-        "<p>Lorem ipsum, blah blah</p>"
+        "<h1>Qt Material Desktop Widgets</h1>"
+        "<p>&copy; 2016 Laserpants Inc.</p>"
         "</center>"
     );
 }
