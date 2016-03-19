@@ -1,4 +1,5 @@
 #include <QLayout>
+#include <QEvent>
 #include "iconbuttonexamples.h"
 #include "components/iconbutton.h"
 #include "exampleview.h"
@@ -20,6 +21,10 @@ IconButtonExamples::IconButtonExamples(QWidget *parent)
             "IconButton *iconButton = new IconButton(QIcon(\"face.svg\"));\n"
         );
         frame->setWidget(view);
+
+        iconButton->setParent(view->parentWidget());
+        iconButton->setGeometryWidget(view);
+        iconButton->setMinimumSize(50, 50);
 
         layout->addWidget(frame);
     }
