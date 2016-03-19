@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
     buttons->addAction("FlatButton");
     buttons->addAction("IconButton");
 
+    components->addAction("Tabs");
+
     menuBar()->addMenu(components);
 
     // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
