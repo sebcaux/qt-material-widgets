@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    a.setStyle(new Style);
+    //a.setStyle(new Style);
 
     MainWindow w;
     w.show();
