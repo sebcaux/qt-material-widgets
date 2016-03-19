@@ -30,12 +30,12 @@ QSize FlatButton::sizeHint() const
     int w = 0,
         h = 0;
 
-    QStyleOptionButton opt = getStyleOption();
+    QStyleOptionButton option(getStyleOption());
 
 #ifndef QT_NO_ICON
     if (!icon().isNull()) {
-        int ih = opt.iconSize.height();
-        int iw = opt.iconSize.width() + 4;
+        int ih = option.iconSize.height();
+        int iw = option.iconSize.width() + 4;
         w += iw;
         h = qMax(h, ih);
     }
@@ -51,7 +51,7 @@ QSize FlatButton::sizeHint() const
         w += sz.width();
     if (!empty || !h)
         h = qMax(h, sz.height());
-    return (style()->sizeFromContents(QStyle::CT_PushButton, &opt, QSize(w, h), this).
+    return (style()->sizeFromContents(QStyle::CT_PushButton, &option, QSize(w, h), this).
             expandedTo(QApplication::globalStrut()));
 }
 
@@ -68,12 +68,12 @@ void FlatButton::paintEvent(QPaintEvent *event)
 
     QStylePainter painter(this);
 
-    QStyleOptionButton option = getStyleOption();
+    QStyleOptionButton option(getStyleOption());
 
     painter.drawControl(QStyle::CE_PushButton, option);
 
     if (underMouse()) {
-        QRect r = rect();
+        QRect r(rect());
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
         painter.setOpacity(0.1);
@@ -83,6 +83,9 @@ void FlatButton::paintEvent(QPaintEvent *event)
 
 void FlatButton::mousePressEvent(QMouseEvent *event)
 {
+    if (!_overlay)
+        return;
+
     _overlay->addRipple(event->pos());
 }
 
@@ -111,8 +114,7 @@ QStyleOptionButton FlatButton::getStyleOption() const
 {
     QStyleOptionButton option;
     option.initFrom(this);
-    option.features = QStyleOptionButton::None;
-    option.features |= QStyleOptionButton::Flat;
+    option.features = QStyleOptionButton::Flat;
     if (isChecked())
         option.state |= QStyle::State_On;
     option.text = text();

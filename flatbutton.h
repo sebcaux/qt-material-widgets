@@ -25,7 +25,7 @@ protected:
     void leaveEvent(QEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    inline void updateOverlayGeometry() { _overlay->setGeometry(rect()); }
+    inline void updateOverlayGeometry() { if (_overlay) { _overlay->setGeometry(rect()); } }
     QStyleOptionButton getStyleOption() const;
 
     RippleOverlay *const _overlay;
