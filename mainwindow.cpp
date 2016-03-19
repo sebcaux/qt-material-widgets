@@ -4,6 +4,7 @@
 #include "mainwindow.h"
 #include "flatbutton.h"
 #include "iconbutton.h"
+#include "appbar.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,6 +14,9 @@ MainWindow::MainWindow(QWidget *parent)
     widget->setLayout(layout);
 
     setCentralWidget(widget);
+
+    AppBar *appBar = new AppBar;
+    layout->addWidget(appBar);
 
     QPushButton *button1 = new QPushButton("Test #1");
     layout->addWidget(button1);
