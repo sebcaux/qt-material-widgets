@@ -1,9 +1,10 @@
 #ifndef STYLE_H
 #define STYLE_H
 
-#include <QCommonStyle>
+#include <QProxyStyle>
 
-class Style : public QCommonStyle
+//class Style : public QCommonStyle
+class Style : public QProxyStyle
 {
     Q_OBJECT
 
