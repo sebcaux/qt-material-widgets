@@ -25,12 +25,14 @@ void Style::drawControl(ControlElement element, const QStyleOption *opt,
     qDebug() << element;
 
     switch (element) {
+    /*
     case CE_CheckBox:
         if (const QStyleOptionButton *item = qstyleoption_cast<const QStyleOptionButton *>(opt)) {
 
         }
         p->fillRect(opt->rect, Qt::black);
         break;
+        */
     /*
     case CE_FocusFrame:
         p->fillRect(opt->rect, opt->palette.foreground());
