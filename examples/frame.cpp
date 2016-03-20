@@ -17,7 +17,6 @@ Frame::Frame(QWidget *parent)
 
     _edit->setTextInteractionFlags(Qt::TextBrowserInteraction);
     _edit->setFont(font);
-    _edit->setWordWrapMode(QTextOption::NoWrap);
     _layout->addWidget(_edit);
 
     _layout->setStretch(0, 1);

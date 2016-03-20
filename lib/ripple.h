@@ -17,10 +17,10 @@ public:
     explicit Ripple(const QPoint &center, QObject *parent = 0);
     ~Ripple();
 
-    void setRadius(qreal radius);
+    inline void setRadius(qreal radius) { _radius = radius; emit valueChanged(); }
     inline qreal radius() const { return _radius; }
 
-    void setOpacity(qreal opacity);
+    inline void setOpacity(qreal opacity) { _opacity = opacity; emit valueChanged(); }
     inline qreal opacity() const { return _opacity; }
 
     inline const QPoint &center() const { return _center; }
