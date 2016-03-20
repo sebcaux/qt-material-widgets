@@ -58,7 +58,12 @@ void MainWindow::_initWidget()
 
 void MainWindow::_initMenu() const
 {
-    QMenu *components = new QMenu("Components");
+    QMenu *file = new QMenu("&File");
+    QMenu *components = new QMenu("&Components");
+    QMenu *settings = new QMenu("&Settings");
+    QMenu *examples = new QMenu("&Examples");
+    QMenu *help = new QMenu("&Help");
+
     components->addAction("AppBar");
 
     QMenu *buttons = new QMenu("Buttons");
@@ -77,7 +82,11 @@ void MainWindow::_initMenu() const
     components->addAction("Tabs");
     components->addAction("Textfield");
 
+    menuBar()->addMenu(file);
     menuBar()->addMenu(components);
+    menuBar()->addMenu(settings);
+    menuBar()->addMenu(examples);
+    menuBar()->addMenu(help);
 
     connect(components, SIGNAL(triggered(QAction *)), this, SLOT(showWidget(QAction *)));
 }
