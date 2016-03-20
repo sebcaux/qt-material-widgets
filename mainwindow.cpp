@@ -8,6 +8,7 @@
 #include "examples/iconbuttonexamples.h"
 #include "examples/appbarexamples.h"
 #include "examples/tabsexamples.h"
+#include "examples/tableexamples.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -16,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
       _iconButtonExamples(new IconButtonExamples),
       _appBarExamples(new AppBarExamples),
       _tabsExamples(new TabsExamples),
+      _tableExamples(new TableExamples),
       _about(new About)
 {
     _initWidget();
@@ -37,6 +39,8 @@ void MainWindow::showWidget(QAction *action)
         _layout->setCurrentWidget(_iconButtonExamples);
     } else if ("Tabs" == text) {
         _layout->setCurrentWidget(_tabsExamples);
+    } else if ("Table" == text) {
+        _layout->setCurrentWidget(_tableExamples);
     } else {
         _layout->setCurrentWidget(_about);
     }
@@ -52,6 +56,7 @@ void MainWindow::_initWidget()
     _layout->addWidget(_iconButtonExamples);
     _layout->addWidget(_appBarExamples);
     _layout->addWidget(_tabsExamples);
+    _layout->addWidget(_tableExamples);
 
     setCentralWidget(widget);
 }
