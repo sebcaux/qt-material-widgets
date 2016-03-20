@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     examples/about.cpp \
     examples/appbarexamples.cpp \
     examples/iconbuttonexamples.cpp \
-    examples/tabsexamples.cpp
+    examples/tabsexamples.cpp \
+    examples/tableexamples.cpp
 
 HEADERS  += mainwindow.h \
     style.h \
@@ -57,4 +58,5 @@ HEADERS  += mainwindow.h \
     examples/appbarexamples.h \
     examples/iconbuttonexamples.h \
     components/tabsexamples.h \
-    examples/tabsexamples.h
+    examples/tabsexamples.h \
+    examples/tableexamples.h
