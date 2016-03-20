@@ -1,3 +1,6 @@
+#include <QDebug>
+#include <QEvent>
+#include <QHeaderView>
 #include "table.h"
 
 Table::Table(QWidget *parent)
@@ -13,7 +16,12 @@ Table::~Table()
 {
 }
 
-bool Table::eventFilter(QObject *obj, QEvent *event)
+void Table::paintEvent(QPaintEvent *event)
 {
-    return QTableWidget::eventFilter(obj, event);
+    QHeaderView *header = horizontalHeader();
+    for (int i = 0; i < header->count(); ++i) {
+        header->setSectionResizeMode(i, QHeaderView::Stretch);
+    }
+
+    QTableWidget::paintEvent(event);
 }
