@@ -3,11 +3,13 @@
 #include <QMouseEvent>
 #include <QApplication>
 #include "flatbutton.h"
+#include "style.h"
 
 FlatButton::FlatButton(QWidget *parent)
     : QAbstractButton(parent),
       _overlay(new RippleOverlay(this))
 {
+    setStyle(&Style::instance());
 }
 
 FlatButton::FlatButton(const QString &text, QWidget *parent)
@@ -15,6 +17,7 @@ FlatButton::FlatButton(const QString &text, QWidget *parent)
       _overlay(new RippleOverlay(this))
 {
     setText(text);
+    setStyle(&Style::instance());
 }
 
 FlatButton::~FlatButton()
@@ -51,8 +54,8 @@ QSize FlatButton::sizeHint() const
         w += sz.width();
     if (!empty || !h)
         h = qMax(h, sz.height());
-    return (style()->sizeFromContents(QStyle::CT_PushButton, &option, QSize(w, h), this).
-            expandedTo(QApplication::globalStrut()));
+    return (style()->sizeFromContents(QStyle::CT_PushButton, &option, QSize(w, h), this)
+           .expandedTo(QApplication::globalStrut()));
 }
 
 void FlatButton::resizeEvent(QResizeEvent *event)
@@ -68,11 +71,9 @@ void FlatButton::paintEvent(QPaintEvent *event)
 
     QStylePainter painter(this);
 
-    QStyleOptionButton option(getStyleOption());
+    painter.drawControl(QStyle::CE_PushButton, getStyleOption());
 
-    painter.drawControl(QStyle::CE_PushButton, option);
-
-    if (underMouse()) {
+    if (testAttribute(Qt::WA_Hover) && underMouse()) {
         QRect r(rect());
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);

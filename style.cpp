@@ -1,16 +1,8 @@
 #include <QDebug>
 #include <QPainter>
 #include <QStyleOption>
+#include <QStyleOptionButton>
 #include "style.h"
-
-Style::Style()
-    : QProxyStyle()
-{
-}
-
-Style::~Style()
-{
-}
 
 void Style::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p,
                           const QWidget *w) const
@@ -20,7 +12,7 @@ void Style::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter
     switch (pe) {
     case PE_FrameFocusRect:
         p->setPen(Qt::blue);
-        p->drawRect(opt->rect);
+        p->drawRect(opt->rect.adjusted(0, 0, -1, -1));
         break;
     default:
         QProxyStyle::drawPrimitive(pe, opt, p, w);
@@ -33,6 +25,12 @@ void Style::drawControl(ControlElement element, const QStyleOption *opt,
     qDebug() << element;
 
     switch (element) {
+    case CE_CheckBox:
+        if (const QStyleOptionButton *item = qstyleoption_cast<const QStyleOptionButton *>(opt)) {
+
+        }
+        p->fillRect(opt->rect, Qt::black);
+        break;
     /*
     case CE_FocusFrame:
         p->fillRect(opt->rect, opt->palette.foreground());

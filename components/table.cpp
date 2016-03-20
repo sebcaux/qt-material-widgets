@@ -2,6 +2,7 @@
 #include <QEvent>
 #include <QHeaderView>
 #include "table.h"
+#include "style.h"
 
 Table::Table(QWidget *parent)
     : QTableWidget(parent)
@@ -10,6 +11,8 @@ Table::Table(QWidget *parent)
     setSelectionMode(QAbstractItemView::SingleSelection);
     setSelectionBehavior(QAbstractItemView::SelectRows);
     setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+
+    setStyle(&Style::instance());
 }
 
 Table::~Table()

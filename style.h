@@ -3,14 +3,16 @@
 
 #include <QProxyStyle>
 
-//class Style : public QCommonStyle
 class Style : public QProxyStyle
 {
     Q_OBJECT
 
 public:
-    Style();
-    ~Style();
+    static Style &instance()
+    {
+        static Style instance;
+        return instance;
+    }
 
     void drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p,
                        const QWidget *w = 0) const Q_DECL_OVERRIDE;
@@ -24,7 +26,12 @@ public:
                          const QWidget *w = 0) const Q_DECL_OVERRIDE;
 
     int pixelMetric(PixelMetric m, const QStyleOption *opt = 0, const QWidget *widget = 0) const Q_DECL_OVERRIDE;
-};
 
+private:
+    Style() {}
+
+    Style(Style const&);
+    void operator=(Style const&);
+};
 
 #endif // STYLE_H

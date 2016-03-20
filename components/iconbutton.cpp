@@ -5,6 +5,7 @@
 #include <QDebug>
 #include "iconbutton.h"
 #include "../lib/rippleoverlay.h"
+#include "style.h"
 
 IconButton::IconButton(const QIcon &icon, QWidget *parent)
     : QAbstractButton(parent),
@@ -18,6 +19,8 @@ IconButton::IconButton(const QIcon &icon, QWidget *parent)
     setSizePolicy(policy);
 
     setGeometryWidget(this);
+
+    setStyle(&Style::instance());
 }
 
 IconButton::~IconButton()
