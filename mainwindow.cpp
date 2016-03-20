@@ -1,18 +1,13 @@
-#include <QVBoxLayout>
-#include <QPushButton>
 #include <QMenu>
 #include <QMenuBar>
-#include <QLabel>
 #include <QStackedLayout>
 #include <QDebug>
 #include "mainwindow.h"
-#include "components/flatbutton.h"
-#include "components/iconbutton.h"
-#include "components/appbar.h"
 #include "examples/about.h"
 #include "examples/flatbuttonexamples.h"
 #include "examples/iconbuttonexamples.h"
 #include "examples/appbarexamples.h"
+#include "examples/tabsexamples.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -20,58 +15,11 @@ MainWindow::MainWindow(QWidget *parent)
       _flatButtonExamples(new FlatButtonExamples),
       _iconButtonExamples(new IconButtonExamples),
       _appBarExamples(new AppBarExamples),
+      _tabsExamples(new TabsExamples),
       _about(new About)
 {
     _initWidget();
     _initMenu();
-
-    /*
-    // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
-
-    QVBoxLayout *layout = new QVBoxLayout;
-    QWidget *widget = new QWidget;
-    widget->setLayout(layout);
-
-    setCentralWidget(widget);
-
-    AppBar *appBar = new AppBar;
-    layout->addWidget(appBar);
-
-    QPushButton *button1 = new QPushButton("Test #1");
-    layout->addWidget(button1);
-
-    FlatButton *flatButton = new FlatButton;
-    flatButton->setText("My button");
-
-    QIcon icon("../qt-material-widgets/face.svg");
-    flatButton->setIcon(icon);
-    flatButton->setIconSize(QSize(64, 64));
-
-    layout->addWidget(flatButton);
-
-    // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
-
-    QHBoxLayout *hLayout = new QHBoxLayout;
-    QLabel *label = new QLabel("Hello");
-    label->setMaximumHeight(32);
-
-    IconButton *iconButton = new IconButton(icon);
-    iconButton->setText("My button sis afdadsfadsf adsfasdf");
-    iconButton->setIconSize(QSize(32, 32));
-
-    hLayout->addWidget(iconButton);
-    hLayout->addWidget(label);
-
-    layout->addLayout(hLayout);
-
-    // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
-
-    QPushButton *button2 = new QPushButton("Test #2");
-    layout->addWidget(button2);
-    button2->setIcon(icon);
-
-    // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
-    */
 }
 
 MainWindow::~MainWindow()
@@ -87,6 +35,8 @@ void MainWindow::showWidget(QAction *action)
         _layout->setCurrentWidget(_flatButtonExamples);
     } else if ("IconButton" == text) {
         _layout->setCurrentWidget(_iconButtonExamples);
+    } else if ("Tabs" == text) {
+        _layout->setCurrentWidget(_tabsExamples);
     } else {
         _layout->setCurrentWidget(_about);
     }
@@ -101,6 +51,7 @@ void MainWindow::_initWidget()
     _layout->addWidget(_flatButtonExamples);
     _layout->addWidget(_iconButtonExamples);
     _layout->addWidget(_appBarExamples);
+    _layout->addWidget(_tabsExamples);
 
     setCentralWidget(widget);
 }
@@ -116,7 +67,15 @@ void MainWindow::_initMenu() const
     buttons->addAction("FlatButton");
     buttons->addAction("IconButton");
 
+    components->addAction("Checkbox");
+    components->addAction("Dialog");
+    components->addAction("Menus");
+    components->addAction("List");
+    components->addAction("Slider");
+    components->addAction("Switches");
+    components->addAction("Table");
     components->addAction("Tabs");
+    components->addAction("Textfield");
 
     menuBar()->addMenu(components);
 

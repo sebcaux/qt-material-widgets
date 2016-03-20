@@ -7,6 +7,7 @@ class About;
 class FlatButtonExamples;
 class IconButtonExamples;
 class AppBarExamples;
+class TabsExamples;
 class QStackedLayout;
 
 class MainWindow : public QMainWindow
@@ -28,6 +29,7 @@ private:
     FlatButtonExamples *const _flatButtonExamples;
     IconButtonExamples *const _iconButtonExamples;
     AppBarExamples     *const _appBarExamples;
+    TabsExamples       *const _tabsExamples;
     About              *const _about;
 };
 
