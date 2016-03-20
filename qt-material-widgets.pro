@@ -57,6 +57,5 @@ HEADERS  += mainwindow.h \
     examples/about.h \
     examples/appbarexamples.h \
     examples/iconbuttonexamples.h \
-    components/tabsexamples.h \
     examples/tabsexamples.h \
     examples/tableexamples.h
