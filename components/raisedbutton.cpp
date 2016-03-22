@@ -9,6 +9,8 @@ RaisedButton::RaisedButton(QWidget *parent)
     : FlatButton(parent)
 {
     CustomShadowEffect *effect = new CustomShadowEffect;
+    effect->setBlurRadius(17);
+    effect->setDistance(6);
     setGraphicsEffect(effect);
     setAutoFillBackground(true);
 
@@ -18,7 +20,7 @@ RaisedButton::RaisedButton(QWidget *parent)
     animation->setTargetObject(effect);
     animation->setPropertyName("distance");
     animation->setStartValue(effect->distance());
-    animation->setEndValue(6);
+    animation->setEndValue(1);
     animation->setDuration(100);
     _group.addAnimation(animation);
 
@@ -26,7 +28,7 @@ RaisedButton::RaisedButton(QWidget *parent)
     animation->setTargetObject(effect);
     animation->setPropertyName("blurRadius");
     animation->setStartValue(effect->blurRadius());
-    animation->setEndValue(20);
+    animation->setEndValue(9);
     animation->setDuration(100);
     _group.addAnimation(animation);
 
