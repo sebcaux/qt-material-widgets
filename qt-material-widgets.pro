@@ -32,7 +32,9 @@ SOURCES += main.cpp\
     examples/appbarexamples.cpp \
     examples/iconbuttonexamples.cpp \
     examples/tabsexamples.cpp \
-    examples/tableexamples.cpp
+    examples/tableexamples.cpp \
+    components/raisedbutton.cpp \
+    examples/raisedbuttonexamples.cpp
 
 HEADERS  += mainwindow.h \
     style.h \
@@ -60,4 +62,6 @@ HEADERS  += mainwindow.h \
     examples/appbarexamples.h \
     examples/iconbuttonexamples.h \
     examples/tabsexamples.h \
-    examples/tableexamples.h
+    examples/tableexamples.h \
+    components/raisedbutton.h \
+    examples/raisedbuttonexamples.h
