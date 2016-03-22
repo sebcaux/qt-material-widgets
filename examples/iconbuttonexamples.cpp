@@ -14,7 +14,7 @@ IconButtonExamples::IconButtonExamples(QWidget *parent)
         IconButton *iconButton = new IconButton(QIcon("../qt-material-widgets/face.svg"));
 
         ExampleView *view = new ExampleView;
-        view->scene()->addWidget(iconButton);
+        view->setWidget(iconButton);
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(
@@ -22,8 +22,6 @@ IconButtonExamples::IconButtonExamples(QWidget *parent)
         );
         frame->setWidget(view);
 
-        iconButton->setParent(view->parentWidget());
-        iconButton->setGeometryWidget(view);
         iconButton->setMinimumSize(50, 50);
 
         layout->addWidget(frame);

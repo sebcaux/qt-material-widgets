@@ -15,7 +15,7 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
         flatButton->setMinimumSize(200, 42);
 
         ExampleView *view = new ExampleView;
-        view->scene()->addWidget(flatButton);
+        view->setWidget(flatButton);
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(
@@ -33,7 +33,7 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
         flatButton->setMinimumSize(200, 50);
 
         ExampleView *view = new ExampleView;
-        view->scene()->addWidget(flatButton);
+        view->setWidget(flatButton);
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(
