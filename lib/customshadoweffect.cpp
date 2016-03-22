@@ -3,9 +3,9 @@
 
 CustomShadowEffect::CustomShadowEffect(QObject *parent)
     : QGraphicsEffect(parent),
-      _distance(4.0),
-      _blurRadius(10.0),
-      _color(0, 0, 0, 80)
+      _distance(2),
+      _blurRadius(10),
+      _color(0, 0, 0, 40)
 {
 }
 
