@@ -1,5 +1,4 @@
 #include <QEvent>
-#include <QDebug>
 #include "exampleview.h"
 
 ExampleView::ExampleView(QWidget *parent)
@@ -27,7 +26,6 @@ bool ExampleView::eventFilter(QObject *obj, QEvent *event)
     QEvent::Type type = event->type();
     if (QEvent::Resize == type || QEvent::Move == type) {
         QRect r(_widget->geometry());
-        qDebug() << r;
         r.moveCenter(rect().center());
         _widget->setGeometry(r);
     }
