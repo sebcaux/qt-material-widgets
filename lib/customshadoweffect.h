@@ -12,7 +12,7 @@ class CustomShadowEffect : public QGraphicsEffect
 
     Q_PROPERTY(qreal distance WRITE setDistance READ distance)
     Q_PROPERTY(qreal blurRadius WRITE setBlurRadius READ blurRadius)
-    Q_PROPERTY(qreal color WRITE setColor READ color)
+    Q_PROPERTY(QColor color WRITE setColor READ color)
 
 public:
     explicit CustomShadowEffect(QObject *parent = 0);
