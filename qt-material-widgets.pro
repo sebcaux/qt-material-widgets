@@ -23,6 +23,7 @@ SOURCES += main.cpp\
     components/table.cpp \
     lib/ripple.cpp \
     lib/rippleoverlay.cpp \
+    lib/customshadoweffect.cpp \
     examples/frame.cpp \
     examples/examplelist.cpp \
     examples/flatbuttonexamples.cpp \
@@ -31,8 +32,7 @@ SOURCES += main.cpp\
     examples/appbarexamples.cpp \
     examples/iconbuttonexamples.cpp \
     examples/tabsexamples.cpp \
-    examples/tableexamples.cpp \
-    customshadoweffect.cpp
+    examples/tableexamples.cpp
 
 HEADERS  += mainwindow.h \
     style.h \
@@ -51,6 +51,7 @@ HEADERS  += mainwindow.h \
     components/table.h \
     lib/ripple.h \
     lib/rippleoverlay.h \
+    lib/customshadoweffect.h \
     examples/frame.h \
     examples/examplelist.h \
     examples/flatbuttonexamples.h \
@@ -59,5 +60,4 @@ HEADERS  += mainwindow.h \
     examples/appbarexamples.h \
     examples/iconbuttonexamples.h \
     examples/tabsexamples.h \
-    examples/tableexamples.h \
-    customshadoweffect.h
+    examples/tableexamples.h
