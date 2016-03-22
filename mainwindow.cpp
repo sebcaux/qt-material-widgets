@@ -10,6 +10,7 @@
 #include "examples/appbarexamples.h"
 #include "examples/tabsexamples.h"
 #include "examples/tableexamples.h"
+#include "examples/sliderexamples.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -20,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
       _appBarExamples(new AppBarExamples),
       _tabsExamples(new TabsExamples),
       _tableExamples(new TableExamples),
+      _sliderExamples(new SliderExamples),
       _about(new About)
 {
     _initWidget();
@@ -45,6 +47,8 @@ void MainWindow::showWidget(QAction *action)
         _layout->setCurrentWidget(_tabsExamples);
     } else if ("Table" == text) {
         _layout->setCurrentWidget(_tableExamples);
+    } else if ("Slider" == text) {
+        _layout->setCurrentWidget(_sliderExamples);
     } else {
         _layout->setCurrentWidget(_about);
     }
@@ -62,6 +66,7 @@ void MainWindow::_initWidget()
     _layout->addWidget(_appBarExamples);
     _layout->addWidget(_tabsExamples);
     _layout->addWidget(_tableExamples);
+    _layout->addWidget(_sliderExamples);
 
     setCentralWidget(widget);
 }

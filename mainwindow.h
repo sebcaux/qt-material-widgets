@@ -10,6 +10,7 @@ class IconButtonExamples;
 class AppBarExamples;
 class TabsExamples;
 class TableExamples;
+class SliderExamples;
 class QStackedLayout;
 
 class MainWindow : public QMainWindow
@@ -34,6 +35,7 @@ private:
     AppBarExamples       *const _appBarExamples;
     TabsExamples         *const _tabsExamples;
     TableExamples        *const _tableExamples;
+    SliderExamples       *const _sliderExamples;
     About                *const _about;
 };
 
