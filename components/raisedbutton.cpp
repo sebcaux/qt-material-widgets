@@ -17,7 +17,7 @@ RaisedButton::RaisedButton(QWidget *parent)
     animation = new QPropertyAnimation;
     animation->setTargetObject(effect);
     animation->setPropertyName("distance");
-    animation->setStartValue(2);
+    animation->setStartValue(effect->distance());
     animation->setEndValue(6);
     animation->setDuration(100);
     _group.addAnimation(animation);
@@ -25,7 +25,7 @@ RaisedButton::RaisedButton(QWidget *parent)
     animation = new QPropertyAnimation;
     animation->setTargetObject(effect);
     animation->setPropertyName("blurRadius");
-    animation->setStartValue(10);
+    animation->setStartValue(effect->blurRadius());
     animation->setEndValue(20);
     animation->setDuration(100);
     _group.addAnimation(animation);
@@ -59,6 +59,8 @@ void RaisedButton::mouseReleaseEvent(QMouseEvent *event)
 
 void RaisedButton::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event)
+
     QStylePainter painter(this);
 
     painter.drawControl(QStyle::CE_PushButton, getStyleOption());
