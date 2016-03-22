@@ -6,6 +6,7 @@ RaisedButton::RaisedButton(QWidget *parent)
 {
     CustomShadowEffect *effect = new CustomShadowEffect;
     setGraphicsEffect(effect);
+    setAutoFillBackground(true);
 }
 
 RaisedButton::~RaisedButton()
