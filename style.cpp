@@ -7,7 +7,7 @@
 void Style::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p,
                           const QWidget *w) const
 {
-    qDebug() << pe;
+//    qDebug() << pe;
 
     switch (pe) {
     case PE_FrameFocusRect:
@@ -22,7 +22,7 @@ void Style::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter
 void Style::drawControl(ControlElement element, const QStyleOption *opt,
                         QPainter *p, const QWidget *widget) const
 {
-    qDebug() << element;
+//    qDebug() << element;
 
     switch (element) {
     /*
@@ -51,8 +51,8 @@ void Style::drawControl(ControlElement element, const QStyleOption *opt,
 QRect Style::subElementRect(SubElement sr, const QStyleOption *opt,
                             const QWidget *widget) const
 {
-    qDebug() << "subElementRect : " << sr;
-    qDebug() << "-----------------------------------------------";
+//    qDebug() << "subElementRect : " << sr;
+//    qDebug() << "-----------------------------------------------";
 
     QRect r;
     switch (sr) {
@@ -66,8 +66,8 @@ QRect Style::subElementRect(SubElement sr, const QStyleOption *opt,
         r = QProxyStyle::subElementRect(sr, opt, widget);
     }
 
-    qDebug() << "r = " << r;
-    qDebug() << "===============================================";
+//    qDebug() << "r = " << r;
+//    qDebug() << "===============================================";
 
     return r;
 }
@@ -75,8 +75,8 @@ QRect Style::subElementRect(SubElement sr, const QStyleOption *opt,
 void Style::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *opt, QPainter *p,
                                const QWidget *w) const
 {
-    qDebug() << "drawComplexControl : " << cc;
-    qDebug() << "===============================================";
+//    qDebug() << "drawComplexControl : " << cc;
+//    qDebug() << "===============================================";
 
     switch (cc) {
     default:
@@ -87,8 +87,8 @@ void Style::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *opt
 QRect Style::subControlRect(ComplexControl cc, const QStyleOptionComplex *opt, SubControl sc,
                             const QWidget *w) const
 {
-    qDebug() << "subControlRect : " << cc;
-    qDebug() << "------------------------------------------------";
+//    qDebug() << "subControlRect : " << cc;
+//    qDebug() << "------------------------------------------------";
 
     QRect r;
     switch (cc) {
@@ -96,16 +96,16 @@ QRect Style::subControlRect(ComplexControl cc, const QStyleOptionComplex *opt, S
         r = QProxyStyle::subControlRect(cc, opt, sc, w);
     }
 
-    qDebug() << "r = " << r;
-    qDebug() << "===============================================";
+//    qDebug() << "r = " << r;
+//    qDebug() << "===============================================";
 
     return r;
 }
 
 int Style::pixelMetric(PixelMetric m, const QStyleOption *opt, const QWidget *widget) const
 {
-    qDebug() << "pixelMetric : " << m;
-    qDebug() << "-----------------------------------------------";
+//    qDebug() << "pixelMetric : " << m;
+//    qDebug() << "-----------------------------------------------";
 
     int ret;
 
@@ -119,8 +119,8 @@ int Style::pixelMetric(PixelMetric m, const QStyleOption *opt, const QWidget *wi
         ret = QProxyStyle::pixelMetric(m, opt, widget);
     }
 
-    qDebug() << "ret = " << ret;
-    qDebug() << "===============================================";
+//    qDebug() << "ret = " << ret;
+//    qDebug() << "===============================================";
 
     return ret;
 }
