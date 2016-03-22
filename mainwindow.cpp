@@ -5,6 +5,7 @@
 #include "mainwindow.h"
 #include "examples/about.h"
 #include "examples/flatbuttonexamples.h"
+#include "examples/raisedbuttonexamples.h"
 #include "examples/iconbuttonexamples.h"
 #include "examples/appbarexamples.h"
 #include "examples/tabsexamples.h"
@@ -14,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       _layout(new QStackedLayout),
       _flatButtonExamples(new FlatButtonExamples),
+      _raisedButtonExamples(new RaisedButtonExamples),
       _iconButtonExamples(new IconButtonExamples),
       _appBarExamples(new AppBarExamples),
       _tabsExamples(new TabsExamples),
@@ -35,6 +37,8 @@ void MainWindow::showWidget(QAction *action)
         _layout->setCurrentWidget(_appBarExamples);
     } else if ("FlatButton" == text) {
         _layout->setCurrentWidget(_flatButtonExamples);
+    } else if ("RaisedButton" == text) {
+        _layout->setCurrentWidget(_raisedButtonExamples);
     } else if ("IconButton" == text) {
         _layout->setCurrentWidget(_iconButtonExamples);
     } else if ("Tabs" == text) {
@@ -53,6 +57,7 @@ void MainWindow::_initWidget()
 
     _layout->addWidget(_about);
     _layout->addWidget(_flatButtonExamples);
+    _layout->addWidget(_raisedButtonExamples);
     _layout->addWidget(_iconButtonExamples);
     _layout->addWidget(_appBarExamples);
     _layout->addWidget(_tabsExamples);
@@ -75,6 +80,7 @@ void MainWindow::_initMenu() const
     components->addMenu(buttons);
 
     buttons->addAction("FlatButton");
+    buttons->addAction("RaisedButton");
     buttons->addAction("IconButton");
 
     components->addAction("Checkbox");

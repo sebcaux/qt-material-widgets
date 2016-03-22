@@ -5,6 +5,7 @@
 
 class About;
 class FlatButtonExamples;
+class RaisedButtonExamples;
 class IconButtonExamples;
 class AppBarExamples;
 class TabsExamples;
@@ -26,13 +27,14 @@ private:
     void _initWidget();
     void _initMenu() const;
 
-    QStackedLayout     *const _layout;
-    FlatButtonExamples *const _flatButtonExamples;
-    IconButtonExamples *const _iconButtonExamples;
-    AppBarExamples     *const _appBarExamples;
-    TabsExamples       *const _tabsExamples;
-    TableExamples      *const _tableExamples;
-    About              *const _about;
+    QStackedLayout       *const _layout;
+    FlatButtonExamples   *const _flatButtonExamples;
+    RaisedButtonExamples *const _raisedButtonExamples;
+    IconButtonExamples   *const _iconButtonExamples;
+    AppBarExamples       *const _appBarExamples;
+    TabsExamples         *const _tabsExamples;
+    TableExamples        *const _tableExamples;
+    About                *const _about;
 };
 
 #endif // MAINWINDOW_H
