@@ -1,10 +1,14 @@
-#include <QEvent>
+#include <QDebug>
+#include <QGridLayout>
+#include <QLabel>
 #include "exampleview.h"
 
 ExampleView::ExampleView(QWidget *parent)
     : QScrollArea(parent),
-      _widget(0)
+      _widget(0),
+      _layout(new QGridLayout)
 {
+    setLayout(_layout);
 }
 
 ExampleView::~ExampleView()
@@ -13,21 +17,12 @@ ExampleView::~ExampleView()
 
 void ExampleView::setWidget(QWidget *widget)
 {
-    if (_widget)
-        _widget->removeEventFilter(this);
-
-    widget->setParent(this);
-    widget->installEventFilter(this);
-    _widget = widget;
-}
-
-bool ExampleView::eventFilter(QObject *obj, QEvent *event)
-{
-    QEvent::Type type = event->type();
-    if (QEvent::Resize == type || QEvent::Move == type) {
-        QRect r(_widget->geometry());
-        r.moveCenter(rect().center());
-        _widget->setGeometry(r);
+    if (_widget) {
+        _layout->replaceWidget(_widget, widget);
+    } else {
+        _layout->addWidget(widget, 1, 1);
+        _layout->addWidget(new QLabel, 1, 0);
+        _layout->addWidget(new QLabel, 1, 2);
     }
-    return QScrollArea::eventFilter(obj, event);
+    _widget = widget;
 }

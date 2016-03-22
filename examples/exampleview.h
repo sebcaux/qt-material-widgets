@@ -3,6 +3,8 @@
 
 #include <QScrollArea>
 
+class QGridLayout;
+
 class ExampleView : public QScrollArea
 {
     Q_OBJECT
@@ -13,11 +15,9 @@ public:
 
     void setWidget(QWidget *widget);
 
-protected:
-    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
-
 private:
-    QWidget *_widget;
+    QWidget     *_widget;
+    QGridLayout *const _layout;
 };
 
 #endif // EXAMPLEVIEW_H
