@@ -28,6 +28,25 @@ SliderExamples::SliderExamples(QWidget *parent)
 
         mainLayout->addWidget(frame);
     }
+    {
+        QWidget *widget = new QWidget;
+        QVBoxLayout *layout = new QVBoxLayout;
+
+        widget->setLayout(layout);
+
+        Slider *slider = new Slider;
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(slider);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "---"
+        );
+        frame->setWidget(view);
+
+        mainLayout->addWidget(frame);
+    }
 }
 
 SliderExamples::~SliderExamples()
