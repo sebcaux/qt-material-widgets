@@ -1,14 +1,14 @@
-#include <QGraphicsDropShadowEffect>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPainter>
 #include "appbar.h"
+#include "lib/customshadoweffect.h"
 
 AppBar::AppBar(QWidget *parent)
     : QWidget(parent)
 {
-    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
-    effect->setOffset(0, 2);
+    CustomShadowEffect *effect = new CustomShadowEffect;
+    effect->setDistance(3);
     effect->setBlurRadius(11);
     effect->setColor(QColor(0, 0, 0, 50));
     setGraphicsEffect(effect);
