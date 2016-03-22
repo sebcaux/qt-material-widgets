@@ -87,15 +87,6 @@ bool IconButton::eventFilter(QObject *obj, QEvent *event)
     return QAbstractButton::eventFilter(obj, event);
 }
 
-void IconButton::updateOverlayGeometry()
-{
-    if (!_overlay || !_geometryWidget)
-        return;
-
-    const int s = iconSize().width()/2;
-    _overlay->setGeometry(_geometryWidget->geometry().adjusted(-s, -s, s, s));
-}
-
 QStyleOptionButton IconButton::getStyleOption() const
 {
     QStyleOptionButton option;
@@ -106,4 +97,13 @@ QStyleOptionButton IconButton::getStyleOption() const
     option.icon = icon();
     option.iconSize = iconSize();
     return option;
+}
+
+void IconButton::updateOverlayGeometry()
+{
+    if (!_overlay || !_geometryWidget)
+        return;
+
+    const int s = iconSize().width()/2;
+    _overlay->setGeometry(_geometryWidget->geometry().adjusted(-s, -s, s, s));
 }

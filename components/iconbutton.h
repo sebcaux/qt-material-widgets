@@ -23,9 +23,10 @@ protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
 
+    QStyleOptionButton getStyleOption() const;
+
 private:
     void updateOverlayGeometry();
-    QStyleOptionButton getStyleOption() const;
 
     RippleOverlay *const _overlay;
     QWidget       *_geometryWidget;
