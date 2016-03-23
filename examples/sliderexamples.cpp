@@ -22,7 +22,7 @@ SliderExamples::SliderExamples(QWidget *parent)
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(
-            "---"
+            "Slider *slider = new Slider;"
         );
         frame->setWidget(view);
 
@@ -35,13 +35,15 @@ SliderExamples::SliderExamples(QWidget *parent)
         widget->setLayout(layout);
 
         Slider *slider = new Slider;
+        slider->setOrientation(Qt::Vertical);
 
         ExampleView *view = new ExampleView;
         view->setWidget(slider);
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(
-            "---"
+            "Slider *slider = new Slider;\n"
+            "slider->setOrientation(Qt::Vertical);"
         );
         frame->setWidget(view);
 
