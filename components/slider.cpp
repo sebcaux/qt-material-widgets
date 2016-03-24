@@ -13,6 +13,31 @@ Handle::~Handle()
 {
 }
 
+void Handle::setPosition(const QPoint &pos)
+{
+    _position = pos;
+    refreshGeometry();
+}
+
+void Handle::refreshGeometry()
+{
+    QWidget *container = parentWidget();
+    const QSize s = sizeHint();
+
+    setGeometry(QRect(_slider->orientation() == Qt::Horizontal
+        ? QPoint(qBound(0, _position.x(), container->width()-s.width()), container->height()/2-s.height()/2)
+        : QPoint(container->width()/2-s.width()/2, qBound(0, _position.y(), container->height()-s.height())), s));
+
+    update();
+}
+
+bool Handle::event(QEvent *event)
+{
+    qDebug() << event;
+
+    return QWidget::event(event);
+}
+
 void Handle::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
@@ -38,15 +63,7 @@ void Handle::mouseReleaseEvent(QMouseEvent *event)
 
 void Handle::mouseMoveEvent(QMouseEvent *event)
 {
-    Q_UNUSED(event)
-
-    QWidget *container = parentWidget();
-    const QPoint d = _offset + event->globalPos() - _eventPos;
-    const QSize  s = sizeHint();
-    QRect r(_slider->orientation() == Qt::Horizontal
-        ? QPoint(qBound(0, d.x(), container->width()-s.width()), container->height()/2-s.height()/2)
-        : QPoint(container->width()/2-s.width()/2, qBound(0, d.y(), container->height()-s.height())), s);
-    setGeometry(r);
+    setPosition(_offset + event->globalPos() - _eventPos);
 }
 
 Slider::Slider(QWidget *parent)
@@ -84,10 +101,14 @@ void Slider::paintEvent(QPaintEvent *event)
 void Slider::mousePressEvent(QMouseEvent *event)
 {
     const QSize s = _handle->sizeHint();
-
-    _handle->setGeometry(QRect(Qt::Horizontal == _orientation
-        ? QPoint(event->pos().x()-s.width()/2, height()/2-s.height()/2)
-        : QPoint(width()/2-s.width()/2, event->pos().y()-s.height()/2), s));
+    _handle->setPosition(event->pos() - QPoint(s.width()/2, s.height()/2));
 
     QWidget::mousePressEvent(event);
+}
+
+void Slider::resizeEvent(QResizeEvent *event)
+{
+    _handle->refreshGeometry();
+
+    QWidget::resizeEvent(event);
 }

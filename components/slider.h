@@ -15,8 +15,12 @@ public:
     ~Handle();
 
     inline QSize sizeHint() const { return QSize(16, 16); }
+    inline const QPoint &position() const { return _position; }
+    inline void setPosition(const QPoint &pos);
+    void refreshGeometry();
 
 protected:
+    bool event(QEvent *event);
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
@@ -24,6 +28,7 @@ protected:
 
 private:
     Slider *const _slider;
+    QPoint        _position;
     QPoint        _eventPos;
     QPoint        _offset;
 };
@@ -42,6 +47,7 @@ public:
 protected:
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent *event);
+    void resizeEvent(QResizeEvent *event);
 
 private:
     Handle   *const _handle;
