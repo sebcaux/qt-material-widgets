@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     examples/tableexamples.cpp \
     components/raisedbutton.cpp \
     examples/raisedbuttonexamples.cpp \
-    examples/sliderexamples.cpp
+    examples/sliderexamples.cpp \
+    components/toggle.cpp
 
 HEADERS  += mainwindow.h \
     style.h \
@@ -66,4 +67,5 @@ HEADERS  += mainwindow.h \
     examples/tableexamples.h \
     components/raisedbutton.h \
     examples/raisedbuttonexamples.h \
-    examples/sliderexamples.h
+    examples/sliderexamples.h \
+    components/toggle.h
