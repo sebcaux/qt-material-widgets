@@ -15,10 +15,15 @@ public:
     ~Handle();
 
     inline QSize sizeHint() const { return QSize(16, 16); }
+
+    inline void setRelativePosition(const QPoint &pos) { setPosition(_offset + pos); }
+
     inline void setPosition(const QPoint &pos) { _position = pos; refreshGeometry(); }
     inline const QPoint &position() const { return _position; }
+
     inline void setOffset(const QPoint &offset) { _offset = offset; update(); }
     inline const QPoint &offset() const { return _offset; }
+
     void refreshGeometry();
 
 protected:
