@@ -56,7 +56,7 @@ protected:
     void resizeEvent(QResizeEvent *event);
 
 private:
-    bool touchesRail(int p, int x) const;
+    inline bool touchesRail(int p, int x) const { return (p >= x-2 && p < x+2); }
 
     bool            _drag;
     Handle   *const _handle;

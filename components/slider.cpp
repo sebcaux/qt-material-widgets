@@ -83,16 +83,13 @@ void Slider::paintEvent(QPaintEvent *event)
 
 void Slider::mousePressEvent(QMouseEvent *event)
 {
-    const QSize s = _handle->sizeHint();
-    const QPoint p = event->pos();
-
     if (Qt::Horizontal == _orientation
-            ? touchesRail(p.y(), height()/2)
-            : touchesRail(p.x(), width()/2))
+            ? touchesRail(event->y(), height()/2)
+            : touchesRail(event->x(), width()/2))
     {
-        const QPoint newPos = p - QPoint(s.width()/2, s.height()/2);
-        _handle->setPosition(newPos);
-        _handle->setOffset(newPos - event->globalPos());
+        const QSize s = _handle->sizeHint();
+        _handle->setOffset((event->pos() - QPoint(s.width()/2, s.height()/2)) - event->globalPos());
+        _handle->setRelativePosition(event->globalPos());
         _drag = true;
     } else {
         _drag = false;
@@ -112,10 +109,4 @@ void Slider::resizeEvent(QResizeEvent *event)
 {
     _handle->refreshGeometry();
     QWidget::resizeEvent(event);
-}
-
-
-bool Slider::touchesRail(int p, int x) const
-{
-    return (p >= x-2 && p < x+2);
 }
