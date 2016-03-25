@@ -13,12 +13,6 @@ Handle::~Handle()
 {
 }
 
-void Handle::setPosition(const QPoint &pos)
-{
-    _position = pos;
-    refreshGeometry();
-}
-
 void Handle::refreshGeometry()
 {
     QWidget *container = parentWidget();
@@ -29,13 +23,6 @@ void Handle::refreshGeometry()
         : QPoint(container->width()/2-s.width()/2, qBound(0, _position.y(), container->height()-s.height())), s));
 
     update();
-}
-
-bool Handle::event(QEvent *event)
-{
-    qDebug() << event;
-
-    return QWidget::event(event);
 }
 
 void Handle::paintEvent(QPaintEvent *event)
@@ -52,22 +39,17 @@ void Handle::paintEvent(QPaintEvent *event)
 
 void Handle::mousePressEvent(QMouseEvent *event)
 {
-    _eventPos = event->globalPos();
-    _offset = pos();
-}
-
-void Handle::mouseReleaseEvent(QMouseEvent *event)
-{
-    Q_UNUSED(event)
+    _offset = pos() - event->globalPos();
 }
 
 void Handle::mouseMoveEvent(QMouseEvent *event)
 {
-    setPosition(_offset + event->globalPos() - _eventPos);
+    setPosition(_offset + event->globalPos());
 }
 
 Slider::Slider(QWidget *parent)
     : QWidget(parent),
+      _drag(false),
       _handle(new Handle(this)),
       _orientation(Qt::Horizontal)
 {
@@ -98,17 +80,40 @@ void Slider::paintEvent(QPaintEvent *event)
     QWidget::paintEvent(event);
 }
 
+
 void Slider::mousePressEvent(QMouseEvent *event)
 {
     const QSize s = _handle->sizeHint();
-    _handle->setPosition(event->pos() - QPoint(s.width()/2, s.height()/2));
+    const QPoint p = event->pos();
+    const QPoint newPos = p - QPoint(s.width()/2, s.height()/2);
 
+    if (Qt::Horizontal == _orientation ? touchesRail(p.y(), height()/2) : touchesRail(p.x(), width()/2)) {
+        _handle->setPosition(newPos);
+        _handle->setOffset(newPos - event->globalPos());
+        _drag = true;
+    } else {
+        _drag = false;
+    }
     QWidget::mousePressEvent(event);
+}
+
+void Slider::mouseMoveEvent(QMouseEvent *event)
+{
+    if (_drag) {
+        _handle->setPosition(_handle->offset() + event->globalPos());
+    }
+    QWidget::mouseMoveEvent(event);
 }
 
 void Slider::resizeEvent(QResizeEvent *event)
 {
     _handle->refreshGeometry();
-
     QWidget::resizeEvent(event);
 }
+
+
+bool Slider::touchesRail(int p, int x) const
+{
+    return (p >= x-2 && p < x+2);
+}
+

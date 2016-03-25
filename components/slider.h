@@ -15,15 +15,15 @@ public:
     ~Handle();
 
     inline QSize sizeHint() const { return QSize(16, 16); }
+    inline void setPosition(const QPoint &pos) { _position = pos; refreshGeometry(); }
     inline const QPoint &position() const { return _position; }
-    inline void setPosition(const QPoint &pos);
+    inline void setOffset(const QPoint &offset) { _offset = offset; update(); }
+    inline const QPoint &offset() const { return _offset; }
     void refreshGeometry();
 
 protected:
-    bool event(QEvent *event);
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
 
 private:
@@ -47,9 +47,13 @@ public:
 protected:
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
     void resizeEvent(QResizeEvent *event);
 
 private:
+    bool touchesRail(int p, int x) const;
+
+    bool            _drag;
     Handle   *const _handle;
     Qt::Orientation _orientation;
 };
