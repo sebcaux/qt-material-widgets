@@ -13,6 +13,8 @@ public:
     explicit Toggle(QWidget *parent = 0);
     ~Toggle();
 
+    QSize sizeHint() const { return QSize(32, 32); }
+
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
