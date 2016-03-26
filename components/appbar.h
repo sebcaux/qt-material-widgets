@@ -12,7 +12,7 @@ public:
     ~AppBar();
 
 protected:
-    void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 };
 
 #endif // APPBAR_H
