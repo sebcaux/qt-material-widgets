@@ -29,8 +29,9 @@ protected:
 private:
     inline void updateOverlayGeometry()
     {
-        if (_overlay)
+        if (_overlay) {
             _overlay->setGeometry(rect());
+        }
     }
 
     RippleOverlay *const _overlay;
