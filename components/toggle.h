@@ -4,16 +4,18 @@
 #include <QAbstractButton>
 
 class RippleOverlay;
+class Toggle;
 
 class Thumb : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Thumb(QWidget *parent = 0);
+    explicit Thumb(Toggle *parent);
     ~Thumb();
 
 protected:
+    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 };
 
