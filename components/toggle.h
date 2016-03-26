@@ -12,6 +12,9 @@ class Thumb : public QWidget
 public:
     explicit Thumb(QWidget *parent = 0);
     ~Thumb();
+
+protected:
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 };
 
 class Toggle : public QAbstractButton
@@ -29,6 +32,7 @@ protected:
 
 private:
     RippleOverlay *const _overlay;
+    Thumb         *const _thumb;
 };
 
 #endif // TOGGLE_H
