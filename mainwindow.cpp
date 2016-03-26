@@ -11,6 +11,7 @@
 #include "examples/tabsexamples.h"
 #include "examples/tableexamples.h"
 #include "examples/sliderexamples.h"
+#include "examples/toggleexamples.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -22,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
       _tabsExamples(new TabsExamples),
       _tableExamples(new TableExamples),
       _sliderExamples(new SliderExamples),
+      _toggleExamples(new ToggleExamples),
       _about(new About)
 {
     _initWidget();
@@ -49,6 +51,8 @@ void MainWindow::showWidget(QAction *action)
         _layout->setCurrentWidget(_tableExamples);
     } else if ("Slider" == text) {
         _layout->setCurrentWidget(_sliderExamples);
+    } else if ("Toggle" == text) {
+        _layout->setCurrentWidget(_toggleExamples);
     } else {
         _layout->setCurrentWidget(_about);
     }
@@ -67,6 +71,7 @@ void MainWindow::_initWidget()
     _layout->addWidget(_tabsExamples);
     _layout->addWidget(_tableExamples);
     _layout->addWidget(_sliderExamples);
+    _layout->addWidget(_toggleExamples);
 
     setCentralWidget(widget);
 }
@@ -93,7 +98,14 @@ void MainWindow::_initMenu() const
     components->addAction("Menus");
     components->addAction("List");
     components->addAction("Slider");
-    components->addAction("Switches");
+
+    QMenu *switches = new QMenu("Switches");
+    components->addMenu(switches);
+
+    switches->addAction("CheckBox");
+    switches->addAction("RadioButton");
+    switches->addAction("Toggle");
+
     components->addAction("Table");
     components->addAction("Tabs");
     components->addAction("Textfield");

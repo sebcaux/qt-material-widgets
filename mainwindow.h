@@ -11,6 +11,7 @@ class AppBarExamples;
 class TabsExamples;
 class TableExamples;
 class SliderExamples;
+class ToggleExamples;
 class QStackedLayout;
 
 class MainWindow : public QMainWindow
@@ -36,6 +37,7 @@ private:
     TabsExamples         *const _tabsExamples;
     TableExamples        *const _tableExamples;
     SliderExamples       *const _sliderExamples;
+    ToggleExamples       *const _toggleExamples;
     About                *const _about;
 };
 
