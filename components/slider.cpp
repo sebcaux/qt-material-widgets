@@ -84,8 +84,8 @@ void Slider::paintEvent(QPaintEvent *event)
 void Slider::mousePressEvent(QMouseEvent *event)
 {
     if (Qt::Horizontal == _orientation
-            ? touchesRail(event->y(), height()/2)
-            : touchesRail(event->x(), width()/2))
+            ? isOnTrack(event->y(), height()/2)
+            : isOnTrack(event->x(), width()/2))
     {
         const QSize s = _handle->sizeHint();
         _handle->setOffset((event->pos() - QPoint(s.width()/2, s.height()/2)) - event->globalPos());

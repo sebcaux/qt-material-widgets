@@ -19,11 +19,17 @@ void Toggle::paintEvent(QPaintEvent *event)
     Q_UNUSED(event)
 
     QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
 
-    QPen pen;
-    pen.setColor(Qt::black);
-    pen.setWidth(2);
-    painter.setPen(pen);
+    const int h = height()/2;
 
-    painter.drawRect(rect());
+    QBrush brush;
+    brush.setColor(QColor(180, 180, 180));
+    brush.setStyle(Qt::SolidPattern);
+    painter.setBrush(brush);
+
+    painter.setPen(Qt::NoPen);
+
+    painter.drawRoundedRect(QRect(0, h-h/2, width(), h+h/2), h, h);
+
 }
