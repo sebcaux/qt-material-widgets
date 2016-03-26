@@ -14,6 +14,7 @@ public:
     explicit Handle(Slider *slider);
     ~Handle();
 
+    Q_DECL_OVERRIDE
     inline QSize sizeHint() const { return QSize(16, 16); }
 
     inline void setRelativePosition(const QPoint &pos) { setPosition(_offset + pos); }
@@ -27,9 +28,9 @@ public:
     void refreshGeometry();
 
 protected:
-    void paintEvent(QPaintEvent *event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
     Slider *const _slider;
@@ -50,10 +51,10 @@ public:
     inline Qt::Orientation orientation() const { return _orientation; }
 
 protected:
-    void paintEvent(QPaintEvent *event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
-    void resizeEvent(QResizeEvent *event);
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 
 private:
     inline bool touchesRail(int p, int x) const { return (p >= x-2 && p < x+2); }
