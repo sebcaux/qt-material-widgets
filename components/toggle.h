@@ -5,6 +5,15 @@
 
 class RippleOverlay;
 
+class Thumb : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit Thumb(QWidget *parent = 0);
+    ~Thumb();
+};
+
 class Toggle : public QAbstractButton
 {
     Q_OBJECT

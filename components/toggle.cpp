@@ -4,6 +4,15 @@
 #include "toggle.h"
 #include "../lib/rippleoverlay.h"
 
+Thumb::Thumb(QWidget *parent)
+    : QWidget(parent)
+{
+}
+
+Thumb::~Thumb()
+{
+}
+
 Toggle::Toggle(QWidget *parent)
     : QAbstractButton(parent),
       _overlay(new RippleOverlay(this))
