@@ -20,7 +20,7 @@ bool Thumb::eventFilter(QObject *obj, QEvent *event)
 {
     const QEvent::Type type = event->type();
     if (QEvent::Resize == type || QEvent::Move == type) {
-        setGeometry(parentWidget()->rect());
+        setGeometry(parentWidget()->rect().adjusted(2, 2, -2, -2));
     }
     return QWidget::eventFilter(obj, event);
 }
@@ -54,8 +54,8 @@ Toggle::Toggle(QWidget *parent)
       _overlay(new RippleOverlay(this)),
       _thumb(new Thumb(this))
 {
-//    CustomShadowEffect *effect = new CustomShadowEffect;
-//    _thumb->setGraphicsEffect(effect);
+    CustomShadowEffect *effect = new CustomShadowEffect;
+    _thumb->setGraphicsEffect(effect);
 }
 
 Toggle::~Toggle()
