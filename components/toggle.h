@@ -17,7 +17,7 @@ public:
     explicit Thumb(Toggle *parent);
     ~Thumb();
 
-    inline void setProgress(qreal p) { _progress = p; }
+    inline void setProgress(qreal p) { _progress = p; update(); }
     inline qreal progress() const { return _progress; }
 
 signals:
@@ -31,7 +31,7 @@ protected:
 private:
     Toggle             *const _toggle;
     QPropertyAnimation *const _animation;
-    qreal _progress;
+    qreal                     _progress;
 };
 
 class Toggle : public QAbstractButton

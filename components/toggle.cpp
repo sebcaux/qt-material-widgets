@@ -20,8 +20,6 @@ Thumb::Thumb(Toggle *parent)
     _animation->setDuration(350);
     _animation->setStartValue(0);
     _animation->setEndValue(1);
-
-    connect(_animation, SIGNAL(valueChanged(QVariant)), this, SLOT(update()));
 }
 
 Thumb::~Thumb()
