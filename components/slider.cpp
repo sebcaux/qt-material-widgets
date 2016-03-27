@@ -28,11 +28,22 @@ void Handle::refreshGeometry()
 void Handle::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    QPen pen;
-    pen.setColor(Qt::black);
-    pen.setWidth(1);
-    painter.setPen(pen);
-    painter.drawRect(rect().adjusted(0, 0, -1, -1));
+    painter.setRenderHint(QPainter::Antialiasing);
+
+//    QPen pen;
+//    pen.setColor(Qt::black);
+//    pen.setWidth(1);
+//    painter.setPen(pen);
+//    painter.drawRect(rect().adjusted(0, 0, -1, -1));
+
+    QBrush brush;
+    brush.setColor(QColor(200, 200, 200));
+    brush.setStyle(Qt::SolidPattern);
+
+    painter.setBrush(brush);
+    painter.setPen(Qt::NoPen);
+
+    painter.drawEllipse(0, 0, width(), height());
 
     QWidget::paintEvent(event);
 }
