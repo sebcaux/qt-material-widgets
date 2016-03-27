@@ -1,4 +1,5 @@
 #include <QAbstractButton>
+#include <QPropertyAnimation>
 #include <QEvent>
 #include <QDebug>
 #include <QPainter>
@@ -7,9 +8,20 @@
 #include "../lib/customshadoweffect.h"
 
 Thumb::Thumb(Toggle *parent)
-    : QWidget(parent)
+    : QWidget(parent),
+      _toggle(parent),
+      _animation(new QPropertyAnimation(this)),
+      _progress(0)
 {
     parent->installEventFilter(this);
+
+    _animation->setPropertyName("progress");
+    _animation->setTargetObject(this);
+    _animation->setDuration(350);
+    _animation->setStartValue(0);
+    _animation->setEndValue(1);
+
+    connect(_animation, SIGNAL(valueChanged(QVariant)), this, SLOT(update()));
 }
 
 Thumb::~Thumb()
@@ -20,23 +32,46 @@ bool Thumb::eventFilter(QObject *obj, QEvent *event)
 {
     const QEvent::Type type = event->type();
     if (QEvent::Resize == type || QEvent::Move == type) {
-        setGeometry(parentWidget()->rect().adjusted(2, 2, -2, -2));
+        setGeometry(parentWidget()->rect().adjusted(8, 8, -8, -8));
     }
     return QWidget::eventFilter(obj, event);
+}
+
+void Thumb::mouseReleaseEvent(QMouseEvent *event)
+{
+    Q_UNUSED(event)
+
+    emit clicked();
+
+    if (_toggle->isChecked()) {
+        _animation->setDirection(QAbstractAnimation::Forward);
+        if (QAbstractAnimation::Running != _animation->state()) {
+            _animation->setEasingCurve(QEasingCurve::OutCubic);
+        }
+    } else {
+        _animation->setDirection(QAbstractAnimation::Backward);
+        if (QAbstractAnimation::Running != _animation->state()) {
+            _animation->setEasingCurve(QEasingCurve::InCubic);
+        }
+    }
+    _animation->start();
 }
 
 void Thumb::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
-    qDebug() << rect();
-
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-//    QPen pen;
-//    pen.setColor(Qt::red);
-//    painter.setPen(pen);
+    /*
+    painter.save();
+    QPen pen;
+    pen.setColor(Qt::red);
+    painter.setPen(pen);
+    painter.drawRect(rect());
+    painter.restore();
+    */
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
@@ -46,7 +81,7 @@ void Thumb::paintEvent(QPaintEvent *event)
     painter.setPen(Qt::NoPen);
 
     const int d = qMin(width(), height());
-    painter.drawEllipse(0, 0, d, d);
+    painter.drawEllipse(5 + _progress*(static_cast<qreal>(width()-d)), 5, d-10, d-10);
 }
 
 Toggle::Toggle(QWidget *parent)
@@ -54,8 +89,17 @@ Toggle::Toggle(QWidget *parent)
       _overlay(new RippleOverlay(this)),
       _thumb(new Thumb(this))
 {
+    setCheckable(true);
+
     CustomShadowEffect *effect = new CustomShadowEffect;
+    effect->setDistance(0); //5
+    effect->setBlurRadius(5);
+    effect->setColor(QColor(0, 0, 0, 128));
+
     _thumb->setGraphicsEffect(effect);
+    _thumb->installEventFilter(this);
+
+    connect(_thumb, SIGNAL(clicked()), this, SLOT(toggle()));
 }
 
 Toggle::~Toggle()
@@ -78,5 +122,6 @@ void Toggle::paintEvent(QPaintEvent *event)
 
     painter.setPen(Qt::NoPen);
 
-    painter.drawRoundedRect(QRect(0, h-h/2, width(), h), h/2, h/2);
+    const QRect r(0, h-h/2, width(), h);
+    painter.drawRoundedRect(r.adjusted(14, 4, -14, -4), h/2-4, h/2-4);
 }
