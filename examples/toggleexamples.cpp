@@ -17,13 +17,27 @@ ToggleExamples::ToggleExamples(QWidget *parent)
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(
-            "??"
+            "Toggle *toggle = new Toggle;"
         );
         frame->setWidget(view);
 
         layout->addWidget(frame);
+    }
+    {
+        Toggle *toggle = new Toggle;
+        toggle->setFixedSize(250, 180);
 
-        toggle->update();
+        ExampleView *view = new ExampleView;
+        view->setWidget(toggle);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "Toggle *toggle = new Toggle;\n"
+            "toggle->setFixedSize(250, 180);"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
     }
 }
 
