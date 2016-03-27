@@ -37,13 +37,13 @@ MainWindow::~MainWindow()
 void MainWindow::showWidget(QAction *action)
 {
     QString text(action->text());
-    if ("AppBar" == text) {
+    if ("App Bar" == text) {
         _layout->setCurrentWidget(_appBarExamples);
-    } else if ("FlatButton" == text) {
+    } else if ("Flat Button" == text) {
         _layout->setCurrentWidget(_flatButtonExamples);
-    } else if ("RaisedButton" == text) {
+    } else if ("Raised Button" == text) {
         _layout->setCurrentWidget(_raisedButtonExamples);
-    } else if ("IconButton" == text) {
+    } else if ("Icon Button" == text) {
         _layout->setCurrentWidget(_iconButtonExamples);
     } else if ("Tabs" == text) {
         _layout->setCurrentWidget(_tabsExamples);
@@ -84,16 +84,15 @@ void MainWindow::_initMenu() const
     QMenu *examples = new QMenu("&Examples");
     QMenu *help = new QMenu("&Help");
 
-    components->addAction("AppBar");
+    components->addAction("App Bar");
 
     QMenu *buttons = new QMenu("Buttons");
     components->addMenu(buttons);
 
-    buttons->addAction("FlatButton");
-    buttons->addAction("RaisedButton");
-    buttons->addAction("IconButton");
+    buttons->addAction("Flat Button");
+    buttons->addAction("Raised Button");
+    buttons->addAction("Icon Button");
 
-    components->addAction("Checkbox");
     components->addAction("Dialog");
     components->addAction("Menus");
     components->addAction("List");
@@ -102,13 +101,13 @@ void MainWindow::_initMenu() const
     QMenu *switches = new QMenu("Switches");
     components->addMenu(switches);
 
-    switches->addAction("CheckBox");
-    switches->addAction("RadioButton");
+    switches->addAction("Checkbox");
+    switches->addAction("Radio Button");
     switches->addAction("Toggle");
 
     components->addAction("Table");
     components->addAction("Tabs");
-    components->addAction("Textfield");
+    components->addAction("Text Field");
 
     menuBar()->addMenu(file);
     menuBar()->addMenu(components);
