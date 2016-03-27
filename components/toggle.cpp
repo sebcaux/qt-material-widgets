@@ -30,7 +30,7 @@ bool Thumb::eventFilter(QObject *obj, QEvent *event)
 {
     const QEvent::Type type = event->type();
     if (QEvent::Resize == type || QEvent::Move == type) {
-        setGeometry(parentWidget()->rect().adjusted(8, 8, -8, -8));
+        setGeometry(parentWidget()->rect().adjusted(9, 9, -9, -9));
     }
     return QWidget::eventFilter(obj, event);
 }
@@ -90,9 +90,9 @@ Toggle::Toggle(QWidget *parent)
     setCheckable(true);
 
     CustomShadowEffect *effect = new CustomShadowEffect;
-    effect->setDistance(0); //5
-    effect->setBlurRadius(5);
-    effect->setColor(QColor(0, 0, 0, 128));
+    effect->setDistance(0);
+    effect->setBlurRadius(6);
+    effect->setColor(QColor(60, 60, 60));
 
     _thumb->setGraphicsEffect(effect);
     _thumb->installEventFilter(this);
