@@ -11,20 +11,24 @@ class Thumb : public QWidget
 {
     Q_OBJECT
 
-    Q_PROPERTY(qreal progress WRITE setProgress READ progress)
+    Q_PROPERTY(qreal progress WRITE setProgress READ progress NOTIFY progressChanged)
 
 public:
     explicit Thumb(Toggle *parent);
     ~Thumb();
 
-    inline void setProgress(qreal p) { _progress = p; update(); }
+    void setProgress(qreal p);
     inline qreal progress() const { return _progress; }
+
+    inline int offset() const { return _offset; }
 
 signals:
     void clicked();
+    void progressChanged(qreal);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
+    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
@@ -32,6 +36,7 @@ private:
     Toggle             *const _toggle;
     QPropertyAnimation *const _animation;
     qreal                     _progress;
+    int                       _offset;
 };
 
 class Toggle : public QAbstractButton
@@ -42,14 +47,19 @@ public:
     explicit Toggle(QWidget *parent = 0);
     ~Toggle();
 
-    QSize sizeHint() const { return QSize(132, 64); }
+    QSize sizeHint() const { return QSize(64, 48); }
+
+protected slots:
+    void xx();
+    void yy();
 
 protected:
+    bool event(QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    RippleOverlay *const _overlay;
     Thumb         *const _thumb;
+    RippleOverlay *const _overlay;
 };
 
 #endif // TOGGLE_H

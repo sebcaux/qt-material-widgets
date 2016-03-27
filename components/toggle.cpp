@@ -1,5 +1,6 @@
 #include <QAbstractButton>
 #include <QPropertyAnimation>
+#include <QMouseEvent>
 #include <QEvent>
 #include <QDebug>
 #include <QPainter>
@@ -11,7 +12,8 @@ Thumb::Thumb(Toggle *parent)
     : QWidget(parent),
       _toggle(parent),
       _animation(new QPropertyAnimation(this)),
-      _progress(0)
+      _progress(0),
+      _offset(0)
 {
     parent->installEventFilter(this);
 
@@ -26,6 +28,19 @@ Thumb::~Thumb()
 {
 }
 
+void Thumb::setProgress(qreal p)
+{
+    if (_progress == p)
+        return;
+
+    _progress = p;
+    _offset = p*(static_cast<qreal>(width()-qMin(width(), height())));
+
+    emit progressChanged(p);
+
+    update();
+}
+
 bool Thumb::eventFilter(QObject *obj, QEvent *event)
 {
     const QEvent::Type type = event->type();
@@ -35,24 +50,27 @@ bool Thumb::eventFilter(QObject *obj, QEvent *event)
     return QWidget::eventFilter(obj, event);
 }
 
+void Thumb::mousePressEvent(QMouseEvent *event)
+{
+    Q_UNUSED(event)
+}
+
 void Thumb::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_UNUSED(event)
 
-    emit clicked();
-
-    if (_toggle->isChecked()) {
-        _animation->setDirection(QAbstractAnimation::Forward);
-        if (QAbstractAnimation::Running != _animation->state()) {
-            _animation->setEasingCurve(QEasingCurve::OutCubic);
-        }
-    } else {
-        _animation->setDirection(QAbstractAnimation::Backward);
-        if (QAbstractAnimation::Running != _animation->state()) {
-            _animation->setEasingCurve(QEasingCurve::InCubic);
-        }
+    const bool checked = _toggle->isChecked();
+    _animation->setDirection(checked
+        ? QAbstractAnimation::Forward
+        : QAbstractAnimation::Backward);
+    if (QAbstractAnimation::Running != _animation->state()) {
+        _animation->setEasingCurve(checked
+            ? QEasingCurve::OutCubic
+            : QEasingCurve::InCubic);
     }
     _animation->start();
+
+    emit clicked();
 }
 
 void Thumb::paintEvent(QPaintEvent *event)
@@ -73,35 +91,67 @@ void Thumb::paintEvent(QPaintEvent *event)
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(QColor(120, 120, 120));
+    brush.setColor(Qt::white);
 
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
+//    painter.drawEllipse(5 + _progress*(static_cast<qreal>(width()-d)), 5, d-10, d-10);
+
     const int d = qMin(width(), height());
-    painter.drawEllipse(5 + _progress*(static_cast<qreal>(width()-d)), 5, d-10, d-10);
+    painter.drawEllipse(5 + _offset, 5, d-10, d-10);
 }
 
 Toggle::Toggle(QWidget *parent)
     : QAbstractButton(parent),
-      _overlay(new RippleOverlay(this)),
-      _thumb(new Thumb(this))
+      _thumb(new Thumb(this)),
+      _overlay(new RippleOverlay(parent))
 {
+    setFixedSize(64, 48);
     setCheckable(true);
 
     CustomShadowEffect *effect = new CustomShadowEffect;
     effect->setDistance(0);
     effect->setBlurRadius(6);
-    effect->setColor(QColor(60, 60, 60));
+    effect->setColor(QColor(100, 100, 100));
 
     _thumb->setGraphicsEffect(effect);
     _thumb->installEventFilter(this);
 
     connect(_thumb, SIGNAL(clicked()), this, SLOT(toggle()));
+    connect(_thumb, SIGNAL(clicked()), this, SLOT(xx()));
+    connect(_thumb, SIGNAL(progressChanged(qreal)), this, SLOT(yy()));
 }
 
 Toggle::~Toggle()
 {
+}
+
+void Toggle::xx()
+{
+    const int d = height()/2;                         // ???
+    _overlay->addRipple(QPoint(10+d, 20+d), 35);
+}
+
+void Toggle::yy()
+{
+    //const int d = progress*(static_cast<qreal>(width()-d));
+
+    //const int r = qMin(_thumb->width(), _thumb->height());
+    const int d = _thumb->offset();
+
+    _overlay->setGeometry(geometry().adjusted(-10+d, -20, 10+d, 20));
+}
+
+bool Toggle::event(QEvent *event)
+{
+    const QEvent::Type type = event->type();
+    if (QEvent::ParentChange == type && parentWidget()) {
+        _overlay->setParent(parentWidget());
+    } else if (QEvent::Resize == type || QEvent::Move == type) {
+        _overlay->setGeometry(geometry().adjusted(-10, -20, 10, 20));
+    }
+    return QAbstractButton::event(event);
 }
 
 void Toggle::paintEvent(QPaintEvent *event)
@@ -110,6 +160,8 @@ void Toggle::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
+
+    painter.drawRect(rect());
 
     const int h = height()/2;
 
