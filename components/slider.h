@@ -14,8 +14,7 @@ public:
     explicit Handle(Slider *slider);
     ~Handle();
 
-    Q_DECL_OVERRIDE
-    inline QSize sizeHint() const { return QSize(16, 16); }
+    inline QSize sizeHint() const Q_DECL_OVERRIDE { return QSize(16, 16); }
 
     inline void setRelativePosition(const QPoint &pos) { setPosition(_offset + pos); }
 
