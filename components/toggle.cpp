@@ -12,7 +12,7 @@ Thumb::Thumb(Toggle *parent)
     : QWidget(parent),
       _toggle(parent),
       _animation(new QPropertyAnimation(this)),
-      _progress(0),
+      _progress(1),
       _offset(0)
 {
     parent->installEventFilter(this);
@@ -20,23 +20,24 @@ Thumb::Thumb(Toggle *parent)
     _animation->setPropertyName("progress");
     _animation->setTargetObject(this);
     _animation->setDuration(350);
-    _animation->setStartValue(0);
-    _animation->setEndValue(1);
+    _animation->setStartValue(1);
+    _animation->setEndValue(0);
 }
 
 Thumb::~Thumb()
 {
 }
 
-void Thumb::setProgress(qreal p)
+void Thumb::setProgress(qreal progress)
 {
-    if (_progress == p)
+    if (_progress == progress)
         return;
 
-    _progress = p;
-    _offset = p*(static_cast<qreal>(width()-qMin(width(), height())));
+    _progress = progress;
+    //_offset = progress*(static_cast<qreal>(width()-qMin(width(), height())));
+    _offset = progress*(static_cast<qreal>(width()-height()));
 
-    emit progressChanged(p);
+    emit progressChanged(progress);
 
     update();
 }
@@ -45,15 +46,24 @@ bool Thumb::eventFilter(QObject *obj, QEvent *event)
 {
     const QEvent::Type type = event->type();
     if (QEvent::Resize == type || QEvent::Move == type) {
-        setGeometry(parentWidget()->rect().adjusted(9, 9, -9, -9));
+
+//        QRect r(parentWidget()->rect());
+//
+//        const QSize s = sizeHint();
+//        QRect q(0, 0, 50, 50);
+//        q.moveCenter(r.center());
+//
+//        setGeometry(q);
+
+        setGeometry(parentWidget()->rect().adjusted(8, 8, -8, -8));
     }
     return QWidget::eventFilter(obj, event);
 }
 
-void Thumb::mousePressEvent(QMouseEvent *event)
-{
-    Q_UNUSED(event)
-}
+//void Thumb::mousePressEvent(QMouseEvent *event)
+//{
+//    Q_UNUSED(event)
+//}
 
 void Thumb::mouseReleaseEvent(QMouseEvent *event)
 {
@@ -80,6 +90,8 @@ void Thumb::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
+    painter.drawRect(rect());
+
     /*
     painter.save();
     QPen pen;
@@ -98,17 +110,23 @@ void Thumb::paintEvent(QPaintEvent *event)
 
 //    painter.drawEllipse(5 + _progress*(static_cast<qreal>(width()-d)), 5, d-10, d-10);
 
-    const int d = qMin(width(), height());
-    painter.drawEllipse(5 + _offset, 5, d-10, d-10);
+    //const int d = qMin(width(), height());
+
+    const int s = height()-10;
+    painter.drawEllipse(5+_offset, 5, s, s);
 }
 
 Toggle::Toggle(QWidget *parent)
     : QAbstractButton(parent),
       _thumb(new Thumb(this)),
-      _overlay(new RippleOverlay(parent))
+      _overlay(new RippleOverlay(parent)),
+      _orientation(Qt::Horizontal)
 {
-    setFixedSize(64, 48);
+//    setFixedSize(64, 48);
+
     setCheckable(true);
+
+    _thumb->hide();
 
     CustomShadowEffect *effect = new CustomShadowEffect;
     effect->setDistance(0);
@@ -125,6 +143,25 @@ Toggle::Toggle(QWidget *parent)
 
 Toggle::~Toggle()
 {
+}
+
+QSize Toggle::sizeHint() const
+{
+    return Qt::Horizontal == _orientation
+        ? QSize(64, 48)
+        : QSize(48, 64);
+}
+
+void Toggle::setOrientation(Qt::Orientation orientation)
+{
+    if (_orientation == orientation)
+        return;
+
+    _orientation = orientation;
+
+//    QSize s = size();
+//    if (Qt::Horizontal == orientation ? s.height() > s.width() : s.width() > s.height())
+//        setFixedSize(s.transposed());
 }
 
 void Toggle::xx()
@@ -163,7 +200,6 @@ void Toggle::paintEvent(QPaintEvent *event)
 
     painter.drawRect(rect());
 
-    const int h = height()/2;
 
     QBrush brush;
     brush.setColor(QColor(180, 180, 180));
@@ -172,6 +208,21 @@ void Toggle::paintEvent(QPaintEvent *event)
 
     painter.setPen(Qt::NoPen);
 
-    const QRect r(0, h-h/2, width(), h);
-    painter.drawRoundedRect(r.adjusted(14, 4, -14, -4), h/2-4, h/2-4);
+    if (Qt::Horizontal == _orientation) {
+        //const int h = qMin((qreal) height(), width()*0.4);
+        const int h = height()/2;
+        const QRect r(0, h/2, width(), h);
+        painter.drawRoundedRect(r.adjusted(14, 4, -14, -4), h/2-4, h/2-4);
+        //painter.drawRect(r.adjusted(14, 4, -14, -4));
+    } else {
+        //const int w = qMin((qreal) width(), height()*0.4);
+        const int w = width()/2;
+        const QRect r(w/2, 0, w, height());
+        painter.drawRoundedRect(r.adjusted(4, 14, -4, -14), w/2-4, w/2-4);
+        //painter.drawRect(r.adjusted(4, 14, -4, -14));
+
+        //const QRect r(w/2, 0, qMin(w, height()/4), height());
+        //painter.drawRect(r.adjusted(4, 0, -4, 0));
+        //const QRect r(0, h/2, width(), h);
+    }
 }

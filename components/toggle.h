@@ -17,7 +17,7 @@ public:
     explicit Thumb(Toggle *parent);
     ~Thumb();
 
-    void setProgress(qreal p);
+    void setProgress(qreal progress);
     inline qreal progress() const { return _progress; }
 
     inline int offset() const { return _offset; }
@@ -28,7 +28,7 @@ signals:
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
-    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    //void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
@@ -47,7 +47,10 @@ public:
     explicit Toggle(QWidget *parent = 0);
     ~Toggle();
 
-    QSize sizeHint() const { return QSize(64, 48); }
+    QSize sizeHint() const;
+
+    inline Qt::Orientation orientation() const { return _orientation; }
+    void setOrientation(Qt::Orientation orientation);
 
 protected slots:
     void xx();
@@ -60,6 +63,7 @@ protected:
 private:
     Thumb         *const _thumb;
     RippleOverlay *const _overlay;
+    Qt::Orientation      _orientation;
 };
 
 #endif // TOGGLE_H
