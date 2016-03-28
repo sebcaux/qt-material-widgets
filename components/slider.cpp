@@ -56,6 +56,7 @@ void Handle::mousePressEvent(QMouseEvent *event)
 void Handle::mouseMoveEvent(QMouseEvent *event)
 {
     setRelativePosition(event->globalPos());
+    _slider->update();
 }
 
 Slider::Slider(QWidget *parent)
@@ -86,6 +87,14 @@ void Slider::paintEvent(QPaintEvent *event)
     brush.setColor(QColor(0, 0, 0));
     painter.fillRect(r, brush);
 
+    painter.save();
+    brush.setColor(QColor(255, 0, 0));
+    const QPoint p = Qt::Vertical == _orientation
+            ? QPoint(width(), _handle->y())
+            : QPoint(_handle->x(), height());
+    painter.fillRect(r.intersected(QRect(QPoint(0, 0), p)), brush);
+    painter.restore();
+
     painter.drawRect(rect().adjusted(0, 0, -1, -1));
 
     QWidget::paintEvent(event);
@@ -102,6 +111,7 @@ void Slider::mousePressEvent(QMouseEvent *event)
         _handle->setOffset((event->pos() - QPoint(s.width()/2, s.height()/2)) - event->globalPos());
         _handle->setRelativePosition(event->globalPos());
         _drag = true;
+        update();
     } else {
         _drag = false;
     }
@@ -112,6 +122,7 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
 {
     if (_drag) {
         _handle->setRelativePosition(event->globalPos());
+        update();
     }
     QWidget::mouseMoveEvent(event);
 }
