@@ -71,6 +71,24 @@ ToggleExamples::ToggleExamples(QWidget *parent)
 
         layout->addWidget(frame);
     }
+    {
+        Toggle *toggle = new Toggle;
+        toggle->setOrientation(Qt::Vertical);
+        toggle->setFixedSize(50, 250);
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(toggle);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "Toggle *toggle = new Toggle;\n"
+            "toggle->setOrientation(Qt::Vertical);\n"
+            "toggle->setFixedSize(50, 250);"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
 }
 
 ToggleExamples::~ToggleExamples()
