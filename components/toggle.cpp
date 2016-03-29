@@ -108,8 +108,8 @@ Toggle::Toggle(QWidget *parent)
     _thumb->installEventFilter(this);
 
     connect(_thumb, SIGNAL(clicked()), this, SLOT(toggle()));
-    connect(_thumb, SIGNAL(clicked()), this, SLOT(xx()));
-    connect(_thumb, SIGNAL(progressChanged(qreal)), this, SLOT(yy()));
+    connect(_thumb, SIGNAL(clicked()), this, SLOT(addRipple()));
+    connect(_thumb, SIGNAL(progressChanged(qreal)), this, SLOT(updateOverlayGeometry()));
 }
 
 Toggle::~Toggle()
@@ -130,7 +130,7 @@ void Toggle::setOrientation(Qt::Orientation orientation)
     _orientation = orientation;
 }
 
-void Toggle::xx()
+void Toggle::addRipple()
 {
     if (Qt::Horizontal == _orientation) {
         const int d = height()/2;
@@ -143,7 +143,7 @@ void Toggle::xx()
     }
 }
 
-void Toggle::yy()
+void Toggle::updateOverlayGeometry()
 {
     const int d = _thumb->offset();
 

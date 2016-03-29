@@ -53,8 +53,8 @@ public:
     void setOrientation(Qt::Orientation orientation);
 
 protected slots:
-    void xx();
-    void yy();
+    void addRipple();
+    void updateOverlayGeometry();
 
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
