@@ -41,7 +41,7 @@ ToggleExamples::ToggleExamples(QWidget *parent)
     }
     {
         Toggle *toggle = new Toggle;
-        toggle->setFixedSize(250, 180);
+        toggle->setFixedSize(200, 140);
 
         ExampleView *view = new ExampleView;
         view->setWidget(toggle);
@@ -49,7 +49,7 @@ ToggleExamples::ToggleExamples(QWidget *parent)
         Frame *frame = new Frame;
         frame->setCodeSnippet(
             "Toggle *toggle = new Toggle;\n"
-            "toggle->setFixedSize(200, 180);"
+            "toggle->setFixedSize(200, 140);"
         );
         frame->setWidget(view);
 
@@ -57,7 +57,7 @@ ToggleExamples::ToggleExamples(QWidget *parent)
     }
     {
         Toggle *toggle = new Toggle;
-        toggle->setFixedSize(250, 50);
+        toggle->setFixedSize(200, 50);
 
         ExampleView *view = new ExampleView;
         view->setWidget(toggle);
@@ -65,7 +65,7 @@ ToggleExamples::ToggleExamples(QWidget *parent)
         Frame *frame = new Frame;
         frame->setCodeSnippet(
             "Toggle *toggle = new Toggle;\n"
-            "toggle->setFixedSize(250, 50);"
+            "toggle->setFixedSize(200, 50);"
         );
         frame->setWidget(view);
 
