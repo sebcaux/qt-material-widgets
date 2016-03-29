@@ -20,6 +20,7 @@ public:
     void setProgress(qreal progress);
     inline qreal progress() const { return _progress; }
 
+    inline void setOffset(int offset) { _offset = offset; }
     inline int offset() const { return _offset; }
 
 signals:
@@ -28,7 +29,6 @@ signals:
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
-    //void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 

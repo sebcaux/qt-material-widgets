@@ -2,7 +2,6 @@
 #include <QPropertyAnimation>
 #include <QMouseEvent>
 #include <QEvent>
-#include <QDebug>
 #include <QPainter>
 #include "toggle.h"
 #include "../lib/rippleoverlay.h"
@@ -32,13 +31,13 @@ void Thumb::setProgress(qreal progress)
 {
     if (_progress == progress)
         return;
-
     _progress = progress;
-    //_offset = progress*(static_cast<qreal>(width()-qMin(width(), height())));
-    _offset = progress*(static_cast<qreal>(width()-height()));
+
+    const QSize s(Qt::Horizontal == _toggle->orientation()
+            ? size() : size().transposed());
+    setOffset(progress*static_cast<qreal>(s.width()-s.height()));
 
     emit progressChanged(progress);
-
     update();
 }
 
@@ -46,24 +45,10 @@ bool Thumb::eventFilter(QObject *obj, QEvent *event)
 {
     const QEvent::Type type = event->type();
     if (QEvent::Resize == type || QEvent::Move == type) {
-
-//        QRect r(parentWidget()->rect());
-//
-//        const QSize s = sizeHint();
-//        QRect q(0, 0, 50, 50);
-//        q.moveCenter(r.center());
-//
-//        setGeometry(q);
-
         setGeometry(parentWidget()->rect().adjusted(8, 8, -8, -8));
     }
     return QWidget::eventFilter(obj, event);
 }
-
-//void Thumb::mousePressEvent(QMouseEvent *event)
-//{
-//    Q_UNUSED(event)
-//}
 
 void Thumb::mouseReleaseEvent(QMouseEvent *event)
 {
@@ -90,30 +75,19 @@ void Thumb::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    painter.drawRect(rect());
-
-    /*
-    painter.save();
-    QPen pen;
-    pen.setColor(Qt::red);
-    painter.setPen(pen);
-    painter.drawRect(rect());
-    painter.restore();
-    */
-
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::white);
-
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
-//    painter.drawEllipse(5 + _progress*(static_cast<qreal>(width()-d)), 5, d-10, d-10);
-
-    //const int d = qMin(width(), height());
-
-    const int s = height()-10;
-    painter.drawEllipse(5+_offset, 5, s, s);
+    if (Qt::Horizontal == _toggle->orientation()) {
+        const int s = height()-10;
+        painter.drawEllipse(5+_offset, 5, s, s);
+    } else {
+        const int s = width()-10;
+        painter.drawEllipse(5, 5+_offset, s, s);
+    }
 }
 
 Toggle::Toggle(QWidget *parent)
@@ -122,11 +96,8 @@ Toggle::Toggle(QWidget *parent)
       _overlay(new RippleOverlay(parent)),
       _orientation(Qt::Horizontal)
 {
-//    setFixedSize(64, 48);
-
     setCheckable(true);
-
-    _thumb->hide();
+    setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
 
     CustomShadowEffect *effect = new CustomShadowEffect;
     effect->setDistance(0);
@@ -156,28 +127,31 @@ void Toggle::setOrientation(Qt::Orientation orientation)
 {
     if (_orientation == orientation)
         return;
-
     _orientation = orientation;
-
-//    QSize s = size();
-//    if (Qt::Horizontal == orientation ? s.height() > s.width() : s.width() > s.height())
-//        setFixedSize(s.transposed());
 }
 
 void Toggle::xx()
 {
-    const int d = height()/2;                         // ???
-    _overlay->addRipple(QPoint(10+d, 20+d), 35);
+    if (Qt::Horizontal == _orientation) {
+        const int d = height()/2;
+        const int w = _thumb->height()/2+10;
+        _overlay->addRipple(QPoint(10+d, 20+d), w);
+    } else {
+        const int d = width()/2;
+        const int w = _thumb->width()/2+10;
+        _overlay->addRipple(QPoint(10+d, 20+d), w);
+    }
 }
 
 void Toggle::yy()
 {
-    //const int d = progress*(static_cast<qreal>(width()-d));
-
-    //const int r = qMin(_thumb->width(), _thumb->height());
     const int d = _thumb->offset();
 
-    _overlay->setGeometry(geometry().adjusted(-10+d, -20, 10+d, 20));
+    if (Qt::Horizontal == _orientation) {
+        _overlay->setGeometry(geometry().adjusted(-10+d, -20, 10+d, 20));
+    } else {
+        _overlay->setGeometry(geometry().adjusted(-10, -20+d, 10, 20+d));
+    }
 }
 
 bool Toggle::event(QEvent *event)
@@ -198,9 +172,6 @@ void Toggle::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    painter.drawRect(rect());
-
-
     QBrush brush;
     brush.setColor(QColor(180, 180, 180));
     brush.setStyle(Qt::SolidPattern);
@@ -209,20 +180,12 @@ void Toggle::paintEvent(QPaintEvent *event)
     painter.setPen(Qt::NoPen);
 
     if (Qt::Horizontal == _orientation) {
-        //const int h = qMin((qreal) height(), width()*0.4);
         const int h = height()/2;
         const QRect r(0, h/2, width(), h);
         painter.drawRoundedRect(r.adjusted(14, 4, -14, -4), h/2-4, h/2-4);
-        //painter.drawRect(r.adjusted(14, 4, -14, -4));
     } else {
-        //const int w = qMin((qreal) width(), height()*0.4);
         const int w = width()/2;
         const QRect r(w/2, 0, w, height());
         painter.drawRoundedRect(r.adjusted(4, 14, -4, -14), w/2-4, w/2-4);
-        //painter.drawRect(r.adjusted(4, 14, -4, -14));
-
-        //const QRect r(w/2, 0, qMin(w, height()/4), height());
-        //painter.drawRect(r.adjusted(4, 0, -4, 0));
-        //const QRect r(0, h/2, width(), h);
     }
 }
