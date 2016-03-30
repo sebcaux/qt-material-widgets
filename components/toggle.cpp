@@ -55,14 +55,15 @@ void Thumb::mouseReleaseEvent(QMouseEvent *event)
     Q_UNUSED(event)
 
     const bool checked = _toggle->isChecked();
+    _toggle->setChecked(!checked);
     _animation->setDirection(checked
         ? QAbstractAnimation::Forward
         : QAbstractAnimation::Backward);
-    if (QAbstractAnimation::Running != _animation->state()) {
-        _animation->setEasingCurve(checked
-            ? QEasingCurve::OutCubic
-            : QEasingCurve::InCubic);
-    }
+//    if (QAbstractAnimation::Running != _animation->state()) {
+//        _animation->setEasingCurve(checked
+//            ? QEasingCurve::OutCubic
+//            : QEasingCurve::InCubic);
+//    }
     _animation->start();
 
     emit clicked();
@@ -107,13 +108,20 @@ Toggle::Toggle(QWidget *parent)
     _thumb->setGraphicsEffect(effect);
     _thumb->installEventFilter(this);
 
-    connect(_thumb, SIGNAL(clicked()), this, SLOT(toggle()));
     connect(_thumb, SIGNAL(clicked()), this, SLOT(addRipple()));
+
+    connect(_thumb, SIGNAL(clicked()), this, SLOT(logCheckedStatus()));
+
     connect(_thumb, SIGNAL(progressChanged(qreal)), this, SLOT(updateOverlayGeometry()));
 }
 
 Toggle::~Toggle()
 {
+}
+
+void Toggle::logCheckedStatus()
+{
+    qDebug() << "checked : " << isChecked();
 }
 
 QSize Toggle::sizeHint() const

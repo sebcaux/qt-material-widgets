@@ -55,12 +55,14 @@ public:
 protected slots:
     void addRipple();
     void updateOverlayGeometry();
+    void logCheckedStatus();
 
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
 private:
+
     Thumb         *const _thumb;
     RippleOverlay *const _overlay;
     Qt::Orientation      _orientation;
