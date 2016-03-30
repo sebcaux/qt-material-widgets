@@ -2,6 +2,7 @@
 #include <QPropertyAnimation>
 #include <QMouseEvent>
 #include <QEvent>
+#include <QDebug>
 #include <QPainter>
 #include "toggle.h"
 #include "../lib/rippleoverlay.h"
