@@ -2,7 +2,7 @@
 #include <QPropertyAnimation>
 #include <QMouseEvent>
 #include <QEvent>
-#include <QDebug>
+#include <QMouseEvent>
 #include <QPainter>
 #include "toggle.h"
 #include "../lib/rippleoverlay.h"
@@ -47,27 +47,29 @@ bool Thumb::eventFilter(QObject *obj, QEvent *event)
     const QEvent::Type type = event->type();
     if (QEvent::Resize == type || QEvent::Move == type) {
         setGeometry(parentWidget()->rect().adjusted(8, 8, -8, -8));
+    } else if (QEvent::MouseButtonRelease == type) {
+        return true;
     }
     return QWidget::eventFilter(obj, event);
 }
 
 void Thumb::mouseReleaseEvent(QMouseEvent *event)
 {
-    Q_UNUSED(event)
-
     const bool checked = _toggle->isChecked();
     _toggle->setChecked(!checked);
+    if (QAbstractAnimation::Running != _animation->state()) {
+        _animation->setEasingCurve(checked
+            ? QEasingCurve::OutCubic
+            : QEasingCurve::InCubic);
+    }
     _animation->setDirection(checked
         ? QAbstractAnimation::Forward
         : QAbstractAnimation::Backward);
-//    if (QAbstractAnimation::Running != _animation->state()) {
-//        _animation->setEasingCurve(checked
-//            ? QEasingCurve::OutCubic
-//            : QEasingCurve::InCubic);
-//    }
     _animation->start();
 
     emit clicked();
+
+    QWidget::mouseReleaseEvent(event);
 }
 
 void Thumb::paintEvent(QPaintEvent *event)
@@ -110,19 +112,11 @@ Toggle::Toggle(QWidget *parent)
     _thumb->installEventFilter(this);
 
     connect(_thumb, SIGNAL(clicked()), this, SLOT(addRipple()));
-
-    connect(_thumb, SIGNAL(clicked()), this, SLOT(logCheckedStatus()));
-
     connect(_thumb, SIGNAL(progressChanged(qreal)), this, SLOT(updateOverlayGeometry()));
 }
 
 Toggle::~Toggle()
 {
-}
-
-void Toggle::logCheckedStatus()
-{
-    qDebug() << "checked : " << isChecked();
 }
 
 QSize Toggle::sizeHint() const

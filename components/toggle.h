@@ -55,7 +55,6 @@ public:
 protected slots:
     void addRipple();
     void updateOverlayGeometry();
-    void logCheckedStatus();
 
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
