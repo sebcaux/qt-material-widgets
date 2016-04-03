@@ -10,11 +10,6 @@ SliderExamples::SliderExamples(QWidget *parent)
     QLayout *mainLayout = widget()->layout();
 
     {
-        QWidget *widget = new QWidget;
-        QVBoxLayout *layout = new QVBoxLayout;
-
-        widget->setLayout(layout);
-
         Slider *slider = new Slider;
 
         ExampleView *view = new ExampleView;
@@ -29,11 +24,6 @@ SliderExamples::SliderExamples(QWidget *parent)
         mainLayout->addWidget(frame);
     }
     {
-        QWidget *widget = new QWidget;
-        QVBoxLayout *layout = new QVBoxLayout;
-
-        widget->setLayout(layout);
-
         Slider *slider = new Slider;
         slider->setOrientation(Qt::Vertical);
 
@@ -44,6 +34,20 @@ SliderExamples::SliderExamples(QWidget *parent)
         frame->setCodeSnippet(
             "Slider *slider = new Slider;\n"
             "slider->setOrientation(Qt::Vertical);"
+        );
+        frame->setWidget(view);
+
+        mainLayout->addWidget(frame);
+    }
+    {
+        Slider *slider = new Slider;
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(slider);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "Slider *slider = new Slider;"
         );
         frame->setWidget(view);
 
