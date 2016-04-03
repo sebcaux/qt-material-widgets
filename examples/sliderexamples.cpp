@@ -1,11 +1,13 @@
 #include <QVBoxLayout>
+#include <QLineEdit>
 #include "sliderexamples.h"
 #include "components/slider.h"
 #include "exampleview.h"
 #include "frame.h"
 
 SliderExamples::SliderExamples(QWidget *parent)
-    : ExampleList(parent)
+    : ExampleList(parent),
+      _edit(new QLineEdit)
 {
     QLayout *mainLayout = widget()->layout();
 
@@ -40,16 +42,29 @@ SliderExamples::SliderExamples(QWidget *parent)
         mainLayout->addWidget(frame);
     }
     {
+        QWidget *widget = new QWidget;
+        QHBoxLayout *layout = new QHBoxLayout;
+
+        widget->setLayout(layout);
+
         Slider *slider = new Slider;
+        QLineEdit *edit = new QLineEdit;
+
+        layout->addWidget(slider);
+        layout->addWidget(edit);
+        layout->setStretch(0, 1);
+        layout->setStretch(1, 1);
 
         ExampleView *view = new ExampleView;
-        view->setWidget(slider);
+        view->setWidget(widget);
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(
-            "Slider *slider = new Slider;"
+            "x"
         );
         frame->setWidget(view);
+
+        connect(slider, SIGNAL(valueChanged(int)), this, SLOT(updateValue(int)));
 
         mainLayout->addWidget(frame);
     }
@@ -57,4 +72,9 @@ SliderExamples::SliderExamples(QWidget *parent)
 
 SliderExamples::~SliderExamples()
 {
+}
+
+void SliderExamples::updateValue(int value)
+{
+    _edit->setText(QString::number(value));
 }
