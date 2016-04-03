@@ -60,7 +60,7 @@ void Handle::mouseMoveEvent(QMouseEvent *event)
 }
 
 Slider::Slider(QWidget *parent)
-    : QWidget(parent),
+    : QAbstractSlider(parent),
       _drag(false),
       _handle(new Handle(this)),
       _orientation(Qt::Horizontal)
@@ -97,7 +97,7 @@ void Slider::paintEvent(QPaintEvent *event)
 
     painter.drawRect(rect().adjusted(0, 0, -1, -1));
 
-    QWidget::paintEvent(event);
+    QAbstractSlider::paintEvent(event);
 }
 
 
@@ -115,7 +115,7 @@ void Slider::mousePressEvent(QMouseEvent *event)
     } else {
         _drag = false;
     }
-    QWidget::mousePressEvent(event);
+    QAbstractSlider::mousePressEvent(event);
 }
 
 void Slider::mouseMoveEvent(QMouseEvent *event)
@@ -124,11 +124,11 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
         _handle->setRelativePosition(event->globalPos());
         update();
     }
-    QWidget::mouseMoveEvent(event);
+    QAbstractSlider::mouseMoveEvent(event);
 }
 
 void Slider::resizeEvent(QResizeEvent *event)
 {
     _handle->refreshGeometry();
-    QWidget::resizeEvent(event);
+    QAbstractSlider::resizeEvent(event);
 }

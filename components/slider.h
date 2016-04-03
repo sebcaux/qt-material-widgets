@@ -1,7 +1,7 @@
 #ifndef SLIDER_H
 #define SLIDER_H
 
-#include <QWidget>
+#include <QAbstractSlider>
 #include <QPoint>
 
 class Slider;
@@ -38,7 +38,7 @@ private:
     QPoint        _offset;
 };
 
-class Slider : public QWidget
+class Slider : public QAbstractSlider
 {
     Q_OBJECT
 
