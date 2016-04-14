@@ -17,6 +17,7 @@
 #include "examples/checkboxexamples.h"
 #include "examples/textfieldexamples.h"
 #include "examples/listexamples.h"
+#include "examples/avatarexamples.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -33,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
       _checkboxExamples(new CheckboxExamples),
       _textFieldExamples(new TextFieldExamples),
       _listExamples(new ListExamples),
+      _avatarExamples(new AvatarExamples),
       _about(new About)
 {
     _initWidget();
@@ -70,6 +72,8 @@ void MainWindow::showWidget(QAction *action)
         _layout->setCurrentWidget(_textFieldExamples);
     } else if ("List" == text) {
         _layout->setCurrentWidget(_listExamples);
+    } else if ("Avatar" == text) {
+        _layout->setCurrentWidget(_avatarExamples);
     } else {
         _layout->setCurrentWidget(_about);
     }
@@ -93,6 +97,7 @@ void MainWindow::_initWidget()
     _layout->addWidget(_checkboxExamples);
     _layout->addWidget(_textFieldExamples);
     _layout->addWidget(_listExamples);
+    _layout->addWidget(_avatarExamples);
 
     setCentralWidget(widget);
 }
@@ -109,6 +114,7 @@ void MainWindow::_initMenu() const
     QMenu *help = new QMenu("&Help");
 
     components->addAction("App Bar");
+    components->addAction("Avatar");
 
     QMenu *buttons = new QMenu("Buttons");
     components->addMenu(buttons);

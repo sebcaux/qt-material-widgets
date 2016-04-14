@@ -43,7 +43,9 @@ SOURCES += main.cpp\
     examples/radiobuttonexamples.cpp \
     examples/checkboxexamples.cpp \
     examples/textfieldexamples.cpp \
-    examples/listexamples.cpp
+    examples/listexamples.cpp \
+    components/avatar.cpp \
+    examples/avatarexamples.cpp
 
 HEADERS  += mainwindow.h \
     style.h \
@@ -80,4 +82,6 @@ HEADERS  += mainwindow.h \
     examples/radiobuttonexamples.h \
     examples/checkboxexamples.h \
     examples/textfieldexamples.h \
-    examples/listexamples.h
+    examples/listexamples.h \
+    components/avatar.h \
+    examples/avatarexamples.h
