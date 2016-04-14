@@ -1,9 +1,9 @@
 #ifndef TEXTFIELD_H
 #define TEXTFIELD_H
 
-#include <QWidget>
+#include <QLineEdit>
 
-class TextField : public QWidget
+class TextField : public QLineEdit
 {
     Q_OBJECT
 

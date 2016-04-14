@@ -1,10 +1,12 @@
 #include <QWidget>
 #include <QPainter>
 #include "textfield.h"
+#include "style.h"
 
 TextField::TextField(QWidget *parent)
-    : QWidget(parent)
+    : QLineEdit(parent)
 {
+    setStyle(&Style::instance());
 }
 
 TextField::~TextField()
@@ -13,19 +15,18 @@ TextField::~TextField()
 
 void TextField::mousePressEvent(QMouseEvent *event)
 {
-    QWidget::mousePressEvent(event);
+    QLineEdit::mousePressEvent(event);
 }
 
 void TextField::mouseReleaseEvent(QMouseEvent *event)
 {
-    QWidget::mouseReleaseEvent(event);
+    QLineEdit::mouseReleaseEvent(event);
 }
 
 void TextField::paintEvent(QPaintEvent *event)
 {
+    QLineEdit::paintEvent(event);
+
     QPainter painter(this);
-
-    painter.drawRect(40, 0, 50, 50);
-
-    QWidget::paintEvent(event);
+    painter.drawRect(0, 0, 50, 50);
 }

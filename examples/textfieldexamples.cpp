@@ -1,5 +1,6 @@
 #include <QLayout>
 #include <QEvent>
+#include <QLineEdit>
 #include "textfieldexamples.h"
 #include "components/textfield.h"
 #include "exampleview.h"
@@ -15,6 +16,20 @@ TextFieldExamples::TextFieldExamples(QWidget *parent)
 
         ExampleView *view = new ExampleView;
         view->setWidget(textField);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "hello"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
+    {
+        QLineEdit *edit = new QLineEdit;
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(edit);
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(
