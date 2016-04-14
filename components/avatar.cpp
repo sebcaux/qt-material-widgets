@@ -36,7 +36,7 @@ void Avatar::paintEvent(QPaintEvent *event)
     painter.setBrush(brush);
 
     QRect r = rect();
-    painter.drawEllipse(r.center(), 24, 24);
+    painter.drawEllipse(r.center(), 20, 20);
 
     QWidget::paintEvent(event);
 }
