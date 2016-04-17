@@ -1,3 +1,4 @@
+#include <QApplication>
 #include <QMenu>
 #include <QMenuBar>
 #include <QStackedLayout>
@@ -12,6 +13,11 @@
 #include "examples/tableexamples.h"
 #include "examples/sliderexamples.h"
 #include "examples/toggleexamples.h"
+#include "examples/radiobuttonexamples.h"
+#include "examples/checkboxexamples.h"
+#include "examples/textfieldexamples.h"
+#include "examples/listexamples.h"
+#include "examples/avatarexamples.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -24,6 +30,11 @@ MainWindow::MainWindow(QWidget *parent)
       _tableExamples(new TableExamples),
       _sliderExamples(new SliderExamples),
       _toggleExamples(new ToggleExamples),
+      _radioButtonExamples(new RadioButtonExamples),
+      _checkboxExamples(new CheckboxExamples),
+      _textFieldExamples(new TextFieldExamples),
+      _listExamples(new ListExamples),
+      _avatarExamples(new AvatarExamples),
       _about(new About)
 {
     _initWidget();
@@ -53,6 +64,16 @@ void MainWindow::showWidget(QAction *action)
         _layout->setCurrentWidget(_sliderExamples);
     } else if ("Toggle" == text) {
         _layout->setCurrentWidget(_toggleExamples);
+    } else if ("Radio Button" == text) {
+        _layout->setCurrentWidget(_radioButtonExamples);
+    } else if ("Checkbox" == text) {
+        _layout->setCurrentWidget(_checkboxExamples);
+    } else if ("Text Field" == text) {
+        _layout->setCurrentWidget(_textFieldExamples);
+    } else if ("List" == text) {
+        _layout->setCurrentWidget(_listExamples);
+    } else if ("Avatar" == text) {
+        _layout->setCurrentWidget(_avatarExamples);
     } else {
         _layout->setCurrentWidget(_about);
     }
@@ -72,6 +93,11 @@ void MainWindow::_initWidget()
     _layout->addWidget(_tableExamples);
     _layout->addWidget(_sliderExamples);
     _layout->addWidget(_toggleExamples);
+    _layout->addWidget(_radioButtonExamples);
+    _layout->addWidget(_checkboxExamples);
+    _layout->addWidget(_textFieldExamples);
+    _layout->addWidget(_listExamples);
+    _layout->addWidget(_avatarExamples);
 
     setCentralWidget(widget);
 }
@@ -79,12 +105,16 @@ void MainWindow::_initWidget()
 void MainWindow::_initMenu() const
 {
     QMenu *file = new QMenu("&File");
+
+    QAction *exitAction = file->addAction("E&xit");
+
     QMenu *components = new QMenu("&Components");
     QMenu *settings = new QMenu("&Settings");
     QMenu *examples = new QMenu("&Examples");
     QMenu *help = new QMenu("&Help");
 
     components->addAction("App Bar");
+    components->addAction("Avatar");
 
     QMenu *buttons = new QMenu("Buttons");
     components->addMenu(buttons);
@@ -116,4 +146,5 @@ void MainWindow::_initMenu() const
     menuBar()->addMenu(help);
 
     connect(components, SIGNAL(triggered(QAction *)), this, SLOT(showWidget(QAction *)));
+    connect(exitAction, SIGNAL(triggered(bool)), qApp, SLOT(quit()));
 }

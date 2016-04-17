@@ -12,6 +12,11 @@ class TabsExamples;
 class TableExamples;
 class SliderExamples;
 class ToggleExamples;
+class RadioButtonExamples;
+class CheckboxExamples;
+class TextFieldExamples;
+class ListExamples;
+class AvatarExamples;
 class QStackedLayout;
 
 class MainWindow : public QMainWindow
@@ -38,6 +43,11 @@ private:
     TableExamples        *const _tableExamples;
     SliderExamples       *const _sliderExamples;
     ToggleExamples       *const _toggleExamples;
+    RadioButtonExamples  *const _radioButtonExamples;
+    CheckboxExamples     *const _checkboxExamples;
+    TextFieldExamples    *const _textFieldExamples;
+    ListExamples         *const _listExamples;
+    AvatarExamples       *const _avatarExamples;
     About                *const _about;
 };
 

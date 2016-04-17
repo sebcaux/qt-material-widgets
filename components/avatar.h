@@ -1,15 +1,15 @@
-#ifndef LIST_H
-#define LIST_H
+#ifndef AVATAR_H
+#define AVATAR_H
 
 #include <QWidget>
 
-class List : public QWidget
+class Avatar : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit List(QWidget *parent = 0);
-    ~List();
+    explicit Avatar(QWidget *parent = 0);
+    ~Avatar();
 
 protected:
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
@@ -17,4 +17,4 @@ protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 };
 
-#endif // LIST_H
+#endif // AVATAR_H

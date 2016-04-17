@@ -75,11 +75,11 @@ void Tabs::updateInkBar()
         const QRect &r = item->geometry();
         const qreal s = 1-_tween;
         if (QAbstractAnimation::Running != _animation->state()) {
-            _inkBarGeometry = QRect(r.left(), r.bottom()-3, r.width(), 4);
+            _inkBarGeometry = QRect(r.left(), r.bottom()-1, r.width(), 2);
         } else {
             const qreal left = _previousGeometry.left()*s + r.left()*_tween;
             const qreal width = _previousGeometry.width()*s + r.width()*_tween;
-            _inkBarGeometry = QRect(left, r.bottom()-3, width, 4);
+            _inkBarGeometry = QRect(left, r.bottom()-1, width, 2);
         }
         update();
     }

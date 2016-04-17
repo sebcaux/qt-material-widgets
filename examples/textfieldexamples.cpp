@@ -1,0 +1,46 @@
+#include <QLayout>
+#include <QEvent>
+#include <QLineEdit>
+#include "textfieldexamples.h"
+#include "components/textfield.h"
+#include "exampleview.h"
+#include "frame.h"
+
+TextFieldExamples::TextFieldExamples(QWidget *parent)
+    : ExampleList(parent)
+{
+    QLayout *layout = widget()->layout();
+
+    {
+        TextField *textField = new TextField;
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(textField);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "hello"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
+    {
+        QLineEdit *edit = new QLineEdit;
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(edit);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "hello"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
+}
+
+TextFieldExamples::~TextFieldExamples()
+{
+}
