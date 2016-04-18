@@ -47,7 +47,8 @@ SOURCES += main.cpp\
     components/avatar.cpp \
     examples/avatarexamples.cpp \
     examples/menuexamples.cpp \
-    components/menu.cpp
+    components/menu.cpp \
+    components/scrollbar.cpp
 
 HEADERS  += mainwindow.h \
     style.h \
@@ -88,4 +89,5 @@ HEADERS  += mainwindow.h \
     components/avatar.h \
     examples/avatarexamples.h \
     examples/menuexamples.h \
-    components/menu.h
+    components/menu.h \
+    components/scrollbar.h
