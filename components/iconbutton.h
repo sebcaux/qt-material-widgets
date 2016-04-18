@@ -2,7 +2,6 @@
 #define ICONBUTTON_H
 
 #include <QAbstractButton>
-#include <QStyleOptionButton>
 
 class RippleOverlay;
 
@@ -22,8 +21,6 @@ protected:
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     bool event(QEvent *event) Q_DECL_OVERRIDE;
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
-
-    QStyleOptionButton getStyleOption() const;
 
 private:
     void updateOverlayGeometry();
