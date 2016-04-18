@@ -22,6 +22,9 @@ public:
     explicit Menu(QWidget *parent = 0);
     ~Menu();
 
+    void addMenuItem(MenuItem *item);
+    void addMenuItem(const QString &text);
+
 protected:
     void paintEvent(QPaintEvent *event);
 };

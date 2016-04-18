@@ -13,12 +13,22 @@ MenuExamples::MenuExamples(QWidget *parent)
     {
         Menu *menu = new Menu;
 
+        menu->addMenuItem("Maps");
+        menu->addMenuItem("Books");
+        menu->addMenuItem("Flights");
+        menu->addMenuItem("Apps");
+
         ExampleView *view = new ExampleView;
         view->setWidget(menu);
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(
-            "hello"
+            "Menu *menu = new Menu;\n"
+            "\n"
+            "menu->addMenuItem(\"Maps\");\n"
+            "menu->addMenuItem(\"Books\");\n"
+            "menu->addMenuItem(\"Flights\");\n"
+            "menu->addMenuItem(\"Apps\");\n"
         );
         frame->setWidget(view);
 

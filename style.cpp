@@ -7,7 +7,7 @@
 void Style::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p,
                           const QWidget *w) const
 {
-//    qDebug() << pe;
+    qDebug() << pe;
 
     switch (pe) {
     case PE_FrameFocusRect:

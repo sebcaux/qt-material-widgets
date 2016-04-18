@@ -7,12 +7,14 @@ MenuItem::MenuItem(QWidget *parent)
     : FlatButton(parent)
 {
     setMinimumHeight(40);
+    //setStyleSheet("text-align: left;");
 }
 
 MenuItem::MenuItem(const QString &text, QWidget *parent)
     : FlatButton(text, parent)
 {
     setMinimumHeight(40);
+    //setStyleSheet("text-align: left;");
 }
 
 MenuItem::~MenuItem()
@@ -32,15 +34,20 @@ Menu::Menu(QWidget *parent)
     policy.setHorizontalPolicy(QSizePolicy::Expanding);
     policy.setVerticalPolicy(QSizePolicy::Maximum);
     setSizePolicy(policy);
-
-    layout->addWidget(new MenuItem("Item #1"));
-    layout->addWidget(new MenuItem("Item #2"));
-    layout->addWidget(new MenuItem("Item #3"));
-    layout->addWidget(new MenuItem("Item #4"));
 }
 
 Menu::~Menu()
 {
+}
+
+void Menu::addMenuItem(MenuItem *item)
+{
+    layout()->addWidget(item);
+}
+
+void Menu::addMenuItem(const QString &text)
+{
+    addMenuItem(new MenuItem(text));
 }
 
 void Menu::paintEvent(QPaintEvent *event)
