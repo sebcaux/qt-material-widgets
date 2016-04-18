@@ -124,7 +124,14 @@ void MainWindow::_initMenu() const
     buttons->addAction("Icon Button");
 
     components->addAction("Dialog");
-    components->addAction("Menus");
+
+    QMenu *menus = new QMenu("Menus");
+    components->addMenu(menus);
+
+    menus->addAction("Menu");
+    menus->addAction("Icon Menu");
+    menus->addAction("Drop Down Menu");
+
     components->addAction("List");
     components->addAction("Slider");
 
