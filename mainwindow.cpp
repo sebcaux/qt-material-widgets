@@ -18,6 +18,7 @@
 #include "examples/textfieldexamples.h"
 #include "examples/listexamples.h"
 #include "examples/avatarexamples.h"
+#include "examples/menuexamples.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -35,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
       _textFieldExamples(new TextFieldExamples),
       _listExamples(new ListExamples),
       _avatarExamples(new AvatarExamples),
+      _menuExamples(new MenuExamples),
       _about(new About)
 {
     _initWidget();
@@ -74,6 +76,8 @@ void MainWindow::showWidget(QAction *action)
         _layout->setCurrentWidget(_listExamples);
     } else if ("Avatar" == text) {
         _layout->setCurrentWidget(_avatarExamples);
+    } else if ("Menu" == text) {
+        _layout->setCurrentWidget(_menuExamples);
     } else {
         _layout->setCurrentWidget(_about);
     }
@@ -98,6 +102,7 @@ void MainWindow::_initWidget()
     _layout->addWidget(_textFieldExamples);
     _layout->addWidget(_listExamples);
     _layout->addWidget(_avatarExamples);
+    _layout->addWidget(_menuExamples);
 
     setCentralWidget(widget);
 }
