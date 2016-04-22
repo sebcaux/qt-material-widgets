@@ -56,7 +56,10 @@ protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 
 private:
+    friend class Handle;
+
     inline bool isOnTrack(int p, int x) const { return (p >= x-2 && p <= x+2); }
+    void updateValue();
 
     bool            _drag;
     Handle   *const _handle;

@@ -56,7 +56,8 @@ void Handle::mousePressEvent(QMouseEvent *event)
 void Handle::mouseMoveEvent(QMouseEvent *event)
 {
     setRelativePosition(event->globalPos());
-    _slider->update();
+    //_slider->update();
+    _slider->updateValue();
 }
 
 Slider::Slider(QWidget *parent)
@@ -111,7 +112,8 @@ void Slider::mousePressEvent(QMouseEvent *event)
         _handle->setOffset((event->pos() - QPoint(s.width()/2, s.height()/2)) - event->globalPos());
         _handle->setRelativePosition(event->globalPos());
         _drag = true;
-        update();
+        //update();
+        updateValue();
     } else {
         _drag = false;
     }
@@ -122,7 +124,8 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
 {
     if (_drag) {
         _handle->setRelativePosition(event->globalPos());
-        update();
+        //update();
+        updateValue();
     }
     QAbstractSlider::mouseMoveEvent(event);
 }
@@ -131,4 +134,24 @@ void Slider::resizeEvent(QResizeEvent *event)
 {
     _handle->refreshGeometry();
     QAbstractSlider::resizeEvent(event);
+}
+
+void Slider::updateValue()
+{
+    const qreal tot = Qt::Horizontal == _orientation
+            ? geometry().width()-_handle->width()
+            : geometry().height()-_handle->height();
+
+    const qreal r = Qt::Horizontal == _orientation
+            ? _handle->geometry().left() / tot
+            : _handle->geometry().top() / tot;
+
+    // use QStyle::sliderValueFromPosition ??
+
+    setValue((1-r)*minimum()+r*maximum());
+
+    //setSliderPosition((1-r)*minimum()+r*maximum());
+    //triggerAction(QAbstractSlider::SliderMove);
+
+    update();
 }

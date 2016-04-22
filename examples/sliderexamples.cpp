@@ -1,3 +1,4 @@
+#include <QDebug>
 #include <QVBoxLayout>
 #include <QLineEdit>
 #include "sliderexamples.h"
@@ -48,10 +49,9 @@ SliderExamples::SliderExamples(QWidget *parent)
         widget->setLayout(layout);
 
         Slider *slider = new Slider;
-        QLineEdit *edit = new QLineEdit;
 
         layout->addWidget(slider);
-        layout->addWidget(edit);
+        layout->addWidget(_edit);
         layout->setStretch(0, 1);
         layout->setStretch(1, 1);
 
@@ -65,6 +65,7 @@ SliderExamples::SliderExamples(QWidget *parent)
         frame->setWidget(view);
 
         connect(slider, SIGNAL(valueChanged(int)), this, SLOT(updateValue(int)));
+//        connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(updateValue(int)));
 
         mainLayout->addWidget(frame);
     }
