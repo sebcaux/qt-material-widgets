@@ -6,19 +6,20 @@
 MenuItem::MenuItem(QWidget *parent)
     : FlatButton(parent)
 {
-    setMinimumHeight(40);
-    //setStyleSheet("text-align: left;");
 }
 
 MenuItem::MenuItem(const QString &text, QWidget *parent)
     : FlatButton(text, parent)
 {
-    setMinimumHeight(40);
-    //setStyleSheet("text-align: left;");
 }
 
 MenuItem::~MenuItem()
 {
+}
+
+QSize MenuItem::sizeHint() const
+{
+    return FlatButton::sizeHint().expandedTo(QSize(200, 40));
 }
 
 Menu::Menu(QWidget *parent)
@@ -31,7 +32,6 @@ Menu::Menu(QWidget *parent)
     layout->setSpacing(0);
 
     QSizePolicy policy;
-    policy.setHorizontalPolicy(QSizePolicy::Expanding);
     policy.setVerticalPolicy(QSizePolicy::Maximum);
     setSizePolicy(policy);
 }

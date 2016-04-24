@@ -12,6 +12,8 @@ public:
     explicit MenuItem(QWidget *parent = 0);
     explicit MenuItem(const QString &text, QWidget *parent = 0);
     ~MenuItem();
+
+    QSize sizeHint() const;
 };
 
 class Menu : public QWidget
