@@ -49,7 +49,8 @@ SOURCES += main.cpp\
     examples/menuexamples.cpp \
     components/menu.cpp \
     components/scrollbar.cpp \
-    lib/style.cpp
+    lib/style.cpp \
+    examples/iconmenuexamples.cpp
 
 HEADERS  += mainwindow.h \
     style.h \
@@ -92,4 +93,5 @@ HEADERS  += mainwindow.h \
     examples/menuexamples.h \
     components/menu.h \
     components/scrollbar.h \
-    lib/style.h
+    lib/style.h \
+    examples/iconmenuexamples.h
