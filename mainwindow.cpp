@@ -19,6 +19,7 @@
 #include "examples/listexamples.h"
 #include "examples/avatarexamples.h"
 #include "examples/menuexamples.h"
+#include "examples/iconmenuexamples.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -37,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
       _listExamples(new ListExamples),
       _avatarExamples(new AvatarExamples),
       _menuExamples(new MenuExamples),
+      _iconMenuExamples(new IconMenuExamples),
       _about(new About)
 {
     _initWidget();
@@ -78,6 +80,8 @@ void MainWindow::showWidget(QAction *action)
         _layout->setCurrentWidget(_avatarExamples);
     } else if ("Menu" == text) {
         _layout->setCurrentWidget(_menuExamples);
+    } else if ("Icon Menu" == text) {
+        _layout->setCurrentWidget(_iconMenuExamples);
     } else {
         _layout->setCurrentWidget(_about);
     }
@@ -103,6 +107,7 @@ void MainWindow::_initWidget()
     _layout->addWidget(_listExamples);
     _layout->addWidget(_avatarExamples);
     _layout->addWidget(_menuExamples);
+    _layout->addWidget(_iconMenuExamples);
 
     setCentralWidget(widget);
 }

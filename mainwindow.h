@@ -18,6 +18,7 @@ class TextFieldExamples;
 class ListExamples;
 class AvatarExamples;
 class MenuExamples;
+class IconMenuExamples;
 class QStackedLayout;
 
 class MainWindow : public QMainWindow
@@ -50,6 +51,7 @@ private:
     ListExamples         *const _listExamples;
     AvatarExamples       *const _avatarExamples;
     MenuExamples         *const _menuExamples;
+    IconMenuExamples     *const _iconMenuExamples;
     About                *const _about;
 };
 
