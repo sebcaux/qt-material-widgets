@@ -25,8 +25,13 @@ public:
     void addMenuItem(MenuItem *item);
     void addMenuItem(const QString &text);
 
+    inline int itemCount() const { return _items.count(); }
+
 protected:
     void paintEvent(QPaintEvent *event);
+
+private:
+    QList<MenuItem *> _items;
 };
 
 #endif // MENU_H

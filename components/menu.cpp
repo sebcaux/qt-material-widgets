@@ -42,6 +42,7 @@ Menu::~Menu()
 
 void Menu::addMenuItem(MenuItem *item)
 {
+    _items.push_back(item);
     layout()->addWidget(item);
 }
 
