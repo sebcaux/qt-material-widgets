@@ -1,5 +1,6 @@
 #include <QLayout>
 #include <QEvent>
+#include <QIcon>
 #include "iconmenuexamples.h"
 #include "components/iconmenu.h"
 #include "exampleview.h"
@@ -11,7 +12,7 @@ IconMenuExamples::IconMenuExamples(QWidget *parent)
     QLayout *layout = widget()->layout();
 
     {
-        IconMenu *iconMenu = new IconMenu;
+        IconMenu *iconMenu = new IconMenu(QIcon("../qt-material-widgets/face.svg"));
 
         ExampleView *view = new ExampleView;
         view->setWidget(iconMenu);

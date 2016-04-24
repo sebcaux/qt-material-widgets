@@ -2,14 +2,34 @@
 #define ICONMENU_H
 
 #include <QWidget>
+#include "iconbutton.h"
 
-class IconMenu : public QWidget
+class Menu;
+
+class MenuOverlay : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit IconMenu(QWidget *parent = 0);
+    explicit MenuOverlay(QWidget *parent = 0);
+    ~MenuOverlay();
+};
+
+class IconMenu : public IconButton
+{
+    Q_OBJECT
+
+public:
+    explicit IconMenu(const QIcon &icon, QWidget *parent = 0);
     ~IconMenu();
+
+protected:
+    bool event(QEvent *event) Q_DECL_OVERRIDE;
+
+private:
+    MenuOverlay   *const _overlay;
+    QWidget       *_geometryWidget;
+    Menu          *const _menu;
 };
 
 #endif // ICONMENU_H
