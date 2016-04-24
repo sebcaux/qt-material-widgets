@@ -1,7 +1,5 @@
-#include <QStylePainter>
-#include <QStyleOptionButton>
-#include <QApplication>
 #include <QEvent>
+#include <QPainter>
 #include <QDebug>
 #include "iconbutton.h"
 #include "../lib/rippleoverlay.h"
@@ -19,8 +17,6 @@ IconButton::IconButton(const QIcon &icon, QWidget *parent)
     setSizePolicy(policy);
 
     setGeometryWidget(this);
-
-    setStyle(&Style::instance());
 }
 
 IconButton::~IconButton()
@@ -29,13 +25,7 @@ IconButton::~IconButton()
 
 QSize IconButton::sizeHint() const
 {
-    QStyleOptionButton option(getStyleOption());
-
-    int w = option.iconSize.width() + 4;
-    int h = option.iconSize.height();
-
-    return (style()->sizeFromContents(QStyle::CT_PushButton, &option, QSize(w, h), this).
-            expandedTo(QApplication::globalStrut()));
+    return iconSize();
 }
 
 void IconButton::setGeometryWidget(QWidget *widget)
@@ -52,9 +42,10 @@ void IconButton::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
-    QStylePainter painter(this);
-    QStyleOptionButton option(getStyleOption());
-    painter.drawControl(QStyle::CE_PushButton, option);
+    QPainter painter(this);
+    const QSize &size = iconSize();
+    QPoint pos(width()/2-size.width()/2, height()/2-size.height()/2);
+    icon().paint(&painter, QRect(pos, size));
 }
 
 void IconButton::mousePressEvent(QMouseEvent *event)
@@ -85,18 +76,6 @@ bool IconButton::eventFilter(QObject *obj, QEvent *event)
         updateOverlayGeometry();
     }
     return QAbstractButton::eventFilter(obj, event);
-}
-
-QStyleOptionButton IconButton::getStyleOption() const
-{
-    QStyleOptionButton option;
-    option.initFrom(this);
-    option.features = QStyleOptionButton::Flat;
-    if (isChecked())
-        option.state |= QStyle::State_On;
-    option.icon = icon();
-    option.iconSize = iconSize();
-    return option;
 }
 
 void IconButton::updateOverlayGeometry()

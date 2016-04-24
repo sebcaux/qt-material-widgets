@@ -7,7 +7,7 @@
 void Style::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p,
                           const QWidget *w) const
 {
-//    qDebug() << pe;
+    qDebug() << pe;
 
     switch (pe) {
     case PE_FrameFocusRect:
@@ -15,7 +15,7 @@ void Style::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter
         p->drawRect(opt->rect.adjusted(0, 0, -1, -1));
         break;
     default:
-        QProxyStyle::drawPrimitive(pe, opt, p, w);
+        QCommonStyle::drawPrimitive(pe, opt, p, w);
     }
 }
 
@@ -44,7 +44,7 @@ void Style::drawControl(ControlElement element, const QStyleOption *opt,
         break;
         */
     default:
-        QProxyStyle::drawControl(element, opt, p, widget);
+        QCommonStyle::drawControl(element, opt, p, widget);
     }
 }
 
@@ -63,7 +63,7 @@ QRect Style::subElementRect(SubElement sr, const QStyleOption *opt,
         }
         break;
     default:
-        r = QProxyStyle::subElementRect(sr, opt, widget);
+        r = QCommonStyle::subElementRect(sr, opt, widget);
     }
 
 //    qDebug() << "r = " << r;
@@ -80,7 +80,7 @@ void Style::drawComplexControl(ComplexControl cc, const QStyleOptionComplex *opt
 
     switch (cc) {
     default:
-        QProxyStyle::drawComplexControl(cc, opt, p, w);
+        QCommonStyle::drawComplexControl(cc, opt, p, w);
     }
 }
 
@@ -93,7 +93,7 @@ QRect Style::subControlRect(ComplexControl cc, const QStyleOptionComplex *opt, S
     QRect r;
     switch (cc) {
     default:
-        r = QProxyStyle::subControlRect(cc, opt, sc, w);
+        r = QCommonStyle::subControlRect(cc, opt, sc, w);
     }
 
 //    qDebug() << "r = " << r;
@@ -116,7 +116,7 @@ int Style::pixelMetric(PixelMetric m, const QStyleOption *opt, const QWidget *wi
         ret = 0;
         break;
     default:
-        ret = QProxyStyle::pixelMetric(m, opt, widget);
+        ret = QCommonStyle::pixelMetric(m, opt, widget);
     }
 
 //    qDebug() << "ret = " << ret;

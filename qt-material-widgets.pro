@@ -45,7 +45,10 @@ SOURCES += main.cpp\
     examples/textfieldexamples.cpp \
     examples/listexamples.cpp \
     components/avatar.cpp \
-    examples/avatarexamples.cpp
+    examples/avatarexamples.cpp \
+    examples/menuexamples.cpp \
+    components/menu.cpp \
+    components/scrollbar.cpp
 
 HEADERS  += mainwindow.h \
     style.h \
@@ -84,4 +87,7 @@ HEADERS  += mainwindow.h \
     examples/textfieldexamples.h \
     examples/listexamples.h \
     components/avatar.h \
-    examples/avatarexamples.h
+    examples/avatarexamples.h \
+    examples/menuexamples.h \
+    components/menu.h \
+    components/scrollbar.h
