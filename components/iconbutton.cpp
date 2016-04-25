@@ -55,7 +55,7 @@ void IconButton::mousePressEvent(QMouseEvent *event)
     if (!_overlay)
         return;
 
-    QPoint p(_overlay->width(), _overlay->height());
+    const QPoint p(_overlay->width(), _overlay->height());
     _overlay->addRipple(p/2, iconSize().width());
 
     emit clicked();

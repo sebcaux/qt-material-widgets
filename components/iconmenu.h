@@ -27,9 +27,9 @@ protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    MenuOverlay   *const _overlay;
-    QWidget       *_geometryWidget;
+    MenuOverlay   *const _menuOverlay;
     Menu          *const _menu;
+    QWidget       *_menuGeometryWidget;
 };
 
 #endif // ICONMENU_H
