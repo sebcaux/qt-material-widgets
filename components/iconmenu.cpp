@@ -6,8 +6,7 @@
 MenuOverlay::MenuOverlay(QWidget *parent)
     : QWidget(parent)
 {
-    //setAttribute(Qt::WA_TransparentForMouseEvents);
-    //setAttribute(Qt::WA_NoSystemBackground);
+    setAttribute(Qt::WA_NoSystemBackground);
 }
 
 MenuOverlay::~MenuOverlay()
@@ -32,11 +31,15 @@ IconMenu::~IconMenu()
 {
 }
 
+void IconMenu::setOverlayParent(QWidget *parent)
+{
+    _menuOverlay->setParent(parent);
+}
+
 bool IconMenu::event(QEvent *event)
 {
     if (QEvent::ParentChange == event->type()) {
-        _menuOverlay->setParent(parentWidget());
-
+        setOverlayParent(parentWidget());
         QSize hint = _menu->layout()->sizeHint();
         _menuOverlay->setGeometry(0, 0, hint.width(), hint.height());
     }

@@ -23,6 +23,8 @@ public:
     explicit IconMenu(const QIcon &icon, QWidget *parent = 0);
     ~IconMenu();
 
+    void setOverlayParent(QWidget *parent);
+
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
 

@@ -24,6 +24,7 @@ IconMenuExamples::IconMenuExamples(QWidget *parent)
         frame->setWidget(view);
 
         layout->addWidget(frame);
+        iconMenu->setOverlayParent(frame);
     }
 }
 
