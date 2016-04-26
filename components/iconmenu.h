@@ -15,6 +15,7 @@ public:
 };
 
 class QPropertyAnimation;
+class ScaleEffect;
 class Menu;
 
 class IconMenu : public IconButton
@@ -49,6 +50,7 @@ private:
     MenuOverlay        *const _menuOverlay;
     Menu               *const _menu;
     QPropertyAnimation *const _animation;
+    ScaleEffect        *const _effect;
     QPoint                    _menuPos;
     bool                      _menuVisible;
     qreal                     _progress;

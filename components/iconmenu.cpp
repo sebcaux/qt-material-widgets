@@ -5,6 +5,7 @@
 #include <QPainter>
 #include "iconmenu.h"
 #include "menu.h"
+#include "lib/scaleeffect.h"
 
 MenuOverlay::MenuOverlay(QWidget *parent)
     : QWidget(parent)
@@ -22,19 +23,23 @@ IconMenu::IconMenu(const QIcon &icon, QWidget *parent)
       _menuOverlay(new MenuOverlay),
       _menu(new Menu(_menuOverlay)),
       _animation(new QPropertyAnimation(this)),
+      _effect(new ScaleEffect(this)),
       _menuVisible(false),
-      _progress(0)
+      _progress(1)
 {
     setCheckable(true);
     setOverlayParent(parent);
 
     _animation->setPropertyName("progress");
     _animation->setTargetObject(this);
-    _animation->setDuration(350);
+    _animation->setDuration(200);
     _animation->setStartValue(1);
     _animation->setEndValue(0);
 
+    _animation->setEasingCurve(QEasingCurve::InOutCubic);
+
     _menu->hide();
+    _menu->setGraphicsEffect(_effect);
 
     _menuOverlay->installEventFilter(this);
 
@@ -56,6 +61,8 @@ void IconMenu::setProgress(qreal progress)
     if (_progress == progress)
         return;
     _progress = progress;
+
+    _effect->setScale(0.5*(1 + progress), progress);
 
     emit progressChanged(progress);
     update();

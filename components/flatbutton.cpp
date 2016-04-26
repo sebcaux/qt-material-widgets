@@ -3,13 +3,14 @@
 #include <QMouseEvent>
 #include <QApplication>
 #include "flatbutton.h"
-#include "style.h"
+#include "lib/style.h"
 
 FlatButton::FlatButton(QWidget *parent)
     : QAbstractButton(parent),
       _overlay(new RippleOverlay(this))
 {
     setStyle(&Style::instance());
+    setAttribute(Qt::WA_Hover);
 }
 
 FlatButton::FlatButton(const QString &text, QWidget *parent)
@@ -18,6 +19,7 @@ FlatButton::FlatButton(const QString &text, QWidget *parent)
 {
     setText(text);
     setStyle(&Style::instance());
+    setAttribute(Qt::WA_Hover);
 }
 
 FlatButton::~FlatButton()
