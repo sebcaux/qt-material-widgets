@@ -23,8 +23,6 @@ IconMenu::IconMenu(const QIcon &icon, QWidget *parent)
     _menu->addMenuItem("Books");
     _menu->addMenuItem("Flights");
     _menu->addMenuItem("Apps");
-
-    setAttribute(Qt::WA_TransparentForMouseEvents);
 }
 
 IconMenu::~IconMenu()
