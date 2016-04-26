@@ -19,6 +19,8 @@ IconMenu::IconMenu(const QIcon &icon, QWidget *parent)
       _menu(new Menu(_menuOverlay)),
       _menuGeometryWidget(0)
 {
+    setCheckable(true);
+
     _menu->addMenuItem("Maps");
     _menu->addMenuItem("Books");
     _menu->addMenuItem("Flights");
