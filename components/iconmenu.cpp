@@ -5,7 +5,7 @@
 #include <QPainter>
 #include "iconmenu.h"
 #include "menu.h"
-#include "lib/scaleeffect.h"
+//#include "lib/scaleeffect.h"
 
 MenuOverlay::MenuOverlay(QWidget *parent)
     : QWidget(parent)
@@ -23,7 +23,7 @@ IconMenu::IconMenu(const QIcon &icon, QWidget *parent)
       _menuOverlay(new MenuOverlay),
       _menu(new Menu(_menuOverlay)),
       _animation(new QPropertyAnimation(this)),
-      _effect(new ScaleEffect(this)),
+      //_effect(new ScaleEffect(this)),
       _menuVisible(false),
       _progress(1)
 {
@@ -39,6 +39,8 @@ IconMenu::IconMenu(const QIcon &icon, QWidget *parent)
     _animation->setEasingCurve(QEasingCurve::OutCubic);
 
     _menu->hide();
+
+    /*
     _menu->setGraphicsEffect(_effect);
 
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
@@ -46,6 +48,7 @@ IconMenu::IconMenu(const QIcon &icon, QWidget *parent)
     effect->setOffset(QPoint(0, 0));
     effect->setColor(QColor(0, 0, 0, 200));
     _menuOverlay->setGraphicsEffect(effect);
+    */
 
     _menuOverlay->installEventFilter(this);
 
@@ -68,7 +71,8 @@ void IconMenu::setProgress(qreal progress)
         return;
     _progress = progress;
 
-    _effect->setScale(progress, progress);
+    //_effect->setScale(progress, progress);
+    updateOverlayGeometry();
 
     emit progressChanged(progress);
     update();
@@ -124,7 +128,7 @@ bool IconMenu::event(QEvent *event)
 
 void IconMenu::updateOverlayGeometry()
 {
-    const QSize size = iconSize();
-    const QPoint pos = _menuPos + QPoint(size.width()/2, size.height()/2);
-    _menu->setGeometry(QRect(pos, _menu->layout()->sizeHint()));
+    const QPoint pos = _menuPos;
+    const QSize size = _menu->layout()->sizeHint();
+    _menu->setGeometry(QRect(pos, size * _progress));
 }
