@@ -49,7 +49,6 @@ SOURCES += main.cpp\
     examples/menuexamples.cpp \
     components/menu.cpp \
     components/scrollbar.cpp \
-    lib/style.cpp \
     examples/iconmenuexamples.cpp \
     lib/scaleeffect.cpp
 
