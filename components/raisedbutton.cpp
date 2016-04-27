@@ -1,34 +1,35 @@
 #include <QDebug>
 #include <QPropertyAnimation>
+#include <QGraphicsDropShadowEffect>
 #include <QStylePainter>
 #include <QPaintEvent>
 #include "raisedbutton.h"
-#include "lib/customshadoweffect.h"
 
 RaisedButton::RaisedButton(QWidget *parent)
     : FlatButton(parent)
 {
-    CustomShadowEffect *effect = new CustomShadowEffect;
-    effect->setBlurRadius(17);
-    effect->setDistance(6);
+    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
+    effect->setBlurRadius(7);
+    effect->setOffset(QPoint(0, 0));
     setGraphicsEffect(effect);
+
     setAutoFillBackground(true);
 
     QPropertyAnimation *animation;
 
     animation = new QPropertyAnimation;
     animation->setTargetObject(effect);
-    animation->setPropertyName("distance");
-    animation->setStartValue(effect->distance());
-    animation->setEndValue(1);
+    animation->setPropertyName("offset");
+    animation->setStartValue(QPoint(0, 6));
+    animation->setEndValue(QPoint(0, 0));
     animation->setDuration(100);
     _group.addAnimation(animation);
 
     animation = new QPropertyAnimation;
     animation->setTargetObject(effect);
     animation->setPropertyName("blurRadius");
-    animation->setStartValue(effect->blurRadius());
-    animation->setEndValue(9);
+    animation->setStartValue(20);
+    animation->setEndValue(7);
     animation->setDuration(100);
     _group.addAnimation(animation);
 
@@ -41,9 +42,7 @@ RaisedButton::~RaisedButton()
 
 void RaisedButton::mousePressEvent(QMouseEvent *event)
 {
-    Q_UNUSED(event)
-
-    _group.setDirection(QAbstractAnimation::Forward);
+    _group.setDirection(QAbstractAnimation::Backward);
     _group.start();
 
     FlatButton::mousePressEvent(event);
@@ -51,9 +50,7 @@ void RaisedButton::mousePressEvent(QMouseEvent *event)
 
 void RaisedButton::mouseReleaseEvent(QMouseEvent *event)
 {
-    Q_UNUSED(event)
-
-    _group.setDirection(QAbstractAnimation::Backward);
+    _group.setDirection(QAbstractAnimation::Forward);
     _group.start();
 
     FlatButton::mouseReleaseEvent(event);
