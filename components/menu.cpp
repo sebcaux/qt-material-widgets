@@ -1,6 +1,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QPainter>
+#include <QGraphicsDropShadowEffect>
 #include "menu.h"
 
 MenuItem::MenuItem(QWidget *parent)
@@ -34,6 +35,12 @@ Menu::Menu(QWidget *parent)
     QSizePolicy policy;
     policy.setVerticalPolicy(QSizePolicy::Maximum);
     setSizePolicy(policy);
+
+    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
+    effect->setBlurRadius(9);
+    effect->setOffset(QPoint(0, 0));
+    effect->setColor(QColor(0, 0, 0, 200));
+    setGraphicsEffect(effect);
 }
 
 Menu::~Menu()
@@ -56,7 +63,6 @@ void Menu::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     painter.fillRect(rect(), Qt::white);
-    painter.drawRect(rect().adjusted(0, 0, -1, -1));
 
     QWidget::paintEvent(event);
 }

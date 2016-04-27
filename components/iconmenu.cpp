@@ -32,14 +32,20 @@ IconMenu::IconMenu(const QIcon &icon, QWidget *parent)
 
     _animation->setPropertyName("progress");
     _animation->setTargetObject(this);
-    _animation->setDuration(200);
+    _animation->setDuration(270);
     _animation->setStartValue(1);
     _animation->setEndValue(0);
 
-    _animation->setEasingCurve(QEasingCurve::InOutCubic);
+    _animation->setEasingCurve(QEasingCurve::OutCubic);
 
     _menu->hide();
     _menu->setGraphicsEffect(_effect);
+
+    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
+    effect->setBlurRadius(9);
+    effect->setOffset(QPoint(0, 0));
+    effect->setColor(QColor(0, 0, 0, 200));
+    _menuOverlay->setGraphicsEffect(effect);
 
     _menuOverlay->installEventFilter(this);
 
@@ -62,7 +68,7 @@ void IconMenu::setProgress(qreal progress)
         return;
     _progress = progress;
 
-    _effect->setScale(0.5*(1 + progress), progress);
+    _effect->setScale(progress, progress);
 
     emit progressChanged(progress);
     update();
@@ -118,5 +124,7 @@ bool IconMenu::event(QEvent *event)
 
 void IconMenu::updateOverlayGeometry()
 {
-    _menu->setGeometry(QRect(_menuPos, _menu->layout()->sizeHint()));
+    const QSize size = iconSize();
+    const QPoint pos = _menuPos + QPoint(size.width()/2, size.height()/2);
+    _menu->setGeometry(QRect(pos, _menu->layout()->sizeHint()));
 }
