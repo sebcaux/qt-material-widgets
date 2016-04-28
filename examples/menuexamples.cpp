@@ -13,10 +13,10 @@ MenuExamples::MenuExamples(QWidget *parent)
     {
         Menu *menu = new Menu;
 
-        menu->addMenuItem("Maps");
-        menu->addMenuItem("Books");
-        menu->addMenuItem("Flights");
-        menu->addMenuItem("Apps");
+        menu->addMenuItem(tr("Maps"));
+        menu->addMenuItem(tr("Books"));
+        menu->addMenuItem(tr("Flights"));
+        menu->addMenuItem(tr("Apps"));
 
         ExampleView *view = new ExampleView;
         view->setWidget(menu);
@@ -25,10 +25,10 @@ MenuExamples::MenuExamples(QWidget *parent)
         frame->setCodeSnippet(
             "Menu *menu = new Menu;\n"
             "\n"
-            "menu->addMenuItem(\"Maps\");\n"
-            "menu->addMenuItem(\"Books\");\n"
-            "menu->addMenuItem(\"Flights\");\n"
-            "menu->addMenuItem(\"Apps\");\n"
+            "menu->addMenuItem(tr(\"Maps\"));\n"
+            "menu->addMenuItem(tr(\"Books\"));\n"
+            "menu->addMenuItem(tr(\"Flights\"));\n"
+            "menu->addMenuItem(tr(\"Apps\"));\n"
         );
         frame->setWidget(view);
 
