@@ -36,7 +36,7 @@ IconMenu::IconMenu(const QIcon &icon, QWidget *parent)
     _animation->setStartValue(1);
     _animation->setEndValue(0);
 
-    _animation->setEasingCurve(QEasingCurve::InBounce);
+    _animation->setEasingCurve(QEasingCurve::InQuad);
 
     _menu->hide();
 
@@ -87,8 +87,8 @@ void IconMenu::toggleMenu()
 {
     if (QAbstractAnimation::Running != _animation->state()) {
         _animation->setEasingCurve(_menuVisible
-            ? QEasingCurve::OutCubic
-            : QEasingCurve::InBounce);
+            ? QEasingCurve::OutQuad
+            : QEasingCurve::InQuad);
     }
 
     _animation->setDirection(_menuVisible
