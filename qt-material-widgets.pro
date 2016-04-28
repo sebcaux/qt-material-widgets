@@ -96,3 +96,6 @@ HEADERS  += mainwindow.h \
     lib/style.h \
     examples/iconmenuexamples.h \
     lib/scaleeffect.h
+
+RESOURCES += \
+    resources.qrc

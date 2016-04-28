@@ -1,16 +1,17 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include <QCommonStyle>
+#include <QFontDatabase>
 #include "style.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-//    QCommonStyle *style = new QCommonStyle;
-//    a.setStyle(style);
+    int id = QFontDatabase::addApplicationFont(":/fonts/Roboto-Regular.ttf");
+    QFont font(QFontDatabase::applicationFontFamilies(id).at(0));
+    font.setPixelSize(14);
 
-//    a.setStyle(&Style::instance());
+    a.setFont(font);
 
     MainWindow w;
     w.show();
