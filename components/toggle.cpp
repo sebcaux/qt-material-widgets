@@ -56,12 +56,15 @@ bool Thumb::eventFilter(QObject *obj, QEvent *event)
 void Thumb::mouseReleaseEvent(QMouseEvent *event)
 {
     const bool checked = _toggle->isChecked();
+
     _toggle->setChecked(!checked);
+
     if (QAbstractAnimation::Running != _animation->state()) {
         _animation->setEasingCurve(checked
             ? QEasingCurve::OutCubic
             : QEasingCurve::InCubic);
     }
+
     _animation->setDirection(checked
         ? QAbstractAnimation::Forward
         : QAbstractAnimation::Backward);
