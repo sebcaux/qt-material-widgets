@@ -32,11 +32,11 @@ IconMenu::IconMenu(const QIcon &icon, QWidget *parent)
 
     _animation->setPropertyName("progress");
     _animation->setTargetObject(this);
-    _animation->setDuration(270);
+    _animation->setDuration(200);
     _animation->setStartValue(1);
     _animation->setEndValue(0);
 
-    _animation->setEasingCurve(QEasingCurve::OutCubic);
+    _animation->setEasingCurve(QEasingCurve::InCurve);
 
     _menu->hide();
 
@@ -108,7 +108,7 @@ void IconMenu::animationFinished()
 
 bool IconMenu::eventFilter(QObject *obj, QEvent *event)
 {
-    if (QEvent::MouseButtonRelease == event->type() && _menuOverlay == obj)
+    if (QEvent::MouseButtonRelease == event->type() && _menuVisible && _menuOverlay == obj)
         toggleMenu();
     return IconButton::eventFilter(obj, event);
 }
@@ -130,5 +130,11 @@ void IconMenu::updateOverlayGeometry()
 {
     const QPoint pos = _menuPos;
     const QSize size = _menu->layout()->sizeHint();
-    _menu->setGeometry(QRect(pos, size * _progress));
+    if (QAbstractAnimation::Running == _animation->state()) {
+        const QSize menuSize = size*(_progress*0.4 + 0.6);
+        _menu->setGeometry(QRect(pos, menuSize));
+        _menu->layout()->setGeometry(QRect(0, 0, menuSize.width(), size.height()*_progress));
+    } else {
+        _menu->setGeometry(QRect(pos, size));
+    }
 }

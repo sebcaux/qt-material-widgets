@@ -47,13 +47,13 @@ protected:
     void updateOverlayGeometry();
 
 private:
-    MenuOverlay        *const _menuOverlay;
-    Menu               *const _menu;
-    QPropertyAnimation *const _animation;
+    MenuOverlay            *const _menuOverlay;
+    Menu                   *const _menu;
+    QPropertyAnimation     *const _animation;
     //ScaleEffect        *const _effect;
-    QPoint                    _menuPos;
-    bool                      _menuVisible;
-    qreal                     _progress;
+    QPoint                        _menuPos;
+    bool                          _menuVisible;
+    qreal                         _progress;
 };
 
 #endif // ICONMENU_H
