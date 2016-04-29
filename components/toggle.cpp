@@ -109,7 +109,7 @@ Toggle::Toggle(QWidget *parent)
     CustomShadowEffect *effect = new CustomShadowEffect;
     effect->setDistance(0);
     effect->setBlurRadius(6);
-    effect->setColor(QColor(100, 100, 100));
+    effect->setColor(QColor(0, 0, 0, 100));
 
     _thumb->setGraphicsEffect(effect);
     _thumb->installEventFilter(this);
