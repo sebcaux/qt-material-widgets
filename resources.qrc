@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/fonts">
+    <qresource prefix="/">
         <file>fonts/Roboto/Roboto-Black.ttf</file>
         <file>fonts/Roboto/Roboto-Bold.ttf</file>
         <file>fonts/Roboto/Roboto-Medium.ttf</file>
