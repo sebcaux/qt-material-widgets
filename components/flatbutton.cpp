@@ -11,6 +11,12 @@ FlatButton::FlatButton(QWidget *parent)
 {
     setStyle(&Style::instance());
     setAttribute(Qt::WA_Hover);
+
+    QFont font(this->font());
+    font.setCapitalization(QFont::AllUppercase);
+    font.setPointSizeF(10.5);
+    font.setStyleName("Medium");
+    setFont(font);
 }
 
 FlatButton::FlatButton(const QString &text, QWidget *parent)
@@ -20,6 +26,12 @@ FlatButton::FlatButton(const QString &text, QWidget *parent)
     setText(text);
     setStyle(&Style::instance());
     setAttribute(Qt::WA_Hover);
+
+    QFont font(this->font());
+    font.setCapitalization(QFont::AllUppercase);
+    font.setPointSizeF(10.5);
+    font.setStyleName("Medium");
+    setFont(font);
 }
 
 FlatButton::~FlatButton()
