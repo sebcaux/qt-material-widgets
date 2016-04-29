@@ -7,11 +7,21 @@
 MenuItem::MenuItem(QWidget *parent)
     : FlatButton(parent)
 {
+    QFont font(this->font());
+    font.setCapitalization(QFont::MixedCase);
+    font.setPointSize(11);
+    font.setStyleName("Regular");
+    setFont(font);
 }
 
 MenuItem::MenuItem(const QString &text, QWidget *parent)
     : FlatButton(text, parent)
 {
+    QFont font(this->font());
+    font.setCapitalization(QFont::MixedCase);
+    font.setPointSize(11);
+    font.setStyleName("Regular");
+    setFont(font);
 }
 
 MenuItem::~MenuItem()
@@ -20,7 +30,7 @@ MenuItem::~MenuItem()
 
 QSize MenuItem::sizeHint() const
 {
-    return FlatButton::sizeHint().expandedTo(QSize(200, 40));
+    return FlatButton::sizeHint().expandedTo(QSize(200, 50));
 }
 
 Menu::Menu(QWidget *parent)
@@ -39,7 +49,7 @@ Menu::Menu(QWidget *parent)
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
     effect->setBlurRadius(9);
     effect->setOffset(QPoint(0, 0));
-    effect->setColor(QColor(0, 0, 0, 200));
+    effect->setColor(QColor(0, 0, 0, 100));
     setGraphicsEffect(effect);
 }
 
