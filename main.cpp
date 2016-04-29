@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 
     int id = QFontDatabase::addApplicationFont(":/fonts/Roboto-Regular.ttf");
     QFont font(QFontDatabase::applicationFontFamilies(id).at(0));
-    font.setPixelSize(14);
+    font.setPixelSize(15);
 
     a.setFont(font);
 
