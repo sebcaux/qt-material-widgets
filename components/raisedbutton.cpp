@@ -11,6 +11,7 @@ RaisedButton::RaisedButton(QWidget *parent)
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
     effect->setBlurRadius(7);
     effect->setOffset(QPoint(0, 0));
+    effect->setColor(QColor(0, 0, 0, 100));
     setGraphicsEffect(effect);
 
     setAutoFillBackground(true);
