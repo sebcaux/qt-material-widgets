@@ -80,8 +80,8 @@ void Slider::paintEvent(QPaintEvent *event)
     const int y = height()/2;
 
     QRect r = Qt::Vertical == _orientation
-            ? QRect(x-2, 0, 4, height())
-            : QRect(0, y-2, width(), 4);
+            ? QRect(x-1, 0, 2, height())
+            : QRect(0, y-1, width(), 2);
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
