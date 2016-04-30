@@ -50,7 +50,8 @@ SOURCES += main.cpp\
     components/menu.cpp \
     components/scrollbar.cpp \
     examples/iconmenuexamples.cpp \
-    lib/scaleeffect.cpp
+    lib/scaleeffect.cpp \
+    lib/style.cpp
 
 HEADERS  += mainwindow.h \
     style.h \

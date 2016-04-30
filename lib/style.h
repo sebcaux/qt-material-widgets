@@ -14,6 +14,9 @@ public:
         return instance;
     }
 
+    void drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p,
+                       const QWidget *w = 0) const Q_DECL_OVERRIDE;
+
 private:
     Style() {}
 
