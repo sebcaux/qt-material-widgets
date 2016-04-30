@@ -9,7 +9,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    style.cpp \
     components/appbar.cpp \
     components/checkbox.cpp \
     components/dialog.cpp \
@@ -54,7 +53,6 @@ SOURCES += main.cpp\
     lib/style.cpp
 
 HEADERS  += mainwindow.h \
-    style.h \
     components/appbar.h \
     components/checkbox.h \
     components/dialog.h \
@@ -94,9 +92,9 @@ HEADERS  += mainwindow.h \
     examples/menuexamples.h \
     components/menu.h \
     components/scrollbar.h \
-    lib/style.h \
     examples/iconmenuexamples.h \
-    lib/scaleeffect.h
+    lib/scaleeffect.h \
+    lib/style.h
 
 RESOURCES += \
     resources.qrc

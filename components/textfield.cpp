@@ -3,7 +3,7 @@
 #include <QPainter>
 #include <QDebug>
 #include "textfield.h"
-#include "style.h"
+#include "lib/style.h"
 
 TextField::TextField(QWidget *parent)
     : QLineEdit(parent),

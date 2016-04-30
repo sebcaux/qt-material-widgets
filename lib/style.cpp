@@ -1,8 +1,8 @@
 #include <QPainter>
 #include <QStyleOption>
-#include "style.h"
+#include "lib/style.h"
 
-void Style::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p, const QWidget *w = 0) const
+void Style::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p, const QWidget *w) const
 {
     switch (pe)
     {

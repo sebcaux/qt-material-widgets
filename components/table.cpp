@@ -2,7 +2,7 @@
 #include <QEvent>
 #include <QHeaderView>
 #include "table.h"
-#include "style.h"
+#include "lib/style.h"
 
 Table::Table(QWidget *parent)
     : QTableWidget(parent)
