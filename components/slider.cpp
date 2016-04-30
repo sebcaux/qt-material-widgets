@@ -102,16 +102,25 @@ void Slider::paintEvent(QPaintEvent *event)
             ? QRect(x-1, 0, 2, height())
             : QRect(0, y-1, width(), 2);
 
+    const QSize s = _handle->sizeHint();
+
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(QColor(0, 0, 0));
+
+    if (Qt::Horizontal == _orientation) {
+        r.adjust(s.width()/2, 0, -s.width()/2, 0);
+    } else {
+        r.adjust(0, s.height()/2, 0, -s.height()/2);
+    }
     painter.fillRect(r, brush);
 
     painter.save();
-    brush.setColor(QColor(255, 0, 0));
+    brush.setColor(Qt::red);
+
     const QPoint p = Qt::Vertical == _orientation
-            ? QPoint(width(), _handle->y())
-            : QPoint(_handle->x(), height());
+            ? QPoint(width(), _handle->y()+s.height()/2)
+            : QPoint(_handle->x()+s.width()/2, height());
     painter.fillRect(r.intersected(QRect(QPoint(0, 0), p)), brush);
     painter.restore();
 
