@@ -124,7 +124,7 @@ void Slider::paintEvent(QPaintEvent *event)
     painter.fillRect(r.intersected(QRect(QPoint(0, 0), p)), brush);
     painter.restore();
 
-    painter.drawRect(rect().adjusted(0, 0, -1, -1));
+    //painter.drawRect(rect().adjusted(0, 0, -1, -1));
 
     QAbstractSlider::paintEvent(event);
 }
