@@ -8,13 +8,13 @@ Handle::Handle(Slider *slider)
     : QWidget(slider),
       _slider(slider),
       _animation(new QPropertyAnimation(this)),
-      _scaleFactor(1)
+      _scaleFactor(12)
 {
     _animation->setPropertyName("scaleFactor");
     _animation->setTargetObject(this);
-    _animation->setStartValue(1);
-    _animation->setEndValue(2);
-    _animation->setDuration(200);
+    _animation->setStartValue(12);
+    _animation->setEndValue(20);
+    _animation->setDuration(100);
 }
 
 Handle::~Handle()
@@ -51,7 +51,9 @@ void Handle::paintEvent(QPaintEvent *event)
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
-    painter.drawEllipse(0, 0, width(), height());
+    //painter.drawEllipse(0, 0, width(), height());
+    //painter.drawRect(rect());
+    painter.drawEllipse((width()-_scaleFactor)/2, (height()-_scaleFactor)/2, _scaleFactor, _scaleFactor);
 
     QWidget::paintEvent(event);
 }
