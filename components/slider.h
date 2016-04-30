@@ -4,17 +4,20 @@
 #include <QAbstractSlider>
 #include <QPoint>
 
+class QPropertyAnimation;
 class Slider;
 
 class Handle : public QWidget
 {
     Q_OBJECT
 
+    Q_PROPERTY(qreal scaleFactor WRITE setScaleFactor READ scaleFactor)
+
 public:
     explicit Handle(Slider *slider);
     ~Handle();
 
-    inline QSize sizeHint() const Q_DECL_OVERRIDE { return QSize(12, 12); }
+    inline QSize sizeHint() const Q_DECL_OVERRIDE { return QSize(12, 12)*_scaleFactor; }
 
     inline void setRelativePosition(const QPoint &pos) { setPosition(_offset + pos); }
 
@@ -24,18 +27,24 @@ public:
     inline void setOffset(const QPoint &offset) { _offset = offset; update(); }
     inline const QPoint &offset() const { return _offset; }
 
+    inline void setScaleFactor (qreal factor ) { _scaleFactor = factor; refreshGeometry(); }
+    inline qreal scaleFactor() const { return _scaleFactor; }
+
     void refreshGeometry();
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    Slider *const _slider;
-    QPoint        _position;
-    QPoint        _eventPos;
-    QPoint        _offset;
+    Slider             *const _slider;
+    QPropertyAnimation *const _animation;
+    QPoint                    _position;
+    QPoint                    _eventPos;
+    QPoint                    _offset;
+    qreal                     _scaleFactor;
 };
 
 class Slider : public QAbstractSlider

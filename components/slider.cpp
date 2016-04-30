@@ -1,12 +1,20 @@
 #include <QPainter>
 #include <QDebug>
 #include <QMouseEvent>
+#include <QPropertyAnimation>
 #include "slider.h"
 
 Handle::Handle(Slider *slider)
     : QWidget(slider),
-      _slider(slider)
+      _slider(slider),
+      _animation(new QPropertyAnimation(this)),
+      _scaleFactor(1)
 {
+    _animation->setPropertyName("scaleFactor");
+    _animation->setTargetObject(this);
+    _animation->setStartValue(1);
+    _animation->setEndValue(2);
+    _animation->setDuration(200);
 }
 
 Handle::~Handle()
@@ -51,6 +59,15 @@ void Handle::paintEvent(QPaintEvent *event)
 void Handle::mousePressEvent(QMouseEvent *event)
 {
     _offset = pos() - event->globalPos();
+
+    _animation->setDirection(QAbstractAnimation::Forward);
+    _animation->start();
+}
+
+void Handle::mouseReleaseEvent(QMouseEvent *event)
+{
+    _animation->setDirection(QAbstractAnimation::Backward);
+    _animation->start();
 }
 
 void Handle::mouseMoveEvent(QMouseEvent *event)
