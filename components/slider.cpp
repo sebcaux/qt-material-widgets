@@ -111,7 +111,7 @@ void Slider::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
 
-    QRect r = Qt::Vertical == _orientation
+    QRect rect = Qt::Vertical == _orientation
             ? QRect(width()/2-1, 0, 2, height())
             : QRect(0, height()/2-1, width(), 2);
 
@@ -122,18 +122,18 @@ void Slider::paintEvent(QPaintEvent *event)
     brush.setColor(_hover ? QColor(0, 0, 0, 80) : QColor(0, 0, 0, 40));
 
     if (Qt::Horizontal == _orientation) {
-        r.adjust(handle.width()/2, 0, -handle.width()/2, 0);
+        rect.adjust(handle.width()/2, 0, -handle.width()/2, 0);
     } else {
-        r.adjust(0, handle.height()/2, 0, -handle.height()/2);
+        rect.adjust(0, handle.height()/2, 0, -handle.height()/2);
     }
-    painter.fillRect(r, brush);
+    painter.fillRect(rect, brush);
 
     painter.save();
     brush.setColor(QColor(0, 0, 0));
     const QPoint range = Qt::Vertical == _orientation
             ? QPoint(width(), _handle->y()+handle.height()/2)
             : QPoint(_handle->x()+handle.width()/2, height());
-    painter.fillRect(r.intersected(QRect(QPoint(0, 0), range)), brush);
+    painter.fillRect(rect.intersected(QRect(QPoint(0, 0), range)), brush);
     painter.restore();
 
     QAbstractSlider::paintEvent(event);
