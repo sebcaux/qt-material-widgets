@@ -41,7 +41,6 @@ protected:
 private:
     Slider *const _slider;
     QPoint        _position;
-    QPoint        _eventPos;
     QPoint        _offset;
     qreal         _knobSize;
     qreal         _haloSize;
