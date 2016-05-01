@@ -34,7 +34,9 @@ public:
         brush.setColor(QColor(0, 0, 0, 255));
 
         painter->save();
+
         painter->fillRect(trackGeometry(), brush);
+
         painter->restore();
 
 #ifdef DEBUG_LAYOUT
@@ -42,9 +44,29 @@ public:
 #endif
     }
 
+    QRectF thumbGeometry() const
+    {
+        Q_Q(const Slider);
+
+        return Qt::Horizontal == orientation
+            ? QRectF(0, q->rect().height()/2 - 5, 10, 10)
+            : QRectF(q->rect().width()/2 - 5, 0, 10, 10);
+    }
+
     void paintThumb(QPainter *painter)
     {
+        Q_Q(Slider);
+
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(QColor(0, 0, 0, 255));
+
         painter->save();
+
+        painter->setRenderHint(QPainter::Antialiasing);
+
+        painter->setBrush(brush);
+        painter->drawEllipse(thumbGeometry());
 
         painter->restore();
     }
