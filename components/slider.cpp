@@ -8,7 +8,8 @@ Handle::Handle(Slider *slider)
     : QWidget(slider),
       _slider(slider),
       _knobSize(12),
-      _haloSize(0)
+      _haloSize(0),
+      _phase(0)
 {
     setAttribute(Qt::WA_TransparentForMouseEvents);
 }
@@ -39,6 +40,7 @@ void Handle::paintEvent(QPaintEvent *event)
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
+    // Paint halo
     if (_haloSize > 12) {
         painter.save();
         painter.setOpacity(0.1);
@@ -46,18 +48,26 @@ void Handle::paintEvent(QPaintEvent *event)
         painter.restore();
     }
 
-    if (_slider->minimum() == _slider->value()) {
+    const QRectF rect((width()-_knobSize)/2, (height()-_knobSize)/2, _knobSize, _knobSize);
+
+    // Paint default knob
+    painter.drawEllipse(rect);
+
+    // Hollow knob (indicates that value == minimum or slider is disabled)
+    if (_phase < 1)
+    {
         QPen pen;
         pen.setColor(QColor(0, 0, 0, 80));
         pen.setWidth(2);
         painter.setPen(pen);
-        QBrush brush;
-        brush.setColor(Qt::white);
-        brush.setStyle(Qt::SolidPattern);
-        painter.setBrush(brush);
-    }
 
-    painter.drawEllipse(QRectF((width()-_knobSize)/2, (height()-_knobSize)/2, _knobSize, _knobSize));
+        brush.setColor(Qt::white);
+        painter.setBrush(brush);
+
+        painter.setOpacity(1-_phase);
+
+        painter.drawEllipse(rect);
+    }
 
     QWidget::paintEvent(event);
 }
@@ -66,6 +76,7 @@ Slider::Slider(QWidget *parent)
     : QAbstractSlider(parent),
       _knobAnimation(new QPropertyAnimation(this)),
       _haloAnimation(new QPropertyAnimation(this)),
+      _phaseAnimation(new QPropertyAnimation(this)),
       _handle(new Handle(this)),
       _drag(false),
       _hover(false),
@@ -82,6 +93,12 @@ Slider::Slider(QWidget *parent)
     _haloAnimation->setStartValue(12);
     _haloAnimation->setEndValue(30);
     _haloAnimation->setDuration(220);
+
+    _phaseAnimation->setPropertyName("phase");
+    _phaseAnimation->setTargetObject(_handle);
+    _phaseAnimation->setStartValue(0);
+    _phaseAnimation->setEndValue(1);
+    _phaseAnimation->setDuration(500);
 
     setMouseTracking(true);
 }
@@ -224,7 +241,22 @@ void Slider::updateValue()
 
     // @TODO: use QStyle::sliderValueFromPosition()
 
-    setValue((1-r)*minimum()+r*maximum());
+    const int oldValue = value();
+    const int newValue = (1-r)*minimum()+r*maximum();
+
+    if (oldValue == newValue) {
+        return;
+    }
+
+    setValue(newValue);
+
+    if (oldValue == 0 && newValue != 0) {
+        _phaseAnimation->setDirection(QAbstractAnimation::Forward);
+        _phaseAnimation->start();
+    } else if (newValue == 0 && oldValue != 0) {
+        _phaseAnimation->setDirection(QAbstractAnimation::Backward);
+        _phaseAnimation->start();
+    }
 
     update();
 }

@@ -4,6 +4,7 @@
 #include <QAbstractSlider>
 #include <QPoint>
 
+class QPropertyAnimation;
 class Slider;
 
 class Handle : public QWidget
@@ -12,6 +13,7 @@ class Handle : public QWidget
 
     Q_PROPERTY(qreal knobSize WRITE setKnobSize READ knobSize)
     Q_PROPERTY(qreal haloSize WRITE setHaloSize READ haloSize)
+    Q_PROPERTY(qreal phase WRITE setPhase READ phase)
 
 public:
     explicit Handle(Slider *slider);
@@ -27,11 +29,14 @@ public:
     inline void setOffset(const QPoint &offset) { _offset = offset; update(); }
     inline const QPoint &offset() const { return _offset; }
 
-    inline void setKnobSize (qreal size ) { _knobSize = size; refreshGeometry(); }
+    inline void setKnobSize (qreal size) { _knobSize = size; refreshGeometry(); }
     inline qreal knobSize() const { return _knobSize; }
 
-    inline void setHaloSize (qreal size ) { _haloSize = size; update(); }
+    inline void setHaloSize (qreal size) { _haloSize = size; update(); }
     inline qreal haloSize() const { return _haloSize; }
+
+    inline void setPhase (qreal phase) { _phase = phase; update(); }
+    inline qreal phase() const { return _phase; }
 
     void refreshGeometry();
 
@@ -44,9 +49,8 @@ private:
     QPoint        _offset;
     qreal         _knobSize;
     qreal         _haloSize;
+    qreal         _phase;
 };
-
-class QPropertyAnimation;
 
 class Slider : public QAbstractSlider
 {
@@ -80,6 +84,7 @@ protected:
 private:
     QPropertyAnimation *const _knobAnimation;
     QPropertyAnimation *const _haloAnimation;
+    QPropertyAnimation *const _phaseAnimation;
     Handle             *const _handle;
     bool                      _drag;
     bool                      _hover;
