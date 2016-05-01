@@ -60,7 +60,7 @@ void RippleOverlay::paintEvent(QPaintEvent *event)
 void RippleOverlay::deleteRipple()
 {
     if (ripples.isEmpty()) {
-        qWarning() << "RippleOverlay::deleteRipple was called when no active ripple.";
+        qWarning() << "RippleOverlay::deleteRipple was called when no ripples were active.";
         return;
     }
     ripples.takeFirst()->deleteLater();
