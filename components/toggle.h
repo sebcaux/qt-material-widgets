@@ -11,7 +11,7 @@ class Thumb : public QWidget
 {
     Q_OBJECT
 
-    Q_PROPERTY(qreal progress WRITE setProgress READ progress NOTIFY progressChanged)
+    Q_PROPERTY(qreal progress WRITE setProgress READ progress)
 
 public:
     explicit Thumb(Toggle *parent);
@@ -25,7 +25,6 @@ public:
 
 signals:
     void clicked();
-    void progressChanged(qreal);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
@@ -43,6 +42,10 @@ class Toggle : public QAbstractButton
 {
     Q_OBJECT
 
+    friend class Thumb;
+
+    void updateOverlayGeometry();
+
 public:
     explicit Toggle(QWidget *parent = 0);
     ~Toggle();
@@ -54,14 +57,12 @@ public:
 
 protected slots:
     void addRipple();
-    void updateOverlayGeometry();
 
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
 private:
-
     Thumb         *const _thumb;
     RippleOverlay *const _overlay;
     Qt::Orientation      _orientation;

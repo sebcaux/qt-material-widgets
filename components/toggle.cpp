@@ -32,13 +32,14 @@ void Thumb::setProgress(qreal progress)
 {
     if (_progress == progress)
         return;
+
     _progress = progress;
 
     const QSize s(Qt::Horizontal == _toggle->orientation()
             ? size() : size().transposed());
     setOffset(progress*static_cast<qreal>(s.width()-s.height()));
 
-    emit progressChanged(progress);
+    _toggle->updateOverlayGeometry();
     update();
 }
 
@@ -97,6 +98,16 @@ void Thumb::paintEvent(QPaintEvent *event)
     }
 }
 
+void Toggle::updateOverlayGeometry()
+{
+    const int offset = _thumb->offset();
+    if (Qt::Horizontal == _orientation) {
+        _overlay->setGeometry(geometry().adjusted(-10+offset, -20, 10+offset, 20));
+    } else {
+        _overlay->setGeometry(geometry().adjusted(-10, -20+offset, 10, 20+offset));
+    }
+}
+
 Toggle::Toggle(QWidget *parent)
     : QAbstractButton(parent),
       _thumb(new Thumb(this)),
@@ -115,7 +126,6 @@ Toggle::Toggle(QWidget *parent)
     _thumb->installEventFilter(this);
 
     connect(_thumb, SIGNAL(clicked()), this, SLOT(addRipple()));
-    connect(_thumb, SIGNAL(progressChanged(qreal)), this, SLOT(updateOverlayGeometry()));
 }
 
 Toggle::~Toggle()
@@ -146,17 +156,6 @@ void Toggle::addRipple()
         const int d = width()/2;
         const int w = _thumb->width()/2+10;
         _overlay->addRipple(QPoint(10+d, 20+d), w);
-    }
-}
-
-void Toggle::updateOverlayGeometry()
-{
-    const int d = _thumb->offset();
-
-    if (Qt::Horizontal == _orientation) {
-        _overlay->setGeometry(geometry().adjusted(-10+d, -20, 10+d, 20));
-    } else {
-        _overlay->setGeometry(geometry().adjusted(-10, -20+d, 10, 20+d));
     }
 }
 
