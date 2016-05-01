@@ -62,6 +62,7 @@ HEADERS  += mainwindow.h \
     components/list.h \
     components/radiobutton.h \
     components/slider.h \
+    components/slider_p.h \
     components/tab.h \
     components/tabs.h \
     components/textfield.h \
