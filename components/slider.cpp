@@ -7,7 +7,8 @@
 Handle::Handle(Slider *slider)
     : QWidget(slider),
       _slider(slider),
-      _knobSize(12)
+      _knobSize(12),
+      _haloSize(0)
 {
     setAttribute(Qt::WA_TransparentForMouseEvents);
 }
@@ -18,16 +19,10 @@ Handle::~Handle()
 
 void Handle::refreshGeometry()
 {
-    //QWidget *container = parentWidget();
-    //Slider *container = _slider;
-    const QSize s = sizeHint();
-
+    const QSize handle = sizeHint();
     setGeometry(QRect(_slider->orientation() == Qt::Horizontal
-        ? QPoint(qBound(0, _position.x(), _slider->width()-s.width()), _slider->height()/2-s.height()/2)
-        : QPoint(_slider->width()/2-s.width()/2, qBound(0, _position.y(), _slider->height()-s.height())), s));
-//        ? QPoint(qBound(0, _position.x(), container->width()-s.width()), container->height()/2-s.height()/2)
-//        : QPoint(container->width()/2-s.width()/2, qBound(0, _position.y(), container->height()-s.height())), s));
-
+        ? QPoint(qBound(0, _position.x(), _slider->width()-handle.width()), _slider->height()/2-handle.height()/2)
+        : QPoint(_slider->width()/2-handle.width()/2, qBound(0, _position.y(), _slider->height()-handle.height())), handle));
     update();
 }
 
@@ -36,75 +31,43 @@ void Handle::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-//    QPen pen;
-//    pen.setColor(Qt::black);
-//    pen.setWidth(1);
-//    painter.setPen(pen);
-//    painter.drawRect(rect().adjusted(0, 0, -1, -1));
+    //painter.drawRect(rect());
 
     QBrush brush;
     brush.setColor(QColor(0, 0, 0));
     brush.setStyle(Qt::SolidPattern);
 
-//    painter.drawRect(rect());
-
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
-    //painter.drawEllipse(0, 0, width(), height());
     painter.drawEllipse((width()-_knobSize)/2, (height()-_knobSize)/2, _knobSize, _knobSize);
+
+    painter.setOpacity(0.2);
+    painter.drawEllipse((width()-_haloSize)/2, (height()-_haloSize)/2, _haloSize, _haloSize);
 
     QWidget::paintEvent(event);
 }
 
-/*
-void Handle::mousePressEvent(QMouseEvent *event)
-{
-    _offset = pos() - event->globalPos();
-
-    _animation->setDirection(QAbstractAnimation::Forward);
-    _animation->start();
-}
-
-void Handle::mouseReleaseEvent(QMouseEvent *event)
-{
-    Q_UNUSED(event)
-
-    _animation->setDirection(QAbstractAnimation::Backward);
-    _animation->start();
-}
-*/
-
-//void Handle::enterEvent(QEvent *event)
-//{
-//    _slider->update();
-//}
-//
-//void Handle::leaveEvent(QEvent *event)
-//{
-//    _slider->update();
-//}
-
-//void Handle::mouseMoveEvent(QMouseEvent *event)
-//{
-//    setRelativePosition(event->globalPos());
-//    //_slider->update();
-//    _slider->updateValue();
-//}
-
 Slider::Slider(QWidget *parent)
     : QAbstractSlider(parent),
-      _animation(new QPropertyAnimation(this)),
+      _knobAnimation(new QPropertyAnimation(this)),
+      _haloAnimation(new QPropertyAnimation(this)),
+      _handle(new Handle(this)),
       _drag(false),
       _hover(false),
-      _handle(new Handle(this)),
       _orientation(Qt::Horizontal)
 {
-    _animation->setPropertyName("knobSize");
-    _animation->setTargetObject(_handle);
-    _animation->setStartValue(12);
-    _animation->setEndValue(20);
-    _animation->setDuration(100);
+    _knobAnimation->setPropertyName("knobSize");
+    _knobAnimation->setTargetObject(_handle);
+    _knobAnimation->setStartValue(12);
+    _knobAnimation->setEndValue(20);
+    _knobAnimation->setDuration(100);
+
+    _haloAnimation->setPropertyName("haloSize");
+    _haloAnimation->setTargetObject(_handle);
+    _haloAnimation->setStartValue(12);
+    _haloAnimation->setEndValue(30);
+    _haloAnimation->setDuration(200);
 
     setMouseTracking(true);
 }
@@ -121,47 +84,50 @@ void Slider::paintEvent(QPaintEvent *event)
             ? QRect(width()/2-1, 0, 2, height())
             : QRect(0, height()/2-1, width(), 2);
 
-    const QSize s = _handle->sizeHint();
+    const QSize handle = _handle->sizeHint();
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(QColor(0, 0, 0, 40));
+    brush.setColor(_hover ? QColor(0, 0, 0, 80) : QColor(0, 0, 0, 40));
 
     if (Qt::Horizontal == _orientation) {
-        r.adjust(s.width()/2, 0, -s.width()/2, 0);
+        r.adjust(handle.width()/2, 0, -handle.width()/2, 0);
     } else {
-        r.adjust(0, s.height()/2, 0, -s.height()/2);
+        r.adjust(0, handle.height()/2, 0, -handle.height()/2);
     }
     painter.fillRect(r, brush);
 
     painter.save();
     brush.setColor(QColor(0, 0, 0));
-
-    const QPoint p = Qt::Vertical == _orientation
-            ? QPoint(width(), _handle->y()+s.height()/2)
-            : QPoint(_handle->x()+s.width()/2, height());
-    painter.fillRect(r.intersected(QRect(QPoint(0, 0), p)), brush);
+    const QPoint range = Qt::Vertical == _orientation
+            ? QPoint(width(), _handle->y()+handle.height()/2)
+            : QPoint(_handle->x()+handle.width()/2, height());
+    painter.fillRect(r.intersected(QRect(QPoint(0, 0), range)), brush);
     painter.restore();
-
-    if (_hover) {
-        painter.drawRect(rect().adjusted(0, 0, -1, -1));
-    }
 
     QAbstractSlider::paintEvent(event);
 }
 
-
 void Slider::mousePressEvent(QMouseEvent *event)
 {
-    const QSize s = _handle->sizeHint();
-    _handle->setOffset((event->pos() - QPoint(s.width(), s.height())/2) - event->globalPos());
+    const QPoint pos = event->pos();
+    const bool oh = overHandle(pos);
 
-    if (overHandle(event->pos())) {
-        _drag = true;
-        _animation->setDirection(QAbstractAnimation::Forward);
-        _animation->start();
-    } else if (overTrack(event->pos())) {
+    if (oh || overTrack(pos)) {
+        const QSize handle = _handle->sizeHint();
+        _handle->setOffset((pos - QPoint(handle.width(), handle.height())/2) - event->globalPos());
         _handle->setRelativePosition(event->globalPos());
+        _drag = true;
+        _knobAnimation->setDirection(QAbstractAnimation::Forward);
+        _knobAnimation->start();
+
+        if (oh) {
+            _haloAnimation->setDirection(QAbstractAnimation::Backward);
+            _haloAnimation->start();
+        } else {
+            _haloAnimation->stop();
+            _handle->setHaloSize(0);
+        }
         updateValue();
     }
     QAbstractSlider::mousePressEvent(event);
@@ -173,8 +139,10 @@ void Slider::mouseReleaseEvent(QMouseEvent *event)
 
     if (_drag) {
         _drag = false;
-        _animation->setDirection(QAbstractAnimation::Backward);
-        _animation->start();
+        _hover = false;
+        _knobAnimation->setDirection(QAbstractAnimation::Backward);
+        _knobAnimation->start();
+        updateHoverState(mapFromGlobal(QCursor::pos()));
     }
 }
 
@@ -200,10 +168,7 @@ void Slider::leaveEvent(QEvent *event)
 {
     Q_UNUSED(event)
 
-    if (_hover) {
-        _hover = false;
-        update();
-    }
+    endHover();
 }
 
 void Slider::resizeEvent(QResizeEvent *event)
@@ -215,23 +180,22 @@ void Slider::resizeEvent(QResizeEvent *event)
 bool Slider::overTrack(const QPoint &pos) const
 {
     if (Qt::Horizontal == _orientation) {
-        const int y = pos.y();
-        const int h = height()/2;
-        return (y >= h-2 && y <= h+2);
+        const int handleW = _handle->width();
+        return QRect(handleW/2, height()/2-4, width()-handleW, 8).contains(pos);
     } else {
-        const int x = pos.x();
-        const int w = width()/2;
-        return (x >= w-2 && x <= w+2);
+        const int handleH = _handle->height();
+        return QRect(width()/2-4, handleH/2, 8, height()-handleH).contains(pos);
     }
 }
 
 bool Slider::overHandle(const QPoint &pos) const
 {
     const int knob = _handle->knobSize();
-    const int hl = _handle->x() + (20-knob)/2;
-    const int ht = _handle->y() + (20-knob)/2;
+    const int hl = _handle->x() + (20-knob)/2;    // @TODO: 20 should not be hard coded
+    const int ht = _handle->y() + (20-knob)/2;    // @TODO: 20 should not be hard coded
 
-    return (pos.x() >= hl && pos.x() <= hl+knob && pos.y() >= ht && pos.y() <= ht+knob);
+    return (pos.x() > hl - 10 && pos.x() < hl+knob + 10
+         && pos.y() > ht - 10 && pos.y() < ht+knob + 10);
 }
 
 void Slider::updateValue()
@@ -244,12 +208,9 @@ void Slider::updateValue()
             ? _handle->geometry().left() / tot
             : _handle->geometry().top() / tot;
 
-    // use QStyle::sliderValueFromPosition ??
+    // @TODO: use QStyle::sliderValueFromPosition()
 
     setValue((1-r)*minimum()+r*maximum());
-
-    //setSliderPosition((1-r)*minimum()+r*maximum());
-    //triggerAction(QAbstractSlider::SliderMove);
 
     update();
 }
@@ -257,14 +218,29 @@ void Slider::updateValue()
 void Slider::updateHoverState(const QPoint &pos)
 {
     if (overTrack(pos) || (overHandle(pos))) {
-        if (!_hover) {
-            _hover = true;
-            update();
-        }
+        beginHover();
     } else {
-        if (_hover) {
-            _hover = false;
-            update();
+        endHover();
+    }
+}
+
+void Slider::beginHover() {
+    if (!_hover) {
+        _hover = true;
+        _haloAnimation->setDirection(QAbstractAnimation::Forward);
+        _haloAnimation->start();
+        update();
+    }
+}
+
+void Slider::endHover()
+{
+    if (_hover) {
+        _hover = false;
+        if (_handle->haloSize() > 12) {
+            _haloAnimation->setDirection(QAbstractAnimation::Backward);
+            _haloAnimation->start();
         }
+        update();
     }
 }
