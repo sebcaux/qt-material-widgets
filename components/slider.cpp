@@ -36,14 +36,28 @@ void Handle::paintEvent(QPaintEvent *event)
     QBrush brush;
     brush.setColor(QColor(0, 0, 0));
     brush.setStyle(Qt::SolidPattern);
-
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
-    painter.drawEllipse(QRectF((width()-_knobSize)/2, (height()-_knobSize)/2, _knobSize, _knobSize));
+    if (_haloSize > 12) {
+        painter.save();
+        painter.setOpacity(0.1);
+        painter.drawEllipse(QRectF((width()-_haloSize)/2, (height()-_haloSize)/2, _haloSize, _haloSize));
+        painter.restore();
+    }
 
-    painter.setOpacity(0.2);
-    painter.drawEllipse(QRectF((width()-_haloSize)/2, (height()-_haloSize)/2, _haloSize, _haloSize));
+    if (_slider->minimum() == _slider->value()) {
+        QPen pen;
+        pen.setColor(QColor(0, 0, 0, 80));
+        pen.setWidth(2);
+        painter.setPen(pen);
+        QBrush brush;
+        brush.setColor(Qt::white);
+        brush.setStyle(Qt::SolidPattern);
+        painter.setBrush(brush);
+    }
+
+    painter.drawEllipse(QRectF((width()-_knobSize)/2, (height()-_knobSize)/2, _knobSize, _knobSize));
 
     QWidget::paintEvent(event);
 }
@@ -111,9 +125,9 @@ void Slider::paintEvent(QPaintEvent *event)
 void Slider::mousePressEvent(QMouseEvent *event)
 {
     const QPoint pos = event->pos();
-    const bool oh = overHandle(pos);
+    const bool touchesHandle = overHandle(pos);
 
-    if (oh || overTrack(pos)) {
+    if (touchesHandle || overTrack(pos)) {
         const QSize handle = _handle->sizeHint();
         _handle->setOffset((pos - QPoint(handle.width(), handle.height())/2) - event->globalPos());
         _handle->setRelativePosition(event->globalPos());
@@ -121,7 +135,7 @@ void Slider::mousePressEvent(QMouseEvent *event)
         _knobAnimation->setDirection(QAbstractAnimation::Forward);
         _knobAnimation->start();
 
-        if (oh) {
+        if (touchesHandle) {
             _haloAnimation->setDirection(QAbstractAnimation::Backward);
             _haloAnimation->start();
         } else {
@@ -241,6 +255,6 @@ void Slider::endHover()
             _haloAnimation->setDirection(QAbstractAnimation::Backward);
             _haloAnimation->start();
         }
-        update();
     }
+    update();
 }
