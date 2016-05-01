@@ -11,7 +11,7 @@ class Handle : public QWidget
 {
     Q_OBJECT
 
-    Q_PROPERTY(qreal scaleFactor WRITE setScaleFactor READ scaleFactor)
+    Q_PROPERTY(qreal knobSize WRITE setKnobSize READ knobSize)
 
 public:
     explicit Handle(Slider *slider);
@@ -27,24 +27,25 @@ public:
     inline void setOffset(const QPoint &offset) { _offset = offset; update(); }
     inline const QPoint &offset() const { return _offset; }
 
-    inline void setScaleFactor (qreal factor ) { _scaleFactor = factor; refreshGeometry(); }
-    inline qreal scaleFactor() const { return _scaleFactor; }
+    inline void setKnobSize (qreal size ) { _knobSize = size; refreshGeometry(); }
+    inline qreal knobSize() const { return _knobSize; }
 
     void refreshGeometry();
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
-    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+//    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+//    void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+//    void enterEvent(QEvent *event) Q_DECL_OVERRIDE;
+//    void leaveEvent(QEvent *event) Q_DECL_OVERRIDE;
+//    void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    Slider             *const _slider;
-    QPropertyAnimation *const _animation;
-    QPoint                    _position;
-    QPoint                    _eventPos;
-    QPoint                    _offset;
-    qreal                     _scaleFactor;
+    Slider *const _slider;
+    QPoint        _position;
+    QPoint        _eventPos;
+    QPoint        _offset;
+    qreal         _knobSize;
 };
 
 class Slider : public QAbstractSlider
@@ -61,16 +62,24 @@ public:
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void enterEvent(QEvent *event) Q_DECL_OVERRIDE;
+    void leaveEvent(QEvent *event) Q_DECL_OVERRIDE;
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 
 private:
     friend class Handle;
 
-    inline bool isOnTrack(int p, int x) const { return (p >= x-2 && p <= x+2); }
-    void updateValue();
+    bool overTrack(const QPoint &pos) const;
+    bool overHandle(const QPoint &pos) const;
 
+    void updateValue();
+    void updateHoverState(const QPoint &pos);
+
+    QPropertyAnimation *const _animation;
     bool            _drag;
+    bool            _hover;
     Handle   *const _handle;
     Qt::Orientation _orientation;
 };

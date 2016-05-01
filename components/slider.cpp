@@ -7,14 +7,9 @@
 Handle::Handle(Slider *slider)
     : QWidget(slider),
       _slider(slider),
-      _animation(new QPropertyAnimation(this)),
-      _scaleFactor(12)
+      _knobSize(12)
 {
-    _animation->setPropertyName("scaleFactor");
-    _animation->setTargetObject(this);
-    _animation->setStartValue(12);
-    _animation->setEndValue(20);
-    _animation->setDuration(100);
+    setAttribute(Qt::WA_TransparentForMouseEvents);
 }
 
 Handle::~Handle()
@@ -23,12 +18,15 @@ Handle::~Handle()
 
 void Handle::refreshGeometry()
 {
-    QWidget *container = parentWidget();
+    //QWidget *container = parentWidget();
+    //Slider *container = _slider;
     const QSize s = sizeHint();
 
     setGeometry(QRect(_slider->orientation() == Qt::Horizontal
-        ? QPoint(qBound(0, _position.x(), container->width()-s.width()), container->height()/2-s.height()/2)
-        : QPoint(container->width()/2-s.width()/2, qBound(0, _position.y(), container->height()-s.height())), s));
+        ? QPoint(qBound(0, _position.x(), _slider->width()-s.width()), _slider->height()/2-s.height()/2)
+        : QPoint(_slider->width()/2-s.width()/2, qBound(0, _position.y(), _slider->height()-s.height())), s));
+//        ? QPoint(qBound(0, _position.x(), container->width()-s.width()), container->height()/2-s.height()/2)
+//        : QPoint(container->width()/2-s.width()/2, qBound(0, _position.y(), container->height()-s.height())), s));
 
     update();
 }
@@ -45,19 +43,21 @@ void Handle::paintEvent(QPaintEvent *event)
 //    painter.drawRect(rect().adjusted(0, 0, -1, -1));
 
     QBrush brush;
-    brush.setColor(QColor(200, 200, 200));
+    brush.setColor(QColor(0, 0, 0));
     brush.setStyle(Qt::SolidPattern);
+
+//    painter.drawRect(rect());
 
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
     //painter.drawEllipse(0, 0, width(), height());
-    //painter.drawRect(rect());
-    painter.drawEllipse((width()-_scaleFactor)/2, (height()-_scaleFactor)/2, _scaleFactor, _scaleFactor);
+    painter.drawEllipse((width()-_knobSize)/2, (height()-_knobSize)/2, _knobSize, _knobSize);
 
     QWidget::paintEvent(event);
 }
 
+/*
 void Handle::mousePressEvent(QMouseEvent *event)
 {
     _offset = pos() - event->globalPos();
@@ -68,23 +68,45 @@ void Handle::mousePressEvent(QMouseEvent *event)
 
 void Handle::mouseReleaseEvent(QMouseEvent *event)
 {
+    Q_UNUSED(event)
+
     _animation->setDirection(QAbstractAnimation::Backward);
     _animation->start();
 }
+*/
 
-void Handle::mouseMoveEvent(QMouseEvent *event)
-{
-    setRelativePosition(event->globalPos());
-    //_slider->update();
-    _slider->updateValue();
-}
+//void Handle::enterEvent(QEvent *event)
+//{
+//    _slider->update();
+//}
+//
+//void Handle::leaveEvent(QEvent *event)
+//{
+//    _slider->update();
+//}
+
+//void Handle::mouseMoveEvent(QMouseEvent *event)
+//{
+//    setRelativePosition(event->globalPos());
+//    //_slider->update();
+//    _slider->updateValue();
+//}
 
 Slider::Slider(QWidget *parent)
     : QAbstractSlider(parent),
+      _animation(new QPropertyAnimation(this)),
       _drag(false),
+      _hover(false),
       _handle(new Handle(this)),
       _orientation(Qt::Horizontal)
 {
+    _animation->setPropertyName("knobSize");
+    _animation->setTargetObject(_handle);
+    _animation->setStartValue(12);
+    _animation->setEndValue(20);
+    _animation->setDuration(100);
+
+    setMouseTracking(true);
 }
 
 Slider::~Slider()
@@ -95,18 +117,15 @@ void Slider::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
 
-    const int x = width()/2;
-    const int y = height()/2;
-
     QRect r = Qt::Vertical == _orientation
-            ? QRect(x-1, 0, 2, height())
-            : QRect(0, y-1, width(), 2);
+            ? QRect(width()/2-1, 0, 2, height())
+            : QRect(0, height()/2-1, width(), 2);
 
     const QSize s = _handle->sizeHint();
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(QColor(0, 0, 0));
+    brush.setColor(QColor(0, 0, 0, 40));
 
     if (Qt::Horizontal == _orientation) {
         r.adjust(s.width()/2, 0, -s.width()/2, 0);
@@ -116,7 +135,7 @@ void Slider::paintEvent(QPaintEvent *event)
     painter.fillRect(r, brush);
 
     painter.save();
-    brush.setColor(Qt::red);
+    brush.setColor(QColor(0, 0, 0));
 
     const QPoint p = Qt::Vertical == _orientation
             ? QPoint(width(), _handle->y()+s.height()/2)
@@ -124,7 +143,9 @@ void Slider::paintEvent(QPaintEvent *event)
     painter.fillRect(r.intersected(QRect(QPoint(0, 0), p)), brush);
     painter.restore();
 
-    //painter.drawRect(rect().adjusted(0, 0, -1, -1));
+    if (_hover) {
+        painter.drawRect(rect().adjusted(0, 0, -1, -1));
+    }
 
     QAbstractSlider::paintEvent(event);
 }
@@ -132,36 +153,85 @@ void Slider::paintEvent(QPaintEvent *event)
 
 void Slider::mousePressEvent(QMouseEvent *event)
 {
-    if (Qt::Horizontal == _orientation
-            ? isOnTrack(event->y(), height()/2)
-            : isOnTrack(event->x(), width()/2))
-    {
-        const QSize s = _handle->sizeHint();
-        _handle->setOffset((event->pos() - QPoint(s.width()/2, s.height()/2)) - event->globalPos());
-        _handle->setRelativePosition(event->globalPos());
+    const QSize s = _handle->sizeHint();
+    _handle->setOffset((event->pos() - QPoint(s.width(), s.height())/2) - event->globalPos());
+
+    if (overHandle(event->pos())) {
         _drag = true;
-        //update();
+        _animation->setDirection(QAbstractAnimation::Forward);
+        _animation->start();
+    } else if (overTrack(event->pos())) {
+        _handle->setRelativePosition(event->globalPos());
         updateValue();
-    } else {
-        _drag = false;
     }
     QAbstractSlider::mousePressEvent(event);
+}
+
+void Slider::mouseReleaseEvent(QMouseEvent *event)
+{
+    Q_UNUSED(event)
+
+    if (_drag) {
+        _drag = false;
+        _animation->setDirection(QAbstractAnimation::Backward);
+        _animation->start();
+    }
 }
 
 void Slider::mouseMoveEvent(QMouseEvent *event)
 {
     if (_drag) {
         _handle->setRelativePosition(event->globalPos());
-        //update();
         updateValue();
+    } else {
+        updateHoverState(event->pos());
     }
     QAbstractSlider::mouseMoveEvent(event);
+}
+
+void Slider::enterEvent(QEvent *event)
+{
+    Q_UNUSED(event)
+
+    updateHoverState(mapFromGlobal(QCursor::pos()));
+}
+
+void Slider::leaveEvent(QEvent *event)
+{
+    Q_UNUSED(event)
+
+    if (_hover) {
+        _hover = false;
+        update();
+    }
 }
 
 void Slider::resizeEvent(QResizeEvent *event)
 {
     _handle->refreshGeometry();
     QAbstractSlider::resizeEvent(event);
+}
+
+bool Slider::overTrack(const QPoint &pos) const
+{
+    if (Qt::Horizontal == _orientation) {
+        const int y = pos.y();
+        const int h = height()/2;
+        return (y >= h-2 && y <= h+2);
+    } else {
+        const int x = pos.x();
+        const int w = width()/2;
+        return (x >= w-2 && x <= w+2);
+    }
+}
+
+bool Slider::overHandle(const QPoint &pos) const
+{
+    const int knob = _handle->knobSize();
+    const int hl = _handle->x() + (20-knob)/2;
+    const int ht = _handle->y() + (20-knob)/2;
+
+    return (pos.x() >= hl && pos.x() <= hl+knob && pos.y() >= ht && pos.y() <= ht+knob);
 }
 
 void Slider::updateValue()
@@ -182,4 +252,19 @@ void Slider::updateValue()
     //triggerAction(QAbstractSlider::SliderMove);
 
     update();
+}
+
+void Slider::updateHoverState(const QPoint &pos)
+{
+    if (overTrack(pos) || (overHandle(pos))) {
+        if (!_hover) {
+            _hover = true;
+            update();
+        }
+    } else {
+        if (_hover) {
+            _hover = false;
+            update();
+        }
+    }
 }
