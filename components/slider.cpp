@@ -40,10 +40,10 @@ void Handle::paintEvent(QPaintEvent *event)
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
-    painter.drawEllipse((width()-_knobSize)/2, (height()-_knobSize)/2, _knobSize, _knobSize);
+    painter.drawEllipse(QRectF((width()-_knobSize)/2, (height()-_knobSize)/2, _knobSize, _knobSize));
 
     painter.setOpacity(0.2);
-    painter.drawEllipse((width()-_haloSize)/2, (height()-_haloSize)/2, _haloSize, _haloSize);
+    painter.drawEllipse(QRectF((width()-_haloSize)/2, (height()-_haloSize)/2, _haloSize, _haloSize));
 
     QWidget::paintEvent(event);
 }
@@ -67,7 +67,7 @@ Slider::Slider(QWidget *parent)
     _haloAnimation->setTargetObject(_handle);
     _haloAnimation->setStartValue(12);
     _haloAnimation->setEndValue(30);
-    _haloAnimation->setDuration(200);
+    _haloAnimation->setDuration(220);
 
     setMouseTracking(true);
 }
