@@ -19,6 +19,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
     const QScopedPointer<SliderPrivate> d_ptr;
 

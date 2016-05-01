@@ -4,6 +4,8 @@
 #include "slider.h"
 #include <QPainter>
 
+#define THUMB_OUTER_SIZE 30
+
 class SliderPrivate
 {
     Q_DISABLE_COPY(SliderPrivate)
@@ -12,8 +14,11 @@ class SliderPrivate
 public:
     SliderPrivate(Slider *parent)
         : q_ptr(parent),
-          orientation(Qt::Horizontal)
+          orientation(Qt::Horizontal),
+          hoverTrack(false),
+          hoverThumb(false)
     {
+        parent->setMouseTracking(true);
     }
 
     QRect trackGeometry() const
@@ -21,26 +26,33 @@ public:
         Q_Q(const Slider);
 
         return Qt::Horizontal == orientation
-            ? QRect(0, q->rect().height()/2 - 1, q->rect().width(), 2)
-            : QRect(q->rect().width()/2 - 1, 0, 2, q->rect().height());
+            ? QRect(THUMB_OUTER_SIZE/2, q->rect().height()/2 - 1,
+                    q->rect().width() - THUMB_OUTER_SIZE, 2)
+            : QRect(q->rect().width()/2 - 1, THUMB_OUTER_SIZE/2, 2,
+                    q->rect().height() - THUMB_OUTER_SIZE);
     }
 
     void paintTrack(QPainter *painter)
     {
         Q_Q(Slider);
 
+        painter->save();
+
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
         brush.setColor(QColor(0, 0, 0, 255));
-
-        painter->save();
 
         painter->fillRect(trackGeometry(), brush);
 
         painter->restore();
 
 #ifdef DEBUG_LAYOUT
-        painter->drawRect(q->rect().adjusted(1, 1, -2, -2));
+        if (hoverTrack) {
+            painter->save();
+            painter->setPen(Qt::red);
+            painter->drawRect(trackGeometry());
+            painter->restore();
+        }
 #endif
     }
 
@@ -49,31 +61,49 @@ public:
         Q_Q(const Slider);
 
         return Qt::Horizontal == orientation
-            ? QRectF(0, q->rect().height()/2 - 5, 10, 10)
-            : QRectF(q->rect().width()/2 - 5, 0, 10, 10);
+            ? QRectF(0, q->rect().height()/2 - THUMB_OUTER_SIZE/2,
+                     THUMB_OUTER_SIZE, THUMB_OUTER_SIZE)
+            : QRectF(q->rect().width()/2 - THUMB_OUTER_SIZE/2, 0,
+                     THUMB_OUTER_SIZE, THUMB_OUTER_SIZE);
     }
 
     void paintThumb(QPainter *painter)
     {
         Q_Q(Slider);
 
+        painter->save();
+
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
         brush.setColor(QColor(0, 0, 0, 255));
-
-        painter->save();
+        painter->setBrush(brush);
 
         painter->setRenderHint(QPainter::Antialiasing);
 
-        painter->setBrush(brush);
-        painter->drawEllipse(thumbGeometry());
+        QRectF thumb(0, 0, 12, 12);
+        thumb.moveCenter(thumbGeometry().center());
+
+        painter->drawEllipse(thumb);
 
         painter->restore();
+
+#ifdef DEBUG_LAYOUT
+        painter->drawRect(thumbGeometry());
+
+        if (hoverThumb) {
+            painter->save();
+            painter->setPen(Qt::red);
+            painter->drawRect(thumbGeometry());
+            painter->restore();
+        }
+#endif
     }
 
     Slider *const q_ptr;
 
     Qt::Orientation orientation;
+    bool            hoverTrack;
+    bool            hoverThumb;
 };
 
 #endif // SLIDER_P_H
