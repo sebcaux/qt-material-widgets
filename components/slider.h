@@ -14,6 +14,9 @@ public:
     explicit Slider(QWidget *parent = 0);
     ~Slider();
 
+    void setOrientation(Qt::Orientation orientation);
+    Qt::Orientation orientation() const;
+
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
