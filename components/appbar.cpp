@@ -19,9 +19,14 @@ AppBar::AppBar(QWidget *parent)
     QLabel *label = new QLabel("App");
     layout->addWidget(label);
 
+    QFont font(this->font());
+    font.setPointSizeF(18);
+    label->setFont(font);
+
     setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Maximum));
 
     setMinimumHeight(64);
+
 }
 
 AppBar::~AppBar()
