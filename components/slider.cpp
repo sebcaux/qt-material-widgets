@@ -32,8 +32,6 @@ void Handle::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    //painter.drawRect(rect());
-
     QBrush brush;
     brush.setColor(QColor(0, 0, 0));
     brush.setStyle(Qt::SolidPattern);
@@ -101,15 +99,29 @@ Slider::Slider(QWidget *parent)
     _phaseAnimation->setDuration(500);
 
     setMouseTracking(true);
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 Slider::~Slider()
 {
 }
 
+void Slider::setOrientation(Qt::Orientation orientation)
+{
+    if (_orientation == orientation)
+        return;
+    _orientation = orientation;
+    _handle->refreshGeometry();
+    update();
+}
+
 void Slider::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
+
+    if (hasFocus()) {
+        painter.drawRect(rect());
+    }
 
     QRect rect = Qt::Vertical == _orientation
             ? QRect(width()/2-1, 0, 2, height())

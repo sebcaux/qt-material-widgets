@@ -60,7 +60,7 @@ public:
     explicit Slider(QWidget *parent = 0);
     ~Slider();
 
-    inline void setOrientation(Qt::Orientation orientation) { _orientation = orientation; }
+    void setOrientation(Qt::Orientation orientation);
     inline Qt::Orientation orientation() const { return _orientation; }
 
 protected:
