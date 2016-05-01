@@ -16,7 +16,7 @@ public:
     void setWidget(QWidget *widget);
 
 private:
-    QWidget     *_widget;
+    QWidget           *_widget;
     QGridLayout *const _layout;
 };
 
