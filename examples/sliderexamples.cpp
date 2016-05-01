@@ -14,6 +14,7 @@ SliderExamples::SliderExamples(QWidget *parent)
 
     {
         Slider *slider = new Slider;
+        slider->setMinimumWidth(250);
 
         ExampleView *view = new ExampleView;
         view->setWidget(slider);
