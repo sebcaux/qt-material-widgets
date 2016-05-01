@@ -4,6 +4,7 @@
 #include "examplelist.h"
 
 class QLineEdit;
+class Slider;
 
 class SliderExamples : public ExampleList
 {
@@ -15,9 +16,11 @@ public:
 
 protected slots:
     void updateValue(int value);
+    void flip();
 
 private:
     QLineEdit *const _edit;
+    Slider    *const _slider;
 };
 
 #endif // SLIDEREXAMPLES_H

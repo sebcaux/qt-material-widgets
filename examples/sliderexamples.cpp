@@ -1,5 +1,6 @@
 #include <QDebug>
 #include <QVBoxLayout>
+#include <QPushButton>
 #include <QLineEdit>
 #include "sliderexamples.h"
 #include "components/slider.h"
@@ -8,7 +9,8 @@
 
 SliderExamples::SliderExamples(QWidget *parent)
     : ExampleList(parent),
-      _edit(new QLineEdit)
+      _edit(new QLineEdit),
+      _slider(new Slider)
 {
     QLayout *mainLayout = widget()->layout();
 
@@ -66,9 +68,33 @@ SliderExamples::SliderExamples(QWidget *parent)
         frame->setWidget(view);
 
         connect(slider, SIGNAL(valueChanged(int)), this, SLOT(updateValue(int)));
-//        connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(updateValue(int)));
 
         mainLayout->addWidget(frame);
+    }
+    {
+        QVBoxLayout *layout = new QVBoxLayout;
+        QWidget *widget = new QWidget;
+        widget->setLayout(layout);
+        widget->setMinimumWidth(350);
+
+        QPushButton *button = new QPushButton("Change orientation");
+
+        _slider->setMinimumWidth(250);
+        layout->addWidget(_slider);
+        layout->addWidget(button);
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(widget);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "Slider *slider = new Slider;"
+        );
+        frame->setWidget(view);
+
+        mainLayout->addWidget(frame);
+
+        connect(button, SIGNAL(pressed()), this, SLOT(flip()));
     }
 }
 
@@ -79,4 +105,10 @@ SliderExamples::~SliderExamples()
 void SliderExamples::updateValue(int value)
 {
     _edit->setText(QString::number(value));
+}
+
+void SliderExamples::flip()
+{
+    _slider->setOrientation(Qt::Horizontal == _slider->orientation() ?
+        Qt::Vertical : Qt::Horizontal);
 }
