@@ -145,7 +145,5 @@ void SliderExamples::flip()
 
 void SliderExamples::updateSliderValue()
 {
-    int n = _edit2->text().toInt();
-    qDebug() << n;
-    _slider2->setValue(n);
+    _slider2->setValue(_edit2->text().toInt());
 }

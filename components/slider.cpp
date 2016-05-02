@@ -76,3 +76,16 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
 
     QAbstractSlider::mouseMoveEvent(event);
 }
+
+void Slider::mouseReleaseEvent(QMouseEvent *event)
+{
+    Q_D(Slider);
+
+    QRect track(d->trackGeometry().adjusted(-2, -2, 2, 2));
+
+    if (track.contains(event->pos())) {
+        setValue(d->valueFromPosition(event->pos()));
+    }
+
+    QAbstractSlider::mouseReleaseEvent(event);
+}

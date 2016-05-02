@@ -111,6 +111,24 @@ public:
 #endif
     }
 
+    int valueFromPosition(const QPoint &pos) const
+    {
+        Q_Q(const Slider);
+
+        const int span = Qt::Horizontal == orientation
+            ? q->rect().width() - THUMB_OUTER_SIZE
+            : q->rect().height() - THUMB_OUTER_SIZE;
+
+        const int position = Qt::Horizontal == orientation ? pos.x() : pos.y();
+
+        return Style::sliderValueFromPosition(
+                    q->minimum(),
+                    q->maximum(),
+                    position - THUMB_OUTER_SIZE/2,
+                    span,
+                    false);
+    }
+
     Slider *const q_ptr;
 
     Qt::Orientation orientation;
