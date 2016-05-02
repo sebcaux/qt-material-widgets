@@ -3,6 +3,7 @@
 
 #include "slider.h"
 #include <QPainter>
+#include "lib/style.h"
 
 #define THUMB_OUTER_SIZE 30
 
@@ -60,10 +61,21 @@ public:
     {
         Q_Q(const Slider);
 
+        const int span = Qt::Horizontal == orientation
+            ? q->rect().width() - THUMB_OUTER_SIZE
+            : q->rect().height() - THUMB_OUTER_SIZE;
+
+        const int pos = Style::sliderPositionFromValue(
+                    q->minimum(),
+                    q->maximum(),
+                    q->value(),
+                    span,
+                    false);
+
         return Qt::Horizontal == orientation
-            ? QRectF(0, q->rect().height()/2 - THUMB_OUTER_SIZE/2,
+            ? QRectF(pos, q->rect().height()/2 - THUMB_OUTER_SIZE/2,
                      THUMB_OUTER_SIZE, THUMB_OUTER_SIZE)
-            : QRectF(q->rect().width()/2 - THUMB_OUTER_SIZE/2, 0,
+            : QRectF(q->rect().width()/2 - THUMB_OUTER_SIZE/2, pos,
                      THUMB_OUTER_SIZE, THUMB_OUTER_SIZE);
     }
 

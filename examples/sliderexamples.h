@@ -17,10 +17,13 @@ public:
 protected slots:
     void updateValue(int value);
     void flip();
+    void updateSliderValue();
 
 private:
     QLineEdit *const _edit;
+    QLineEdit *const _edit2;
     Slider    *const _slider;
+    Slider    *const _slider2;
 };
 
 #endif // SLIDEREXAMPLES_H

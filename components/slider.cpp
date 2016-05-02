@@ -1,5 +1,6 @@
 #include "slider.h"
 #include <QPainter>
+#include <QStringBuilder>
 #include <QMouseEvent>
 #include <QDebug>
 
@@ -49,8 +50,8 @@ void Slider::paintEvent(QPaintEvent *event)
     painter.drawRect(rect().adjusted(0, 0, -1, -1));
 
     painter.setFont(QFont("monospace", 8));
-    painter.drawText(8, 18, "Value: ");
-    painter.drawText(8, 36, "Position: ");
+    painter.drawText(8, 18, "Value: " % QString::number(value()));
+    painter.drawText(8, 36, "Position: " % QString::number(sliderPosition()));
 #endif
 }
 
