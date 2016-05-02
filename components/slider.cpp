@@ -47,6 +47,10 @@ void Slider::paintEvent(QPaintEvent *event)
     painter.setPen(pen);
     painter.setBrush(Qt::NoBrush);
     painter.drawRect(rect().adjusted(0, 0, -1, -1));
+
+    painter.setFont(QFont("monospace", 8));
+    painter.drawText(8, 18, "Value: ");
+    painter.drawText(8, 36, "Position: ");
 #endif
 }
 
@@ -55,19 +59,17 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
     Q_D(Slider);
 
     QRect track(d->trackGeometry().adjusted(-2, -2, 2, 2));
-    const bool onTrack = track.contains(event->pos());
 
-    if (onTrack != d->hoverTrack) {
-        d->hoverTrack = onTrack;
+    if (track.contains(event->pos()) != d->hoverTrack) {
+        d->hoverTrack = !d->hoverTrack;
         update();
     }
 
     QRectF thumb(0, 0, 16, 16);
     thumb.moveCenter(d->thumbGeometry().center());
-    const bool onThumb = thumb.contains(event->pos());
 
-    if (onThumb != d->hoverThumb) {
-        d->hoverThumb = onThumb;
+    if (thumb.contains(event->pos()) != d->hoverThumb) {
+        d->hoverThumb = !d->hoverThumb;
         update();
     }
 
