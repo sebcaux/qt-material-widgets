@@ -59,27 +59,49 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
 {
     Q_D(Slider);
 
-    QRect track(d->trackGeometry().adjusted(-2, -2, 2, 2));
+    if (d->slide) {
+        setSliderPosition(d->valueFromPosition(event->pos()));
+    } else
+    {
+        QRect track(d->trackGeometry().adjusted(-2, -2, 2, 2));
 
-    if (track.contains(event->pos()) != d->hoverTrack) {
-        d->hoverTrack = !d->hoverTrack;
-        update();
-    }
+        if (track.contains(event->pos()) != d->hoverTrack) {
+            d->hoverTrack = !d->hoverTrack;
+            update();
+        }
 
-    QRectF thumb(0, 0, 16, 16);
-    thumb.moveCenter(d->thumbGeometry().center());
+        QRectF thumb(0, 0, 16, 16);
+        thumb.moveCenter(d->thumbGeometry().center());
 
-    if (thumb.contains(event->pos()) != d->hoverThumb) {
-        d->hoverThumb = !d->hoverThumb;
-        update();
+        if (thumb.contains(event->pos()) != d->hoverThumb) {
+            d->hoverThumb = !d->hoverThumb;
+            update();
+        }
     }
 
     QAbstractSlider::mouseMoveEvent(event);
 }
 
+void Slider::mousePressEvent(QMouseEvent *event)
+{
+    Q_D(Slider);
+
+    QRectF thumb(0, 0, 16, 16);
+    thumb.moveCenter(d->thumbGeometry().center());
+
+    if (thumb.contains(event->pos())) {
+        d->slide = true;
+    }
+}
+
 void Slider::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_D(Slider);
+
+    if (d->slide) {
+        d->slide = false;
+        return QAbstractSlider::mouseReleaseEvent(event);
+    }
 
     QRect track(d->trackGeometry().adjusted(-2, -2, 2, 2));
 

@@ -17,7 +17,8 @@ public:
         : q_ptr(parent),
           orientation(Qt::Horizontal),
           hoverTrack(false),
-          hoverThumb(false)
+          hoverThumb(false),
+          slide(false)
     {
         parent->setMouseTracking(true);
     }
@@ -134,6 +135,7 @@ public:
     Qt::Orientation orientation;
     bool            hoverTrack;
     bool            hoverThumb;
+    bool            slide;
 };
 
 #endif // SLIDER_P_H
