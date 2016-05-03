@@ -15,10 +15,11 @@ class SliderPrivate
 public:
     SliderPrivate(Slider *parent)
         : q_ptr(parent),
-          orientation(Qt::Horizontal),
           hoverTrack(false),
           hoverThumb(false),
-          slide(false)
+          slide(false),
+          step(false),
+          stepTo(0)
     {
         parent->setMouseTracking(true);
     }
@@ -27,7 +28,7 @@ public:
     {
         Q_Q(const Slider);
 
-        return Qt::Horizontal == orientation
+        return Qt::Horizontal == q->orientation()
             ? QRect(THUMB_OUTER_SIZE/2, q->rect().height()/2 - 1,
                     q->rect().width() - THUMB_OUTER_SIZE, 2)
             : QRect(q->rect().width()/2 - 1, THUMB_OUTER_SIZE/2, 2,
@@ -62,7 +63,7 @@ public:
     {
         Q_Q(const Slider);
 
-        const int span = Qt::Horizontal == orientation
+        const int span = Qt::Horizontal == q->orientation()
             ? q->rect().width() - THUMB_OUTER_SIZE
             : q->rect().height() - THUMB_OUTER_SIZE;
 
@@ -73,7 +74,7 @@ public:
                     span,
                     false);
 
-        return Qt::Horizontal == orientation
+        return Qt::Horizontal == q->orientation()
             ? QRectF(pos, q->rect().height()/2 - THUMB_OUTER_SIZE/2,
                      THUMB_OUTER_SIZE, THUMB_OUTER_SIZE)
             : QRectF(q->rect().width()/2 - THUMB_OUTER_SIZE/2, pos,
@@ -116,11 +117,11 @@ public:
     {
         Q_Q(const Slider);
 
-        const int span = Qt::Horizontal == orientation
+        int position = Qt::Horizontal == q->orientation() ? pos.x() : pos.y();
+
+        int span = Qt::Horizontal == q->orientation()
             ? q->rect().width() - THUMB_OUTER_SIZE
             : q->rect().height() - THUMB_OUTER_SIZE;
-
-        const int position = Qt::Horizontal == orientation ? pos.x() : pos.y();
 
         return Style::sliderValueFromPosition(
                     q->minimum(),
@@ -132,10 +133,11 @@ public:
 
     Slider *const q_ptr;
 
-    Qt::Orientation orientation;
-    bool            hoverTrack;
-    bool            hoverThumb;
-    bool            slide;
+    bool hoverTrack;
+    bool hoverThumb;
+    bool slide;
+    bool step;
+    int  stepTo;
 };
 
 #endif // SLIDER_P_H

@@ -2,6 +2,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QLineEdit>
+#include <QSlider>
 #include "sliderexamples.h"
 #include "components/slider.h"
 #include "exampleview.h"
@@ -113,6 +114,8 @@ SliderExamples::SliderExamples(QWidget *parent)
         layout->addWidget(_slider2);
         layout->addLayout(hLayout);
 
+        layout->addWidget(new QSlider(Qt::Horizontal));
+
         ExampleView *view = new ExampleView;
         view->setWidget(widget);
 
@@ -128,6 +131,7 @@ SliderExamples::SliderExamples(QWidget *parent)
 
         _slider2->setTracking(false);
     }
+
 }
 
 SliderExamples::~SliderExamples()

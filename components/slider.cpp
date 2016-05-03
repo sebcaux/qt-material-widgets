@@ -10,23 +10,27 @@ Slider::Slider(QWidget *parent)
     : QAbstractSlider(parent),
       d_ptr(new SliderPrivate(this))
 {
+    connect(this, SIGNAL(actionTriggered(int)), this, SLOT(handleAction(int)));
 }
 
 Slider::~Slider()
 {
 }
 
-void Slider::setOrientation(Qt::Orientation orientation)
+void Slider::handleAction(int action)
 {
     Q_D(Slider);
-    d->orientation = orientation;
-    update();
-}
 
-Qt::Orientation Slider::orientation() const
-{
-    Q_D(const Slider);
-    return d->orientation;
+    if (!d->step)
+        return;
+
+    if ((SliderPageStepAdd == action && sliderPosition() > d->stepTo) ||
+        (SliderPageStepSub == action && sliderPosition() < d->stepTo))
+    {
+        d->step = false;
+        setRepeatAction(SliderNoAction);
+        setSliderPosition(d->stepTo);
+    }
 }
 
 void Slider::paintEvent(QPaintEvent *event)
@@ -59,9 +63,11 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
 {
     Q_D(Slider);
 
-    if (d->slide) {
+    if (d->slide)
+    {
         setSliderPosition(d->valueFromPosition(event->pos()));
-    } else
+    }
+    else
     {
         QRect track(d->trackGeometry().adjusted(-2, -2, 2, 2));
 
@@ -86,11 +92,28 @@ void Slider::mousePressEvent(QMouseEvent *event)
 {
     Q_D(Slider);
 
+    const QPoint pos = event->pos();
+
     QRectF thumb(0, 0, 16, 16);
     thumb.moveCenter(d->thumbGeometry().center());
 
-    if (thumb.contains(event->pos())) {
+    if (thumb.contains(pos)) {
         d->slide = true;
+        return;
+    }
+
+    QRect track(d->trackGeometry().adjusted(-2, -2, 2, 2));
+
+    if (track.contains(pos)) {
+        d->step = true;
+        d->stepTo = d->valueFromPosition(pos);
+
+        SliderAction action = d->stepTo > sliderPosition()
+                ? SliderPageStepAdd
+                : SliderPageStepSub;
+
+        triggerAction(action);
+        setRepeatAction(action, 200);
     }
 }
 
@@ -102,12 +125,9 @@ void Slider::mouseReleaseEvent(QMouseEvent *event)
         d->slide = false;
         setValue(sliderPosition());
         return QAbstractSlider::mouseReleaseEvent(event);
-    }
-
-    QRect track(d->trackGeometry().adjusted(-2, -2, 2, 2));
-
-    if (track.contains(event->pos())) {
-        setValue(d->valueFromPosition(event->pos()));
+    } else if (d->step) {
+        d->step = false;
+        setRepeatAction(SliderNoAction);
     }
 
     QAbstractSlider::mouseReleaseEvent(event);
