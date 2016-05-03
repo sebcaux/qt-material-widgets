@@ -125,6 +125,8 @@ SliderExamples::SliderExamples(QWidget *parent)
         mainLayout->addWidget(frame);
 
         connect(button, SIGNAL(pressed()), this, SLOT(updateSliderValue()));
+
+        _slider2->setTracking(false);
     }
 }
 

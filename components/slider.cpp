@@ -100,6 +100,7 @@ void Slider::mouseReleaseEvent(QMouseEvent *event)
 
     if (d->slide) {
         d->slide = false;
+        setValue(sliderPosition());
         return QAbstractSlider::mouseReleaseEvent(event);
     }
 

@@ -69,7 +69,7 @@ public:
         const int pos = Style::sliderPositionFromValue(
                     q->minimum(),
                     q->maximum(),
-                    q->value(),
+                    q->sliderPosition(),
                     span,
                     false);
 
