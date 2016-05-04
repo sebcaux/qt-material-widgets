@@ -131,6 +131,23 @@ SliderExamples::SliderExamples(QWidget *parent)
 
         _slider2->setTracking(false);
     }
+    {
+        Slider *slider = new Slider;
+        slider->setDisabled(true);
+        slider->setMinimumWidth(250);
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(slider);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "Slider *slider = new Slider;\n"
+            "slider->setDisabled(true);\n"
+        );
+        frame->setWidget(view);
+
+        mainLayout->addWidget(frame);
+    }
 
 }
 

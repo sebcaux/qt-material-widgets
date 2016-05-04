@@ -40,6 +40,7 @@ void Slider::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     d->paintTrack(&painter);
+    d->paintHalo(&painter);
     d->paintThumb(&painter);
 
 #ifdef DEBUG_LAYOUT
@@ -65,7 +66,7 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
         setSliderPosition(d->valueFromPosition(event->pos()));
     } else {
 
-        QRect track(d->trackGeometry().adjusted(-2, -2, 2, 2));
+        QRectF track(d->trackGeometry().adjusted(-2, -2, 2, 2));
 
         if (track.contains(event->pos()) != d->hoverTrack) {
             d->hoverTrack = !d->hoverTrack;
@@ -98,7 +99,7 @@ void Slider::mousePressEvent(QMouseEvent *event)
         return;
     }
 
-    QRect track(d->trackGeometry().adjusted(-2, -2, 2, 2));
+    QRectF track(d->trackGeometry().adjusted(-2, -2, 2, 2));
 
     if (track.contains(pos)) {
         d->step = true;

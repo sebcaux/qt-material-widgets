@@ -5,7 +5,7 @@
 #include <QPainter>
 #include "lib/style.h"
 
-#define THUMB_OUTER_SIZE 30
+#define THUMB_OUTER_SIZE 35
 
 class SliderPrivate
 {
@@ -23,14 +23,14 @@ public:
         parent->setMouseTracking(true);
     }
 
-    QRect trackGeometry() const
+    QRectF trackGeometry() const
     {
         Q_Q(const Slider);
 
         return Qt::Horizontal == q->orientation()
-            ? QRect(THUMB_OUTER_SIZE/2, q->rect().height()/2 - 1,
+            ? QRectF(THUMB_OUTER_SIZE/2, q->rect().height()/2 - 1,
                     q->rect().width() - THUMB_OUTER_SIZE, 2)
-            : QRect(q->rect().width()/2 - 1, THUMB_OUTER_SIZE/2, 2,
+            : QRectF(q->rect().width()/2 - 1, THUMB_OUTER_SIZE/2, 2,
                     q->rect().height() - THUMB_OUTER_SIZE);
     }
 
@@ -78,6 +78,26 @@ public:
                      THUMB_OUTER_SIZE, THUMB_OUTER_SIZE);
     }
 
+    void paintHalo(QPainter *painter)
+    {
+        painter->save();
+
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(QColor(0, 0, 0, 20));
+        painter->setBrush(brush);
+        painter->setPen(Qt::NoPen);
+
+        painter->setRenderHint(QPainter::Antialiasing);
+
+        QRectF halo(0, 0, THUMB_OUTER_SIZE, THUMB_OUTER_SIZE);
+        halo.moveCenter(thumbGeometry().center());
+
+        painter->drawEllipse(halo);
+
+        painter->restore();
+    }
+
     void paintThumb(QPainter *painter)
     {
         painter->save();
@@ -89,7 +109,7 @@ public:
 
         painter->setRenderHint(QPainter::Antialiasing);
 
-        QRectF thumb(0, 0, 12, 12);
+        QRectF thumb(0, 0, 11, 11);
         thumb.moveCenter(thumbGeometry().center());
 
         painter->drawEllipse(thumb);
