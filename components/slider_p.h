@@ -3,6 +3,7 @@
 
 #include "slider.h"
 #include <QPainter>
+#include <QSequentialAnimationGroup>
 #include "lib/style.h"
 
 #define THUMB_OUTER_SIZE 35
@@ -15,6 +16,8 @@ class SliderPrivate
 public:
     SliderPrivate(Slider *parent)
         : q_ptr(parent),
+          haloAnimation(new QSequentialAnimationGroup(parent)),
+          haloScaleFactor(1),
           hoverTrack(false),
           hoverThumb(false),
           step(false),
@@ -90,7 +93,9 @@ public:
 
         painter->setRenderHint(QPainter::Antialiasing);
 
-        QRectF halo(0, 0, THUMB_OUTER_SIZE, THUMB_OUTER_SIZE);
+        qreal size = THUMB_OUTER_SIZE * haloScaleFactor;
+
+        QRectF halo(0, 0, size, size);
         halo.moveCenter(thumbGeometry().center());
 
         painter->drawEllipse(halo);
@@ -148,10 +153,12 @@ public:
 
     Slider *const q_ptr;
 
-    bool hoverTrack;
-    bool hoverThumb;
-    bool step;
-    int  stepTo;
+    QSequentialAnimationGroup *const haloAnimation;
+    qreal haloScaleFactor;
+    bool  hoverTrack;
+    bool  hoverThumb;
+    bool  step;
+    int   stepTo;
 };
 
 #endif // SLIDER_P_H

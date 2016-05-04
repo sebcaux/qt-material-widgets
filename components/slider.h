@@ -10,9 +10,14 @@ class Slider : public QAbstractSlider
 {
     Q_OBJECT
 
+    Q_PROPERTY(qreal haloScaleFactor WRITE setHaloScaleFactor READ haloScaleFactor)
+
 public:
     explicit Slider(QWidget *parent = 0);
     ~Slider();
+
+    void setHaloScaleFactor(qreal factor);
+    qreal haloScaleFactor() const;
 
 protected slots:
     void handleAction(int action);

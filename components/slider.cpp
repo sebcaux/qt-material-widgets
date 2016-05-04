@@ -1,5 +1,6 @@
 #include "slider.h"
 #include <QPainter>
+#include <QPropertyAnimation>
 #include <QStringBuilder>
 #include <QMouseEvent>
 #include <QDebug>
@@ -10,11 +11,53 @@ Slider::Slider(QWidget *parent)
     : QAbstractSlider(parent),
       d_ptr(new SliderPrivate(this))
 {
+    QPropertyAnimation *animation;
+
+    animation = new QPropertyAnimation;
+
+    animation->setPropertyName("haloScaleFactor");
+    animation->setTargetObject(this);
+    animation->setStartValue(0.8);
+    animation->setEndValue(1);
+    animation->setDuration(900);
+    animation->setEasingCurve(QEasingCurve::InOutQuad);
+
+    d_ptr->haloAnimation->addAnimation(animation);
+
+    animation = new QPropertyAnimation;
+
+    animation->setPropertyName("haloScaleFactor");
+    animation->setTargetObject(this);
+    animation->setStartValue(1);
+    animation->setEndValue(0.8);
+    animation->setDuration(900);
+    animation->setEasingCurve(QEasingCurve::InOutQuad);
+
+    d_ptr->haloAnimation->addAnimation(animation);
+
+    d_ptr->haloAnimation->setLoopCount(-1);
+    d_ptr->haloAnimation->start();
+
     connect(this, SIGNAL(actionTriggered(int)), this, SLOT(handleAction(int)));
 }
 
 Slider::~Slider()
 {
+}
+
+void Slider::setHaloScaleFactor(qreal factor)
+{
+    Q_D(Slider);
+
+    d->haloScaleFactor = factor;
+    update();
+}
+
+qreal Slider::haloScaleFactor() const
+{
+    Q_D(const Slider);
+
+    return d->haloScaleFactor;
 }
 
 void Slider::handleAction(int action)
