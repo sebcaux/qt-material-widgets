@@ -17,7 +17,6 @@ public:
         : q_ptr(parent),
           hoverTrack(false),
           hoverThumb(false),
-          slide(false),
           step(false),
           stepTo(0)
     {
@@ -37,8 +36,6 @@ public:
 
     void paintTrack(QPainter *painter)
     {
-        Q_Q(Slider);
-
         painter->save();
 
         QBrush brush;
@@ -83,8 +80,6 @@ public:
 
     void paintThumb(QPainter *painter)
     {
-        Q_Q(Slider);
-
         painter->save();
 
         QBrush brush;
@@ -135,7 +130,6 @@ public:
 
     bool hoverTrack;
     bool hoverThumb;
-    bool slide;
     bool step;
     int  stepTo;
 };

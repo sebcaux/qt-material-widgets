@@ -27,8 +27,6 @@ void Slider::handleAction(int action)
     if ((SliderPageStepAdd == action && sliderPosition() > d->stepTo) ||
         (SliderPageStepSub == action && sliderPosition() < d->stepTo))
     {
-        d->step = false;
-        setRepeatAction(SliderNoAction);
         setSliderPosition(d->stepTo);
     }
 }
@@ -63,12 +61,10 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
 {
     Q_D(Slider);
 
-    if (d->slide)
-    {
+    if (isSliderDown()) {
         setSliderPosition(d->valueFromPosition(event->pos()));
-    }
-    else
-    {
+    } else {
+
         QRect track(d->trackGeometry().adjusted(-2, -2, 2, 2));
 
         if (track.contains(event->pos()) != d->hoverTrack) {
@@ -98,7 +94,7 @@ void Slider::mousePressEvent(QMouseEvent *event)
     thumb.moveCenter(d->thumbGeometry().center());
 
     if (thumb.contains(pos)) {
-        d->slide = true;
+        setSliderDown(true);
         return;
     }
 
@@ -121,13 +117,11 @@ void Slider::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_D(Slider);
 
-    if (d->slide) {
-        d->slide = false;
-        setValue(sliderPosition());
-        return QAbstractSlider::mouseReleaseEvent(event);
+    if (isSliderDown()) {
+        setSliderDown(false);
     } else if (d->step) {
         d->step = false;
-        setRepeatAction(SliderNoAction);
+        setRepeatAction(SliderNoAction, 0);
     }
 
     QAbstractSlider::mouseReleaseEvent(event);
