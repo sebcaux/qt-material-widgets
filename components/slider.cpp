@@ -11,67 +11,105 @@ Slider::Slider(QWidget *parent)
     : QAbstractSlider(parent),
       d_ptr(new SliderPrivate(this))
 {
-    QPropertyAnimation *animation;
+    d_ptr->init(this);
 
-    animation = new QPropertyAnimation;
+    setFocusPolicy(Qt::StrongFocus);
 
-    animation->setPropertyName("haloScaleFactor");
-    animation->setTargetObject(this);
-    animation->setStartValue(0.8);
-    animation->setEndValue(1);
-    animation->setDuration(900);
-    animation->setEasingCurve(QEasingCurve::InOutQuad);
+    QSizePolicy sp(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    if (orientation() == Qt::Vertical)
+        sp.transpose();
+    setSizePolicy(sp);
+    setAttribute(Qt::WA_WState_OwnSizePolicy, false);
 
-    d_ptr->haloAnimation->addAnimation(animation);
-
-    animation = new QPropertyAnimation;
-
-    animation->setPropertyName("haloScaleFactor");
-    animation->setTargetObject(this);
-    animation->setStartValue(1);
-    animation->setEndValue(0.8);
-    animation->setDuration(900);
-    animation->setEasingCurve(QEasingCurve::InOutQuad);
-
-    d_ptr->haloAnimation->addAnimation(animation);
-
-    d_ptr->haloAnimation->setLoopCount(-1);
-    d_ptr->haloAnimation->start();
-
-    connect(this, SIGNAL(actionTriggered(int)), this, SLOT(handleAction(int)));
+//    connect(this, SIGNAL(actionTriggered(int)), this, SLOT(handleAction(int)));
 }
 
 Slider::~Slider()
 {
 }
 
-void Slider::setHaloScaleFactor(qreal factor)
+QSize Slider::minimumSizeHint() const
+{
+    return QSize(20, 20);
+}
+
+int Slider::thumbOffset() const
+{
+    return Style::sliderPositionFromValue(
+        minimum(),
+        maximum(),
+        sliderPosition(),
+        Qt::Horizontal == orientation()
+            ? rect().width() - 20 : rect().height() - 20,
+        false);
+}
+
+void Slider::setThumbSize(qreal size)
 {
     Q_D(Slider);
 
-    d->haloScaleFactor = factor;
+    d->thumbSize = size;
     update();
 }
 
-qreal Slider::haloScaleFactor() const
+qreal Slider::thumbSize() const
 {
     Q_D(const Slider);
 
-    return d->haloScaleFactor;
+    return d->thumbSize;
 }
 
-void Slider::handleAction(int action)
+void Slider::setThumbPenWidth(qreal width)
 {
     Q_D(Slider);
 
-    if (!d->step)
-        return;
+    d->thumbPenWidth = width;
+    update();
+}
 
-    if ((SliderPageStepAdd == action && sliderPosition() > d->stepTo) ||
-        (SliderPageStepSub == action && sliderPosition() < d->stepTo))
-    {
-        setSliderPosition(d->stepTo);
+qreal Slider::thumbPenWidth() const
+{
+    Q_D(const Slider);
+
+    return d->thumbPenWidth;
+}
+
+void Slider::setThumbColor(const QColor &color)
+{
+    Q_D(Slider);
+
+    d->thumbColor = color;
+    update();
+}
+
+QColor Slider::thumbColor() const
+{
+    Q_D(const Slider);
+
+    return d->thumbColor;
+}
+
+void Slider::sliderChange(SliderChange change)
+{
+    Q_D(Slider);
+
+    if (SliderOrientationChange == change) {
+        QSizePolicy sp(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        if (orientation() == Qt::Vertical)
+            sp.transpose();
+        setSizePolicy(sp);
+    } else if (SliderValueChange == change) {
+        if (minimum() == value()) {
+            triggerAction(SliderToMinimum);
+            emit changedToMinimum();
+        } else if (maximum() == value()) {
+            triggerAction(SliderToMaximum);
+        } else if (minimum() == d->oldValue) {
+            emit changedFromMinimum();
+        }
+        d->oldValue = value();
     }
+    QAbstractSlider::sliderChange(change);
 }
 
 void Slider::paintEvent(QPaintEvent *event)
@@ -83,10 +121,12 @@ void Slider::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     d->paintTrack(&painter);
-    d->paintHalo(&painter);
     d->paintThumb(&painter);
 
 #ifdef DEBUG_LAYOUT
+    if (hasFocus())
+        painter.drawRect(rect().adjusted(0, 0, -1, -1));
+
     QPen pen;
     pen.setColor(Qt::red);
     pen.setWidth(1);
@@ -94,10 +134,6 @@ void Slider::paintEvent(QPaintEvent *event)
     painter.setPen(pen);
     painter.setBrush(Qt::NoBrush);
     painter.drawRect(rect().adjusted(0, 0, -1, -1));
-
-    painter.setFont(QFont("monospace", 8));
-    painter.drawText(8, 18, "Value: " % QString::number(value()));
-    painter.drawText(8, 36, "Position: " % QString::number(sliderPosition()));
 #endif
 }
 
@@ -105,10 +141,12 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
 {
     Q_D(Slider);
 
-    if (isSliderDown()) {
+    if (isSliderDown())
+    {
         setSliderPosition(d->valueFromPosition(event->pos()));
-    } else {
-
+    }
+    else
+    {
         QRectF track(d->trackGeometry().adjusted(-2, -2, 2, 2));
 
         if (track.contains(event->pos()) != d->hoverTrack) {
@@ -142,19 +180,15 @@ void Slider::mousePressEvent(QMouseEvent *event)
         return;
     }
 
-    QRectF track(d->trackGeometry().adjusted(-2, -2, 2, 2));
+    d->step = true;
+    d->stepTo = d->valueFromPosition(pos);
 
-    if (track.contains(pos)) {
-        d->step = true;
-        d->stepTo = d->valueFromPosition(pos);
+    SliderAction action = d->stepTo > sliderPosition()
+        ? SliderPageStepAdd
+        : SliderPageStepSub;
 
-        SliderAction action = d->stepTo > sliderPosition()
-                ? SliderPageStepAdd
-                : SliderPageStepSub;
-
-        triggerAction(action);
-        setRepeatAction(action, 200);
-    }
+    triggerAction(action);
+    setRepeatAction(action);
 }
 
 void Slider::mouseReleaseEvent(QMouseEvent *event)

@@ -10,19 +10,34 @@ class Slider : public QAbstractSlider
 {
     Q_OBJECT
 
-    Q_PROPERTY(qreal haloScaleFactor WRITE setHaloScaleFactor READ haloScaleFactor)
+    Q_PROPERTY(qreal thumbSize WRITE setThumbSize READ thumbSize)
+    Q_PROPERTY(qreal thumbPenWidth WRITE setThumbPenWidth READ thumbPenWidth)
+    Q_PROPERTY(QColor thumbColor WRITE setThumbColor READ thumbColor)
 
 public:
     explicit Slider(QWidget *parent = 0);
     ~Slider();
 
-    void setHaloScaleFactor(qreal factor);
-    qreal haloScaleFactor() const;
+    QSize minimumSizeHint() const;
 
-protected slots:
-    void handleAction(int action);
+    int thumbOffset() const;
+
+    void setThumbSize(qreal size);
+    qreal thumbSize() const;
+
+    void setThumbPenWidth(qreal width);
+    qreal thumbPenWidth() const;
+
+    void setThumbColor(const QColor &color);
+    QColor thumbColor() const;
+
+signals:
+    void changedToMinimum();
+    void changedFromMinimum();
 
 protected:
+    void sliderChange(SliderChange change) Q_DECL_OVERRIDE;
+
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;

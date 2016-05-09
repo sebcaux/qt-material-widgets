@@ -13,7 +13,8 @@ SliderExamples::SliderExamples(QWidget *parent)
       _edit(new QLineEdit),
       _edit2(new QLineEdit),
       _slider(new Slider),
-      _slider2(new Slider)
+      _slider2(new Slider),
+      __slider(new QSlider)
 {
     QLayout *mainLayout = widget()->layout();
 
@@ -82,7 +83,7 @@ SliderExamples::SliderExamples(QWidget *parent)
 
         QPushButton *button = new QPushButton("Change orientation");
 
-        _slider->setMinimumWidth(250);
+        //_slider->setMinimumWidth(250);
         layout->addWidget(_slider);
         layout->addWidget(button);
 
@@ -98,6 +99,29 @@ SliderExamples::SliderExamples(QWidget *parent)
         mainLayout->addWidget(frame);
 
         connect(button, SIGNAL(pressed()), this, SLOT(flip()));
+    }
+    {
+        QVBoxLayout *layout = new QVBoxLayout;
+        QWidget *widget = new QWidget;
+        widget->setLayout(layout);
+        widget->setMinimumWidth(350);
+
+        QPushButton *button = new QPushButton("Change orientation");
+
+        //__slider->setMinimumWidth(250);
+        layout->addWidget(__slider);
+        layout->addWidget(button);
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(widget);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet("xxx");
+        frame->setWidget(view);
+
+        mainLayout->addWidget(frame);
+
+        connect(button, SIGNAL(pressed()), this, SLOT(flip2()));
     }
     {
         QVBoxLayout *layout = new QVBoxLayout;
@@ -163,6 +187,12 @@ void SliderExamples::updateValue(int value)
 void SliderExamples::flip()
 {
     _slider->setOrientation(Qt::Horizontal == _slider->orientation() ?
+        Qt::Vertical : Qt::Horizontal);
+}
+
+void SliderExamples::flip2()
+{
+    __slider->setOrientation(Qt::Horizontal == __slider->orientation() ?
         Qt::Vertical : Qt::Horizontal);
 }
 
