@@ -148,7 +148,8 @@ void Slider::mousePressEvent(QMouseEvent *event)
 
     if (!d->pageStepMode) {
         setSliderPosition(d->valueFromPosition(event->pos()));
-        //setSliderDown(true);
+        d->thumb->setHaloSize(0);
+        setSliderDown(true);
         return;
     }
 

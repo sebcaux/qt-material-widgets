@@ -51,7 +51,7 @@ SliderPrivate::SliderPrivate(Slider *parent)
       hoverTrack(false),
       hoverThumb(false),
       step(false),
-      pageStepMode(true),
+      pageStepMode(false),
       stepTo(0),
       oldValue(parent->value())
 {
@@ -163,20 +163,20 @@ void SliderPrivate::init(Slider *slider)
     transition = new QSignalTransition(slider, SIGNAL(changedToMinimum()));
     transition->setTargetState(normalState);
     animation = new QPropertyAnimation(thumb, "fillColor");
-    animation->setDuration(400);
+    animation->setDuration(200);
     transition->addAnimation(animation);
     animation = new QPropertyAnimation(thumb, "borderWidth");
-    animation->setDuration(400);
+    animation->setDuration(200);
     transition->addAnimation(animation);
     minState->addTransition(transition);
 
     transition = new QSignalTransition(slider, SIGNAL(changedFromMinimum()));
     transition->setTargetState(minState);
     animation = new QPropertyAnimation(thumb, "fillColor");
-    animation->setDuration(400);
+    animation->setDuration(200);
     transition->addAnimation(animation);
     animation = new QPropertyAnimation(thumb, "borderWidth");
-    animation->setDuration(400);
+    animation->setDuration(200);
     transition->addAnimation(animation);
     normalState->addTransition(transition);
 
