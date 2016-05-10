@@ -2,7 +2,6 @@
 // inverse mode
 // paint track differently left of thumb
 // direct click mode (mode thumb to click pos)
-// paint thumb in halo widget
 #ifndef SLIDER_P_H
 #define SLIDER_P_H
 
@@ -14,98 +13,21 @@
 #include <QSignalTransition>
 #include <QDebug>
 #include "lib/style.h"
+#include "sliderthumb.h"
 
 #define THUMB_OUTER_SIZE 20
-
-class Halo : public QWidget
-{
-    Q_OBJECT
-
-    Q_PROPERTY(qreal size WRITE setSize READ size)
-
-public:
-    Halo(Slider *slider)
-        : QWidget(slider->parentWidget()),
-          slider(slider),
-          _size(0)
-    {
-        slider->installEventFilter(this);
-        setAttribute(Qt::WA_TransparentForMouseEvents, true);
-
-        connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(update()));
-        connect(slider, SIGNAL(valueChanged(int)), this, SLOT(update()));
-    }
-
-    ~Halo()
-    {
-    }
-
-    inline void setSize(qreal size)
-    {
-        _size = size;
-        update();
-    }
-
-    inline qreal size() const { return _size; }
-
-protected:
-    bool eventFilter(QObject *obj, QEvent *event)
-    {
-        if (QEvent::ParentChange == event->type()) {
-            setParent(slider->parentWidget());
-        }
-        return QWidget::eventFilter(obj, event);
-    }
-
-    void paintEvent(QPaintEvent *event)
-    {
-        QPainter painter(this);
-
-        QBrush brush;
-        brush.setStyle(Qt::SolidPattern);
-        brush.setColor(QColor(0, 0, 0, 20));
-        painter.setBrush(brush);
-        painter.setPen(Qt::NoPen);
-
-        painter.setRenderHint(QPainter::Antialiasing);
-
-        QPointF disp = Qt::Horizontal == slider->orientation()
-            ? QPointF(THUMB_OUTER_SIZE/2 + slider->thumbOffset(),
-                      slider->height()/2)
-            : QPointF(slider->width()/2,
-                      THUMB_OUTER_SIZE/2 + slider->thumbOffset());
-
-        QRectF halo((slider->pos() - QPointF(_size, _size)/2) + disp,
-                    QSize(_size, _size));
-
-        painter.drawEllipse(halo);
-
-#ifdef DEBUG_LAYOUT
-        QPen pen;
-        pen.setColor(Qt::red);
-        pen.setWidth(2);
-        painter.setPen(pen);
-        painter.setBrush(Qt::NoBrush);
-
-        painter.drawRect(rect().adjusted(0, 0, -2, -2));
-#endif
-        QWidget::paintEvent(event);
-    }
-
-private:
-    const Slider *const slider;
-    qreal _size;
-};
 
 class SliderPrivate
 {
     Q_DISABLE_COPY(SliderPrivate)
     Q_DECLARE_PUBLIC(Slider)
 
+    friend class SliderThumb;
+
 public:
     SliderPrivate(Slider *parent)
         : q_ptr(parent),
-          halo(new Halo(parent)),
+          thumb(new SliderThumb(this)),
           hoverTrack(false),
           hoverThumb(false),
           step(false),
@@ -132,10 +54,10 @@ public:
 
         focusState->setInitialState(pulseState);
 
-        inactiveState->assignProperty(halo, "size", 0);
-        pulseState->assignProperty(halo, "size", 35);
-        pulse2State->assignProperty(halo, "size", 28);
-        downState->assignProperty(halo, "size", 0);
+        inactiveState->assignProperty(thumb, "haloSize", 0);
+        pulseState->assignProperty(thumb, "haloSize", 35);
+        pulse2State->assignProperty(thumb, "haloSize", 28);
+        downState->assignProperty(thumb, "haloSize", 0);
 
         inactiveState->assignProperty(slider, "thumbSize", 11);
         focusState->assignProperty(slider, "thumbSize", 11);
@@ -161,7 +83,7 @@ public:
         transition = new QEventTransition(slider, QEvent::FocusIn);
         transition->setTargetState(focusState);
 
-        animation = new QPropertyAnimation(halo, "size");
+        animation = new QPropertyAnimation(thumb, "haloSize");
         transition->addAnimation(animation);
         inactiveState->addTransition(transition);
 
@@ -170,7 +92,7 @@ public:
         transition = new QEventTransition(slider, QEvent::FocusOut);
         transition->setTargetState(inactiveState);
 
-        animation = new QPropertyAnimation(halo, "size");
+        animation = new QPropertyAnimation(thumb, "haloSize");
         transition->addAnimation(animation);
         focusState->addTransition(transition);
 
@@ -179,7 +101,7 @@ public:
         transition = new QSignalTransition(pulseState, SIGNAL(propertiesAssigned()));
         transition->setTargetState(pulse2State);
 
-        animation = new QPropertyAnimation(halo, "size");
+        animation = new QPropertyAnimation(thumb, "haloSize");
         animation->setEasingCurve(QEasingCurve::InOutSine);
         animation->setDuration(1000);
         transition->addAnimation(animation);
@@ -190,7 +112,7 @@ public:
         transition = new QSignalTransition(pulse2State, SIGNAL(propertiesAssigned()));
         transition->setTargetState(pulseState);
 
-        animation = new QPropertyAnimation(halo, "size");
+        animation = new QPropertyAnimation(thumb, "haloSize");
         animation->setEasingCurve(QEasingCurve::InOutSine);
         animation->setDuration(1000);
         transition->addAnimation(animation);
@@ -201,7 +123,7 @@ public:
         transition = new QSignalTransition(slider, SIGNAL(sliderPressed()));
         transition->setTargetState(downState);
         transition->addAnimation(new QPropertyAnimation(slider, "thumbSize"));
-        transition->addAnimation(new QPropertyAnimation(halo, "size"));
+        transition->addAnimation(new QPropertyAnimation(thumb, "haloSize"));
         focusState->addTransition(transition);
 
         // Slider released
@@ -209,7 +131,7 @@ public:
         transition = new QSignalTransition(slider, SIGNAL(sliderReleased()));
         transition->setTargetState(focusState);
         transition->addAnimation(new QPropertyAnimation(slider, "thumbSize"));
-        transition->addAnimation(new QPropertyAnimation(halo, "size"));
+        transition->addAnimation(new QPropertyAnimation(thumb, "haloSize"));
         downState->addTransition(transition);
 
         //
@@ -287,6 +209,9 @@ public:
 #endif
     }
 
+    // remove
+    // remove
+    // remove
     QRectF thumbGeometry() const
     {
         Q_Q(const Slider);
@@ -298,6 +223,8 @@ public:
                      THUMB_OUTER_SIZE, THUMB_OUTER_SIZE);
     }
 
+    // remove
+    // remove
     void paintThumb(QPainter *painter)
     {
         painter->drawRect(thumbGeometry().adjusted(0, 0, -1, -1));
@@ -359,14 +286,14 @@ public:
     }
 
     Slider *const q_ptr;
-    Halo   *const halo;
+    SliderThumb *const thumb;
     QStateMachine machine;
     bool   hoverTrack;
     bool   hoverThumb;
     bool   step;
     int    stepTo;
     int    oldValue;
-    qreal  thumbSize;
+    qreal  thumbSize;        // move VVV
     qreal  thumbPenWidth;
     QColor thumbColor;
 };

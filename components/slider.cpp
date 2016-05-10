@@ -20,8 +20,6 @@ Slider::Slider(QWidget *parent)
         sp.transpose();
     setSizePolicy(sp);
     setAttribute(Qt::WA_WState_OwnSizePolicy, false);
-
-//    connect(this, SIGNAL(actionTriggered(int)), this, SLOT(handleAction(int)));
 }
 
 Slider::~Slider()

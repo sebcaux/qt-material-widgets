@@ -50,7 +50,8 @@ SOURCES += main.cpp\
     components/scrollbar.cpp \
     examples/iconmenuexamples.cpp \
     lib/scaleeffect.cpp \
-    lib/style.cpp
+    lib/style.cpp \
+    components/sliderthumb.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -95,7 +96,8 @@ HEADERS  += mainwindow.h \
     components/scrollbar.h \
     examples/iconmenuexamples.h \
     lib/scaleeffect.h \
-    lib/style.h
+    lib/style.h \
+    components/sliderthumb.h
 
 RESOURCES += \
     resources.qrc
