@@ -39,52 +39,21 @@ int Slider::thumbOffset() const
         sliderPosition(),
         Qt::Horizontal == orientation()
             ? rect().width() - 20 : rect().height() - 20,
-        false);
+        invertedAppearance());
 }
 
-void Slider::setThumbSize(qreal size)
+void Slider::setPageStepMode(bool pageStep)
 {
     Q_D(Slider);
 
-    d->thumbSize = size;
-    update();
+    d->pageStepMode = pageStep;
 }
 
-qreal Slider::thumbSize() const
+bool Slider::pageStepMode() const
 {
     Q_D(const Slider);
 
-    return d->thumbSize;
-}
-
-void Slider::setThumbPenWidth(qreal width)
-{
-    Q_D(Slider);
-
-    d->thumbPenWidth = width;
-    update();
-}
-
-qreal Slider::thumbPenWidth() const
-{
-    Q_D(const Slider);
-
-    return d->thumbPenWidth;
-}
-
-void Slider::setThumbColor(const QColor &color)
-{
-    Q_D(Slider);
-
-    d->thumbColor = color;
-    update();
-}
-
-QColor Slider::thumbColor() const
-{
-    Q_D(const Slider);
-
-    return d->thumbColor;
+    return d->pageStepMode;
 }
 
 void Slider::sliderChange(SliderChange change)
@@ -119,7 +88,6 @@ void Slider::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     d->paintTrack(&painter);
-    d->paintThumb(&painter);
 
 #ifdef DEBUG_LAYOUT
     if (hasFocus())
@@ -175,6 +143,12 @@ void Slider::mousePressEvent(QMouseEvent *event)
 
     if (thumb.contains(pos)) {
         setSliderDown(true);
+        return;
+    }
+
+    if (!d->pageStepMode) {
+        setSliderPosition(d->valueFromPosition(event->pos()));
+        //setSliderDown(true);
         return;
     }
 

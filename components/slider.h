@@ -10,26 +10,16 @@ class Slider : public QAbstractSlider
 {
     Q_OBJECT
 
-    Q_PROPERTY(qreal thumbSize WRITE setThumbSize READ thumbSize)
-    Q_PROPERTY(qreal thumbPenWidth WRITE setThumbPenWidth READ thumbPenWidth)
-    Q_PROPERTY(QColor thumbColor WRITE setThumbColor READ thumbColor)
-
 public:
     explicit Slider(QWidget *parent = 0);
     ~Slider();
 
-    QSize minimumSizeHint() const;
+    QSize minimumSizeHint() const Q_DECL_OVERRIDE;
 
     int thumbOffset() const;
 
-    void setThumbSize(qreal size);
-    qreal thumbSize() const;
-
-    void setThumbPenWidth(qreal width);
-    qreal thumbPenWidth() const;
-
-    void setThumbColor(const QColor &color);
-    QColor thumbColor() const;
+    void setPageStepMode(bool pageStep);
+    bool pageStepMode() const;
 
 signals:
     void changedToMinimum();

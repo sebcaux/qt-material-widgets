@@ -3,6 +3,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QSlider>
+#include <QCheckBox>
 #include "sliderexamples.h"
 #include "components/slider.h"
 #include "exampleview.h"
@@ -14,16 +15,28 @@ SliderExamples::SliderExamples(QWidget *parent)
       _edit2(new QLineEdit),
       _slider(new Slider),
       _slider2(new Slider),
+      _slider3(new Slider),
       __slider(new QSlider)
 {
     QLayout *mainLayout = widget()->layout();
 
     {
-        Slider *slider = new Slider;
-        slider->setMinimumWidth(250);
+        QHBoxLayout *layout = new QHBoxLayout;
+        QWidget *widget = new QWidget;
+
+        widget->setLayout(layout);
+
+        _slider3->setMinimumWidth(250);
+
+        QCheckBox *checkbox = new QCheckBox;
+        QCheckBox *checkbox2 = new QCheckBox;
+
+        layout->addWidget(_slider3);
+        layout->addWidget(checkbox);
+        layout->addWidget(checkbox2);
 
         ExampleView *view = new ExampleView;
-        view->setWidget(slider);
+        view->setWidget(widget);
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(
@@ -32,6 +45,9 @@ SliderExamples::SliderExamples(QWidget *parent)
         frame->setWidget(view);
 
         mainLayout->addWidget(frame);
+
+        connect(checkbox, SIGNAL(toggled(bool)), this, SLOT(inv()));
+        connect(checkbox2, SIGNAL(toggled(bool)), this, SLOT(togglePageStepMode()));
     }
     {
         Slider *slider = new Slider;
@@ -199,4 +215,14 @@ void SliderExamples::flip2()
 void SliderExamples::updateSliderValue()
 {
     _slider2->setValue(_edit2->text().toInt());
+}
+
+void SliderExamples::inv()
+{
+    _slider3->setInvertedAppearance(!_slider3->invertedAppearance());
+}
+
+void SliderExamples::togglePageStepMode()
+{
+    _slider3->setPageStepMode(!_slider3->pageStepMode());
 }

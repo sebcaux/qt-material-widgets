@@ -20,12 +20,15 @@ protected slots:
     void flip();
     void flip2();
     void updateSliderValue();
+    void inv();
+    void togglePageStepMode();
 
 private:
     QLineEdit *const _edit;
     QLineEdit *const _edit2;
     Slider    *const _slider;
     Slider    *const _slider2;
+    Slider    *const _slider3;
     QSlider   *const __slider;
 };
 
