@@ -65,6 +65,21 @@ QColor Slider::trackColor() const
     return d->trackColor;
 }
 
+void Slider::setTrackWidth(int width)
+{
+    Q_D(Slider);
+
+    d->trackWidth = width;
+    update();
+}
+
+int Slider::trackWidth() const
+{
+    Q_D(const Slider);
+
+    return d->trackWidth;
+}
+
 void Slider::sliderChange(SliderChange change)
 {
     Q_D(Slider);

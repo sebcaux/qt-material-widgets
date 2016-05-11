@@ -11,6 +11,7 @@ class Slider : public QAbstractSlider
     Q_OBJECT
 
     Q_PROPERTY(QColor trackColor WRITE setTrackColor READ trackColor)
+    Q_PROPERTY(int trackWidth WRITE setTrackWidth READ trackWidth)
 
 public:
     explicit Slider(QWidget *parent = 0);
@@ -25,6 +26,9 @@ public:
 
     void setTrackColor(const QColor &color);
     QColor trackColor() const;
+
+    void setTrackWidth(int width);
+    int trackWidth() const;
 
 signals:
     void changedToMinimum();

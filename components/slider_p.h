@@ -38,6 +38,7 @@ public:
     bool pageStepMode;
     int  stepTo;
     int  oldValue;
+    int  trackWidth;
     QColor trackColor;
 };
 
@@ -50,6 +51,7 @@ SliderPrivate::SliderPrivate(Slider *parent)
       pageStepMode(false),
       stepTo(0),
       oldValue(parent->value()),
+      trackWidth(2),
       trackColor(QColor(200, 200, 200))
 {
     parent->setMouseTracking(true);
@@ -218,10 +220,12 @@ QRectF SliderPrivate::trackGeometry() const
 {
     Q_Q(const Slider);
 
+    qreal hw = static_cast<qreal>(trackWidth)/2;
+
     return Qt::Horizontal == q->orientation()
-        ? QRectF(SLIDER_MARGIN, q->rect().height()/2 - 1,
-                q->rect().width() - SLIDER_MARGIN*2, 2)
-        : QRectF(q->rect().width()/2 - 1, SLIDER_MARGIN, 2,
+        ? QRectF(SLIDER_MARGIN, q->rect().height()/2 - hw,
+                q->rect().width() - SLIDER_MARGIN*2, hw*2)
+        : QRectF(q->rect().width()/2 - hw, SLIDER_MARGIN, hw*2,
                 q->rect().height() - SLIDER_MARGIN*2);
 }
 

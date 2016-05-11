@@ -3,6 +3,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QSlider>
+#include <QLabel>
 #include <QCheckBox>
 #include "sliderexamples.h"
 #include "components/slider.h"
@@ -198,24 +199,33 @@ SliderExamples::SliderExamples(QWidget *parent)
         widget->setLayout(layout);
         widget->setMinimumWidth(350);
 
-        Slider *slider = new Slider;
+        Slider *slider;
+        QHBoxLayout *hLayout;
 
-        QHBoxLayout *hLayout = new QHBoxLayout;
+        slider = new Slider;
+
+        hLayout = new QHBoxLayout;
+        hLayout->addWidget(new QLabel("R"));
         hLayout->addWidget(slider);
+        hLayout->addWidget(new QLineEdit);
 
         layout->addLayout(hLayout);
 
         slider = new Slider;
 
         hLayout = new QHBoxLayout;
+        hLayout->addWidget(new QLabel("G"));
         hLayout->addWidget(slider);
+        hLayout->addWidget(new QLineEdit);
 
         layout->addLayout(hLayout);
 
         slider = new Slider;
 
         hLayout = new QHBoxLayout;
+        hLayout->addWidget(new QLabel("B"));
         hLayout->addWidget(slider);
+        hLayout->addWidget(new QLineEdit);
 
         layout->addLayout(hLayout);
 
