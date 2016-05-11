@@ -97,7 +97,7 @@ void SliderPrivate::init(Slider *slider)
     QAbstractTransition *transition;
     QPropertyAnimation *animation;
 
-    //
+    // Add transitions
 
     transition = new QSignalTransition(slider, SIGNAL(sliderDisabled()));
     transition->setTargetState(disabledState);
