@@ -13,16 +13,6 @@ Slider::Slider(QWidget *parent)
       d_ptr(new SliderPrivate(this))
 {
     d_func()->init(this);
-
-    setFocusPolicy(Qt::StrongFocus);
-
-    QSizePolicy sp(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    if (orientation() == Qt::Vertical)
-        sp.transpose();
-    setSizePolicy(sp);
-    setAttribute(Qt::WA_WState_OwnSizePolicy, false);
-
-    QCoreApplication::processEvents();
 }
 
 Slider::~Slider()
@@ -41,7 +31,7 @@ int Slider::thumbOffset() const
         maximum(),
         sliderPosition(),
         Qt::Horizontal == orientation()
-            ? rect().width() -SLIDER_MARGIN*2
+            ? rect().width() - SLIDER_MARGIN*2
             : rect().height() - SLIDER_MARGIN*2,
         invertedAppearance());
 }

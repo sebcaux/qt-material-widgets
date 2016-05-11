@@ -202,6 +202,16 @@ void SliderPrivate::init(Slider *slider)
     normalState->addTransition(transition);
 
     machine.start();
+
+    slider->setFocusPolicy(Qt::StrongFocus);
+
+    QSizePolicy sp(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    if (slider->orientation() == Qt::Vertical)
+        sp.transpose();
+    slider->setSizePolicy(sp);
+    slider->setAttribute(Qt::WA_WState_OwnSizePolicy, false);
+
+    QCoreApplication::processEvents();
 }
 
 QRectF SliderPrivate::trackGeometry() const
