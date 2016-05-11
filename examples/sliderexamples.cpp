@@ -40,6 +40,7 @@ SliderExamples::SliderExamples(QWidget *parent)
 
         ExampleView *view = new ExampleView;
         view->setWidget(widget);
+        view->setBackgroundRole(QPalette::Base);
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(

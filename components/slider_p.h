@@ -1,13 +1,13 @@
 #ifndef SLIDER_P_H
 #define SLIDER_P_H
 
-#include "slider.h"
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QStateMachine>
 #include <QEventTransition>
 #include <QSignalTransition>
 #include <QDebug>
+#include "slider.h"
 #include "lib/style.h"
 #include "sliderthumb.h"
 
@@ -51,14 +51,15 @@ SliderPrivate::SliderPrivate(Slider *parent)
       pageStepMode(false),
       stepTo(0),
       oldValue(parent->value()),
-      trackWidth(2),
-      trackColor(QColor(200, 200, 200))
+      trackWidth(2)
 {
     parent->setMouseTracking(true);
 }
 
 void SliderPrivate::init(Slider *slider)
 {
+    Style &style = Style::instance();
+
     QState *topState = new QState(QState::ParallelStates);
 
     QState *fstState = new QState(topState);
@@ -79,16 +80,27 @@ void SliderPrivate::init(Slider *slider)
     pulseOutState->assignProperty(thumb, "haloSize", 35);
     pulseInState->assignProperty(thumb, "haloSize", 28);
 
+    QColor disabledColor = style.themeColor("disabled");
+
     disabledState->assignProperty(thumb, "diameter", 7);
-    disabledState->assignProperty(thumb, "fillColor", QColor(200, 200, 200));
+    disabledState->assignProperty(thumb, "fillColor", disabledColor);
+    disabledState->assignProperty(slider, "trackColor", disabledColor);
 
     inactiveState->assignProperty(thumb, "diameter", 11);
     focusState->assignProperty(thumb, "diameter", 11);
     slidingState->assignProperty(thumb, "diameter", 17);
 
-    inactiveState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
-    focusState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
-    slidingState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
+    QColor trackColor = style.themeColor("accent3");
+
+    inactiveState->assignProperty(slider, "trackColor", trackColor);
+    focusState->assignProperty(slider, "trackColor", trackColor);
+    slidingState->assignProperty(slider, "trackColor", trackColor);
+
+    QColor fillColor = style.themeColor("primary1");
+
+    inactiveState->assignProperty(thumb, "fillColor", fillColor);
+    focusState->assignProperty(thumb, "fillColor", fillColor);
+    slidingState->assignProperty(thumb, "fillColor", fillColor);
 
     machine.addState(topState);
 
@@ -180,11 +192,20 @@ void SliderPrivate::init(Slider *slider)
     QState *minState = new QState(sndState);
     QState *normalState = new QState(sndState);
 
-    minState->assignProperty(thumb, "minFillColor", QColor(255, 255, 255));
-    minState->assignProperty(thumb, "fillColor", QColor(255, 255, 255));
+    QColor minHaloColor(trackColor);
+    QColor haloColor = style.themeColor("primary1");
+    minHaloColor.setAlphaF(0.2);
+    haloColor.setAlphaF(0.2);
+
+    QColor canvasColor = style.themeColor("canvas");
+
+    minState->assignProperty(thumb, "minFillColor", canvasColor);
+    minState->assignProperty(thumb, "fillColor", canvasColor);
+    minState->assignProperty(thumb, "haloColor", minHaloColor);
     minState->assignProperty(thumb, "borderWidth", 2);
-    normalState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
-    normalState->assignProperty(thumb, "minFillColor", QColor(0, 0, 0));
+    normalState->assignProperty(thumb, "fillColor", fillColor);
+    normalState->assignProperty(thumb, "minFillColor", fillColor);
+    normalState->assignProperty(thumb, "haloColor", haloColor);
     normalState->assignProperty(thumb, "borderWidth", 0);
 
     sndState->setInitialState(minState);
@@ -195,10 +216,18 @@ void SliderPrivate::init(Slider *slider)
     animation->setDuration(200);
     transition->addAnimation(animation);
     minState->addTransition(transition);
+    animation = new QPropertyAnimation(thumb, "haloColor");
+    animation->setDuration(200);
+    transition->addAnimation(animation);
+    minState->addTransition(transition);
 
     transition = new QSignalTransition(slider, SIGNAL(changedToMinimum()));
     transition->setTargetState(minState);
     animation = new QPropertyAnimation(thumb, "minFillColor");
+    animation->setDuration(200);
+    transition->addAnimation(animation);
+    normalState->addTransition(transition);
+    animation = new QPropertyAnimation(thumb, "haloColor");
     animation->setDuration(200);
     transition->addAnimation(animation);
     normalState->addTransition(transition);

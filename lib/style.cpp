@@ -1,6 +1,20 @@
+#include "lib/style.h"
 #include <QPainter>
 #include <QStyleOption>
-#include "lib/style.h"
+
+void Style::setTheme(Theme *theme)
+{
+    _theme = theme;
+    theme->setParent(this);
+}
+
+QColor Style::themeColor(const QString &key) const
+{
+    if (!_theme)
+        return QColor();
+
+    return _theme->getColor(key);
+}
 
 void Style::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p, const QWidget *w) const
 {

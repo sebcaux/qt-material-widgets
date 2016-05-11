@@ -1,6 +1,7 @@
 #include "sliderthumb.h"
 #include <QEvent>
 #include <QPainter>
+#include "lib/style.h"
 #include "slider.h"
 
 SliderThumb::SliderThumb(Slider *slider)
@@ -37,7 +38,7 @@ void SliderThumb::paintEvent(QPaintEvent *event)
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(QColor(0, 0, 0, 20));
+    brush.setColor(_haloColor);
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 

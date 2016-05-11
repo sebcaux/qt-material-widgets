@@ -17,6 +17,7 @@ class SliderThumb : public QWidget
     Q_PROPERTY(QColor fillColor WRITE setFillColor READ fillColor)
     Q_PROPERTY(QColor minFillColor WRITE setMinFillColor READ minFillColor)
     Q_PROPERTY(qreal haloSize WRITE setHaloSize READ haloSize)
+    Q_PROPERTY(QColor haloColor WRITE setHaloColor READ haloColor)
 
     friend class SliderPrivate;
     explicit SliderThumb(Slider *slider);
@@ -74,7 +75,21 @@ public:
         update();
     }
 
-    inline qreal haloSize() const { return _haloSize; }
+    inline qreal haloSize() const
+    {
+        return _haloSize;
+    }
+
+    inline void setHaloColor(const QColor &color)
+    {
+        _haloColor = color;
+        update();
+    }
+
+    inline QColor haloColor() const
+    {
+        return _haloColor;
+    }
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
@@ -86,10 +101,10 @@ private:
     const Slider *const slider;
     qreal  _diameter;
     qreal  _borderWidth;
+    qreal  _haloSize;
     QColor _fillColor;
     QColor _minFillColor;
-    qreal  _haloSize;
-
+    QColor _haloColor;
 };
 
 #endif // SLIDERTHUMB_H

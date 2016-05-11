@@ -52,7 +52,8 @@ SOURCES += main.cpp\
     lib/scaleeffect.cpp \
     lib/style.cpp \
     components/sliderthumb.cpp \
-    components/searchfield.cpp
+    components/searchfield.cpp \
+    lib/theme.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -99,7 +100,9 @@ HEADERS  += mainwindow.h \
     lib/scaleeffect.h \
     lib/style.h \
     components/sliderthumb.h \
-    components/searchfield.h
+    components/searchfield.h \
+    lib/theme.h \
+    lib/theme_p.h
 
 RESOURCES += \
     resources.qrc
