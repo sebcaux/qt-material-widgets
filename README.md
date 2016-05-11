@@ -17,7 +17,7 @@
 - [ ] Tabs
 - [ ] Text Field
 - [ ] Toggle
-- [ ] Theme
+- [x] Theme
 
 #### Not started
 
