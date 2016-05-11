@@ -3,16 +3,11 @@
 #include <QPainter>
 #include "slider.h"
 
-// change
-#define THUMB_OUTER_SIZE 20
-
 SliderThumb::SliderThumb(Slider *slider)
     : QWidget(slider->parentWidget()),
       slider(slider),
       _diameter(11),
-      _borderWidth(0),
-      _fillColor(Qt::white),
-      _minFillColor(Qt::white),
+      _borderWidth(2),
       _haloSize(0)
 {
     slider->installEventFilter(this);
@@ -49,10 +44,10 @@ void SliderThumb::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing);
 
     QPointF disp = Qt::Horizontal == slider->orientation()
-        ? QPointF(THUMB_OUTER_SIZE/2 + slider->thumbOffset(),
+        ? QPointF(SLIDER_MARGIN + slider->thumbOffset(),
                   slider->height()/2)
         : QPointF(slider->width()/2,
-                  THUMB_OUTER_SIZE/2 + slider->thumbOffset());
+                  SLIDER_MARGIN + slider->thumbOffset());
 
     QRectF halo((slider->pos() - QPointF(_haloSize, _haloSize)/2) + disp,
                 QSizeF(_haloSize, _haloSize));
@@ -62,12 +57,13 @@ void SliderThumb::paintEvent(QPaintEvent *event)
     // Knob
 
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(slider->sliderPosition() > slider->minimum()
+    brush.setColor(slider->value() > slider->minimum()
        ? _fillColor : _minFillColor);
     painter.setBrush(brush);
 
     if (_borderWidth > 0) {
         QPen pen;
+        pen.setColor(slider->trackColor());
         pen.setWidthF(_borderWidth);
         painter.setPen(pen);
     } else {
@@ -75,10 +71,10 @@ void SliderThumb::paintEvent(QPaintEvent *event)
     }
 
     QRectF geometry = Qt::Horizontal == slider->orientation()
-        ? QRectF(slider->thumbOffset(), slider->height()/2 - THUMB_OUTER_SIZE/2,
-                 THUMB_OUTER_SIZE, THUMB_OUTER_SIZE).translated(slider->pos())
-        : QRectF(slider->width()/2 - THUMB_OUTER_SIZE/2, slider->thumbOffset(),
-                 THUMB_OUTER_SIZE, THUMB_OUTER_SIZE).translated(slider->pos());
+        ? QRectF(slider->thumbOffset(), slider->height()/2 - SLIDER_MARGIN,
+                 SLIDER_MARGIN*2, SLIDER_MARGIN*2).translated(slider->pos())
+        : QRectF(slider->width()/2 - SLIDER_MARGIN, slider->thumbOffset(),
+                 SLIDER_MARGIN*2, SLIDER_MARGIN*2).translated(slider->pos());
 
     QRectF thumb(0, 0, _diameter, _diameter);
 
@@ -92,6 +88,8 @@ void SliderThumb::paintEvent(QPaintEvent *event)
     pen.setWidth(2);
     painter.setPen(pen);
     painter.setBrush(Qt::NoBrush);
+
+    painter.drawRect(geometry);
 
     painter.drawRect(rect().adjusted(0, 0, -2, -2));
 #endif

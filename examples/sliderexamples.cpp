@@ -176,6 +176,7 @@ SliderExamples::SliderExamples(QWidget *parent)
     }
     {
         Slider *slider = new Slider;
+        //slider->setValue(20);
         slider->setDisabled(true);
         slider->setMinimumWidth(250);
 
@@ -186,6 +187,44 @@ SliderExamples::SliderExamples(QWidget *parent)
         frame->setCodeSnippet(
             "Slider *slider = new Slider;\n"
             "slider->setDisabled(true);\n"
+        );
+        frame->setWidget(view);
+
+        mainLayout->addWidget(frame);
+    }
+    {
+        QVBoxLayout *layout = new QVBoxLayout;
+        QWidget *widget = new QWidget;
+        widget->setLayout(layout);
+        widget->setMinimumWidth(350);
+
+        Slider *slider = new Slider;
+
+        QHBoxLayout *hLayout = new QHBoxLayout;
+        hLayout->addWidget(slider);
+
+        layout->addLayout(hLayout);
+
+        slider = new Slider;
+
+        hLayout = new QHBoxLayout;
+        hLayout->addWidget(slider);
+
+        layout->addLayout(hLayout);
+
+        slider = new Slider;
+
+        hLayout = new QHBoxLayout;
+        hLayout->addWidget(slider);
+
+        layout->addLayout(hLayout);
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(widget);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "xx"
         );
         frame->setWidget(view);
 

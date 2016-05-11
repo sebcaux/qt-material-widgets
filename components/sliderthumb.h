@@ -1,6 +1,8 @@
 #ifndef SLIDERTHUMB_H
 #define SLIDERTHUMB_H
 
+#define SLIDER_MARGIN 30
+
 #include <QWidget>
 
 class Slider;

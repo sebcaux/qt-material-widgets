@@ -11,9 +11,6 @@
 #include "lib/style.h"
 #include "sliderthumb.h"
 
-// change
-#define THUMB_OUTER_SIZE 20
-
 class SliderPrivate
 {
     Q_DISABLE_COPY(SliderPrivate)
@@ -81,15 +78,15 @@ void SliderPrivate::init(Slider *slider)
     pulseInState->assignProperty(thumb, "haloSize", 28);
 
     disabledState->assignProperty(thumb, "diameter", 7);
-    //disabledState->assignProperty(thumb, "fillColor", QColor(200, 200, 200));
+    disabledState->assignProperty(thumb, "fillColor", QColor(200, 200, 200));
 
     inactiveState->assignProperty(thumb, "diameter", 11);
     focusState->assignProperty(thumb, "diameter", 11);
     slidingState->assignProperty(thumb, "diameter", 17);
 
-    //inactiveState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
-    //focusState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
-    //slidingState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
+    inactiveState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
+    focusState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
+    slidingState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
 
     machine.addState(topState);
 
@@ -181,29 +178,25 @@ void SliderPrivate::init(Slider *slider)
     QState *minState = new QState(sndState);
     QState *normalState = new QState(sndState);
 
-    minState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
-    minState->assignProperty(thumb, "borderWidth", 0);
-    normalState->assignProperty(thumb, "fillColor", QColor(255, 255, 255));
-    normalState->assignProperty(thumb, "borderWidth", 1.5);
+    minState->assignProperty(thumb, "minFillColor", QColor(255, 255, 255));
+    minState->assignProperty(thumb, "fillColor", QColor(255, 255, 255));
+    minState->assignProperty(thumb, "borderWidth", 2);
+    normalState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
+    normalState->assignProperty(thumb, "minFillColor", QColor(0, 0, 0));
+    normalState->assignProperty(thumb, "borderWidth", 0);
 
     sndState->setInitialState(minState);
 
-    transition = new QSignalTransition(slider, SIGNAL(changedToMinimum()));
+    transition = new QSignalTransition(slider, SIGNAL(changedFromMinimum()));
     transition->setTargetState(normalState);
     animation = new QPropertyAnimation(thumb, "fillColor");
     animation->setDuration(200);
     transition->addAnimation(animation);
-    animation = new QPropertyAnimation(thumb, "borderWidth");
-    animation->setDuration(200);
-    transition->addAnimation(animation);
     minState->addTransition(transition);
 
-    transition = new QSignalTransition(slider, SIGNAL(changedFromMinimum()));
+    transition = new QSignalTransition(slider, SIGNAL(changedToMinimum()));
     transition->setTargetState(minState);
-    animation = new QPropertyAnimation(thumb, "fillColor");
-    animation->setDuration(200);
-    transition->addAnimation(animation);
-    animation = new QPropertyAnimation(thumb, "borderWidth");
+    animation = new QPropertyAnimation(thumb, "minFillColor");
     animation->setDuration(200);
     transition->addAnimation(animation);
     normalState->addTransition(transition);
@@ -216,10 +209,10 @@ QRectF SliderPrivate::trackGeometry() const
     Q_Q(const Slider);
 
     return Qt::Horizontal == q->orientation()
-        ? QRectF(THUMB_OUTER_SIZE/2, q->rect().height()/2 - 1,
-                q->rect().width() - THUMB_OUTER_SIZE, 2)
-        : QRectF(q->rect().width()/2 - 1, THUMB_OUTER_SIZE/2, 2,
-                q->rect().height() - THUMB_OUTER_SIZE);
+        ? QRectF(SLIDER_MARGIN, q->rect().height()/2 - 1,
+                q->rect().width() - SLIDER_MARGIN*2, 2)
+        : QRectF(q->rect().width()/2 - 1, SLIDER_MARGIN, 2,
+                q->rect().height() - SLIDER_MARGIN*2);
 }
 
 QRectF SliderPrivate::thumbGeometry() const
@@ -227,10 +220,10 @@ QRectF SliderPrivate::thumbGeometry() const
     Q_Q(const Slider);
 
     return Qt::Horizontal == q->orientation()
-        ? QRectF(q->thumbOffset(), q->rect().height()/2 - THUMB_OUTER_SIZE/2,
-                 THUMB_OUTER_SIZE, THUMB_OUTER_SIZE)
-        : QRectF(q->rect().width()/2 - THUMB_OUTER_SIZE/2, q->thumbOffset(),
-                 THUMB_OUTER_SIZE, THUMB_OUTER_SIZE);
+        ? QRectF(q->thumbOffset(), q->rect().height()/2 - SLIDER_MARGIN,
+                 SLIDER_MARGIN*2, SLIDER_MARGIN*2)
+        : QRectF(q->rect().width()/2 - SLIDER_MARGIN, q->thumbOffset(),
+                 SLIDER_MARGIN*2, SLIDER_MARGIN*2);
 }
 
 void SliderPrivate::paintTrack(QPainter *painter)
@@ -247,7 +240,7 @@ void SliderPrivate::paintTrack(QPainter *painter)
     bg.setStyle(Qt::SolidPattern);
     bg.setColor(trackColor);
 
-    qreal offset = q->thumbOffset() + THUMB_OUTER_SIZE/2;
+    qreal offset = q->thumbOffset() + SLIDER_MARGIN;
 
     QSizeF box(q->isEnabled() ? offset : offset - 7,
                qMax(q->width(), q->height()));
@@ -286,13 +279,13 @@ int SliderPrivate::valueFromPosition(const QPoint &pos) const
     int position = Qt::Horizontal == q->orientation() ? pos.x() : pos.y();
 
     int span = Qt::Horizontal == q->orientation()
-        ? q->rect().width() - THUMB_OUTER_SIZE
-        : q->rect().height() - THUMB_OUTER_SIZE;
+        ? q->rect().width() - SLIDER_MARGIN*2
+        : q->rect().height() - SLIDER_MARGIN*2;
 
     return Style::sliderValueFromPosition(
                 q->minimum(),
                 q->maximum(),
-                position - THUMB_OUTER_SIZE/2,
+                position - SLIDER_MARGIN,
                 span,
                 q->invertedAppearance());
 }

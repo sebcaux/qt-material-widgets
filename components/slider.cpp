@@ -3,6 +3,7 @@
 #include <QPropertyAnimation>
 #include <QStringBuilder>
 #include <QMouseEvent>
+#include <QApplication>
 #include <QDebug>
 
 #include "slider_p.h"
@@ -11,7 +12,7 @@ Slider::Slider(QWidget *parent)
     : QAbstractSlider(parent),
       d_ptr(new SliderPrivate(this))
 {
-    d_ptr->init(this);
+    d_func()->init(this);
 
     setFocusPolicy(Qt::StrongFocus);
 
@@ -20,6 +21,8 @@ Slider::Slider(QWidget *parent)
         sp.transpose();
     setSizePolicy(sp);
     setAttribute(Qt::WA_WState_OwnSizePolicy, false);
+
+    QCoreApplication::processEvents();
 }
 
 Slider::~Slider()
@@ -38,7 +41,8 @@ int Slider::thumbOffset() const
         maximum(),
         sliderPosition(),
         Qt::Horizontal == orientation()
-            ? rect().width() - 20 : rect().height() - 20,
+            ? rect().width() -SLIDER_MARGIN*2
+            : rect().height() - SLIDER_MARGIN*2,
         invertedAppearance());
 }
 
