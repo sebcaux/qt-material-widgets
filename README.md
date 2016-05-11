@@ -31,4 +31,5 @@
 - [ ] Paper
 - [ ] Select Field
 - [ ] Progress
+- [ ] Chips
 - [ ] Docs
