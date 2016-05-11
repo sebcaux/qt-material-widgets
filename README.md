@@ -2,23 +2,33 @@
 
 ### Roadmap
 
+#### Work in progress
+
 - [x] Slider
-- [ ] Discrete Slider
 - [ ] Flat Button
 - [ ] App Bar
 - [ ] Avatar
-- [ ] Checkbox
-- [ ] Dialog
 - [ ] Icon Button
 - [ ] Icon Menu
-- [ ] List
 - [ ] Menu
-- [ ] Radio Button
+- [ ] Dialog
 - [ ] Raised Button
 - [ ] Scroll Bar
-- [ ] Search Field
 - [ ] Tabs
-- [ ] Table
 - [ ] Text Field
 - [ ] Toggle
 - [ ] Theme
+
+#### Not started
+
+- [ ] Discrete Slider
+- [ ] Checkbox
+- [ ] List
+- [ ] Radio Button
+- [ ] Search Field
+- [ ] Table
+- [ ] Badge
+- [ ] Paper
+- [ ] Select Field
+- [ ] Progress
+- [ ] Docs
