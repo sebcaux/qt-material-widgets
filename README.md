@@ -1,7 +1,9 @@
-# qt-material-widgets
+# Qt Material Design Desktop Widgets
+
+### Roadmap
 
 - [x] Slider
-  - [ ] Discrete Slider
+- [ ] Discrete Slider
 - [ ] Flat Button
 - [ ] App Bar
 - [ ] Avatar
@@ -19,3 +21,4 @@
 - [ ] Table
 - [ ] Text Field
 - [ ] Toggle
+- [ ] Theme
