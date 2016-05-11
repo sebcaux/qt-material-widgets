@@ -51,7 +51,8 @@ SOURCES += main.cpp\
     examples/iconmenuexamples.cpp \
     lib/scaleeffect.cpp \
     lib/style.cpp \
-    components/sliderthumb.cpp
+    components/sliderthumb.cpp \
+    components/searchfield.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -97,7 +98,8 @@ HEADERS  += mainwindow.h \
     examples/iconmenuexamples.h \
     lib/scaleeffect.h \
     lib/style.h \
-    components/sliderthumb.h
+    components/sliderthumb.h \
+    components/searchfield.h
 
 RESOURCES += \
     resources.qrc

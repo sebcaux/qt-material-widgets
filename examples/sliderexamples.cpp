@@ -30,10 +30,12 @@ SliderExamples::SliderExamples(QWidget *parent)
 
         QCheckBox *checkbox = new QCheckBox;
         QCheckBox *checkbox2 = new QCheckBox;
+        QCheckBox *checkbox3 = new QCheckBox;
 
         layout->addWidget(_slider3);
         layout->addWidget(checkbox);
         layout->addWidget(checkbox2);
+        layout->addWidget(checkbox3);
 
         ExampleView *view = new ExampleView;
         view->setWidget(widget);
@@ -48,6 +50,7 @@ SliderExamples::SliderExamples(QWidget *parent)
 
         connect(checkbox, SIGNAL(toggled(bool)), this, SLOT(inv()));
         connect(checkbox2, SIGNAL(toggled(bool)), this, SLOT(togglePageStepMode()));
+        connect(checkbox3, SIGNAL(toggled(bool)), this, SLOT(toggleEnabled()));
     }
     {
         Slider *slider = new Slider;
@@ -225,4 +228,10 @@ void SliderExamples::inv()
 void SliderExamples::togglePageStepMode()
 {
     _slider3->setPageStepMode(!_slider3->pageStepMode());
+}
+
+void SliderExamples::toggleEnabled()
+{
+    bool enabled = !_slider3->isEnabled();
+    _slider3->setEnabled(enabled);
 }

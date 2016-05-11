@@ -13,6 +13,7 @@ class SliderThumb : public QWidget
     Q_PROPERTY(qreal diameter WRITE setDiameter READ diameter)
     Q_PROPERTY(qreal borderWidth WRITE setBorderWidth READ borderWidth)
     Q_PROPERTY(QColor fillColor WRITE setFillColor READ fillColor)
+    Q_PROPERTY(QColor minFillColor WRITE setMinFillColor READ minFillColor)
     Q_PROPERTY(qreal haloSize WRITE setHaloSize READ haloSize)
 
     friend class SliderPrivate;
@@ -54,6 +55,17 @@ public:
         return _fillColor;
     }
 
+    inline void setMinFillColor(const QColor &color)
+    {
+        _minFillColor = color;
+        update();
+    }
+
+    inline QColor minFillColor() const
+    {
+        return _minFillColor;
+    }
+
     inline void setHaloSize(qreal size)
     {
         _haloSize = size;
@@ -73,6 +85,7 @@ private:
     qreal  _diameter;
     qreal  _borderWidth;
     QColor _fillColor;
+    QColor _minFillColor;
     qreal  _haloSize;
 
 };

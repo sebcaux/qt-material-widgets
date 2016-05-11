@@ -12,6 +12,7 @@ SliderThumb::SliderThumb(Slider *slider)
       _diameter(11),
       _borderWidth(0),
       _fillColor(Qt::white),
+      _minFillColor(Qt::white),
       _haloSize(0)
 {
     slider->installEventFilter(this);
@@ -61,7 +62,8 @@ void SliderThumb::paintEvent(QPaintEvent *event)
     // Knob
 
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(_fillColor);
+    brush.setColor(slider->sliderPosition() > slider->minimum()
+       ? _fillColor : _minFillColor);
     painter.setBrush(brush);
 
     if (_borderWidth > 0) {

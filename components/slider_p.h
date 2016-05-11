@@ -1,5 +1,3 @@
-// todo: disabled mode
-
 #ifndef SLIDER_P_H
 #define SLIDER_P_H
 
@@ -43,6 +41,7 @@ public:
     bool pageStepMode;
     int  stepTo;
     int  oldValue;
+    QColor trackColor;
 };
 
 SliderPrivate::SliderPrivate(Slider *parent)
@@ -53,7 +52,8 @@ SliderPrivate::SliderPrivate(Slider *parent)
       step(false),
       pageStepMode(false),
       stepTo(0),
-      oldValue(parent->value())
+      oldValue(parent->value()),
+      trackColor(QColor(200, 200, 200))
 {
     parent->setMouseTracking(true);
 }
@@ -66,20 +66,30 @@ void SliderPrivate::init(Slider *slider)
 
     QState *inactiveState = new QState(fstState);
     QState *focusState = new QState(fstState);
+    QState *slidingState = new QState(fstState);
+    QState *disabledState = new QState(fstState);
+
     QState *pulseOutState = new QState(focusState);
     QState *pulseInState = new QState(focusState);
-    QState *slidingState = new QState(fstState);
 
     focusState->setInitialState(pulseOutState);
 
     inactiveState->assignProperty(thumb, "haloSize", 0);
+    slidingState->assignProperty(thumb, "haloSize", 0);
+
     pulseOutState->assignProperty(thumb, "haloSize", 35);
     pulseInState->assignProperty(thumb, "haloSize", 28);
-    slidingState->assignProperty(thumb, "haloSize", 0);
+
+    disabledState->assignProperty(thumb, "diameter", 7);
+    //disabledState->assignProperty(thumb, "fillColor", QColor(200, 200, 200));
 
     inactiveState->assignProperty(thumb, "diameter", 11);
     focusState->assignProperty(thumb, "diameter", 11);
     slidingState->assignProperty(thumb, "diameter", 17);
+
+    //inactiveState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
+    //focusState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
+    //slidingState->assignProperty(thumb, "fillColor", QColor(0, 0, 0));
 
     machine.addState(topState);
 
@@ -89,6 +99,24 @@ void SliderPrivate::init(Slider *slider)
 
     QAbstractTransition *transition;
     QPropertyAnimation *animation;
+
+    //
+
+    transition = new QSignalTransition(slider, SIGNAL(sliderDisabled()));
+    transition->setTargetState(disabledState);
+    inactiveState->addTransition(transition);
+
+    transition = new QSignalTransition(slider, SIGNAL(sliderDisabled()));
+    transition->setTargetState(disabledState);
+    focusState->addTransition(transition);
+
+    transition = new QSignalTransition(slider, SIGNAL(sliderDisabled()));
+    transition->setTargetState(disabledState);
+    slidingState->addTransition(transition);
+
+    transition = new QSignalTransition(slider, SIGNAL(sliderEnabled()));
+    transition->setTargetState(inactiveState);
+    disabledState->addTransition(transition);
 
     // Show halo on focus in
 
@@ -213,22 +241,25 @@ void SliderPrivate::paintTrack(QPainter *painter)
 
     QBrush fg;
     fg.setStyle(Qt::SolidPattern);
-    fg.setColor(QColor(255, 0, 0));
+    fg.setColor(thumb->fillColor());
 
     QBrush bg;
     bg.setStyle(Qt::SolidPattern);
-    bg.setColor(QColor(0, 0, 0));
+    bg.setColor(trackColor);
 
     qreal offset = q->thumbOffset() + THUMB_OUTER_SIZE/2;
 
-    QSizeF box(offset, qMax(q->width(), q->height()));
+    QSizeF box(q->isEnabled() ? offset : offset - 7,
+               qMax(q->width(), q->height()));
 
     if (Qt::Vertical == q->orientation())
         box.transpose();
 
     QRectF rect = Qt::Vertical == q->orientation()
-        ? QRectF(0, offset, box.width(), box.width())
-        : QRectF(offset, 0, box.height(), box.height());
+        ? QRectF(0, q->isEnabled() ? offset : offset + 7,
+                 box.width(), box.width())
+        : QRectF(q->isEnabled() ? offset : offset + 7, 0,
+                 box.height(), box.height());
 
     bool inverted = q->invertedAppearance();
 

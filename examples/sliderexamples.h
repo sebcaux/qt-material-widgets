@@ -22,6 +22,7 @@ protected slots:
     void updateSliderValue();
     void inv();
     void togglePageStepMode();
+    void toggleEnabled();
 
 private:
     QLineEdit *const _edit;

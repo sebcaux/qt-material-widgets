@@ -56,6 +56,21 @@ bool Slider::pageStepMode() const
     return d->pageStepMode;
 }
 
+void Slider::setTrackColor(const QColor &color)
+{
+    Q_D(Slider);
+
+    d->trackColor = color;
+    update();
+}
+
+QColor Slider::trackColor() const
+{
+    Q_D(const Slider);
+
+    return d->trackColor;
+}
+
 void Slider::sliderChange(SliderChange change)
 {
     Q_D(Slider);
@@ -77,6 +92,18 @@ void Slider::sliderChange(SliderChange change)
         d->oldValue = value();
     }
     QAbstractSlider::sliderChange(change);
+}
+
+void Slider::changeEvent(QEvent *event)
+{
+    if (QEvent::EnabledChange == event->type()) {
+        if (isEnabled()) {
+            emit sliderEnabled();
+        } else {
+            emit sliderDisabled();
+        }
+    }
+    QAbstractSlider::changeEvent(event);
 }
 
 void Slider::paintEvent(QPaintEvent *event)
