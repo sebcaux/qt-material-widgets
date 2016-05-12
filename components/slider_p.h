@@ -2,14 +2,12 @@
 #define SLIDER_P_H
 
 #include <QPainter>
-#include <QPropertyAnimation>
-#include <QStateMachine>
-#include <QEventTransition>
-#include <QSignalTransition>
+#include <QApplication>
 #include <QDebug>
-#include "slider.h"
 #include "lib/style.h"
+#include "slider.h"
 #include "sliderthumb.h"
+#include "sliderstatemachine.h"
 
 class SliderPrivate
 {
@@ -21,7 +19,7 @@ class SliderPrivate
 public:
     SliderPrivate(Slider *parent);
 
-    void init(Slider *slider);
+    void init();
 
     QRectF trackGeometry() const;
     QRectF thumbGeometry() const;
@@ -29,11 +27,11 @@ public:
     void paintTrack(QPainter *painter);
     int valueFromPosition(const QPoint &pos) const;
 
-    void setHovered(bool hovered);
+    void setHovered(bool status);
 
-    Slider *const q_ptr;
-    SliderThumb *const thumb;
-    QStateMachine machine;
+    Slider             *const q_ptr;
+    SliderThumb        *const thumb;
+    SliderStateMachine *const machine;
     bool hoverTrack;
     bool hoverThumb;
     bool hover;
@@ -47,6 +45,7 @@ public:
 SliderPrivate::SliderPrivate(Slider *parent)
     : q_ptr(parent),
       thumb(new SliderThumb(parent)),
+      machine(new SliderStateMachine(parent, thumb)),
       hoverTrack(false),
       hoverThumb(false),
       hover(false),
@@ -59,225 +58,17 @@ SliderPrivate::SliderPrivate(Slider *parent)
     parent->setMouseTracking(true);
 }
 
-void SliderPrivate::init(Slider *slider)
+void SliderPrivate::init()
 {
-    Style &style = Style::instance();
+    Q_Q(Slider);
 
-    QState *topState = new QState(QState::ParallelStates);
-
-    QState *fstState = new QState(topState);
-
-    QState *inactiveState = new QState(fstState);
-    QState *focusState = new QState(fstState);
-    QState *slidingState = new QState(fstState);
-    QState *disabledState = new QState(fstState);
-
-    QState *pulseOutState = new QState(focusState);
-    QState *pulseInState = new QState(focusState);
-
-    focusState->setInitialState(pulseOutState);
-
-    inactiveState->assignProperty(thumb, "haloSize", 0);
-    slidingState->assignProperty(thumb, "haloSize", 0);
-
-    pulseOutState->assignProperty(thumb, "haloSize", 35);
-    pulseInState->assignProperty(thumb, "haloSize", 28);
-
-    disabledState->assignProperty(thumb, "diameter", 7);
-    disabledState->assignProperty(thumb, "fillColor", style.themeColor("disabled"));
-
-    inactiveState->assignProperty(thumb, "diameter", 11);
-    focusState->assignProperty(thumb, "diameter", 11);
-    slidingState->assignProperty(thumb, "diameter", 17);
-
-    QColor fillColor = style.themeColor("primary1");
-
-    inactiveState->assignProperty(thumb, "fillColor", fillColor);
-    focusState->assignProperty(thumb, "fillColor", fillColor);
-    slidingState->assignProperty(thumb, "fillColor", fillColor);
-
-    machine.addState(topState);
-
-    fstState->setInitialState(inactiveState);
-
-    machine.setInitialState(topState);
-
-    QAbstractTransition *transition;
-    QPropertyAnimation *animation;
-
-    // Add transitions
-
-    transition = new QSignalTransition(slider, SIGNAL(sliderDisabled()));
-    transition->setTargetState(disabledState);
-    inactiveState->addTransition(transition);
-
-    transition = new QSignalTransition(slider, SIGNAL(sliderDisabled()));
-    transition->setTargetState(disabledState);
-    focusState->addTransition(transition);
-
-    transition = new QSignalTransition(slider, SIGNAL(sliderDisabled()));
-    transition->setTargetState(disabledState);
-    slidingState->addTransition(transition);
-
-    transition = new QSignalTransition(slider, SIGNAL(sliderEnabled()));
-    transition->setTargetState(inactiveState);
-    disabledState->addTransition(transition);
-
-    // Show halo on mouse enter
-
-    transition = new QSignalTransition(slider, SIGNAL(mouseEnter()));
-    transition->setTargetState(focusState);
-
-    animation = new QPropertyAnimation(thumb, "haloSize");
-    animation->setEasingCurve(QEasingCurve::InOutSine);
-    transition->addAnimation(animation);
-    inactiveState->addTransition(transition);
-
-    // Show halo on focus in
-
-    transition = new QEventTransition(slider, QEvent::FocusIn);
-    transition->setTargetState(focusState);
-
-    animation = new QPropertyAnimation(thumb, "haloSize");
-    animation->setEasingCurve(QEasingCurve::InOutSine);
-    transition->addAnimation(animation);
-    inactiveState->addTransition(transition);
-
-    // Hide halo on focus out
-
-    transition = new QEventTransition(slider, QEvent::FocusOut);
-    transition->setTargetState(inactiveState);
-
-    animation = new QPropertyAnimation(thumb, "haloSize");
-    animation->setEasingCurve(QEasingCurve::InOutSine);
-    transition->addAnimation(animation);
-    focusState->addTransition(transition);
-
-    // Hide halo on mouse leave, except if widget has focus
-
-    transition = new QSignalTransition(slider, SIGNAL(mouseLeave()));
-    transition->setTargetState(inactiveState);
-
-    animation = new QPropertyAnimation(thumb, "haloSize");
-    animation->setEasingCurve(QEasingCurve::InOutSine);
-    transition->addAnimation(animation);
-    focusState->addTransition(transition);
-
-    // Pulse in
-
-    transition = new QSignalTransition(pulseOutState, SIGNAL(propertiesAssigned()));
-    transition->setTargetState(pulseInState);
-
-    animation = new QPropertyAnimation(thumb, "haloSize");
-    animation->setEasingCurve(QEasingCurve::InOutSine);
-    animation->setDuration(1000);
-    transition->addAnimation(animation);
-    pulseOutState->addTransition(transition);
-
-    // Pulse out
-
-    transition = new QSignalTransition(pulseInState, SIGNAL(propertiesAssigned()));
-    transition->setTargetState(pulseOutState);
-
-    animation = new QPropertyAnimation(thumb, "haloSize");
-    animation->setEasingCurve(QEasingCurve::InOutSine);
-    animation->setDuration(1000);
-    transition->addAnimation(animation);
-    pulseInState->addTransition(transition);
-
-    // Slider pressed
-
-    transition = new QSignalTransition(slider, SIGNAL(sliderPressed()));
-    transition->setTargetState(slidingState);
-    transition->addAnimation(new QPropertyAnimation(thumb, "diameter"));
-
-    animation = new QPropertyAnimation(thumb, "haloSize");
-    animation->setEasingCurve(QEasingCurve::InOutSine);
-    transition->addAnimation(animation);
-    focusState->addTransition(transition);
-
-    // Slider released
-
-    transition = new QSignalTransition(slider, SIGNAL(sliderReleased()));
-    transition->setTargetState(focusState);
-    transition->addAnimation(new QPropertyAnimation(thumb, "diameter"));
-
-    animation = new QPropertyAnimation(thumb, "haloSize");
-    animation->setEasingCurve(QEasingCurve::InOutSine);
-    transition->addAnimation(animation);
-    slidingState->addTransition(transition);
-
-    // Min. value transitions
-
-    QState *sndState = new QState(topState);
-
-    QState *minState = new QState(sndState);
-    QState *normalState = new QState(sndState);
-
-    QColor minHaloColor = style.themeColor("accent3");
-    minHaloColor.setAlphaF(0.15);
-
-    QColor haloColor = style.themeColor("primary1");
-    haloColor.setAlphaF(0.15);
-
-    QColor canvasColor = style.themeColor("canvas");
-
-    minState->assignProperty(thumb, "minFillColor", canvasColor);
-    minState->assignProperty(thumb, "fillColor", canvasColor);
-    minState->assignProperty(thumb, "haloColor", minHaloColor);
-    minState->assignProperty(thumb, "borderWidth", 2);
-    normalState->assignProperty(thumb, "fillColor", fillColor);
-    normalState->assignProperty(thumb, "minFillColor", fillColor);
-    normalState->assignProperty(thumb, "haloColor", haloColor);
-    normalState->assignProperty(thumb, "borderWidth", 0);
-
-    sndState->setInitialState(minState);
-
-    transition = new QSignalTransition(slider, SIGNAL(changedFromMinimum()));
-    transition->setTargetState(normalState);
-
-    animation = new QPropertyAnimation(thumb, "fillColor");
-    animation->setDuration(200);
-    transition->addAnimation(animation);
-
-    animation = new QPropertyAnimation(thumb, "haloColor");
-    animation->setDuration(200);
-    transition->addAnimation(animation);
-
-    animation = new QPropertyAnimation(thumb, "borderWidth");
-    animation->setDuration(400);
-    transition->addAnimation(animation);
-
-    minState->addTransition(transition);
-
-    transition = new QSignalTransition(slider, SIGNAL(changedToMinimum()));
-    transition->setTargetState(minState);
-
-    animation = new QPropertyAnimation(thumb, "minFillColor");
-    animation->setDuration(200);
-    transition->addAnimation(animation);
-
-    animation = new QPropertyAnimation(thumb, "haloColor");
-    animation->setDuration(200);
-    transition->addAnimation(animation);
-
-    animation = new QPropertyAnimation(thumb, "borderWidth");
-    animation->setDuration(400);
-    transition->addAnimation(animation);
-
-    normalState->addTransition(transition);
-
-    machine.start();
-
-    // End of state machine code
-
-    slider->setFocusPolicy(Qt::StrongFocus);
+    q->setFocusPolicy(Qt::StrongFocus);
 
     QSizePolicy sp(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    if (slider->orientation() == Qt::Vertical)
+    if (q->orientation() == Qt::Vertical)
         sp.transpose();
-    slider->setSizePolicy(sp);
-    slider->setAttribute(Qt::WA_WState_OwnSizePolicy, false);
+    q->setSizePolicy(sp);
+    q->setAttribute(Qt::WA_WState_OwnSizePolicy, false);
 
     QCoreApplication::processEvents();
 }
@@ -373,17 +164,17 @@ int SliderPrivate::valueFromPosition(const QPoint &pos) const
                 q->invertedAppearance());
 }
 
-void SliderPrivate::setHovered(bool hovered)
+void SliderPrivate::setHovered(bool status)
 {
     Q_Q(Slider);
 
-    if (hover != hovered) {
-        hover = hovered;
+    if (hover != status) {
+        hover = status;
         if (!q->hasFocus())  {
-            if (hovered) {
-                emit q->mouseEnter();
+            if (status) {
+                emit machine->noFocusMouseEnter();
             } else {
-                emit q->mouseLeave();
+                emit machine->noFocusMouseLeave();
             }
         }
         q->update();

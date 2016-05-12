@@ -26,14 +26,6 @@ public:
     void setTrackWidth(int width);
     int trackWidth() const;
 
-signals:
-    void changedToMinimum();       // @TODO: create custom event type
-    void changedFromMinimum();     // @TODO: create custom event type
-    void sliderEnabled();          //
-    void sliderDisabled();         //
-    void mouseEnter();             //
-    void mouseLeave();             //
-
 protected:
     void sliderChange(SliderChange change) Q_DECL_OVERRIDE;
 

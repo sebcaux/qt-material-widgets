@@ -12,7 +12,7 @@ Slider::Slider(QWidget *parent)
     : QAbstractSlider(parent),
       d_ptr(new SliderPrivate(this))
 {
-    d_func()->init(this);
+    d_func()->init();
 }
 
 Slider::~Slider()
@@ -77,11 +77,11 @@ void Slider::sliderChange(SliderChange change)
     } else if (SliderValueChange == change) {
         if (minimum() == value()) {
             triggerAction(SliderToMinimum);
-            emit changedToMinimum();
+            emit d->machine->changedToMinimum();
         } else if (maximum() == value()) {
             triggerAction(SliderToMaximum);
         } else if (minimum() == d->oldValue) {
-            emit changedFromMinimum();
+            emit d->machine->changedFromMinimum();
         }
         d->oldValue = value();
     }
@@ -90,11 +90,14 @@ void Slider::sliderChange(SliderChange change)
 
 void Slider::changeEvent(QEvent *event)
 {
-    if (QEvent::EnabledChange == event->type()) {
+    if (QEvent::EnabledChange == event->type())
+    {
+        Q_D(Slider);
+
         if (isEnabled()) {
-            emit sliderEnabled();
+            emit d->machine->sliderEnabled();
         } else {
-            emit sliderDisabled();
+            emit d->machine->sliderDisabled();
         }
     }
     QAbstractSlider::changeEvent(event);
