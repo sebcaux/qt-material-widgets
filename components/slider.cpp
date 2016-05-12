@@ -50,21 +50,6 @@ bool Slider::pageStepMode() const
     return d->pageStepMode;
 }
 
-void Slider::setTrackColor(const QColor &color)
-{
-    Q_D(Slider);
-
-    d->trackColor = color;
-    update();
-}
-
-QColor Slider::trackColor() const
-{
-    Q_D(const Slider);
-
-    return d->trackColor;
-}
-
 void Slider::setTrackWidth(int width)
 {
     Q_D(Slider);

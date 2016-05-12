@@ -42,7 +42,6 @@ public:
     int  stepTo;
     int  oldValue;
     int  trackWidth;
-    QColor trackColor;
 };
 
 SliderPrivate::SliderPrivate(Slider *parent)
@@ -84,21 +83,12 @@ void SliderPrivate::init(Slider *slider)
     pulseOutState->assignProperty(thumb, "haloSize", 35);
     pulseInState->assignProperty(thumb, "haloSize", 28);
 
-    QColor disabledColor = style.themeColor("disabled");
-
     disabledState->assignProperty(thumb, "diameter", 7);
-    disabledState->assignProperty(thumb, "fillColor", disabledColor);
-    disabledState->assignProperty(slider, "trackColor", disabledColor);
+    disabledState->assignProperty(thumb, "fillColor", style.themeColor("disabled"));
 
     inactiveState->assignProperty(thumb, "diameter", 11);
     focusState->assignProperty(thumb, "diameter", 11);
     slidingState->assignProperty(thumb, "diameter", 17);
-
-    QColor trackColor = style.themeColor("accent3");
-
-    inactiveState->assignProperty(slider, "trackColor", trackColor);
-    focusState->assignProperty(slider, "trackColor", trackColor);
-    slidingState->assignProperty(slider, "trackColor", trackColor);
 
     QColor fillColor = style.themeColor("primary1");
 
@@ -320,18 +310,18 @@ void SliderPrivate::paintTrack(QPainter *painter)
 {
     Q_Q(const Slider);
 
+    Style &style = Style::instance();
+
     painter->save();
 
     QBrush fg;
     fg.setStyle(Qt::SolidPattern);
-    fg.setColor(q->isEnabled() ? Style::instance().themeColor("primary1")
-                               : trackColor);
-    // @TODO -- clean up this
-
+    fg.setColor(q->isEnabled() ? style.themeColor("primary1")
+                               : style.themeColor("disabled"));
     QBrush bg;
     bg.setStyle(Qt::SolidPattern);
-    bg.setColor(hover ? QColor(0, 0, 0, 150)
-                      : trackColor);
+    bg.setColor(hover ? QColor(0, 0, 0, 150)          // @TODO: set theme color
+                      : style.themeColor("accent3"));
 
     qreal offset = q->thumbOffset() + SLIDER_MARGIN;
 

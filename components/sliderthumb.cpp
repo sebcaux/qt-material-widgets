@@ -64,7 +64,7 @@ void SliderThumb::paintEvent(QPaintEvent *event)
 
     if (_borderWidth > 0) {
         QPen pen;
-        pen.setColor(slider->trackColor());
+        pen.setColor(Style::instance().themeColor("accent3"));
         pen.setWidthF(_borderWidth);
         painter.setPen(pen);
     } else {

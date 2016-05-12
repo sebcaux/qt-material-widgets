@@ -10,7 +10,6 @@ class Slider : public QAbstractSlider
 {
     Q_OBJECT
 
-    Q_PROPERTY(QColor trackColor WRITE setTrackColor READ trackColor)
     Q_PROPERTY(int trackWidth WRITE setTrackWidth READ trackWidth)
 
 public:
@@ -24,19 +23,16 @@ public:
     void setPageStepMode(bool pageStep);
     bool pageStepMode() const;
 
-    void setTrackColor(const QColor &color);
-    QColor trackColor() const;
-
     void setTrackWidth(int width);
     int trackWidth() const;
 
 signals:
-    void changedToMinimum();       // @TODO: create custom event
-    void changedFromMinimum();
-    void sliderEnabled();
-    void sliderDisabled();
-    void mouseEnter();             // rename/change
-    void mouseLeave();             // rename/change
+    void changedToMinimum();       // @TODO: create custom event type
+    void changedFromMinimum();     // @TODO: create custom event type
+    void sliderEnabled();          //
+    void sliderDisabled();         //
+    void mouseEnter();             //
+    void mouseLeave();             //
 
 protected:
     void sliderChange(SliderChange change) Q_DECL_OVERRIDE;
