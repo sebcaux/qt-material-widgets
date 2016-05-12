@@ -214,8 +214,6 @@ SliderStateMachine::SliderStateMachine(Slider *parent, SliderThumb *thumb)
     transition->addAnimation(animation);
 
     normalState->addTransition(transition);
-
-    start();
 }
 
 SliderStateMachine::~SliderStateMachine()

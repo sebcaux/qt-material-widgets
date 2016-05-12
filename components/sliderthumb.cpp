@@ -59,7 +59,8 @@ void SliderThumb::paintEvent(QPaintEvent *event)
 
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(slider->value() > slider->minimum()
-       ? _fillColor : _minFillColor);
+       ? (slider->isEnabled() ? _fillColor : Style::instance().themeColor("disabled"))
+       : _minFillColor);
     painter.setBrush(brush);
 
     if (_borderWidth > 0) {

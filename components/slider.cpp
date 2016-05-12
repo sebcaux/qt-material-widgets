@@ -12,7 +12,6 @@ Slider::Slider(QWidget *parent)
     : QAbstractSlider(parent),
       d_ptr(new SliderPrivate(this))
 {
-    d_func()->init();
 }
 
 Slider::~Slider()

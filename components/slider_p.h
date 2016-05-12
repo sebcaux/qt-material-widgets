@@ -19,8 +19,6 @@ class SliderPrivate
 public:
     SliderPrivate(Slider *parent);
 
-    void init();
-
     QRectF trackGeometry() const;
     QRectF thumbGeometry() const;
 
@@ -55,13 +53,9 @@ SliderPrivate::SliderPrivate(Slider *parent)
       oldValue(parent->value()),
       trackWidth(2)
 {
-    parent->setMouseTracking(true);
-}
-
-void SliderPrivate::init()
-{
     Q_Q(Slider);
 
+    q->setMouseTracking(true);
     q->setFocusPolicy(Qt::StrongFocus);
 
     QSizePolicy sp(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -69,6 +63,8 @@ void SliderPrivate::init()
         sp.transpose();
     q->setSizePolicy(sp);
     q->setAttribute(Qt::WA_WState_OwnSizePolicy, false);
+
+    machine->start();
 
     QCoreApplication::processEvents();
 }

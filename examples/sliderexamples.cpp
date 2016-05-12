@@ -178,7 +178,7 @@ SliderExamples::SliderExamples(QWidget *parent)
     }
     {
         Slider *slider = new Slider;
-        //slider->setValue(20);
+        slider->setValue(20);
         slider->setDisabled(true);
         slider->setMinimumWidth(250);
 
