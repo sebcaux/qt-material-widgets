@@ -175,7 +175,7 @@ void Slider::mousePressEvent(QMouseEvent *event)
         : SliderPageStepSub;
 
     triggerAction(action);
-    setRepeatAction(action);
+    setRepeatAction(action, 400, 8);
 }
 
 void Slider::mouseReleaseEvent(QMouseEvent *event)

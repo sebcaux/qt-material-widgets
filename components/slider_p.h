@@ -3,7 +3,6 @@
 
 #include <QPainter>
 #include <QApplication>
-#include <QDebug>
 #include "lib/style.h"
 #include "slider.h"
 #include "slidertrack.h"
@@ -48,7 +47,7 @@ SliderPrivate::SliderPrivate(Slider *parent)
       hoverThumb(false),
       hover(false),
       step(false),
-      pageStepMode(false),
+      pageStepMode(true),
       stepTo(0),
       oldValue(parent->value()),
       trackWidth(2)
@@ -57,6 +56,7 @@ SliderPrivate::SliderPrivate(Slider *parent)
 
     q->setMouseTracking(true);
     q->setFocusPolicy(Qt::StrongFocus);
+    q->setPageStep(1);
 
     QSizePolicy sp(QSizePolicy::Expanding, QSizePolicy::Fixed);
     if (q->orientation() == Qt::Vertical)

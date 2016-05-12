@@ -1,6 +1,7 @@
 #include "sliderthumb.h"
 #include <QEvent>
 #include <QPainter>
+#include <QDebug>
 #include "lib/style.h"
 #include "slider.h"
 
@@ -24,8 +25,15 @@ SliderThumb::~SliderThumb()
 
 bool SliderThumb::eventFilter(QObject *obj, QEvent *event)
 {
-    if (QEvent::ParentChange == event->type()) {
+    QEvent::Type type = event->type();
+
+    if (QEvent::ParentChange == type) {
         setParent(slider->parentWidget());
+    } else if (QEvent::Resize == type || QEvent::Move == type) {
+        QWidget *widget;
+        if ((widget = parentWidget())) {
+            setGeometry(widget->rect());
+        }
     }
     return QWidget::eventFilter(obj, event);
 }
@@ -45,10 +53,8 @@ void SliderThumb::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing);
 
     QPointF disp = Qt::Horizontal == slider->orientation()
-        ? QPointF(SLIDER_MARGIN + slider->thumbOffset(),
-                  slider->height()/2)
-        : QPointF(slider->width()/2,
-                  SLIDER_MARGIN + slider->thumbOffset());
+        ? QPointF(SLIDER_MARGIN + slider->thumbOffset(), slider->height()/2)
+        : QPointF(slider->width()/2, SLIDER_MARGIN + slider->thumbOffset());
 
     QRectF halo((slider->pos() - QPointF(_haloSize, _haloSize)/2) + disp,
                 QSizeF(_haloSize, _haloSize));
@@ -57,9 +63,9 @@ void SliderThumb::paintEvent(QPaintEvent *event)
 
     // Knob
 
-    brush.setStyle(Qt::SolidPattern);
     brush.setColor(slider->value() > slider->minimum()
-       ? (slider->isEnabled() ? _fillColor : Style::instance().themeColor("disabled"))
+       ? (slider->isEnabled()
+          ? _fillColor : Style::instance().themeColor("disabled"))
        : _minFillColor);
     painter.setBrush(brush);
 
