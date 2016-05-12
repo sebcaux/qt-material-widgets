@@ -38,6 +38,8 @@ public:
     int  trackWidth;
 };
 
+#endif // SLIDER_P_H
+
 SliderPrivate::SliderPrivate(Slider *parent)
     : q_ptr(parent),
       thumb(new SliderThumb(parent)),
@@ -127,5 +129,3 @@ void SliderPrivate::setHovered(bool status)
         q->update();
     }
 }
-
-#endif // SLIDER_P_H
