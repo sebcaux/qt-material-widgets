@@ -12,8 +12,6 @@ class Slider : public QAbstractSlider
 {
     Q_OBJECT
 
-    Q_PROPERTY(int trackWidth WRITE setTrackWidth READ trackWidth)
-
 public:
     explicit Slider(QWidget *parent = 0);
     ~Slider();
@@ -25,8 +23,7 @@ public:
     void setPageStepMode(bool pageStep);
     bool pageStepMode() const;
 
-    void setTrackWidth(int width);
-    int trackWidth() const;
+    bool hovered() const;
 
 protected:
     void sliderChange(SliderChange change) Q_DECL_OVERRIDE;

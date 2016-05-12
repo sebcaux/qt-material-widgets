@@ -54,7 +54,8 @@ SOURCES += main.cpp\
     components/sliderthumb.cpp \
     components/searchfield.cpp \
     lib/theme.cpp \
-    components/sliderstatemachine.cpp
+    components/sliderstatemachine.cpp \
+    components/slidertrack.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -104,7 +105,8 @@ HEADERS  += mainwindow.h \
     components/searchfield.h \
     lib/theme.h \
     lib/theme_p.h \
-    components/sliderstatemachine.h
+    components/sliderstatemachine.h \
+    components/slidertrack.h
 
 RESOURCES += \
     resources.qrc

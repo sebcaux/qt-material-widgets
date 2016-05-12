@@ -6,6 +6,7 @@
 #include <QDebug>
 #include "lib/style.h"
 #include "slider.h"
+#include "slidertrack.h"
 #include "sliderthumb.h"
 #include "sliderstatemachine.h"
 
@@ -20,12 +21,13 @@ public:
     QRectF trackBoundingRect() const;
     QRectF thumbBoundingRect() const;
 
-    void paintTrack(QPainter *painter);
+    //void paintTrack(QPainter *painter);
     int valueFromPosition(const QPoint &pos) const;
 
     void setHovered(bool status);
 
     Slider             *const q_ptr;
+    SliderTrack        *const track;
     SliderThumb        *const thumb;
     SliderStateMachine *const machine;
     bool hoverTrack;
@@ -40,6 +42,7 @@ public:
 
 SliderPrivate::SliderPrivate(Slider *parent)
     : q_ptr(parent),
+      track(new SliderTrack(parent)),
       thumb(new SliderThumb(parent)),
       machine(new SliderStateMachine(parent, thumb)),
       hoverTrack(false),
@@ -74,10 +77,10 @@ QRectF SliderPrivate::trackBoundingRect() const
     qreal hw = static_cast<qreal>(trackWidth)/2;
 
     return Qt::Horizontal == q->orientation()
-        ? QRectF(SLIDER_MARGIN, q->rect().height()/2 - hw,
-                q->rect().width() - SLIDER_MARGIN*2, hw*2)
-        : QRectF(q->rect().width()/2 - hw, SLIDER_MARGIN, hw*2,
-                q->rect().height() - SLIDER_MARGIN*2);
+        ? QRectF(SLIDER_MARGIN, q->height()/2 - hw,
+                 q->width() - SLIDER_MARGIN*2, hw*2)
+        : QRectF(q->width()/2 - hw, SLIDER_MARGIN, hw*2,
+                 q->height() - SLIDER_MARGIN*2);
 }
 
 QRectF SliderPrivate::thumbBoundingRect() const
@@ -85,12 +88,13 @@ QRectF SliderPrivate::thumbBoundingRect() const
     Q_Q(const Slider);
 
     return Qt::Horizontal == q->orientation()
-        ? QRectF(q->thumbOffset(), q->rect().height()/2 - SLIDER_MARGIN,
+        ? QRectF(q->thumbOffset(), q->height()/2 - SLIDER_MARGIN,
                  SLIDER_MARGIN*2, SLIDER_MARGIN*2)
-        : QRectF(q->rect().width()/2 - SLIDER_MARGIN, q->thumbOffset(),
+        : QRectF(q->width()/2 - SLIDER_MARGIN, q->thumbOffset(),
                  SLIDER_MARGIN*2, SLIDER_MARGIN*2);
 }
 
+/*
 void SliderPrivate::paintTrack(QPainter *painter)
 {
     Q_Q(const Slider);
@@ -139,6 +143,7 @@ void SliderPrivate::paintTrack(QPainter *painter)
     }
 #endif
 }
+*/
 
 int SliderPrivate::valueFromPosition(const QPoint &pos) const
 {

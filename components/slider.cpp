@@ -49,19 +49,11 @@ bool Slider::pageStepMode() const
     return d->pageStepMode;
 }
 
-void Slider::setTrackWidth(int width)
-{
-    Q_D(Slider);
-
-    d->trackWidth = width;
-    update();
-}
-
-int Slider::trackWidth() const
+bool Slider::hovered() const
 {
     Q_D(const Slider);
 
-    return d->trackWidth;
+    return d->hover;
 }
 
 void Slider::sliderChange(SliderChange change)
@@ -106,12 +98,6 @@ void Slider::changeEvent(QEvent *event)
 void Slider::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
-
-    Q_D(Slider);
-
-    QPainter painter(this);
-
-    d->paintTrack(&painter);
 
 #ifdef DEBUG_LAYOUT
     if (hasFocus())
