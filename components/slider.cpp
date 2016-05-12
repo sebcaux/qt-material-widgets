@@ -79,7 +79,8 @@ void Slider::sliderChange(SliderChange change)
             emit d->machine->changedToMinimum();
         } else if (maximum() == value()) {
             triggerAction(SliderToMaximum);
-        } else if (minimum() == d->oldValue) {
+        }
+        if (minimum() == d->oldValue) {
             emit d->machine->changedFromMinimum();
         }
         d->oldValue = value();
