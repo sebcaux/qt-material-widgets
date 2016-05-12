@@ -4,6 +4,8 @@
 #include <QAbstractSlider>
 #include <QScopedPointer>
 
+#define SLIDER_MARGIN 30
+
 class SliderPrivate;
 
 class Slider : public QAbstractSlider
