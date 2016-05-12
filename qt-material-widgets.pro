@@ -5,7 +5,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = qt-material-widgets
 TEMPLATE = app
 
-DEFINES += DEBUG_LAYOUT=1
+#DEFINES += DEBUG_LAYOUT=1
 
 SOURCES += main.cpp\
         mainwindow.cpp \

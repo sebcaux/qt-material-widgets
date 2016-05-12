@@ -47,9 +47,11 @@ void SliderTrack::paintEvent(QPaintEvent *event)
         box.transpose();
 
     QRectF rect = Qt::Vertical == slider->orientation()
-        ? QRectF(0, slider->isEnabled() ? offset : offset + 7,
+        ? QRectF(0, slider->isEnabled() ? slider->y() + offset + SLIDER_MARGIN
+                                        : slider->y() + offset + SLIDER_MARGIN + 7,
                  box.width(), box.width())
-        : QRectF(slider->isEnabled() ? slider->x() + offset : offset + 7, 0,
+        : QRectF(slider->isEnabled() ? slider->x() + offset + SLIDER_MARGIN
+                                     : slider->x() + offset + SLIDER_MARGIN + 7, 0,
                  box.height(), box.height());
 
     qreal hw = static_cast<qreal>(_width)/2;
@@ -70,10 +72,8 @@ void SliderTrack::paintEvent(QPaintEvent *event)
         ? QPointF(slider->x() + SLIDER_MARGIN, 0)
         : QPointF(0, slider->y() + SLIDER_MARGIN);
 
-    //painter.fillRect(QRectF(QPointF(0, 0), box).intersected(geometry),
-
-//    painter.fillRect(QRectF(pos, box), inverted ? bg : fg);
-    painter.fillRect(rect, inverted ? fg : bg);
+    painter.fillRect(QRectF(pos, box).intersected(geometry), inverted ? bg : fg);
+    painter.fillRect(rect.intersected(geometry), inverted ? fg : bg);
 
 #ifdef DEBUG_LAYOUT
     if (slider->hovered()) {
