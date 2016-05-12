@@ -30,8 +30,8 @@ int Slider::thumbOffset() const
         maximum(),
         sliderPosition(),
         Qt::Horizontal == orientation()
-            ? rect().width() - SLIDER_MARGIN*2
-            : rect().height() - SLIDER_MARGIN*2,
+            ? width() - SLIDER_MARGIN*2
+            : height() - SLIDER_MARGIN*2,
         invertedAppearance());
 }
 
@@ -100,6 +100,8 @@ void Slider::paintEvent(QPaintEvent *event)
     Q_UNUSED(event)
 
 #ifdef DEBUG_LAYOUT
+    QPainter painter(this);
+
     if (hasFocus())
         painter.drawRect(rect().adjusted(0, 0, -1, -1));
 

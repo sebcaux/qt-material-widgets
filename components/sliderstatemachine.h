@@ -5,13 +5,14 @@
 
 class Slider;
 class SliderThumb;
+class SliderTrack;
 
 class SliderStateMachine : public QStateMachine
 {
     Q_OBJECT
 
 public:
-    SliderStateMachine(Slider *parent, SliderThumb *thumb);
+    SliderStateMachine(Slider *parent, SliderThumb *thumb, SliderTrack *track);
     ~SliderStateMachine();
 
 signals:

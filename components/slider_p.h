@@ -21,14 +21,13 @@ public:
     QRectF trackBoundingRect() const;
     QRectF thumbBoundingRect() const;
 
-    //void paintTrack(QPainter *painter);
     int valueFromPosition(const QPoint &pos) const;
 
     void setHovered(bool status);
 
     Slider             *const q_ptr;
-    SliderTrack        *const track;
     SliderThumb        *const thumb;
+    SliderTrack        *const track;
     SliderStateMachine *const machine;
     bool hoverTrack;
     bool hoverThumb;
@@ -42,9 +41,9 @@ public:
 
 SliderPrivate::SliderPrivate(Slider *parent)
     : q_ptr(parent),
-      track(new SliderTrack(parent)),
       thumb(new SliderThumb(parent)),
-      machine(new SliderStateMachine(parent, thumb)),
+      track(new SliderTrack(parent)),
+      machine(new SliderStateMachine(parent, thumb, track)),
       hoverTrack(false),
       hoverThumb(false),
       hover(false),
@@ -94,57 +93,6 @@ QRectF SliderPrivate::thumbBoundingRect() const
                  SLIDER_MARGIN*2, SLIDER_MARGIN*2);
 }
 
-/*
-void SliderPrivate::paintTrack(QPainter *painter)
-{
-    Q_Q(const Slider);
-
-    Style &style = Style::instance();
-
-    painter->save();
-
-    QBrush fg;
-    fg.setStyle(Qt::SolidPattern);
-    fg.setColor(q->isEnabled() ? style.themeColor("primary1")
-                               : style.themeColor("disabled"));
-    QBrush bg;
-    bg.setStyle(Qt::SolidPattern);
-    bg.setColor(hover ? QColor(0, 0, 0, 150)          // @TODO: set theme color
-                      : style.themeColor("accent3"));
-
-    qreal offset = q->thumbOffset() + SLIDER_MARGIN;
-
-    QSizeF box(q->isEnabled() ? offset : offset - 7,
-               qMax(q->width(), q->height()));
-
-    if (Qt::Vertical == q->orientation())
-        box.transpose();
-
-    QRectF rect = Qt::Vertical == q->orientation()
-        ? QRectF(0, q->isEnabled() ? offset : offset + 7,
-                 box.width(), box.width())
-        : QRectF(q->isEnabled() ? offset : offset + 7, 0,
-                 box.height(), box.height());
-
-    bool inverted = q->invertedAppearance();
-
-    painter->fillRect(QRectF(QPointF(0, 0), box).intersected(trackBoundingRect()),
-                      inverted ? bg : fg);
-    painter->fillRect(rect.intersected(trackBoundingRect()), inverted ? fg : bg);
-
-    painter->restore();
-
-#ifdef DEBUG_LAYOUT
-    if (hoverTrack) {
-        painter->save();
-        painter->setPen(Qt::red);
-        painter->drawRect(trackBoundingRect());
-        painter->restore();
-    }
-#endif
-}
-*/
-
 int SliderPrivate::valueFromPosition(const QPoint &pos) const
 {
     Q_Q(const Slider);
@@ -152,8 +100,8 @@ int SliderPrivate::valueFromPosition(const QPoint &pos) const
     int position = Qt::Horizontal == q->orientation() ? pos.x() : pos.y();
 
     int span = Qt::Horizontal == q->orientation()
-        ? q->rect().width() - SLIDER_MARGIN*2
-        : q->rect().height() - SLIDER_MARGIN*2;
+        ? q->width() - SLIDER_MARGIN*2
+        : q->height() - SLIDER_MARGIN*2;
 
     return Style::sliderValueFromPosition(
                 q->minimum(),

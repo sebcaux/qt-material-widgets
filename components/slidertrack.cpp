@@ -36,10 +36,9 @@ void SliderTrack::paintEvent(QPaintEvent *event)
                                     : style.themeColor("disabled"));
     QBrush bg;
     bg.setStyle(Qt::SolidPattern);
-    bg.setColor(slider->hovered() ? QColor(0, 0, 0, 150) // @TODO: set theme color
-                                  : style.themeColor("accent3"));
+    bg.setColor(slider->isEnabled() ? _fillColor : style.themeColor("disabled"));
 
-    qreal offset = slider->thumbOffset() + SLIDER_MARGIN;
+    qreal offset = slider->thumbOffset();
 
     QSizeF box(slider->isEnabled() ? offset : offset - 7,
                qMax(slider->width(), slider->height()));
@@ -50,25 +49,34 @@ void SliderTrack::paintEvent(QPaintEvent *event)
     QRectF rect = Qt::Vertical == slider->orientation()
         ? QRectF(0, slider->isEnabled() ? offset : offset + 7,
                  box.width(), box.width())
-        : QRectF(slider->isEnabled() ? offset : offset + 7, 0,
+        : QRectF(slider->isEnabled() ? slider->x() + offset : offset + 7, 0,
                  box.height(), box.height());
 
     qreal hw = static_cast<qreal>(_width)/2;
 
     QRectF geometry = Qt::Horizontal == slider->orientation()
-        ? QRectF(SLIDER_MARGIN, slider->rect().height()/2 - hw,
-                 slider->width() - SLIDER_MARGIN*2, hw*2)
-        : QRectF(slider->width()/2 - hw, SLIDER_MARGIN, hw*2,
+        ? QRectF(slider->x() + SLIDER_MARGIN,
+                 slider->y() + slider->height()/2 - hw,
+                 slider->width() - SLIDER_MARGIN*2,
+                 hw*2)
+        : QRectF(slider->x() + slider->width()/2 - hw,
+                 slider->y() + SLIDER_MARGIN,
+                 hw*2,
                  slider->height() - SLIDER_MARGIN*2);
 
     bool inverted = slider->invertedAppearance();
 
-    painter.fillRect(QRectF(QPointF(0, 0), box).intersected(geometry),
-                     inverted ? bg : fg);
-    painter.fillRect(rect.intersected(geometry), inverted ? fg : bg);
+    QPointF pos = Qt::Horizontal == slider->orientation()
+        ? QPointF(slider->x() + SLIDER_MARGIN, 0)
+        : QPointF(0, slider->y() + SLIDER_MARGIN);
+
+    //painter.fillRect(QRectF(QPointF(0, 0), box).intersected(geometry),
+
+//    painter.fillRect(QRectF(pos, box), inverted ? bg : fg);
+    painter.fillRect(rect, inverted ? fg : bg);
 
 #ifdef DEBUG_LAYOUT
-    if (hoverTrack) {
+    if (slider->hovered()) {
         painter.save();
         painter.setPen(Qt::red);
         painter.drawRect(geometry);

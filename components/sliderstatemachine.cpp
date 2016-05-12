@@ -5,8 +5,11 @@
 #include "lib/style.h"
 #include "slider.h"
 #include "sliderthumb.h"
+#include "slidertrack.h"
 
-SliderStateMachine::SliderStateMachine(Slider *parent, SliderThumb *thumb)
+SliderStateMachine::SliderStateMachine(Slider *parent,
+                                       SliderThumb *thumb,
+                                       SliderTrack *track)
     : QStateMachine(parent)
 {
     Style &style = Style::instance();
@@ -44,6 +47,11 @@ SliderStateMachine::SliderStateMachine(Slider *parent, SliderThumb *thumb)
     focusState->assignProperty(thumb, "fillColor", fillColor);
     slidingState->assignProperty(thumb, "fillColor", fillColor);
 
+    inactiveState->assignProperty(track, "fillColor", style.themeColor("accent2"));
+    slidingState->assignProperty(track, "fillColor", style.themeColor("accent3"));
+    focusState->assignProperty(track, "fillColor", style.themeColor("accent3"));
+    disabledState->assignProperty(track, "fillColor", style.themeColor("disabled"));
+
     addState(topState);
 
     fstState->setInitialState(inactiveState);
@@ -79,6 +87,7 @@ SliderStateMachine::SliderStateMachine(Slider *parent, SliderThumb *thumb)
     animation = new QPropertyAnimation(thumb, "haloSize");
     animation->setEasingCurve(QEasingCurve::InOutSine);
     transition->addAnimation(animation);
+    transition->addAnimation(new QPropertyAnimation(track, "fillColor"));
     inactiveState->addTransition(transition);
 
     // Show halo on focus in
@@ -89,6 +98,7 @@ SliderStateMachine::SliderStateMachine(Slider *parent, SliderThumb *thumb)
     animation = new QPropertyAnimation(thumb, "haloSize");
     animation->setEasingCurve(QEasingCurve::InOutSine);
     transition->addAnimation(animation);
+    transition->addAnimation(new QPropertyAnimation(track, "fillColor"));
     inactiveState->addTransition(transition);
 
     // Hide halo on focus out
@@ -99,6 +109,7 @@ SliderStateMachine::SliderStateMachine(Slider *parent, SliderThumb *thumb)
     animation = new QPropertyAnimation(thumb, "haloSize");
     animation->setEasingCurve(QEasingCurve::InOutSine);
     transition->addAnimation(animation);
+    transition->addAnimation(new QPropertyAnimation(track, "fillColor"));
     focusState->addTransition(transition);
 
     // Hide halo on mouse leave, except if widget has focus
@@ -109,6 +120,7 @@ SliderStateMachine::SliderStateMachine(Slider *parent, SliderThumb *thumb)
     animation = new QPropertyAnimation(thumb, "haloSize");
     animation->setEasingCurve(QEasingCurve::InOutSine);
     transition->addAnimation(animation);
+    transition->addAnimation(new QPropertyAnimation(track, "fillColor"));
     focusState->addTransition(transition);
 
     // Pulse in
