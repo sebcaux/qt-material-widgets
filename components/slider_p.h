@@ -14,8 +14,6 @@ class SliderPrivate
     Q_DISABLE_COPY(SliderPrivate)
     Q_DECLARE_PUBLIC(Slider)
 
-    friend class SliderThumb;
-
 public:
     SliderPrivate(Slider *parent);
 

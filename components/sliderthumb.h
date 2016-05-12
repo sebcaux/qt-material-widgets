@@ -4,7 +4,6 @@
 #include <QWidget>
 
 class Slider;
-class SliderPrivate;
 
 class SliderThumb : public QWidget
 {
@@ -17,10 +16,8 @@ class SliderThumb : public QWidget
     Q_PROPERTY(qreal haloSize WRITE setHaloSize READ haloSize)
     Q_PROPERTY(QColor haloColor WRITE setHaloColor READ haloColor)
 
-    friend class SliderPrivate;
-    explicit SliderThumb(Slider *slider);
-
 public:
+    explicit SliderThumb(Slider *slider);
     ~SliderThumb();
 
     inline void setDiameter(qreal diameter)
