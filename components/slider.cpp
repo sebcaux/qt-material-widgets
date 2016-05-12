@@ -163,6 +163,8 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
             d->hoverThumb = !d->hoverThumb;
             update();
         }
+
+        d->setHovered(d->hoverTrack || d->hoverThumb);
     }
 
     QAbstractSlider::mouseMoveEvent(event);
@@ -212,4 +214,22 @@ void Slider::mouseReleaseEvent(QMouseEvent *event)
     }
 
     QAbstractSlider::mouseReleaseEvent(event);
+}
+
+void Slider::leaveEvent(QEvent *event)
+{
+    Q_D(Slider);
+
+    if (d->hoverTrack) {
+        d->hoverTrack = false;
+        update();
+    }
+    if (d->hoverThumb) {
+        d->hoverThumb = false;
+        update();
+    }
+
+    d->setHovered(false);
+
+    QAbstractSlider::leaveEvent(event);
 }

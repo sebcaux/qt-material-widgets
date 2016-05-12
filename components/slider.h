@@ -31,10 +31,12 @@ public:
     int trackWidth() const;
 
 signals:
-    void changedToMinimum();
+    void changedToMinimum();       // @TODO: create custom event
     void changedFromMinimum();
     void sliderEnabled();
     void sliderDisabled();
+    void mouseEnter();             // rename/change
+    void mouseLeave();             // rename/change
 
 protected:
     void sliderChange(SliderChange change) Q_DECL_OVERRIDE;
@@ -44,6 +46,7 @@ protected:
     void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void leaveEvent(QEvent *event) Q_DECL_OVERRIDE;
 
     const QScopedPointer<SliderPrivate> d_ptr;
 
