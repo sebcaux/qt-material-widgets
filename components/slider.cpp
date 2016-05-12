@@ -137,7 +137,7 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
     }
     else
     {
-        QRectF track(d->trackGeometry().adjusted(-2, -2, 2, 2));
+        QRectF track(d->trackBoundingRect().adjusted(-2, -2, 2, 2));
 
         if (track.contains(event->pos()) != d->hoverTrack) {
             d->hoverTrack = !d->hoverTrack;
@@ -145,7 +145,7 @@ void Slider::mouseMoveEvent(QMouseEvent *event)
         }
 
         QRectF thumb(0, 0, 16, 16);
-        thumb.moveCenter(d->thumbGeometry().center());
+        thumb.moveCenter(d->thumbBoundingRect().center());
 
         if (thumb.contains(event->pos()) != d->hoverThumb) {
             d->hoverThumb = !d->hoverThumb;
@@ -165,7 +165,7 @@ void Slider::mousePressEvent(QMouseEvent *event)
     const QPoint pos = event->pos();
 
     QRectF thumb(0, 0, 16, 16);
-    thumb.moveCenter(d->thumbGeometry().center());
+    thumb.moveCenter(d->thumbBoundingRect().center());
 
     if (thumb.contains(pos)) {
         setSliderDown(true);

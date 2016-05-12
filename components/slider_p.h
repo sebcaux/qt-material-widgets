@@ -19,8 +19,8 @@ class SliderPrivate
 public:
     SliderPrivate(Slider *parent);
 
-    QRectF trackGeometry() const;
-    QRectF thumbGeometry() const;
+    QRectF trackBoundingRect() const;
+    QRectF thumbBoundingRect() const;
 
     void paintTrack(QPainter *painter);
     int valueFromPosition(const QPoint &pos) const;
@@ -69,7 +69,7 @@ SliderPrivate::SliderPrivate(Slider *parent)
     QCoreApplication::processEvents();
 }
 
-QRectF SliderPrivate::trackGeometry() const
+QRectF SliderPrivate::trackBoundingRect() const
 {
     Q_Q(const Slider);
 
@@ -82,7 +82,7 @@ QRectF SliderPrivate::trackGeometry() const
                 q->rect().height() - SLIDER_MARGIN*2);
 }
 
-QRectF SliderPrivate::thumbGeometry() const
+QRectF SliderPrivate::thumbBoundingRect() const
 {
     Q_Q(const Slider);
 
@@ -126,9 +126,9 @@ void SliderPrivate::paintTrack(QPainter *painter)
 
     bool inverted = q->invertedAppearance();
 
-    painter->fillRect(QRectF(QPointF(0, 0), box).intersected(trackGeometry()),
+    painter->fillRect(QRectF(QPointF(0, 0), box).intersected(trackBoundingRect()),
                       inverted ? bg : fg);
-    painter->fillRect(rect.intersected(trackGeometry()), inverted ? fg : bg);
+    painter->fillRect(rect.intersected(trackBoundingRect()), inverted ? fg : bg);
 
     painter->restore();
 
@@ -136,7 +136,7 @@ void SliderPrivate::paintTrack(QPainter *painter)
     if (hoverTrack) {
         painter->save();
         painter->setPen(Qt::red);
-        painter->drawRect(trackGeometry());
+        painter->drawRect(trackBoundingRect());
         painter->restore();
     }
 #endif
