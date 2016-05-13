@@ -149,7 +149,9 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
 
     transition = new QSignalTransition(parent, SIGNAL(sliderPressed()));
     transition->setTargetState(slidingState);
-    transition->addAnimation(new QPropertyAnimation(thumb, "diameter"));
+    animation = new QPropertyAnimation(thumb, "diameter");
+    animation->setDuration(70);
+    transition->addAnimation(animation);
 
     animation = new QPropertyAnimation(thumb, "haloSize");
     animation->setEasingCurve(QEasingCurve::InOutSine);
@@ -160,7 +162,9 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
 
     transition = new QSignalTransition(parent, SIGNAL(sliderReleased()));
     transition->setTargetState(focusState);
-    transition->addAnimation(new QPropertyAnimation(thumb, "diameter"));
+    animation = new QPropertyAnimation(thumb, "diameter");
+    animation->setDuration(70);
+    transition->addAnimation(animation);
 
     animation = new QPropertyAnimation(thumb, "haloSize");
     animation->setEasingCurve(QEasingCurve::InOutSine);
