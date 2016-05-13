@@ -18,8 +18,6 @@ public:
     QHash<QString, QColor> colors;
 };
 
-#endif // THEME_P_H
-
 ThemePrivate::ThemePrivate(Theme *parent)
     : q_ptr(parent)
 {
@@ -31,3 +29,5 @@ QColor ThemePrivate::rgba(int r, int g, int b, qreal a) const
     color.setAlphaF(a);
     return color;
 }
+
+#endif // THEME_P_H
