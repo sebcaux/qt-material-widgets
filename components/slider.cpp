@@ -80,21 +80,6 @@ void Slider::sliderChange(SliderChange change)
     QAbstractSlider::sliderChange(change);
 }
 
-void Slider::changeEvent(QEvent *event)
-{
-    if (QEvent::EnabledChange == event->type())
-    {
-        Q_D(Slider);
-
-        if (isEnabled()) {
-            emit d->machine->sliderEnabled();
-        } else {
-            emit d->machine->sliderDisabled();
-        }
-    }
-    QAbstractSlider::changeEvent(event);
-}
-
 void Slider::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)

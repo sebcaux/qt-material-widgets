@@ -22,7 +22,6 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     QState *inactiveState = new QState(fstState);
     QState *focusState = new QState(fstState);
     QState *slidingState = new QState(fstState);
-    QState *disabledState = new QState(fstState);
 
     QState *pulseOutState = new QState(focusState);
     QState *pulseInState = new QState(focusState);
@@ -35,23 +34,15 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     pulseOutState->assignProperty(thumb, "haloSize", 35);
     pulseInState->assignProperty(thumb, "haloSize", 28);
 
-    disabledState->assignProperty(thumb, "diameter", 7);
-    disabledState->assignProperty(thumb, "fillColor", style.themeColor("disabled"));
-
     inactiveState->assignProperty(thumb, "diameter", 11);
     focusState->assignProperty(thumb, "diameter", 11);
     slidingState->assignProperty(thumb, "diameter", 17);
 
     QColor fillColor = style.themeColor("primary1");
 
-    inactiveState->assignProperty(thumb, "fillColor", fillColor);
-    focusState->assignProperty(thumb, "fillColor", fillColor);
-    slidingState->assignProperty(thumb, "fillColor", fillColor);
-
     inactiveState->assignProperty(track, "fillColor", style.themeColor("accent2"));
     slidingState->assignProperty(track, "fillColor", style.themeColor("accent3"));
     focusState->assignProperty(track, "fillColor", style.themeColor("accent3"));
-    disabledState->assignProperty(track, "fillColor", style.themeColor("disabled"));
 
     addState(topState);
 
@@ -61,24 +52,6 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
 
     QAbstractTransition *transition;
     QPropertyAnimation *animation;
-
-    // Add transitions
-
-    transition = new QSignalTransition(this, SIGNAL(sliderDisabled()));
-    transition->setTargetState(disabledState);
-    inactiveState->addTransition(transition);
-
-    transition = new QSignalTransition(this, SIGNAL(sliderDisabled()));
-    transition->setTargetState(disabledState);
-    focusState->addTransition(transition);
-
-    transition = new QSignalTransition(this, SIGNAL(sliderDisabled()));
-    transition->setTargetState(disabledState);
-    slidingState->addTransition(transition);
-
-    transition = new QSignalTransition(this, SIGNAL(sliderEnabled()));
-    transition->setTargetState(inactiveState);
-    disabledState->addTransition(transition);
 
     // Show halo on mouse enter
 
@@ -187,12 +160,10 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
 
     QColor canvasColor = style.themeColor("canvas");
 
-    minState->assignProperty(thumb, "minFillColor", canvasColor);
     minState->assignProperty(thumb, "fillColor", canvasColor);
     minState->assignProperty(thumb, "haloColor", minHaloColor);
     minState->assignProperty(thumb, "borderWidth", 2);
     normalState->assignProperty(thumb, "fillColor", fillColor);
-    normalState->assignProperty(thumb, "minFillColor", fillColor);
     normalState->assignProperty(thumb, "haloColor", haloColor);
     normalState->assignProperty(thumb, "borderWidth", 0);
 
@@ -218,7 +189,7 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     transition = new QSignalTransition(this, SIGNAL(changedToMinimum()));
     transition->setTargetState(minState);
 
-    animation = new QPropertyAnimation(thumb, "minFillColor");
+    animation = new QPropertyAnimation(thumb, "fillColor");
     animation->setDuration(200);
     transition->addAnimation(animation);
 
@@ -295,13 +266,12 @@ void SliderThumb::paintEvent(QPaintEvent *event)
 
     // Knob
 
-    brush.setColor(slider->value() > slider->minimum()
-       ? (slider->isEnabled()
-          ? _fillColor : Style::instance().themeColor("disabled"))
-       : _minFillColor);
+    brush.setColor(slider->isEnabled()
+           ? _fillColor
+           : Style::instance().themeColor("disabled"));
     painter.setBrush(brush);
 
-    if (_borderWidth > 0) {
+    if (_borderWidth > 0 && slider->isEnabled()) {
         QPen pen;
         pen.setColor(Style::instance().themeColor("accent3"));
         pen.setWidthF(_borderWidth);
@@ -316,7 +286,9 @@ void SliderThumb::paintEvent(QPaintEvent *event)
         : QRectF(slider->width()/2 - SLIDER_MARGIN, slider->thumbOffset(),
                  SLIDER_MARGIN*2, SLIDER_MARGIN*2).translated(slider->pos());
 
-    QRectF thumb(0, 0, _diameter, _diameter);
+    qreal s = slider->isEnabled() ? _diameter : 7;
+
+    QRectF thumb(0, 0, s, s);
 
     thumb.moveCenter(geometry.center());
 
