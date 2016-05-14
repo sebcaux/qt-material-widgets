@@ -22,6 +22,9 @@ public:
     void drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p,
                        const QWidget *w = 0) const Q_DECL_OVERRIDE;
 
+    int pixelMetric(PixelMetric m, const QStyleOption *opt,
+                    const QWidget *widget) const Q_DECL_OVERRIDE;
+
 private:
     Style() {}
 

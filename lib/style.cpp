@@ -20,11 +20,24 @@ void Style::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter
 {
     switch (pe)
     {
-        case PE_FrameFocusRect:
-            //p->setPen(Qt::blue);
-            //p->drawRect(opt->rect);
-            break;
-        default:
-            QCommonStyle::drawPrimitive(pe, opt, p, w);
+    case PE_FrameFocusRect:
+        //p->setPen(Qt::blue);
+        //p->drawRect(opt->rect);
+        break;
+    default:
+        QCommonStyle::drawPrimitive(pe, opt, p, w);
     }
+}
+
+int Style::pixelMetric(PixelMetric m, const QStyleOption *opt, const QWidget *widget) const
+{
+    switch (m)
+    {
+    case PM_ButtonShiftHorizontal:
+    case PM_ButtonShiftVertical:
+        return 0;
+    default:
+        break;
+    }
+    return QCommonStyle::pixelMetric(m, opt, widget);
 }
