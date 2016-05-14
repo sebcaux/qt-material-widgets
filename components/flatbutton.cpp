@@ -1,23 +1,52 @@
 #include "flatbutton.h"
 #include <QPainter>
+#include <QMouseEvent>
 #include "lib/style.h"
+#include "lib/rippleoverlay.h"
 
 FlatButton::FlatButton(QWidget *parent)
-    : QPushButton(parent)
+    : QPushButton(parent),
+      _ripple(new RippleOverlay(this))
 {
     setStyle(&Style::instance());
+    setAttribute(Qt::WA_Hover);
+    setMouseTracking(true);
+
+    QFont f(font());
+    f.setCapitalization(QFont::AllUppercase);
+    f.setPointSizeF(10.5);
+    f.setStyleName("Medium");
+    setFont(f);
 }
 
 FlatButton::FlatButton(const QString &text, QWidget *parent)
-    : QPushButton(parent)
+    : QPushButton(parent),
+      _ripple(new RippleOverlay(this))
 {
     setText(text);
 
     setStyle(&Style::instance());
+    setAttribute(Qt::WA_Hover);
+    setMouseTracking(true);
+
+    QFont f(font());
+    f.setCapitalization(QFont::AllUppercase);
+    f.setPointSizeF(10.5);
+    f.setStyleName("Medium");
+    setFont(f);
 }
 
 FlatButton::~FlatButton()
 {
+}
+
+void FlatButton::resizeEvent(QResizeEvent *event)
+{
+    if (_ripple) {
+        _ripple->setGeometry(rect());
+    }
+
+    QPushButton::resizeEvent(event);
 }
 
 void FlatButton::paintEvent(QPaintEvent *event)
@@ -27,6 +56,13 @@ void FlatButton::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     painter.drawRect(rect().adjusted(0, 0, -1, -1));
+}
+
+void FlatButton::mousePressEvent(QMouseEvent *event)
+{
+    _ripple->addRipple(event->pos());
+
+    QPushButton::mousePressEvent(event);
 }
 
 //#include <QDebug>

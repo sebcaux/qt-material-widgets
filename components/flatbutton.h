@@ -3,6 +3,8 @@
 
 #include <QPushButton>
 
+class RippleOverlay;
+
 class FlatButton : public QPushButton
 {
     Q_OBJECT
@@ -13,7 +15,12 @@ public:
     ~FlatButton();
 
 protected:
+    void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+
+private:
+    RippleOverlay *const _ripple;
 };
 
 #endif // FLATBUTTON_H
