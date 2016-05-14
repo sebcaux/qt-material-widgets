@@ -13,7 +13,8 @@ public:
     explicit RippleOverlay(QWidget *parent = 0);
     ~RippleOverlay();
 
-    void addRipple(const QPoint &position, qreal radius = 300);
+    void addRipple(const QPoint &position, const QColor &color = Qt::black,
+                   qreal radius = 300);
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;

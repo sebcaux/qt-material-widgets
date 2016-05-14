@@ -14,6 +14,9 @@ Ripple::Ripple(const QPoint &center, QObject *parent)
     setOpacityEndValue(0);
     setRadiusStartValue(0);
     setRadiusEndValue(300);
+
+    _brush.setColor(Qt::black);
+    _brush.setStyle(Qt::SolidPattern);
 }
 
 Ripple::~Ripple()
@@ -36,6 +39,14 @@ void Ripple::setOpacity(qreal opacity)
 
     _opacity = opacity;
     emit changed();
+}
+
+void Ripple::setColor(const QColor &color)
+{
+    if (color == _brush.color())
+        return;
+
+    _brush.setColor(color);
 }
 
 QPropertyAnimation *Ripple::animate(const QByteArray &property)

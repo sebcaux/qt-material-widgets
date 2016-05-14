@@ -5,6 +5,7 @@
 #include <QPoint>
 #include <QParallelAnimationGroup>
 #include <QPropertyAnimation>
+#include <QBrush>
 
 class Ripple : public QObject
 {
@@ -22,6 +23,12 @@ public:
 
     void setOpacity(qreal opacity);
     inline qreal opacity() const { return _opacity; }
+
+    void setColor(const QColor &color);
+    inline QColor color() const { return _brush.color(); }
+
+    inline void setBrush(const QBrush &brush) { _brush = brush; }
+    inline QBrush brush() const { return _brush; }
 
     inline const QPoint &center() const { return _center; }
 
@@ -51,6 +58,7 @@ private:
     qreal                     _radius;
     qreal                     _opacity;
     QPoint                    _center;
+    QBrush                    _brush;
 };
 
 #endif // RIPPLE_H
