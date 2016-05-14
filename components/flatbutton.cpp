@@ -15,6 +15,10 @@ FlatButton::FlatButton(const QString &text, QWidget *parent)
     setStyle(&Style::instance());
 }
 
+FlatButton::~FlatButton()
+{
+}
+
 //#include <QDebug>
 //#include <QStylePainter>
 //#include <QMouseEvent>

@@ -63,5 +63,5 @@ void RaisedButton::paintEvent(QPaintEvent *event)
 
     QStylePainter painter(this);
 
-    painter.drawControl(QStyle::CE_PushButton, getStyleOption());
+//    painter.drawControl(QStyle::CE_PushButton, getStyleOption());
 }
