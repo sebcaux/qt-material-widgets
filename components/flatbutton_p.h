@@ -14,6 +14,8 @@ class FlatButtonPrivate
 public:
     FlatButtonPrivate(FlatButton *parent);
 
+    void setTextColor(const QString &themeColor);
+
     FlatButton    *const q_ptr;
     RippleOverlay *const ripple;
     Material::Role role;
@@ -40,6 +42,19 @@ FlatButtonPrivate::FlatButtonPrivate(FlatButton *parent)
     palette.setColor(QPalette::Disabled, QPalette::ButtonText,
                      style.themeColor("disabled"));
     parent->setPalette(palette);
+}
+
+void FlatButtonPrivate::setTextColor(const QString &themeColor)
+{
+    Q_Q(FlatButton);
+
+    QPalette palette(q->palette());
+    Style &style = Style::instance();
+
+    palette.setColor(QPalette::Active, QPalette::ButtonText,
+                     style.themeColor(themeColor));
+
+    q->setPalette(palette);
 }
 
 #endif // FLATBUTTON_P_H

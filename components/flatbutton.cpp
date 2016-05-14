@@ -34,23 +34,18 @@ void FlatButton::setRole(Material::Role role)
 
     d->role = role;
 
-    Style &style = Style::instance();
-    QPalette p(palette());
-
     switch (role)
     {
     case Material::Primary:
-        p.setColor(QPalette::Active, QPalette::ButtonText, style.themeColor("primary1"));
+        d->setTextColor("primary1");
         break;
     case Material::Secondary:
-        p.setColor(QPalette::Active, QPalette::ButtonText, style.themeColor("accent1"));
+        d->setTextColor("accent1");
         break;
     default:
-        p.setColor(QPalette::Active, QPalette::ButtonText, style.themeColor("text"));
+        d->setTextColor("text");
         break;
     }
-    setPalette(p);
-
     update();
 }
 
