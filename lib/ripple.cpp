@@ -26,7 +26,7 @@ void Ripple::setRadius(qreal radius)
         return;
 
     _radius = radius;
-    emit valueChanged();
+    emit changed();
 }
 
 void Ripple::setOpacity(qreal opacity)
@@ -35,7 +35,7 @@ void Ripple::setOpacity(qreal opacity)
         return;
 
     _opacity = opacity;
-    emit valueChanged();
+    emit changed();
 }
 
 QPropertyAnimation *Ripple::animate(const QByteArray &property)

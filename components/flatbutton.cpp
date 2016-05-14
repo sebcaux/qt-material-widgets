@@ -1,4 +1,5 @@
 #include "flatbutton.h"
+#include <QPainter>
 #include "lib/style.h"
 
 FlatButton::FlatButton(QWidget *parent)
@@ -17,6 +18,15 @@ FlatButton::FlatButton(const QString &text, QWidget *parent)
 
 FlatButton::~FlatButton()
 {
+}
+
+void FlatButton::paintEvent(QPaintEvent *event)
+{
+    Q_UNUSED(event)
+
+    QPainter painter(this);
+
+    painter.drawRect(rect().adjusted(0, 0, -1, -1));
 }
 
 //#include <QDebug>

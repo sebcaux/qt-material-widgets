@@ -39,7 +39,7 @@ public:
     inline void startAnimation() { _group.start(); }
 
 signals:
-    void valueChanged();
+    void changed();
     void finished();
 
 private:

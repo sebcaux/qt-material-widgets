@@ -11,6 +11,9 @@ public:
     explicit FlatButton(QWidget *parent = 0);
     explicit FlatButton(const QString &text, QWidget *parent = 0);
     ~FlatButton();
+
+protected:
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 };
 
 #endif // FLATBUTTON_H

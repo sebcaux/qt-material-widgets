@@ -19,7 +19,7 @@ void RippleOverlay::addRipple(const QPoint &position, qreal radius)
     Ripple *ripple = new Ripple(position);
     ripple->setRadiusEndValue(radius);
     ripples.push_back(ripple);
-    connect(ripple, SIGNAL(valueChanged()), this, SLOT(update()));
+    connect(ripple, SIGNAL(changed()), this, SLOT(update()));
     connect(ripple, SIGNAL(finished()), this, SLOT(deleteRipple()));
     ripple->startAnimation();
 }
