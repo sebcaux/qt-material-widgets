@@ -3,6 +3,7 @@
 
 #include "flatbutton.h"
 #include "lib/rippleoverlay.h"
+#include "lib/theme.h"
 
 class FlatButtonPrivate
 {
@@ -14,11 +15,13 @@ public:
 
     FlatButton    *const q_ptr;
     RippleOverlay *const ripple;
+    Material::Role role;
 };
 
 FlatButtonPrivate::FlatButtonPrivate(FlatButton *parent)
     : q_ptr(parent),
-      ripple(new RippleOverlay(parent))
+      ripple(new RippleOverlay(parent)),
+      role(Material::Default)
 {
     parent->setStyle(&Style::instance());
     parent->setAttribute(Qt::WA_Hover);

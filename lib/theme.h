@@ -8,6 +8,12 @@
 
 namespace Material
 {
+    enum Role {
+        Default,
+        Primary,
+        Secondary
+    };
+
     enum Color {
         red50,
         red100,

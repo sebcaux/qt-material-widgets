@@ -3,6 +3,7 @@
 
 #include <QPushButton>
 #include <QScopedPointer>
+#include "lib/theme.h"
 
 class FlatButtonPrivate;
 
@@ -14,6 +15,8 @@ public:
     explicit FlatButton(QWidget *parent = 0);
     explicit FlatButton(const QString &text, QWidget *parent = 0);
     ~FlatButton();
+
+    void setRole(Material::Role role);
 
 protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;

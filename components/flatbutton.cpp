@@ -3,6 +3,8 @@
 #include <QMouseEvent>
 #include <QStylePainter>
 #include <QStyleOption>
+#include <QApplication>
+#include <QPalette>
 #include <QDebug>
 #include "lib/style.h"
 #include "lib/rippleoverlay.h"
@@ -24,6 +26,30 @@ FlatButton::FlatButton(const QString &text, QWidget *parent)
 
 FlatButton::~FlatButton()
 {
+}
+
+void FlatButton::setRole(Material::Role role)
+{
+    Q_D(FlatButton);
+
+    d->role = role;
+
+    //Style &style = Style::instance();
+    //switch (role)
+    //{
+    //case Material::Primary:
+    //    d->palette.setColor(QPalette::ButtonText, style.themeColor("primary1"));
+    //    break;
+    //case Material::Secondary:
+    //    d->palette.setColor(QPalette::ButtonText, style.themeColor("accent1"));
+    //    break;
+    //default:
+    //    d->palette.setColor(QPalette::ButtonText, style.themeColor("text"));
+    //    break;
+    //}
+    //setPalette(d->palette);
+
+    update();
 }
 
 void FlatButton::resizeEvent(QResizeEvent *event)
