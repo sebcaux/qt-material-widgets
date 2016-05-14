@@ -2,8 +2,9 @@
 #define FLATBUTTON_H
 
 #include <QPushButton>
+#include <QScopedPointer>
 
-class RippleOverlay;
+class FlatButtonPrivate;
 
 class FlatButton : public QPushButton
 {
@@ -21,8 +22,11 @@ protected:
     void enterEvent(QEvent *event) Q_DECL_OVERRIDE;
     void leaveEvent(QEvent *event) Q_DECL_OVERRIDE;
 
+    const QScopedPointer<FlatButtonPrivate> d_ptr;
+
 private:
-    RippleOverlay *const _ripple;
+    Q_DISABLE_COPY(FlatButton)
+    Q_DECLARE_PRIVATE(FlatButton)
 };
 
 #endif // FLATBUTTON_H

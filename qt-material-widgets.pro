@@ -102,7 +102,8 @@ HEADERS  += mainwindow.h \
     components/searchfield.h \
     lib/theme.h \
     lib/theme_p.h \
-    components/sliderinternal.h
+    components/sliderinternal.h \
+    components/flatbutton_p.h
 
 RESOURCES += \
     resources.qrc

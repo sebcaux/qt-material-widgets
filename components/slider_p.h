@@ -52,17 +52,15 @@ SliderPrivate::SliderPrivate(Slider *parent)
       oldValue(parent->value()),
       trackWidth(2)
 {
-    Q_Q(Slider);
-
-    q->setMouseTracking(true);
-    q->setFocusPolicy(Qt::StrongFocus);
-    q->setPageStep(1);
+    parent->setMouseTracking(true);
+    parent->setFocusPolicy(Qt::StrongFocus);
+    parent->setPageStep(1);
 
     QSizePolicy sp(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    if (q->orientation() == Qt::Vertical)
+    if (parent->orientation() == Qt::Vertical)
         sp.transpose();
-    q->setSizePolicy(sp);
-    q->setAttribute(Qt::WA_WState_OwnSizePolicy, false);
+    parent->setSizePolicy(sp);
+    parent->setAttribute(Qt::WA_WState_OwnSizePolicy, false);
 
     machine->start();
 
