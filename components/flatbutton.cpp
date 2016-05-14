@@ -34,20 +34,22 @@ void FlatButton::setRole(Material::Role role)
 
     d->role = role;
 
-    //Style &style = Style::instance();
-    //switch (role)
-    //{
-    //case Material::Primary:
-    //    d->palette.setColor(QPalette::ButtonText, style.themeColor("primary1"));
-    //    break;
-    //case Material::Secondary:
-    //    d->palette.setColor(QPalette::ButtonText, style.themeColor("accent1"));
-    //    break;
-    //default:
-    //    d->palette.setColor(QPalette::ButtonText, style.themeColor("text"));
-    //    break;
-    //}
-    //setPalette(d->palette);
+    Style &style = Style::instance();
+    QPalette p(palette());
+
+    switch (role)
+    {
+    case Material::Primary:
+        p.setColor(QPalette::Active, QPalette::ButtonText, style.themeColor("primary1"));
+        break;
+    case Material::Secondary:
+        p.setColor(QPalette::Active, QPalette::ButtonText, style.themeColor("accent1"));
+        break;
+    default:
+        p.setColor(QPalette::Active, QPalette::ButtonText, style.themeColor("text"));
+        break;
+    }
+    setPalette(p);
 
     update();
 }
@@ -75,7 +77,7 @@ void FlatButton::paintEvent(QPaintEvent *event)
 
     painter.drawControl(QStyle::CE_PushButtonLabel, option);
 
-    if (testAttribute(Qt::WA_Hover) && underMouse())
+    if (isEnabled() && testAttribute(Qt::WA_Hover) && underMouse())
     {
         QPainter painter(this);
         QBrush brush;

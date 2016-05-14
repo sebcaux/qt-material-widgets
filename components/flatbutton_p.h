@@ -4,6 +4,7 @@
 #include "flatbutton.h"
 #include "lib/rippleoverlay.h"
 #include "lib/theme.h"
+#include "lib/style.h"
 
 class FlatButtonPrivate
 {
@@ -23,7 +24,9 @@ FlatButtonPrivate::FlatButtonPrivate(FlatButton *parent)
       ripple(new RippleOverlay(parent)),
       role(Material::Default)
 {
-    parent->setStyle(&Style::instance());
+    Style &style = Style::instance();
+
+    parent->setStyle(&style);
     parent->setAttribute(Qt::WA_Hover);
     parent->setMouseTracking(true);
 
@@ -32,6 +35,11 @@ FlatButtonPrivate::FlatButtonPrivate(FlatButton *parent)
     font.setPointSizeF(10.5);
     font.setStyleName("Medium");
     parent->setFont(font);
+
+    QPalette palette;
+    palette.setColor(QPalette::Disabled, QPalette::ButtonText,
+                     style.themeColor("disabled"));
+    parent->setPalette(palette);
 }
 
 #endif // FLATBUTTON_P_H
