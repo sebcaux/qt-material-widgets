@@ -15,7 +15,6 @@ class FlatButtonPrivate
 public:
     FlatButtonPrivate(FlatButton *parent);
 
-    QColor textColor() const;
     void setTextColor(const QString &themeColor);
 
     FlatButton         *const q_ptr;
@@ -46,13 +45,6 @@ FlatButtonPrivate::FlatButtonPrivate(FlatButton *parent)
     palette.setColor(QPalette::Disabled, QPalette::ButtonText,
                      style.themeColor("disabled"));
     parent->setPalette(palette);
-}
-
-QColor FlatButtonPrivate::textColor() const
-{
-    Q_Q(const FlatButton);
-
-    return q->palette().color(QPalette::Active, QPalette::ButtonText);
 }
 
 void FlatButtonPrivate::setTextColor(const QString &themeColor)
