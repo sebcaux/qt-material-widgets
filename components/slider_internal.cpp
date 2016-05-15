@@ -165,9 +165,11 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
 
     minState->assignProperty(thumb, "fillColor", canvasColor);
     minState->assignProperty(thumb, "haloColor", minHaloColor);
+    minState->assignProperty(thumb, "borderColor", style.themeColor("accent3"));
     minState->assignProperty(thumb, "borderWidth", 2);
     normalState->assignProperty(thumb, "fillColor", fillColor);
     normalState->assignProperty(thumb, "haloColor", haloColor);
+    normalState->assignProperty(thumb, "borderColor", fillColor);
     normalState->assignProperty(thumb, "borderWidth", 0);
 
     sndState->setInitialState(minState);
@@ -183,8 +185,12 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     animation->setDuration(200);
     transition->addAnimation(animation);
 
+    animation = new QPropertyAnimation(thumb, "borderColor");
+    animation->setDuration(200);
+    transition->addAnimation(animation);
+
     animation = new QPropertyAnimation(thumb, "borderWidth");
-    animation->setDuration(400);
+    animation->setDuration(200);
     transition->addAnimation(animation);
 
     minState->addTransition(transition);
@@ -200,8 +206,12 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     animation->setDuration(200);
     transition->addAnimation(animation);
 
+    animation = new QPropertyAnimation(thumb, "borderColor");
+    animation->setDuration(200);
+    transition->addAnimation(animation);
+
     animation = new QPropertyAnimation(thumb, "borderWidth");
-    animation->setDuration(400);
+    animation->setDuration(200);
     transition->addAnimation(animation);
 
     normalState->addTransition(transition);
@@ -274,9 +284,9 @@ void SliderThumb::paintEvent(QPaintEvent *event)
            : Style::instance().themeColor("disabled"));
     painter.setBrush(brush);
 
-    if (_borderWidth > 0 && slider->isEnabled()) {
+    if (slider->isEnabled()) {
         QPen pen;
-        pen.setColor(Style::instance().themeColor("accent3"));
+        pen.setColor(_borderColor);
         pen.setWidthF(_borderWidth);
         painter.setPen(pen);
     } else {
@@ -315,7 +325,7 @@ void SliderThumb::paintEvent(QPaintEvent *event)
 SliderTrack::SliderTrack(Slider *slider)
     : QWidget(slider->parentWidget()),
       slider(slider),
-      _width(2)
+      _trackWidth(2)
 {
     slider->installEventFilter(this);
     setAttribute(Qt::WA_TransparentForMouseEvents, true);
@@ -362,26 +372,26 @@ void SliderTrack::paintEvent(QPaintEvent *event)
     if (Qt::Horizontal == slider->orientation()) {
         painter.translate(slider->x() + SLIDER_MARGIN,
                           slider->y() + slider->height()/2
-                                      - static_cast<qreal>(_width)/2);
+                                      - static_cast<qreal>(_trackWidth)/2);
     } else {
         painter.translate(slider->x() + slider->width()/2
-                                      - static_cast<qreal>(_width)/2,
+                                      - static_cast<qreal>(_trackWidth)/2,
                           slider->y() + SLIDER_MARGIN);
     }
 
     QRectF geometry = Qt::Horizontal == slider->orientation()
-        ? QRectF(0, 0, slider->width() - SLIDER_MARGIN*2, _width)
-        : QRectF(0, 0, _width, slider->height() - SLIDER_MARGIN*2);
+        ? QRectF(0, 0, slider->width() - SLIDER_MARGIN*2, _trackWidth)
+        : QRectF(0, 0, _trackWidth, slider->height() - SLIDER_MARGIN*2);
 
     QRectF bgRect;
     QRectF fgRect;
 
     if (Qt::Horizontal == slider->orientation()) {
-        fgRect = QRectF(0, 0, offset, _width);
-        bgRect = QRectF(offset, 0, slider->width(), _width).intersected(geometry);
+        fgRect = QRectF(0, 0, offset, _trackWidth);
+        bgRect = QRectF(offset, 0, slider->width(), _trackWidth).intersected(geometry);
     } else {
-        fgRect = QRectF(0, 0, _width, offset);
-        bgRect = QRectF(0, offset, _width, slider->height()).intersected(geometry);
+        fgRect = QRectF(0, 0, _trackWidth, offset);
+        bgRect = QRectF(0, offset, _trackWidth, slider->height()).intersected(geometry);
     }
 
     if (!slider->isEnabled()) {

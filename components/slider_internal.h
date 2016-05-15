@@ -32,6 +32,7 @@ class SliderThumb : public QWidget
 
     Q_PROPERTY(qreal diameter WRITE setDiameter READ diameter)
     Q_PROPERTY(qreal borderWidth WRITE setBorderWidth READ borderWidth)
+    Q_PROPERTY(QColor borderColor WRITE setBorderColor READ borderColor)
     Q_PROPERTY(QColor fillColor WRITE setFillColor READ fillColor)
     Q_PROPERTY(qreal haloSize WRITE setHaloSize READ haloSize)
     Q_PROPERTY(QColor haloColor WRITE setHaloColor READ haloColor)
@@ -60,6 +61,17 @@ public:
     inline qreal borderWidth() const
     {
         return _borderWidth;
+    }
+
+    inline void setBorderColor(const QColor &color)
+    {
+        _borderColor = color;
+        update();
+    }
+
+    inline QColor borderColor() const
+    {
+        return _borderColor;
     }
 
     inline void setFillColor(const QColor &color)
@@ -106,6 +118,7 @@ private:
     qreal  _diameter;
     qreal  _borderWidth;
     qreal  _haloSize;
+    QColor _borderColor;
     QColor _fillColor;
     QColor _haloColor;
 };
@@ -133,13 +146,13 @@ public:
 
     void setTrackWidth(int width)
     {
-        _width = width;
+        _trackWidth = width;
         update();
     }
 
     int trackWidth() const
     {
-        return _width;
+        return _trackWidth;
     }
 
 protected:
@@ -151,7 +164,7 @@ private:
 
     const Slider *const slider;
     QColor _fillColor;
-    int    _width;
+    int    _trackWidth;
 };
 
 #endif // SLIDERINTERNAL_H
