@@ -115,7 +115,6 @@ class SliderTrack : public QWidget
     Q_OBJECT
 
     Q_PROPERTY(QColor fillColor WRITE setFillColor READ fillColor)
-    Q_PROPERTY(int trackWidth WRITE setTrackWidth READ trackWidth)
 
 public:
     explicit SliderTrack(Slider *slider);
