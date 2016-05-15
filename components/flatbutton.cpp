@@ -82,7 +82,9 @@ void FlatButton::paintEvent(QPaintEvent *event)
         brush.setStyle(Qt::SolidPattern);
         brush.setColor(d->delegate->backgroundColor());
         painter.setOpacity(bgOpacity);
-        painter.fillRect(rect(), brush);
+        painter.setBrush(brush);
+        painter.setPen(Qt::NoPen);
+        painter.drawRoundedRect(rect(), 3, 3);
     }
 
 #ifdef DEBUG_LAYOUT
