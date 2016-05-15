@@ -23,12 +23,18 @@ public:
     void setBackgroundColor(const QColor &color);
     QColor backgroundColor() const;
 
+    void assignProperties();
+
 private:
     Q_DISABLE_COPY(FlatButtonDelegate)
 
-    FlatButton *const button;
-    qreal  _backgroundOpacity;
-    QColor _backgroundColor;
+    FlatButton *const  button;
+    QState     *const _normalState;
+    QState     *const _focusedState;
+    QState     *const _pressedState;
+    qreal             _backgroundOpacity;
+    QColor            _backgroundColor;
+
 };
 
 #endif // FLATBUTTON_INTERNAL_H

@@ -37,12 +37,15 @@ void FlatButton::setRole(Material::Role role)
     {
     case Material::Primary:
         d->setTextColor("primary1");
+        d->delegate->assignProperties();
         break;
     case Material::Secondary:
         d->setTextColor("accent1");
+        d->delegate->assignProperties();
         break;
     default:
         d->setTextColor("text");
+        d->delegate->assignProperties();
         break;
     }
     update();
@@ -65,14 +68,6 @@ void FlatButton::paintEvent(QPaintEvent *event)
 
     Q_D(FlatButton);
 
-    QStylePainter painter(this);
-
-    QStyleOptionButton option;
-    initStyleOption(&option);
-    option.features |= QStyleOptionButton::Flat;
-
-    painter.drawControl(QStyle::CE_PushButtonLabel, option);
-
     const qreal bgOpacity = d->delegate->backgroundOpacity();
 
     if (isEnabled() && bgOpacity > 0)
@@ -86,6 +81,14 @@ void FlatButton::paintEvent(QPaintEvent *event)
         painter.setPen(Qt::NoPen);
         painter.drawRoundedRect(rect(), 3, 3);
     }
+
+    QStylePainter painter(this);
+
+    QStyleOptionButton option;
+    initStyleOption(&option);
+    option.features |= QStyleOptionButton::Flat;
+
+    painter.drawControl(QStyle::CE_PushButtonLabel, option);
 
 #ifdef DEBUG_LAYOUT
     QPainter debug(this);
@@ -101,12 +104,12 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
 {
     Q_D(FlatButton);
 
-    Style &style = Style::instance();
+    QColor color = palette().color(QPalette::Active, QPalette::ButtonText);
 
     Ripple *ripple = new Ripple(event->pos());
     ripple->setRadiusEndValue(100);
-    ripple->setOpacityStartValue(0.3);
-    ripple->setColor(style.themeColor("text"));
+    ripple->setOpacityStartValue(0.4);
+    ripple->setColor(color);
 
     d->ripple->addRipple(ripple);
 
