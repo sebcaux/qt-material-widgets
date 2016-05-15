@@ -17,10 +17,7 @@ Theme::Theme(QObject *parent)
     setColor("alternateText", Material::white);
     setColor("canvas", Material::white);
     setColor("border", Material::grey300);
-
-    QColor black(Material::darkBlack);
-    black.setAlphaF(0.28);
-    setColor("disabled", black);
+    setColor("disabled", Material::minBlack);
 }
 
 Theme::~Theme()
