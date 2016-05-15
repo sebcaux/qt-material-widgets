@@ -53,7 +53,8 @@ SOURCES += main.cpp\
     lib/style.cpp \
     components/searchfield.cpp \
     lib/theme.cpp \
-    components/sliderinternal.cpp
+    components/slider_internal.cpp \
+    components/flatbutton_internal.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -102,8 +103,9 @@ HEADERS  += mainwindow.h \
     components/searchfield.h \
     lib/theme.h \
     lib/theme_p.h \
-    components/sliderinternal.h \
-    components/flatbutton_p.h
+    components/flatbutton_p.h \
+    components/slider_internal.h \
+    components/flatbutton_internal.h
 
 RESOURCES += \
     resources.qrc

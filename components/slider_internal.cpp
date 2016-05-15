@@ -1,4 +1,4 @@
-#include "sliderinternal.h"
+#include "slider_internal.h"
 #include <QEvent>
 #include <QPainter>
 #include <QDebug>

@@ -103,7 +103,7 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
     ripple->setOpacityStartValue(0.2);
     ripple->setColor(d->textColor());
 
-    d->ripple->addRipple(ripple);
+    //d->ripple->addRipple(ripple);
 
     QPushButton::mousePressEvent(event);
 }
