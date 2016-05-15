@@ -5,7 +5,7 @@
 #### Work in progress
 
 - [x] Slider
-- [ ] Flat Button
+- [x] Flat Button
 - [ ] App Bar
 - [ ] Avatar
 - [ ] Icon Button
