@@ -1,11 +1,11 @@
 #ifndef FLATBUTTON_P_H
 #define FLATBUTTON_P_H
 
-#include <QStateMachine>
 #include "flatbutton.h"
 #include "lib/rippleoverlay.h"
 #include "lib/theme.h"
 #include "lib/style.h"
+#include "flatbutton_internal.h"
 
 class FlatButtonPrivate
 {
@@ -18,15 +18,16 @@ public:
     QColor textColor() const;
     void setTextColor(const QString &themeColor);
 
-    FlatButton    *const q_ptr;
-    RippleOverlay *const ripple;
-    QStateMachine  machine;
+    FlatButton         *const q_ptr;
+    RippleOverlay      *const ripple;
+    FlatButtonDelegate *const delegate;
     Material::Role role;
 };
 
 FlatButtonPrivate::FlatButtonPrivate(FlatButton *parent)
     : q_ptr(parent),
       ripple(new RippleOverlay(parent)),
+      delegate(new FlatButtonDelegate(parent)),
       role(Material::Default)
 {
     Style &style = Style::instance();
@@ -45,16 +46,6 @@ FlatButtonPrivate::FlatButtonPrivate(FlatButton *parent)
     palette.setColor(QPalette::Disabled, QPalette::ButtonText,
                      style.themeColor("disabled"));
     parent->setPalette(palette);
-
-    QState *normalState = new QState;
-    QState *focusedState = new QState;
-    QState *pressedState = new QState;
-
-    machine.addState(normalState);
-    machine.addState(focusedState);
-    machine.addState(pressedState);
-
-    machine.setInitialState(normalState);
 }
 
 QColor FlatButtonPrivate::textColor() const

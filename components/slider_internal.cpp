@@ -40,9 +40,12 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
 
     QColor fillColor = style.themeColor("primary1");
 
-    inactiveState->assignProperty(track, "fillColor", style.themeColor("accent2"));
-    slidingState->assignProperty(track, "fillColor", style.themeColor("accent3"));
-    focusState->assignProperty(track, "fillColor", style.themeColor("accent3"));
+    inactiveState->assignProperty(track, "fillColor",
+                                  style.themeColor("accent3").lighter(130));
+    slidingState->assignProperty(track, "fillColor",
+                                 style.themeColor("accent3"));
+    focusState->assignProperty(track, "fillColor",
+                               style.themeColor("accent3"));
 
     addState(topState);
 

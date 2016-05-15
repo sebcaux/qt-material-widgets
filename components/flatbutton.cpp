@@ -4,7 +4,6 @@
 #include <QStylePainter>
 #include <QStyleOption>
 #include <QApplication>
-#include <QPalette>
 #include <QDebug>
 #include "lib/rippleoverlay.h"
 #include "lib/ripple.h"
@@ -74,13 +73,15 @@ void FlatButton::paintEvent(QPaintEvent *event)
 
     painter.drawControl(QStyle::CE_PushButtonLabel, option);
 
-    if (isEnabled() && testAttribute(Qt::WA_Hover) && underMouse())
+    const qreal bgOpacity = d->delegate->backgroundOpacity();
+
+    if (isEnabled() && bgOpacity > 0)
     {
         QPainter painter(this);
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
-        brush.setColor(d->textColor());
-        painter.setOpacity(0.1);
+        brush.setColor(d->delegate->backgroundColor());
+        painter.setOpacity(bgOpacity);
         painter.fillRect(rect(), brush);
     }
 
@@ -98,26 +99,14 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
 {
     Q_D(FlatButton);
 
+    Style &style = Style::instance();
+
     Ripple *ripple = new Ripple(event->pos());
     ripple->setRadiusEndValue(100);
-    ripple->setOpacityStartValue(0.2);
-    ripple->setColor(d->textColor());
+    ripple->setOpacityStartValue(0.3);
+    ripple->setColor(style.themeColor("text"));
 
-    //d->ripple->addRipple(ripple);
+    d->ripple->addRipple(ripple);
 
     QPushButton::mousePressEvent(event);
-}
-
-void FlatButton::enterEvent(QEvent *event)
-{
-    update();
-
-    QPushButton::enterEvent(event);
-}
-
-void FlatButton::leaveEvent(QEvent *event)
-{
-    update();
-
-    QPushButton::leaveEvent(event);
 }

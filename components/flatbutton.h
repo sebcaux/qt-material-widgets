@@ -22,8 +22,6 @@ protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    void enterEvent(QEvent *event) Q_DECL_OVERRIDE;
-    void leaveEvent(QEvent *event) Q_DECL_OVERRIDE;
 
     const QScopedPointer<FlatButtonPrivate> d_ptr;
 
