@@ -14,11 +14,15 @@ RippleOverlay::~RippleOverlay()
 {
 }
 
-void RippleOverlay::addRipple(const QPoint &position, const QColor &color, qreal radius)
+void RippleOverlay::addRipple(const QPoint &position, qreal radius)
 {
     Ripple *ripple = new Ripple(position);
     ripple->setRadiusEndValue(radius);
-    ripple->setColor(color);
+    addRipple(ripple);
+}
+
+void RippleOverlay::addRipple(Ripple *ripple)
+{
     ripples.push_back(ripple);
     connect(ripple, SIGNAL(changed()), this, SLOT(update()));
     connect(ripple, SIGNAL(finished()), this, SLOT(deleteRipple()));
@@ -31,6 +35,7 @@ void RippleOverlay::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
+    painter.setPen(Qt::NoPen);
 
     QList<Ripple *>::const_iterator i;
     for (i = ripples.begin(); i != ripples.end(); ++i)

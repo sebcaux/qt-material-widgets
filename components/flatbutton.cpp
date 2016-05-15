@@ -6,8 +6,8 @@
 #include <QApplication>
 #include <QPalette>
 #include <QDebug>
-#include "lib/style.h"
 #include "lib/rippleoverlay.h"
+#include "lib/ripple.h"
 
 #include "flatbutton_p.h"
 
@@ -64,6 +64,8 @@ void FlatButton::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
+    Q_D(FlatButton);
+
     QStylePainter painter(this);
 
     QStyleOptionButton option;
@@ -77,6 +79,7 @@ void FlatButton::paintEvent(QPaintEvent *event)
         QPainter painter(this);
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
+        brush.setColor(d->textColor());
         painter.setOpacity(0.1);
         painter.fillRect(rect(), brush);
     }
@@ -95,7 +98,12 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
 {
     Q_D(FlatButton);
 
-    d->ripple->addRipple(event->pos());
+    Ripple *ripple = new Ripple(event->pos());
+    ripple->setRadiusEndValue(100);
+    ripple->setOpacityStartValue(0.2);
+    ripple->setColor(d->textColor());
+
+    d->ripple->addRipple(ripple);
 
     QPushButton::mousePressEvent(event);
 }

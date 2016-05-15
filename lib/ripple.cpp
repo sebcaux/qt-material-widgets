@@ -53,9 +53,9 @@ QPropertyAnimation *Ripple::animate(const QByteArray &property)
 {
     QPropertyAnimation *animation = new QPropertyAnimation;
     animation->setPropertyName(property);
-    animation->setEasingCurve(QEasingCurve::OutCubic);
+    animation->setEasingCurve(QEasingCurve::OutQuad);
     animation->setTargetObject(this);
-    animation->setDuration(1000);
+    animation->setDuration(800);
     _group.addAnimation(animation);
     return animation;
 }
