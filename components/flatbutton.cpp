@@ -7,7 +7,6 @@
 #include <QDebug>
 #include "lib/rippleoverlay.h"
 #include "lib/ripple.h"
-
 #include "flatbutton_p.h"
 
 void FlatButtonPrivate::init()
@@ -163,4 +162,3 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
 
     QPushButton::mousePressEvent(event);
 }
-

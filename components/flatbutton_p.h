@@ -16,8 +16,7 @@ public:
     FlatButtonPrivate(FlatButton *q)
         : q_ptr(q),
           role(Material::Default)
-    {
-    }
+    {}
 
     void init();
     void setTextColor(const QString &themeColor);

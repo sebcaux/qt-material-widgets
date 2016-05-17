@@ -1,5 +1,4 @@
 #include "raisedbutton.h"
-
 #include "raisedbutton_p.h"
 
 RaisedButton::RaisedButton(QWidget *parent)

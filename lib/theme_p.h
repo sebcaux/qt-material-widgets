@@ -18,16 +18,4 @@ public:
     QHash<QString, QColor> colors;
 };
 
-ThemePrivate::ThemePrivate(Theme *q)
-    : q_ptr(q)
-{
-}
-
-QColor ThemePrivate::rgba(int r, int g, int b, qreal a) const
-{
-    QColor color(r, g, b);
-    color.setAlphaF(a);
-    return color;
-}
-
 #endif // THEME_P_H
