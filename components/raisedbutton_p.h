@@ -11,8 +11,9 @@ class RaisedButtonPrivate : public FlatButtonPrivate
 public:
     RaisedButtonPrivate(RaisedButton *q)
         : FlatButtonPrivate(q)
-    {
-    }
+    {}
+
+    void init();
 };
 
 #endif // RAISEDBUTTON_P_H

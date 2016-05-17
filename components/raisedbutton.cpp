@@ -1,9 +1,26 @@
 #include "raisedbutton.h"
+#include <QGraphicsDropShadowEffect>
 #include "raisedbutton_p.h"
+
+void RaisedButtonPrivate::init()
+{
+    Q_Q(RaisedButton);
+
+    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
+    effect->setBlurRadius(7);
+    effect->setOffset(QPoint(0, 0));
+    effect->setColor(QColor(0, 0, 0, 100));
+    q->setGraphicsEffect(effect);
+
+    q->setAutoFillBackground(true);
+}
 
 RaisedButton::RaisedButton(QWidget *parent)
     : FlatButton(*new RaisedButtonPrivate(this), parent)
 {
+    Q_D(RaisedButton);
+
+    d->init();
 }
 
 RaisedButton::~RaisedButton()
