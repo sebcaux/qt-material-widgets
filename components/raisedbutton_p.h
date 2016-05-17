@@ -14,6 +14,8 @@ public:
     {}
 
     void init();
+
+    QStateMachine machine;
 };
 
 #endif // RAISEDBUTTON_P_H
