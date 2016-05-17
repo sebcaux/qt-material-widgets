@@ -38,29 +38,29 @@ public:
     int  trackWidth;
 };
 
-SliderPrivate::SliderPrivate(Slider *parent)
-    : q_ptr(parent),
-      thumb(new SliderThumb(parent)),
-      track(new SliderTrack(parent)),
-      machine(new SliderStateMachine(parent, thumb, track)),
+SliderPrivate::SliderPrivate(Slider *q)
+    : q_ptr(q),
+      thumb(new SliderThumb(q)),
+      track(new SliderTrack(q)),
+      machine(new SliderStateMachine(q, thumb, track)),
       hoverTrack(false),
       hoverThumb(false),
       hover(false),
       step(false),
       pageStepMode(true),
       stepTo(0),
-      oldValue(parent->value()),
+      oldValue(q->value()),
       trackWidth(2)
 {
-    parent->setMouseTracking(true);
-    parent->setFocusPolicy(Qt::StrongFocus);
-    parent->setPageStep(1);
+    q->setMouseTracking(true);
+    q->setFocusPolicy(Qt::StrongFocus);
+    q->setPageStep(1);
 
     QSizePolicy sp(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    if (parent->orientation() == Qt::Vertical)
+    if (q->orientation() == Qt::Vertical)
         sp.transpose();
-    parent->setSizePolicy(sp);
-    parent->setAttribute(Qt::WA_WState_OwnSizePolicy, false);
+    q->setSizePolicy(sp);
+    q->setAttribute(Qt::WA_WState_OwnSizePolicy, false);
 
     machine->start();
 

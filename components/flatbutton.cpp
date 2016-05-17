@@ -10,16 +10,57 @@
 
 #include "flatbutton_p.h"
 
+void FlatButtonPrivate::init()
+{
+    Q_Q(FlatButton);
+
+    ripple = new RippleOverlay(q);
+    delegate = new FlatButtonDelegate(q);
+
+    Style &style = Style::instance();
+
+    q->setStyle(&style);
+    q->setAttribute(Qt::WA_Hover);
+    q->setMouseTracking(true);
+
+    QFont font(q->font());
+    font.setCapitalization(QFont::AllUppercase);
+    font.setPointSizeF(10.5);
+    font.setStyleName("Medium");
+    q->setFont(font);
+
+    QPalette palette;
+    palette.setColor(QPalette::Disabled, QPalette::ButtonText,
+                     style.themeColor("disabled"));
+    q->setPalette(palette);
+}
+
+void FlatButtonPrivate::setTextColor(const QString &themeColor)
+{
+    Q_Q(FlatButton);
+
+    QPalette palette(q->palette());
+    Style &style = Style::instance();
+
+    palette.setColor(QPalette::Active, QPalette::ButtonText,
+                     style.themeColor(themeColor));
+
+    q->setPalette(palette);
+}
+
 FlatButton::FlatButton(QWidget *parent)
     : QPushButton(parent),
       d_ptr(new FlatButtonPrivate(this))
 {
+    d_func()->init();
 }
 
 FlatButton::FlatButton(const QString &text, QWidget *parent)
     : QPushButton(parent),
       d_ptr(new FlatButtonPrivate(this))
 {
+    d_func()->init();
+
     setText(text);
 }
 
@@ -49,6 +90,13 @@ void FlatButton::setRole(Material::Role role)
         break;
     }
     update();
+}
+
+FlatButton::FlatButton(FlatButtonPrivate &d, QWidget *parent)
+    : QPushButton(parent),
+      d_ptr(&d)
+{
+    d_func()->init();
 }
 
 void FlatButton::resizeEvent(QResizeEvent *event)
@@ -115,3 +163,4 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
 
     QPushButton::mousePressEvent(event);
 }
+

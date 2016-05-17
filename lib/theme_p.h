@@ -9,7 +9,7 @@ class ThemePrivate
     Q_DECLARE_PUBLIC(Theme)
 
 public:
-    ThemePrivate(Theme *parent);
+    ThemePrivate(Theme *q);
 
     QColor rgba(int r, int g, int b, qreal a) const;
 
@@ -18,8 +18,8 @@ public:
     QHash<QString, QColor> colors;
 };
 
-ThemePrivate::ThemePrivate(Theme *parent)
-    : q_ptr(parent)
+ThemePrivate::ThemePrivate(Theme *q)
+    : q_ptr(q)
 {
 }
 

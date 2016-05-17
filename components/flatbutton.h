@@ -19,6 +19,8 @@ public:
     void setRole(Material::Role role);
 
 protected:
+    FlatButton(FlatButtonPrivate &d, QWidget *parent = 0);
+
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
