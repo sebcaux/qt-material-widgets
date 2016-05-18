@@ -13,6 +13,9 @@ public:
     explicit RaisedButton(QWidget *parent = 0);
     ~RaisedButton();
 
+protected:
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+
 private:
     Q_DISABLE_COPY(RaisedButton)
     Q_DECLARE_PRIVATE(RaisedButton)
