@@ -16,7 +16,7 @@ public:
     explicit FlatButton(const QString &text, QWidget *parent = 0);
     ~FlatButton();
 
-    void setRole(Material::Role role);
+    virtual void setRole(Material::Role role);
 
 protected:
     FlatButton(FlatButtonPrivate &d, QWidget *parent = 0);

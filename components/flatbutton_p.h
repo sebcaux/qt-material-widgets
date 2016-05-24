@@ -1,11 +1,13 @@
 #ifndef FLATBUTTON_P_H
 #define FLATBUTTON_P_H
 
-#include "flatbutton.h"
+#include <QPalette>
 #include "lib/rippleoverlay.h"
 #include "lib/theme.h"
 #include "lib/style.h"
 #include "flatbutton_internal.h"
+
+class FlatButton;
 
 class FlatButtonPrivate
 {
@@ -19,7 +21,7 @@ public:
     {}
 
     void init();
-    void setTextColor(const QString &themeColor);
+    void setPaletteColor(QPalette::ColorGroup group, QPalette::ColorRole role, const QString &themeColor);
 
     FlatButton *const q_ptr;
     RippleOverlay *ripple;

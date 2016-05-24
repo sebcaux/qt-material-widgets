@@ -10,10 +10,10 @@ ExampleList::ExampleList(QWidget *parent)
 
     widget->setLayout(layout);
 
-    QSizePolicy policy;
-    policy.setHorizontalPolicy(QSizePolicy::Expanding);
-    policy.setVerticalPolicy(QSizePolicy::Maximum);
-    widget->setSizePolicy(policy);
+    //QSizePolicy policy;
+    //policy.setHorizontalPolicy(QSizePolicy::Expanding);
+    //policy.setVerticalPolicy(QSizePolicy::Maximum);
+    //widget->setSizePolicy(policy);
 
     setWidget(widget);
     setWidgetResizable(true);

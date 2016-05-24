@@ -34,15 +34,14 @@ void FlatButtonPrivate::init()
     q->setPalette(palette);
 }
 
-void FlatButtonPrivate::setTextColor(const QString &themeColor)
+void FlatButtonPrivate::setPaletteColor(QPalette::ColorGroup group, QPalette::ColorRole role, const QString &themeColor)
 {
     Q_Q(FlatButton);
 
     QPalette palette(q->palette());
     Style &style = Style::instance();
 
-    palette.setColor(QPalette::Active, QPalette::ButtonText,
-                     style.themeColor(themeColor));
+    palette.setColor(group, role, style.themeColor(themeColor));
 
     q->setPalette(palette);
 }
@@ -76,18 +75,16 @@ void FlatButton::setRole(Material::Role role)
     switch (role)
     {
     case Material::Primary:
-        d->setTextColor("primary1");
-        d->delegate->assignProperties();
+        d->setPaletteColor(QPalette::Active, QPalette::ButtonText, "primary1");
         break;
     case Material::Secondary:
-        d->setTextColor("accent1");
-        d->delegate->assignProperties();
+        d->setPaletteColor(QPalette::Active, QPalette::ButtonText, "accent1");
         break;
     default:
-        d->setTextColor("text");
-        d->delegate->assignProperties();
+        d->setPaletteColor(QPalette::Active, QPalette::ButtonText, "text");
         break;
     }
+    d->delegate->assignProperties();
     update();
 }
 

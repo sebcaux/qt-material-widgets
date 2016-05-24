@@ -1,10 +1,13 @@
 #include "raisedbutton.h"
 #include <QGraphicsDropShadowEffect>
 #include <QEventTransition>
+#include <QSignalTransition>
 #include <QPropertyAnimation>
 #include <QPainter>
 #include <QStylePainter>
 #include <QStyleOption>
+#include <QMouseEvent>
+#include <QDebug>
 #include "raisedbutton_p.h"
 
 void RaisedButtonPrivate::init()
@@ -14,7 +17,7 @@ void RaisedButtonPrivate::init()
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
     effect->setBlurRadius(7);
     effect->setOffset(QPointF(0, 0));
-    effect->setColor(QColor(0, 0, 0, 100));
+    effect->setColor(QColor(0, 0, 0, 60));
     q->setGraphicsEffect(effect);
 
     QState *normalState = new QState;
@@ -48,6 +51,20 @@ void RaisedButtonPrivate::init()
 
     //
 
+    transition = new QEventTransition(q, QEvent::MouseButtonDblClick);
+    transition->setTargetState(pressedState);
+
+    animation = new QPropertyAnimation(effect, "offset");
+    animation->setDuration(100);
+    transition->addAnimation(animation);
+    animation = new QPropertyAnimation(effect, "blurRadius");
+    animation->setDuration(100);
+    transition->addAnimation(animation);
+
+    normalState->addTransition(transition);
+
+    //
+
     transition = new QEventTransition(q, QEvent::MouseButtonRelease);
     transition->setTargetState(normalState);
 
@@ -63,10 +80,6 @@ void RaisedButtonPrivate::init()
     //
 
     machine.setInitialState(normalState);
-
-    QObject::connect(effect, SIGNAL(blurRadiusChanged(qreal)), q, SLOT(update()));
-    QObject::connect(effect, SIGNAL(offsetChanged(QPointF)), q, SLOT(update()));
-
     machine.start();
 }
 
@@ -82,9 +95,36 @@ RaisedButton::~RaisedButton()
 {
 }
 
+void RaisedButton::setRole(Material::Role role)
+{
+    Q_D(FlatButton);
+
+    d->role = role;
+
+    switch (role)
+    {
+    case Material::Primary:
+        d->setPaletteColor(QPalette::Active, QPalette::Background, "primary1");
+        d->setPaletteColor(QPalette::Active, QPalette::ButtonText, "alternateText");
+        break;
+    case Material::Secondary:
+        d->setPaletteColor(QPalette::Active, QPalette::Background, "accent1");
+        d->setPaletteColor(QPalette::Active, QPalette::ButtonText, "alternateText");
+        break;
+    default:
+        d->setPaletteColor(QPalette::Active, QPalette::Background, "canvas");
+        d->setPaletteColor(QPalette::Active, QPalette::ButtonText, "text");
+        break;
+    }
+    d->delegate->assignProperties();
+    update();
+}
+
 void RaisedButton::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
+
+    Q_D(RaisedButton);
 
     QPainter painter(this);
 
@@ -92,7 +132,7 @@ void RaisedButton::paintEvent(QPaintEvent *event)
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::white);
+    brush.setColor(palette().color(QPalette::Active, QPalette::Background));
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
@@ -105,6 +145,4 @@ void RaisedButton::paintEvent(QPaintEvent *event)
     option.features |= QStyleOptionButton::Flat;
 
     style.drawControl(QStyle::CE_PushButtonLabel, option);
-
-    //FlatButton::paintEvent(event);
 }

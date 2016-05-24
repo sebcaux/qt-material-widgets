@@ -13,6 +13,8 @@ public:
     explicit RaisedButton(QWidget *parent = 0);
     ~RaisedButton();
 
+    void setRole(Material::Role role) Q_DECL_OVERRIDE;
+
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 

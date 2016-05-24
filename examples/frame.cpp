@@ -23,7 +23,7 @@ Frame::Frame(QWidget *parent)
     _layout->setStretch(0, 1);
     _layout->setStretch(1, 1);
 
-    setMinimumHeight(300);
+    //setMinimumHeight(300);
 }
 
 Frame::~Frame()

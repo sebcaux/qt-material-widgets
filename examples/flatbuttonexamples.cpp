@@ -15,7 +15,7 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
         flatButton->setText("Press me!");
         flatButton->setMinimumSize(200, 42);
 
-//        flatButton->setRole(Material::Secondary);
+        flatButton->setRole(Material::Primary);
 //        flatButton->setDisabled(true);
 
         ExampleView *view = new ExampleView;
