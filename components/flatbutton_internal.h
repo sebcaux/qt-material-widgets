@@ -30,7 +30,8 @@ private:
 
     FlatButton *const  button;
     QState     *const _normalState;
-    QState     *const _focusedState;
+    QState     *const _hoveredState;
+    QState     *const _focusedState2;
     QState     *const _pressedState;
     qreal             _backgroundOpacity;
     QColor            _backgroundColor;

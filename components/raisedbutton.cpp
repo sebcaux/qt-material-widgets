@@ -89,6 +89,8 @@ RaisedButton::RaisedButton(QWidget *parent)
     Q_D(RaisedButton);
 
     d->init();
+
+    setMinimumHeight(42);
 }
 
 RaisedButton::~RaisedButton()

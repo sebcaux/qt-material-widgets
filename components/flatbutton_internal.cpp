@@ -10,7 +10,8 @@ FlatButtonDelegate::FlatButtonDelegate(FlatButton *parent)
     : QStateMachine(parent),
       button(parent),
       _normalState(new QState(this)),
-      _focusedState(new QState(this)),
+      _hoveredState(new QState(this)),
+      _focusedState2(new QState(this)),
       _pressedState(new QState(this))
 {
     setInitialState(_normalState);
@@ -23,12 +24,22 @@ FlatButtonDelegate::FlatButtonDelegate(FlatButton *parent)
     //
 
     transition = new QEventTransition(button, QEvent::Enter);
-    transition->setTargetState(_focusedState);
+    transition->setTargetState(_hoveredState);
 
     animation = new QPropertyAnimation(this, "backgroundOpacity");
     animation->setDuration(140);
     transition->addAnimation(animation);
     _normalState->addTransition(transition);
+
+    //
+
+    //transition = new QEventTransition(button, QEvent::FocusIn);
+    //transition->setTargetState(_focusedState2);
+
+    ////animation = new QPropertyAnimation(this, "backgroundOpacity");
+    ////animation->setDuration(140);
+    ////transition->addAnimation(animation);
+    //_normalState->addTransition(transition);
 
     //
 
@@ -38,7 +49,17 @@ FlatButtonDelegate::FlatButtonDelegate(FlatButton *parent)
     animation = new QPropertyAnimation(this, "backgroundOpacity");
     animation->setDuration(140);
     transition->addAnimation(animation);
-    _focusedState->addTransition(transition);
+    _focusedState2->addTransition(transition);
+
+    //
+
+    transition = new QEventTransition(button, QEvent::Leave);
+    transition->setTargetState(_normalState);
+
+    animation = new QPropertyAnimation(this, "backgroundOpacity");
+    animation->setDuration(140);
+    transition->addAnimation(animation);
+    _hoveredState->addTransition(transition);
 
     //
 
@@ -48,12 +69,12 @@ FlatButtonDelegate::FlatButtonDelegate(FlatButton *parent)
     animation = new QPropertyAnimation(this, "backgroundOpacity");
     animation->setDuration(140);
     transition->addAnimation(animation);
-    _focusedState->addTransition(transition);
+    _hoveredState->addTransition(transition);
 
     //
 
     transition = new QEventTransition(button, QEvent::MouseButtonRelease);
-    transition->setTargetState(_focusedState);
+    transition->setTargetState(_focusedState2);
 
     animation = new QPropertyAnimation(this, "backgroundOpacity");
     animation->setDuration(500);
@@ -99,8 +120,11 @@ void FlatButtonDelegate::assignProperties()
     _normalState->assignProperty(this, "backgroundOpacity", 0);
     _normalState->assignProperty(this, "backgroundColor", textColor);
 
-    _focusedState->assignProperty(this, "backgroundOpacity", 0.15);
-    _focusedState->assignProperty(this, "backgroundColor", textColor);
+    _hoveredState->assignProperty(this, "backgroundOpacity", 0.15);
+    _hoveredState->assignProperty(this, "backgroundColor", textColor);
+
+    _focusedState2->assignProperty(this, "backgroundOpacity", 0.15);
+    _focusedState2->assignProperty(this, "backgroundColor", textColor);
 
     _pressedState->assignProperty(this, "backgroundOpacity", 0.15);
     _pressedState->assignProperty(this, "backgroundColor", textColor);

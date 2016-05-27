@@ -134,6 +134,13 @@ void FlatButton::paintEvent(QPaintEvent *event)
 
     painter.drawControl(QStyle::CE_PushButtonLabel, option);
 
+    //if (hasFocus() && !underMouse()) {
+    //    QPen pen;
+    //    pen.setWidth(4);
+    //    painter.setPen(pen);
+    //    painter.drawRect(rect());
+    //}
+
 #ifdef DEBUG_LAYOUT
     QPainter debug(this);
     QPen pen;
