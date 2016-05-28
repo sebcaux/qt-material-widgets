@@ -17,7 +17,8 @@ class FlatButtonPrivate
 public:
     FlatButtonPrivate(FlatButton *q)
         : q_ptr(q),
-          role(Material::Default)
+          role(Material::Default),
+          rippleStyle(FlatButton::PositionedRipple)
     {}
 
     void init();
@@ -27,6 +28,7 @@ public:
     RippleOverlay *ripple;
     FlatButtonDelegate *delegate;
     Material::Role role;
+    FlatButton::RippleStyle rippleStyle;
 };
 
 #endif // FLATBUTTON_P_H

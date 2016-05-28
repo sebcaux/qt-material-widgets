@@ -129,16 +129,27 @@ void RaisedButton::paintEvent(QPaintEvent *event)
     Q_D(RaisedButton);
 
     QPainter painter(this);
-
     painter.setRenderHint(QPainter::Antialiasing);
+
+    painter.save();
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(palette().color(QPalette::Active, QPalette::Background));
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
-
     painter.drawRoundedRect(rect(), 3, 3);
+
+    const int hs = (width()/2)*d->delegate->focusHaloSize();
+    const qreal haloOpacity = d->delegate->focusHaloOpacity();
+
+    brush.setColor(palette().color(QPalette::Active, QPalette::ButtonText));
+    painter.setBrush(brush);
+    painter.setOpacity(haloOpacity);
+    painter.setPen(Qt::NoPen);
+    painter.drawEllipse(rect().center(), hs, hs);
+
+    painter.restore();
 
     QStylePainter style(this);
 

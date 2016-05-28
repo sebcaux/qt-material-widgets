@@ -12,11 +12,19 @@ class FlatButton : public QPushButton
     Q_OBJECT
 
 public:
+    enum RippleStyle {
+        CenteredRipple,
+        PositionedRipple,
+        NoRipple
+    };
+
     explicit FlatButton(QWidget *parent = 0);
     explicit FlatButton(const QString &text, QWidget *parent = 0);
     ~FlatButton();
 
     virtual void setRole(Material::Role role);
+
+    void setRippleStyle(RippleStyle style);
 
 protected:
     FlatButton(FlatButtonPrivate &d, QWidget *parent = 0);
