@@ -106,7 +106,8 @@ HEADERS  += mainwindow.h \
     components/flatbutton_p.h \
     components/slider_internal.h \
     components/flatbutton_internal.h \
-    components/raisedbutton_p.h
+    components/raisedbutton_p.h \
+    toggle_p.h
 
 RESOURCES += \
     resources.qrc
