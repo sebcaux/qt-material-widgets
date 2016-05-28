@@ -13,7 +13,7 @@ RaisedButtonExamples::RaisedButtonExamples(QWidget *parent)
     raisedButton->setRole(Material::Primary);
     raisedButton->setText("Press me!");
 
-    raisedButton->setDisabled(true);
+    //raisedButton->setDisabled(true);
 
     //raisedButton->setFixedSize(400, 50);
 

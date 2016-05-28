@@ -122,6 +122,20 @@ void RaisedButton::setRole(Material::Role role)
     update();
 }
 
+bool RaisedButton::event(QEvent *event)
+{
+    Q_D(RaisedButton);
+
+    if (QEvent::EnabledChange == event->type()) {
+        if (isEnabled()) {
+            d->machine.start();
+        } else {
+            d->machine.stop();
+        }
+    }
+    return FlatButton::event(event);
+}
+
 void RaisedButton::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
@@ -135,13 +149,13 @@ void RaisedButton::paintEvent(QPaintEvent *event)
 
     QBrush brush;
 
-    if (isEnabled()) {
-        brush.setStyle(Qt::SolidPattern);
-        brush.setColor(palette().color(QPalette::Active, QPalette::Background));
-        painter.setBrush(brush);
-        painter.setPen(Qt::NoPen);
-        painter.drawRoundedRect(rect(), 3, 3);
-    }
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor(isEnabled()
+       ? palette().color(QPalette::Active, QPalette::Background)
+       : palette().color(QPalette::Disabled, QPalette::Background));
+    painter.setBrush(brush);
+    painter.setPen(Qt::NoPen);
+    painter.drawRoundedRect(rect(), 3, 3);
 
     if (isEnabled()) {
         const qreal hs = static_cast<qreal>(width())*d->delegate->focusHaloSize()/2;
