@@ -129,7 +129,6 @@ void RaisedButton::paintEvent(QPaintEvent *event)
     Q_D(RaisedButton);
 
     QPainter painter(this);
-
     painter.setRenderHint(QPainter::Antialiasing);
 
     QBrush brush;
@@ -140,11 +139,13 @@ void RaisedButton::paintEvent(QPaintEvent *event)
 
     painter.drawRoundedRect(rect(), 3, 3);
 
-    QStylePainter style(this);
+    FlatButton::paintEvent(event);
 
-    QStyleOptionButton option;
-    initStyleOption(&option);
-    option.features |= QStyleOptionButton::Flat;
+    //QStylePainter style(this);
 
-    style.drawControl(QStyle::CE_PushButtonLabel, option);
+    //QStyleOptionButton option;
+    //initStyleOption(&option);
+    //option.features |= QStyleOptionButton::Flat;
+
+    //style.drawControl(QStyle::CE_PushButtonLabel, option);
 }

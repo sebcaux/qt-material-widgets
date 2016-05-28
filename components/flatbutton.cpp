@@ -34,7 +34,9 @@ void FlatButtonPrivate::init()
     q->setPalette(palette);
 }
 
-void FlatButtonPrivate::setPaletteColor(QPalette::ColorGroup group, QPalette::ColorRole role, const QString &themeColor)
+void FlatButtonPrivate::setPaletteColor(QPalette::ColorGroup group,
+                                        QPalette::ColorRole role,
+                                        const QString &themeColor)
 {
     Q_Q(FlatButton);
 
@@ -113,10 +115,13 @@ void FlatButton::paintEvent(QPaintEvent *event)
     Q_D(FlatButton);
 
     const qreal bgOpacity = d->delegate->backgroundOpacity();
+    const qreal haloOpacity = d->delegate->focusHaloOpacity();
+    const int hs = d->delegate->focusHaloSize();
 
-    if (isEnabled() && bgOpacity > 0)
-    {
-        QPainter painter(this);
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    if (isEnabled() && bgOpacity > 0) {
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
         brush.setColor(d->delegate->backgroundColor());
@@ -126,20 +131,23 @@ void FlatButton::paintEvent(QPaintEvent *event)
         painter.drawRoundedRect(rect(), 3, 3);
     }
 
-    QStylePainter painter(this);
+    if (isEnabled() && haloOpacity > 0) {
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(palette().color(QPalette::Active, QPalette::ButtonText));
+        painter.setOpacity(haloOpacity);
+        painter.setBrush(brush);
+        painter.setPen(Qt::NoPen);
+        painter.drawEllipse(rect().center(), hs, hs);
+    }
+
+    QStylePainter style(this);
 
     QStyleOptionButton option;
     initStyleOption(&option);
     option.features |= QStyleOptionButton::Flat;
 
-    painter.drawControl(QStyle::CE_PushButtonLabel, option);
-
-    //if (hasFocus() && !underMouse()) {
-    //    QPen pen;
-    //    pen.setWidth(4);
-    //    painter.setPen(pen);
-    //    painter.drawRect(rect());
-    //}
+    style.drawControl(QStyle::CE_PushButtonLabel, option);
 
 #ifdef DEBUG_LAYOUT
     QPainter debug(this);
@@ -160,6 +168,7 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
     Ripple *ripple = new Ripple(event->pos());
     ripple->setRadiusEndValue(100);
     ripple->setOpacityStartValue(0.4);
+
     ripple->setColor(color);
 
     d->ripple->addRipple(ripple);
