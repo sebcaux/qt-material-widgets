@@ -123,7 +123,7 @@ void FlatButton::paintEvent(QPaintEvent *event)
 
     const qreal bgOpacity = d->delegate->backgroundOpacity();
     const qreal haloOpacity = d->delegate->focusHaloOpacity();
-    const int hs = (width()/2)*d->delegate->focusHaloSize();
+    const qreal hs = static_cast<qreal>(width())*d->delegate->focusHaloSize()/2;
 
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
@@ -145,7 +145,8 @@ void FlatButton::paintEvent(QPaintEvent *event)
         painter.setOpacity(haloOpacity);
         painter.setBrush(brush);
         painter.setPen(Qt::NoPen);
-        painter.drawEllipse(rect().center(), hs, hs);
+        QPointF center = rect().center();
+        painter.drawEllipse(center, hs, hs);
     }
 
     QStylePainter style(this);

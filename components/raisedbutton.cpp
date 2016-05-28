@@ -134,20 +134,26 @@ void RaisedButton::paintEvent(QPaintEvent *event)
     painter.save();
 
     QBrush brush;
-    brush.setStyle(Qt::SolidPattern);
-    brush.setColor(palette().color(QPalette::Active, QPalette::Background));
-    painter.setBrush(brush);
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect(), 3, 3);
 
-    const int hs = (width()/2)*d->delegate->focusHaloSize();
-    const qreal haloOpacity = d->delegate->focusHaloOpacity();
+    if (isEnabled()) {
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(palette().color(QPalette::Active, QPalette::Background));
+        painter.setBrush(brush);
+        painter.setPen(Qt::NoPen);
+        painter.drawRoundedRect(rect(), 3, 3);
+    }
 
-    brush.setColor(palette().color(QPalette::Active, QPalette::ButtonText));
-    painter.setBrush(brush);
-    painter.setOpacity(haloOpacity);
-    painter.setPen(Qt::NoPen);
-    painter.drawEllipse(rect().center(), hs, hs);
+    if (isEnabled()) {
+        const qreal hs = static_cast<qreal>(width())*d->delegate->focusHaloSize()/2;
+        const qreal haloOpacity = d->delegate->focusHaloOpacity();
+
+        brush.setColor(palette().color(QPalette::Active, QPalette::ButtonText));
+        painter.setBrush(brush);
+        painter.setOpacity(haloOpacity);
+        painter.setPen(Qt::NoPen);
+        QPointF center = rect().center();
+        painter.drawEllipse(center, hs, hs);
+    }
 
     painter.restore();
 
