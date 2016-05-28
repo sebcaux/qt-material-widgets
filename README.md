@@ -6,13 +6,13 @@
 
 - [x] Slider
 - [x] Flat Button
+- [x] Raised Button
 - [ ] App Bar
 - [ ] Avatar
 - [ ] Icon Button
 - [ ] Icon Menu
 - [ ] Menu
 - [ ] Dialog
-- [ ] Raised Button
 - [ ] Scroll Bar
 - [ ] Tabs
 - [ ] Text Field
