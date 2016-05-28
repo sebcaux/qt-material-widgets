@@ -123,7 +123,7 @@ void FlatButton::paintEvent(QPaintEvent *event)
 
     const qreal bgOpacity = d->delegate->backgroundOpacity();
     const qreal haloOpacity = d->delegate->focusHaloOpacity();
-    const int hs = d->delegate->focusHaloSize();
+    const int hs = (width()/2)*d->delegate->focusHaloSize();
 
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);

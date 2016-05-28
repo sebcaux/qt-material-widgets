@@ -15,7 +15,7 @@ FlatButtonDelegate::FlatButtonDelegate(FlatButton *parent)
       _hoveredState(new QState(this)),
       _hoveredFocusedState(new QState(this)),
       _pressedState(new QState(this)),
-      _focusHaloSize(85)
+      _focusHaloSize(0.8)
 {
     setInitialState(_normalState);
 
@@ -37,15 +37,15 @@ FlatButtonDelegate::FlatButtonDelegate(FlatButton *parent)
 
     grow->setTargetObject(this);
     grow->setPropertyName("focusHaloSize");
-    grow->setStartValue(85);
-    grow->setEndValue(100);
+    grow->setStartValue(0.8);
+    grow->setEndValue(0.9);
     grow->setEasingCurve(QEasingCurve::InOutSine);
     grow->setDuration(840);
 
     shrink->setTargetObject(this);
     shrink->setPropertyName("focusHaloSize");
-    shrink->setStartValue(100);
-    shrink->setEndValue(85);
+    shrink->setStartValue(0.9);
+    shrink->setEndValue(0.8);
     shrink->setEasingCurve(QEasingCurve::InOutSine);
     shrink->setDuration(840);
 
@@ -94,13 +94,13 @@ qreal FlatButtonDelegate::focusHaloOpacity() const
     return _focusHaloOpacity;
 }
 
-void FlatButtonDelegate::setFocusHaloSize(int size)
+void FlatButtonDelegate::setFocusHaloSize(qreal size)
 {
     _focusHaloSize = size;
     button->update();
 }
 
-int FlatButtonDelegate::focusHaloSize() const
+qreal FlatButtonDelegate::focusHaloSize() const
 {
     return _focusHaloSize;
 }
@@ -116,7 +116,7 @@ void FlatButtonDelegate::assignProperties()
 
     _normalFocusedState->assignProperty(this, "backgroundOpacity", 0);
     _normalFocusedState->assignProperty(this, "backgroundColor", textColor);
-    _normalFocusedState->assignProperty(this, "focusHaloOpacity", 0.12);
+    _normalFocusedState->assignProperty(this, "focusHaloOpacity", 0.15);
 
     _hoveredState->assignProperty(this, "backgroundOpacity", 0.15);
     _hoveredState->assignProperty(this, "backgroundColor", textColor);
@@ -124,7 +124,7 @@ void FlatButtonDelegate::assignProperties()
 
     _hoveredFocusedState->assignProperty(this, "backgroundOpacity", 0.15);
     _hoveredFocusedState->assignProperty(this, "backgroundColor", textColor);
-    _normalFocusedState->assignProperty(this, "focusHaloOpacity", 0.12);
+    _normalFocusedState->assignProperty(this, "focusHaloOpacity", 0.15);
 
     _pressedState->assignProperty(this, "backgroundOpacity", 0.15);
     _pressedState->assignProperty(this, "backgroundColor", textColor);

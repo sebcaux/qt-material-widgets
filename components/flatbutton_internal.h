@@ -14,7 +14,7 @@ class FlatButtonDelegate : public QStateMachine
     Q_PROPERTY(QColor backgroundColor WRITE setBackgroundColor READ backgroundColor)
     Q_PROPERTY(qreal backgroundOpacity WRITE setBackgroundOpacity READ backgroundOpacity)
     Q_PROPERTY(qreal focusHaloOpacity WRITE setFocusHaloOpacity READ focusHaloOpacity)
-    Q_PROPERTY(int focusHaloSize WRITE setFocusHaloSize READ focusHaloSize)
+    Q_PROPERTY(qreal focusHaloSize WRITE setFocusHaloSize READ focusHaloSize)
 
 public:
     FlatButtonDelegate(FlatButton *parent);
@@ -29,8 +29,8 @@ public:
     void setFocusHaloOpacity(qreal opacity);
     qreal focusHaloOpacity() const;
 
-    void setFocusHaloSize(int size);
-    int focusHaloSize() const;
+    void setFocusHaloSize(qreal size);
+    qreal focusHaloSize() const;
 
     void assignProperties();
 
@@ -47,7 +47,7 @@ private:
     QState     *const _pressedState;
     qreal             _backgroundOpacity;
     qreal             _focusHaloOpacity;
-    int               _focusHaloSize;
+    qreal             _focusHaloSize;
     QColor            _backgroundColor;
 };
 

@@ -131,21 +131,31 @@ void RaisedButton::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
+    painter.save();
+
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(palette().color(QPalette::Active, QPalette::Background));
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
-
     painter.drawRoundedRect(rect(), 3, 3);
 
-    FlatButton::paintEvent(event);
+    const int hs = (width()/2)*d->delegate->focusHaloSize();
+    const qreal haloOpacity = d->delegate->focusHaloOpacity();
 
-    //QStylePainter style(this);
+    brush.setColor(palette().color(QPalette::Active, QPalette::ButtonText));
+    painter.setBrush(brush);
+    painter.setOpacity(haloOpacity);
+    painter.setPen(Qt::NoPen);
+    painter.drawEllipse(rect().center(), hs, hs);
 
-    //QStyleOptionButton option;
-    //initStyleOption(&option);
-    //option.features |= QStyleOptionButton::Flat;
+    painter.restore();
 
-    //style.drawControl(QStyle::CE_PushButtonLabel, option);
+    QStylePainter style(this);
+
+    QStyleOptionButton option;
+    initStyleOption(&option);
+    option.features |= QStyleOptionButton::Flat;
+
+    style.drawControl(QStyle::CE_PushButtonLabel, option);
 }
