@@ -3,6 +3,8 @@
 
 #include <QAbstractButton>
 
+class TogglePrivate;
+
 class Toggle : public QAbstractButton
 {
     Q_OBJECT
@@ -15,6 +17,12 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+
+    const QScopedPointer<TogglePrivate> d_ptr;
+
+private:
+    Q_DISABLE_COPY(Toggle)
+    Q_DECLARE_PRIVATE(Toggle)
 };
 
 #endif // TOGGLE_H

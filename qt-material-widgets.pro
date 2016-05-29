@@ -54,7 +54,8 @@ SOURCES += main.cpp\
     components/searchfield.cpp \
     lib/theme.cpp \
     components/slider_internal.cpp \
-    components/flatbutton_internal.cpp
+    components/flatbutton_internal.cpp \
+    components/toggle_internal.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -107,7 +108,8 @@ HEADERS  += mainwindow.h \
     components/slider_internal.h \
     components/flatbutton_internal.h \
     components/raisedbutton_p.h \
-    components/toggle_p.h
+    components/toggle_p.h \
+    components/toggle_internal.h
 
 RESOURCES += \
     resources.qrc

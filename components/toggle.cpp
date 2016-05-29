@@ -1,8 +1,20 @@
 #include "toggle.h"
+#include "toggle_p.h"
+
+TogglePrivate::TogglePrivate(Toggle *q)
+    : q_ptr(q)
+{
+}
+
+void TogglePrivate::init()
+{
+}
 
 Toggle::Toggle(QWidget *parent)
-    : QAbstractButton(parent)
+    : QAbstractButton(parent),
+      d_ptr(new TogglePrivate(this))
 {
+    d_func()->init();
 }
 
 Toggle::~Toggle()
