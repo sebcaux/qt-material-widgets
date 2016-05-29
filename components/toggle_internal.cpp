@@ -117,7 +117,13 @@ void ToggleTrack::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing);
 
     QBrush brush;
-    brush.setColor(_trackColor);
+    if (_toggle->isEnabled()) {
+        brush.setColor(_trackColor);
+    } else {
+        QColor disabledColor = _trackColor;
+        disabledColor.setAlpha(80);
+        brush.setColor(disabledColor);
+    }
     brush.setStyle(Qt::SolidPattern);
     painter.setBrush(brush);
 
