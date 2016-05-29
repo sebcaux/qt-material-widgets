@@ -21,7 +21,7 @@ public:
     void updateOverlayGeometry();
 
 protected slots:
-    void addRipple();
+    void addRipple(bool checked);
 
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;

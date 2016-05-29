@@ -2,9 +2,11 @@
 #define TOGGLE_P_H
 
 #include <QStateMachine>
-#include "toggle_internal.h"
 
 class RippleOverlay;
+class Toggle;
+class ToggleThumb;
+class ToggleTrack;
 
 class TogglePrivate
 {
@@ -17,7 +19,8 @@ public:
     void init();
 
     Toggle *const q_ptr;
-    Thumb  *const thumb;
+    ToggleTrack *const track;
+    ToggleThumb *const thumb;
     RippleOverlay *const ripple;
     QStateMachine machine;
     Qt::Orientation orientation;

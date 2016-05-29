@@ -4,11 +4,15 @@
 #include <QSignalTransition>
 #include <QPropertyAnimation>
 #include "lib/rippleoverlay.h"
+#include "lib/ripple.h"
+#include "lib/style.h"
 #include "toggle_p.h"
+#include "toggle_internal.h"
 
 TogglePrivate::TogglePrivate(Toggle *q)
     : q_ptr(q),
-      thumb(new Thumb(q)),
+      track(new ToggleTrack(q)),
+      thumb(new ToggleThumb(q)),
       ripple(new RippleOverlay(q->parentWidget())),
       orientation(Qt::Horizontal)
 {
@@ -34,36 +38,76 @@ void TogglePrivate::init()
 
     //
 
-    transition = new QSignalTransition(thumb, SIGNAL(clicked()));
+    transition = new QSignalTransition(thumb, SIGNAL(clicked(bool)));
     transition->setTargetState(onState);
     offState->addTransition(transition);
 
     animation = new QPropertyAnimation;
     animation->setPropertyName("shift");
     animation->setTargetObject(thumb);
+    animation->setDuration(200);
+    animation->setEasingCurve(QEasingCurve::OutQuad);
+    transition->addAnimation(animation);
+
+    animation = new QPropertyAnimation;
+    animation->setPropertyName("trackColor");
+    animation->setTargetObject(track);
     animation->setDuration(150);
     transition->addAnimation(animation);
 
-    //
-
-    transition = new QSignalTransition(thumb, SIGNAL(clicked()));
-    transition->setTargetState(offState);
-    onState->addTransition(transition);
-
     animation = new QPropertyAnimation;
-    animation->setPropertyName("shift");
+    animation->setPropertyName("thumbColor");
     animation->setTargetObject(thumb);
     animation->setDuration(150);
     transition->addAnimation(animation);
 
     //
 
+    transition = new QSignalTransition(thumb, SIGNAL(clicked(bool)));
+    transition->setTargetState(offState);
+    onState->addTransition(transition);
+
+    animation = new QPropertyAnimation;
+    animation->setPropertyName("shift");
+    animation->setTargetObject(thumb);
+    animation->setDuration(200);
+    animation->setEasingCurve(QEasingCurve::OutQuad);
+    transition->addAnimation(animation);
+
+    animation = new QPropertyAnimation;
+    animation->setPropertyName("trackColor");
+    animation->setTargetObject(track);
+    animation->setDuration(150);
+    transition->addAnimation(animation);
+
+    animation = new QPropertyAnimation;
+    animation->setPropertyName("thumbColor");
+    animation->setTargetObject(thumb);
+    animation->setDuration(150);
+    transition->addAnimation(animation);
+
+    //
+
+    const Style &style = Style::instance();
+
     offState->assignProperty(thumb, "shift", 0);
     onState->assignProperty(thumb, "shift", 1);
 
+    QColor trackOnColor = style.themeColor("primary1");
+    trackOnColor.setAlpha(100);
+
+    QColor trackOffColor = style.themeColor("accent3");
+    trackOffColor.setAlpha(170);
+
+    offState->assignProperty(track, "trackColor", trackOffColor);
+    onState->assignProperty(track, "trackColor", trackOnColor);
+
+    offState->assignProperty(thumb, "thumbColor", style.themeColor("canvas"));
+    onState->assignProperty(thumb, "thumbColor", style.themeColor("primary1"));
+
     machine.start();
 
-    QObject::connect(thumb, SIGNAL(clicked()), q, SLOT(addRipple()));
+    QObject::connect(thumb, SIGNAL(clicked(bool)), q, SLOT(addRipple(bool)));
 }
 
 Toggle::Toggle(QWidget *parent)
@@ -114,19 +158,28 @@ void Toggle::updateOverlayGeometry()
     }
 }
 
-void Toggle::addRipple()
+void Toggle::addRipple(bool checked)
 {
     Q_D(Toggle);
 
+    int t, w;
+
     if (Qt::Horizontal == d->orientation) {
-        const int t = height()/2;
-        const int w = d->thumb->height()/2+10;
-        d->ripple->addRipple(QPoint(10+t, 20+t), w);
+        t = height()/2;
+        w = d->thumb->height()/2+10;
     } else {
-        const int t = width()/2;
-        const int w = d->thumb->width()/2+10;
-        d->ripple->addRipple(QPoint(10+t, 20+t), w);
+        t = width()/2;
+        w = d->thumb->width()/2+10;
     }
+
+    Ripple *ripple = new Ripple(QPoint(10+t, 20+t));
+    ripple->setColor(Style::instance().themeColor(checked
+          ? "primary2"
+          : "accent3"));
+    ripple->setRadiusEndValue(w);
+    ripple->setOpacityStartValue(0.4);
+
+    d->ripple->addRipple(ripple);
 }
 
 bool Toggle::event(QEvent *event)
@@ -153,25 +206,15 @@ void Toggle::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
-    Q_D(Toggle);
-
+#ifdef DEBUG_LAYOUT
     QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
 
-    QBrush brush;
-    brush.setColor(QColor(180, 180, 180));
-    brush.setStyle(Qt::SolidPattern);
-    painter.setBrush(brush);
-
-    painter.setPen(Qt::NoPen);
-
-    if (Qt::Horizontal == d->orientation) {
-        const int h = height()/2;
-        const QRect r(0, h/2, width(), h);
-        painter.drawRoundedRect(r.adjusted(14, 4, -14, -4), h/2-4, h/2-4);
-    } else {
-        const int w = width()/2;
-        const QRect r(w/2, 0, w, height());
-        painter.drawRoundedRect(r.adjusted(4, 14, -4, -14), w/2-4, w/2-4);
-    }
+    QPen pen;
+    pen.setColor(Qt::red);
+    pen.setWidth(1);
+    painter.setOpacity(1);
+    painter.setPen(pen);
+    painter.setBrush(Qt::NoBrush);
+    painter.drawRect(rect().adjusted(0, 0, -1, -1));
+#endif
 }
