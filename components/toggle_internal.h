@@ -18,16 +18,22 @@ public:
     void setShift(qreal shift);
     inline qreal shift() const { return _shift; }
 
+    inline qreal offset() const { return _offset; }
+
+signals:
+    void clicked();
+
 protected:
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(Thumb)
 
     Toggle *const _toggle;
     qreal _shift;
-    int _offset;
+    qreal _offset;
 };
 
 #endif // TOGGLE_INTERNAL_H

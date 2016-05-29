@@ -27,6 +27,8 @@ ToggleExamples::ToggleExamples(QWidget *parent)
         Toggle *toggle = new Toggle;
         toggle->setOrientation(Qt::Vertical);
 
+        toggle->setDisabled(true);
+
         ExampleView *view = new ExampleView;
         view->setWidget(toggle);
 

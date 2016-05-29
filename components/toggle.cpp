@@ -2,11 +2,15 @@
 #include <QPainter>
 #include <QState>
 #include <QEventTransition>
+#include <QPropertyAnimation>
+#include <QDebug>
+#include "lib/rippleoverlay.h"
 #include "toggle_p.h"
 
 TogglePrivate::TogglePrivate(Toggle *q)
     : q_ptr(q),
       thumb(new Thumb(q)),
+      ripple(new RippleOverlay(q->parentWidget())),
       orientation(Qt::Horizontal)
 {
 }
@@ -26,27 +30,64 @@ void TogglePrivate::init()
     machine.setInitialState(offState);
 
     QEventTransition *transition;
+    QPropertyAnimation *animation;
+
+    //
 
     transition = new QEventTransition(q, QEvent::MouseButtonPress);
     transition->setTargetState(onState);
     offState->addTransition(transition);
 
+    animation = new QPropertyAnimation;
+    animation->setPropertyName("shift");
+    animation->setTargetObject(thumb);
+    animation->setDuration(200);
+    transition->addAnimation(animation);
+
+    //
+
     transition = new QEventTransition(q, QEvent::MouseButtonDblClick);
     transition->setTargetState(onState);
     offState->addTransition(transition);
+
+    animation = new QPropertyAnimation;
+    animation->setPropertyName("shift");
+    animation->setTargetObject(thumb);
+    animation->setDuration(200);
+    transition->addAnimation(animation);
+
+    //
 
     transition = new QEventTransition(q, QEvent::MouseButtonPress);
     transition->setTargetState(offState);
     onState->addTransition(transition);
 
+    animation = new QPropertyAnimation;
+    animation->setPropertyName("shift");
+    animation->setTargetObject(thumb);
+    animation->setDuration(200);
+    transition->addAnimation(animation);
+
+    //
+
     transition = new QEventTransition(q, QEvent::MouseButtonDblClick);
     transition->setTargetState(offState);
     onState->addTransition(transition);
+
+    animation = new QPropertyAnimation;
+    animation->setPropertyName("shift");
+    animation->setTargetObject(thumb);
+    animation->setDuration(200);
+    transition->addAnimation(animation);
+
+    //
 
     offState->assignProperty(thumb, "shift", 0);
     onState->assignProperty(thumb, "shift", 1);
 
     machine.start();
+
+    QObject::connect(thumb, SIGNAL(clicked()), q, SLOT(addRipple()));
 }
 
 Toggle::Toggle(QWidget *parent)
@@ -83,6 +124,53 @@ void Toggle::setOrientation(Qt::Orientation orientation)
     if (d->orientation == orientation)
         return;
     d->orientation = orientation;
+}
+
+void Toggle::updateOverlayGeometry()
+{
+    Q_D(Toggle);
+
+    const qreal offset = d->thumb->offset();
+    if (Qt::Horizontal == d->orientation) {
+        d->ripple->setGeometry(geometry().adjusted(-10+offset, -20, 10+offset, 20));
+    } else {
+        d->ripple->setGeometry(geometry().adjusted(-10, -20+offset, 10, 20+offset));
+    }
+}
+
+void Toggle::addRipple()
+{
+    Q_D(Toggle);
+
+    if (Qt::Horizontal == d->orientation) {
+        const int t = height()/2;
+        const int w = d->thumb->height()/2+10;
+        d->ripple->addRipple(QPoint(10+t, 20+t), w);
+    } else {
+        const int t = width()/2;
+        const int w = d->thumb->width()/2+10;
+        d->ripple->addRipple(QPoint(10+t, 20+t), w);
+    }
+}
+
+bool Toggle::event(QEvent *event)
+{
+    Q_D(Toggle);
+
+    const QEvent::Type type = event->type();
+
+    if (QEvent::EnabledChange == type) {
+        if (isEnabled()) {
+            d->machine.start();
+        } else {
+            d->machine.stop();
+        }
+    } else if (QEvent::ParentChange == type && parentWidget()) {
+        d->ripple->setParent(parentWidget());
+    } else if (QEvent::Resize == type || QEvent::Move == type) {
+        d->ripple->setGeometry(geometry().adjusted(-10, -20, 10, 20));
+    }
+    return QAbstractButton::event(event);
 }
 
 void Toggle::paintEvent(QPaintEvent *event)

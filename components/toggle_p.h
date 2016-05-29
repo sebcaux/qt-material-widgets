@@ -4,6 +4,8 @@
 #include <QStateMachine>
 #include "toggle_internal.h"
 
+class RippleOverlay;
+
 class TogglePrivate
 {
     Q_DISABLE_COPY(TogglePrivate)
@@ -16,6 +18,7 @@ public:
 
     Toggle *const q_ptr;
     Thumb  *const thumb;
+    RippleOverlay *const ripple;
     QStateMachine machine;
     Qt::Orientation orientation;
 };
