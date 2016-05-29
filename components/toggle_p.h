@@ -1,6 +1,7 @@
 #ifndef TOGGLE_P_H
 #define TOGGLE_P_H
 
+#include <QStateMachine>
 #include "toggle_internal.h"
 
 class TogglePrivate
@@ -14,6 +15,8 @@ public:
     void init();
 
     Toggle *const q_ptr;
+    Thumb  *const thumb;
+    QStateMachine machine;
     Qt::Orientation orientation;
 };
 

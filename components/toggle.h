@@ -15,6 +15,7 @@ public:
 
     QSize sizeHint() const;
 
+    Qt::Orientation orientation() const;
     void setOrientation(Qt::Orientation orientation) Q_DECL_OVERRIDE;
 
 protected:

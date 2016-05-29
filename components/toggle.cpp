@@ -1,9 +1,12 @@
 #include "toggle.h"
 #include <QPainter>
+#include <QState>
+#include <QEventTransition>
 #include "toggle_p.h"
 
 TogglePrivate::TogglePrivate(Toggle *q)
     : q_ptr(q),
+      thumb(new Thumb(q)),
       orientation(Qt::Horizontal)
 {
 }
@@ -13,6 +16,37 @@ void TogglePrivate::init()
     Q_Q(Toggle);
 
     q->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+
+    QState *offState = new QState;
+    QState *onState = new QState;
+
+    machine.addState(offState);
+    machine.addState(onState);
+
+    machine.setInitialState(offState);
+
+    QEventTransition *transition;
+
+    transition = new QEventTransition(q, QEvent::MouseButtonPress);
+    transition->setTargetState(onState);
+    offState->addTransition(transition);
+
+    transition = new QEventTransition(q, QEvent::MouseButtonDblClick);
+    transition->setTargetState(onState);
+    offState->addTransition(transition);
+
+    transition = new QEventTransition(q, QEvent::MouseButtonPress);
+    transition->setTargetState(offState);
+    onState->addTransition(transition);
+
+    transition = new QEventTransition(q, QEvent::MouseButtonDblClick);
+    transition->setTargetState(offState);
+    onState->addTransition(transition);
+
+    offState->assignProperty(thumb, "shift", 0);
+    onState->assignProperty(thumb, "shift", 1);
+
+    machine.start();
 }
 
 Toggle::Toggle(QWidget *parent)
@@ -33,6 +67,13 @@ QSize Toggle::sizeHint() const
     return Qt::Horizontal == d->orientation
         ? QSize(64, 48)
         : QSize(48, 64);
+}
+
+Qt::Orientation Toggle::orientation() const
+{
+    Q_D(const Toggle);
+
+    return d->orientation;
 }
 
 void Toggle::setOrientation(Qt::Orientation orientation)
