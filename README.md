@@ -32,4 +32,5 @@
 - [ ] Select Field
 - [ ] Progress
 - [ ] Chips
+- [ ] Floating Action Button
 - [ ] Docs
