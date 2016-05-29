@@ -21,7 +21,7 @@ public:
     Toggle *const q_ptr;
     ToggleTrack *const track;
     ToggleThumb *const thumb;
-    RippleOverlay *const ripple;
+    RippleOverlay *ripple;
     QStateMachine machine;
     Qt::Orientation orientation;
 };

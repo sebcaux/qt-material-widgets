@@ -8,9 +8,9 @@
 - [x] Flat Button
 - [x] Raised Button
 - [x] Toggle
+- [x] Icon Button
 - [ ] App Bar
 - [ ] Avatar
-- [ ] Icon Button
 - [ ] Icon Menu
 - [ ] Menu
 - [ ] Dialog

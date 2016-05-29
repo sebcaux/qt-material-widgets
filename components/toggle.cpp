@@ -3,6 +3,7 @@
 #include <QState>
 #include <QSignalTransition>
 #include <QPropertyAnimation>
+#include <QDebug>
 #include "lib/rippleoverlay.h"
 #include "lib/ripple.h"
 #include "lib/style.h"
@@ -13,7 +14,6 @@ TogglePrivate::TogglePrivate(Toggle *q)
     : q_ptr(q),
       track(new ToggleTrack(q)),
       thumb(new ToggleThumb(q)),
-      ripple(new RippleOverlay(q->parentWidget())),
       orientation(Qt::Horizontal)
 {
 }
@@ -21,6 +21,8 @@ TogglePrivate::TogglePrivate(Toggle *q)
 void TogglePrivate::init()
 {
     Q_Q(Toggle);
+
+    ripple = new RippleOverlay(q->parentWidget());
 
     q->setCheckable(true);
     q->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);

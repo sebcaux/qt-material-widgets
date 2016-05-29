@@ -44,6 +44,8 @@ IconButtonExamples::IconButtonExamples(QWidget *parent)
         IconButton *iconButton = new IconButton(QIcon("../qt-material-widgets/face.svg"));
         iconButton->setIconSize(QSize(128, 128));
 
+        iconButton->setDisabled(true);
+
         ExampleView *view = new ExampleView;
         view->setWidget(iconButton);
 

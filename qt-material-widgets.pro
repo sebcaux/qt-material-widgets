@@ -109,7 +109,8 @@ HEADERS  += mainwindow.h \
     components/flatbutton_internal.h \
     components/raisedbutton_p.h \
     components/toggle_p.h \
-    components/toggle_internal.h
+    components/toggle_internal.h \
+    components/iconbutton_p.h
 
 RESOURCES += \
     resources.qrc
