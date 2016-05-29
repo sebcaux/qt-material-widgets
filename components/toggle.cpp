@@ -1,5 +1,22 @@
 #include "toggle.h"
 
+Toggle::Toggle(QWidget *parent)
+    : QAbstractButton(parent)
+{
+}
+
+Toggle::~Toggle()
+{
+}
+
+void Toggle::setOrientation(Qt::Orientation orientation)
+{
+}
+
+void Toggle::paintEvent(QPaintEvent *event)
+{
+}
+
 //#include <QAbstractButton>
 //#include <QPropertyAnimation>
 //#include <QMouseEvent>

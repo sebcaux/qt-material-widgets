@@ -1,6 +1,22 @@
 #ifndef TOGGLE_H
 #define TOGGLE_H
 
+#include <QAbstractButton>
+
+class Toggle : public QAbstractButton
+{
+    Q_OBJECT
+
+public:
+    explicit Toggle(QWidget *parent = 0);
+    ~Toggle();
+
+    void setOrientation(Qt::Orientation orientation) Q_DECL_OVERRIDE;
+
+protected:
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+};
+
 #endif // TOGGLE_H
 
 //#ifndef TOGGLE_H
