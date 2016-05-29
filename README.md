@@ -7,6 +7,7 @@
 - [x] Slider
 - [x] Flat Button
 - [x] Raised Button
+- [x] Toggle
 - [ ] App Bar
 - [ ] Avatar
 - [ ] Icon Button
@@ -16,7 +17,6 @@
 - [ ] Scroll Bar
 - [ ] Tabs
 - [ ] Text Field
-- [ ] Toggle
 - [x] Theme
 
 #### Not started
