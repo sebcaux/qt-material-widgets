@@ -18,7 +18,8 @@ public:
     FlatButtonPrivate(FlatButton *q)
         : q_ptr(q),
           role(Material::Default),
-          rippleStyle(FlatButton::PositionedRipple)
+          rippleStyle(FlatButton::PositionedRipple),
+          cornerRadius(3)
     {}
 
     void init();
@@ -29,6 +30,7 @@ public:
     FlatButtonDelegate *delegate;
     Material::Role role;
     FlatButton::RippleStyle rippleStyle;
+    qreal cornerRadius;
 };
 
 #endif // FLATBUTTON_P_H

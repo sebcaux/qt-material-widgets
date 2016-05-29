@@ -149,13 +149,15 @@ void RaisedButton::paintEvent(QPaintEvent *event)
 
     QBrush brush;
 
+    const qreal cr = d->cornerRadius;
+
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(isEnabled()
        ? palette().color(QPalette::Active, QPalette::Background)
        : palette().color(QPalette::Disabled, QPalette::Background));
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect(), 3, 3);
+    painter.drawRoundedRect(rect(), cr, cr);
 
     if (isEnabled()) {
         const qreal hs = static_cast<qreal>(width())*d->delegate->focusHaloSize()/2;

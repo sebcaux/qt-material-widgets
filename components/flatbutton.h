@@ -11,6 +11,8 @@ class FlatButton : public QPushButton
 {
     Q_OBJECT
 
+    Q_PROPERTY(qreal cornerRadius WRITE setCornerRadius READ cornerRadius)
+
 public:
     enum RippleStyle {
         CenteredRipple,
@@ -25,6 +27,9 @@ public:
     virtual void setRole(Material::Role role);
 
     void setRippleStyle(RippleStyle style);
+
+    void setCornerRadius(qreal radius);
+    qreal cornerRadius() const;
 
 protected:
     FlatButton(FlatButtonPrivate &d, QWidget *parent = 0);

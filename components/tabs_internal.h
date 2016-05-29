@@ -1,0 +1,4 @@
+#ifndef TABS_INTERNAL_H
+#define TABS_INTERNAL_H
+
+#endif // TABS_INTERNAL_H

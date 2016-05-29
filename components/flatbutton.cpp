@@ -75,6 +75,21 @@ void FlatButton::setRippleStyle(RippleStyle style)
     d->rippleStyle = style;
 }
 
+void FlatButton::setCornerRadius(qreal radius)
+{
+    Q_D(FlatButton);
+
+    d->cornerRadius = radius;
+    update();
+}
+
+qreal FlatButton::cornerRadius() const
+{
+    Q_D(const FlatButton);
+
+    return d->cornerRadius;
+}
+
 void FlatButton::setRole(Material::Role role)
 {
     Q_D(FlatButton);
@@ -129,13 +144,14 @@ void FlatButton::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing);
 
     if (isEnabled() && bgOpacity > 0) {
+        const qreal cr = d->cornerRadius;
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
         brush.setColor(d->delegate->backgroundColor());
         painter.setOpacity(bgOpacity);
         painter.setBrush(brush);
         painter.setPen(Qt::NoPen);
-        painter.drawRoundedRect(rect(), 3, 3);
+        painter.drawRoundedRect(rect(), cr, cr);
     }
 
     if (isEnabled() && haloOpacity > 0) {
