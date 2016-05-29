@@ -45,9 +45,7 @@ bool Thumb::eventFilter(QObject *obj, QEvent *event)
     const QEvent::Type type = event->type();
     if (QEvent::Resize == type || QEvent::Move == type) {
         setGeometry(parentWidget()->rect().adjusted(8, 8, -8, -8));
-    } //else if (QEvent::MouseButtonRelease == type) {
-        //return true;
-    //}
+    }
     return QWidget::eventFilter(obj, event);
 }
 
