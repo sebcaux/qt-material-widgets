@@ -5,9 +5,7 @@
 #include <QApplication>
 #include "lib/style.h"
 #include "slider.h"
-#include "slidertrack.h"
-#include "sliderthumb.h"
-#include "sliderstatemachine.h"
+#include "slider_internal.h"
 
 class SliderPrivate
 {
