@@ -13,6 +13,8 @@ public:
     explicit Toggle(QWidget *parent = 0);
     ~Toggle();
 
+    QSize sizeHint() const;
+
     void setOrientation(Qt::Orientation orientation) Q_DECL_OVERRIDE;
 
 protected:

@@ -1,13 +1,18 @@
 #include "toggle.h"
+#include <QPainter>
 #include "toggle_p.h"
 
 TogglePrivate::TogglePrivate(Toggle *q)
-    : q_ptr(q)
+    : q_ptr(q),
+      orientation(Qt::Horizontal)
 {
 }
 
 void TogglePrivate::init()
 {
+    Q_Q(Toggle);
+
+    q->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
 }
 
 Toggle::Toggle(QWidget *parent)
@@ -21,12 +26,49 @@ Toggle::~Toggle()
 {
 }
 
+QSize Toggle::sizeHint() const
+{
+    Q_D(const Toggle);
+
+    return Qt::Horizontal == d->orientation
+        ? QSize(64, 48)
+        : QSize(48, 64);
+}
+
 void Toggle::setOrientation(Qt::Orientation orientation)
 {
+    Q_D(Toggle);
+
+    if (d->orientation == orientation)
+        return;
+    d->orientation = orientation;
 }
 
 void Toggle::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event)
+
+    Q_D(Toggle);
+
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    QBrush brush;
+    brush.setColor(QColor(180, 180, 180));
+    brush.setStyle(Qt::SolidPattern);
+    painter.setBrush(brush);
+
+    painter.setPen(Qt::NoPen);
+
+    if (Qt::Horizontal == d->orientation) {
+        const int h = height()/2;
+        const QRect r(0, h/2, width(), h);
+        painter.drawRoundedRect(r.adjusted(14, 4, -14, -4), h/2-4, h/2-4);
+    } else {
+        const int w = width()/2;
+        const QRect r(w/2, 0, w, height());
+        painter.drawRoundedRect(r.adjusted(4, 14, -4, -14), w/2-4, w/2-4);
+    }
 }
 
 //#include <QAbstractButton>

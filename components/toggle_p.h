@@ -14,6 +14,7 @@ public:
     void init();
 
     Toggle *const q_ptr;
+    Qt::Orientation orientation;
 };
 
 #endif // TOGGLE_P_H
