@@ -53,7 +53,6 @@ void TabsDelegate::updateInkBar()
     }
 }
 
-
 Tab::Tab(QWidget *parent)
     : FlatButton(parent)
 {
