@@ -19,18 +19,20 @@ public:
         : q_ptr(q),
           role(Material::Default),
           rippleStyle(Material::PositionedRipple),
-          cornerRadius(3)
+          cornerRadius(3),
+          bgMode(Qt::TransparentMode)
     {}
 
     void init();
     void setPaletteColor(QPalette::ColorGroup group, QPalette::ColorRole role, const QString &themeColor);
 
-    FlatButton *const q_ptr;
-    RippleOverlay *ripple;
-    FlatButtonDelegate *delegate;
-    Material::Role role;
+    FlatButton           *const q_ptr;
+    RippleOverlay        *ripple;
+    FlatButtonDelegate   *delegate;
+    Material::Role        role;
     Material::RippleStyle rippleStyle;
-    qreal cornerRadius;
+    qreal                 cornerRadius;
+    Qt::BGMode            bgMode;
 };
 
 #endif // FLATBUTTON_P_H

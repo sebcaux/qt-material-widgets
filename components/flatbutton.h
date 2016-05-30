@@ -11,7 +11,10 @@ class FlatButton : public QPushButton
 {
     Q_OBJECT
 
+    Q_PROPERTY(Material::Role role WRITE setRole READ role)
+    Q_PROPERTY(Material::RippleStyle rippleStyle WRITE setRippleStyle READ rippleStyle)
     Q_PROPERTY(qreal cornerRadius WRITE setCornerRadius READ cornerRadius)
+    Q_PROPERTY(Qt::BGMode bgMode WRITE setBgMode READ bgMode)
 
 public:
     explicit FlatButton(QWidget *parent = 0);
@@ -19,11 +22,16 @@ public:
     ~FlatButton();
 
     virtual void setRole(Material::Role role);
+    Material::Role role() const;
 
     void setRippleStyle(Material::RippleStyle style);
+    Material::RippleStyle rippleStyle() const;
 
     void setCornerRadius(qreal radius);
     qreal cornerRadius() const;
+
+    void setBgMode(Qt::BGMode mode);
+    Qt::BGMode bgMode() const;
 
 protected:
     FlatButton(FlatButtonPrivate &d, QWidget *parent = 0);
