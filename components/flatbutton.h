@@ -15,6 +15,10 @@ class FlatButton : public QPushButton
     Q_PROPERTY(Material::RippleStyle rippleStyle WRITE setRippleStyle READ rippleStyle)
     Q_PROPERTY(qreal cornerRadius WRITE setCornerRadius READ cornerRadius)
     Q_PROPERTY(Qt::BGMode bgMode WRITE setBgMode READ bgMode)
+    Q_PROPERTY(QColor primaryTextColor WRITE setPrimaryTextColor READ primaryTextColor)
+    Q_PROPERTY(QColor secondaryTextColor WRITE setSecondaryTextColor READ secondaryTextColor)
+    Q_PROPERTY(QColor defaultTextColor WRITE setDefaultTextColor READ defaultTextColor)
+    Q_PROPERTY(QColor disabledTextColor WRITE setDisabledTextColor READ disabledTextColor)
 
 public:
     explicit FlatButton(QWidget *parent = 0);
@@ -32,6 +36,18 @@ public:
 
     void setBgMode(Qt::BGMode mode);
     Qt::BGMode bgMode() const;
+
+    void setPrimaryTextColor(const QColor &color);
+    QColor primaryTextColor() const;
+
+    void setSecondaryTextColor(const QColor &color);
+    QColor secondaryTextColor() const;
+
+    void setDefaultTextColor(const QColor &color);
+    QColor defaultTextColor() const;
+
+    void setDisabledTextColor(const QColor &color);
+    QColor disabledTextColor() const;
 
 protected:
     FlatButton(FlatButtonPrivate &d, QWidget *parent = 0);

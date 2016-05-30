@@ -1,6 +1,8 @@
 #ifndef ICONBUTTON_P_H
 #define ICONBUTTON_P_H
 
+#include <QObject>
+
 class IconButton;
 class RippleOverlay;
 
@@ -14,7 +16,7 @@ public:
 
     void init();
 
-    IconButton *const q_ptr;
+    IconButton    *const q_ptr;
     RippleOverlay *ripple;
 };
 

@@ -32,7 +32,7 @@ public:
     void setFocusHaloSize(qreal size);
     qreal focusHaloSize() const;
 
-    void assignProperties();
+    void updatePalette();
 
 private:
     Q_DISABLE_COPY(FlatButtonDelegate)

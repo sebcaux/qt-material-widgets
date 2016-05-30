@@ -15,16 +15,13 @@ class FlatButtonPrivate
     Q_DECLARE_PUBLIC(FlatButton)
 
 public:
-    FlatButtonPrivate(FlatButton *q)
-        : q_ptr(q),
-          role(Material::Default),
-          rippleStyle(Material::PositionedRipple),
-          cornerRadius(3),
-          bgMode(Qt::TransparentMode)
-    {}
+    FlatButtonPrivate(FlatButton *q);
 
     void init();
-    void setPaletteColor(QPalette::ColorGroup group, QPalette::ColorRole role, const QString &themeColor);
+
+    /*
+    void setPaletteColor(QPalette::ColorGroup group, QPalette::ColorRole role, const QColor &color);
+    */
 
     FlatButton           *const q_ptr;
     RippleOverlay        *ripple;
@@ -33,6 +30,10 @@ public:
     Material::RippleStyle rippleStyle;
     qreal                 cornerRadius;
     Qt::BGMode            bgMode;
+    QColor                primaryTextColor;
+    QColor                secondaryTextColor;
+    QColor                defaultTextColor;
+    QColor                disabledTextColor;
 };
 
 #endif // FLATBUTTON_P_H

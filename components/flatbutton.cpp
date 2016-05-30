@@ -9,6 +9,15 @@
 #include "lib/ripple.h"
 #include "flatbutton_p.h"
 
+FlatButtonPrivate::FlatButtonPrivate(FlatButton *q)
+    : q_ptr(q),
+      role(Material::Default),
+      rippleStyle(Material::PositionedRipple),
+      cornerRadius(3),
+      bgMode(Qt::TransparentMode)
+{
+}
+
 void FlatButtonPrivate::init()
 {
     Q_Q(FlatButton);
@@ -27,26 +36,27 @@ void FlatButtonPrivate::init()
     font.setPointSizeF(10.5);
     font.setStyleName("Medium");
     q->setFont(font);
-
-    QPalette palette;
-    palette.setColor(QPalette::Disabled, QPalette::ButtonText,
-                     style.themeColor("disabled"));
-    q->setPalette(palette);
 }
 
+/*
 void FlatButtonPrivate::setPaletteColor(QPalette::ColorGroup group,
                                         QPalette::ColorRole role,
-                                        const QString &themeColor)
+                                        const QColor &color)
 {
     Q_Q(FlatButton);
 
     QPalette palette(q->palette());
-    Style &style = Style::instance();
-
-    palette.setColor(group, role, style.themeColor(themeColor));
-
+    palette.setColor(group, role, color);
     q->setPalette(palette);
+
+//    QPalette palette(q->palette());
+//    Style &style = Style::instance();
+//
+//    palette.setColor(group, role, style.themeColor(themeColor));
+//
+//    q->setPalette(palette);
 }
+*/
 
 FlatButton::FlatButton(QWidget *parent)
     : QPushButton(parent),
@@ -112,26 +122,72 @@ Qt::BGMode FlatButton::bgMode() const
     return d->bgMode;
 }
 
+void FlatButton::setPrimaryTextColor(const QColor &color)
+{
+    Q_D(FlatButton);
+
+    d->primaryTextColor = color;
+    d->delegate->updatePalette();
+}
+
+QColor FlatButton::primaryTextColor() const
+{
+    Q_D(const FlatButton);
+
+    return d->primaryTextColor;
+}
+
+void FlatButton::setSecondaryTextColor(const QColor &color)
+{
+    Q_D(FlatButton);
+
+    d->secondaryTextColor = color;
+    d->delegate->updatePalette();
+}
+
+QColor FlatButton::secondaryTextColor() const
+{
+    Q_D(const FlatButton);
+
+    return d->secondaryTextColor;
+}
+
+void FlatButton::setDefaultTextColor(const QColor &color)
+{
+    Q_D(FlatButton);
+
+    d->defaultTextColor = color;
+    d->delegate->updatePalette();
+}
+
+QColor FlatButton::defaultTextColor() const
+{
+    Q_D(const FlatButton);
+
+    return d->defaultTextColor;
+}
+
+void FlatButton::setDisabledTextColor(const QColor &color)
+{
+    Q_D(FlatButton);
+
+    d->disabledTextColor = color;
+    d->delegate->updatePalette();
+}
+
+QColor FlatButton::disabledTextColor() const
+{
+    Q_D(const FlatButton);
+
+    return d->disabledTextColor;
+}
+
 void FlatButton::setRole(Material::Role role)
 {
     Q_D(FlatButton);
 
     d->role = role;
-
-    switch (role)
-    {
-    case Material::Primary:
-        d->setPaletteColor(QPalette::Active, QPalette::ButtonText, "primary1");
-        break;
-    case Material::Secondary:
-        d->setPaletteColor(QPalette::Active, QPalette::ButtonText, "accent1");
-        break;
-    default:
-        d->setPaletteColor(QPalette::Active, QPalette::ButtonText, "text");
-        break;
-    }
-    d->delegate->assignProperties();
-    update();
+    d->delegate->updatePalette();
 }
 
 Material::Role FlatButton::role() const

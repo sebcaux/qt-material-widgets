@@ -103,6 +103,7 @@ void RaisedButton::setRole(Material::Role role)
 
     d->role = role;
 
+    /*
     switch (role)
     {
     case Material::Primary:
@@ -120,6 +121,7 @@ void RaisedButton::setRole(Material::Role role)
     }
     d->delegate->assignProperties();
     update();
+    */
 }
 
 bool RaisedButton::event(QEvent *event)

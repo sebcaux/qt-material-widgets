@@ -1,6 +1,7 @@
 #include <QPainter>
 #include <QEvent>
 #include <QGraphicsDropShadowEffect>
+#include <QDebug>
 #include "lib/style.h"
 #include "toggle_internal.h"
 #include "toggle.h"
@@ -84,6 +85,7 @@ void ToggleThumb::mouseReleaseEvent(QMouseEvent *event)
     if (_toggle->isEnabled()) {
         const bool newChecked = !_toggle->isChecked();
         _toggle->setChecked(newChecked);
+        qDebug() << "checked : " << newChecked;
         emit clicked(newChecked);
     }
     QWidget::mouseReleaseEvent(event);

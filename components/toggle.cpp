@@ -25,6 +25,7 @@ void TogglePrivate::init()
     ripple = new RippleOverlay(q->parentWidget());
 
     q->setCheckable(true);
+    q->setChecked(false);
     q->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
 
     QState *offState = new QState;
