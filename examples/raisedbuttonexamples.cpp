@@ -7,6 +7,7 @@
 RaisedButtonExamples::RaisedButtonExamples(QWidget *parent)
     : ExampleList(parent)
 {
+
     QLayout *layout = widget()->layout();
 
     RaisedButton *raisedButton = new RaisedButton;
@@ -19,7 +20,6 @@ RaisedButtonExamples::RaisedButtonExamples(QWidget *parent)
 
     layout->addWidget(raisedButton);
     //layout->setAlignment(raisedButton, Qt::AlignHCenter);
-
 
     QPushButton *pb = new QPushButton;
     pb->setText("Press me!");

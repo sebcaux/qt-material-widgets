@@ -9,9 +9,8 @@ class RaisedButtonPrivate : public FlatButtonPrivate
     Q_DECLARE_PUBLIC(RaisedButton)
 
 public:
-    RaisedButtonPrivate(RaisedButton *q)
-        : FlatButtonPrivate(q)
-    {}
+    RaisedButtonPrivate(RaisedButton *q);
+    ~RaisedButtonPrivate();
 
     void init();
 

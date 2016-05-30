@@ -19,8 +19,6 @@ FlatButtonDelegate::FlatButtonDelegate(FlatButton *parent)
 {
     setInitialState(_normalState);
 
-    updatePalette();
-
     addTransition(QEvent::Enter, _normalFocusedState, _hoveredFocusedState);
     addTransition(QEvent::FocusIn, _normalState, _normalFocusedState);
     addTransition(QEvent::FocusOut, _normalFocusedState, _normalState);
@@ -124,6 +122,7 @@ void FlatButtonDelegate::updatePalette()
 
     QPalette palette(button->palette());
     palette.setColor(QPalette::Active, QPalette::ButtonText, color);
+    palette.setColor(QPalette::Inactive, QPalette::ButtonText, color);
     palette.setColor(QPalette::Disabled, QPalette::ButtonText, button->disabledTextColor());
     button->setPalette(palette);
 
@@ -133,17 +132,17 @@ void FlatButtonDelegate::updatePalette()
 
     _normalFocusedState->assignProperty(this, "backgroundOpacity", 0);
     _normalFocusedState->assignProperty(this, "backgroundColor", color);
-    _normalFocusedState->assignProperty(this, "focusHaloOpacity", 0.15);
+    _normalFocusedState->assignProperty(this, "focusHaloOpacity", button->peakOpacity());
 
-    _hoveredState->assignProperty(this, "backgroundOpacity", 0.15);
+    _hoveredState->assignProperty(this, "backgroundOpacity", button->peakOpacity());
     _hoveredState->assignProperty(this, "backgroundColor", color);
     _hoveredState->assignProperty(this, "focusHaloOpacity", 0);
 
-    _hoveredFocusedState->assignProperty(this, "backgroundOpacity", 0.15);
+    _hoveredFocusedState->assignProperty(this, "backgroundOpacity", button->peakOpacity());
     _hoveredFocusedState->assignProperty(this, "backgroundColor", color);
-    _normalFocusedState->assignProperty(this, "focusHaloOpacity", 0.15);
+    _normalFocusedState->assignProperty(this, "focusHaloOpacity", button->peakOpacity());
 
-    _pressedState->assignProperty(this, "backgroundOpacity", 0.15);
+    _pressedState->assignProperty(this, "backgroundOpacity", button->peakOpacity());
     _pressedState->assignProperty(this, "backgroundColor", color);
     _pressedState->assignProperty(this, "focusHaloOpacity", 0);
 

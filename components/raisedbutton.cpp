@@ -10,9 +10,22 @@
 #include <QDebug>
 #include "raisedbutton_p.h"
 
+RaisedButtonPrivate::RaisedButtonPrivate(RaisedButton *q)
+    : FlatButtonPrivate(q)
+{
+}
+
+RaisedButtonPrivate::~RaisedButtonPrivate()
+{
+}
+
 void RaisedButtonPrivate::init()
 {
     Q_Q(RaisedButton);
+
+    q->setPrimaryTextColor(Qt::white);
+    q->setSecondaryTextColor(Qt::white);
+    q->setPeakOpacity(0.25);
 
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
     effect->setBlurRadius(7);
@@ -97,33 +110,6 @@ RaisedButton::~RaisedButton()
 {
 }
 
-void RaisedButton::setRole(Material::Role role)
-{
-    Q_D(FlatButton);
-
-    d->role = role;
-
-    /*
-    switch (role)
-    {
-    case Material::Primary:
-        d->setPaletteColor(QPalette::Active, QPalette::Background, "primary1");
-        d->setPaletteColor(QPalette::Active, QPalette::ButtonText, "alternateText");
-        break;
-    case Material::Secondary:
-        d->setPaletteColor(QPalette::Active, QPalette::Background, "accent1");
-        d->setPaletteColor(QPalette::Active, QPalette::ButtonText, "alternateText");
-        break;
-    default:
-        d->setPaletteColor(QPalette::Active, QPalette::Background, "canvas");
-        d->setPaletteColor(QPalette::Active, QPalette::ButtonText, "text");
-        break;
-    }
-    d->delegate->assignProperties();
-    update();
-    */
-}
-
 bool RaisedButton::event(QEvent *event)
 {
     Q_D(RaisedButton);
@@ -149,14 +135,26 @@ void RaisedButton::paintEvent(QPaintEvent *event)
 
     painter.save();
 
-    QBrush brush;
-
     const qreal cr = d->cornerRadius;
 
+    QColor bg;
+    switch (d->role)
+    {
+    case Material::Primary:
+        bg = d->primaryBgColor;
+        break;
+    case Material::Secondary:
+        bg = d->secondaryBgColor;
+        break;
+    case Material::Default:
+    default:
+        bg = d->defaultBgColor;
+    }
+
+    QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(isEnabled()
-       ? palette().color(QPalette::Active, QPalette::Background)
-       : palette().color(QPalette::Disabled, QPalette::Background));
+       ? bg : palette().color(QPalette::Disabled, QPalette::Background));
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
     painter.drawRoundedRect(rect(), cr, cr);

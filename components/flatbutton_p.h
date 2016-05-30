@@ -16,12 +16,9 @@ class FlatButtonPrivate
 
 public:
     FlatButtonPrivate(FlatButton *q);
+    virtual ~FlatButtonPrivate();
 
     void init();
-
-    /*
-    void setPaletteColor(QPalette::ColorGroup group, QPalette::ColorRole role, const QColor &color);
-    */
 
     FlatButton           *const q_ptr;
     RippleOverlay        *ripple;
@@ -34,6 +31,10 @@ public:
     QColor                secondaryTextColor;
     QColor                defaultTextColor;
     QColor                disabledTextColor;
+    QColor                primaryBgColor;
+    QColor                secondaryBgColor;
+    QColor                defaultBgColor;
+    qreal                 peakOpacity;
 };
 
 #endif // FLATBUTTON_P_H

@@ -15,17 +15,21 @@ class FlatButton : public QPushButton
     Q_PROPERTY(Material::RippleStyle rippleStyle WRITE setRippleStyle READ rippleStyle)
     Q_PROPERTY(qreal cornerRadius WRITE setCornerRadius READ cornerRadius)
     Q_PROPERTY(Qt::BGMode bgMode WRITE setBgMode READ bgMode)
+    Q_PROPERTY(QColor primaryBgColor WRITE setPrimaryBgColor READ primaryBgColor)
+    Q_PROPERTY(QColor secondaryBgColor WRITE setSecondaryBgColor READ secondaryBgColor)
+    Q_PROPERTY(QColor defaultBgColor WRITE setDefaultBgColor READ defaultBgColor)
     Q_PROPERTY(QColor primaryTextColor WRITE setPrimaryTextColor READ primaryTextColor)
     Q_PROPERTY(QColor secondaryTextColor WRITE setSecondaryTextColor READ secondaryTextColor)
     Q_PROPERTY(QColor defaultTextColor WRITE setDefaultTextColor READ defaultTextColor)
     Q_PROPERTY(QColor disabledTextColor WRITE setDisabledTextColor READ disabledTextColor)
+    Q_PROPERTY(qreal peakOpacity WRITE setPeakOpacity READ peakOpacity)
 
 public:
     explicit FlatButton(QWidget *parent = 0);
     explicit FlatButton(const QString &text, QWidget *parent = 0);
     ~FlatButton();
 
-    virtual void setRole(Material::Role role);
+    void setRole(Material::Role role);
     Material::Role role() const;
 
     void setRippleStyle(Material::RippleStyle style);
@@ -36,6 +40,15 @@ public:
 
     void setBgMode(Qt::BGMode mode);
     Qt::BGMode bgMode() const;
+
+    void setPrimaryBgColor(const QColor &color);
+    QColor primaryBgColor() const;
+
+    void setSecondaryBgColor(const QColor &color);
+    QColor secondaryBgColor() const;
+
+    void setDefaultBgColor(const QColor &color);
+    QColor defaultBgColor() const;
 
     void setPrimaryTextColor(const QColor &color);
     QColor primaryTextColor() const;
@@ -48,6 +61,9 @@ public:
 
     void setDisabledTextColor(const QColor &color);
     QColor disabledTextColor() const;
+
+    void setPeakOpacity(qreal opacity);
+    qreal peakOpacity() const;
 
 protected:
     FlatButton(FlatButtonPrivate &d, QWidget *parent = 0);

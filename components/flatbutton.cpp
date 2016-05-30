@@ -14,7 +14,12 @@ FlatButtonPrivate::FlatButtonPrivate(FlatButton *q)
       role(Material::Default),
       rippleStyle(Material::PositionedRipple),
       cornerRadius(3),
-      bgMode(Qt::TransparentMode)
+      bgMode(Qt::TransparentMode),
+      peakOpacity(0.15)
+{
+}
+
+FlatButtonPrivate::~FlatButtonPrivate()
 {
 }
 
@@ -36,27 +41,21 @@ void FlatButtonPrivate::init()
     font.setPointSizeF(10.5);
     font.setStyleName("Medium");
     q->setFont(font);
+
+    // Apply theme style
+
+    q->setPrimaryBgColor(style.themeColor("primary1"));
+    q->setSecondaryBgColor(style.themeColor("accent1"));
+    q->setDefaultBgColor(style.themeColor("text"));
+
+    q->setPrimaryTextColor(style.themeColor("primary1"));
+    q->setSecondaryTextColor(style.themeColor("accent1"));
+    q->setDefaultTextColor(style.themeColor("text"));
+
+    q->setDisabledTextColor(style.themeColor("disabled"));
+
+    delegate->updatePalette();
 }
-
-/*
-void FlatButtonPrivate::setPaletteColor(QPalette::ColorGroup group,
-                                        QPalette::ColorRole role,
-                                        const QColor &color)
-{
-    Q_Q(FlatButton);
-
-    QPalette palette(q->palette());
-    palette.setColor(group, role, color);
-    q->setPalette(palette);
-
-//    QPalette palette(q->palette());
-//    Style &style = Style::instance();
-//
-//    palette.setColor(group, role, style.themeColor(themeColor));
-//
-//    q->setPalette(palette);
-}
-*/
 
 FlatButton::FlatButton(QWidget *parent)
     : QPushButton(parent),
@@ -122,6 +121,51 @@ Qt::BGMode FlatButton::bgMode() const
     return d->bgMode;
 }
 
+void FlatButton::setPrimaryBgColor(const QColor &color)
+{
+    Q_D(FlatButton);
+
+    d->primaryBgColor = color;
+    d->delegate->updatePalette();
+}
+
+QColor FlatButton::primaryBgColor() const
+{
+    Q_D(const FlatButton);
+
+    return d->primaryBgColor;
+}
+
+void FlatButton::setSecondaryBgColor(const QColor &color)
+{
+    Q_D(FlatButton);
+
+    d->secondaryBgColor = color;
+    d->delegate->updatePalette();
+}
+
+QColor FlatButton::secondaryBgColor() const
+{
+    Q_D(const FlatButton);
+
+    return d->secondaryBgColor;
+}
+
+void FlatButton::setDefaultBgColor(const QColor &color)
+{
+    Q_D(FlatButton);
+
+    d->defaultBgColor = color;
+    d->delegate->updatePalette();
+}
+
+QColor FlatButton::defaultBgColor() const
+{
+    Q_D(const FlatButton);
+
+    return d->defaultBgColor;
+}
+
 void FlatButton::setPrimaryTextColor(const QColor &color)
 {
     Q_D(FlatButton);
@@ -182,6 +226,21 @@ QColor FlatButton::disabledTextColor() const
     return d->disabledTextColor;
 }
 
+void FlatButton::setPeakOpacity(qreal opacity)
+{
+    Q_D(FlatButton);
+
+    d->peakOpacity = opacity;
+    d->delegate->updatePalette();
+}
+
+qreal FlatButton::peakOpacity() const
+{
+    Q_D(const FlatButton);
+
+    return d->peakOpacity;
+}
+
 void FlatButton::setRole(Material::Role role)
 {
     Q_D(FlatButton);
@@ -232,7 +291,20 @@ void FlatButton::paintEvent(QPaintEvent *event)
     if (Qt::OpaqueMode == d->bgMode) {
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
-        brush.setColor(Qt::red);
+        QColor color;
+        switch (d->role)
+        {
+        case Material::Primary:
+            color = d->primaryBgColor;
+            break;
+        case Material::Secondary:
+            color = d->secondaryBgColor;
+            break;
+        case Material::Default:
+        default:
+            color = d->defaultBgColor;
+        }
+        brush.setColor(color);
         painter.setOpacity(1);
         painter.setBrush(brush);
         painter.setPen(Qt::NoPen);
@@ -289,7 +361,8 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
     QColor color = palette().color(QPalette::Active, QPalette::ButtonText);
 
     Ripple *ripple = new Ripple(Material::CenteredRipple == d->rippleStyle
-        ? rect().center() : event->pos());
+        ? rect().center()
+        : event->pos());
 
     ripple->setRadiusEndValue(100);
     ripple->setOpacityStartValue(0.4);

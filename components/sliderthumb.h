@@ -18,7 +18,7 @@ class SliderThumb : public QWidget
 
 public:
     explicit SliderThumb(Slider *slider);
-    ~SliderThumb();
+    virutal ~SliderThumb();
 
     inline void setDiameter(qreal diameter)
     {
