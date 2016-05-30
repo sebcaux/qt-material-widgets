@@ -18,7 +18,6 @@ SOURCES += main.cpp\
     components/list.cpp \
     components/radiobutton.cpp \
     components/slider.cpp \
-    components/tab.cpp \
     components/tabs.cpp \
     components/textfield.cpp \
     components/table.cpp \
@@ -69,7 +68,6 @@ HEADERS  += mainwindow.h \
     components/radiobutton.h \
     components/slider.h \
     components/slider_p.h \
-    components/tab.h \
     components/tabs.h \
     components/textfield.h \
     components/table.h \
