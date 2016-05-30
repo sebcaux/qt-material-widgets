@@ -68,7 +68,7 @@ FlatButton::~FlatButton()
 {
 }
 
-void FlatButton::setRippleStyle(RippleStyle style)
+void FlatButton::setRippleStyle(Material::RippleStyle style)
 {
     Q_D(FlatButton);
 
@@ -187,13 +187,13 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
 {
     Q_D(FlatButton);
 
-    if (FlatButton::NoRipple == d->rippleStyle) {
+    if (Material::NoRipple == d->rippleStyle) {
         return;
     }
 
     QColor color = palette().color(QPalette::Active, QPalette::ButtonText);
 
-    Ripple *ripple = new Ripple(FlatButton::CenteredRipple == d->rippleStyle
+    Ripple *ripple = new Ripple(Material::CenteredRipple == d->rippleStyle
         ? rect().center() : event->pos());
 
     ripple->setRadiusEndValue(100);

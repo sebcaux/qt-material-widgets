@@ -8,6 +8,12 @@
 
 namespace Material
 {
+    enum RippleStyle {
+        CenteredRipple,
+        PositionedRipple,
+        NoRipple
+    };
+
     enum Role {
         Default,
         Primary,

@@ -2,6 +2,7 @@
 #define TABS_H
 
 #include <QWidget>
+#include "lib/theme.h"
 
 class TabsPrivate;
 
@@ -14,6 +15,8 @@ public:
     ~Tabs();
 
     void addTab(const QString &text);
+
+    void setRippleStyle(Material::RippleStyle style);
 
     const QLayout *tabLayout() const;
     int currentIndex() const;

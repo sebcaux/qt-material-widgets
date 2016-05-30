@@ -4,6 +4,8 @@
 #include <QPropertyAnimation>
 #include "tabs_p.h"
 #include "tabs_internal.h"
+#include "lib/ripple.h"
+#include "lib/style.h"
 
 TabsPrivate::TabsPrivate(Tabs *q)
     : q_ptr(q),
@@ -21,6 +23,7 @@ void TabsPrivate::init()
     q->setLayout(tabLayout);
     tabLayout->setSpacing(0);
     tabLayout->setMargin(0);
+    tabLayout->setContentsMargins(0, 0, 0, 2);
 }
 
 Tabs::Tabs(QWidget *parent)
@@ -40,6 +43,8 @@ void Tabs::addTab(const QString &text)
 
     Tab *tab = new Tab(text);
     tab->setCornerRadius(0);
+    tab->setRippleStyle(Material::CenteredRipple);
+    tab->setRole(Material::Primary);
     d->tabLayout->addWidget(tab);
 
     if (-1 == d->tab) {
@@ -48,6 +53,20 @@ void Tabs::addTab(const QString &text)
     }
 
     connect(tab, SIGNAL(clicked()), this, SLOT(switchTab()));
+}
+
+void Tabs::setRippleStyle(Material::RippleStyle style)
+{
+    Q_D(Tabs);
+
+    Tab *tab;
+    for (int i = 0; i < d->tabLayout->count(); ++i) {
+        QLayoutItem *item = d->tabLayout->itemAt(i);
+        if ((tab = static_cast<Tab *>(item->widget()))) {
+            tab->setRippleStyle(style);
+        }
+    }
+
 }
 
 const QLayout *Tabs::tabLayout() const
@@ -69,7 +88,8 @@ void Tabs::paintEvent(QPaintEvent *event)
     Q_D(Tabs);
 
     QPainter painter(this);
-    painter.fillRect(d->delegate->inkBarGeometry(), Qt::black);
+    painter.fillRect(d->delegate->inkBarGeometry(),
+        Style::instance().themeColor("accent1"));
 
     QWidget::paintEvent(event);
 }
