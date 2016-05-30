@@ -55,7 +55,8 @@ SOURCES += main.cpp\
     lib/theme.cpp \
     components/slider_internal.cpp \
     components/flatbutton_internal.cpp \
-    components/toggle_internal.cpp
+    components/toggle_internal.cpp \
+    components/tabs_internal.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -110,7 +111,9 @@ HEADERS  += mainwindow.h \
     components/raisedbutton_p.h \
     components/toggle_p.h \
     components/toggle_internal.h \
-    components/iconbutton_p.h
+    components/iconbutton_p.h \
+    components/tabs_p.h \
+    components/tabs_internal.h
 
 RESOURCES += \
     resources.qrc

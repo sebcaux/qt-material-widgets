@@ -27,9 +27,13 @@ TabsExamples::TabsExamples(QWidget *parent)
         layout->addLayout(stack);
         layout->setContentsMargins(0, 0, 0, 0);
 
-        tabs->addTab(new Tab("First"));
-        tabs->addTab(new Tab("Second"));
-        tabs->addTab(new Tab("Third"));
+        tabs->addTab("First");
+        tabs->addTab("Second");
+        tabs->addTab("Third");
+
+        //tabs->addTab(new Tab("First"));
+        //tabs->addTab(new Tab("Second"));
+        //tabs->addTab(new Tab("Third"));
 
         QScrollArea *area = new QScrollArea;
         area->setWidget(widget);
