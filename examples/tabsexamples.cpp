@@ -3,7 +3,6 @@
 #include <QLabel>
 #include "tabsexamples.h"
 #include "components/tabs.h"
-#include "components/tab.h"
 #include "frame.h"
 
 TabsExamples::TabsExamples(QWidget *parent)
