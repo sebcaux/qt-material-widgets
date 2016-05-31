@@ -45,6 +45,10 @@ void Tabs::addTab(const QString &text)
     tab->setCornerRadius(0);
     tab->setRippleStyle(Material::CenteredRipple);
     tab->setRole(Material::Primary);
+    tab->setBgMode(Qt::OpaqueMode);
+    tab->setPrimaryTextColor(Qt::white);
+    tab->setPeakOpacity(0.25);
+
     d->tabLayout->addWidget(tab);
 
     if (-1 == d->tab) {
