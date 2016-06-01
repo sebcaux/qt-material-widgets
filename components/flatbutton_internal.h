@@ -45,6 +45,7 @@ private:
     QState     *const _hoveredState;
     QState     *const _hoveredFocusedState;
     QState     *const _pressedState;
+    QState     *const _releaseState;
     qreal             _backgroundOpacity;
     qreal             _focusHaloOpacity;
     qreal             _focusHaloSize;

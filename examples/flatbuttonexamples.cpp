@@ -57,9 +57,31 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
         flatButton->setText("Press me!");
         flatButton->setMinimumSize(200, 42);
 
+        flatButton->setRole(Material::Secondary);
+        flatButton->setSecondaryBgColor(QColor(0, 0, 0, 80));
+//        flatButton->setDisabled(true);
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(flatButton);
+        view->setBackgroundRole(QPalette::Base);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "FlatButton *flatButton = new FlatButton;\n"
+            "flatButton->setText(\"Press me!\");"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
+    {
+        FlatButton *flatButton = new FlatButton;
+        flatButton->setText("Press me!");
+        flatButton->setMinimumSize(200, 42);
+
         flatButton->setRole(Material::Primary);
         flatButton->setBgMode(Qt::OpaqueMode);
-        flatButton->setPrimaryTextColor(Qt::white);
+        //flatButton->setPrimaryTextColor(Qt::white);
         flatButton->setPeakOpacity(0.25);
 
         ExampleView *view = new ExampleView;
@@ -82,7 +104,6 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
 
         flatButton->setRole(Material::Secondary);
         flatButton->setBgMode(Qt::OpaqueMode);
-        flatButton->setSecondaryTextColor(Qt::white);
         flatButton->setPeakOpacity(0.25);
 
         ExampleView *view = new ExampleView;
