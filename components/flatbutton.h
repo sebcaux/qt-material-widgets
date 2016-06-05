@@ -14,13 +14,9 @@ class FlatButton : public QPushButton
     Q_PROPERTY(Material::Role role WRITE setRole READ role)
     Q_PROPERTY(Material::RippleStyle rippleStyle WRITE setRippleStyle READ rippleStyle)
     Q_PROPERTY(qreal cornerRadius WRITE setCornerRadius READ cornerRadius)
-    Q_PROPERTY(Qt::BGMode bgMode WRITE setBgMode READ bgMode)
-    Q_PROPERTY(QColor primaryBgColor WRITE setPrimaryBgColor READ primaryBgColor)
-    Q_PROPERTY(QColor secondaryBgColor WRITE setSecondaryBgColor READ secondaryBgColor)
-    Q_PROPERTY(QColor defaultBgColor WRITE setDefaultBgColor READ defaultBgColor)
-    Q_PROPERTY(QColor primaryTextColor WRITE setPrimaryTextColor READ primaryTextColor)
-    Q_PROPERTY(QColor secondaryTextColor WRITE setSecondaryTextColor READ secondaryTextColor)
-    Q_PROPERTY(QColor defaultTextColor WRITE setDefaultTextColor READ defaultTextColor)
+    Q_PROPERTY(Qt::BGMode backgroundMode WRITE setBackgroundMode READ backgroundMode)
+    Q_PROPERTY(QColor textColor WRITE setTextColor READ textColor)
+    Q_PROPERTY(QColor backgroundColor WRITE setBackgroundColor READ backgroundColor)
     Q_PROPERTY(QColor disabledTextColor WRITE setDisabledTextColor READ disabledTextColor)
     Q_PROPERTY(qreal peakOpacity WRITE setPeakOpacity READ peakOpacity)
 
@@ -32,32 +28,23 @@ public:
     void setRole(Material::Role role);
     Material::Role role() const;
 
+    void setUseThemeColors(bool value);
+    bool useThemeColors() const;
+
     void setRippleStyle(Material::RippleStyle style);
     Material::RippleStyle rippleStyle() const;
 
     void setCornerRadius(qreal radius);
     qreal cornerRadius() const;
 
-    void setBgMode(Qt::BGMode mode);
-    Qt::BGMode bgMode() const;
+    void setBackgroundMode(Qt::BGMode mode);
+    Qt::BGMode backgroundMode() const;
 
-    void setPrimaryBgColor(const QColor &color);
-    QColor primaryBgColor() const;
+    void setTextColor(const QColor &color);
+    QColor textColor() const;
 
-    void setSecondaryBgColor(const QColor &color);
-    QColor secondaryBgColor() const;
-
-    void setDefaultBgColor(const QColor &color);
-    QColor defaultBgColor() const;
-
-    void setPrimaryTextColor(const QColor &color);
-    QColor primaryTextColor() const;
-
-    void setSecondaryTextColor(const QColor &color);
-    QColor secondaryTextColor() const;
-
-    void setDefaultTextColor(const QColor &color);
-    QColor defaultTextColor() const;
+    void setBackgroundColor(const QColor &color);
+    QColor backgroundColor() const;
 
     void setDisabledTextColor(const QColor &color);
     QColor disabledTextColor() const;

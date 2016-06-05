@@ -15,6 +15,7 @@ FlatButtonPrivate::FlatButtonPrivate(FlatButton *q)
       rippleStyle(Material::PositionedRipple),
       cornerRadius(3),
       bgMode(Qt::TransparentMode),
+      useThemeColors(true),
       peakOpacity(0.15)
 {
 }
@@ -41,18 +42,6 @@ void FlatButtonPrivate::init()
     font.setPointSizeF(10.5);
     font.setStyleName("Medium");
     q->setFont(font);
-
-    // Apply theme style
-
-    q->setPrimaryBgColor(style.themeColor("primary1"));
-    q->setSecondaryBgColor(style.themeColor("accent1"));
-    q->setDefaultBgColor(style.themeColor("text"));
-
-    q->setPrimaryTextColor(style.themeColor("primary1"));
-    q->setSecondaryTextColor(style.themeColor("accent1"));
-    q->setDefaultTextColor(style.themeColor("text"));
-
-    q->setDisabledTextColor(style.themeColor("disabled"));
 
     delegate->updatePalette();
 }
@@ -106,7 +95,7 @@ qreal FlatButton::cornerRadius() const
     return d->cornerRadius;
 }
 
-void FlatButton::setBgMode(Qt::BGMode mode)
+void FlatButton::setBackgroundMode(Qt::BGMode mode)
 {
     Q_D(FlatButton);
 
@@ -114,101 +103,72 @@ void FlatButton::setBgMode(Qt::BGMode mode)
     update();
 }
 
-Qt::BGMode FlatButton::bgMode() const
+Qt::BGMode FlatButton::backgroundMode() const
 {
     Q_D(const FlatButton);
 
     return d->bgMode;
 }
 
-void FlatButton::setPrimaryBgColor(const QColor &color)
+void FlatButton::setTextColor(const QColor &color)
 {
     Q_D(FlatButton);
 
-    d->primaryBgColor = color;
-    d->delegate->updatePalette();
+    d->textColor = color;
+    setUseThemeColors(false);
 }
 
-QColor FlatButton::primaryBgColor() const
+QColor FlatButton::textColor() const
 {
     Q_D(const FlatButton);
 
-    return d->primaryBgColor;
+    if (d->useThemeColors || !d->textColor.isValid()) {
+        Style &style = Style::instance();
+        if (Qt::OpaqueMode == d->bgMode) {
+            return style.themeColor("canvas");
+        }
+        switch (d->role)
+        {
+        case Material::Primary:
+            return style.themeColor("primary1");
+        case Material::Secondary:
+            return style.themeColor("accent1");
+        case Material::Default:
+        default:
+            return style.themeColor("text");
+        }
+    } else {
+        return d->textColor;
+    }
 }
 
-void FlatButton::setSecondaryBgColor(const QColor &color)
+void FlatButton::setBackgroundColor(const QColor &color)
 {
     Q_D(FlatButton);
 
-    d->secondaryBgColor = color;
-    d->delegate->updatePalette();
+    d->backgroundColor = color;
+    setUseThemeColors(false);
 }
 
-QColor FlatButton::secondaryBgColor() const
+QColor FlatButton::backgroundColor() const
 {
     Q_D(const FlatButton);
 
-    return d->secondaryBgColor;
-}
-
-void FlatButton::setDefaultBgColor(const QColor &color)
-{
-    Q_D(FlatButton);
-
-    d->defaultBgColor = color;
-    d->delegate->updatePalette();
-}
-
-QColor FlatButton::defaultBgColor() const
-{
-    Q_D(const FlatButton);
-
-    return d->defaultBgColor;
-}
-
-void FlatButton::setPrimaryTextColor(const QColor &color)
-{
-    Q_D(FlatButton);
-
-    d->primaryTextColor = color;
-    d->delegate->updatePalette();
-}
-
-QColor FlatButton::primaryTextColor() const
-{
-    Q_D(const FlatButton);
-
-    return d->primaryTextColor;
-}
-
-void FlatButton::setSecondaryTextColor(const QColor &color)
-{
-    Q_D(FlatButton);
-
-    d->secondaryTextColor = color;
-    d->delegate->updatePalette();
-}
-
-QColor FlatButton::secondaryTextColor() const
-{
-    Q_D(const FlatButton);
-
-    return d->secondaryTextColor;
-}
-
-void FlatButton::setDefaultTextColor(const QColor &color)
-{
-    Q_D(FlatButton);
-
-    d->defaultTextColor = color;
-    d->delegate->updatePalette();
-}
-
-QColor FlatButton::defaultTextColor() const
-{
-    Q_D(const FlatButton);
-
-    return d->defaultTextColor;
+    if (d->useThemeColors || !d->backgroundColor.isValid()) {
+        Style &style = Style::instance();
+        switch (d->role)
+        {
+        case Material::Primary:
+            return style.themeColor("primary1");
+        case Material::Secondary:
+            return style.themeColor("accent1");
+        case Material::Default:
+        default:
+            return style.themeColor("text");
+        }
+    } else {
+        return d->backgroundColor;
+    }
 }
 
 void FlatButton::setDisabledTextColor(const QColor &color)
@@ -216,14 +176,18 @@ void FlatButton::setDisabledTextColor(const QColor &color)
     Q_D(FlatButton);
 
     d->disabledTextColor = color;
-    d->delegate->updatePalette();
+    setUseThemeColors(false);
 }
 
 QColor FlatButton::disabledTextColor() const
 {
     Q_D(const FlatButton);
 
-    return d->disabledTextColor;
+    if (d->useThemeColors || !d->disabledTextColor.isValid()) {
+        return Style::instance().themeColor("disabled");
+    } else {
+        return d->disabledTextColor;
+    }
 }
 
 void FlatButton::setPeakOpacity(qreal opacity)
@@ -254,6 +218,21 @@ Material::Role FlatButton::role() const
     Q_D(const FlatButton);
 
     return d->role;
+}
+
+void FlatButton::setUseThemeColors(bool value)
+{
+    Q_D(FlatButton);
+
+    d->useThemeColors = value;
+    d->delegate->updatePalette();
+}
+
+bool FlatButton::useThemeColors() const
+{
+    Q_D(const FlatButton);
+
+    return d->useThemeColors;
 }
 
 FlatButton::FlatButton(FlatButtonPrivate &d, QWidget *parent)
@@ -291,20 +270,28 @@ void FlatButton::paintEvent(QPaintEvent *event)
     if (Qt::OpaqueMode == d->bgMode) {
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
-        QColor color;
-        switch (d->role)
-        {
-        case Material::Primary:
-            color = d->primaryBgColor;
-            break;
-        case Material::Secondary:
-            color = d->secondaryBgColor;
-            break;
-        case Material::Default:
-        default:
-            color = d->defaultBgColor;
+
+        QColor brushColor;
+        if (d->useThemeColors || !d->backgroundColor.isValid()) {
+            Style &style = Style::instance();
+            switch (d->role)
+            {
+            case Material::Primary:
+                brushColor = style.themeColor("primary1");
+                break;
+            case Material::Secondary:
+                brushColor = style.themeColor("accent1");
+                break;
+            case Material::Default:
+            default:
+                brushColor = style.themeColor("text");
+                break;
+            }
+        } else {
+             brushColor = d->backgroundColor;
         }
-        brush.setColor(color);
+
+        brush.setColor(brushColor);
         painter.setOpacity(1);
         painter.setBrush(brush);
         painter.setPen(Qt::NoPen);
@@ -358,15 +345,13 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
         return;
     }
 
-    QColor color = palette().color(QPalette::Active, QPalette::ButtonText);
-
     Ripple *ripple = new Ripple(Material::CenteredRipple == d->rippleStyle
         ? rect().center()
         : event->pos());
 
-    ripple->setRadiusEndValue(100);
+    ripple->setRadiusEndValue(width()*0.45);
     ripple->setOpacityStartValue(0.4);
-    ripple->setColor(color);
+    ripple->setColor(palette().color(QPalette::Active, QPalette::ButtonText));
 
     d->ripple->addRipple(ripple);
 

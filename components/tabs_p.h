@@ -2,10 +2,11 @@
 #define TABS_P_H
 
 #include <QRect>
+#include <QColor>
 
 class QHBoxLayout;
 class Tabs;
-class TabsDelegate;
+class TabsInkBar;
 
 class TabsPrivate
 {
@@ -17,10 +18,14 @@ public:
 
     void init();
 
-    Tabs *const q_ptr;
-    TabsDelegate *delegate;
-    QHBoxLayout  *tabLayout;
-    int tab;
+    Tabs        *const q_ptr;
+    TabsInkBar  *inkBar;
+    QHBoxLayout *tabLayout;
+    QColor       inkColor;
+    QColor       backgroundColor;
+    QColor       textColor;
+    int          tab;
+    bool         useThemeColors;
 };
 
 #endif // TABS_P_H

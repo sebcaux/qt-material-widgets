@@ -30,6 +30,9 @@ TabsExamples::TabsExamples(QWidget *parent)
         tabs->addTab("Second");
         tabs->addTab("Third");
 
+        tabs->setBackgroundColor(Qt::green);
+        tabs->setTextColor(Qt::blue);
+
         //tabs->addTab(new Tab("First"));
         //tabs->addTab(new Tab("Second"));
         //tabs->addTab(new Tab("Third"));

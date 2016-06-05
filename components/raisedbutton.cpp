@@ -23,8 +23,7 @@ void RaisedButtonPrivate::init()
 {
     Q_Q(RaisedButton);
 
-    q->setPrimaryTextColor(Qt::white);
-    q->setSecondaryTextColor(Qt::white);
+    q->setTextColor(Qt::white);
     q->setPeakOpacity(0.25);
 
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
@@ -137,24 +136,10 @@ void RaisedButton::paintEvent(QPaintEvent *event)
 
     const qreal cr = d->cornerRadius;
 
-    QColor bg;
-    switch (d->role)
-    {
-    case Material::Primary:
-        bg = d->primaryBgColor;
-        break;
-    case Material::Secondary:
-        bg = d->secondaryBgColor;
-        break;
-    case Material::Default:
-    default:
-        bg = d->defaultBgColor;
-    }
-
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(isEnabled()
-       ? bg : palette().color(QPalette::Disabled, QPalette::Background));
+       ? backgroundColor() : palette().color(QPalette::Disabled, QPalette::Background));
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
     painter.drawRoundedRect(rect(), cr, cr);

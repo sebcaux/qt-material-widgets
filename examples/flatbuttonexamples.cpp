@@ -1,6 +1,8 @@
 #include <QLayout>
 #include <QPushButton>
+#include <QDebug>
 #include "flatbuttonexamples.h"
+#include "lib/style.h"
 #include "components/flatbutton.h"
 #include "exampleview.h"
 #include "frame.h"
@@ -58,7 +60,8 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
         flatButton->setMinimumSize(200, 42);
 
         flatButton->setRole(Material::Secondary);
-        flatButton->setSecondaryBgColor(QColor(0, 0, 0, 80));
+        flatButton->setBackgroundColor(QColor(0, 0, 0, 80));
+        //flatButton->setTextColor(Style::instance().themeColor("primary1"));
 //        flatButton->setDisabled(true);
 
         ExampleView *view = new ExampleView;
@@ -80,7 +83,7 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
         flatButton->setMinimumSize(200, 42);
 
         flatButton->setRole(Material::Primary);
-        flatButton->setBgMode(Qt::OpaqueMode);
+        flatButton->setBackgroundMode(Qt::OpaqueMode);
         //flatButton->setPrimaryTextColor(Qt::white);
         flatButton->setPeakOpacity(0.25);
 
@@ -103,7 +106,30 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
         flatButton->setMinimumSize(200, 42);
 
         flatButton->setRole(Material::Secondary);
-        flatButton->setBgMode(Qt::OpaqueMode);
+        flatButton->setBackgroundMode(Qt::OpaqueMode);
+        flatButton->setPeakOpacity(0.25);
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(flatButton);
+        view->setBackgroundRole(QPalette::Base);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "FlatButton *flatButton = new FlatButton;\n"
+            "flatButton->setText(\"Press me!\");"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
+    {
+        FlatButton *flatButton = new FlatButton;
+        flatButton->setText("Press me!");
+        flatButton->setMinimumSize(200, 42);
+
+        //flatButton->setRole(Material::Secondary);
+        flatButton->setBackgroundMode(Qt::OpaqueMode);
+        flatButton->setBackgroundColor(Qt::green);
         flatButton->setPeakOpacity(0.25);
 
         ExampleView *view = new ExampleView;

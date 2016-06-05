@@ -27,13 +27,10 @@ public:
     Material::RippleStyle rippleStyle;
     qreal                 cornerRadius;
     Qt::BGMode            bgMode;
-    QColor                primaryTextColor;
-    QColor                secondaryTextColor;
-    QColor                defaultTextColor;
+    QColor                textColor;
+    QColor                backgroundColor;
     QColor                disabledTextColor;
-    QColor                primaryBgColor;
-    QColor                secondaryBgColor;
-    QColor                defaultBgColor;
+    bool                  useThemeColors;
     qreal                 peakOpacity;
 };
 

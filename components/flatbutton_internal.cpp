@@ -5,7 +5,6 @@
 #include <QPropertyAnimation>
 #include <QSequentialAnimationGroup>
 #include "flatbutton.h"
-#include "lib/style.h"
 
 FlatButtonDelegate::FlatButtonDelegate(FlatButton *parent)
     : QStateMachine(parent),
@@ -107,56 +106,38 @@ qreal FlatButtonDelegate::focusHaloSize() const
 
 void FlatButtonDelegate::updatePalette()
 {
-    QColor color, bg;
-
-    switch (button->role())
-    {
-    case Material::Primary:
-        color = button->primaryTextColor();
-        bg = button->primaryBgColor();
-        break;
-    case Material::Secondary:
-        color = button->secondaryTextColor();
-        bg = button->secondaryBgColor();
-        break;
-    case Material::Default:
-    default:
-        color = button->defaultTextColor();
-        bg = button->defaultBgColor();
-    }
-
-    if (Qt::OpaqueMode == button->bgMode()) {
-        color = Qt::white;
-    }
+    QColor textColor = button->textColor();
+    QColor bgColor = button->backgroundColor();
+    QColor disabledColor = button->disabledTextColor();
 
     QPalette palette(button->palette());
-    palette.setColor(QPalette::Active, QPalette::ButtonText, color);
-    palette.setColor(QPalette::Inactive, QPalette::ButtonText, color);
-    palette.setColor(QPalette::Disabled, QPalette::ButtonText, button->disabledTextColor());
+    palette.setColor(QPalette::Active, QPalette::ButtonText, textColor);
+    palette.setColor(QPalette::Inactive, QPalette::ButtonText, textColor);
+    palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledColor);
     button->setPalette(palette);
 
     _normalState->assignProperty(this, "backgroundOpacity", 0);
-    _normalState->assignProperty(this, "backgroundColor", bg);
+    _normalState->assignProperty(this, "backgroundColor", bgColor);
     _normalState->assignProperty(this, "focusHaloOpacity", 0);
 
     _normalFocusedState->assignProperty(this, "backgroundOpacity", 0);
-    _normalFocusedState->assignProperty(this, "backgroundColor", bg);
+    _normalFocusedState->assignProperty(this, "backgroundColor", bgColor);
     _normalFocusedState->assignProperty(this, "focusHaloOpacity", button->peakOpacity());
 
     _hoveredState->assignProperty(this, "backgroundOpacity", button->peakOpacity());
-    _hoveredState->assignProperty(this, "backgroundColor", bg);
+    _hoveredState->assignProperty(this, "backgroundColor", bgColor);
     _hoveredState->assignProperty(this, "focusHaloOpacity", 0);
 
     _hoveredFocusedState->assignProperty(this, "backgroundOpacity", button->peakOpacity());
-    _hoveredFocusedState->assignProperty(this, "backgroundColor", bg);
+    _hoveredFocusedState->assignProperty(this, "backgroundColor", bgColor);
     _normalFocusedState->assignProperty(this, "focusHaloOpacity", button->peakOpacity());
 
     _pressedState->assignProperty(this, "backgroundOpacity", 0);
-    _pressedState->assignProperty(this, "backgroundColor", bg);
+    _pressedState->assignProperty(this, "backgroundColor", bgColor);
     _pressedState->assignProperty(this, "focusHaloOpacity", 0);
 
     _releaseState->assignProperty(this, "backgroundOpacity", 0);
-    _releaseState->assignProperty(this, "backgroundColor", bg);
+    _releaseState->assignProperty(this, "backgroundColor", bgColor);
     _releaseState->assignProperty(this, "focusHaloOpacity", 0);
 
     button->update();

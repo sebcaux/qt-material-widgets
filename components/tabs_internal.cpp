@@ -1,34 +1,54 @@
 #include "tabs_internal.h"
 #include <QLayout>
+#include <QPainter>
+#include <QEvent>
 #include <QPropertyAnimation>
 #include "tabs.h"
 
-TabsDelegate::TabsDelegate(Tabs *parent)
-    : QObject(parent),
+TabsInkBar::TabsInkBar(Tabs *parent)
+    : QWidget(parent->parentWidget()),
       tabs(parent),
       _animation(new QPropertyAnimation(parent)),
       _tween(0)
 {
-    _animation->setPropertyName("tween");
+    parent->installEventFilter(this);
+
+    _animation->setPropertyName("tweenValue");
     _animation->setEasingCurve(QEasingCurve::OutCirc);
     _animation->setTargetObject(this);
     _animation->setDuration(700);
 }
 
-TabsDelegate::~TabsDelegate()
+TabsInkBar::~TabsInkBar()
 {
 }
 
-void TabsDelegate::setTween(qreal tween)
+void TabsInkBar::setTweenValue(qreal value)
 {
-    _tween = tween;
-    updateInkBar();
+    _tween = value;
+    refreshGeometry();
 }
 
-void TabsDelegate::setInkBarGeometry(const QRect &newGeometry)
+void TabsInkBar::refreshGeometry()
 {
-    _previousGeometry = _inkBarGeometry;
-    _inkBarGeometry = newGeometry;
+    QLayoutItem *item = tabs->tabLayout()->itemAt(tabs->currentIndex());
+    if (item) {
+        const QRect &r = item->geometry();
+        const qreal s = 1-_tween;
+        if (QAbstractAnimation::Running != _animation->state()) {
+            setGeometry(r.left(), r.bottom()-1, r.width(), 2);
+        } else {
+            const qreal left = _previousGeometry.left()*s + r.left()*_tween;
+            const qreal width = _previousGeometry.width()*s + r.width()*_tween;
+            setGeometry(left, r.bottom()-1, width, 2);
+        }
+        tabs->update();
+    }
+}
+
+void TabsInkBar::animate()
+{
+    _previousGeometry = geometry();
 
     _animation->stop();
     _animation->setStartValue(0);
@@ -36,21 +56,31 @@ void TabsDelegate::setInkBarGeometry(const QRect &newGeometry)
     _animation->start();
 }
 
-void TabsDelegate::updateInkBar()
+bool TabsInkBar::eventFilter(QObject *obj, QEvent *event)
 {
-    QLayoutItem *item = tabs->tabLayout()->itemAt(tabs->currentIndex());
-    if (item) {
-        const QRect &r = item->geometry();
-        const qreal s = 1-_tween;
-        if (QAbstractAnimation::Running != _animation->state()) {
-            _inkBarGeometry = QRect(r.left(), r.bottom()+1, r.width(), 2);
-        } else {
-            const qreal left = _previousGeometry.left()*s + r.left()*_tween;
-            const qreal width = _previousGeometry.width()*s + r.width()*_tween;
-            _inkBarGeometry = QRect(left, r.bottom()+1, width, 2);
+    QEvent::Type type = event->type();
+
+    if (QEvent::ParentChange == type) {
+        setParent(tabs->parentWidget());
+    } else if (QEvent::Resize == type || QEvent::Move == type) {
+        QWidget *widget;
+        if ((widget = parentWidget())) {
+            setGeometry(widget->rect());
         }
-        tabs->update();
     }
+    return QWidget::eventFilter(obj, event);
+}
+
+void TabsInkBar::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+
+    painter.setBrush(tabs->inkColor());
+    painter.setOpacity(1);
+    painter.setPen(Qt::NoPen);
+    painter.drawRect(rect());
+
+    QWidget::paintEvent(event);
 }
 
 Tab::Tab(QWidget *parent)

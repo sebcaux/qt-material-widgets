@@ -10,9 +10,25 @@ class Tabs : public QWidget
 {
     Q_OBJECT
 
+    Q_PROPERTY(QColor inkColor WRITE setInkColor READ inkColor)
+    Q_PROPERTY(QColor backgroundColor WRITE setBackgroundColor READ backgroundColor)
+    Q_PROPERTY(QColor textColor WRITE setTextColor READ textColor)
+
 public:
     explicit Tabs(QWidget *parent = 0);
     ~Tabs();
+
+    void setUseThemeColors(bool value);
+    bool useThemeColors() const;
+
+    void setInkColor(const QColor &color);
+    QColor inkColor() const;
+
+    void setBackgroundColor(const QColor &color);
+    QColor backgroundColor() const;
+
+    void setTextColor(const QColor &color);
+    QColor textColor() const;
 
     void addTab(const QString &text);
 
@@ -25,7 +41,6 @@ signals:
     void currentChanged(int);
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     void moveEvent(QMoveEvent *event) Q_DECL_OVERRIDE;
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 

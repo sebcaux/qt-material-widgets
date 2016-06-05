@@ -4,35 +4,36 @@
 #include <QObject>
 #include "flatbutton.h"
 
-class QPropertyAnimation;
 class Tabs;
+class QPropertyAnimation;
 
-class TabsDelegate : public QObject
+class TabsInkBar : public QWidget
 {
     Q_OBJECT
 
-    Q_PROPERTY(qreal tween WRITE setTween READ tween)
+    Q_PROPERTY(qreal tweenValue WRITE setTweenValue READ tweenValue)
 
 public:
-    TabsDelegate(Tabs *parent);
-    ~TabsDelegate();
+    TabsInkBar(Tabs *parent);
+    ~TabsInkBar();
 
-    void setTween(qreal tween);
-    inline qreal tween() const { return _tween; }
+    void setTweenValue(qreal value);
+    inline qreal tweenValue() const { return _tween; }
 
-    void setInkBarGeometry(const QRect &newGeometry);
-    inline QRect inkBarGeometry() const { return _inkBarGeometry; }
-    \
-    void updateInkBar();
+    void refreshGeometry();
+    void animate();
+
+protected:
+    bool eventFilter(QObject *obj, QEvent *event);
+    void paintEvent(QPaintEvent *event);
 
 private:
-    Q_DISABLE_COPY(TabsDelegate)
+    Q_DISABLE_COPY(TabsInkBar)
 
-    Tabs *const tabs;
+    Tabs               *const tabs;
     QPropertyAnimation *_animation;
-    qreal _tween;
-    QRect _inkBarGeometry;
-    QRect _previousGeometry;
+    qreal               _tween;
+    QRect               _previousGeometry;
 };
 
 class Tab : public FlatButton

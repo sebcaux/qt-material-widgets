@@ -9,7 +9,8 @@
 
 TabsPrivate::TabsPrivate(Tabs *q)
     : q_ptr(q),
-      tab(-1)
+      tab(-1),
+      useThemeColors(true)
 {
 }
 
@@ -17,13 +18,12 @@ void TabsPrivate::init()
 {
     Q_Q(Tabs);
 
-    delegate = new TabsDelegate(q);
+    inkBar = new TabsInkBar(q);
 
     tabLayout = new QHBoxLayout;
     q->setLayout(tabLayout);
     tabLayout->setSpacing(0);
     tabLayout->setMargin(0);
-    tabLayout->setContentsMargins(0, 0, 0, 2);
 }
 
 Tabs::Tabs(QWidget *parent)
@@ -37,6 +37,93 @@ Tabs::~Tabs()
 {
 }
 
+void Tabs::setUseThemeColors(bool value)
+{
+    Q_D(Tabs);
+
+    d->useThemeColors = value;
+}
+
+bool Tabs::useThemeColors() const
+{
+    Q_D(const Tabs);
+
+    return d->useThemeColors;
+}
+
+void Tabs::setInkColor(const QColor &color)
+{
+    Q_D(Tabs);
+
+    d->inkColor = color;
+    setUseThemeColors(false);
+}
+
+QColor Tabs::inkColor() const
+{
+    Q_D(const Tabs);
+
+    if (d->useThemeColors || !d->inkColor.isValid()) {
+        return Style::instance().themeColor("accent1");
+    } else {
+        return d->inkColor;
+    }
+}
+
+void Tabs::setBackgroundColor(const QColor &color)
+{
+    Q_D(Tabs);
+
+    d->backgroundColor = color;
+    setUseThemeColors(false);
+
+    Tab *tab;
+    for (int i = 0; i < d->tabLayout->count(); ++i) {
+        QLayoutItem *item = d->tabLayout->itemAt(i);
+        if ((tab = static_cast<Tab *>(item->widget()))) {
+            tab->setBackgroundColor(color);
+        }
+    }
+}
+
+QColor Tabs::backgroundColor() const
+{
+    Q_D(const Tabs);
+
+    if (d->useThemeColors || !d->backgroundColor.isValid()) {
+        return Style::instance().themeColor("primary1");
+    } else {
+        return d->backgroundColor;
+    }
+}
+
+void Tabs::setTextColor(const QColor &color)
+{
+    Q_D(Tabs);
+
+    d->textColor = color;
+    setUseThemeColors(false);
+
+    Tab *tab;
+    for (int i = 0; i < d->tabLayout->count(); ++i) {
+        QLayoutItem *item = d->tabLayout->itemAt(i);
+        if ((tab = static_cast<Tab *>(item->widget()))) {
+            tab->setTextColor(color);
+        }
+    }
+}
+
+QColor Tabs::textColor() const
+{
+    Q_D(const Tabs);
+
+    if (d->useThemeColors || !d->textColor.isValid()) {
+        return Style::instance().themeColor("canvas");
+    } else {
+        return d->textColor;
+    }
+}
+
 void Tabs::addTab(const QString &text)
 {
     Q_D(Tabs);
@@ -45,15 +132,14 @@ void Tabs::addTab(const QString &text)
     tab->setCornerRadius(0);
     tab->setRippleStyle(Material::CenteredRipple);
     tab->setRole(Material::Primary);
-    tab->setBgMode(Qt::OpaqueMode);
-    tab->setPrimaryTextColor(Qt::white);
+    tab->setBackgroundMode(Qt::OpaqueMode);
     tab->setPeakOpacity(0.25);
 
     d->tabLayout->addWidget(tab);
 
     if (-1 == d->tab) {
         d->tab = 0;
-        d->delegate->updateInkBar();
+        d->inkBar->refreshGeometry();
     }
 
     connect(tab, SIGNAL(clicked()), this, SLOT(switchTab()));
@@ -87,24 +173,13 @@ int Tabs::currentIndex() const
     return d->tab;
 }
 
-void Tabs::paintEvent(QPaintEvent *event)
-{
-    Q_D(Tabs);
-
-    QPainter painter(this);
-    painter.fillRect(d->delegate->inkBarGeometry(),
-        Style::instance().themeColor("accent1"));
-
-    QWidget::paintEvent(event);
-}
-
 void Tabs::moveEvent(QMoveEvent *event)
 {
     Q_UNUSED(event)
 
     Q_D(Tabs);
 
-    d->delegate->updateInkBar();
+    d->inkBar->refreshGeometry();
 }
 
 void Tabs::resizeEvent(QResizeEvent *event)
@@ -113,7 +188,7 @@ void Tabs::resizeEvent(QResizeEvent *event)
 
     Q_D(Tabs);
 
-    d->delegate->updateInkBar();
+    d->inkBar->refreshGeometry();
 }
 
 void Tabs::switchTab()
@@ -123,7 +198,7 @@ void Tabs::switchTab()
     Tab *tab = static_cast<Tab *>(sender());
     if (tab) {
         d->tab = d->tabLayout->indexOf(tab);
-        d->delegate->setInkBarGeometry(d->tabLayout->itemAt(d->tab)->geometry());
+        d->inkBar->animate();
         emit currentChanged(d->tab);
     }
 }
