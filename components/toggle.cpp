@@ -3,6 +3,7 @@
 #include <QState>
 #include <QSignalTransition>
 #include <QPropertyAnimation>
+#include <QApplication>
 #include <QDebug>
 #include "lib/rippleoverlay.h"
 #include "lib/ripple.h"
@@ -14,7 +15,10 @@ TogglePrivate::TogglePrivate(Toggle *q)
     : q_ptr(q),
       track(new ToggleTrack(q)),
       thumb(new ToggleThumb(q)),
-      orientation(Qt::Horizontal)
+      offState(new QState),
+      onState(new QState),
+      orientation(Qt::Horizontal),
+      useThemeColors(true)
 {
 }
 
@@ -27,9 +31,6 @@ void TogglePrivate::init()
     q->setCheckable(true);
     q->setChecked(false);
     q->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-
-    QState *offState = new QState;
-    QState *onState = new QState;
 
     machine.addState(offState);
     machine.addState(onState);
@@ -91,26 +92,29 @@ void TogglePrivate::init()
 
     //
 
-    const Style &style = Style::instance();
-
     offState->assignProperty(thumb, "shift", 0);
     onState->assignProperty(thumb, "shift", 1);
 
-    QColor trackOnColor = style.themeColor("primary1");
-    trackOnColor.setAlpha(100);
+    //
 
-    QColor trackOffColor = style.themeColor("accent3");
-    trackOffColor.setAlpha(170);
+    updatePalette();
 
-    offState->assignProperty(track, "trackColor", trackOffColor);
-    onState->assignProperty(track, "trackColor", trackOnColor);
-
-    offState->assignProperty(thumb, "thumbColor", style.themeColor("canvas"));
-    onState->assignProperty(thumb, "thumbColor", style.themeColor("primary1"));
+    QObject::connect(q, SIGNAL(toggled(bool)), q, SLOT(addRipple()));
 
     machine.start();
 
-    QObject::connect(q, SIGNAL(toggled(bool)), q, SLOT(addRipple()));
+    QCoreApplication::processEvents();
+}
+
+void TogglePrivate::updatePalette()
+{
+    Q_Q(Toggle);
+
+    offState->assignProperty(track, "trackColor", q->trackColor().lighter(110));
+    onState->assignProperty(track, "trackColor", q->activeColor().lighter(110));
+
+    offState->assignProperty(thumb, "thumbColor", q->inactiveColor());
+    onState->assignProperty(thumb, "thumbColor", q->activeColor());
 }
 
 Toggle::Toggle(QWidget *parent)
@@ -122,6 +126,99 @@ Toggle::Toggle(QWidget *parent)
 
 Toggle::~Toggle()
 {
+}
+
+void Toggle::setUseThemeColors(bool value)
+{
+    Q_D(Toggle);
+
+    d->useThemeColors = value;
+    d->updatePalette();
+}
+
+bool Toggle::useThemeColors() const
+{
+    Q_D(const Toggle);
+
+    return d->useThemeColors;
+}
+
+void Toggle::setDisabledColor(const QColor &color)
+{
+    Q_D(Toggle);
+
+    d->disabledColor = color;
+    setUseThemeColors(false);
+}
+
+QColor Toggle::disabledColor() const
+{
+    Q_D(const Toggle);
+
+    if (d->useThemeColors || !d->disabledColor.isValid()) {
+        QColor color = Style::instance().themeColor("disabled");
+        color.setAlpha(30);
+        return color;
+    } else {
+        return d->disabledColor;
+    }
+}
+
+void Toggle::setActiveColor(const QColor &color)
+{
+    Q_D(Toggle);
+
+    d->activeColor = color;
+    setUseThemeColors(false);
+}
+
+QColor Toggle::activeColor() const
+{
+    Q_D(const Toggle);
+
+    if (d->useThemeColors || !d->activeColor.isValid()) {
+        return Style::instance().themeColor("primary1");
+    } else {
+        return d->activeColor;
+    }
+}
+
+void Toggle::setInactiveColor(const QColor &color)
+{
+    Q_D(Toggle);
+
+    d->inactiveColor = color;
+    setUseThemeColors(false);
+}
+
+QColor Toggle::inactiveColor() const
+{
+    Q_D(const Toggle);
+
+    if (d->useThemeColors || !d->inactiveColor.isValid()) {
+        return Style::instance().themeColor("canvas");
+    } else {
+        return d->inactiveColor;
+    }
+}
+
+void Toggle::setTrackColor(const QColor &color)
+{
+    Q_D(Toggle);
+
+    d->trackColor = color;
+    setUseThemeColors(false);
+}
+
+QColor Toggle::trackColor() const
+{
+    Q_D(const Toggle);
+
+    if (d->useThemeColors || !d->trackColor.isValid()) {
+        return Style::instance().themeColor("accent3");
+    } else {
+        return d->trackColor;
+    }
 }
 
 QSize Toggle::sizeHint() const
@@ -176,9 +273,7 @@ void Toggle::addRipple()
     }
 
     Ripple *ripple = new Ripple(QPoint(10+t, 20+t));
-    ripple->setColor(Style::instance().themeColor(isChecked()
-          ? "primary2"
-          : "accent3"));
+    ripple->setColor(isChecked() ? activeColor() : trackColor());
     ripple->setRadiusEndValue(w);
     ripple->setOpacityStartValue(0.4);
 

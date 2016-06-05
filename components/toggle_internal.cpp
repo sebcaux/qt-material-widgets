@@ -1,7 +1,6 @@
 #include <QPainter>
 #include <QEvent>
 #include <QGraphicsDropShadowEffect>
-#include <QDebug>
 #include "lib/style.h"
 #include "toggle_internal.h"
 #include "toggle.h"
@@ -33,13 +32,7 @@ void ToggleThumb::setShift(qreal shift)
         return;
 
     _shift = shift;
-
-    const QSize s(Qt::Horizontal == _toggle->orientation()
-            ? size() : size().transposed());
-
-    _offset = shift*static_cast<qreal>(s.width()-s.height());
-    _toggle->updateOverlayGeometry();
-    update();
+    updateOffset();
 }
 
 bool ToggleThumb::eventFilter(QObject *obj, QEvent *event)
@@ -47,6 +40,7 @@ bool ToggleThumb::eventFilter(QObject *obj, QEvent *event)
     const QEvent::Type type = event->type();
     if (QEvent::Resize == type || QEvent::Move == type) {
         setGeometry(parentWidget()->rect().adjusted(8, 8, -8, -8));
+        updateOffset();
     }
     return QWidget::eventFilter(obj, event);
 }
@@ -60,22 +54,39 @@ void ToggleThumb::paintEvent(QPaintEvent *event)
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    if (_toggle->isEnabled()) {
-        brush.setColor(_thumbColor);
-    } else {
-        QColor disabledColor = Style::instance().themeColor("accent3");
-        brush.setColor(disabledColor.lighter(140));
-    }
+    brush.setColor(_toggle->isEnabled() ? _thumbColor : Qt::white);
+
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
+    int s;
+    QRectF r;
+
     if (Qt::Horizontal == _toggle->orientation()) {
-        const int s = height()-10;
-        painter.drawEllipse(QRectF(5+_offset, 5, s, s));
+        s = height()-10;
+        r = QRectF(5+_offset, 5, s, s);
     } else {
-        const int s = width()-10;
-        painter.drawEllipse(QRectF(5, 5+_offset, s, s));
+        s = width()-10;
+        r = QRectF(5, 5+_offset, s, s);
     }
+
+    painter.drawEllipse(r);
+
+    if (!_toggle->isEnabled()) {
+        brush.setColor(_toggle->disabledColor());
+        painter.setBrush(brush);
+        painter.drawEllipse(r);
+    }
+}
+
+void ToggleThumb::updateOffset()
+{
+    const QSize s(Qt::Horizontal == _toggle->orientation()
+        ? size() : size().transposed());
+    _offset = shift()*static_cast<qreal>(s.width()-s.height());
+
+    _toggle->updateOverlayGeometry();
+    update();
 }
 
 ToggleTrack::ToggleTrack(Toggle *parent)
@@ -108,14 +119,14 @@ void ToggleTrack::paintEvent(QPaintEvent *event)
     QBrush brush;
     if (_toggle->isEnabled()) {
         brush.setColor(_trackColor);
+        painter.setOpacity(0.8);
     } else {
-        QColor disabledColor = _trackColor;
-        disabledColor.setAlpha(80);
+        QColor disabledColor(Style::instance().themeColor("disabled"));
         brush.setColor(disabledColor);
+        painter.setOpacity(0.6);
     }
     brush.setStyle(Qt::SolidPattern);
     painter.setBrush(brush);
-
     painter.setPen(Qt::NoPen);
 
     if (Qt::Horizontal == _toggle->orientation()) {

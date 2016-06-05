@@ -18,12 +18,21 @@ public:
 
     void init();
 
-    Toggle *const q_ptr;
-    ToggleTrack *const track;
-    ToggleThumb *const thumb;
-    RippleOverlay *ripple;
-    QStateMachine machine;
+    void updatePalette();
+
+    Toggle         *const q_ptr;
+    ToggleTrack    *const track;
+    ToggleThumb    *const thumb;
+    QState         *const offState;
+    QState         *const onState;
+    RippleOverlay  *ripple;
+    QStateMachine   machine;
     Qt::Orientation orientation;
+    QColor          disabledColor;
+    QColor          activeColor;
+    QColor          inactiveColor;
+    QColor          trackColor;
+    bool            useThemeColors;
 };
 
 #endif // TOGGLE_P_H

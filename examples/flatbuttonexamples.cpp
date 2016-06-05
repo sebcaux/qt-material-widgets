@@ -165,6 +165,22 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
         layout->addWidget(frame);
     }
     {
+        FlatButton *flatButton = new FlatButton;
+        flatButton->setText("Press me!");
+        flatButton->setDisabled(true);
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(flatButton);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+                    ""
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
+    {
         QPushButton *flatButton = new QPushButton;
         flatButton->setText("Press me!");
         flatButton->setIcon(QIcon("../qt-material-widgets/face.svg"));

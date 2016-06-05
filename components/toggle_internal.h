@@ -39,9 +39,11 @@ protected:
 private:
     Q_DISABLE_COPY(ToggleThumb)
 
+    void updateOffset();
+
     Toggle *const _toggle;
-    qreal _shift;
-    qreal _offset;
+    qreal  _shift;
+    qreal  _offset;
     QColor _thumbColor;
 };
 

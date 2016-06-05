@@ -9,9 +9,29 @@ class Toggle : public QAbstractButton
 {
     Q_OBJECT
 
+    Q_PROPERTY(QColor disabledColor WRITE setDisabledColor READ disabledColor)
+    Q_PROPERTY(QColor activeColor WRITE setActiveColor READ activeColor)
+    Q_PROPERTY(QColor inactiveColor WRITE setInactiveColor READ inactiveColor)
+    Q_PROPERTY(QColor trackColor WRITE setTrackColor READ trackColor)
+
 public:
     explicit Toggle(QWidget *parent = 0);
     ~Toggle();
+
+    void setUseThemeColors(bool value);
+    bool useThemeColors() const;
+
+    void setDisabledColor(const QColor &color);
+    QColor disabledColor() const;
+
+    void setActiveColor(const QColor &color);
+    QColor activeColor() const;
+
+    void setInactiveColor(const QColor &color);
+    QColor inactiveColor() const;
+
+    void setTrackColor(const QColor &color);
+    QColor trackColor() const;
 
     QSize sizeHint() const;
 
