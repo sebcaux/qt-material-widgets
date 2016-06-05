@@ -41,7 +41,7 @@ void TogglePrivate::init()
 
     //
 
-    transition = new QSignalTransition(thumb, SIGNAL(clicked(bool)));
+    transition = new QSignalTransition(q, SIGNAL(toggled(bool)));
     transition->setTargetState(onState);
     offState->addTransition(transition);
 
@@ -66,7 +66,7 @@ void TogglePrivate::init()
 
     //
 
-    transition = new QSignalTransition(thumb, SIGNAL(clicked(bool)));
+    transition = new QSignalTransition(q, SIGNAL(toggled(bool)));
     transition->setTargetState(offState);
     onState->addTransition(transition);
 
@@ -110,7 +110,7 @@ void TogglePrivate::init()
 
     machine.start();
 
-    QObject::connect(thumb, SIGNAL(clicked(bool)), q, SLOT(addRipple(bool)));
+    QObject::connect(q, SIGNAL(toggled(bool)), q, SLOT(addRipple()));
 }
 
 Toggle::Toggle(QWidget *parent)
@@ -161,7 +161,7 @@ void Toggle::updateOverlayGeometry()
     }
 }
 
-void Toggle::addRipple(bool checked)
+void Toggle::addRipple()
 {
     Q_D(Toggle);
 
@@ -176,7 +176,7 @@ void Toggle::addRipple(bool checked)
     }
 
     Ripple *ripple = new Ripple(QPoint(10+t, 20+t));
-    ripple->setColor(Style::instance().themeColor(checked
+    ripple->setColor(Style::instance().themeColor(isChecked()
           ? "primary2"
           : "accent3"));
     ripple->setRadiusEndValue(w);

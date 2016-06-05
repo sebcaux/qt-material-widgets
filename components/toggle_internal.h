@@ -32,13 +32,9 @@ public:
         return _thumbColor;
     }
 
-signals:
-    void clicked(bool);
-
 protected:
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
-    void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(ToggleThumb)

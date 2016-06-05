@@ -47,8 +47,6 @@ bool ToggleThumb::eventFilter(QObject *obj, QEvent *event)
     const QEvent::Type type = event->type();
     if (QEvent::Resize == type || QEvent::Move == type) {
         setGeometry(parentWidget()->rect().adjusted(8, 8, -8, -8));
-    } else if (QEvent::MouseButtonPress == type) {
-        return true;
     }
     return QWidget::eventFilter(obj, event);
 }
@@ -78,17 +76,6 @@ void ToggleThumb::paintEvent(QPaintEvent *event)
         const int s = width()-10;
         painter.drawEllipse(QRectF(5, 5+_offset, s, s));
     }
-}
-
-void ToggleThumb::mouseReleaseEvent(QMouseEvent *event)
-{
-    if (_toggle->isEnabled()) {
-        const bool newChecked = !_toggle->isChecked();
-        _toggle->setChecked(newChecked);
-        qDebug() << "checked : " << newChecked;
-        emit clicked(newChecked);
-    }
-    QWidget::mouseReleaseEvent(event);
 }
 
 ToggleTrack::ToggleTrack(Toggle *parent)
