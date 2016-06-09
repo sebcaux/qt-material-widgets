@@ -4,7 +4,6 @@
 #include <QStylePainter>
 #include <QStyleOption>
 #include <QApplication>
-#include <QDebug>
 #include "lib/rippleoverlay.h"
 #include "lib/ripple.h"
 #include "flatbutton_p.h"
@@ -260,8 +259,9 @@ void FlatButton::paintEvent(QPaintEvent *event)
     Q_D(FlatButton);
 
     const qreal bgOpacity = d->delegate->backgroundOpacity();
-    const qreal haloOpacity = d->delegate->focusHaloOpacity();
-    const qreal hs = static_cast<qreal>(width())*d->delegate->focusHaloSize()/2;
+    const qreal haloOpacity = d->delegate->haloOpacity();
+    const qreal s = d->delegate->haloScaleFactor()*d->delegate->haloSize()*0.7;
+    const qreal hs = static_cast<qreal>(width())*s;
     const qreal cr = d->cornerRadius;
 
     QPainter painter(this);

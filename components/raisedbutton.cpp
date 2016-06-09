@@ -145,8 +145,9 @@ void RaisedButton::paintEvent(QPaintEvent *event)
     painter.drawRoundedRect(rect(), cr, cr);
 
     if (isEnabled()) {
-        const qreal hs = static_cast<qreal>(width())*d->delegate->focusHaloSize()/2;
-        const qreal haloOpacity = d->delegate->focusHaloOpacity();
+        const qreal s = d->delegate->haloScaleFactor()*d->delegate->haloSize()*0.7;
+        const qreal hs = static_cast<qreal>(width())*s;
+        const qreal haloOpacity = d->delegate->haloOpacity();
 
         brush.setColor(palette().color(QPalette::Active, QPalette::ButtonText));
         painter.setBrush(brush);
