@@ -9,13 +9,13 @@
 - [x] Raised Button
 - [x] Toggle
 - [x] Icon Button
+- [x] Tabs
 - [ ] App Bar
 - [ ] Avatar
 - [ ] Icon Menu
 - [ ] Menu
 - [ ] Dialog
 - [ ] Scroll Bar
-- [ ] Tabs
 - [ ] Text Field
 - [x] Theme
 
