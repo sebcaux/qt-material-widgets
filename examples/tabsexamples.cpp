@@ -68,6 +68,69 @@ TabsExamples::TabsExamples(QWidget *parent)
 
         mainLayout->addWidget(frame);
     }
+    {
+        QWidget *widget = new QWidget;
+        QVBoxLayout *layout = new QVBoxLayout;
+
+        widget->setLayout(layout);
+
+        QStackedLayout *stack = new QStackedLayout;
+        stack->addWidget(new QLabel("<center>First</center>"));
+        stack->addWidget(new QLabel("<center>Second</center>"));
+        stack->addWidget(new QLabel("<center>Third</center>"));
+
+        Tabs *tabs = new Tabs;
+        layout->addWidget(tabs);
+        layout->addLayout(stack);
+        layout->setContentsMargins(0, 0, 0, 0);
+
+        tabs->addTab("First");
+        tabs->addTab("Second");
+        tabs->addTab("Third");
+
+        QScrollArea *area = new QScrollArea;
+        area->setWidget(widget);
+        area->setWidgetResizable(true);
+        area->setBackgroundRole(QPalette::Base);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet("");
+        frame->setWidget(area);
+
+        mainLayout->addWidget(frame);
+    }
+    {
+        QWidget *widget = new QWidget;
+        QVBoxLayout *layout = new QVBoxLayout;
+
+        widget->setLayout(layout);
+
+        QStackedLayout *stack = new QStackedLayout;
+        stack->addWidget(new QLabel("<center>First</center>"));
+        stack->addWidget(new QLabel("<center>Second</center>"));
+        stack->addWidget(new QLabel("<center>Third</center>"));
+
+        Tabs *tabs = new Tabs;
+        layout->addWidget(tabs);
+        layout->addLayout(stack);
+        layout->setContentsMargins(0, 0, 0, 0);
+
+        tabs->addTab("First");
+        tabs->addTab("Second");
+        tabs->addTab("Third");
+
+        QScrollArea *area = new QScrollArea;
+        area->setWidget(widget);
+        area->setWidgetResizable(true);
+        area->setBackgroundRole(QPalette::Base);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet("");
+        frame->setWidget(area);
+
+        mainLayout->addWidget(frame);
+    }
+
 }
 
 TabsExamples::~TabsExamples()
