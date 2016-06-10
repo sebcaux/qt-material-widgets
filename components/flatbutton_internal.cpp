@@ -205,11 +205,11 @@ void FlatButtonDelegate::addTransition(QAbstractTransition *transition,
     QPropertyAnimation *animation;
 
     animation = new QPropertyAnimation(this, "backgroundOpacity");
-    animation->setDuration(200);
+    animation->setDuration(150);
     transition->addAnimation(animation);
 
     animation = new QPropertyAnimation(this, "backgroundColor");
-    animation->setDuration(200);
+    animation->setDuration(150);
     transition->addAnimation(animation);
 
     animation = new QPropertyAnimation(this, "haloOpacity");
