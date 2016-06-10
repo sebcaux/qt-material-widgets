@@ -115,6 +115,8 @@ void TogglePrivate::updatePalette()
 
     offState->assignProperty(thumb, "thumbColor", q->inactiveColor());
     onState->assignProperty(thumb, "thumbColor", q->activeColor());
+
+    q->update();
 }
 
 Toggle::Toggle(QWidget *parent)

@@ -16,6 +16,8 @@ public:
     SliderStateMachine(Slider *parent, SliderThumb *thumb, SliderTrack *track);
     ~SliderStateMachine();
 
+    void updatePalette();
+
 signals:
     void changedToMinimum();
     void changedFromMinimum();
@@ -24,6 +26,21 @@ signals:
 
 private:
     Q_DISABLE_COPY(SliderStateMachine)
+
+    Slider *const slider;
+    SliderTrack  *const _track;
+    SliderThumb  *const _thumb;
+    QState *const _topState;
+    QState *const _fstState;
+    QState *const _inactiveState;
+    QState *const _focusState;
+    QState *const _slidingState;
+    QState *const _pulseOutState;
+    QState *const _pulseInState;
+    QState *const _sndState;
+    QState *const _minState;
+    QState *const _normalState;
+
 };
 
 class SliderThumb : public QWidget

@@ -12,9 +12,25 @@ class Slider : public QAbstractSlider
 {
     Q_OBJECT
 
+    Q_PROPERTY(QColor thumbColor WRITE setThumbColor READ thumbColor)
+    Q_PROPERTY(QColor trackColor WRITE setTrackColor READ trackColor)
+    Q_PROPERTY(QColor disabledColor WRITE setDisabledColor READ disabledColor)
+
 public:
     explicit Slider(QWidget *parent = 0);
     ~Slider();
+
+    void setUseThemeColors(bool value);
+    bool useThemeColors() const;
+
+    void setThumbColor(const QColor &color);
+    QColor thumbColor() const;
+
+    void setTrackColor(const QColor &color);
+    QColor trackColor() const;
+
+    void setDisabledColor(const QColor &color);
+    QColor disabledColor() const;
 
     QSize minimumSizeHint() const Q_DECL_OVERRIDE;
 

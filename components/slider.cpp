@@ -4,7 +4,6 @@
 #include <QStringBuilder>
 #include <QMouseEvent>
 #include <QApplication>
-#include <QDebug>
 #include "slider_p.h"
 
 void SliderPrivate::init()
@@ -102,9 +101,83 @@ Slider::~Slider()
 {
 }
 
+void Slider::setUseThemeColors(bool value)
+{
+    Q_D(Slider);
+
+    d->useThemeColors = value;
+    d->machine->updatePalette();
+}
+
+bool Slider::useThemeColors() const
+{
+    Q_D(const Slider);
+
+    return d->useThemeColors;
+}
+
+void Slider::setThumbColor(const QColor &color)
+{
+    Q_D(Slider);
+
+    d->thumbColor = color;
+    setUseThemeColors(false);
+}
+
+QColor Slider::thumbColor() const
+{
+    Q_D(const Slider);
+
+    if (d->useThemeColors || !d->thumbColor.isValid()) {
+        return Style::instance().themeColor("primary1");
+    } else {
+        return d->thumbColor;
+    }
+}
+
+void Slider::setTrackColor(const QColor &color)
+{
+    Q_D(Slider);
+
+    d->trackColor = color;
+    setUseThemeColors(false);
+}
+
+QColor Slider::trackColor() const
+{
+    Q_D(const Slider);
+
+    if (d->useThemeColors || !d->trackColor.isValid()) {
+        return Style::instance().themeColor("accent3");
+    } else {
+        return d->trackColor;
+    }
+}
+
+void Slider::setDisabledColor(const QColor &color)
+{
+    Q_D(Slider);
+
+    d->disabledColor = color;
+    setUseThemeColors(false);
+}
+
+QColor Slider::disabledColor() const
+{
+    Q_D(const Slider);
+
+    if (d->useThemeColors || !d->disabledColor.isValid()) {
+        return Style::instance().themeColor("disabled");
+    } else {
+        return d->disabledColor;
+    }
+}
+
 QSize Slider::minimumSizeHint() const
 {
-    return QSize(20, 20);
+    return Qt::Horizontal == orientation()
+            ? QSize(20, 34)
+            : QSize(34, 20);
 }
 
 int Slider::thumbOffset() const

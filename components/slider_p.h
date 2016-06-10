@@ -22,7 +22,8 @@ public:
           pageStepMode(true),
           stepTo(0),
           oldValue(0),
-          trackWidth(2)
+          trackWidth(2),
+          useThemeColors(true)
     {}
 
     void init();
@@ -46,6 +47,10 @@ public:
     int  stepTo;
     int  oldValue;
     int  trackWidth;
+    QColor thumbColor;
+    QColor trackColor;
+    QColor disabledColor;
+    bool useThemeColors;
 };
 
 #endif // SLIDER_P_H
