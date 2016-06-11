@@ -270,28 +270,7 @@ void FlatButton::paintEvent(QPaintEvent *event)
     if (Qt::OpaqueMode == d->bgMode) {
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
-
-        QColor brushColor;
-        if (d->useThemeColors || !d->backgroundColor.isValid()) {
-            Style &style = Style::instance();
-            switch (d->role)
-            {
-            case Material::Primary:
-                brushColor = style.themeColor("primary1");
-                break;
-            case Material::Secondary:
-                brushColor = style.themeColor("accent1");
-                break;
-            case Material::Default:
-            default:
-                brushColor = style.themeColor("text");
-                break;
-            }
-        } else {
-             brushColor = d->backgroundColor;
-        }
-
-        brush.setColor(brushColor);
+        brush.setColor(backgroundColor());
         painter.setOpacity(1);
         painter.setBrush(brush);
         painter.setPen(Qt::NoPen);
