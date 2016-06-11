@@ -38,6 +38,12 @@ public:
         _opacityAnimation->setDuration(duration);
     }
 
+    inline void setEasingCurve(QEasingCurve easing)
+    {
+        _radiusAnimation->setEasingCurve(easing);
+        _opacityAnimation->setEasingCurve(easing);
+    }
+
     inline void setOpacityStartValue(qreal value) { _opacityAnimation->setStartValue(value); }
     inline void setOpacityEndValue(qreal value) { _opacityAnimation->setEndValue(value); }
     inline void setRadiusStartValue(qreal value) { _radiusAnimation->setStartValue(value); }
