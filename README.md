@@ -4,33 +4,32 @@
 
 #### Work in progress
 
-- [x] Slider
 - [x] Flat Button
-- [x] Raised Button
-- [x] Toggle
 - [x] Icon Button
+- [x] Raised Button
+- [x] Slider
 - [x] Tabs
+- [x] Toggle
 - [ ] App Bar
 - [ ] Avatar
+- [ ] Badge
+- [ ] Checkbox
+- [ ] Dialog
+- [ ] Floating Action Button
 - [ ] Icon Menu
 - [ ] Menu
-- [ ] Dialog
+- [ ] Progress
+- [ ] Radio Button
+- [ ] Select Field
 - [ ] Scroll Bar
 - [ ] Text Field
-- [x] Theme
 
 #### Not started
 
+- [ ] Chips
 - [ ] Discrete Slider
-- [ ] Checkbox
+- [ ] Docs
 - [ ] List
-- [ ] Radio Button
+- [ ] Paper
 - [ ] Search Field
 - [ ] Table
-- [ ] Badge
-- [ ] Paper
-- [ ] Select Field
-- [ ] Progress
-- [ ] Chips
-- [ ] Floating Action Button
-- [ ] Docs
