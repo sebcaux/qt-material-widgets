@@ -45,6 +45,11 @@ public:
     explicit Tab(QString text, QWidget *parent = 0);
     ~Tab();
 
+    QSize sizeHint() const Q_DECL_OVERRIDE;
+
+protected:
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+
 private:
     Q_DISABLE_COPY(Tab)
 

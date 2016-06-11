@@ -5,6 +5,7 @@
 #include "lib/theme.h"
 
 class TabsPrivate;
+class Tab;
 
 class Tabs : public QWidget
 {
@@ -31,6 +32,7 @@ public:
     QColor textColor() const;
 
     void addTab(const QString &text);
+    void addTab(const QString &text, const QIcon &icon);
 
     void setRippleStyle(Material::RippleStyle style);
 
@@ -52,6 +54,8 @@ private slots:
 private:
     Q_DISABLE_COPY(Tabs)
     Q_DECLARE_PRIVATE(Tabs)
+
+    Tab *createTab(const QString &text);
 };
 
 #endif // TABS_H

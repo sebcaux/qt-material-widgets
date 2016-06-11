@@ -126,23 +126,16 @@ QColor Tabs::textColor() const
 
 void Tabs::addTab(const QString &text)
 {
+    createTab(text);
+}
+
+void Tabs::addTab(const QString &text, const QIcon &icon)
+{
     Q_D(Tabs);
 
-    Tab *tab = new Tab(text);
-    tab->setCornerRadius(0);
-    tab->setRippleStyle(Material::CenteredRipple);
-    tab->setRole(Material::Primary);
-    tab->setBackgroundMode(Qt::OpaqueMode);
-    tab->setPeakOpacity(0.25);
-
-    d->tabLayout->addWidget(tab);
-
-    if (-1 == d->tab) {
-        d->tab = 0;
-        d->inkBar->refreshGeometry();
-    }
-
-    connect(tab, SIGNAL(clicked()), this, SLOT(switchTab()));
+    Tab *tab = createTab(text);
+    tab->setIcon(icon);
+    tab->setIconSize(QSize(24, 24));
 }
 
 void Tabs::setRippleStyle(Material::RippleStyle style)
@@ -201,4 +194,27 @@ void Tabs::switchTab()
         d->inkBar->animate();
         emit currentChanged(d->tab);
     }
+}
+
+Tab *Tabs::createTab(const QString &text)
+{
+    Q_D(Tabs);
+
+    Tab *tab = new Tab(text);
+    tab->setCornerRadius(0);
+    tab->setRippleStyle(Material::CenteredRipple);
+    tab->setRole(Material::Primary);
+    tab->setBackgroundMode(Qt::OpaqueMode);
+    tab->setPeakOpacity(0.25);
+
+    d->tabLayout->addWidget(tab);
+
+    if (-1 == d->tab) {
+        d->tab = 0;
+        d->inkBar->refreshGeometry();
+    }
+
+    connect(tab, SIGNAL(clicked()), this, SLOT(switchTab()));
+
+    return tab;
 }

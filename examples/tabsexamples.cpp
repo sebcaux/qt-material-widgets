@@ -1,6 +1,7 @@
 #include <QVBoxLayout>
 #include <QStackedLayout>
 #include <QLabel>
+#include <QIcon>
 #include "tabsexamples.h"
 #include "components/tabs.h"
 #include "frame.h"
@@ -84,9 +85,9 @@ TabsExamples::TabsExamples(QWidget *parent)
         layout->addLayout(stack);
         layout->setContentsMargins(0, 0, 0, 0);
 
-        tabs->addTab("First");
-        tabs->addTab("Second");
-        tabs->addTab("Third");
+        tabs->addTab("Listen", QIcon("../qt-material-widgets/ic_volume_up_white_24px.svg"));
+        tabs->addTab("Talk",   QIcon("../qt-material-widgets/ic_message_white_24px.svg"));
+        tabs->addTab("Eat",    QIcon("../qt-material-widgets/ic_local_dining_white_24px.svg"));
 
         QScrollArea *area = new QScrollArea;
         area->setWidget(widget);

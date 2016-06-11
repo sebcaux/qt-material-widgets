@@ -1,8 +1,12 @@
 #include "tabs_internal.h"
 #include <QLayout>
 #include <QPainter>
+#include <QStylePainter>
+#include <QStyleOptionButton>
 #include <QEvent>
+#include <QDebug>
 #include <QPropertyAnimation>
+#include <QtSvg/QSvgRenderer>
 #include "tabs.h"
 
 TabsInkBar::TabsInkBar(Tabs *parent)
@@ -101,7 +105,65 @@ Tab::~Tab()
 {
 }
 
+QSize Tab::sizeHint() const
+{
+    if (icon().isNull()) {
+        return FlatButton::sizeHint();
+    } else {
+        return QSize(40, iconSize().height() + 48);
+    }
+}
+
+void Tab::paintEvent(QPaintEvent *event)
+{
+    Q_UNUSED(event)
+
+    //FlatButton::paintEvent(event);
+
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor(backgroundColor());
+    painter.setOpacity(1);
+    painter.setBrush(brush);
+    painter.setPen(Qt::NoPen);
+    painter.drawRect(rect());
+
+    QStylePainter style(this);
+
+    QStyleOptionButton option;
+    initStyleOption(&option);
+    option.features |= QStyleOptionButton::Flat;
+    option.iconSize = QSize(-1, -1);  // Let's not draw the icon right now
+
+    style.drawControl(QStyle::CE_PushButtonLabel, option);
+
+
+    if (!icon().isNull()) {
+        const QSize &size = iconSize();
+        icon().paint(&painter,
+                   QRect(QPoint((width()-size.width())/2, 0), size),
+                   Qt::AlignCenter,
+                   QIcon::Normal);
+    }
+
+    //
+
+    QPen pen;
+    pen.setColor(Qt::red);
+    pen.setWidth(2);
+    painter.setPen(pen);
+
+    painter.drawRect(rect());
+}
+
 void Tab::init()
 {
     setMinimumHeight(50);
+
+    QFont fnt(font());
+    fnt.setStyleName("Normal");
+    setFont(fnt);
 }
