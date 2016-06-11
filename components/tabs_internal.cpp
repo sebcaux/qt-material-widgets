@@ -133,6 +133,10 @@ void Tab::paintEvent(QPaintEvent *event)
 
     QStylePainter style(this);
 
+    if (!icon().isNull()) {
+        style.translate(0, 10);
+    }
+
     QStyleOptionButton option;
     initStyleOption(&option);
     option.features |= QStyleOptionButton::Flat;
@@ -140,22 +144,17 @@ void Tab::paintEvent(QPaintEvent *event)
 
     style.drawControl(QStyle::CE_PushButtonLabel, option);
 
-
     if (!icon().isNull()) {
         const QSize &size = iconSize();
-        icon().paint(&painter,
-                   QRect(QPoint((width()-size.width())/2, 0), size),
-                   Qt::AlignCenter,
-                   QIcon::Normal);
+        QRect iconPos(QPoint((width()-size.width())/2, 0), size);
+        icon().paint(&painter, iconPos, Qt::AlignCenter, QIcon::Normal);
     }
-
-    //
 
     QPen pen;
     pen.setColor(Qt::red);
-    pen.setWidth(2);
+    pen.setWidth(5);
     painter.setPen(pen);
-
+    painter.setBrush(Qt::NoBrush);
     painter.drawRect(rect());
 }
 
