@@ -45,6 +45,9 @@ public:
     explicit Tab(QString text, QWidget *parent = 0);
     ~Tab();
 
+    inline void setActive(bool state) { _active = state; update(); }
+    inline bool isActive() const { return _active; }
+
     QSize sizeHint() const Q_DECL_OVERRIDE;
 
 protected:
@@ -54,6 +57,8 @@ private:
     Q_DISABLE_COPY(Tab)
 
     void init();
+
+    bool _active;
 };
 
 #endif // TABS_INTERNAL_H

@@ -1,4 +1,4 @@
-QT       += core gui qml svg
+QT       += core gui qml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

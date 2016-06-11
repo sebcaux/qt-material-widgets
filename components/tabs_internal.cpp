@@ -6,7 +6,6 @@
 #include <QEvent>
 #include <QDebug>
 #include <QPropertyAnimation>
-#include <QtSvg/QSvgRenderer>
 #include "tabs.h"
 
 TabsInkBar::TabsInkBar(Tabs *parent)
@@ -110,7 +109,7 @@ QSize Tab::sizeHint() const
     if (icon().isNull()) {
         return FlatButton::sizeHint();
     } else {
-        return QSize(40, iconSize().height() + 48);
+        return QSize(40, iconSize().height() + 46);
     }
 }
 
@@ -134,28 +133,41 @@ void Tab::paintEvent(QPaintEvent *event)
     QStylePainter style(this);
 
     if (!icon().isNull()) {
-        style.translate(0, 10);
+        style.translate(0, 12);
     }
 
     QStyleOptionButton option;
     initStyleOption(&option);
     option.features |= QStyleOptionButton::Flat;
-    option.iconSize = QSize(-1, -1);  // Let's not draw the icon right now
+    option.iconSize = QSize(-1, -1);  // Prevent icon from being drawn twice
 
     style.drawControl(QStyle::CE_PushButtonLabel, option);
 
     if (!icon().isNull()) {
         const QSize &size = iconSize();
-        QRect iconPos(QPoint((width()-size.width())/2, 0), size);
-        icon().paint(&painter, iconPos, Qt::AlignCenter, QIcon::Normal);
+        QRect iconRect(QPoint((width()-size.width())/2, 0), size);
+        icon().paint(&painter, iconRect, Qt::AlignCenter, QIcon::Normal);
     }
 
+    if (!_active) {
+        QColor overlayColor = backgroundColor();
+        overlayColor.setAlphaF(0.36);
+
+        QBrush overlay;
+        overlay.setStyle(Qt::SolidPattern);
+        overlay.setColor(overlayColor);
+        painter.fillRect(rect(), overlay);
+    }
+
+#ifdef DEBUG_LAYOUT
+    QPainter debug(this);
     QPen pen;
     pen.setColor(Qt::red);
-    pen.setWidth(5);
-    painter.setPen(pen);
-    painter.setBrush(Qt::NoBrush);
-    painter.drawRect(rect());
+    pen.setWidth(2);
+    debug.setPen(pen);
+    debug.setBrush(Qt::NoBrush);
+    debug.drawRect(rect());
+#endif
 }
 
 void Tab::init()

@@ -135,7 +135,7 @@ void Tabs::addTab(const QString &text, const QIcon &icon)
 
     Tab *tab = createTab(text);
     tab->setIcon(icon);
-    tab->setIconSize(QSize(24, 24));
+    tab->setIconSize(QSize(22, 22));
 }
 
 void Tabs::setRippleStyle(Material::RippleStyle style)
@@ -188,8 +188,14 @@ void Tabs::switchTab()
 {
     Q_D(Tabs);
 
+    Tab *oldTab = static_cast<Tab *>(d->tabLayout->itemAt(d->tab)->widget());
+    if (oldTab) {
+        oldTab->setActive(false);
+    }
+
     Tab *tab = static_cast<Tab *>(sender());
     if (tab) {
+        tab->setActive(true);
         d->tab = d->tabLayout->indexOf(tab);
         d->inkBar->animate();
         emit currentChanged(d->tab);
@@ -212,6 +218,7 @@ Tab *Tabs::createTab(const QString &text)
     if (-1 == d->tab) {
         d->tab = 0;
         d->inkBar->refreshGeometry();
+        tab->setActive(true);
     }
 
     connect(tab, SIGNAL(clicked()), this, SLOT(switchTab()));
