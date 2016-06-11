@@ -87,13 +87,17 @@ void TabsInkBar::paintEvent(QPaintEvent *event)
 }
 
 Tab::Tab(QWidget *parent)
-    : FlatButton(parent)
+    : FlatButton(parent),
+      _active(false)
+//      _showHalo(true)
 {
     init();
 }
 
 Tab::Tab(QString text, QWidget *parent)
-    : FlatButton(parent)
+    : FlatButton(parent),
+      _active(false)
+//      _showHalo(true)
 {
     init();
 
@@ -117,8 +121,6 @@ void Tab::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
-    //FlatButton::paintEvent(event);
-
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
@@ -129,6 +131,8 @@ void Tab::paintEvent(QPaintEvent *event)
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
     painter.drawRect(rect());
+
+    paintHalo(&painter);
 
     QStylePainter style(this);
 

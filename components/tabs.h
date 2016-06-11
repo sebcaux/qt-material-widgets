@@ -22,6 +22,9 @@ public:
     void setUseThemeColors(bool value);
     bool useThemeColors() const;
 
+    void setShowHalo(bool state);
+    bool showHalo() const;
+
     void setInkColor(const QColor &color);
     QColor inkColor() const;
 

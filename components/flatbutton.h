@@ -31,6 +31,9 @@ public:
     void setUseThemeColors(bool value);
     bool useThemeColors() const;
 
+    void setShowHalo(bool state);
+    bool showHalo() const;
+
     void setRippleStyle(Material::RippleStyle style);
     Material::RippleStyle rippleStyle() const;
 
@@ -58,6 +61,8 @@ protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+
+    void paintHalo(QPainter *painter);
 
     const QScopedPointer<FlatButtonPrivate> d_ptr;
 

@@ -10,7 +10,8 @@
 TabsPrivate::TabsPrivate(Tabs *q)
     : q_ptr(q),
       tab(-1),
-      useThemeColors(true)
+      useThemeColors(true),
+      showHalo(false)
 {
 }
 
@@ -49,6 +50,28 @@ bool Tabs::useThemeColors() const
     Q_D(const Tabs);
 
     return d->useThemeColors;
+}
+
+void Tabs::setShowHalo(bool state)
+{
+    Q_D(Tabs);
+
+    d->showHalo = state;
+
+    Tab *tab;
+    for (int i = 0; i < d->tabLayout->count(); ++i) {
+        QLayoutItem *item = d->tabLayout->itemAt(i);
+        if ((tab = static_cast<Tab *>(item->widget()))) {
+            tab->setShowHalo(state);
+        }
+    }
+}
+
+bool Tabs::showHalo() const
+{
+    Q_D(const Tabs);
+
+    return d->showHalo;
 }
 
 void Tabs::setInkColor(const QColor &color)
@@ -212,6 +235,7 @@ Tab *Tabs::createTab(const QString &text)
     tab->setRole(Material::Primary);
     tab->setBackgroundMode(Qt::OpaqueMode);
     tab->setPeakOpacity(0.25);
+    tab->setShowHalo(d->showHalo);
 
     d->tabLayout->addWidget(tab);
 

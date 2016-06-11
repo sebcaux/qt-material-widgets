@@ -15,6 +15,7 @@ FlatButtonPrivate::FlatButtonPrivate(FlatButton *q)
       cornerRadius(3),
       bgMode(Qt::TransparentMode),
       useThemeColors(true),
+      showHalo(true),
       peakOpacity(0.15)
 {
 }
@@ -234,6 +235,21 @@ bool FlatButton::useThemeColors() const
     return d->useThemeColors;
 }
 
+void FlatButton::setShowHalo(bool state)
+{
+    Q_D(FlatButton);
+
+    d->showHalo = state;
+    update();
+}
+
+bool FlatButton::showHalo() const
+{
+    Q_D(const FlatButton);
+
+    return d->showHalo;
+}
+
 FlatButton::FlatButton(FlatButtonPrivate &d, QWidget *parent)
     : QPushButton(parent),
       d_ptr(&d)
@@ -259,9 +275,6 @@ void FlatButton::paintEvent(QPaintEvent *event)
     Q_D(FlatButton);
 
     const qreal bgOpacity = d->delegate->backgroundOpacity();
-    const qreal haloOpacity = d->delegate->haloOpacity();
-    const qreal s = d->delegate->haloScaleFactor()*d->delegate->haloSize()*0.7;
-    const qreal hs = static_cast<qreal>(width())*s;
     const qreal cr = d->cornerRadius;
 
     QPainter painter(this);
@@ -287,16 +300,7 @@ void FlatButton::paintEvent(QPaintEvent *event)
         painter.drawRoundedRect(rect(), cr, cr);
     }
 
-    if (isEnabled() && haloOpacity > 0) {
-        QBrush brush;
-        brush.setStyle(Qt::SolidPattern);
-        brush.setColor(palette().color(QPalette::Active, QPalette::ButtonText));
-        painter.setOpacity(haloOpacity);
-        painter.setBrush(brush);
-        painter.setPen(Qt::NoPen);
-        QPointF center = rect().center();
-        painter.drawEllipse(center, hs, hs);
-    }
+    paintHalo(&painter);
 
     QStylePainter style(this);
 
@@ -336,4 +340,27 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
     d->ripple->addRipple(ripple);
 
     QPushButton::mousePressEvent(event);
+}
+
+void FlatButton::paintHalo(QPainter *painter)
+{
+    Q_D(FlatButton);
+
+    if (!d->showHalo)
+        return;
+
+    const qreal haloOpacity = d->delegate->haloOpacity();
+    const qreal s = d->delegate->haloScaleFactor()*d->delegate->haloSize()*0.7;
+    const qreal hs = static_cast<qreal>(width())*s;
+
+    if (isEnabled() && haloOpacity > 0) {
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(palette().color(QPalette::Active, QPalette::ButtonText));
+        painter->setOpacity(haloOpacity);
+        painter->setBrush(brush);
+        painter->setPen(Qt::NoPen);
+        QPointF center = rect().center();
+        painter->drawEllipse(center, hs, hs);
+    }
 }

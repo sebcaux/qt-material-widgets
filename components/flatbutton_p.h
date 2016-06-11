@@ -31,6 +31,7 @@ public:
     QColor                backgroundColor;
     QColor                disabledTextColor;
     bool                  useThemeColors;
+    bool                  showHalo;
     qreal                 peakOpacity;
 };
 

@@ -26,6 +26,7 @@ public:
     QColor       textColor;
     int          tab;
     bool         useThemeColors;
+    bool         showHalo;
 };
 
 #endif // TABS_P_H

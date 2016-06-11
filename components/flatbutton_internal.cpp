@@ -44,9 +44,10 @@ FlatButtonDelegate::FlatButtonDelegate(FlatButton *parent)
     addTransition(button, QEvent::Leave, _pressedState, _normalFocusedState);
     addTransition(button, QEvent::FocusOut, _pressedState, _hoveredState);
 
+    _normalState->assignProperty(this, "haloSize", 0);
     _normalFocusedState->assignProperty(this, "haloSize", 0.7);
-    _normalState->assignProperty(this, "haloSize", 1);
-    _hoveredState->assignProperty(this, "haloSize", 1);
+    _hoveredState->assignProperty(this, "haloSize", 0);
+    _pressedState->assignProperty(this, "haloSize", 4);
     _hoveredFocusedState->assignProperty(this, "haloSize", 0.7);
 
     //
@@ -213,11 +214,12 @@ void FlatButtonDelegate::addTransition(QAbstractTransition *transition,
     transition->addAnimation(animation);
 
     animation = new QPropertyAnimation(this, "haloOpacity");
-    animation->setDuration(350);
+    animation->setDuration(170);
     transition->addAnimation(animation);
 
     animation = new QPropertyAnimation(this, "haloSize");
     animation->setDuration(350);
+    animation->setEasingCurve(QEasingCurve::OutCubic);
     transition->addAnimation(animation);
 
     fromState->addTransition(transition);
