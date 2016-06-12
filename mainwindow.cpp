@@ -48,15 +48,16 @@ MainWindow::MainWindow(QWidget *parent)
     FloatingActionButton *button = new FloatingActionButton(QIcon("../qt-material-widgets/ic_local_dining_white_24px.svg"));
     button->setParent(this);
 
-    button->setCorner(Qt::TopLeftCorner);
+    button->setCorner(Qt::TopRightCorner);
     button->setMini(true);
+    button->setYOffset(56);
 
     //
 
     FloatingActionButton *button2 = new FloatingActionButton(QIcon("../qt-material-widgets/ic_message_white_24px.svg"));
     button2->setParent(this);
 
-    button2->setDisabled(true);
+    //button2->setDisabled(true);
 }
 
 MainWindow::~MainWindow()

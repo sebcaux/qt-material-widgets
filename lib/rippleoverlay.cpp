@@ -46,7 +46,7 @@ void RippleOverlay::paintEvent(QPaintEvent *event)
     painter.setPen(Qt::NoPen);
 
     if (useClip) {
-        painter.setClipRegion(clipRegion);
+        painter.setClipPath(clipPath);
     }
 
     QList<Ripple *>::const_iterator i;

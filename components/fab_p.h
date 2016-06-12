@@ -19,6 +19,8 @@ public:
     void assignAnimationProperties();
 
     bool mini;
+    int offsX;
+    int offsY;
     Qt::Corner corner;
 };
 

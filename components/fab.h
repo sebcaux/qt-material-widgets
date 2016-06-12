@@ -21,6 +21,15 @@ public:
     void setCorner(Qt::Corner corner);
     Qt::Corner corner() const;
 
+    void setOffset(int x, int y);
+    QSize offset() const;
+
+    void setXOffset(int x);
+    int xOffset() const;
+
+    void setYOffset(int y);
+    int yOffset() const;
+
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;

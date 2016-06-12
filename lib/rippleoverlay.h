@@ -21,7 +21,7 @@ public:
     inline void setClipping(bool enabled) { useClip = enabled; update(); }
     inline bool hasClipping() const { return useClip; }
 
-    inline void setClipRegion(const QRegion &region) { clipRegion = region; update(); }
+    inline void setClipPath(const QPainterPath &path) { clipPath = path; update(); }
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
@@ -31,8 +31,8 @@ protected slots:
 
 private:
     QList<Ripple *> ripples;
-    QRegion clipRegion;
-    bool    useClip;
+    QPainterPath clipPath;
+    bool useClip;
 };
 
 #endif // RIPPLEOVERLAY_H

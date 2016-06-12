@@ -6,6 +6,8 @@
 FloatingActionButtonPrivate::FloatingActionButtonPrivate(FloatingActionButton *q)
     : RaisedButtonPrivate(q),
       mini(false),
+      offsX(34),
+      offsY(36),
       corner(Qt::BottomRightCorner)
 {
 }
@@ -23,6 +25,11 @@ void FloatingActionButtonPrivate::init()
     q->setGeometry(fabGeometry());
 
     assignAnimationProperties();
+
+    QPainterPath path;
+    path.addEllipse(0, 0, 56, 56);
+    ripple->setClipPath(path);
+    ripple->setClipping(true);
 }
 
 QRect FloatingActionButtonPrivate::fabGeometry() const
@@ -33,27 +40,26 @@ QRect FloatingActionButtonPrivate::fabGeometry() const
     if (!parent)
         return QRect();
 
-    const int offset = mini ? 74 : 90;
     const int s = mini ? 40 : 56;
 
     switch (corner)
     {
     case Qt::TopLeftCorner:
-        return QRect(offset - s,
-                     offset - s,
+        return QRect(offsX,
+                     offsY,
                      s, s);
     case Qt::TopRightCorner:
-        return QRect(parent->width() - offset,
-                     offset - s,
+        return QRect(parent->width() - (offsX + s),
+                     offsY,
                      s, s);
     case Qt::BottomLeftCorner:
-        return QRect(offset -s,
-                     parent->height() - offset,
+        return QRect(offsX,
+                     parent->height() - (offsY + s),
                      s, s);
     case Qt::BottomRightCorner:
     default:
-        return QRect(parent->width() - offset,
-                     parent->height() - offset,
+        return QRect(parent->width() - (offsX + s),
+                     parent->height() - (offsY + s),
                      s, s);
     }
 }
@@ -111,11 +117,13 @@ void FloatingActionButton::setMini(bool state)
 
     d->mini = state;
 
-    if (state) {
-        setFixedSize(40, 40);
-    } else {
-        setFixedSize(56, 56);
-    }
+    const int s = state ? 40 : 56;
+
+    setFixedSize(s, s);
+    QPainterPath path;
+    path.addEllipse(0, 0, s, s);
+    d->ripple->setClipPath(path);
+
     d->assignAnimationProperties();
     update();
 }
@@ -143,6 +151,52 @@ Qt::Corner FloatingActionButton::corner() const
     Q_D(const FloatingActionButton);
 
     return d->corner;
+}
+
+void FloatingActionButton::setOffset(int x, int y)
+{
+    Q_D(FloatingActionButton);
+
+    d->offsX = x;
+    d->offsY = y;
+    update();
+}
+
+QSize FloatingActionButton::offset() const
+{
+    Q_D(const FloatingActionButton);
+
+    return QSize(d->offsX, d->offsY);
+}
+
+void FloatingActionButton::setXOffset(int x)
+{
+    Q_D(FloatingActionButton);
+
+    d->offsX = x;
+    update();
+}
+
+int FloatingActionButton::xOffset() const
+{
+    Q_D(const FloatingActionButton);
+
+    return d->offsX;
+}
+
+void FloatingActionButton::setYOffset(int y)
+{
+    Q_D(FloatingActionButton);
+
+    d->offsY = y;
+    update();
+}
+
+int FloatingActionButton::yOffset() const
+{
+    Q_D(const FloatingActionButton);
+
+    return d->offsY;
 }
 
 bool FloatingActionButton::event(QEvent *event)
