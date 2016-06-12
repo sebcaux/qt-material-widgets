@@ -14,6 +14,8 @@ public:
     ~RaisedButton();
 
 protected:
+    RaisedButton(RaisedButtonPrivate &d, QWidget *parent = 0);
+
     bool event(QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 

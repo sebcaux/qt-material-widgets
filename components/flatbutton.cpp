@@ -4,6 +4,7 @@
 #include <QStylePainter>
 #include <QStyleOption>
 #include <QApplication>
+#include <QDebug>
 #include "lib/rippleoverlay.h"
 #include "lib/ripple.h"
 #include "flatbutton_p.h"

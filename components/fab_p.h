@@ -14,7 +14,12 @@ public:
 
     void init();
 
+    QRect fabGeometry() const;
+
+    void assignAnimationProperties();
+
     bool mini;
+    Qt::Corner corner;
 };
 
 #endif // FAB_P_H

@@ -20,6 +20,7 @@
 #include "examples/avatarexamples.h"
 #include "examples/menuexamples.h"
 #include "examples/iconmenuexamples.h"
+#include "components/fab.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -43,6 +44,19 @@ MainWindow::MainWindow(QWidget *parent)
 {
     _initWidget();
     _initMenu();
+
+    FloatingActionButton *button = new FloatingActionButton(QIcon("../qt-material-widgets/ic_local_dining_white_24px.svg"));
+    button->setParent(this);
+
+    button->setCorner(Qt::TopLeftCorner);
+    button->setMini(true);
+
+    //
+
+    FloatingActionButton *button2 = new FloatingActionButton(QIcon("../qt-material-widgets/ic_message_white_24px.svg"));
+    button2->setParent(this);
+
+    button2->setDisabled(true);
 }
 
 MainWindow::~MainWindow()

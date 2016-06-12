@@ -10,7 +10,7 @@ class FloatingActionButton : public RaisedButton
     Q_OBJECT
 
 public:
-    explicit FloatingActionButton(QWidget *parent = 0);
+    explicit FloatingActionButton(const QIcon &icon, QWidget *parent = 0);
     ~FloatingActionButton();
 
     QSize sizeHint() const Q_DECL_OVERRIDE;
@@ -18,7 +18,12 @@ public:
     void setMini(bool state);
     bool isMini() const;
 
+    void setCorner(Qt::Corner corner);
+    Qt::Corner corner() const;
+
 protected:
+    bool event(QEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
 private:

@@ -3,6 +3,8 @@
 
 #include "flatbutton_p.h"
 
+class QGraphicsDropShadowEffect;
+
 class RaisedButtonPrivate : public FlatButtonPrivate
 {
     Q_DISABLE_COPY(RaisedButtonPrivate)
@@ -15,6 +17,9 @@ public:
     void init();
 
     QStateMachine machine;
+    QState *normalState;
+    QState *pressedState;
+    QGraphicsDropShadowEffect *effect;
 };
 
 #endif // RAISEDBUTTON_P_H

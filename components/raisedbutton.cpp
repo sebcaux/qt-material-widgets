@@ -26,14 +26,14 @@ void RaisedButtonPrivate::init()
     q->setTextColor(Qt::white);
     q->setPeakOpacity(0.25);
 
-    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
+    effect = new QGraphicsDropShadowEffect;
     effect->setBlurRadius(7);
     effect->setOffset(QPointF(0, 0));
     effect->setColor(QColor(0, 0, 0, 60));
     q->setGraphicsEffect(effect);
 
-    QState *normalState = new QState;
-    QState *pressedState = new QState;
+    normalState = new QState;
+    pressedState = new QState;
 
     machine.addState(normalState);
     machine.addState(pressedState);
@@ -107,6 +107,12 @@ RaisedButton::RaisedButton(QWidget *parent)
 
 RaisedButton::~RaisedButton()
 {
+}
+
+RaisedButton::RaisedButton(RaisedButtonPrivate &d, QWidget *parent)
+    : FlatButton(d, parent)
+{
+    d_func()->init();
 }
 
 bool RaisedButton::event(QEvent *event)

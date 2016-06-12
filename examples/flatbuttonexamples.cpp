@@ -1,6 +1,7 @@
 #include <QLayout>
 #include <QPushButton>
 #include <QDebug>
+#include <QApplication>
 #include "flatbuttonexamples.h"
 #include "lib/style.h"
 #include "components/flatbutton.h"
@@ -206,18 +207,20 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
         //flatButton->setMinimumSize(200, 50);
         //flatButton->setCheckable(true);
 
-        FloatingActionButton *button = new FloatingActionButton;
+        FloatingActionButton *button = new FloatingActionButton(QIcon("../qt-material-widgets/ic_local_dining_white_24px.svg"));
 
-        ExampleView *view = new ExampleView;
-        view->setWidget(button);
+        //qDebug() << QGuiApplication::allWindows();
 
-        Frame *frame = new Frame;
-        frame->setCodeSnippet(
-                    ""
-        );
-        frame->setWidget(view);
+        //ExampleView *view = new ExampleView;
+        //view->setWidget(button);
 
-        layout->addWidget(frame);
+        //Frame *frame = new Frame;
+        //frame->setCodeSnippet(
+        //            ""
+        //);
+        //frame->setWidget(view);
+
+        //layout->addWidget(frame);
     }
 }
 
