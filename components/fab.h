@@ -1,9 +1,9 @@
 #ifndef FAB_H
 #define FAB_H
 
-#include <QWidget>
+#include "raisedbutton.h"
 
-class FloatingActionButton : public QWidget
+class FloatingActionButton : public RaisedButton
 {
     Q_OBJECT
 
@@ -13,7 +13,7 @@ public:
 
 private:
     Q_DISABLE_COPY(FloatingActionButton)
-    //Q_DECLARE_PRIVATE(FloatingActionButton)
+    Q_DECLARE_PRIVATE(FloatingActionButton)
 };
 
 #endif // FAB_H
