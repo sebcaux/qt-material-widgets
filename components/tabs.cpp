@@ -12,7 +12,7 @@ TabsPrivate::TabsPrivate(Tabs *q)
       tab(-1),
       useThemeColors(true),
       showHalo(false),
-      rippleStyle(Material::PositionedRipple)
+      rippleStyle(Material::CenteredRipple)
 {
 }
 
@@ -244,6 +244,7 @@ Tab *Tabs::createTab(const QString &text)
     tab->setBackgroundMode(Qt::OpaqueMode);
     tab->setPeakOpacity(0.25);
     tab->setShowHalo(d->showHalo);
+    tab->setRippleStyle(d->rippleStyle);
 
     d->tabLayout->addWidget(tab);
 

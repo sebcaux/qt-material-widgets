@@ -89,7 +89,6 @@ void TabsInkBar::paintEvent(QPaintEvent *event)
 Tab::Tab(QWidget *parent)
     : FlatButton(parent),
       _active(false)
-//      _showHalo(true)
 {
     init();
 }
@@ -97,7 +96,6 @@ Tab::Tab(QWidget *parent)
 Tab::Tab(QString text, QWidget *parent)
     : FlatButton(parent),
       _active(false)
-//      _showHalo(true)
 {
     init();
 
