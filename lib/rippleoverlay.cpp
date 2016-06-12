@@ -4,7 +4,8 @@
 #include "ripple.h"
 
 RippleOverlay::RippleOverlay(QWidget *parent)
-    : QWidget(parent)
+    : QWidget(parent),
+      useClip(false)
 {
     setAttribute(Qt::WA_TransparentForMouseEvents);
     setAttribute(Qt::WA_NoSystemBackground);
@@ -43,6 +44,10 @@ void RippleOverlay::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(Qt::NoPen);
+
+    if (useClip) {
+        painter.setClipRegion(clipRegion);
+    }
 
     QList<Ripple *>::const_iterator i;
     for (i = ripples.begin(); i != ripples.end(); ++i)

@@ -18,6 +18,11 @@ public:
 
     void setColor(const QColor &color);
 
+    inline void setClipping(bool enabled) { useClip = enabled; update(); }
+    inline bool hasClipping() const { return useClip; }
+
+    inline void setClipRegion(const QRegion &region) { clipRegion = region; update(); }
+
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
@@ -26,6 +31,8 @@ protected slots:
 
 private:
     QList<Ripple *> ripples;
+    QRegion clipRegion;
+    bool    useClip;
 };
 
 #endif // RIPPLEOVERLAY_H
