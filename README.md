@@ -29,6 +29,7 @@
 - [ ] Chips
 - [ ] Discrete Slider
 - [ ] Docs
+- [ ] Grid List
 - [ ] List
 - [ ] Paper
 - [ ] Search Field
