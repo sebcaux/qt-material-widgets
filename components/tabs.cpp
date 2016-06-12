@@ -177,8 +177,6 @@ void Tabs::addTab(const QString &text)
 
 void Tabs::addTab(const QString &text, const QIcon &icon)
 {
-    Q_D(Tabs);
-
     Tab *tab = createTab(text);
     tab->setIcon(icon);
     tab->setIconSize(QSize(22, 22));
