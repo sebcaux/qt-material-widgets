@@ -4,6 +4,7 @@
 
 #### Work in progress
 
+- [x] Floating Action Button
 - [x] Flat Button
 - [x] Icon Button
 - [x] Raised Button
@@ -15,7 +16,6 @@
 - [ ] Badge
 - [ ] Checkbox
 - [ ] Dialog
-- [ ] Floating Action Button
 - [ ] Icon Menu
 - [ ] Menu
 - [ ] Progress
