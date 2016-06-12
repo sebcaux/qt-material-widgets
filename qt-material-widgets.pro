@@ -55,7 +55,11 @@ SOURCES += main.cpp\
     components/slider_internal.cpp \
     components/flatbutton_internal.cpp \
     components/toggle_internal.cpp \
-    components/tabs_internal.cpp
+    components/tabs_internal.cpp \
+    components/fab.cpp \
+    components/badge.cpp \
+    components/progress.cpp \
+    components/selectfield.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -111,7 +115,11 @@ HEADERS  += mainwindow.h \
     components/toggle_internal.h \
     components/iconbutton_p.h \
     components/tabs_p.h \
-    components/tabs_internal.h
+    components/tabs_internal.h \
+    components/fab.h \
+    components/badge.h \
+    components/progress.h \
+    components/selectfield.h
 
 RESOURCES += \
     resources.qrc
