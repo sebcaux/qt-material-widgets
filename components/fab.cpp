@@ -1,6 +1,6 @@
 #include "fab.h"
 
-FloatingActionButton::FloatingActionButton(QWidget *parent = 0)
+FloatingActionButton::FloatingActionButton(QWidget *parent)
     : QWidget(parent)
 {
 }

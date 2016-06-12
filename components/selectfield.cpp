@@ -1,6 +1,6 @@
 #include "selectfield.h"
 
-SelectField::SelectField(QWidget *parent = 0)
+SelectField::SelectField(QWidget *parent)
     : QWidget(parent)
 {
 }

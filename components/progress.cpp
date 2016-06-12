@@ -1,6 +1,6 @@
 #include "progress.h"
 
-Progress::Progress(QWidget *parent = 0)
+Progress::Progress(QWidget *parent)
     : QWidget(parent)
 {
 }

@@ -1,6 +1,6 @@
 #include "badge.h"
 
-Badge::Badge(QWidget *parent = 0)
+Badge::Badge(QWidget *parent)
     : QWidget(parent)
 {
 }
