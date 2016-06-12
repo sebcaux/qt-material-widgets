@@ -1,4 +1,5 @@
 #include <QLayout>
+#include <QCheckBox>
 #include "toggleexamples.h"
 #include "components/toggle.h"
 #include "exampleview.h"
@@ -78,19 +79,23 @@ ToggleExamples::ToggleExamples(QWidget *parent)
     }
     {
         Toggle *toggle = new Toggle;
-        toggle->setFixedSize(200, 50);
+        //toggle->setFixedSize(200, 50);
 
         ExampleView *view = new ExampleView;
         view->setWidget(toggle);
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(
-            "Toggle *toggle = new Toggle;\n"
-            "toggle->setFixedSize(200, 50);"
+                    ""
         );
         frame->setWidget(view);
 
         layout->addWidget(frame);
+
+        QCheckBox *cb = new QCheckBox;
+        layout->addWidget(cb);
+
+        connect(cb, SIGNAL(toggled(bool)), toggle, SLOT(setChecked(bool)));
     }
     {
         Toggle *toggle = new Toggle;
