@@ -2,6 +2,7 @@
 #define RADIOBUTTON_P_H
 
 #include <QObject>
+#include <QStateMachine>
 #include "radiobutton_internal.h"
 
 class RadioButton;
@@ -17,11 +18,22 @@ public:
 
     void init();
 
+    void assignAnimationProperties();
+    void updatePalette();
+
     RadioButton     *const q_ptr;
     RippleOverlay   *ripple;
-    RadioButtonIcon *iconWidget;
-    QIcon checkedIcon;
-    QIcon uncheckedIcon;
+    RadioButtonIcon *checkedIcon;
+    RadioButtonIcon *uncheckedIcon;
+    QStateMachine   *machine;
+    QState          *uncheckedState;
+    QState          *checkedState;
+    int              iconSize;
+    QColor           checkedColor;
+    QColor           uncheckedColor;
+    QColor           textColor;
+    QColor           disabledColor;
+    bool             useThemeColors;
 };
 
 #endif // RADIOBUTTON_P_H

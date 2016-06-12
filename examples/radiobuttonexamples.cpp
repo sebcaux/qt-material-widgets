@@ -17,13 +17,27 @@ RadioButtonExamples::RadioButtonExamples(QWidget *parent)
         RadioButton *radioButton1 = new RadioButton;
         RadioButton *radioButton2 = new RadioButton;
         RadioButton *radioButton3 = new RadioButton;
+        RadioButton *radioButton4 = new RadioButton;
+        RadioButton *radioButton5 = new RadioButton;
+
+        radioButton3->setCheckedIcon(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+        radioButton3->setUncheckedIcon(QIcon("../qt-material-widgets/ic_star_border_black_24px.svg"));
+        radioButton3->setIconSize(30);
 
         radioButton1->setText("Auto select");
         radioButton2->setText("Option #2");
+        radioButton4->setText("Disabled option");
+        radioButton5->setText("Disabled option (checked)");
 
-        bg->addButton(radioButton1);
-        bg->addButton(radioButton2);
-        bg->addButton(radioButton3);
+        radioButton4->setDisabled(true);
+        radioButton5->setDisabled(true);
+        radioButton5->setChecked(true);
+
+        bg->addButton(radioButton1, 1);
+        bg->addButton(radioButton2, 2);
+        bg->addButton(radioButton3, 3);
+        bg->addButton(radioButton4, 4);
+        bg->addButton(radioButton5, 5);
 
         QWidget *widget = new QWidget;
         QVBoxLayout *vbl = new QVBoxLayout;
@@ -38,6 +52,8 @@ RadioButtonExamples::RadioButtonExamples(QWidget *parent)
         vbl->addWidget(radioButton1);
         vbl->addWidget(radioButton2);
         vbl->addWidget(radioButton3);
+        vbl->addWidget(radioButton4);
+        vbl->addWidget(radioButton5);
 
         ExampleView *view = new ExampleView;
         view->setWidget(widget);
