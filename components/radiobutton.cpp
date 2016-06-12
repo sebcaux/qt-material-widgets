@@ -1,4 +1,3 @@
-#include <QWidget>
 #include <QPainter>
 #include "radiobutton.h"
 
@@ -25,7 +24,7 @@ void RadioButton::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
 
-    painter.drawRect(0, 50, 50, 50);
+    painter.drawRect(rect());
 
     QWidget::paintEvent(event);
 }
