@@ -7,6 +7,7 @@
 - [x] Floating Action Button
 - [x] Flat Button
 - [x] Icon Button
+- [x] Radio Button
 - [x] Raised Button
 - [x] Slider
 - [x] Tabs
@@ -19,7 +20,6 @@
 - [ ] Icon Menu
 - [ ] Menu
 - [ ] Progress
-- [ ] Radio Button
 - [ ] Select Field
 - [ ] Scroll Bar
 - [ ] Text Field
