@@ -7,6 +7,10 @@
 
 class FlatButtonPrivate;
 
+/*
+ * @TODO: implement checkable behavior
+ */
+
 class FlatButton : public QPushButton
 {
     Q_OBJECT
