@@ -3,6 +3,7 @@
 
 #include <QRect>
 #include <QColor>
+#include "lib/theme.h"
 
 class QHBoxLayout;
 class Tabs;
@@ -27,6 +28,7 @@ public:
     int          tab;
     bool         useThemeColors;
     bool         showHalo;
+    Material::RippleStyle rippleStyle;
 };
 
 #endif // TABS_P_H

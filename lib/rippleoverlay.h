@@ -16,6 +16,8 @@ public:
     void addRipple(const QPoint &position, qreal radius = 300);
     void addRipple(Ripple *ripple);
 
+    void setColor(const QColor &color);
+
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 

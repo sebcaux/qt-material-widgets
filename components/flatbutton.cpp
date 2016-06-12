@@ -332,10 +332,10 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
         ? rect().center()
         : event->pos());
 
-    ripple->setRadiusEndValue(width()*0.45);
-    ripple->setOpacityStartValue(0.4);
+    ripple->setRadiusEndValue(width()/2);
+    ripple->setOpacityStartValue(0.35);
     ripple->setColor(palette().color(QPalette::Active, QPalette::ButtonText));
-    ripple->setDuration(500);
+    ripple->setDuration(600, 1300);
 
     d->ripple->addRipple(ripple);
 

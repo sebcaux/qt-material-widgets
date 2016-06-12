@@ -32,10 +32,22 @@ public:
 
     inline const QPoint &center() const { return _center; }
 
+    inline void setDuration(int radius, int opacity)
+    {
+        _radiusAnimation->setDuration(radius);
+        _opacityAnimation->setDuration(opacity);
+    }
+
     inline void setDuration(int duration)
     {
         _radiusAnimation->setDuration(duration);
         _opacityAnimation->setDuration(duration);
+    }
+
+    inline void setEasingCurve(QEasingCurve radius, QEasingCurve opacity)
+    {
+        _radiusAnimation->setEasingCurve(radius);
+        _opacityAnimation->setEasingCurve(opacity);
     }
 
     inline void setEasingCurve(QEasingCurve easing)

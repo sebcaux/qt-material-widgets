@@ -11,7 +11,8 @@ TabsPrivate::TabsPrivate(Tabs *q)
     : q_ptr(q),
       tab(-1),
       useThemeColors(true),
-      showHalo(false)
+      showHalo(false),
+      rippleStyle(Material::PositionedRipple)
 {
 }
 
@@ -72,6 +73,28 @@ bool Tabs::showHalo() const
     Q_D(const Tabs);
 
     return d->showHalo;
+}
+
+void Tabs::setRippleStyle(Material::RippleStyle style)
+{
+    Q_D(Tabs);
+
+    d->rippleStyle = style;
+
+    Tab *tab;
+    for (int i = 0; i < d->tabLayout->count(); ++i) {
+        QLayoutItem *item = d->tabLayout->itemAt(i);
+        if ((tab = static_cast<Tab *>(item->widget()))) {
+            tab->setRippleStyle(style);
+        }
+    }
+}
+
+Material::RippleStyle Tabs::rippleStyle() const
+{
+    Q_D(const Tabs);
+
+    return d->rippleStyle;
 }
 
 void Tabs::setInkColor(const QColor &color)
@@ -161,20 +184,6 @@ void Tabs::addTab(const QString &text, const QIcon &icon)
     tab->setIconSize(QSize(22, 22));
 }
 
-void Tabs::setRippleStyle(Material::RippleStyle style)
-{
-    Q_D(Tabs);
-
-    Tab *tab;
-    for (int i = 0; i < d->tabLayout->count(); ++i) {
-        QLayoutItem *item = d->tabLayout->itemAt(i);
-        if ((tab = static_cast<Tab *>(item->widget()))) {
-            tab->setRippleStyle(style);
-        }
-    }
-
-}
-
 const QLayout *Tabs::tabLayout() const
 {
     Q_D(const Tabs);
@@ -231,7 +240,6 @@ Tab *Tabs::createTab(const QString &text)
 
     Tab *tab = new Tab(text);
     tab->setCornerRadius(0);
-    tab->setRippleStyle(Material::CenteredRipple);
     tab->setRole(Material::Primary);
     tab->setBackgroundMode(Qt::OpaqueMode);
     tab->setPeakOpacity(0.25);

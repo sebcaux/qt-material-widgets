@@ -13,6 +13,7 @@ RaisedButtonExamples::RaisedButtonExamples(QWidget *parent)
     RaisedButton *raisedButton = new RaisedButton;
     raisedButton->setRole(Material::Primary);
     raisedButton->setText("Press me!");
+    raisedButton->setMaximumWidth(408);
 
     //raisedButton->setDisabled(true);
 

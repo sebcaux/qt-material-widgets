@@ -29,6 +29,13 @@ void RippleOverlay::addRipple(Ripple *ripple)
     ripple->startAnimation();
 }
 
+void RippleOverlay::setColor(const QColor &color)
+{
+    QList<Ripple *>::const_iterator i;
+    for (i = ripples.begin(); i != ripples.end(); ++i)
+        (*i)->setColor(color);
+}
+
 void RippleOverlay::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)

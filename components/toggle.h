@@ -4,6 +4,8 @@
 #include <QAbstractButton>
 
 class TogglePrivate;
+class ToggleTrack;
+class ToggleThumb;
 
 class Toggle : public QAbstractButton
 {
@@ -52,6 +54,9 @@ protected:
 private:
     Q_DISABLE_COPY(Toggle)
     Q_DECLARE_PRIVATE(Toggle)
+
+    friend class ToggleTrack;
+    friend class ToggleThumb;
 };
 
 #endif // TOGGLE_H

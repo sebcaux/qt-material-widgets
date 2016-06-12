@@ -2,8 +2,10 @@
 #include <QEvent>
 #include <QGraphicsDropShadowEffect>
 #include "lib/style.h"
+#include "lib/rippleoverlay.h"
 #include "toggle_internal.h"
 #include "toggle.h"
+#include "toggle_p.h"
 
 ToggleThumb::ToggleThumb(Toggle *parent)
     : QWidget(parent),
@@ -98,6 +100,13 @@ ToggleTrack::ToggleTrack(Toggle *parent)
 
 ToggleTrack::~ToggleTrack()
 {
+}
+
+void ToggleTrack::setTrackColor(const QColor &color)
+{
+    _trackColor = color;
+    _toggle->d_func()->ripple->setColor(color);
+    update();
 }
 
 bool ToggleTrack::eventFilter(QObject *obj, QEvent *event)

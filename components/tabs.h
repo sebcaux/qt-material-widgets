@@ -25,6 +25,9 @@ public:
     void setShowHalo(bool state);
     bool showHalo() const;
 
+    void setRippleStyle(Material::RippleStyle style);
+    Material::RippleStyle rippleStyle() const;
+
     void setInkColor(const QColor &color);
     QColor inkColor() const;
 
@@ -36,8 +39,6 @@ public:
 
     void addTab(const QString &text);
     void addTab(const QString &text, const QIcon &icon);
-
-    void setRippleStyle(Material::RippleStyle style);
 
     const QLayout *tabLayout() const;
     int currentIndex() const;

@@ -57,11 +57,7 @@ public:
     ToggleTrack(Toggle *parent);
     ~ToggleTrack();
 
-    inline void setTrackColor(const QColor &color)
-    {
-        _trackColor = color;
-        update();
-    }
+    void setTrackColor(const QColor &color);
 
     inline QColor trackColor() const
     {
