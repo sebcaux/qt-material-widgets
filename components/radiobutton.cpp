@@ -67,7 +67,10 @@ bool RadioButton::event(QEvent *event)
         d->iconWidget->setGeometry(geometry());
         break;
     case QEvent::ParentChange:
-        d->ripple->setParent(parentWidget());
+        QWidget *widget;
+        if ((widget = parentWidget())) {
+            d->ripple->setParent(widget);
+        }
         break;
     default:
         break;

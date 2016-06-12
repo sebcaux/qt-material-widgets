@@ -286,18 +286,27 @@ bool Toggle::event(QEvent *event)
 {
     Q_D(Toggle);
 
-    const QEvent::Type type = event->type();
-
-    if (QEvent::EnabledChange == type) {
+    switch (event->type())
+    {
+    case QEvent::EnabledChange:
         if (isEnabled()) {
             d->machine.start();
         } else {
             d->machine.stop();
         }
-    } else if (QEvent::ParentChange == type && parentWidget()) {
-        d->ripple->setParent(parentWidget());
-    } else if (QEvent::Resize == type || QEvent::Move == type) {
+        break;
+    case QEvent::ParentChange:
+        QWidget *widget;
+        if ((widget = parentWidget())) {
+            d->ripple->setParent(widget);
+        }
+        break;
+    case QEvent::Resize:
+    case QEvent::Move:
         d->ripple->setGeometry(geometry().adjusted(-10, -20, 10, 20));
+        break;
+    default:
+        break;
     }
     return QAbstractButton::event(event);
 }

@@ -235,15 +235,20 @@ SliderThumb::~SliderThumb()
 
 bool SliderThumb::eventFilter(QObject *obj, QEvent *event)
 {
-    QEvent::Type type = event->type();
-
-    if (QEvent::ParentChange == type) {
+    switch (event->type())
+    {
+    case QEvent::ParentChange:
         setParent(slider->parentWidget());
-    } else if (QEvent::Resize == type || QEvent::Move == type) {
+        break;
+    case QEvent::Resize:
+    case QEvent::Move:
         QWidget *widget;
         if ((widget = parentWidget())) {
             setGeometry(widget->rect());
         }
+        break;
+    default:
+        break;
     }
     return QWidget::eventFilter(obj, event);
 }
@@ -339,14 +344,20 @@ SliderTrack::~SliderTrack()
 
 bool SliderTrack::eventFilter(QObject *obj, QEvent *event)
 {
-    QEvent::Type type = event->type();
-
-    if (QEvent::ParentChange == type) {
+    switch (event->type())
+    {
+    case QEvent::ParentChange:
         setParent(slider->parentWidget());
-    } else if (QEvent::Resize == type || QEvent::Move == type) {
-        if (parentWidget()) {
-            setGeometry(parentWidget()->rect());
+        break;
+    case QEvent::Resize:
+    case QEvent::Move:
+        QWidget *widget;
+        if ((widget = parentWidget())) {
+            setGeometry(widget->rect());
         }
+        break;
+    default:
+        break;
     }
     return QWidget::eventFilter(obj, event);
 }

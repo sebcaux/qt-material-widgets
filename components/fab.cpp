@@ -201,18 +201,29 @@ int FloatingActionButton::yOffset() const
 
 bool FloatingActionButton::event(QEvent *event)
 {
-    QEvent::Type type = event->type();
-
-    if (QEvent::ParentChange == type && parentWidget())
+    switch (event->type())
     {
+    case QEvent::ParentChange:
+    {
+        if (!parent())
+            break;
+
         Q_D(FloatingActionButton);
 
         parent()->installEventFilter(this);
         setGeometry(d->fabGeometry());
+        break;
     }
-    else if (QEvent::ParentAboutToChange == type && parentWidget())
+    case QEvent::ParentAboutToChange:
     {
+        if (!parent())
+            break;
+
         parent()->removeEventFilter(this);
+        break;
+    }
+    default:
+        break;
     }
     return RaisedButton::event(event);
 }
