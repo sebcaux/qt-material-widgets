@@ -9,18 +9,12 @@ class FloatingActionButtonPrivate : public RaisedButtonPrivate
     Q_DECLARE_PUBLIC(FloatingActionButton)
 
 public:
-    FloatingActionButtonPrivate(FloatingActionButton *q)
-        : RaisedButtonPrivate(q)
-    {
-    }
+    FloatingActionButtonPrivate(FloatingActionButton *q);
+    ~FloatingActionButtonPrivate();
 
-    ~FloatingActionButtonPrivate()
-    {
-    }
+    void init();
 
-    void init()
-    {
-    }
+    bool mini;
 };
 
 #endif // FAB_P_H

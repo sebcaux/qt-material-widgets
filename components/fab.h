@@ -3,6 +3,8 @@
 
 #include "raisedbutton.h"
 
+class FloatingActionButtonPrivate;
+
 class FloatingActionButton : public RaisedButton
 {
     Q_OBJECT
@@ -10,6 +12,14 @@ class FloatingActionButton : public RaisedButton
 public:
     explicit FloatingActionButton(QWidget *parent = 0);
     ~FloatingActionButton();
+
+    QSize sizeHint() const Q_DECL_OVERRIDE;
+
+    void setMini(bool state);
+    bool isMini() const;
+
+protected:
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(FloatingActionButton)

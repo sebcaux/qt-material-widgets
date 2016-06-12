@@ -4,6 +4,7 @@
 #include "flatbuttonexamples.h"
 #include "lib/style.h"
 #include "components/flatbutton.h"
+#include "components/fab.h"
 #include "exampleview.h"
 #include "frame.h"
 
@@ -189,6 +190,26 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
 
         ExampleView *view = new ExampleView;
         view->setWidget(flatButton);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+                    ""
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
+    {
+        //QPushButton *flatButton = new QPushButton;
+        //flatButton->setText("Press me!");
+        //flatButton->setIcon(QIcon("../qt-material-widgets/face.svg"));
+        //flatButton->setMinimumSize(200, 50);
+        //flatButton->setCheckable(true);
+
+        FloatingActionButton *button = new FloatingActionButton;
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(button);
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(
