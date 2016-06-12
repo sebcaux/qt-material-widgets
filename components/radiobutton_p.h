@@ -2,6 +2,7 @@
 #define RADIOBUTTON_P_H
 
 #include <QObject>
+#include "radiobutton_internal.h"
 
 class RadioButton;
 class RippleOverlay;
@@ -16,8 +17,11 @@ public:
 
     void init();
 
-    RadioButton   *const q_ptr;
-    RippleOverlay *ripple;
+    RadioButton     *const q_ptr;
+    RippleOverlay   *ripple;
+    RadioButtonIcon *iconWidget;
+    QIcon checkedIcon;
+    QIcon uncheckedIcon;
 };
 
 #endif // RADIOBUTTON_P_H

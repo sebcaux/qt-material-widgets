@@ -59,7 +59,8 @@ SOURCES += main.cpp\
     components/fab.cpp \
     components/badge.cpp \
     components/progress.cpp \
-    components/selectfield.cpp
+    components/selectfield.cpp \
+    components/radiobutton_internal.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -121,7 +122,8 @@ HEADERS  += mainwindow.h \
     components/progress.h \
     components/selectfield.h \
     components/fab_p.h \
-    components/radiobutton_p.h
+    components/radiobutton_p.h \
+    components/radiobutton_internal.h
 
 RESOURCES += \
     resources.qrc
