@@ -24,6 +24,8 @@ Theme::Theme(QObject *parent)
     setColor("canvas", Material::white);
     setColor("border", Material::grey300);
     setColor("disabled", Material::minBlack);
+    setColor("disabled2", Material::faintBlack);
+    setColor("disabled3", Material::grey300);
 }
 
 Theme::~Theme()

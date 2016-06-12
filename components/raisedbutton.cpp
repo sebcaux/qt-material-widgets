@@ -109,6 +109,25 @@ RaisedButton::~RaisedButton()
 {
 }
 
+void RaisedButton::setDisabledBackgroundColor(const QColor &color)
+{
+    Q_D(RaisedButton);
+
+    d->disabledBackgroundColor = color;
+    setUseThemeColors(false);
+}
+
+QColor RaisedButton::disabledBackgroundColor() const
+{
+    Q_D(const RaisedButton);
+
+    if (d->useThemeColors || !d->disabledBackgroundColor.isValid()) {
+        return Style::instance().themeColor("disabled3");
+    } else {
+        return d->disabledBackgroundColor;
+    }
+}
+
 RaisedButton::RaisedButton(RaisedButtonPrivate &d, QWidget *parent)
     : FlatButton(d, parent)
 {
@@ -122,8 +141,10 @@ bool RaisedButton::event(QEvent *event)
     if (QEvent::EnabledChange == event->type()) {
         if (isEnabled()) {
             d->machine.start();
+            d->effect->setEnabled(true);
         } else {
             d->machine.stop();
+            d->effect->setEnabled(false);
         }
     }
     return FlatButton::event(event);
@@ -145,7 +166,8 @@ void RaisedButton::paintEvent(QPaintEvent *event)
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(isEnabled()
-       ? backgroundColor() : palette().color(QPalette::Disabled, QPalette::Background));
+       ? backgroundColor()
+       : disabledBackgroundColor());
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
     painter.drawRoundedRect(rect(), cr, cr);

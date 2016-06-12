@@ -20,6 +20,7 @@ public:
     QState *normalState;
     QState *pressedState;
     QGraphicsDropShadowEffect *effect;
+    QColor disabledBackgroundColor;
 };
 
 #endif // RAISEDBUTTON_P_H

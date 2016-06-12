@@ -9,9 +9,14 @@ class RaisedButton : public FlatButton
 {
     Q_OBJECT
 
+    Q_PROPERTY(QColor disabledBackgroundColor WRITE setDisabledBackgroundColor READ disabledBackgroundColor)
+
 public:
     explicit RaisedButton(QWidget *parent = 0);
     ~RaisedButton();
+
+    void setDisabledBackgroundColor(const QColor &color);
+    QColor disabledBackgroundColor() const;
 
 protected:
     RaisedButton(RaisedButtonPrivate &d, QWidget *parent = 0);

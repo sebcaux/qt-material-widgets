@@ -193,7 +193,8 @@ void FloatingActionButton::paintEvent(QPaintEvent *event)
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(isEnabled()
-       ? backgroundColor() : palette().color(QPalette::Disabled, QPalette::Background));
+       ? backgroundColor()
+       : disabledTextColor());
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
