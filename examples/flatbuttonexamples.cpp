@@ -200,14 +200,13 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
 
         layout->addWidget(frame);
     }
-    {
         //QPushButton *flatButton = new QPushButton;
         //flatButton->setText("Press me!");
         //flatButton->setIcon(QIcon("../qt-material-widgets/face.svg"));
         //flatButton->setMinimumSize(200, 50);
         //flatButton->setCheckable(true);
 
-        FloatingActionButton *button = new FloatingActionButton(QIcon("../qt-material-widgets/ic_local_dining_white_24px.svg"));
+        //FloatingActionButton *button = new FloatingActionButton(QIcon("../qt-material-widgets/ic_local_dining_white_24px.svg"));
 
         //qDebug() << QGuiApplication::allWindows();
 
@@ -221,7 +220,6 @@ FlatButtonExamples::FlatButtonExamples(QWidget *parent)
         //frame->setWidget(view);
 
         //layout->addWidget(frame);
-    }
 }
 
 FlatButtonExamples::~FlatButtonExamples()
