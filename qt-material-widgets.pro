@@ -120,7 +120,8 @@ HEADERS  += mainwindow.h \
     components/badge.h \
     components/progress.h \
     components/selectfield.h \
-    components/fab_p.h
+    components/fab_p.h \
+    components/radiobutton_p.h
 
 RESOURCES += \
     resources.qrc

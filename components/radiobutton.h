@@ -1,9 +1,11 @@
 #ifndef RADIOBUTTON_H
 #define RADIOBUTTON_H
 
-#include <QWidget>
+#include <QRadioButton>
 
-class RadioButton : public QWidget
+class RadioButtonPrivate;
+
+class RadioButton : public QRadioButton
 {
     Q_OBJECT
 
@@ -15,6 +17,12 @@ protected:
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+
+    const QScopedPointer<RadioButtonPrivate> d_ptr;
+
+private:
+    Q_DISABLE_COPY(RadioButton)
+    Q_DECLARE_PRIVATE(RadioButton)
 };
 
 #endif // RADIOBUTTON_H

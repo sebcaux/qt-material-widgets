@@ -1,8 +1,20 @@
-#include <QPainter>
 #include "radiobutton.h"
+#include <QPainter>
+#include "radiobutton_p.h"
+
+RadioButtonPrivate::RadioButtonPrivate(RadioButton *q)
+    : q_ptr(q)
+{
+}
+
+void RadioButtonPrivate::init()
+{
+    //Q_Q(RadioButton);
+}
 
 RadioButton::RadioButton(QWidget *parent)
-    : QWidget(parent)
+    : QRadioButton(parent),
+      d_ptr(new RadioButtonPrivate(this))
 {
 }
 
