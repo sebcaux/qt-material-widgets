@@ -32,4 +32,5 @@
 - [ ] List
 - [ ] Paper
 - [ ] Search Field
+- [ ] Snackbar
 - [ ] Table
