@@ -16,9 +16,9 @@ public:
 
     void init();
 
-    QStateMachine machine;
-    QState *normalState;
-    QState *pressedState;
+    QStateMachine *machine;
+    QState        *normalState;
+    QState        *pressedState;
     QGraphicsDropShadowEffect *effect;
     QColor disabledBackgroundColor;
 };

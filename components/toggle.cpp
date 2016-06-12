@@ -27,15 +27,16 @@ void TogglePrivate::init()
     Q_Q(Toggle);
 
     ripple = new RippleOverlay(q->parentWidget());
+    machine = new QStateMachine(q);
 
     q->setCheckable(true);
     q->setChecked(false);
     q->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
 
-    machine.addState(offState);
-    machine.addState(onState);
+    machine->addState(offState);
+    machine->addState(onState);
 
-    machine.setInitialState(offState);
+    machine->setInitialState(offState);
 
     QSignalTransition *transition;
     QPropertyAnimation *animation;
@@ -101,7 +102,7 @@ void TogglePrivate::init()
 
     QObject::connect(q, SIGNAL(toggled(bool)), q, SLOT(addRipple()));
 
-    machine.start();
+    machine->start();
 
     QCoreApplication::processEvents();
 }
@@ -290,9 +291,9 @@ bool Toggle::event(QEvent *event)
     {
     case QEvent::EnabledChange:
         if (isEnabled()) {
-            d->machine.start();
+            d->machine->start();
         } else {
-            d->machine.stop();
+            d->machine->stop();
         }
         break;
     case QEvent::ParentChange:

@@ -23,6 +23,8 @@ void RaisedButtonPrivate::init()
 {
     Q_Q(RaisedButton);
 
+    machine = new QStateMachine(q);
+
     q->setTextColor(Qt::white);
     q->setPeakOpacity(0.25);
 
@@ -35,8 +37,8 @@ void RaisedButtonPrivate::init()
     normalState = new QState;
     pressedState = new QState;
 
-    machine.addState(normalState);
-    machine.addState(pressedState);
+    machine->addState(normalState);
+    machine->addState(pressedState);
 
     normalState->assignProperty(effect, "offset", QPointF(0, 0));
     normalState->assignProperty(effect, "blurRadius", 7);
@@ -91,8 +93,8 @@ void RaisedButtonPrivate::init()
 
     //
 
-    machine.setInitialState(normalState);
-    machine.start();
+    machine->setInitialState(normalState);
+    machine->start();
 }
 
 RaisedButton::RaisedButton(QWidget *parent)
@@ -140,10 +142,10 @@ bool RaisedButton::event(QEvent *event)
 
     if (QEvent::EnabledChange == event->type()) {
         if (isEnabled()) {
-            d->machine.start();
+            d->machine->start();
             d->effect->setEnabled(true);
         } else {
-            d->machine.stop();
+            d->machine->stop();
             d->effect->setEnabled(false);
         }
     }

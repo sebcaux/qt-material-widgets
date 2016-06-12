@@ -26,7 +26,7 @@ public:
     QState         *const offState;
     QState         *const onState;
     RippleOverlay  *ripple;
-    QStateMachine   machine;
+    QStateMachine  *machine;
     Qt::Orientation orientation;
     QColor          disabledColor;
     QColor          activeColor;
