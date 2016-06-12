@@ -16,7 +16,7 @@ FlatButtonPrivate::FlatButtonPrivate(FlatButton *q)
       bgMode(Qt::TransparentMode),
       useThemeColors(true),
       showHalo(true),
-      peakOpacity(0.15)
+      peakOpacity(0.08)
 {
 }
 
