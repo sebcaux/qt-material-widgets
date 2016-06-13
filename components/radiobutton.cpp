@@ -245,8 +245,10 @@ void RadioButton::setIconSize(int size)
 
     if (isChecked()) {
         d->checkedIcon->setIconSize(size);
+        d->uncheckedIcon->setIconSize(0);
     } else {
         d->uncheckedIcon->setIconSize(size);
+        d->checkedIcon->setIconSize(0);
     }
     update();
 }
