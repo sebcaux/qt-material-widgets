@@ -5,6 +5,10 @@
 
 class CheckablePrivate;
 
+/*
+ * @TODO: add option for showing label on the left of icon
+ */
+
 class Checkable : public QAbstractButton
 {
     Q_OBJECT
