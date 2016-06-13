@@ -60,8 +60,8 @@ SOURCES += main.cpp\
     components/badge.cpp \
     components/progress.cpp \
     components/selectfield.cpp \
-    components/radiobutton_internal.cpp \
-    components/checkbox_internal.cpp
+    lib/checkable.cpp \
+    lib/checkable_internal.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -124,9 +124,10 @@ HEADERS  += mainwindow.h \
     components/selectfield.h \
     components/fab_p.h \
     components/radiobutton_p.h \
-    components/radiobutton_internal.h \
     components/checkbox_p.h \
-    components/checkbox_internal.h
+    lib/checkable.h \
+    lib/checkable_p.h \
+    lib/checkable_internal.h
 
 RESOURCES += \
     resources.qrc

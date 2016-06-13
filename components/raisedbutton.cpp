@@ -100,9 +100,7 @@ void RaisedButtonPrivate::init()
 RaisedButton::RaisedButton(QWidget *parent)
     : FlatButton(*new RaisedButtonPrivate(this), parent)
 {
-    Q_D(RaisedButton);
-
-    d->init();
+    d_func()->init();
 
     setMinimumHeight(42);
 }

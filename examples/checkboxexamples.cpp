@@ -1,5 +1,6 @@
 #include <QLayout>
 #include <QEvent>
+#include <QCheckBox>
 #include "checkboxexamples.h"
 #include "components/checkbox.h"
 #include "exampleview.h"
@@ -11,7 +12,10 @@ CheckboxExamples::CheckboxExamples(QWidget *parent)
     QLayout *layout = widget()->layout();
 
     {
-        Checkbox *checkbox = new Checkbox;
+        CheckBox *checkbox = new CheckBox;
+        checkbox->setText("Do the macarena");
+        checkbox->setDisabled(true);
+        checkbox->setChecked(true);
 
         ExampleView *view = new ExampleView;
         view->setWidget(checkbox);
@@ -23,6 +27,12 @@ CheckboxExamples::CheckboxExamples(QWidget *parent)
         frame->setWidget(view);
 
         layout->addWidget(frame);
+
+
+        QCheckBox *cb = new QCheckBox;
+        layout->addWidget(cb);
+
+        connect(cb, SIGNAL(toggled(bool)), checkbox, SLOT(setDisabled(bool)));
     }
 }
 

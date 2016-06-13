@@ -1,25 +1,24 @@
-#include "checkbox_internal.h"
+#include "checkable_internal.h"
 #include <QPainter>
-#include <QDebug>
 #include <QGraphicsColorizeEffect>
 
-CheckboxIcon::CheckboxIcon(const QIcon &icon, QWidget *parent)
+CheckableIcon::CheckableIcon(const QIcon &icon, QWidget *parent)
     : QWidget(parent),
+      _effect(new QGraphicsColorizeEffect),
       _icon(icon),
       _iconSize(24),
-      _opacity(1.0),
-      _effect(new QGraphicsColorizeEffect)
+      _opacity(1.0)
 {
     setAttribute(Qt::WA_TransparentForMouseEvents);
 
     setGraphicsEffect(_effect);
 }
 
-CheckboxIcon::~CheckboxIcon()
+CheckableIcon::~CheckableIcon()
 {
 }
 
-void CheckboxIcon::setColor(const QColor &color)
+void CheckableIcon::setColor(const QColor &color)
 {
     if (_effect->color() == color)
         return;
@@ -28,34 +27,34 @@ void CheckboxIcon::setColor(const QColor &color)
     update();
 }
 
-QColor CheckboxIcon::color() const
+QColor CheckableIcon::color() const
 {
     return _effect->color();
 }
 
-void CheckboxIcon::setIconSize(qreal size)
+void CheckableIcon::setIconSize(qreal size)
 {
     _iconSize = size;
     update();
 }
 
-qreal CheckboxIcon::iconSize() const
+qreal CheckableIcon::iconSize() const
 {
     return _iconSize;
 }
 
-void CheckboxIcon::setOpacity(qreal opacity)
+void CheckableIcon::setOpacity(qreal opacity)
 {
     _opacity = opacity;
     update();
 }
 
-qreal CheckboxIcon::opacity() const
+qreal CheckableIcon::opacity() const
 {
     return _opacity;
 }
 
-void CheckboxIcon::paintEvent(QPaintEvent *event)
+void CheckableIcon::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 

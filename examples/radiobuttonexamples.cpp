@@ -22,7 +22,6 @@ RadioButtonExamples::RadioButtonExamples(QWidget *parent)
 
         radioButton3->setCheckedIcon(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
         radioButton3->setUncheckedIcon(QIcon("../qt-material-widgets/ic_star_border_black_24px.svg"));
-        radioButton3->setIconSize(30);
 
         radioButton1->setText("Auto select");
         radioButton2->setText("Option #2");

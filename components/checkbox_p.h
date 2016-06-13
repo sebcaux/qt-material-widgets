@@ -1,38 +1,18 @@
 #ifndef CHECKBOX_P_H
 #define CHECKBOX_P_H
 
-#include <QObject>
-#include <QStateMachine>
-#include "checkbox_internal.h"
+#include "lib/checkable_p.h"
 
-class Checkbox;
-class RippleOverlay;
-
-class CheckboxPrivate
+class CheckBoxPrivate : public CheckablePrivate
 {
-    Q_DISABLE_COPY(CheckboxPrivate)
-    Q_DECLARE_PUBLIC(Checkbox)
+    Q_DISABLE_COPY(CheckBoxPrivate)
+    Q_DECLARE_PUBLIC(CheckBox)
 
 public:
-    CheckboxPrivate(Checkbox *q);
+    CheckBoxPrivate(CheckBox *q);
+    ~CheckBoxPrivate();
 
     void init();
-    void updatePalette();
-
-    Checkbox      *const q_ptr;
-    RippleOverlay *ripple;
-    CheckboxIcon  *checkedIcon;
-    CheckboxIcon  *uncheckedIcon;
-    QStateMachine *machine;
-    QState        *uncheckedState;
-    QState        *transitionState;
-    QState        *checkedState;
-    int            iconSize;
-    QColor         checkedColor;
-    QColor         uncheckedColor;
-    QColor         textColor;
-    QColor         disabledColor;
-    bool           useThemeColors;
 };
 
 #endif // CHECKBOX_P_H
