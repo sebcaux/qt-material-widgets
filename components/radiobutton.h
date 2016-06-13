@@ -1,11 +1,11 @@
 #ifndef RADIOBUTTON_H
 #define RADIOBUTTON_H
 
-#include <QRadioButton>
+#include <QAbstractButton>
 
 class RadioButtonPrivate;
 
-class RadioButton : public QRadioButton
+class RadioButton : public QAbstractButton
 {
     Q_OBJECT
 

@@ -23,6 +23,9 @@ void RadioButtonPrivate::init()
 {
     Q_Q(RadioButton);
 
+    q->setCheckable(true);
+    q->setAutoExclusive(true);
+
     checkedIcon->setParent(q);
     uncheckedIcon->setParent(q);
 
@@ -99,7 +102,7 @@ void RadioButtonPrivate::updatePalette()
 }
 
 RadioButton::RadioButton(QWidget *parent)
-    : QRadioButton(parent),
+    : QAbstractButton(parent),
       d_ptr(new RadioButtonPrivate(this))
 {
     d_func()->init();
@@ -303,7 +306,7 @@ bool RadioButton::event(QEvent *event)
     default:
         break;
     }
-    return QRadioButton::event(event);
+    return QAbstractButton::event(event);
 }
 
 void RadioButton::mousePressEvent(QMouseEvent *event)
