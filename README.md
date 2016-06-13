@@ -34,5 +34,6 @@
 - [ ] Paper
 - [ ] Search Field
 - [ ] Snackbar
+- [ ] Stepper
 - [ ] Table
 - [ ] Toolbar
