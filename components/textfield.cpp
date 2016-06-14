@@ -4,6 +4,7 @@
 TextFieldPrivate::TextFieldPrivate(TextField *q)
     : q_ptr(q)
 {
+    q->setFrame(false);
 }
 
 void TextFieldPrivate::init()
