@@ -130,7 +130,8 @@ HEADERS  += mainwindow.h \
     lib/checkable_p.h \
     lib/checkable_internal.h \
     components/snackbar.h \
-    components/snackbar_p.h
+    components/snackbar_p.h \
+    components/textfield_p.h
 
 RESOURCES += \
     resources.qrc
