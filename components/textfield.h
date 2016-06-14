@@ -9,48 +9,35 @@ class TextField : public QLineEdit
 {
     Q_OBJECT
 
+    Q_PROPERTY(QColor textColor WRITE setTextColor READ progress NOTIFY textColor)
+    Q_PROPERTY(QColor backgroundColor WRITE setBackgroundColor READ progress NOTIFY backgroundColor)
+    Q_PROPERTY(QColor inkColor WRITE setInkColor READ progress NOTIFY inkColor)
+    Q_PROPERTY(QColor underlineColor WRITE setUnderlineColor READ progress NOTIFY underlineColor)
+
 public:
     explicit TextField(QWidget *parent = 0);
     ~TextField();
 
+    void setTextColor(const QColor &color);
+    QColor textColor() const;
+
+    void setBackgroundColor(const QColor &color);
+    QColor backgroundColor() const;
+
+    void setInkColor(const QColor &color);
+    QColor inkColor() const;
+
+    void setUnderlineColor(const QColor &color);
+    QColor underlineColor() const;
+
 protected:
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+
     const QScopedPointer<TextFieldPrivate> d_ptr;
 
 private:
     Q_DISABLE_COPY(TextField)
     Q_DECLARE_PRIVATE(TextField)
 };
-
-//#include <QLineEdit>
-//
-//class QPropertyAnimation;
-//
-//class TextField : public QLineEdit
-//{
-//    Q_OBJECT
-//
-//    Q_PROPERTY(qreal progress WRITE setProgress READ progress NOTIFY progressChanged)
-//
-//public:
-//    explicit TextField(QWidget *parent = 0);
-//    ~TextField();
-//
-//    void setProgress(qreal progress);
-//    inline qreal progress() const { return _progress; }
-//
-//signals:
-//    void progressChanged(qreal);
-//
-//protected:
-//    void focusInEvent(QFocusEvent *event) Q_DECL_OVERRIDE;
-//    void focusOutEvent(QFocusEvent *event) Q_DECL_OVERRIDE;
-//    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-//    void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-//    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
-//
-//private:
-//    QPropertyAnimation *const _animation;
-//    qreal                     _progress;
-//};
 
 #endif // TEXTFIELD_H

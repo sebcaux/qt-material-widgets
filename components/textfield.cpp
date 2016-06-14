@@ -1,14 +1,25 @@
 #include "textfield.h"
+#include <QPainter>
+#include <QApplication>
 #include "textfield_p.h"
+#include "textfield_internal.h"
 
 TextFieldPrivate::TextFieldPrivate(TextField *q)
     : q_ptr(q)
 {
     q->setFrame(false);
+    q->setTextMargins(0, 1, 0, 1);
 }
 
 void TextFieldPrivate::init()
 {
+    Q_Q(TextField);
+
+    machine = new TextFieldStateMachine(q);
+
+    machine->start();
+
+    QCoreApplication::processEvents();
 }
 
 TextField::TextField(QWidget *parent)
@@ -16,91 +27,86 @@ TextField::TextField(QWidget *parent)
       d_ptr(new TextFieldPrivate(this))
 {
     d_func()->init();
+
+    //
+
+    setPlaceholderText("This is a placeholder");
+
+    QPalette p;
+    p.setColor(QPalette::Normal, QPalette::Base, p.color(QPalette::Window));
+//    p.setColor(QPalette::Normal, QPalette::Text, Qt::blue);
+    setPalette(p);
 }
 
 TextField::~TextField()
 {
 }
 
-//#include <QPropertyAnimation>
-//#include <QWidget>
-//#include <QPainter>
-//#include <QDebug>
-//#include "textfield.h"
-//#include "lib/style.h"
-//
-//TextField::TextField(QWidget *parent)
-//    : QLineEdit(parent),
-//      _animation(new QPropertyAnimation(this)),
-//      _progress(1)
-//{
-//    setStyle(&Style::instance());
-//
-//    _animation->setPropertyName("progress");
-//    _animation->setTargetObject(this);
-//    _animation->setEasingCurve(QEasingCurve::InCubic);
-//    _animation->setDuration(350);
-//    _animation->setStartValue(1);
-//    _animation->setEndValue(0);
-//}
-//
-//TextField::~TextField()
-//{
-//}
-//
-//void TextField::setProgress(qreal progress)
-//{
-//    if (_progress == progress)
-//        return;
-//    _progress = progress;
-//
-//    emit progressChanged(progress);
-//    update();
-//}
-//
-//void TextField::focusInEvent(QFocusEvent *event)
-//{
-//    _animation->setDirection(QAbstractAnimation::Forward);
-//    _animation->start();
-//
-//    QLineEdit::focusInEvent(event);
-//}
-//
-//void TextField::focusOutEvent(QFocusEvent *event)
-//{
-//    _animation->setDirection(QAbstractAnimation::Backward);
-//    _animation->start();
-//
-//    QLineEdit::focusOutEvent(event);
-//}
-//
-//void TextField::mousePressEvent(QMouseEvent *event)
-//{
-//    QLineEdit::mousePressEvent(event);
-//}
-//
-//void TextField::mouseReleaseEvent(QMouseEvent *event)
-//{
-//    QLineEdit::mouseReleaseEvent(event);
-//}
-//
-//void TextField::paintEvent(QPaintEvent *event)
-//{
-//    QLineEdit::paintEvent(event);
-//
-//    QPainter painter(this);
-//
-//    QBrush brush;
-//    brush.setStyle(Qt::SolidPattern);
-//
-//    if (!qFuzzyCompare(1, _progress)) {
-//
-//        painter.setPen(Qt::NoPen);
-//        painter.setBrush(brush);
-//
-//        int w = _progress*static_cast<qreal>(width()/2);
-//
-//        painter.drawRect(w, height()-2, width()-w*2, 2);
+void TextField::setTextColor(const QColor &color)
+{
+}
+
+QColor TextField::textColor() const
+{
+}
+
+void TextField::setBackgroundColor(const QColor &color)
+{
+}
+
+QColor TextField::backgroundColor() const
+{
+}
+
+void TextField::setInkColor(const QColor &color)
+{
+}
+
+QColor TextField::inkColor() const
+{
+}
+
+void TextField::setUnderlineColor(const QColor &color)
+{
+}
+
+QColor TextField::underlineColor() const
+{
+}
+
+void TextField::paintEvent(QPaintEvent *event)
+{
+    Q_D(TextField);
+
+    QLineEdit::paintEvent(event);
+
+    QPainter painter(this);
+
+//    {
+//        painter.drawText(0, height()/2, text());
 //    }
-//}
-//
+
+    //QBrush bgBrush;
+    //bgBrush.setStyle(Qt::SolidPattern);
+    //bgBrush.setColor(palette().color(QPalette::Window));
+    //painter.fillRect(rect(), bgBrush);
+
+    const int y = height()-1;
+    painter.drawLine(0, y, width(), y);
+
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+
+    const qreal progress = d->machine->progress();
+
+    if (progress > 0) {
+
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(brush);
+
+        int w = (1-progress)*static_cast<qreal>(width()/2);
+
+        painter.drawRect(w, height()-2, width()-w*2, 2);
+
+    }
+}

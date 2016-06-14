@@ -4,6 +4,7 @@
 #include <QObject>
 
 class TextField;
+class TextFieldStateMachine;
 
 class TextFieldPrivate
 {
@@ -15,6 +16,11 @@ public:
     void init();
 
     TextField *const q_ptr;
+    TextFieldStateMachine *machine;
+    QColor textColor;
+    QColor backgroundColor;
+    QColor inkColor;
+    QColor underlineColor;
 };
 
 #endif // TEXTFIELD_P_H
