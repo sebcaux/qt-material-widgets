@@ -22,6 +22,7 @@
 - [ ] Progress
 - [ ] Select Field
 - [ ] Scroll Bar
+- [ ] Snackbar
 - [ ] Text Field
 
 #### Not started
@@ -33,7 +34,6 @@
 - [ ] List
 - [ ] Paper
 - [ ] Search Field
-- [ ] Snackbar
 - [ ] Stepper
 - [ ] Table
 - [ ] Toolbar
