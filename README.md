@@ -12,6 +12,7 @@
 - [x] Raised Button
 - [x] Slider
 - [x] Tabs
+- [x] Text Field
 - [x] Toggle
 - [ ] App Bar
 - [ ] Avatar
@@ -23,7 +24,6 @@
 - [ ] Select Field
 - [ ] Scroll Bar
 - [ ] Snackbar
-- [ ] Text Field
 
 #### Not started
 
