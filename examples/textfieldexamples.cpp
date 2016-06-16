@@ -13,6 +13,52 @@ TextFieldExamples::TextFieldExamples(QWidget *parent)
 
     {
         TextField *textField = new TextField;
+        textField->setPlaceholderText("This is a placeholder");
+        textField->setLabel("Enter your name");
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(textField);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "hello"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
+    {
+        TextField *textField = new TextField;
+        textField->setLabel("Enter your name");
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(textField);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "hello"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
+    {
+        TextField *textField = new TextField;
+        textField->setPlaceholderText("No label, only placeholder");
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(textField);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "hello"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
+    {
+        TextField *textField = new TextField;
 
         ExampleView *view = new ExampleView;
         view->setWidget(textField);
