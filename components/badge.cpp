@@ -1,13 +1,17 @@
 #include "badge.h"
 #include <QPainter>
 #include <QIcon>
+#include <QEvent>
+#include <QDebug>
 #include "badge_p.h"
 #include "lib/style.h"
 
 BadgePrivate::BadgePrivate(Badge *q)
     : q_ptr(q),
       padding(10),
-      useThemeColors(true)
+      useThemeColors(true),
+      x(0),
+      y(0)
 {
 }
 
@@ -92,10 +96,61 @@ QColor Badge::backgroundColor() const
     }
 }
 
+void Badge::setRelativePosition(const QPointF &pos)
+{
+    setRelativePosition(pos.x(), pos.y());
+}
+
+void Badge::setRelativePosition(qreal x, qreal y)
+{
+    Q_D(Badge);
+
+    d->x = x;
+    d->y = y;
+    update();
+}
+
+QPointF Badge::relativePosition() const
+{
+    Q_D(const Badge);
+
+    return QPointF(d->x, d->y);
+}
+
+void Badge::setRelativeXPosition(qreal x)
+{
+    Q_D(Badge);
+
+    d->x = x;
+    update();
+}
+
+qreal Badge::relativeXPosition() const
+{
+    Q_D(const Badge);
+
+    return d->x;
+}
+
+void Badge::setRelativeYPosition(qreal y)
+{
+    Q_D(Badge);
+
+    d->y = y;
+    update();
+}
+
+qreal Badge::relativeYPosition() const
+{
+    Q_D(const Badge);
+
+    return d->y;
+}
+
 QSize Badge::sizeHint() const
 {
     const int s = getDiameter();
-    return QSize(s, s);
+    return QSize(s+4, s+4);
 }
 
 void Badge::setIcon(const QIcon &icon)
@@ -122,6 +177,51 @@ void Badge::setText(const QString &text)
     update();
 }
 
+bool Badge::event(QEvent *event)
+{
+    switch (event->type())
+    {
+    case QEvent::ParentChange:
+    {
+        if (!parent())
+            break;
+
+        parent()->installEventFilter(this);
+
+        QWidget *widget;
+        if ((widget = parentWidget())) {
+            setGeometry(widget->rect());
+        }
+        break;
+    }
+    case QEvent::ParentAboutToChange:
+    {
+        if (!parent())
+            break;
+
+        parent()->removeEventFilter(this);
+        break;
+    }
+    default:
+        break;
+    }
+    return QWidget::event(event);
+}
+
+bool Badge::eventFilter(QObject *obj, QEvent *event)
+{
+    QEvent::Type type = event->type();
+
+    if (QEvent::Move == type || QEvent::Resize == type)
+    {
+        QWidget *widget;
+        if ((widget = parentWidget())) {
+            setGeometry(widget->rect());
+        }
+    }
+    return QWidget::eventFilter(obj, event);
+}
+
 void Badge::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
@@ -130,6 +230,8 @@ void Badge::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
+
+    painter.translate(d->x, d->y);
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);

@@ -24,6 +24,8 @@ public:
     bool         useThemeColors;
     QColor       textColor;
     QColor       backgroundColor;
+    qreal        x;
+    qreal        y;
 };
 
 #endif // BADGE_P_H

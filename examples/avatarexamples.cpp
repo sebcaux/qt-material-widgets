@@ -3,6 +3,7 @@
 #include <QIcon>
 #include "avatarexamples.h"
 #include "components/avatar.h"
+#include "components/badge.h"
 #include "exampleview.h"
 #include "frame.h"
 
@@ -18,6 +19,28 @@ AvatarExamples::AvatarExamples(QWidget *parent)
 
         ExampleView *view = new ExampleView;
         view->setWidget(avatar);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "hello"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
+    {
+        Avatar *avatar = new Avatar;
+        Badge *badge = new Badge;
+        badge->setText("5");
+        badge->setRelativePosition(13, 13);
+
+        avatar->setLetter(QChar('M'));
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(avatar);
+
+        //view->setWidget(badge);
+        badge->setParent(avatar);
 
         Frame *frame = new Frame;
         frame->setCodeSnippet(

@@ -12,6 +12,8 @@ MenuItem::MenuItem(QWidget *parent)
     font.setPointSize(11);
     font.setStyleName("Regular");
     setFont(font);
+
+    setShowHalo(false);
 }
 
 MenuItem::MenuItem(const QString &text, QWidget *parent)
@@ -22,6 +24,8 @@ MenuItem::MenuItem(const QString &text, QWidget *parent)
     font.setPointSize(11);
     font.setStyleName("Regular");
     setFont(font);
+
+    setShowHalo(false);
 }
 
 MenuItem::~MenuItem()
@@ -46,11 +50,11 @@ Menu::Menu(QWidget *parent)
     policy.setVerticalPolicy(QSizePolicy::Maximum);
     setSizePolicy(policy);
 
-    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
-    effect->setBlurRadius(9);
-    effect->setOffset(QPoint(0, 0));
-    effect->setColor(QColor(0, 0, 0, 100));
-    setGraphicsEffect(effect);
+    //QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
+    //effect->setBlurRadius(9);
+    //effect->setOffset(QPoint(0, 0));
+    //effect->setColor(QColor(0, 0, 0, 100));
+    //setGraphicsEffect(effect);
 }
 
 Menu::~Menu()
@@ -71,7 +75,6 @@ void Menu::addMenuItem(const QString &text)
 void Menu::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-
     painter.fillRect(rect(), Qt::white);
 
     QWidget::paintEvent(event);

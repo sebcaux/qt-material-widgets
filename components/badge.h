@@ -11,6 +11,7 @@ class Badge : public QWidget
 
     Q_PROPERTY(QColor textColor WRITE setTextColor READ textColor)
     Q_PROPERTY(QColor backgroundColor WRITE setBackgroundColor READ backgroundColor)
+    Q_PROPERTY(QPointF relativePosition WRITE setRelativePosition READ relativePosition)
 
 public:
     explicit Badge(QWidget *parent = 0);
@@ -25,12 +26,24 @@ public:
     void setBackgroundColor(const QColor &color);
     QColor backgroundColor() const;
 
+    void setRelativePosition(const QPointF &pos);
+    void setRelativePosition(qreal x, qreal y);
+    QPointF relativePosition() const;
+
+    void setRelativeXPosition(qreal x);
+    qreal relativeXPosition() const;
+
+    void setRelativeYPosition(qreal y);
+    qreal relativeYPosition() const;
+
     QSize sizeHint() const Q_DECL_OVERRIDE;
 
     void setIcon(const QIcon &icon);
     void setText(const QString &text);
 
 protected:
+    bool event(QEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     int getDiameter() const;
 
