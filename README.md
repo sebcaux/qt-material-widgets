@@ -31,6 +31,7 @@
 - [ ] Chips
 - [ ] Discrete Slider
 - [ ] Docs
+- [ ] Divider
 - [ ] Grid List
 - [ ] List
 - [ ] Paper
