@@ -6,7 +6,8 @@
 
 BadgePrivate::BadgePrivate(Badge *q)
     : q_ptr(q),
-      padding(10)
+      padding(10),
+      useThemeColors(true)
 {
 }
 

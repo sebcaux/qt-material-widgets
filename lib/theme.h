@@ -8,6 +8,12 @@
 
 namespace Material
 {
+    enum AvatarType {
+        ImageAvatar,
+        IconAvatar,
+        LetterAvatar
+    };
+
     enum RippleStyle {
         CenteredRipple,
         PositionedRipple,

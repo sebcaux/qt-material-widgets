@@ -2,6 +2,7 @@
 #define AVATAR_P_H
 
 #include <QObject>
+#include "lib/theme.h"
 
 class Avatar;
 
@@ -15,8 +16,16 @@ public:
 
     void init();
 
-    Avatar *const q_ptr;
-    int size;
+    Avatar        *const q_ptr;
+    int                  size;
+    Material::AvatarType type;
+    QChar                letter;
+    QImage               image;
+    QIcon                icon;
+    QPixmap              pixmap;
+    bool                 useThemeColors;
+    QColor               textColor;
+    QColor               backgroundColor;
 };
 
 #endif // AVATAR_P_H
