@@ -133,7 +133,8 @@ HEADERS  += mainwindow.h \
     components/snackbar.h \
     components/snackbar_p.h \
     components/textfield_p.h \
-    components/textfield_internal.h
+    components/textfield_internal.h \
+    components/badge_p.h
 
 RESOURCES += \
     resources.qrc
