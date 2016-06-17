@@ -18,6 +18,7 @@
 - [x] Toggle
 - [ ] App Bar
 - [ ] Dialog
+- [ ] Divider
 - [ ] Drawer
 - [ ] Icon Menu
 - [ ] Menu
@@ -31,7 +32,6 @@
 - [ ] Chips
 - [ ] Discrete Slider
 - [ ] Docs
-- [ ] Divider
 - [ ] Grid List
 - [ ] List
 - [ ] Paper
