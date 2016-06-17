@@ -93,8 +93,6 @@ QColor Badge::backgroundColor() const
 
 QSize Badge::sizeHint() const
 {
-    Q_D(const Badge);
-
     const int s = getDiameter();
     return QSize(s, s);
 }
