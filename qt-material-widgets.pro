@@ -63,7 +63,8 @@ SOURCES += main.cpp\
     lib/checkable.cpp \
     lib/checkable_internal.cpp \
     components/snackbar.cpp \
-    components/textfield_internal.cpp
+    components/textfield_internal.cpp \
+    components/drawer.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -134,7 +135,8 @@ HEADERS  += mainwindow.h \
     components/snackbar_p.h \
     components/textfield_p.h \
     components/textfield_internal.h \
-    components/badge_p.h
+    components/badge_p.h \
+    components/drawer.h
 
 RESOURCES += \
     resources.qrc
