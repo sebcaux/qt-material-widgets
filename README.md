@@ -4,6 +4,7 @@
 
 #### Work in progress
 
+- [x] Badge
 - [x] Check Box
 - [x] Floating Action Button
 - [x] Flat Button
@@ -16,7 +17,6 @@
 - [x] Toggle
 - [ ] App Bar
 - [ ] Avatar
-- [ ] Badge
 - [ ] Dialog
 - [ ] Drawer
 - [ ] Icon Menu
