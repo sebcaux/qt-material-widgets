@@ -6,6 +6,10 @@
 class SnackbarPrivate;
 class SnackbarStateMachine;
 
+/*
+ * @TODO: Allow dismiss on blur
+ */
+
 class Snackbar : public QWidget
 {
     Q_OBJECT
