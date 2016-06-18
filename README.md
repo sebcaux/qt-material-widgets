@@ -18,6 +18,7 @@
 - [x] Text Field
 - [x] Toggle
 - [ ] App Bar
+- [ ] Circular Progress
 - [ ] Dialog
 - [ ] Divider
 - [ ] Drawer
