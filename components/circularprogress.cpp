@@ -1,4 +1,5 @@
 #include "circularprogress.h"
+#include <QPainter>
 #include "circularprogress_p.h"
 
 CircularProgressPrivate::CircularProgressPrivate(CircularProgress *q)
@@ -23,4 +24,11 @@ CircularProgress::CircularProgress(QWidget *parent)
 
 CircularProgress::~CircularProgress()
 {
+}
+
+void CircularProgress::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+
+    painter.drawRect(rect());
 }

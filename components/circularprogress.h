@@ -14,6 +14,8 @@ public:
     ~CircularProgress();
 
 protected:
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+
     const QScopedPointer<CircularProgressPrivate> d_ptr;
 
 private:

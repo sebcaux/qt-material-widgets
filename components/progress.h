@@ -14,6 +14,8 @@ public:
     ~Progress();
 
 protected:
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+
     const QScopedPointer<ProgressPrivate> d_ptr;
 
 private:

@@ -2,6 +2,7 @@
 #include "appbarexamples.h"
 #include "components/appbar.h"
 #include "frame.h"
+#include "components/progress.h"
 
 AppBarExamples::AppBarExamples(QWidget *parent)
     : ExampleList(parent)
@@ -33,6 +34,22 @@ AppBarExamples::AppBarExamples(QWidget *parent)
             "layout->setContentsMargins(0, 0, 0, 0);"
         );
         frame->setWidget(area);
+
+        mainLayout->addWidget(frame);
+    }
+    {
+        QWidget *widget = new QWidget;
+        QVBoxLayout *layout = new QVBoxLayout;
+
+        widget->setLayout(layout);
+
+        Progress *p = new Progress;
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            ""
+        );
+        frame->setWidget(p);
 
         mainLayout->addWidget(frame);
     }
