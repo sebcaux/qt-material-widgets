@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+class ProgressPrivate;
+
 class Progress : public QWidget
 {
     Q_OBJECT
@@ -11,9 +13,12 @@ public:
     explicit Progress(QWidget *parent = 0);
     ~Progress();
 
+protected:
+    const QScopedPointer<ProgressPrivate> d_ptr;
+
 private:
     Q_DISABLE_COPY(Progress)
-    //Q_DECLARE_PRIVATE(Progress)
+    Q_DECLARE_PRIVATE(Progress)
 };
 
 #endif // PROGRESS_H

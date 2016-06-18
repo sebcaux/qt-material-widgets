@@ -65,7 +65,8 @@ SOURCES += main.cpp\
     components/snackbar.cpp \
     components/textfield_internal.cpp \
     components/drawer.cpp \
-    components/snackbar_internal.cpp
+    components/snackbar_internal.cpp \
+    components/circularprogress.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -139,7 +140,10 @@ HEADERS  += mainwindow.h \
     components/badge_p.h \
     components/drawer.h \
     components/avatar_p.h \
-    components/snackbar_internal.h
+    components/snackbar_internal.h \
+    components/progress_p.h \
+    components/circularprogress.h \
+    components/circularprogress_p.h
 
 RESOURCES += \
     resources.qrc
