@@ -93,8 +93,6 @@ QColor Snackbar::textColor() const
 
 void Snackbar::setFontSize(qreal size)
 {
-    Q_D(Snackbar);
-
     QFont f(font());
     f.setPointSizeF(size);
     setFont(f);
@@ -104,8 +102,6 @@ void Snackbar::setFontSize(qreal size)
 
 qreal Snackbar::fontSize() const
 {
-    Q_D(const Snackbar);
-
     return font().pointSizeF();
 }
 
