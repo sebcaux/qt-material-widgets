@@ -20,6 +20,7 @@ class AvatarExamples;
 class MenuExamples;
 class IconMenuExamples;
 class QStackedLayout;
+class Snackbar;
 
 class MainWindow : public QMainWindow
 {
@@ -31,6 +32,8 @@ public:
 
 protected slots:
     void showWidget(QAction *action);
+    void addMsg();
+    void addInstantMsg();
 
 private:
     void _initWidget();
@@ -53,6 +56,7 @@ private:
     MenuExamples         *const _menuExamples;
     IconMenuExamples     *const _iconMenuExamples;
     About                *const _about;
+    Snackbar *snackbar;
 };
 
 #endif // MAINWINDOW_H

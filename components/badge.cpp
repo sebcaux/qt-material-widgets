@@ -31,6 +31,10 @@ void BadgePrivate::init()
     q->setFont(font);
 
     q->setText("+1");
+
+    if (q->parentWidget()) {
+        q->parentWidget()->installEventFilter(q);
+    }
 }
 
 Badge::Badge(QWidget *parent)

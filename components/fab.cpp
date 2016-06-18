@@ -30,6 +30,10 @@ void FloatingActionButtonPrivate::init()
     path.addEllipse(0, 0, 56, 56);
     ripple->setClipPath(path);
     ripple->setClipping(true);
+
+    if (q->parentWidget()) {
+        q->parentWidget()->installEventFilter(q);
+    }
 }
 
 QRect FloatingActionButtonPrivate::fabGeometry() const

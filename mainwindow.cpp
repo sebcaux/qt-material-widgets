@@ -2,6 +2,7 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QStackedLayout>
+#include <QStringBuilder>
 #include <QDebug>
 #include "mainwindow.h"
 #include "examples/about.h"
@@ -21,6 +22,7 @@
 #include "examples/menuexamples.h"
 #include "examples/iconmenuexamples.h"
 #include "components/fab.h"
+#include "components/snackbar.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -54,10 +56,28 @@ MainWindow::MainWindow(QWidget *parent)
 
     //
 
-    FloatingActionButton *button2 = new FloatingActionButton(QIcon("../qt-material-widgets/ic_message_white_24px.svg"));
-    button2->setParent(this);
+    new FloatingActionButton(QIcon("../qt-material-widgets/ic_message_white_24px.svg"), this);
 
     //button2->setDisabled(true);
+
+    snackbar = new Snackbar;
+    snackbar->setParent(this);
+
+    //
+
+    QPushButton *btn = new QPushButton;
+    btn->setText("Show Snackbar");
+    btn->setGeometry(90, 50, 140, 40);
+    btn->setParent(this);
+
+    connect(btn, SIGNAL(pressed()), this, SLOT(addMsg()));
+
+    btn = new QPushButton;
+    btn->setText("Show Snackbar (instant)");
+    btn->setGeometry(240, 50, 140, 40);
+    btn->setParent(this);
+
+    connect(btn, SIGNAL(pressed()), this, SLOT(addInstantMsg()));
 }
 
 MainWindow::~MainWindow()
@@ -100,6 +120,21 @@ void MainWindow::showWidget(QAction *action)
     } else {
         _layout->setCurrentWidget(_about);
     }
+}
+
+static int n = 1;
+
+void MainWindow::addMsg()
+{
+    snackbar->addMessage(QString("Hello from the Snackbar (") % QString::number(n++) % QString(")"));
+}
+
+void MainWindow::addInstantMsg()
+{
+    QString msg("This is longer message which will show up immediately after it is added to the message queue");
+    msg.append(QString(" (") % QString::number(n++) % QString(")."));
+
+    snackbar->addMessage(msg, true);
 }
 
 void MainWindow::_initWidget()

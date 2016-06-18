@@ -13,6 +13,7 @@
 - [x] Radio Button
 - [x] Raised Button
 - [x] Slider
+- [x] Snackbar
 - [x] Tabs
 - [x] Text Field
 - [x] Toggle
@@ -25,7 +26,6 @@
 - [ ] Progress
 - [ ] Select Field
 - [ ] Scroll Bar
-- [ ] Snackbar
 
 #### Not started
 
