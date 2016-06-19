@@ -72,6 +72,22 @@ TextFieldExamples::TextFieldExamples(QWidget *parent)
         layout->addWidget(frame);
     }
     {
+        TextField *textField = new TextField;
+        textField->setDisabled(true);
+        textField->setLabel("Disabled");
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(textField);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "hello"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
+    {
         QLineEdit *edit = new QLineEdit;
 
         ExampleView *view = new ExampleView;

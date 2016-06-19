@@ -3,7 +3,7 @@
 
 #include "examplelist.h"
 
-class AppBarExamples : public ExampleList
+class AppBarExamples : public QWidget
 {
     Q_OBJECT
 

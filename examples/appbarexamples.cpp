@@ -1,12 +1,39 @@
 #include <QVBoxLayout>
+#include <QProgressBar>
+#include <QPushButton>
 #include "appbarexamples.h"
 #include "components/appbar.h"
 #include "frame.h"
 #include "components/progress.h"
+#include "components/circularprogress.h"
 
 AppBarExamples::AppBarExamples(QWidget *parent)
-    : ExampleList(parent)
+    : QWidget(parent)
 {
+    Progress *p = new Progress;
+
+    QVBoxLayout *l = new QVBoxLayout;
+
+    setLayout(l);
+
+    l->addStretch(1);
+
+    l->addWidget(p);
+
+    CircularProgress *cp = new CircularProgress;
+    cp->setSize(30);
+
+    l->addWidget(cp);
+
+    QProgressBar *pb = new QProgressBar;
+
+    QPushButton *b = new QPushButton;
+
+    l->addWidget(b);
+
+    l->addWidget(pb);
+
+    /*
     QLayout *mainLayout = widget()->layout();
 
     {
@@ -53,6 +80,7 @@ AppBarExamples::AppBarExamples(QWidget *parent)
 
         mainLayout->addWidget(frame);
     }
+    */
 }
 
 AppBarExamples::~AppBarExamples()

@@ -137,6 +137,24 @@ AvatarExamples::AvatarExamples(QWidget *parent)
 
         layout->addWidget(frame);
     }
+    {
+        Avatar *avatar = new Avatar;
+        avatar->setSize(80);
+
+        QImage img("../qt-material-widgets/sikh.jpg");
+        avatar->setImage(img);
+
+        ExampleView *view = new ExampleView;
+        view->setWidget(avatar);
+
+        Frame *frame = new Frame;
+        frame->setCodeSnippet(
+            "hello"
+        );
+        frame->setWidget(view);
+
+        layout->addWidget(frame);
+    }
 }
 
 AvatarExamples::~AvatarExamples()
