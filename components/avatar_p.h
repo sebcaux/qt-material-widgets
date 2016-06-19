@@ -2,6 +2,9 @@
 #define AVATAR_P_H
 
 #include <QObject>
+#include <QImage>
+#include <QIcon>
+#include <QPixmap>
 #include "lib/theme.h"
 
 class Avatar;

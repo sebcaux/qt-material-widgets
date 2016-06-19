@@ -1,8 +1,8 @@
+#include "avatar_p.h"
+#include "avatar.h"
 #include <QWidget>
 #include <QPainter>
 #include <QIcon>
-#include "avatar.h"
-#include "avatar_p.h"
 #include "lib/style.h"
 
 AvatarPrivate::AvatarPrivate(Avatar *q)

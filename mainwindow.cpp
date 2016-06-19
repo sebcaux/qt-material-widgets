@@ -23,6 +23,7 @@
 #include "examples/iconmenuexamples.h"
 #include "components/fab.h"
 #include "components/snackbar.h"
+#include "components/dialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -78,6 +79,11 @@ MainWindow::MainWindow(QWidget *parent)
     btn->setParent(this);
 
     connect(btn, SIGNAL(pressed()), this, SLOT(addInstantMsg()));
+
+    //
+
+    Dialog *dialog = new Dialog;
+    dialog->setParent(this);
 }
 
 MainWindow::~MainWindow()
