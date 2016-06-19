@@ -2,6 +2,7 @@
 #define PROGRESS_P_H
 
 #include <QObject>
+#include "lib/theme.h"
 
 class Progress;
 
@@ -17,6 +18,7 @@ public:
     void init();
 
     Progress *const q_ptr;
+    Material::ProgressType progressType;
 };
 
 #endif // PROGRESS_P_H

@@ -1,17 +1,21 @@
 #ifndef PROGRESS_H
 #define PROGRESS_H
 
-#include <QWidget>
+#include <QProgressBar>
+#include "lib/theme.h"
 
 class ProgressPrivate;
 
-class Progress : public QWidget
+class Progress : public QProgressBar
 {
     Q_OBJECT
 
 public:
     explicit Progress(QWidget *parent = 0);
     ~Progress();
+
+    void setProgressType(Material::ProgressType type);
+    Material::ProgressType progressType() const;
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
