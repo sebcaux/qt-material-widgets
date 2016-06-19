@@ -7,9 +7,11 @@
 - [x] Avatar
 - [x] Badge
 - [x] Check Box
+- [x] Circular Progress
 - [x] Floating Action Button
 - [x] Flat Button
 - [x] Icon Button
+- [x] Progress
 - [x] Radio Button
 - [x] Raised Button
 - [x] Slider
@@ -18,13 +20,11 @@
 - [x] Text Field
 - [x] Toggle
 - [ ] App Bar
-- [ ] Circular Progress
 - [ ] Dialog
 - [ ] Divider
 - [ ] Drawer
 - [ ] Icon Menu
 - [ ] Menu
-- [ ] Progress
 - [ ] Select Field
 - [ ] Scroll Bar
 
