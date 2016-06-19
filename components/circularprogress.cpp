@@ -12,7 +12,6 @@ CircularProgressPrivate::CircularProgressPrivate(CircularProgress *q)
       delegate(0),
       progressType(Material::IndeterminateProgress),
       size(64),
-      angle(0),
       penWidth(6.25),
       useThemeColors(true)
 {
@@ -31,7 +30,6 @@ void CircularProgressPrivate::init()
     QSizePolicy policy(QSizePolicy::MinimumExpanding,
                        QSizePolicy::MinimumExpanding);
     q->setSizePolicy(policy);
-    q->startTimer(4);
 
     QParallelAnimationGroup *group = new QParallelAnimationGroup(q);
     group->setLoopCount(-1);
@@ -60,6 +58,15 @@ void CircularProgressPrivate::init()
     animation->setKeyValueAt(0.6, -7);
     animation->setKeyValueAt(0.7, -7);
     animation->setEndValue(-25);
+    animation->setDuration(2050);
+
+    group->addAnimation(animation);
+
+    animation = new QPropertyAnimation(q);
+    animation->setPropertyName("angle");
+    animation->setTargetObject(delegate);
+    animation->setStartValue(0);
+    animation->setEndValue(719);
     animation->setDuration(2050);
 
     group->addAnimation(animation);
@@ -178,7 +185,7 @@ void CircularProgress::paintEvent(QPaintEvent *event)
     painter.drawRect(rect());
 
     painter.translate(width()/2, height()/2);
-    painter.rotate(d->angle);
+    painter.rotate(d->delegate->angle());
 
     QPen pen;
     pen.setCapStyle(Qt::RoundCap);
@@ -201,16 +208,4 @@ void CircularProgress::paintEvent(QPaintEvent *event)
     {
 
     }
-}
-
-void CircularProgress::timerEvent(QTimerEvent *event)
-{
-    Q_UNUSED(event)
-
-    Q_D(CircularProgress);
-
-    if (++d->angle > 360) {
-       d->angle -= 360;
-    }
-    update();
 }

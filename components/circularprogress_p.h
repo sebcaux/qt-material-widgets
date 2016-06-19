@@ -22,7 +22,6 @@ public:
     CircularProgressDelegate *delegate;
     Material::ProgressType progressType;
     int    size;
-    int    angle;
     qreal  penWidth;
     QColor color;
     bool   useThemeColors;

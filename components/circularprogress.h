@@ -37,7 +37,6 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
-    void timerEvent(QTimerEvent *event) Q_DECL_OVERRIDE;
 
     const QScopedPointer<CircularProgressPrivate> d_ptr;
 
