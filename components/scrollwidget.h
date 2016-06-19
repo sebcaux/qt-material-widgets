@@ -1,5 +1,5 @@
-#ifndef SCROLLBAR_H
-#define SCROLLBAR_H
+#ifndef SCROLLWIDGET_H
+#define SCROLLWIDGET_H
 
 #include <QScrollBar>
 
@@ -37,4 +37,4 @@ private:
     Q_DECLARE_PRIVATE(ScrollBar)
 };
 
-#endif // SCROLLBAR_H
+#endif // SCROLLWIDGET_H

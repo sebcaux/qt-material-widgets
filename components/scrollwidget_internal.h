@@ -2,7 +2,7 @@
 #define SCROLLBAR_INTERNAL_H
 
 #include <QStateMachine>
-#include "scrollbar.h"
+#include "scrollwidget.h"
 
 class ScrollBar;
 

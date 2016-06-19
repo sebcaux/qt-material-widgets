@@ -68,8 +68,8 @@ SOURCES += main.cpp\
     components/circularprogress.cpp \
     components/circularprogress_internal.cpp \
     components/progress_internal.cpp \
-    components/scrollbar.cpp \
-    components/scrollbar_internal.cpp
+    components/scrollwidget.cpp \
+    components/scrollwidget_internal.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -148,9 +148,9 @@ HEADERS  += mainwindow.h \
     components/circularprogress_p.h \
     components/circularprogress_internal.h \
     components/progress_internal.h \
-    components/scrollbar.h \
-    components/scrollbar_p.h \
-    components/scrollbar_internal.h
+    components/scrollwidget_p.h \
+    components/scrollwidget.h \
+    components/scrollwidget_internal.h
 
 RESOURCES += \
     resources.qrc

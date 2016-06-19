@@ -1,4 +1,4 @@
-#include "scrollbar_internal.h"
+#include "scrollwidget_internal.h"
 #include <QPropertyAnimation>
 #include <QEventTransition>
 

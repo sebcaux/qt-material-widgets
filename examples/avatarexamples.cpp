@@ -6,7 +6,7 @@
 #include "components/badge.h"
 #include "exampleview.h"
 #include "frame.h"
-#include "components/scrollbar.h"
+#include "components/scrollwidget.h"
 
 AvatarExamples::AvatarExamples(QWidget *parent)
     : ExampleList(parent)

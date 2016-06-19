@@ -1,8 +1,8 @@
-#include "scrollbar.h"
+#include "scrollwidget.h"
 #include <QPainter>
 #include <QApplication>
-#include "scrollbar_p.h"
-#include "scrollbar_internal.h"
+#include "scrollwidget_p.h"
+#include "scrollwidget_internal.h"
 #include "lib/style.h"
 
 ScrollBarPrivate::ScrollBarPrivate(ScrollBar *q)

@@ -1,5 +1,5 @@
-#ifndef SCROLLBAR_P_H
-#define SCROLLBAR_P_H
+#ifndef SCROLLWIDGET_P_H
+#define SCROLLWIDGET_P_H
 
 #include <QObject>
 
@@ -25,4 +25,4 @@ public:
     bool            useThemeColors;
 };
 
-#endif // SCROLLBAR_P_H
+#endif // SCROLLWIDGET_P_H
