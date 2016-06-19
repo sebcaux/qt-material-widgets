@@ -13,7 +13,7 @@ class CircularProgressDelegate : public QObject
     Q_PROPERTY(qreal dashLength WRITE setDashLength READ dashLength)
 
 public:
-    CircularProgressDelegate(CircularProgress *parent = 0);
+    CircularProgressDelegate(CircularProgress *parent);
     ~CircularProgressDelegate();
 
     void setDashOffset(qreal offset);

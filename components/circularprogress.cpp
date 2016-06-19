@@ -9,6 +9,8 @@
 
 CircularProgressPrivate::CircularProgressPrivate(CircularProgress *q)
     : q_ptr(q),
+      delegate(0),
+      progressType(Material::IndeterminateProgress),
       size(64),
       angle(0),
       penWidth(6.25),
@@ -107,7 +109,6 @@ bool CircularProgress::useThemeColors() const
     return d->useThemeColors;
 }
 
-
 void CircularProgress::setLineWidth(qreal width)
 {
     Q_D(CircularProgress);
@@ -155,7 +156,6 @@ QColor CircularProgress::color() const
     } else {
         return d->color;
     }
-    return d->color;
 }
 
 QSize CircularProgress::sizeHint() const
@@ -185,15 +185,22 @@ void CircularProgress::paintEvent(QPaintEvent *event)
     pen.setWidthF(d->penWidth);
     pen.setColor(color());
 
-    QVector<qreal> pattern;
-    pattern << d->delegate->dashLength()*d->size/50 << 30*d->size/50;
+    if (Material::IndeterminateProgress == d->progressType)
+    {
+        QVector<qreal> pattern;
+        pattern << d->delegate->dashLength()*d->size/50 << 30*d->size/50;
 
-    pen.setDashOffset(d->delegate->dashOffset()*d->size/50);
-    pen.setDashPattern(pattern);
+        pen.setDashOffset(d->delegate->dashOffset()*d->size/50);
+        pen.setDashPattern(pattern);
 
-    painter.setPen(pen);
+        painter.setPen(pen);
 
-    painter.drawEllipse(QPoint(0, 0), d->size/2, d->size/2);
+        painter.drawEllipse(QPoint(0, 0), d->size/2, d->size/2);
+    }
+    else
+    {
+
+    }
 }
 
 void CircularProgress::timerEvent(QTimerEvent *event)

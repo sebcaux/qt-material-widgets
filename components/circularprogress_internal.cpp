@@ -2,7 +2,8 @@
 #include "circularprogress.h"
 
 CircularProgressDelegate::CircularProgressDelegate(CircularProgress *parent)
-    : progress(parent),
+    : QObject(parent),
+      progress(parent),
       _dashOffset(0),
       _dashLength(89)
 {

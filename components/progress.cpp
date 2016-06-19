@@ -1,9 +1,15 @@
 #include "progress.h"
 #include <QPainter>
+#include <QPropertyAnimation>
 #include "progress_p.h"
+#include "progress_internal.h"
+#include "lib/style.h"
 
 ProgressPrivate::ProgressPrivate(Progress *q)
-    : q_ptr(q)
+    : q_ptr(q),
+      delegate(0),
+      progressType(Material::IndeterminateProgress),
+      useThemeColors(true)
 {
 }
 
@@ -13,6 +19,22 @@ ProgressPrivate::~ProgressPrivate()
 
 void ProgressPrivate::init()
 {
+    Q_Q(Progress);
+
+    delegate = new ProgressDelegate(q);
+
+    QPropertyAnimation *animation;
+
+    animation = new QPropertyAnimation(q);
+    animation->setPropertyName("offset");
+    animation->setTargetObject(delegate);
+    animation->setStartValue(0);
+    animation->setEndValue(1);
+    animation->setDuration(1000);
+
+    animation->setLoopCount(-1);
+
+    animation->start();
 }
 
 Progress::Progress(QWidget *parent)
@@ -41,34 +63,86 @@ Material::ProgressType Progress::progressType() const
     return d->progressType;
 }
 
+void Progress::setUseThemeColors(bool state)
+{
+    Q_D(Progress);
+
+    d->useThemeColors = state;
+    update();
+}
+
+bool Progress::useThemeColors() const
+{
+    Q_D(const Progress);
+
+    return d->useThemeColors;
+}
+
+void Progress::setProgressColor(const QColor &color)
+{
+    Q_D(Progress);
+
+    d->progressColor = color;
+    setUseThemeColors(false);
+}
+
+QColor Progress::progressColor() const
+{
+    Q_D(const Progress);
+
+    if (d->useThemeColors || !d->progressColor.isValid()) {
+        return Style::instance().themeColor("primary1");
+    } else {
+        return d->progressColor;
+    }
+}
+
+void Progress::setBackgroundColor(const QColor &color)
+{
+    Q_D(Progress);
+
+    d->backgroundColor = color;
+    setUseThemeColors(false);
+}
+
+QColor Progress::backgroundColor() const
+{
+    Q_D(const Progress);
+
+    if (d->useThemeColors || !d->backgroundColor.isValid()) {
+        return Style::instance().themeColor("accent3");
+    } else {
+        return d->backgroundColor;
+    }
+}
+
 void Progress::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
+    Q_D(Progress);
+
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-//    painter.drawRect(rect().adjusted(0, 0, -1, -1));
-
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::black);
+    brush.setColor(backgroundColor());
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
-    //QRectF r(0, 0, width(), 8);
-    //r.moveCenter(rect().center());
-
-    //painter.drawRect(r);
-
     QPainterPath path;
-    path.addRoundedRect(0, height()/2-4, width(), 8, 3, 3);
+    path.addRoundedRect(0, height()/2-3, width(), 6, 3, 3);
     painter.setClipPath(path);
 
     painter.drawRect(0, 0, width(), height());
 
-    brush.setColor(Qt::blue);
+    brush.setColor(progressColor());
     painter.setBrush(brush);
 
-    painter.drawRect(0, 0, width()/2, height());
+    if (Material::IndeterminateProgress == d->progressType) {
+        painter.drawRect(d->delegate->offset()*width()*2-width(), 0, width(), height());
+    } else {
+
+    }
 }

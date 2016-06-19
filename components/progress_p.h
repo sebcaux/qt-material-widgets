@@ -5,6 +5,7 @@
 #include "lib/theme.h"
 
 class Progress;
+class ProgressDelegate;
 
 class ProgressPrivate
 {
@@ -18,7 +19,11 @@ public:
     void init();
 
     Progress *const q_ptr;
+    ProgressDelegate *delegate;
     Material::ProgressType progressType;
+    QColor progressColor;
+    QColor backgroundColor;
+    bool   useThemeColors;
 };
 
 #endif // PROGRESS_P_H
