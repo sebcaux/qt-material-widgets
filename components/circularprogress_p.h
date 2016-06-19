@@ -2,8 +2,10 @@
 #define CIRCULARPROGRESS_P_H
 
 #include <QObject>
+#include "lib/theme.h"
 
 class CircularProgress;
+class CircularProgressDelegate;
 
 class CircularProgressPrivate
 {
@@ -17,6 +19,13 @@ public:
     void init();
 
     CircularProgress *const q_ptr;
+    CircularProgressDelegate *delegate;
+    Material::ProgressType progressType;
+    int    size;
+    int    angle;
+    qreal  penWidth;
+    QColor color;
+    bool   useThemeColors;
 };
 
 #endif // CIRCULARPROGRESS_P_H
