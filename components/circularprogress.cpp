@@ -182,10 +182,10 @@ void CircularProgress::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    painter.drawRect(rect());
-
-    painter.translate(width()/2, height()/2);
-    painter.rotate(d->delegate->angle());
+    if (Material::IndeterminateProgress == d->progressType) {
+        painter.translate(width()/2, height()/2);
+        painter.rotate(d->delegate->angle());
+    }
 
     QPen pen;
     pen.setCapStyle(Qt::RoundCap);
@@ -206,6 +206,17 @@ void CircularProgress::paintEvent(QPaintEvent *event)
     }
     else
     {
+        painter.setPen(pen);
 
+        const qreal x = (width()-d->size)/2;
+        const qreal y = (height()-d->size)/2;
+
+        const qreal a = 360*(value()-minimum())/(maximum()-minimum());
+
+        QPainterPath path;
+        path.arcMoveTo(x, y, d->size, d->size, 0);
+        path.arcTo(x, y, d->size, d->size, 0, a);
+
+        painter.drawPath(path);
     }
 }

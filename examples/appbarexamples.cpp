@@ -11,6 +11,10 @@ AppBarExamples::AppBarExamples(QWidget *parent)
     : QWidget(parent)
 {
     Progress *p = new Progress;
+    p->setProgressType(Material::DeterminateProgress);
+    p->setMinimum(0);
+    p->setMaximum(99);
+    p->setValue(22);
 
     QVBoxLayout *l = new QVBoxLayout;
 
@@ -21,11 +25,17 @@ AppBarExamples::AppBarExamples(QWidget *parent)
     l->addWidget(p);
 
     CircularProgress *cp = new CircularProgress;
-    cp->setSize(30);
+    cp->setProgressType(Material::DeterminateProgress);
+    cp->setMinimum(0);
+    cp->setMaximum(99);
+    cp->setValue(90);
 
     l->addWidget(cp);
 
     QProgressBar *pb = new QProgressBar;
+    pb->setMinimum(0);
+    pb->setMaximum(99);
+    pb->setValue(50);
 
     QPushButton *b = new QPushButton;
 

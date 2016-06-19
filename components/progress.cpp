@@ -1,6 +1,7 @@
 #include "progress.h"
 #include <QPainter>
 #include <QPropertyAnimation>
+#include <QDebug>
 #include "progress_p.h"
 #include "progress_internal.h"
 #include "lib/style.h"
@@ -140,9 +141,13 @@ void Progress::paintEvent(QPaintEvent *event)
     brush.setColor(progressColor());
     painter.setBrush(brush);
 
-    if (Material::IndeterminateProgress == d->progressType) {
+    if (Material::IndeterminateProgress == d->progressType)
+    {
         painter.drawRect(d->delegate->offset()*width()*2-width(), 0, width(), height());
-    } else {
-
+    }
+    else
+    {
+        qreal p = static_cast<qreal>(width())*(value()-minimum())/(maximum()-minimum());
+        painter.drawRect(0, 0, p, height());
     }
 }
