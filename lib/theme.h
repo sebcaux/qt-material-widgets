@@ -8,6 +8,11 @@
 
 namespace Material
 {
+    enum ProgressType {
+        DeterminateProgress,
+        IndeterminateProgress
+    };
+
     enum AvatarType {
         ImageAvatar,
         IconAvatar,
