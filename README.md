@@ -14,6 +14,7 @@
 - [x] Progress
 - [x] Radio Button
 - [x] Raised Button
+- [x] Scroll Bar
 - [x] Slider
 - [x] Snackbar
 - [x] Tabs
@@ -26,7 +27,6 @@
 - [ ] Icon Menu
 - [ ] Menu
 - [ ] Select Field
-- [ ] Scroll Bar
 
 #### Not started
 
