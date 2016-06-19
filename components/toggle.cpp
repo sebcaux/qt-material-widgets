@@ -278,7 +278,7 @@ void Toggle::addRipple()
     Ripple *ripple = new Ripple(QPoint(10+t, 20+t));
     ripple->setColor(d->track->trackColor());
     ripple->setRadiusEndValue(w);
-    ripple->setOpacityStartValue(0.4);
+    ripple->setOpacityStartValue(0.8);
 
     d->ripple->addRipple(ripple);
 }
