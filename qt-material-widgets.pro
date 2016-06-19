@@ -46,7 +46,6 @@ SOURCES += main.cpp\
     examples/avatarexamples.cpp \
     examples/menuexamples.cpp \
     components/menu.cpp \
-    components/scrollbar.cpp \
     examples/iconmenuexamples.cpp \
     lib/scaleeffect.cpp \
     lib/style.cpp \
@@ -68,7 +67,9 @@ SOURCES += main.cpp\
     components/snackbar_internal.cpp \
     components/circularprogress.cpp \
     components/circularprogress_internal.cpp \
-    components/progress_internal.cpp
+    components/progress_internal.cpp \
+    components/scrollbar.cpp \
+    components/scrollbar_internal.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -109,7 +110,6 @@ HEADERS  += mainwindow.h \
     examples/avatarexamples.h \
     examples/menuexamples.h \
     components/menu.h \
-    components/scrollbar.h \
     examples/iconmenuexamples.h \
     lib/scaleeffect.h \
     lib/style.h \
@@ -147,7 +147,10 @@ HEADERS  += mainwindow.h \
     components/circularprogress.h \
     components/circularprogress_p.h \
     components/circularprogress_internal.h \
-    components/progress_internal.h
+    components/progress_internal.h \
+    components/scrollbar.h \
+    components/scrollbar_p.h \
+    components/scrollbar_internal.h
 
 RESOURCES += \
     resources.qrc

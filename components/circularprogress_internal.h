@@ -16,14 +16,14 @@ public:
     CircularProgressDelegate(CircularProgress *parent);
     ~CircularProgressDelegate();
 
-    void setDashOffset(qreal offset) { _dashOffset = offset; progress->update(); }
-    qreal dashOffset() const { return _dashOffset; }
+    inline void setDashOffset(qreal offset) { _dashOffset = offset; progress->update(); }
+    inline qreal dashOffset() const { return _dashOffset; }
 
-    void setDashLength(qreal value) { _dashLength = value; progress->update(); }
-    qreal dashLength() const { return _dashLength; }
+    inline void setDashLength(qreal value) { _dashLength = value; progress->update(); }
+    inline qreal dashLength() const { return _dashLength; }
 
-    void setAngle(int angle) { _angle = angle; progress->update(); }
-    int angle() const { return _angle; }
+    inline void setAngle(int angle) { _angle = angle; progress->update(); }
+    inline int angle() const { return _angle; }
 
 private:
     Q_DISABLE_COPY(CircularProgressDelegate)

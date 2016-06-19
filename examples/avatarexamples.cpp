@@ -6,11 +6,15 @@
 #include "components/badge.h"
 #include "exampleview.h"
 #include "frame.h"
+#include "components/scrollbar.h"
 
 AvatarExamples::AvatarExamples(QWidget *parent)
     : ExampleList(parent)
 {
     QLayout *layout = widget()->layout();
+
+    ScrollBar *sb = new ScrollBar;
+    setVerticalScrollBar(sb);
 
     {
         Avatar *avatar = new Avatar;
