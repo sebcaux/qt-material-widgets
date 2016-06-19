@@ -1,7 +1,7 @@
 #include "iconbutton.h"
+#include "iconbutton_p.h"
 #include <QPainter>
 #include <QEvent>
-#include "iconbutton_p.h"
 #include "lib/style.h"
 #include "lib/rippleoverlay.h"
 

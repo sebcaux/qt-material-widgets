@@ -1,4 +1,5 @@
 #include "toggle.h"
+#include "toggle_p.h"
 #include <QPainter>
 #include <QState>
 #include <QSignalTransition>
@@ -8,7 +9,6 @@
 #include "lib/rippleoverlay.h"
 #include "lib/ripple.h"
 #include "lib/style.h"
-#include "toggle_p.h"
 #include "toggle_internal.h"
 
 TogglePrivate::TogglePrivate(Toggle *q)

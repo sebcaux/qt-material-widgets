@@ -1,5 +1,5 @@
-#include <QPainter>
 #include "scaleeffect.h"
+#include <QPainter>
 
 ScaleEffect::ScaleEffect(QObject *parent)
     : QGraphicsEffect(parent),

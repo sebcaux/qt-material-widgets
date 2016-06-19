@@ -1,8 +1,8 @@
 #include "progress.h"
+#include "progress_p.h"
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QDebug>
-#include "progress_p.h"
 #include "progress_internal.h"
 #include "lib/style.h"
 

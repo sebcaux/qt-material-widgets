@@ -1,5 +1,5 @@
-#include "avatar_p.h"
 #include "avatar.h"
+#include "avatar_p.h"
 #include <QWidget>
 #include <QPainter>
 #include <QIcon>

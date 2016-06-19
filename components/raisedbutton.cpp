@@ -1,4 +1,5 @@
 #include "raisedbutton.h"
+#include "raisedbutton_p.h"
 #include <QGraphicsDropShadowEffect>
 #include <QEventTransition>
 #include <QSignalTransition>
@@ -8,7 +9,6 @@
 #include <QStyleOption>
 #include <QMouseEvent>
 #include <QDebug>
-#include "raisedbutton_p.h"
 
 RaisedButtonPrivate::RaisedButtonPrivate(RaisedButton *q)
     : FlatButtonPrivate(q)

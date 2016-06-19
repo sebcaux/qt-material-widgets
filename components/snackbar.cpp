@@ -1,8 +1,8 @@
 #include "snackbar.h"
+#include "snackbar_p.h"
 #include <QPainter>
 #include <QEvent>
 #include <QDebug>
-#include "snackbar_p.h"
 #include "snackbar_internal.h"
 
 SnackbarPrivate::SnackbarPrivate(Snackbar *q)

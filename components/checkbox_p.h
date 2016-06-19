@@ -3,6 +3,8 @@
 
 #include "lib/checkable_p.h"
 
+class CheckBox;
+
 class CheckBoxPrivate : public CheckablePrivate
 {
     Q_DISABLE_COPY(CheckBoxPrivate)

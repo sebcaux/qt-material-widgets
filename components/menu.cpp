@@ -1,8 +1,8 @@
+#include "menu.h"
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QPainter>
 #include <QGraphicsDropShadowEffect>
-#include "menu.h"
 
 MenuItem::MenuItem(QWidget *parent)
     : FlatButton(parent)

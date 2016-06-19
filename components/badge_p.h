@@ -2,6 +2,8 @@
 #define BADGE_P_H
 
 #include <QObject>
+#include <QSize>
+#include <QIcon>
 
 class Badge;
 

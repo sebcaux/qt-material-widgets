@@ -1,9 +1,9 @@
+#include "toggle_internal.h"
 #include <QPainter>
 #include <QEvent>
 #include <QGraphicsDropShadowEffect>
 #include "lib/style.h"
 #include "lib/rippleoverlay.h"
-#include "toggle_internal.h"
 #include "toggle.h"
 #include "toggle_p.h"
 

@@ -2,6 +2,7 @@
 #define TOGGLE_P_H
 
 #include <QStateMachine>
+#include <QColor>
 
 class RippleOverlay;
 class Toggle;

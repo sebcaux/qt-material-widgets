@@ -1,4 +1,5 @@
 #include "flatbutton.h"
+#include "flatbutton_p.h"
 #include <QPainter>
 #include <QMouseEvent>
 #include <QStylePainter>
@@ -7,7 +8,6 @@
 #include <QDebug>
 #include "lib/rippleoverlay.h"
 #include "lib/ripple.h"
-#include "flatbutton_p.h"
 
 FlatButtonPrivate::FlatButtonPrivate(FlatButton *q)
     : q_ptr(q),

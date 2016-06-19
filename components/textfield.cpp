@@ -1,8 +1,8 @@
 #include "textfield.h"
+#include "textfield_p.h"
 #include <QPainter>
 #include <QPaintEvent>
 #include <QApplication>
-#include "textfield_p.h"
 #include "textfield_internal.h"
 #include "lib/style.h"
 

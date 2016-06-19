@@ -1,4 +1,5 @@
 #include "radiobutton.h"
+#include "radiobutton_p.h"
 #include <QStateMachine>
 #include <QEvent>
 #include <QSignalTransition>
@@ -6,7 +7,6 @@
 #include <QPropertyAnimation>
 #include <QApplication>
 #include <QDebug>
-#include "radiobutton_p.h"
 
 RadioButtonPrivate::RadioButtonPrivate(RadioButton *q)
     : CheckablePrivate(q)

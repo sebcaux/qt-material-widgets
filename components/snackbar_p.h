@@ -2,6 +2,7 @@
 #define SNACKBAR_P_H
 
 #include <QObject>
+#include <QColor>
 
 class Snackbar;
 class SnackbarStateMachine;

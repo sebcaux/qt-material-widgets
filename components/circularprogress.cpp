@@ -1,9 +1,9 @@
 #include "circularprogress.h"
+#include "circularprogress_p.h"
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QSequentialAnimationGroup>
 #include <QParallelAnimationGroup>
-#include "circularprogress_p.h"
 #include "circularprogress_internal.h"
 #include "lib/style.h"
 

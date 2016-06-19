@@ -3,6 +3,8 @@
 
 #include "lib/checkable_p.h"
 
+class RadioButton;
+
 class RadioButtonPrivate : public CheckablePrivate
 {
     Q_DISABLE_COPY(RadioButtonPrivate)

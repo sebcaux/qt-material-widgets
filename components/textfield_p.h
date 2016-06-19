@@ -2,6 +2,7 @@
 #define TEXTFIELD_P_H
 
 #include <QObject>
+#include <QColor>
 
 class TextField;
 class TextFieldStateMachine;

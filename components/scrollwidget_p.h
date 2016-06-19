@@ -2,6 +2,7 @@
 #define SCROLLWIDGET_P_H
 
 #include <QObject>
+#include <QColor>
 
 class ScrollBar;
 class ScrollBarStateMachine;

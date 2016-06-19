@@ -1,6 +1,6 @@
+#include "list.h"
 #include <QWidget>
 #include <QPainter>
-#include "list.h"
 
 List::List(QWidget *parent)
     : QWidget(parent)

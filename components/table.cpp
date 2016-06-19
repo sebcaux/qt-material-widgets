@@ -1,7 +1,7 @@
+#include "table.h"
 #include <QDebug>
 #include <QEvent>
 #include <QHeaderView>
-#include "table.h"
 #include "lib/style.h"
 
 Table::Table(QWidget *parent)

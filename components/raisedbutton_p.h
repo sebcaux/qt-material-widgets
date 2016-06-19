@@ -2,6 +2,7 @@
 #define RAISEDBUTTON_P_H
 
 #include "flatbutton_p.h"
+#include "raisedbutton.h"
 
 class QGraphicsDropShadowEffect;
 

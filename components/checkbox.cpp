@@ -1,4 +1,5 @@
 #include "checkbox.h"
+#include "checkbox_p.h"
 #include <QStateMachine>
 #include <QEvent>
 #include <QSignalTransition>
@@ -6,7 +7,6 @@
 #include <QPropertyAnimation>
 #include <QApplication>
 #include <QDebug>
-#include "checkbox_p.h"
 
 CheckBoxPrivate::CheckBoxPrivate(CheckBox *q)
     : CheckablePrivate(q)

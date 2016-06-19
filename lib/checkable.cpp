@@ -1,4 +1,5 @@
 #include "checkable.h"
+#include "checkable_p.h"
 #include <QPainter>
 #include <QEvent>
 #include <QStateMachine>
@@ -7,7 +8,6 @@
 #include <QPropertyAnimation>
 #include <QApplication>
 #include <QDebug>
-#include "checkable_p.h"
 #include "lib/rippleoverlay.h"
 #include "lib/style.h"
 #include "lib/ripple.h"

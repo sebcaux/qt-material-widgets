@@ -1,6 +1,6 @@
 #include "theme.h"
-#include <QDebug>
 #include "theme_p.h"
+#include <QDebug>
 
 QColor ThemePrivate::rgba(int r, int g, int b, qreal a) const
 {

@@ -1,9 +1,9 @@
+#include "iconmenu.h"
 #include <QEvent>
 #include <QLayout>
 #include <QPropertyAnimation>
 #include <QDebug>
 #include <QPainter>
-#include "iconmenu.h"
 #include "menu.h"
 //#include "lib/scaleeffect.h"
 

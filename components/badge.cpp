@@ -1,9 +1,9 @@
 #include "badge.h"
+#include "badge_p.h"
 #include <QPainter>
 #include <QIcon>
 #include <QEvent>
 #include <QDebug>
-#include "badge_p.h"
 #include "lib/style.h"
 
 BadgePrivate::BadgePrivate(Badge *q)

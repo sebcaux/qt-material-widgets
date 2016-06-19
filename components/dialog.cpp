@@ -1,5 +1,5 @@
-#include "dialog_p.h"
 #include "dialog.h"
+#include "dialog_p.h"
 #include <QEvent>
 #include <QPainter>
 #include "dialog_internal.h"

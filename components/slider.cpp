@@ -1,10 +1,10 @@
 #include "slider.h"
+#include "slider_p.h"
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QStringBuilder>
 #include <QMouseEvent>
 #include <QApplication>
-#include "slider_p.h"
 
 void SliderPrivate::init()
 {

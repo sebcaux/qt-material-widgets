@@ -1,7 +1,7 @@
 #include "scrollwidget.h"
+#include "scrollwidget_p.h"
 #include <QPainter>
 #include <QApplication>
-#include "scrollwidget_p.h"
 #include "scrollwidget_internal.h"
 #include "lib/style.h"
 

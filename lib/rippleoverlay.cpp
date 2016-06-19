@@ -1,6 +1,6 @@
+#include "rippleoverlay.h"
 #include <QDebug>
 #include <QPainter>
-#include "rippleoverlay.h"
 #include "ripple.h"
 
 RippleOverlay::RippleOverlay(QWidget *parent)

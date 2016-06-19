@@ -2,6 +2,7 @@
 #define FAB_P_H
 
 #include "raisedbutton_p.h"
+#include "fab.h"
 
 class FloatingActionButtonPrivate : public RaisedButtonPrivate
 {

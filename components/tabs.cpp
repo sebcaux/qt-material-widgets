@@ -1,8 +1,8 @@
 #include "tabs.h"
+#include "tabs_p.h"
 #include <QHBoxLayout>
 #include <QPainter>
 #include <QPropertyAnimation>
-#include "tabs_p.h"
 #include "tabs_internal.h"
 #include "lib/ripple.h"
 #include "lib/style.h"

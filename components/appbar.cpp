@@ -1,7 +1,7 @@
+#include "appbar.h"
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPainter>
-#include "appbar.h"
 #include "lib/customshadoweffect.h"
 
 AppBar::AppBar(QWidget *parent)

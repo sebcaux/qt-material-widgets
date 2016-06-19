@@ -1,7 +1,7 @@
 #include "fab.h"
+#include "fab_p.h"
 #include <QPainter>
 #include <QGraphicsDropShadowEffect>
-#include "fab_p.h"
 
 FloatingActionButtonPrivate::FloatingActionButtonPrivate(FloatingActionButton *q)
     : RaisedButtonPrivate(q),
