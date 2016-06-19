@@ -111,6 +111,7 @@ TextFieldLabel::TextFieldLabel(TextField *parent)
     QFont f;
     f.setPointSizeF(parent->labelFontSize());
     f.setStyleName("Medium");
+    f.setLetterSpacing(QFont::PercentageSpacing, 102);
     setFont(f);
 }
 
