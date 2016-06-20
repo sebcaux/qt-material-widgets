@@ -1,7 +1,9 @@
 #include "ripple.h"
+#include "rippleoverlay.h"
 
-Ripple::Ripple(const QPoint &center, QObject *parent)
+Ripple::Ripple(const QPoint &center, RippleOverlay *overlay, QObject *parent)
     : QObject(parent),
+      _overlay(overlay),
       _radiusAnimation(animate("radius")),
       _opacityAnimation(animate("opacity")),
       _radius(0),
@@ -23,22 +25,31 @@ Ripple::~Ripple()
 {
 }
 
+void Ripple::setOverlay(RippleOverlay *overlay)
+{
+    _overlay = overlay;
+}
+
 void Ripple::setRadius(qreal radius)
 {
+    Q_ASSERT(_overlay);
+
     if (radius == _radius)
         return;
 
     _radius = radius;
-    emit changed();
+    _overlay->update();
 }
 
 void Ripple::setOpacity(qreal opacity)
 {
+    Q_ASSERT(_overlay);
+
     if (opacity == _opacity)
         return;
 
     _opacity = opacity;
-    emit changed();
+    _overlay->update();
 }
 
 void Ripple::setColor(const QColor &color)

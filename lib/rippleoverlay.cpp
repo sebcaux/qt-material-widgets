@@ -17,15 +17,15 @@ RippleOverlay::~RippleOverlay()
 
 void RippleOverlay::addRipple(const QPoint &position, qreal radius)
 {
-    Ripple *ripple = new Ripple(position);
+    Ripple *ripple = new Ripple(position, this);
     ripple->setRadiusEndValue(radius);
     addRipple(ripple);
 }
 
 void RippleOverlay::addRipple(Ripple *ripple)
 {
+    ripple->setOverlay(this);
     ripples.push_back(ripple);
-    connect(ripple, SIGNAL(changed()), this, SLOT(update()));
     connect(ripple, SIGNAL(finished()), this, SLOT(deleteRipple()));
     ripple->startAnimation();
 }

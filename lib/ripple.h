@@ -7,6 +7,8 @@
 #include <QPropertyAnimation>
 #include <QBrush>
 
+class RippleOverlay;
+
 class Ripple : public QObject
 {
     Q_OBJECT
@@ -15,8 +17,10 @@ class Ripple : public QObject
     Q_PROPERTY(qreal opacity WRITE setOpacity READ opacity)
 
 public:
-    explicit Ripple(const QPoint &center, QObject *parent = 0);
+    explicit Ripple(const QPoint &center, RippleOverlay *overlay = 0, QObject *parent = 0);
     ~Ripple();
+
+    void setOverlay(RippleOverlay *overlay);
 
     void setRadius(qreal radius);
     inline qreal radius() const { return _radius; }
@@ -64,13 +68,13 @@ public:
     inline void startAnimation() { _group.start(); }
 
 signals:
-    void changed();
     void finished();
 
 private:
     QPropertyAnimation *animate(const QByteArray &property);
 
     QParallelAnimationGroup   _group;
+    RippleOverlay            *_overlay;
     QPropertyAnimation *const _radiusAnimation;
     QPropertyAnimation *const _opacityAnimation;
     qreal                     _radius;
