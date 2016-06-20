@@ -309,6 +309,7 @@ void FlatButton::paintEvent(QPaintEvent *event)
     initStyleOption(&option);
     option.features |= QStyleOptionButton::Flat;
 
+    style.setOpacity(1);
     style.drawControl(QStyle::CE_PushButtonLabel, option);
 
 #ifdef DEBUG_LAYOUT

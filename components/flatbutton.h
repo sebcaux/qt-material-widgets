@@ -9,6 +9,8 @@ class FlatButtonPrivate;
 
 /*
  * @TODO: implement checkable behavior
+ *
+ * @TODO: set default minimum height?
  */
 
 class FlatButton : public QPushButton

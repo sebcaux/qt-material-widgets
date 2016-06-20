@@ -5,6 +5,7 @@
 
 class Dialog;
 class DialogWindow;
+class TransparencyProxy;
 
 class DialogPrivate
 {
@@ -18,6 +19,7 @@ public:
 
     Dialog *const q_ptr;
     DialogWindow *window;
+    TransparencyProxy *proxy;
 };
 
 #endif // DIALOG_P_H

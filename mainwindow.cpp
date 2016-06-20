@@ -82,8 +82,24 @@ MainWindow::MainWindow(QWidget *parent)
 
     //
 
-    Dialog *dialog = new Dialog;
-    dialog->setParent(this);
+    {
+        Dialog *dialog = new Dialog;
+        dialog->setParent(this);
+
+        FlatButton *btn = new FlatButton;
+        btn->setMinimumHeight(40);
+        btn->setText("Hello world");
+
+        QPushButton *btn2 = new QPushButton;
+        btn2->setText("Hello world");
+
+        QVBoxLayout *layout = new QVBoxLayout;
+        dialog->setWindowLayout(layout);
+
+        layout->addWidget(btn);
+        layout->addWidget(btn2);
+    }
+
 }
 
 MainWindow::~MainWindow()

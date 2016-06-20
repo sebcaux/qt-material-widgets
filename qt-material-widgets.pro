@@ -70,7 +70,9 @@ SOURCES += main.cpp\
     components/progress_internal.cpp \
     components/scrollwidget.cpp \
     components/scrollwidget_internal.cpp \
-    components/dialog_internal.cpp
+    components/dialog_internal.cpp \
+    lib/transparencyproxy.cpp \
+    lib/transparencyproxy_internal.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -153,7 +155,10 @@ HEADERS  += mainwindow.h \
     components/scrollwidget.h \
     components/scrollwidget_internal.h \
     components/dialog_p.h \
-    components/dialog_internal.h
+    components/dialog_internal.h \
+    lib/transparencyproxy.h \
+    lib/transparencyproxy_p.h \
+    lib/transparencyproxy_internal.h
 
 RESOURCES += \
     resources.qrc
