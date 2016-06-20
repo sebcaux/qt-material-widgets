@@ -5,6 +5,10 @@
 
 class ScrollBarPrivate;
 
+/*
+ * @TODO: Rename to ScrollBar
+ */
+
 class ScrollBar : public QScrollBar
 {
     Q_OBJECT
