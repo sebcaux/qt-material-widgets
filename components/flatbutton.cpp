@@ -11,6 +11,8 @@
 
 FlatButtonPrivate::FlatButtonPrivate(FlatButton *q)
     : q_ptr(q),
+      ripple(new RippleOverlay),
+      delegate(0),
       role(Material::Default),
       rippleStyle(Material::PositionedRipple),
       cornerRadius(3),
@@ -31,7 +33,7 @@ void FlatButtonPrivate::init()
 {
     Q_Q(FlatButton);
 
-    ripple = new RippleOverlay(q);
+    ripple->setParent(q);
     delegate = new FlatButtonDelegate(q);
 
     Style &style = Style::instance();

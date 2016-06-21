@@ -18,12 +18,12 @@ public:
 
     void init();
 
-    Progress *const q_ptr;
-    ProgressDelegate *delegate;
-    Material::ProgressType progressType;
-    QColor progressColor;
-    QColor backgroundColor;
-    bool   useThemeColors;
+    Progress         *const q_ptr;
+    ProgressDelegate *const delegate;
+    Material::ProgressType  progressType;
+    QColor                  progressColor;
+    QColor                  backgroundColor;
+    bool                    useThemeColors;
 };
 
 #endif // PROGRESS_P_H

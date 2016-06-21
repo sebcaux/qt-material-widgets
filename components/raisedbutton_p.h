@@ -17,11 +17,11 @@ public:
 
     void init();
 
-    QStateMachine *machine;
-    QState        *normalState;
-    QState        *pressedState;
-    QGraphicsDropShadowEffect *effect;
-    QColor disabledBackgroundColor;
+    QStateMachine             *machine;
+    QState                    *const normalState;
+    QState                    *const pressedState;
+    QGraphicsDropShadowEffect *const effect;
+    QColor                           disabledBackgroundColor;
 };
 
 #endif // RAISEDBUTTON_P_H

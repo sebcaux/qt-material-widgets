@@ -11,7 +11,7 @@ AppBarExamples::AppBarExamples(QWidget *parent)
     : QWidget(parent)
 {
     Progress *p = new Progress;
-    p->setProgressType(Material::DeterminateProgress);
+    p->setProgressType(Material::IndeterminateProgress);
     p->setMinimum(0);
     p->setMaximum(99);
     p->setValue(22);
@@ -25,7 +25,7 @@ AppBarExamples::AppBarExamples(QWidget *parent)
     l->addWidget(p);
 
     CircularProgress *cp = new CircularProgress;
-    cp->setProgressType(Material::DeterminateProgress);
+    cp->setProgressType(Material::IndeterminateProgress);
     cp->setMinimum(0);
     cp->setMaximum(99);
     cp->setValue(90);

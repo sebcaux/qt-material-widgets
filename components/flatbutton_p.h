@@ -21,20 +21,20 @@ public:
     void init();
 
     FlatButton           *const q_ptr;
-    RippleOverlay        *ripple;
-    FlatButtonDelegate   *delegate;
-    Material::Role        role;
-    Material::RippleStyle rippleStyle;
-    qreal                 cornerRadius;
-    Qt::BGMode            bgMode;
-    QColor                textColor;
-    QColor                backgroundColor;
-    QColor                disabledTextColor;
-    bool                  useThemeColors;
-    bool                  showHalo;
-    qreal                 peakOpacity;
-    bool                  useFixedRippleRadius;
-    qreal                 fixedRippleRadius;
+    RippleOverlay        *const ripple;
+    FlatButtonDelegate         *delegate;
+    Material::Role              role;
+    Material::RippleStyle       rippleStyle;
+    qreal                       cornerRadius;
+    Qt::BGMode                  bgMode;
+    QColor                      textColor;
+    QColor                      backgroundColor;
+    QColor                      disabledTextColor;
+    bool                        useThemeColors;
+    bool                        showHalo;
+    qreal                       peakOpacity;
+    bool                        useFixedRippleRadius;
+    qreal                       fixedRippleRadius;
 };
 
 #endif // FLATBUTTON_P_H

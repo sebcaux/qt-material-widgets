@@ -20,11 +20,11 @@ public:
 
     CircularProgress         *const q_ptr;
     CircularProgressDelegate *const delegate;
-    Material::ProgressType progressType;
-    int    size;
-    qreal  penWidth;
-    QColor color;
-    bool   useThemeColors;
+    Material::ProgressType          progressType;
+    int                             size;
+    qreal                           penWidth;
+    QColor                          color;
+    bool                            useThemeColors;
 };
 
 #endif // CIRCULARPROGRESS_P_H

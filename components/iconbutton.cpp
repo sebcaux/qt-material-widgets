@@ -6,15 +6,14 @@
 #include "lib/rippleoverlay.h"
 
 IconButtonPrivate::IconButtonPrivate(IconButton *q)
-    : q_ptr(q)
+    : q_ptr(q),
+      ripple(new RippleOverlay(q->parentWidget()))
 {
 }
 
 void IconButtonPrivate::init()
 {
     Q_Q(IconButton);
-
-    ripple = new RippleOverlay(q->parentWidget());
 
     QSizePolicy policy;
     policy.setWidthForHeight(true);

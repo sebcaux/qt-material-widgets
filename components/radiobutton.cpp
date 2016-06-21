@@ -46,19 +46,19 @@ void RadioButtonPrivate::init()
 
     QPropertyAnimation *animation;
 
-    animation = new QPropertyAnimation(checkedIcon, "iconSize");
+    animation = new QPropertyAnimation(checkedIcon, "iconSize", q);
     animation->setDuration(250);
     machine->addDefaultAnimation(animation);
 
-    animation = new QPropertyAnimation(uncheckedIcon, "iconSize");
+    animation = new QPropertyAnimation(uncheckedIcon, "iconSize", q);
     animation->setDuration(250);
     machine->addDefaultAnimation(animation);
 
-    animation = new QPropertyAnimation(uncheckedIcon, "opacity");
+    animation = new QPropertyAnimation(uncheckedIcon, "opacity", q);
     animation->setDuration(250);
     machine->addDefaultAnimation(animation);
 
-    animation = new QPropertyAnimation(checkedIcon, "opacity");
+    animation = new QPropertyAnimation(checkedIcon, "opacity", q);
     animation->setDuration(250);
     machine->addDefaultAnimation(animation);
 }

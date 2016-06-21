@@ -11,7 +11,7 @@ IconButtonExamples::IconButtonExamples(QWidget *parent)
     QLayout *layout = widget()->layout();
 
     {
-        IconButton *iconButton = new IconButton(QIcon("../qt-material-widgets/face.svg"));
+        IconButton *iconButton = new IconButton(QIcon("../qt-material-widgets/face.svg"), this);
 
         ExampleView *view = new ExampleView;
         view->setWidget(iconButton);

@@ -8,7 +8,7 @@
 
 ProgressPrivate::ProgressPrivate(Progress *q)
     : q_ptr(q),
-      delegate(0),
+      delegate(new ProgressDelegate(q)),
       progressType(Material::IndeterminateProgress),
       useThemeColors(true)
 {
@@ -21,8 +21,6 @@ ProgressPrivate::~ProgressPrivate()
 void ProgressPrivate::init()
 {
     Q_Q(Progress);
-
-    delegate = new ProgressDelegate(q);
 
     QPropertyAnimation *animation;
 

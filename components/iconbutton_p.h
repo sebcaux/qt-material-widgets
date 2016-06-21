@@ -17,7 +17,7 @@ public:
     void init();
 
     IconButton    *const q_ptr;
-    RippleOverlay *ripple;
+    RippleOverlay *const ripple;
 };
 
 #endif // ICONBUTTON_P_H

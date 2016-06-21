@@ -11,7 +11,11 @@
 #include <QDebug>
 
 RaisedButtonPrivate::RaisedButtonPrivate(RaisedButton *q)
-    : FlatButtonPrivate(q)
+    : FlatButtonPrivate(q),
+      machine(new QStateMachine),
+      normalState(new QState),
+      pressedState(new QState),
+      effect(new QGraphicsDropShadowEffect)
 {
 }
 
@@ -23,19 +27,15 @@ void RaisedButtonPrivate::init()
 {
     Q_Q(RaisedButton);
 
-    machine = new QStateMachine(q);
+    machine->setParent(q);
 
     q->setTextColor(Qt::white);
     q->setPeakOpacity(0.25);
 
-    effect = new QGraphicsDropShadowEffect;
     effect->setBlurRadius(7);
     effect->setOffset(QPointF(0, 0));
     effect->setColor(QColor(0, 0, 0, 60));
     q->setGraphicsEffect(effect);
-
-    normalState = new QState;
-    pressedState = new QState;
 
     machine->addState(normalState);
     machine->addState(pressedState);
