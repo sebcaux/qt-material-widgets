@@ -31,6 +31,11 @@ public:
     explicit FlatButton(const QString &text, QWidget *parent = 0);
     ~FlatButton();
 
+    void setHasFixedRippleRadius(bool value);
+    bool hasFixedRippleRadius() const;
+
+    void setFixedRippleRadius(qreal radius);
+
     void setRole(Material::Role role);
     Material::Role role() const;
 

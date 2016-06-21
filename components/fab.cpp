@@ -34,6 +34,8 @@ void FloatingActionButtonPrivate::init()
     if (q->parentWidget()) {
         q->parentWidget()->installEventFilter(q);
     }
+
+    q->setFixedRippleRadius(50);
 }
 
 QRect FloatingActionButtonPrivate::fabGeometry() const
@@ -127,6 +129,8 @@ void FloatingActionButton::setMini(bool state)
     QPainterPath path;
     path.addEllipse(0, 0, s, s);
     d->ripple->setClipPath(path);
+
+    setFixedRippleRadius(state ? 30 : 50);
 
     d->assignAnimationProperties();
     update();

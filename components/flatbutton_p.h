@@ -33,6 +33,8 @@ public:
     bool                  useThemeColors;
     bool                  showHalo;
     qreal                 peakOpacity;
+    bool                  useFixedRippleRadius;
+    qreal                 fixedRippleRadius;
 };
 
 #endif // FLATBUTTON_P_H

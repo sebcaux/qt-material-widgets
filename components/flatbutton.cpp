@@ -17,7 +17,9 @@ FlatButtonPrivate::FlatButtonPrivate(FlatButton *q)
       bgMode(Qt::TransparentMode),
       useThemeColors(true),
       showHalo(true),
-      peakOpacity(0.08)
+      peakOpacity(0.08),
+      useFixedRippleRadius(false),
+      fixedRippleRadius(64)
 {
 }
 
@@ -65,6 +67,28 @@ FlatButton::FlatButton(const QString &text, QWidget *parent)
 
 FlatButton::~FlatButton()
 {
+}
+
+void FlatButton::setHasFixedRippleRadius(bool value)
+{
+    Q_D(FlatButton);
+
+    d->useFixedRippleRadius = value;
+}
+
+bool FlatButton::hasFixedRippleRadius() const
+{
+    Q_D(const FlatButton);
+
+    return d->useFixedRippleRadius;
+}
+
+void FlatButton::setFixedRippleRadius(qreal radius)
+{
+    Q_D(FlatButton);
+
+    d->fixedRippleRadius = radius;
+    setHasFixedRippleRadius(true);
 }
 
 void FlatButton::setRippleStyle(Material::RippleStyle style)
@@ -338,6 +362,10 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
     ripple->setOpacityStartValue(0.35);
     ripple->setColor(palette().color(QPalette::Active, QPalette::ButtonText));
     ripple->setDuration(600, 1300);
+
+    if (d->useFixedRippleRadius) {
+        ripple->setRadiusEndValue(d->fixedRippleRadius);
+    }
 
     d->ripple->addRipple(ripple);
 
