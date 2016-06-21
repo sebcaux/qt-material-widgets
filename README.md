@@ -8,6 +8,7 @@
 - [x] Badge
 - [x] Check Box
 - [x] Circular Progress
+- [x] Dialog
 - [x] Floating Action Button
 - [x] Flat Button
 - [x] Icon Button
@@ -21,7 +22,6 @@
 - [x] Text Field
 - [x] Toggle
 - [ ] App Bar
-- [ ] Dialog
 - [ ] Divider
 - [ ] Drawer
 - [ ] Icon Menu
