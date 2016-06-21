@@ -18,8 +18,8 @@ public:
     void init();
 
     TransparencyProxy *const q_ptr;
-    QWidget     *widget;
-    ProxyWidget *proxy;
+    QWidget           *widget;
+    ProxyWidget       *proxy;
 };
 
 #endif // TRANSPARENCYPROXY_P_H

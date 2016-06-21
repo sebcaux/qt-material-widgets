@@ -31,8 +31,8 @@ protected slots:
 
 private:
     QList<Ripple *> ripples;
-    QPainterPath clipPath;
-    bool useClip;
+    QPainterPath    clipPath;
+    bool            useClip;
 };
 
 #endif // RIPPLEOVERLAY_H
