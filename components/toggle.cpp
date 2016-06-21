@@ -47,20 +47,20 @@ void TogglePrivate::init()
     transition->setTargetState(onState);
     offState->addTransition(transition);
 
-    animation = new QPropertyAnimation;
+    animation = new QPropertyAnimation(q);
     animation->setPropertyName("shift");
     animation->setTargetObject(thumb);
     animation->setDuration(200);
     animation->setEasingCurve(QEasingCurve::OutQuad);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation;
+    animation = new QPropertyAnimation(q);
     animation->setPropertyName("trackColor");
     animation->setTargetObject(track);
     animation->setDuration(150);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation;
+    animation = new QPropertyAnimation(q);
     animation->setPropertyName("thumbColor");
     animation->setTargetObject(thumb);
     animation->setDuration(150);
@@ -72,20 +72,20 @@ void TogglePrivate::init()
     transition->setTargetState(offState);
     onState->addTransition(transition);
 
-    animation = new QPropertyAnimation;
+    animation = new QPropertyAnimation(q);
     animation->setPropertyName("shift");
     animation->setTargetObject(thumb);
     animation->setDuration(200);
     animation->setEasingCurve(QEasingCurve::OutQuad);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation;
+    animation = new QPropertyAnimation(q);
     animation->setPropertyName("trackColor");
     animation->setTargetObject(track);
     animation->setDuration(150);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation;
+    animation = new QPropertyAnimation(q);
     animation->setPropertyName("thumbColor");
     animation->setTargetObject(thumb);
     animation->setDuration(150);

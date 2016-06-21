@@ -9,6 +9,7 @@
 TextFieldPrivate::TextFieldPrivate(TextField *q)
     : q_ptr(q),
       label(0),
+      machine(0),
       labelFontSize(9.5),
       showLabel(false),
       useThemeColors(true)

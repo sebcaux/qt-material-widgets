@@ -8,9 +8,11 @@
 TextFieldStateMachine::TextFieldStateMachine(TextField *parent)
     : QStateMachine(parent),
       textField(parent),
-      label(0),
       _normalState(new QState),
       _focusedState(new QState),
+      _label(0),
+      _offsetAnimation(0),
+      _colorAnimation(0),
       _progress(0)
 {
     addState(_normalState);
@@ -25,7 +27,7 @@ TextFieldStateMachine::TextFieldStateMachine(TextField *parent)
     transition->setTargetState(_focusedState);
     _normalState->addTransition(transition);
 
-    animation = new QPropertyAnimation(this, "progress");
+    animation = new QPropertyAnimation(this, "progress", this);
     animation->setEasingCurve(QEasingCurve::InCubic);
     animation->setDuration(340);
     transition->addAnimation(animation);
@@ -34,7 +36,7 @@ TextFieldStateMachine::TextFieldStateMachine(TextField *parent)
     transition->setTargetState(_normalState);
     _focusedState->addTransition(transition);
 
-    animation = new QPropertyAnimation(this, "progress");
+    animation = new QPropertyAnimation(this, "progress", this);
     animation->setEasingCurve(QEasingCurve::OutCubic);
     animation->setDuration(340);
     transition->addAnimation(animation);
@@ -53,20 +55,30 @@ TextFieldStateMachine::~TextFieldStateMachine()
 
 void TextFieldStateMachine::setLabel(TextFieldLabel *widget)
 {
-    label = widget;
+    if (_label) {
+        delete _label;
+    }
+    if (_offsetAnimation) {
+        removeDefaultAnimation(_offsetAnimation);
+        delete _offsetAnimation;
+    }
+    if (_colorAnimation) {
+        removeDefaultAnimation(_colorAnimation);
+        delete _colorAnimation;
+    }
 
-    if (label)
+    _label = widget;
+
+    if (_label)
     {
-        QPropertyAnimation *animation;
+        _offsetAnimation = new QPropertyAnimation(_label, "offset", this);
+        _offsetAnimation->setDuration(210);
+        _offsetAnimation->setEasingCurve(QEasingCurve::OutCubic);
+        addDefaultAnimation(_offsetAnimation);
 
-        animation = new QPropertyAnimation(label, "offset");
-        animation->setDuration(210);
-        animation->setEasingCurve(QEasingCurve::OutCubic);
-        addDefaultAnimation(animation);
-
-        animation = new QPropertyAnimation(label, "color");
-        animation->setDuration(210);
-        addDefaultAnimation(animation);
+        _colorAnimation = new QPropertyAnimation(_label, "color", this);
+        _colorAnimation->setDuration(210);
+        addDefaultAnimation(_colorAnimation);
     }
 
     assignProperties();
@@ -84,19 +96,19 @@ void TextFieldStateMachine::assignProperties()
     p.setColor(QPalette::Normal, QPalette::Base, textField->backgroundColor());
     textField->setPalette(p);
 
-    if (label)
+    if (_label)
     {
         const int m = textField->textMargins().top();
 
-        _focusedState->assignProperty(label, "offset", QPointF(0, 0-m));
+        _focusedState->assignProperty(_label, "offset", QPointF(0, 0-m));
 
         if (textField->text().isEmpty()) {
-            _normalState->assignProperty(label, "offset", QPointF(0, 26));
+            _normalState->assignProperty(_label, "offset", QPointF(0, 26));
         } else {
-            _normalState->assignProperty(label, "offset", QPointF(0, 0-m));
+            _normalState->assignProperty(_label, "offset", QPointF(0, 0-m));
         }
-        _focusedState->assignProperty(label, "color", textField->inkColor());
-        _normalState->assignProperty(label, "color", textField->hintColor());
+        _focusedState->assignProperty(_label, "color", textField->inkColor());
+        _normalState->assignProperty(_label, "color", textField->hintColor());
     }
 }
 

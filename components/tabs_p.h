@@ -19,15 +19,15 @@ public:
 
     void init();
 
-    Tabs        *const q_ptr;
-    TabsInkBar  *const inkBar;
-    QHBoxLayout *const tabLayout;
-    QColor             inkColor;
-    QColor             backgroundColor;
-    QColor             textColor;
-    int                tab;
-    bool               useThemeColors;
-    bool               showHalo;
+    Tabs           *const q_ptr;
+    TabsInkBar     *const inkBar;
+    QHBoxLayout    *const tabLayout;
+    QColor                inkColor;
+    QColor                backgroundColor;
+    QColor                textColor;
+    int                   tab;
+    bool                  useThemeColors;
+    bool                  showHalo;
     Material::RippleStyle rippleStyle;
 };
 

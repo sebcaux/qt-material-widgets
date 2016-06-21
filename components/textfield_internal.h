@@ -4,6 +4,7 @@
 #include <QStateMachine>
 #include <QWidget>
 
+class QPropertyAnimation;
 class TextField;
 class TextFieldLabel;
 
@@ -31,9 +32,11 @@ private:
     friend class TextField;
 
     TextField      *const textField;
-    TextFieldLabel *label;
     QState         *const _normalState;
     QState         *const _focusedState;
+    TextFieldLabel       *_label;
+    QPropertyAnimation   *_offsetAnimation;
+    QPropertyAnimation   *_colorAnimation;
     qreal                 _progress;
 };
 
@@ -65,10 +68,10 @@ private:
     Q_DISABLE_COPY(TextFieldLabel)
 
     TextField *const label;
-    qreal  _scale;
-    qreal  _posX;
-    qreal  _posY;
-    QColor _color;
+    qreal            _scale;
+    qreal            _posX;
+    qreal            _posY;
+    QColor           _color;
 };
 
 #endif // TEXTFIELD_INTERNAL_H
