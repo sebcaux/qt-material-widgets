@@ -21,22 +21,22 @@ public:
 
     void init();
 
-    Checkable     *const q_ptr;
-    RippleOverlay *ripple;
-    CheckableIcon *checkedIcon;
-    CheckableIcon *uncheckedIcon;
-    QStateMachine *machine;
-    QState        *uncheckedState;
-    QState        *checkedState;
-    QState        *disabledUncheckedState;
-    QState        *disabledCheckedState;
-    QSignalTransition *uncheckedTransition;
-    QSignalTransition *checkedTransition;
-    QColor         checkedColor;
-    QColor         uncheckedColor;
-    QColor         textColor;
-    QColor         disabledColor;
-    bool           useThemeColors;
+    Checkable         *const q_ptr;
+    RippleOverlay     *const ripple;
+    CheckableIcon     *const checkedIcon;
+    CheckableIcon     *const uncheckedIcon;
+    QStateMachine     *const machine;
+    QState            *const uncheckedState;
+    QState            *const checkedState;
+    QState            *const disabledUncheckedState;
+    QState            *const disabledCheckedState;
+    QSignalTransition *const uncheckedTransition;
+    QSignalTransition *const checkedTransition;
+    QColor                   checkedColor;
+    QColor                   uncheckedColor;
+    QColor                   textColor;
+    QColor                   disabledColor;
+    bool                     useThemeColors;
 };
 
 #endif // CHECKABLE_P_H

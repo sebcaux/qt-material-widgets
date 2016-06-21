@@ -5,7 +5,6 @@
 #include <QStateMachine>
 #include <QSignalTransition>
 #include <QEventTransition>
-#include <QPropertyAnimation>
 #include <QApplication>
 #include <QDebug>
 #include "lib/rippleoverlay.h"
@@ -14,8 +13,16 @@
 
 CheckablePrivate::CheckablePrivate(Checkable *q)
     : q_ptr(q),
+      ripple(new RippleOverlay),
       checkedIcon(new CheckableIcon(QIcon("../qt-material-widgets/ic_check_box_black_24px.svg"))),
       uncheckedIcon(new CheckableIcon(QIcon("../qt-material-widgets/ic_check_box_outline_blank_black_24px.svg"))),
+      machine(new QStateMachine),
+      uncheckedState(new QState),
+      checkedState(new QState),
+      disabledUncheckedState(new QState),
+      disabledCheckedState(new QState),
+      uncheckedTransition(new QSignalTransition(q, SIGNAL(toggled(bool)))),
+      checkedTransition(new QSignalTransition(q, SIGNAL(toggled(bool)))),
       useThemeColors(true)
 {
 }
@@ -33,20 +40,14 @@ void CheckablePrivate::init()
     uncheckedIcon->setParent(q);
     checkedIcon->setParent(q);
 
-    ripple = new RippleOverlay(q->parentWidget());
-
     QFont f(q->font());
     f.setPointSizeF(11);
     q->setFont(f);
 
     //
 
-    machine = new QStateMachine(q);
-
-    uncheckedState = new QState;
-    checkedState = new QState;
-    disabledUncheckedState = new QState;
-    disabledCheckedState = new QState;
+    ripple->setParent(q->parentWidget());
+    machine->setParent(q);
 
     machine->addState(uncheckedState);
     machine->addState(checkedState);
@@ -57,13 +58,11 @@ void CheckablePrivate::init()
 
     // Transition to checked
 
-    uncheckedTransition = new QSignalTransition(q, SIGNAL(toggled(bool)));
     uncheckedTransition->setTargetState(checkedState);
     uncheckedState->addTransition(uncheckedTransition);
 
     // Transition to unchecked
 
-    checkedTransition = new QSignalTransition(q, SIGNAL(toggled(bool)));
     checkedTransition->setTargetState(uncheckedState);
     checkedState->addTransition(checkedTransition);
 
