@@ -17,6 +17,8 @@ TogglePrivate::TogglePrivate(Toggle *q)
       thumb(new ToggleThumb(q)),
       offState(new QState),
       onState(new QState),
+      ripple(new RippleOverlay(q->parentWidget())),
+      machine(new QStateMachine),
       orientation(Qt::Horizontal),
       useThemeColors(true)
 {
@@ -26,8 +28,7 @@ void TogglePrivate::init()
 {
     Q_Q(Toggle);
 
-    ripple = new RippleOverlay(q->parentWidget());
-    machine = new QStateMachine(q);
+    machine->setParent(q);
 
     q->setCheckable(true);
     q->setChecked(false);
