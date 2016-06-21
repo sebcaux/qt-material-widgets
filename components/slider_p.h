@@ -13,18 +13,7 @@ class SliderPrivate
     Q_DECLARE_PUBLIC(Slider)
 
 public:
-    SliderPrivate(Slider *q)
-        : q_ptr(q),
-          hoverTrack(false),
-          hoverThumb(false),
-          hover(false),
-          step(false),
-          pageStepMode(true),
-          stepTo(0),
-          oldValue(0),
-          trackWidth(2),
-          useThemeColors(true)
-    {}
+    SliderPrivate(Slider *q);
 
     void init();
 
@@ -35,22 +24,22 @@ public:
 
     void setHovered(bool status);
 
-    Slider *const q_ptr;
-    SliderThumb *thumb;
-    SliderTrack *track;
+    Slider             *const q_ptr;
+    SliderThumb        *const thumb;
+    SliderTrack        *const track;
     SliderStateMachine *machine;
-    bool hoverTrack;
-    bool hoverThumb;
-    bool hover;
-    bool step;
-    bool pageStepMode;
-    int  stepTo;
-    int  oldValue;
-    int  trackWidth;
-    QColor thumbColor;
-    QColor trackColor;
-    QColor disabledColor;
-    bool useThemeColors;
+    bool                hoverTrack;
+    bool                hoverThumb;
+    bool                hover;
+    bool                step;
+    bool                pageStepMode;
+    int                 stepTo;
+    int                 oldValue;
+    int                 trackWidth;
+    QColor              thumbColor;
+    QColor              trackColor;
+    QColor              disabledColor;
+    bool                useThemeColors;
 };
 
 #endif // SLIDER_P_H

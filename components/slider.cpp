@@ -6,12 +6,27 @@
 #include <QMouseEvent>
 #include <QApplication>
 
+SliderPrivate::SliderPrivate(Slider *q)
+    : q_ptr(q),
+      thumb(new SliderThumb(q)),
+      track(new SliderTrack(q)),
+      machine(0),
+      hoverTrack(false),
+      hoverThumb(false),
+      hover(false),
+      step(false),
+      pageStepMode(true),
+      stepTo(0),
+      oldValue(0),
+      trackWidth(2),
+      useThemeColors(true)
+{
+}
+
 void SliderPrivate::init()
 {
     Q_Q(Slider);
 
-    thumb = new SliderThumb(q);
-    track = new SliderTrack(q);
     machine = new SliderStateMachine(q, thumb, track);
 
     oldValue = q->value();
