@@ -17,8 +17,9 @@ public:
     void setWindowLayout(QLayout *layout);
 
 protected slots:
-    void pressOne();
-    void pressTwo();
+    void showDialog();
+    void hideDialog();
+    void acceptMouseEvents();
 
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;

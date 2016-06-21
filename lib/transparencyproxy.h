@@ -10,6 +10,8 @@ class TransparencyProxy : public QStackedLayout
 {
     Q_OBJECT
 
+    Q_PROPERTY(qreal opacity WRITE setOpacity READ opacity NOTIFY opacityChanged)
+
 public:
     TransparencyProxy();
     ~TransparencyProxy();
@@ -18,6 +20,10 @@ public:
 
     void setOpaque();
     void setOpacity(qreal opacity);
+    qreal opacity() const;
+
+signals:
+    void opacityChanged();
 
 protected:
     const QScopedPointer<TransparencyProxyPrivate> d_ptr;

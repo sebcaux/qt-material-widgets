@@ -98,6 +98,24 @@ MainWindow::MainWindow(QWidget *parent)
 
         layout->addWidget(btn);
         layout->addWidget(btn2);
+
+        {
+            QPushButton *btn;
+
+            btn = new QPushButton;
+            btn->setParent(this);
+            btn->setText("Show");
+            btn->setGeometry(190, 80, 140, 40);
+
+            QObject::connect(btn, SIGNAL(pressed()), dialog, SLOT(showDialog()));
+
+            btn = new QPushButton;
+            btn->setParent(this);
+            btn->setText("Hide");
+            btn->setGeometry(370, 80, 140, 40);
+
+            QObject::connect(btn, SIGNAL(pressed()), dialog, SLOT(hideDialog()));
+        }
     }
 
 }

@@ -1,6 +1,10 @@
 #include "dialog.h"
 #include "dialog_p.h"
 #include <QPainter>
+#include <QApplication>
+#include <QStateMachine>
+#include <QSignalTransition>
+#include <QPropertyAnimation>
 #include <QEvent>
 #include <QPushButton>
 #include <QGraphicsDropShadowEffect>
@@ -8,7 +12,10 @@
 #include "dialog_internal.h"
 
 DialogPrivate::DialogPrivate(Dialog *q)
-    : q_ptr(q)
+    : q_ptr(q),
+      machine(new QStateMachine(q)),
+      window(new DialogWindow(q)),
+      proxy(new TransparencyProxy)
 {
 }
 
@@ -21,15 +28,12 @@ void DialogPrivate::init()
 
     QWidget *widget = new QWidget;
 
-    proxy = new TransparencyProxy;
     widget->setLayout(proxy);
     layout->addWidget(widget);
     layout->setAlignment(widget, Qt::AlignCenter);
 
     widget->setMinimumWidth(400);
-    widget->setMinimumHeight(400);
 
-    window = new DialogWindow(q);
     proxy->setWidget(window);
 
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
@@ -38,54 +42,55 @@ void DialogPrivate::init()
     effect->setOffset(0, 13);
     widget->setGraphicsEffect(effect);
 
-/*
-    {
-        QVBoxLayout *layout = new QVBoxLayout;
-        window->setLayout(layout);
-
-        QPushButton *button = new QPushButton;
-        button->setText("Hello test!");
-        layout->addWidget(button);
-
-        button = new QPushButton;
-        button->setText("Hello test!");
-        layout->addWidget(button);
-
-        button = new QPushButton;
-        button->setText("Hello test!");
-        layout->addWidget(button);
-
-        button = new QPushButton;
-        button->setText("Hello test!");
-        layout->addWidget(button);
-
-        button = new QPushButton;
-        button->setText("Hello test!");
-        layout->addWidget(button);
-    }
-    */
-
     //
 
-    proxy->setCurrentIndex(1);
+    QState *hiddenState = new QState;
+    QState *visibleState = new QState;
 
-    //
+    machine->addState(hiddenState);
+    machine->addState(visibleState);
 
+    machine->setInitialState(hiddenState);
 
+    QSignalTransition *transition;
 
-    QPushButton *btn;
+    transition = new QSignalTransition(window, SIGNAL(dialogActivated()));
+    transition->setTargetState(visibleState);
+    hiddenState->addTransition(transition);
 
-    btn = new QPushButton;
-    btn->setText("One");
-    layout->addWidget(btn);
+    transition = new QSignalTransition(window, SIGNAL(dialogDeactivated()));
+    transition->setTargetState(hiddenState);
+    visibleState->addTransition(transition);
 
-    QObject::connect(btn, SIGNAL(pressed()), q, SLOT(pressOne()));
+    visibleState->assignProperty(proxy, "opacity", 1);
+    visibleState->assignProperty(effect, "color", QColor(0, 0, 0, 200));
+    visibleState->assignProperty(window, "offset", 0);
+    hiddenState->assignProperty(proxy, "opacity", 0);
+    hiddenState->assignProperty(effect, "color", QColor(0, 0, 0, 0));
+    hiddenState->assignProperty(window, "offset", 200);
 
-    btn = new QPushButton;
-    btn->setText("Two");
-    layout->addWidget(btn);
+    QObject::connect(proxy, SIGNAL(opacityChanged()), q, SLOT(update()));
 
-    QObject::connect(btn, SIGNAL(pressed()), q, SLOT(pressTwo()));
+    QPropertyAnimation *animation;
+
+    animation = new QPropertyAnimation(proxy, "opacity");
+    animation->setDuration(280);
+    machine->addDefaultAnimation(animation);
+
+    animation = new QPropertyAnimation(effect, "color");
+    animation->setDuration(280);
+    machine->addDefaultAnimation(animation);
+
+    animation = new QPropertyAnimation(window, "offset");
+    animation->setDuration(280);
+    animation->setEasingCurve(QEasingCurve::OutCirc);
+    machine->addDefaultAnimation(animation);
+
+    QObject::connect(visibleState, SIGNAL(propertiesAssigned()), q, SLOT(acceptMouseEvents()));
+
+    machine->start();
+
+    QCoreApplication::processEvents();
 }
 
 Dialog::Dialog(QWidget *parent)
@@ -113,18 +118,24 @@ void Dialog::setWindowLayout(QLayout *layout)
     d->window->setLayout(layout);
 }
 
-void Dialog::pressOne()
+void Dialog::showDialog()
 {
     Q_D(Dialog);
 
-    d->proxy->setOpaque();
+    emit d->window->dialogActivated();
 }
 
-void Dialog::pressTwo()
+void Dialog::hideDialog()
 {
     Q_D(Dialog);
 
-    d->proxy->setOpacity(0.5);
+    emit d->window->dialogDeactivated();
+    setAttribute(Qt::WA_TransparentForMouseEvents);
+}
+
+void Dialog::acceptMouseEvents()
+{
+    setAttribute(Qt::WA_TransparentForMouseEvents, false);
 }
 
 bool Dialog::event(QEvent *event)
@@ -176,21 +187,16 @@ void Dialog::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
+    Q_D(Dialog);
+
     QPainter painter(this);
-
-    //QPen pen;
-    //pen.setColor(Qt::blue);
-    //pen.setWidth(3);
-    //painter.setPen(pen);
-
-    //painter.drawRect(rect());
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::black);
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
-    painter.setOpacity(0.5);
+    painter.setOpacity(d->proxy->opacity()/2);
 
     painter.drawRect(rect());
 }

@@ -3,6 +3,7 @@
 
 #include <QObject>
 
+class QStateMachine;
 class Dialog;
 class DialogWindow;
 class TransparencyProxy;
@@ -17,9 +18,10 @@ public:
 
     void init();
 
-    Dialog *const q_ptr;
-    DialogWindow *window;
-    TransparencyProxy *proxy;
+    Dialog            *const q_ptr;
+    QStateMachine     *const machine;
+    DialogWindow      *const window;
+    TransparencyProxy *const proxy;
 };
 
 #endif // DIALOG_P_H

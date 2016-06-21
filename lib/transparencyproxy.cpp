@@ -61,6 +61,8 @@ void TransparencyProxy::setOpaque()
 
     d->proxy->setOpacity(1);
     setCurrentIndex(0);
+
+    emit opacityChanged();
 }
 
 void TransparencyProxy::setOpacity(qreal opacity)
@@ -71,6 +73,19 @@ void TransparencyProxy::setOpacity(qreal opacity)
         return;
     }
 
+    if (1 == opacity) {
+        return setOpaque();
+    }
+
     d->proxy->setOpacity(opacity);
     setCurrentIndex(1);
+
+    emit opacityChanged();
+}
+
+qreal TransparencyProxy::opacity() const
+{
+    Q_D(const TransparencyProxy);
+
+    return d->proxy->opacity();
 }

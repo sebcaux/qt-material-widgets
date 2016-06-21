@@ -1,14 +1,28 @@
 #include "dialog_internal.h"
 #include <QPainter>
+#include <QLayout>
 #include "dialog.h"
 
-DialogWindow::DialogWindow(QWidget *parent)
-    : QWidget(parent)
+DialogWindow::DialogWindow(Dialog *dialog, QWidget *parent)
+    : QWidget(parent),
+      dialog(dialog)
 {
 }
 
 DialogWindow::~DialogWindow()
 {
+}
+
+void DialogWindow::setOffset(int offset)
+{
+    QMargins margins = dialog->layout()->contentsMargins();
+    margins.setBottom(offset);
+    dialog->layout()->setContentsMargins(margins);
+}
+
+int DialogWindow::offset() const
+{
+    return dialog->layout()->contentsMargins().bottom();
 }
 
 void DialogWindow::paintEvent(QPaintEvent *event)
