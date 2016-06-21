@@ -54,10 +54,10 @@ void RaisedButtonPrivate::init()
     transition = new QEventTransition(q, QEvent::MouseButtonPress);
     transition->setTargetState(pressedState);
 
-    animation = new QPropertyAnimation(effect, "offset");
+    animation = new QPropertyAnimation(effect, "offset", q);
     animation->setDuration(100);
     transition->addAnimation(animation);
-    animation = new QPropertyAnimation(effect, "blurRadius");
+    animation = new QPropertyAnimation(effect, "blurRadius", q);
     animation->setDuration(100);
     transition->addAnimation(animation);
 
@@ -68,10 +68,10 @@ void RaisedButtonPrivate::init()
     transition = new QEventTransition(q, QEvent::MouseButtonDblClick);
     transition->setTargetState(pressedState);
 
-    animation = new QPropertyAnimation(effect, "offset");
+    animation = new QPropertyAnimation(effect, "offset", q);
     animation->setDuration(100);
     transition->addAnimation(animation);
-    animation = new QPropertyAnimation(effect, "blurRadius");
+    animation = new QPropertyAnimation(effect, "blurRadius", q);
     animation->setDuration(100);
     transition->addAnimation(animation);
 
@@ -82,10 +82,10 @@ void RaisedButtonPrivate::init()
     transition = new QEventTransition(q, QEvent::MouseButtonRelease);
     transition->setTargetState(normalState);
 
-    animation = new QPropertyAnimation(effect, "offset");
+    animation = new QPropertyAnimation(effect, "offset", q);
     transition->addAnimation(animation);
     animation->setDuration(100);
-    animation = new QPropertyAnimation(effect, "blurRadius");
+    animation = new QPropertyAnimation(effect, "blurRadius", q);
     animation->setDuration(100);
     transition->addAnimation(animation);
 
