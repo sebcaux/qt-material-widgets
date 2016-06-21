@@ -2,13 +2,14 @@
 #include "tabs_p.h"
 #include <QHBoxLayout>
 #include <QPainter>
-#include <QPropertyAnimation>
 #include "tabs_internal.h"
 #include "lib/ripple.h"
 #include "lib/style.h"
 
 TabsPrivate::TabsPrivate(Tabs *q)
     : q_ptr(q),
+      inkBar(new TabsInkBar(q)),
+      tabLayout(new QHBoxLayout),
       tab(-1),
       useThemeColors(true),
       showHalo(false),
@@ -20,9 +21,6 @@ void TabsPrivate::init()
 {
     Q_Q(Tabs);
 
-    inkBar = new TabsInkBar(q);
-
-    tabLayout = new QHBoxLayout;
     q->setLayout(tabLayout);
     tabLayout->setSpacing(0);
     tabLayout->setMargin(0);
