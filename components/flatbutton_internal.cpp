@@ -54,8 +54,8 @@ FlatButtonDelegate::FlatButtonDelegate(FlatButton *parent)
 
     QSequentialAnimationGroup *group = new QSequentialAnimationGroup(this);
 
-    QPropertyAnimation *grow = new QPropertyAnimation;
-    QPropertyAnimation *shrink = new QPropertyAnimation;
+    QPropertyAnimation *grow = new QPropertyAnimation(this);
+    QPropertyAnimation *shrink = new QPropertyAnimation(this);
 
     grow->setTargetObject(this);
     grow->setPropertyName("haloScaleFactor");
@@ -205,19 +205,19 @@ void FlatButtonDelegate::addTransition(QAbstractTransition *transition,
 
     QPropertyAnimation *animation;
 
-    animation = new QPropertyAnimation(this, "backgroundOpacity");
+    animation = new QPropertyAnimation(this, "backgroundOpacity", this);
     animation->setDuration(150);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(this, "backgroundColor");
+    animation = new QPropertyAnimation(this, "backgroundColor", this);
     animation->setDuration(150);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(this, "haloOpacity");
+    animation = new QPropertyAnimation(this, "haloOpacity", this);
     animation->setDuration(170);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(this, "haloSize");
+    animation = new QPropertyAnimation(this, "haloSize", this);
     animation->setDuration(350);
     animation->setEasingCurve(QEasingCurve::OutCubic);
     transition->addAnimation(animation);
