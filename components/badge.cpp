@@ -44,6 +44,24 @@ Badge::Badge(QWidget *parent)
     d_func()->init();
 }
 
+Badge::Badge(const QIcon &icon, QWidget *parent)
+    : QWidget(parent),
+      d_ptr(new BadgePrivate(this))
+{
+    d_func()->init();
+
+    setIcon(icon);
+}
+
+Badge::Badge(const QString &text, QWidget *parent)
+    : QWidget(parent),
+      d_ptr(new BadgePrivate(this))
+{
+    d_func()->init();
+
+    setText(text);
+}
+
 Badge::~Badge()
 {
 }
