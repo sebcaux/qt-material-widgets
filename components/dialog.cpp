@@ -75,15 +75,15 @@ void DialogPrivate::init()
 
     QPropertyAnimation *animation;
 
-    animation = new QPropertyAnimation(proxy, "opacity");
+    animation = new QPropertyAnimation(proxy, "opacity", q);
     animation->setDuration(280);
     machine->addDefaultAnimation(animation);
 
-    animation = new QPropertyAnimation(effect, "color");
+    animation = new QPropertyAnimation(effect, "color", q);
     animation->setDuration(280);
     machine->addDefaultAnimation(animation);
 
-    animation = new QPropertyAnimation(window, "offset");
+    animation = new QPropertyAnimation(window, "offset", q);
     animation->setDuration(280);
     animation->setEasingCurve(QEasingCurve::OutCirc);
     machine->addDefaultAnimation(animation);
