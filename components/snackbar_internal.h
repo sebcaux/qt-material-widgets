@@ -33,7 +33,7 @@ private:
     Q_DISABLE_COPY(SnackbarStateMachine)
 
     Snackbar *const snackbar;
-    QTimer           timer;
+    QTimer          _timer;
     qreal           _offset;
 };
 

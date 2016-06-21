@@ -7,6 +7,7 @@
 
 SnackbarPrivate::SnackbarPrivate(Snackbar *q)
     : q_ptr(q),
+      machine(0),
       duration(3000),
       boxWidth(300)
 {

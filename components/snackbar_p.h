@@ -18,13 +18,13 @@ public:
 
     void init();
 
-    Snackbar *const q_ptr;
+    Snackbar             *const q_ptr;
     SnackbarStateMachine *machine;
-    QColor backgroundColor;
-    QColor textColor;
-    QList<QString> messages;
-    int duration;
-    int boxWidth;
+    QColor                backgroundColor;
+    QColor                textColor;
+    QList<QString>        messages;
+    int                   duration;
+    int                   boxWidth;
 };
 
 #endif // SNACKBAR_P_H

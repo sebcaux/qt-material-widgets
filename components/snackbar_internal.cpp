@@ -9,7 +9,7 @@ SnackbarStateMachine::SnackbarStateMachine(Snackbar *parent)
       snackbar(parent),
       _offset(0)
 {
-    timer.setSingleShot(true);
+    _timer.setSingleShot(true);
 
     QState *hiddenState = new QState;
     QState *visibleState = new QState;
@@ -50,7 +50,7 @@ SnackbarStateMachine::SnackbarStateMachine(Snackbar *parent)
 
     QPropertyAnimation *animation;
 
-    animation = new QPropertyAnimation(this, "offset");
+    animation = new QPropertyAnimation(this, "offset", this);
     animation->setEasingCurve(QEasingCurve::OutCubic);
     animation->setDuration(400);
     addDefaultAnimation(animation);
@@ -59,8 +59,8 @@ SnackbarStateMachine::SnackbarStateMachine(Snackbar *parent)
     visibleState->assignProperty(this, "offset", 0);
     finalState->assignProperty(this, "offset", 1);
 
-    connect(&timer, SIGNAL(timeout()), this, SIGNAL(hideSnackbar()));
-    connect(this, SIGNAL(hideSnackbar()), &timer, SLOT(stop()));
+    connect(&_timer, SIGNAL(timeout()), this, SIGNAL(hideSnackbar()));
+    connect(this, SIGNAL(hideSnackbar()), &_timer, SLOT(stop()));
 }
 
 SnackbarStateMachine::~SnackbarStateMachine()
@@ -85,5 +85,5 @@ void SnackbarStateMachine::snackbarHidden()
 
 void SnackbarStateMachine::snackbarShown()
 {
-    timer.start(snackbar->autoHideDuration());
+    _timer.start(snackbar->autoHideDuration());
 }
