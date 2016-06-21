@@ -52,10 +52,10 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     transition = new QSignalTransition(this, SIGNAL(noFocusMouseEnter()));
     transition->setTargetState(_focusState);
 
-    animation = new QPropertyAnimation(thumb, "haloSize");
+    animation = new QPropertyAnimation(thumb, "haloSize", this);
     animation->setEasingCurve(QEasingCurve::InOutSine);
     transition->addAnimation(animation);
-    transition->addAnimation(new QPropertyAnimation(track, "fillColor"));
+    transition->addAnimation(new QPropertyAnimation(track, "fillColor", this));
     _inactiveState->addTransition(transition);
 
     // Show halo on focus in
@@ -63,10 +63,10 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     transition = new QEventTransition(parent, QEvent::FocusIn);
     transition->setTargetState(_focusState);
 
-    animation = new QPropertyAnimation(thumb, "haloSize");
+    animation = new QPropertyAnimation(thumb, "haloSize", this);
     animation->setEasingCurve(QEasingCurve::InOutSine);
     transition->addAnimation(animation);
-    transition->addAnimation(new QPropertyAnimation(track, "fillColor"));
+    transition->addAnimation(new QPropertyAnimation(track, "fillColor", this));
     _inactiveState->addTransition(transition);
 
     // Hide halo on focus out
@@ -74,10 +74,10 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     transition = new QEventTransition(parent, QEvent::FocusOut);
     transition->setTargetState(_inactiveState);
 
-    animation = new QPropertyAnimation(thumb, "haloSize");
+    animation = new QPropertyAnimation(thumb, "haloSize", this);
     animation->setEasingCurve(QEasingCurve::InOutSine);
     transition->addAnimation(animation);
-    transition->addAnimation(new QPropertyAnimation(track, "fillColor"));
+    transition->addAnimation(new QPropertyAnimation(track, "fillColor", this));
     _focusState->addTransition(transition);
 
     // Hide halo on mouse leave, except if widget has focus
@@ -85,10 +85,10 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     transition = new QSignalTransition(this, SIGNAL(noFocusMouseLeave()));
     transition->setTargetState(_inactiveState);
 
-    animation = new QPropertyAnimation(thumb, "haloSize");
+    animation = new QPropertyAnimation(thumb, "haloSize", this);
     animation->setEasingCurve(QEasingCurve::InOutSine);
     transition->addAnimation(animation);
-    transition->addAnimation(new QPropertyAnimation(track, "fillColor"));
+    transition->addAnimation(new QPropertyAnimation(track, "fillColor", this));
     _focusState->addTransition(transition);
 
     // Pulse in
@@ -96,7 +96,7 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     transition = new QSignalTransition(_pulseOutState, SIGNAL(propertiesAssigned()));
     transition->setTargetState(_pulseInState);
 
-    animation = new QPropertyAnimation(thumb, "haloSize");
+    animation = new QPropertyAnimation(thumb, "haloSize", this);
     animation->setEasingCurve(QEasingCurve::InOutSine);
     animation->setDuration(1000);
     transition->addAnimation(animation);
@@ -107,7 +107,7 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     transition = new QSignalTransition(_pulseInState, SIGNAL(propertiesAssigned()));
     transition->setTargetState(_pulseOutState);
 
-    animation = new QPropertyAnimation(thumb, "haloSize");
+    animation = new QPropertyAnimation(thumb, "haloSize", this);
     animation->setEasingCurve(QEasingCurve::InOutSine);
     animation->setDuration(1000);
     transition->addAnimation(animation);
@@ -117,11 +117,11 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
 
     transition = new QSignalTransition(parent, SIGNAL(sliderPressed()));
     transition->setTargetState(_slidingState);
-    animation = new QPropertyAnimation(thumb, "diameter");
+    animation = new QPropertyAnimation(thumb, "diameter", this);
     animation->setDuration(70);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(thumb, "haloSize");
+    animation = new QPropertyAnimation(thumb, "haloSize", this);
     animation->setEasingCurve(QEasingCurve::InOutSine);
     transition->addAnimation(animation);
     _focusState->addTransition(transition);
@@ -130,11 +130,11 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
 
     transition = new QSignalTransition(parent, SIGNAL(sliderReleased()));
     transition->setTargetState(_focusState);
-    animation = new QPropertyAnimation(thumb, "diameter");
+    animation = new QPropertyAnimation(thumb, "diameter", this);
     animation->setDuration(70);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(thumb, "haloSize");
+    animation = new QPropertyAnimation(thumb, "haloSize", this);
     animation->setEasingCurve(QEasingCurve::InOutSine);
     transition->addAnimation(animation);
     _slidingState->addTransition(transition);
@@ -149,19 +149,19 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     transition = new QSignalTransition(this, SIGNAL(changedFromMinimum()));
     transition->setTargetState(_normalState);
 
-    animation = new QPropertyAnimation(thumb, "fillColor");
+    animation = new QPropertyAnimation(thumb, "fillColor", this);
     animation->setDuration(200);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(thumb, "haloColor");
+    animation = new QPropertyAnimation(thumb, "haloColor", this);
     animation->setDuration(300);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(thumb, "borderColor");
+    animation = new QPropertyAnimation(thumb, "borderColor", this);
     animation->setDuration(200);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(thumb, "borderWidth");
+    animation = new QPropertyAnimation(thumb, "borderWidth", this);
     animation->setDuration(200);
     transition->addAnimation(animation);
 
@@ -170,19 +170,19 @@ SliderStateMachine::SliderStateMachine(Slider *parent,
     transition = new QSignalTransition(this, SIGNAL(changedToMinimum()));
     transition->setTargetState(_minState);
 
-    animation = new QPropertyAnimation(thumb, "fillColor");
+    animation = new QPropertyAnimation(thumb, "fillColor", this);
     animation->setDuration(200);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(thumb, "haloColor");
+    animation = new QPropertyAnimation(thumb, "haloColor", this);
     animation->setDuration(300);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(thumb, "borderColor");
+    animation = new QPropertyAnimation(thumb, "borderColor", this);
     animation->setDuration(200);
     transition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(thumb, "borderWidth");
+    animation = new QPropertyAnimation(thumb, "borderWidth", this);
     animation->setDuration(200);
     transition->addAnimation(animation);
 

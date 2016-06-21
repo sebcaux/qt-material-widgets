@@ -27,19 +27,19 @@ signals:
 private:
     Q_DISABLE_COPY(SliderStateMachine)
 
-    Slider *const slider;
+    Slider       *const slider;
     SliderTrack  *const _track;
     SliderThumb  *const _thumb;
-    QState *const _topState;
-    QState *const _fstState;
-    QState *const _inactiveState;
-    QState *const _focusState;
-    QState *const _slidingState;
-    QState *const _pulseOutState;
-    QState *const _pulseInState;
-    QState *const _sndState;
-    QState *const _minState;
-    QState *const _normalState;
+    QState       *const _topState;
+    QState       *const _fstState;
+    QState       *const _inactiveState;
+    QState       *const _focusState;
+    QState       *const _slidingState;
+    QState       *const _pulseOutState;
+    QState       *const _pulseInState;
+    QState       *const _sndState;
+    QState       *const _minState;
+    QState       *const _normalState;
 
 };
 
