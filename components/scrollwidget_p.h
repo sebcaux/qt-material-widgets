@@ -18,12 +18,12 @@ public:
 
     void init();
 
-    ScrollBar *const q_ptr;
-    ScrollBarStateMachine *machine;
-    QColor          backgroundColor;
-    QColor          sliderColor;
-    bool            hideOnMouseOut;
-    bool            useThemeColors;
+    ScrollBar             *const q_ptr;
+    ScrollBarStateMachine *const machine;
+    QColor                       backgroundColor;
+    QColor                       sliderColor;
+    bool                         hideOnMouseOut;
+    bool                         useThemeColors;
 };
 
 #endif // SCROLLWIDGET_P_H

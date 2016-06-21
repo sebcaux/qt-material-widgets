@@ -7,7 +7,7 @@
 
 ScrollBarPrivate::ScrollBarPrivate(ScrollBar *q)
     : q_ptr(q),
-      machine(0),
+      machine(new ScrollBarStateMachine(q)),
       hideOnMouseOut(true),
       useThemeColors(true)
 {
@@ -23,7 +23,6 @@ void ScrollBarPrivate::init()
 
     q->setMouseTracking(true);
 
-    machine = new ScrollBarStateMachine(q);
     machine->start();
 
     QCoreApplication::processEvents();

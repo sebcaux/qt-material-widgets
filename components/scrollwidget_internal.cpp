@@ -40,7 +40,7 @@ ScrollBarStateMachine::ScrollBarStateMachine(ScrollBar *parent)
 
     QPropertyAnimation *animation;
 
-    animation = new QPropertyAnimation(this, "opacity");
+    animation = new QPropertyAnimation(this, "opacity", this);
     animation->setDuration(340);
 
     addDefaultAnimation(animation);

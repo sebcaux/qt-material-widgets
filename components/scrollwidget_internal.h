@@ -23,7 +23,7 @@ private:
     Q_DISABLE_COPY(ScrollBarStateMachine)
 
     ScrollBar *const scrollBar;
-    qreal _opacity;
+    qreal            _opacity;
 };
 
 #endif // SCROLLBAR_INTERNAL_H
