@@ -18,8 +18,8 @@ public:
 
     void init();
 
-    CircularProgress *const q_ptr;
-    CircularProgressDelegate *delegate;
+    CircularProgress         *const q_ptr;
+    CircularProgressDelegate *const delegate;
     Material::ProgressType progressType;
     int    size;
     qreal  penWidth;

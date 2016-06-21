@@ -9,7 +9,7 @@
 
 CircularProgressPrivate::CircularProgressPrivate(CircularProgress *q)
     : q_ptr(q),
-      delegate(0),
+      delegate(new CircularProgressDelegate(q)),
       progressType(Material::IndeterminateProgress),
       size(64),
       penWidth(6.25),
@@ -24,8 +24,6 @@ CircularProgressPrivate::~CircularProgressPrivate()
 void CircularProgressPrivate::init()
 {
     Q_Q(CircularProgress);
-
-    delegate = new CircularProgressDelegate(q);
 
     QSizePolicy policy(QSizePolicy::MinimumExpanding,
                        QSizePolicy::MinimumExpanding);

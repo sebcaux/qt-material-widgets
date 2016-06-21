@@ -19,25 +19,27 @@ CheckBoxPrivate::~CheckBoxPrivate()
 
 void CheckBoxPrivate::init()
 {
+    Q_Q(CheckBox);
+
     QPropertyAnimation *animation;
 
-    animation = new QPropertyAnimation(checkedIcon, "iconSize");
+    animation = new QPropertyAnimation(checkedIcon, "iconSize", q);
     animation->setStartValue(0);
     animation->setEndValue(24);
     animation->setDuration(250);
     uncheckedTransition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(uncheckedIcon, "color");
+    animation = new QPropertyAnimation(uncheckedIcon, "color", q);
     animation->setDuration(250);
     uncheckedTransition->addAnimation(animation);
 
     //
 
-    animation = new QPropertyAnimation(uncheckedIcon, "color");
+    animation = new QPropertyAnimation(uncheckedIcon, "color", q);
     animation->setDuration(550);
     checkedTransition->addAnimation(animation);
 
-    animation = new QPropertyAnimation(checkedIcon, "opacity");
+    animation = new QPropertyAnimation(checkedIcon, "opacity", q);
     animation->setDuration(450);
     checkedTransition->addAnimation(animation);
 
