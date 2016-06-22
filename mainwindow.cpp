@@ -1,3 +1,47 @@
+#include "mainwindow.h"
+#include <QPainter>
+#include <QVBoxLayout>
+#include "components/flatbutton.h"
+#include "components/raisedbutton.h"
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+{
+    QVBoxLayout *layout = new QVBoxLayout;
+    QWidget *widget = new QWidget;
+
+    widget->setLayout(layout);
+    setCentralWidget(widget);
+
+//    FlatButton *button = new FlatButton;
+//    button->setText("Hello");
+//
+//    layout->addWidget(button);
+
+    RaisedButton *button;
+
+    button = new RaisedButton;
+    button->setText("Hello");
+
+    layout->addWidget(button);
+}
+
+MainWindow::~MainWindow()
+{
+}
+
+void MainWindow::paintEvent(QPaintEvent *event)
+{
+    Q_UNUSED(event)
+
+    QPainter painter(this);
+
+    painter.setPen(Qt::red);
+
+    painter.drawRect(rect());
+}
+
+/*
 #include <QApplication>
 #include <QMenu>
 #include <QMenuBar>
@@ -255,3 +299,4 @@ void MainWindow::_initMenu() const
     connect(components, SIGNAL(triggered(QAction *)), this, SLOT(showWidget(QAction *)));
     connect(exitAction, SIGNAL(triggered(bool)), qApp, SLOT(quit()));
 }
+*/

@@ -5,10 +5,10 @@
 #include <QSignalTransition>
 #include <QPropertyAnimation>
 #include <QPainter>
+#include <QDebug>
 #include <QStylePainter>
 #include <QStyleOption>
 #include <QMouseEvent>
-#include <QDebug>
 
 RaisedButtonPrivate::RaisedButtonPrivate(RaisedButton *q)
     : FlatButtonPrivate(q),
@@ -17,6 +17,7 @@ RaisedButtonPrivate::RaisedButtonPrivate(RaisedButton *q)
       pressedState(new QState),
       effect(new QGraphicsDropShadowEffect)
 {
+    qDebug() << "RaisedButtonPrivate";
 }
 
 RaisedButtonPrivate::~RaisedButtonPrivate()
@@ -100,6 +101,8 @@ void RaisedButtonPrivate::init()
 RaisedButton::RaisedButton(QWidget *parent)
     : FlatButton(*new RaisedButtonPrivate(this), parent)
 {
+    qDebug() << "RaisedButton::RaisedButton";
+
     d_func()->init();
 
     setMinimumHeight(42);

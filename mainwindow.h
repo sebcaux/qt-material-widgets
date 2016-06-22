@@ -3,6 +3,19 @@
 
 #include <QMainWindow>
 
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
+
+protected:
+    void paintEvent(QPaintEvent *event);
+};
+
+/*
 class About;
 class FlatButtonExamples;
 class RaisedButtonExamples;
@@ -58,5 +71,7 @@ private:
     About                *const _about;
     Snackbar *snackbar;
 };
+
+*/
 
 #endif // MAINWINDOW_H

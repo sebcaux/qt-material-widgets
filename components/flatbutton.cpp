@@ -11,8 +11,8 @@
 
 FlatButtonPrivate::FlatButtonPrivate(FlatButton *q)
     : q_ptr(q),
-      ripple(new RippleOverlay),
-      delegate(0),
+      ripple(new RippleOverlay), //new RippleOverlay(q)),
+      delegate(0), //new FlatButtonDelegate(q)),
       role(Material::Default),
       rippleStyle(Material::PositionedRipple),
       cornerRadius(3),
@@ -23,6 +23,7 @@ FlatButtonPrivate::FlatButtonPrivate(FlatButton *q)
       useFixedRippleRadius(false),
       fixedRippleRadius(64)
 {
+    qDebug() << "FlatButtonPrivate";
 }
 
 FlatButtonPrivate::~FlatButtonPrivate()
@@ -282,6 +283,8 @@ FlatButton::FlatButton(FlatButtonPrivate &d, QWidget *parent)
       d_ptr(&d)
 {
     d_func()->init();
+
+    qDebug() << "FlatButton::FlatButton";
 }
 
 void FlatButton::resizeEvent(QResizeEvent *event)
