@@ -158,7 +158,8 @@ HEADERS  += mainwindow.h \
     components/dialog_internal.h \
     lib/transparencyproxy.h \
     lib/transparencyproxy_p.h \
-    lib/transparencyproxy_internal.h
+    lib/transparencyproxy_internal.h \
+    components/drawer_p.h
 
 RESOURCES += \
     resources.qrc
