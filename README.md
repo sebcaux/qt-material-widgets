@@ -26,17 +26,16 @@
 - [ ] Drawer
 - [ ] Icon Menu
 - [ ] Menu
+- [ ] Search Field
 - [ ] Select Field
 
 #### Not started
 
 - [ ] Chips
 - [ ] Discrete Slider
-- [ ] Docs
 - [ ] Grid List
 - [ ] List
 - [ ] Paper
-- [ ] Search Field
 - [ ] Stepper
 - [ ] Table
 - [ ] Toolbar
