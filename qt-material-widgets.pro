@@ -72,7 +72,10 @@ SOURCES += main.cpp\
     components/scrollwidget_internal.cpp \
     components/dialog_internal.cpp \
     lib/transparencyproxy.cpp \
-    lib/transparencyproxy_internal.cpp
+    lib/transparencyproxy_internal.cpp \
+    components/drawer_internal.cpp \
+    lib/testrippleoverlay.cpp \
+    lib/overlaywidget.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -159,7 +162,10 @@ HEADERS  += mainwindow.h \
     lib/transparencyproxy.h \
     lib/transparencyproxy_p.h \
     lib/transparencyproxy_internal.h \
-    components/drawer_p.h
+    components/drawer_p.h \
+    components/drawer_internal.h \
+    lib/testrippleoverlay.h \
+    lib/overlaywidget.h
 
 RESOURCES += \
     resources.qrc

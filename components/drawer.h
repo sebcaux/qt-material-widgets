@@ -1,9 +1,12 @@
 #ifndef DRAWER_H
 #define DRAWER_H
 
-#include <QWidget>
+#include "lib/overlaywidget.h"
 
-class Drawer : public QWidget
+class DrawerPrivate;
+class DrawerStateMachine;
+
+class Drawer : public OverlayWidget
 {
     Q_OBJECT
 
@@ -11,11 +14,29 @@ public:
     explicit Drawer(QWidget *parent = 0);
     ~Drawer();
 
-    Drawer *const q_ptr;
+    void setDrawerWidth(int width);
+    int drawerWidth() const;
+
+    void setDrawerLayout(QLayout *layout);
+    QLayout *drawerLayout() const;
+
+protected slots:
+    void openDrawer();
+    void closeDrawer();
+
+protected:
+    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+
+    QRect overlayGeometry() const;
+
+    const QScopedPointer<DrawerPrivate> d_ptr;
 
 private:
     Q_DISABLE_COPY(Drawer)
     Q_DECLARE_PRIVATE(Drawer)
+
+//    friend class DrawerStateMachine;
 };
 
 #endif // DRAWER_H

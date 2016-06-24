@@ -3,6 +3,8 @@
 #include <QVBoxLayout>
 #include "components/flatbutton.h"
 #include "components/raisedbutton.h"
+#include "components/drawer.h"
+#include "lib/testrippleoverlay.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,10 +22,39 @@ MainWindow::MainWindow(QWidget *parent)
 
     RaisedButton *button;
 
+    //RaisedButton btn2(*button);
+
     button = new RaisedButton;
     button->setText("Hello");
 
     layout->addWidget(button);
+
+    Drawer *drawer = new Drawer;
+
+    connect(button, SIGNAL(clicked(bool)), drawer, SLOT(openDrawer()));
+
+    drawer->setParent(this);
+
+    QPushButton *btn1 = new QPushButton;
+    btn1->setText("Hello");
+
+    connect(btn1, SIGNAL(clicked(bool)), drawer, SLOT(openDrawer()));
+
+    QPushButton *btn2 = new QPushButton;
+    btn2->setText("This is a button");
+
+    connect(btn2, SIGNAL(clicked(bool)), drawer, SLOT(closeDrawer()));
+
+    layout = new QVBoxLayout;
+    layout->addWidget(btn1);
+    layout->addWidget(btn2);
+    layout->addStretch();
+
+    drawer->setDrawerLayout(layout);
+
+    //TestRippleOverlay *overlay = new TestRippleOverlay;
+    //overlay->setParent(this);
+
 }
 
 MainWindow::~MainWindow()
@@ -38,7 +69,7 @@ void MainWindow::paintEvent(QPaintEvent *event)
 
     painter.setPen(Qt::red);
 
-    painter.drawRect(rect());
+//    painter.drawRect(rect());
 }
 
 /*

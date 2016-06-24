@@ -1,9 +1,10 @@
 #ifndef DRAWER_P_H
 #define DRAWER_P_H
 
-#include <QtGlobal>
+#include <QObject>
 
 class Drawer;
+class DrawerStateMachine;
 
 class DrawerPrivate
 {
@@ -12,6 +13,11 @@ class DrawerPrivate
 
 public:
     DrawerPrivate(Drawer *q);
+
+    Drawer             *const q_ptr;
+    DrawerStateMachine *const stateMachine;
+    QWidget            *const window;
+    int                       width;
 };
 
 #endif // DRAWER_P_H
