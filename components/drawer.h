@@ -28,15 +28,13 @@ protected:
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
-    QRect overlayGeometry() const;
+    QRect overlayGeometry() const Q_DECL_OVERRIDE;
 
     const QScopedPointer<DrawerPrivate> d_ptr;
 
 private:
     Q_DISABLE_COPY(Drawer)
     Q_DECLARE_PRIVATE(Drawer)
-
-//    friend class DrawerStateMachine;
 };
 
 #endif // DRAWER_H

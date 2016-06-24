@@ -40,7 +40,7 @@ void Drawer::setDrawerWidth(int width)
     Q_D(Drawer);
 
     d->width = width;
-    d->stateMachine->assignProperties();
+    d->stateMachine->updatePropertyAssignments();
     setFixedWidth(width+16);
 }
 
@@ -84,8 +84,9 @@ bool Drawer::eventFilter(QObject *obj, QEvent *event)
     const QEvent::Type type = event->type();
 
     if (QEvent::Move == type || QEvent::Resize == type) {
-        if (layout() && 16 != layout()->contentsMargins().right()) {
-            layout()->setContentsMargins(0, 0, 16, 0);
+        QLayout *t = layout();
+        if (t && 16 != t->contentsMargins().right()) {
+            t->setContentsMargins(0, 0, 16, 0);
         }
     }
     return OverlayWidget::eventFilter(obj, event);

@@ -18,7 +18,7 @@ public:
     void setOffset(int offset);
     inline int offset() const { return m_offset; }
 
-    void assignProperties();
+    void updatePropertyAssignments();
 
 signals:
     void enterOpenedState();

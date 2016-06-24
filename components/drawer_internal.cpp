@@ -37,7 +37,7 @@ DrawerStateMachine::DrawerStateMachine(Drawer *drawer)
     animation->setEasingCurve(QEasingCurve::InCirc);
     transition->addAnimation(animation);
 
-    assignProperties();
+    updatePropertyAssignments();
 }
 
 DrawerStateMachine::~DrawerStateMachine()
@@ -54,7 +54,7 @@ void DrawerStateMachine::setOffset(int offset)
     }
 }
 
-void DrawerStateMachine::assignProperties()
+void DrawerStateMachine::updatePropertyAssignments()
 {
     m_closedState->assignProperty(this, "offset", -(m_drawer->width()+32));
     m_openState->assignProperty(this, "offset", 0);
