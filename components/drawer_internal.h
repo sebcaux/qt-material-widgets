@@ -1,0 +1,4 @@
+#ifndef DRAWER_INTERNAL_H
+#define DRAWER_INTERNAL_H
+
+#endif // DRAWER_INTERNAL_H

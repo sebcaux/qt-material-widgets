@@ -9,6 +9,7 @@
 - [x] Check Box
 - [x] Circular Progress
 - [x] Dialog
+- [x] Drawer
 - [x] Floating Action Button
 - [x] Flat Button
 - [x] Icon Button
@@ -23,7 +24,6 @@
 - [x] Toggle
 - [ ] App Bar
 - [ ] Divider
-- [ ] Drawer
 - [ ] Icon Menu
 - [ ] Menu
 - [ ] Search Field

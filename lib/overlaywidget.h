@@ -1,0 +1,4 @@
+#ifndef OVERLAYWIDGET_H
+#define OVERLAYWIDGET_H
+
+#endif // OVERLAYWIDGET_H
