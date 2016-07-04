@@ -46,9 +46,13 @@ Menu::Menu(QWidget *parent)
     layout->setMargin(0);
     layout->setSpacing(0);
 
-    QSizePolicy policy;
-    policy.setVerticalPolicy(QSizePolicy::Maximum);
-    setSizePolicy(policy);
+    //QSizePolicy policy;
+    //policy.setVerticalPolicy(QSizePolicy::Maximum);
+    //setSizePolicy(policy);
+
+//    QSizePolicy policy(QSizePolicy::MinimumExpanding,
+//                       QSizePolicy::MinimumExpanding);
+//    setSizePolicy(policy);
 
     //QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
     //effect->setBlurRadius(9);
@@ -63,7 +67,7 @@ Menu::~Menu()
 
 void Menu::addMenuItem(MenuItem *item)
 {
-    _items.push_back(item);
+    m_items.push_back(item);
     layout()->addWidget(item);
 }
 
@@ -74,8 +78,8 @@ void Menu::addMenuItem(const QString &text)
 
 void Menu::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event)
+
     QPainter painter(this);
     painter.fillRect(rect(), Qt::white);
-
-    QWidget::paintEvent(event);
 }

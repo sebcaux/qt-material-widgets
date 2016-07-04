@@ -5,6 +5,7 @@
 #include <QPropertyAnimation>
 #include <QSequentialAnimationGroup>
 #include <QFocusEvent>
+#include <QDebug>
 #include "flatbutton.h"
 
 FlatButtonDelegate::FlatButtonDelegate(FlatButton *parent)
@@ -150,11 +151,19 @@ void FlatButtonDelegate::updatePalette()
     palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledColor);
     button->setPalette(palette);
 
-    _normalState->assignProperty(this, "backgroundOpacity", 0);
+    qreal baseOpacity;
+
+    if (button->isCheckable() && button->isChecked()) {
+        baseOpacity = button->peakOpacity();
+    } else {
+        baseOpacity = 0;
+    }
+
+    _normalState->assignProperty(this, "backgroundOpacity", baseOpacity);
     _normalState->assignProperty(this, "backgroundColor", bgColor);
     _normalState->assignProperty(this, "haloOpacity", 0);
 
-    _normalFocusedState->assignProperty(this, "backgroundOpacity", 0);
+    _normalFocusedState->assignProperty(this, "backgroundOpacity", baseOpacity);
     _normalFocusedState->assignProperty(this, "backgroundColor", bgColor);
     _normalFocusedState->assignProperty(this, "haloOpacity", button->peakOpacity());
 
@@ -177,6 +186,9 @@ bool FlatButtonDelegate::eventFilter(QObject *watched, QEvent *event)
             emit pressed();
             return true;
         }
+    }
+    if (button->isCheckable()) {
+        updatePalette();
     }
     return QStateMachine::eventFilter(watched, event);
 }

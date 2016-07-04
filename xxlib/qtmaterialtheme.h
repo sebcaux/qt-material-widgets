@@ -1,14 +1,36 @@
-#ifndef THEME_H
-#define THEME_H
+#ifndef QTMATERIALTHEME_H
+#define QTMATERIALTHEME_H
 
 #include <QObject>
-#include <QHash>
-#include <QColor>
 #include <QScopedPointer>
+#include <QColor>
 
-namespace Material
+namespace XXMaterial
 {
-    enum IconPlacement {
+    enum ButtonPreset {
+        FlatPreset,
+        CheckablePreset
+    };
+
+    enum RippleStyle {
+        CenteredRipple,
+        PositionedRipple,
+        NoRipple
+    };
+
+    enum OverlayStyle {
+        NoOverlay,
+        TintedOverlay,
+        GrayOverlay
+    };
+
+    enum Role {
+        Default,
+        Primary,
+        Secondary
+    };
+
+    enum ButtonIconPlacement {
         LeftIcon,
         RightIcon
     };
@@ -22,18 +44,6 @@ namespace Material
         ImageAvatar,
         IconAvatar,
         LetterAvatar
-    };
-
-    enum RippleStyle {
-        CenteredRipple,
-        PositionedRipple,
-        NoRipple
-    };
-
-    enum Role {
-        Default,
-        Primary,
-        Secondary
     };
 
     enum Color {
@@ -305,27 +315,27 @@ namespace Material
     };
 }
 
-class ThemePrivate;
+class QtMaterialThemePrivate;
 
-class Theme : public QObject
+class QtMaterialTheme : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit Theme(QObject *parent = 0);
-    ~Theme();
+    explicit QtMaterialTheme(QObject *parent = 0);
+    ~QtMaterialTheme();
 
     QColor getColor(const QString &key) const;
 
     void setColor(const QString &key, const QColor &color);
-    void setColor(const QString &key, Material::Color color);
+    void setColor(const QString &key, XXMaterial::Color color);
 
 protected:
-    const QScopedPointer<ThemePrivate> d_ptr;
+    const QScopedPointer<QtMaterialThemePrivate> d_ptr;
 
 private:
-    Q_DISABLE_COPY(Theme)
-    Q_DECLARE_PRIVATE(Theme)
+    Q_DISABLE_COPY(QtMaterialTheme)
+    Q_DECLARE_PRIVATE(QtMaterialTheme)
 };
 
-#endif // THEME_H
+#endif // QTMATERIALTHEME_H

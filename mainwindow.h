@@ -13,6 +13,9 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event);
+
+private:
+    void _initMenu() const;
 };
 
 /*

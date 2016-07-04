@@ -75,7 +75,19 @@ SOURCES += main.cpp\
     lib/transparencyproxy_internal.cpp \
     components/drawer_internal.cpp \
     lib/testrippleoverlay.cpp \
-    lib/overlaywidget.cpp
+    lib/overlaywidget.cpp \
+    lib/sizeproxy.cpp \
+    components/collapsiblemenu.cpp \
+    components/appmenu.cpp \
+    xx/qtmaterialflatbutton.cpp \
+    xxlib/qtmaterialrippleoverlay.cpp \
+    xxlib/qtmaterialripple.cpp \
+    xxlib/qtmaterialoverlaywidget.cpp \
+    lib/sizeproxywidget.cpp \
+    xx/qtmaterialflatbutton_internal.cpp \
+    xxlib/qtmaterialstyle.cpp \
+    xxlib/qtmaterialtheme.cpp \
+    yy/flatbuttonsettingseditor.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -165,7 +177,22 @@ HEADERS  += mainwindow.h \
     components/drawer_p.h \
     components/drawer_internal.h \
     lib/testrippleoverlay.h \
-    lib/overlaywidget.h
+    lib/overlaywidget.h \
+    lib/sizeproxy.h \
+    components/collapsiblemenu.h \
+    components/appmenu.h \
+    xx/qtmaterialflatbutton.h \
+    xx/qtmaterialflatbutton_p.h \
+    xxlib/qtmaterialrippleoverlay.h \
+    xxlib/qtmaterialripple.h \
+    xxlib/qtmaterialoverlaywidget.h \
+    xxlib/qtmaterialtheme.h \
+    lib/sizeproxywidget.h \
+    xx/qtmaterialflatbutton_internal.h \
+    xxlib/qtmaterialstyle.h \
+    xxlib/qtmaterialstyle_p.h \
+    xxlib/qtmaterialtheme_p.h \
+    yy/flatbuttonsettingseditor.h
 
 RESOURCES += \
     resources.qrc

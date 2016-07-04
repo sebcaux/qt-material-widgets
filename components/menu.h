@@ -13,7 +13,7 @@ public:
     explicit MenuItem(const QString &text, QWidget *parent = 0);
     ~MenuItem();
 
-    QSize sizeHint() const;
+    QSize sizeHint() const Q_DECL_OVERRIDE;
 };
 
 class Menu : public QWidget
@@ -27,13 +27,13 @@ public:
     void addMenuItem(MenuItem *item);
     void addMenuItem(const QString &text);
 
-    inline int itemCount() const { return _items.count(); }
+    inline int itemCount() const { return m_items.count(); }
 
 protected:
-    void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    QList<MenuItem *> _items;
+    QList<MenuItem *> m_items;
 };
 
 #endif // MENU_H

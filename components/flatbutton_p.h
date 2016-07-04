@@ -25,6 +25,7 @@ public:
     FlatButtonDelegate         *delegate;
     Material::Role              role;
     Material::RippleStyle       rippleStyle;
+    Material::IconPlacement     iconPlacement;
     qreal                       cornerRadius;
     Qt::BGMode                  bgMode;
     QColor                      textColor;

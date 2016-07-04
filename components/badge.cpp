@@ -193,8 +193,7 @@ void Badge::setText(const QString &text)
         d->icon = QIcon();
     }
 
-    QFontMetrics fm = fontMetrics();
-    d->size = fm.size(Qt::TextShowMnemonic, text);
+    d->size = fontMetrics().size(Qt::TextShowMnemonic, text);
 
     update();
 }

@@ -7,12 +7,6 @@
 
 class FlatButtonPrivate;
 
-/*
- * @TODO: implement checkable behavior
- *
- * @TODO: set default minimum height?
- */
-
 class FlatButton : public QPushButton
 {
     Q_OBJECT
@@ -31,6 +25,8 @@ public:
     explicit FlatButton(const QString &text, QWidget *parent = 0);
     ~FlatButton();
 
+    QSize sizeHint() const Q_DECL_OVERRIDE;
+
     void setHasFixedRippleRadius(bool value);
     bool hasFixedRippleRadius() const;
 
@@ -47,6 +43,9 @@ public:
 
     void setRippleStyle(Material::RippleStyle style);
     Material::RippleStyle rippleStyle() const;
+
+    void setIconPlacement(Material::IconPlacement placement);
+    Material::IconPlacement iconPlacement() const;
 
     void setCornerRadius(qreal radius);
     qreal cornerRadius() const;

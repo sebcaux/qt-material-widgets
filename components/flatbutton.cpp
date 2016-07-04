@@ -15,6 +15,7 @@ FlatButtonPrivate::FlatButtonPrivate(FlatButton *q)
       delegate(0), //new FlatButtonDelegate(q)),
       role(Material::Default),
       rippleStyle(Material::PositionedRipple),
+      iconPlacement(Material::LeftIcon),
       cornerRadius(3),
       bgMode(Qt::TransparentMode),
       useThemeColors(true),
@@ -72,6 +73,22 @@ FlatButton::~FlatButton()
 {
 }
 
+QSize FlatButton::sizeHint() const
+{
+    ensurePolished();
+
+    QSize size = fontMetrics().size(Qt::TextSingleLine, text());
+
+    int h = qMax(size.height(), iconSize().height());
+    int w = size.width();
+
+    if (!icon().isNull()) {
+        w += iconSize().width()+12;
+    }
+
+    return QSize(20+w, 20+h);
+}
+
 void FlatButton::setHasFixedRippleRadius(bool value)
 {
     Q_D(FlatButton);
@@ -106,6 +123,21 @@ Material::RippleStyle FlatButton::rippleStyle() const
     Q_D(const FlatButton);
 
     return d->rippleStyle;
+}
+
+void FlatButton::setIconPlacement(Material::IconPlacement placement)
+{
+    Q_D(FlatButton);
+
+    d->iconPlacement = placement;
+    update();
+}
+
+Material::IconPlacement FlatButton::iconPlacement() const
+{
+    Q_D(const FlatButton);
+
+    return d->iconPlacement;
 }
 
 void FlatButton::setCornerRadius(qreal radius)
@@ -332,6 +364,40 @@ void FlatButton::paintEvent(QPaintEvent *event)
 
     paintHalo(&painter);
 
+    //
+
+    painter.setPen(textColor());
+    painter.setOpacity(1);
+
+    if (icon().isNull())
+    {
+        painter.drawText(rect(), Qt::AlignCenter, text());
+    }
+    else
+    {
+        QSize textSize(fontMetrics().size(Qt::TextSingleLine, text()));
+
+        QSize base(size()-textSize);
+
+        const int pad = 12;
+        const int iw = iconSize().width() + pad;
+
+        QPoint pos((base.width()-iw)/2, 0);
+
+        QRect textGeometry(pos + QPoint(0, base.height()/2), textSize);
+        QRect iconGeometry(pos + QPoint(0, (height()-iconSize().height())/2), iconSize());
+
+        if (Material::LeftIcon == d->iconPlacement) {
+            textGeometry.translate(iw, 0);
+        } else {
+            iconGeometry.translate(textSize.width() + pad, 0);
+        }
+
+        painter.drawText(textGeometry, Qt::AlignCenter, text());
+        icon().paint(&painter, iconGeometry);
+    }
+
+    /*
     QStylePainter style(this);
 
     QStyleOptionButton option;
@@ -340,6 +406,7 @@ void FlatButton::paintEvent(QPaintEvent *event)
 
     style.setOpacity(1);
     style.drawControl(QStyle::CE_PushButtonLabel, option);
+    */
 
 #ifdef DEBUG_LAYOUT
     QPainter debug(this);
@@ -356,7 +423,7 @@ void FlatButton::mousePressEvent(QMouseEvent *event)
     Q_D(FlatButton);
 
     if (Material::NoRipple == d->rippleStyle) {
-        return;
+        return QPushButton::mousePressEvent(event);
     }
 
     Ripple *ripple = new Ripple(Material::CenteredRipple == d->rippleStyle
