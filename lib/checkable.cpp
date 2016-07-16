@@ -6,9 +6,10 @@
 #include <QSignalTransition>
 #include <QEventTransition>
 #include <QApplication>
+#include <QFontDatabase>
 #include <QDebug>
 #include "lib/rippleoverlay.h"
-#include "lib/style.h"
+#include "xxlib/qtmaterialstyle.h"
 #include "lib/ripple.h"
 
 CheckablePrivate::CheckablePrivate(Checkable *q)
@@ -40,9 +41,15 @@ void CheckablePrivate::init()
     uncheckedIcon->setParent(q);
     checkedIcon->setParent(q);
 
-    QFont f(q->font());
-    f.setPointSizeF(11);
-    q->setFont(f);
+    //QFont f(q->font());
+    //f.setPointSizeF(11);
+    //q->setFont(f);
+
+    q->setStyle(&QtMaterialStyle::instance());
+
+    QFontDatabase db;
+    QFont font(db.font("Roboto", "Medium", 11));
+    q->setFont(font);
 
     //
 
@@ -135,7 +142,7 @@ QColor Checkable::checkedColor() const
     Q_D(const Checkable);
 
     if (d->useThemeColors || !d->checkedColor.isValid()) {
-        return Style::instance().themeColor("primary1");
+        return QtMaterialStyle::instance().themeColor("primary1");
     } else {
         return d->checkedColor;
     }
@@ -154,7 +161,7 @@ QColor Checkable::uncheckedColor() const
     Q_D(const Checkable);
 
     if (d->useThemeColors || !d->uncheckedColor.isValid()) {
-        return Style::instance().themeColor("text");
+        return QtMaterialStyle::instance().themeColor("text");
     } else {
         return d->uncheckedColor;
     }
@@ -173,7 +180,7 @@ QColor Checkable::textColor() const
     Q_D(const Checkable);
 
     if (d->useThemeColors || !d->textColor.isValid()) {
-        return Style::instance().themeColor("text");
+        return QtMaterialStyle::instance().themeColor("text");
     } else {
         return d->textColor;
     }
@@ -194,7 +201,7 @@ QColor Checkable::disabledColor() const
     if (d->useThemeColors || !d->disabledColor.isValid()) {
         // Transparency will not work here, since we use this color to
         // tint the icon using a QGraphicsColorizeEffect
-        return Style::instance().themeColor("accent3");
+        return QtMaterialStyle::instance().themeColor("accent3");
     } else {
         return d->disabledColor;
     }
@@ -231,13 +238,16 @@ QIcon Checkable::uncheckedIcon() const
 QSize Checkable::sizeHint() const
 {
     QString s(text());
+    //if (s.isEmpty())
+    //    return QSize(32, 32);
     if (s.isEmpty())
-        return QSize(32, 32);
+        return QSize(40, 40);
 
     QFontMetrics fm = fontMetrics();
     QSize sz = fm.size(Qt::TextShowMnemonic, s);
 
-    return QSize(sz.width() + 44, 32);
+    //return QSize(sz.width() + 44, 32);
+    return QSize(sz.width() + 52, 40);
 }
 
 Checkable::Checkable(CheckablePrivate &d, QWidget *parent)
@@ -280,9 +290,13 @@ void Checkable::mousePressEvent(QMouseEvent *event)
 
     Q_D(Checkable);
 
-    Ripple *ripple = new Ripple(QPoint(24, 24));
-    ripple->setRadiusEndValue(20);
+    //Ripple *ripple = new Ripple(QPoint(28, 28));
+    Ripple *ripple = new Ripple(QPoint(width()-14, 28));
+    ripple->setRadiusEndValue(22);
     ripple->setColor(isChecked() ? checkedColor() : uncheckedColor());
+    if (isChecked()) {
+        ripple->setOpacityStartValue(1);
+    }
     d->ripple->addRipple(ripple);
 
     setChecked(!isChecked());
@@ -298,7 +312,11 @@ void Checkable::paintEvent(QPaintEvent *event)
     pen.setColor(isEnabled() ? textColor() : disabledColor());
     painter.setPen(pen);
 
-    painter.drawText(44, 21, text());
+    /*
+    painter.drawText(44, 25, text());
+    */
+
+    painter.drawText(0, 25, text());
 }
 
 void Checkable::assignProperties()

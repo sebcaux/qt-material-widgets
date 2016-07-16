@@ -5,10 +5,6 @@
 
 class ScrollBarPrivate;
 
-/*
- * @TODO: Rename to ScrollBar
- */
-
 class ScrollBar : public QScrollBar
 {
     Q_OBJECT
@@ -19,6 +15,9 @@ public:
 
     void setUseThemeColors(bool value);
     bool useThemeColors() const;
+
+    void setCanvasColor(const QColor &color);
+    QColor canvasColor() const;
 
     void setBackgroundColor(const QColor &color);
     QColor backgroundColor() const;
@@ -32,11 +31,15 @@ public:
     QSize sizeHint() const Q_DECL_OVERRIDE;
 
 protected:
+    //void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    //void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
     const QScopedPointer<ScrollBarPrivate> d_ptr;
 
-private:
+//private:
+//    QMouseEvent translateEventGeometry(QMouseEvent *event);
+
     Q_DISABLE_COPY(ScrollBar)
     Q_DECLARE_PRIVATE(ScrollBar)
 };

@@ -53,7 +53,7 @@ bool IconButton::event(QEvent *event)
     case QEvent::ParentChange: {
         QWidget *widget;
         if ((widget = parentWidget())) {
-            d->ripple->setParent(parentWidget());
+            d->ripple->setParent(widget);
         }
         break;
     }

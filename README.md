@@ -2,7 +2,7 @@
 
 ### Roadmap
 
-#### Work in progress
+#### Complete
 
 - [x] Avatar
 - [x] Badge
@@ -13,29 +13,30 @@
 - [x] Floating Action Button
 - [x] Flat Button
 - [x] Icon Button
+- [X] Icon Menu
+- [X] Menu
 - [x] Progress
 - [x] Radio Button
 - [x] Raised Button
 - [x] Scroll Bar
+- [X] Select Field
 - [x] Slider
 - [x] Snackbar
 - [x] Tabs
 - [x] Text Field
 - [x] Toggle
+
+#### To-Do
+
 - [ ] App Bar
-- [ ] Divider
-- [ ] Icon Menu
-- [ ] Menu
-- [ ] Search Field
-- [ ] Select Field
-
-#### Not started
-
+- [ ] Autocomplete
 - [ ] Chips
 - [ ] Discrete Slider
+- [ ] Divider
 - [ ] Grid List
 - [ ] List
 - [ ] Paper
+- [ ] Search Field
 - [ ] Stepper
 - [ ] Table
 - [ ] Toolbar

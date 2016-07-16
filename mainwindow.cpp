@@ -18,13 +18,282 @@
 #include "xx/qtmaterialflatbutton.h"
 #include "lib/sizeproxywidget.h"
 #include "yy/flatbuttonsettingseditor.h"
+#include "yy/raisedbuttonsettingseditor.h"
+#include "yy/fabsettingseditor.h"
+#include "components/raisedbutton.h"
+#include "xx/qtmaterialfab.h"
+#include "ui_flatbuttonsettingsform.h"
+#include "ui_fabsettingsform.h"
+#include "yy/avatarsettingseditor.h"
+#include "yy/badgesettingseditor.h"
+#include "components/menuplus.h"
+#include "components/menuplusproxy.h"
+//#include "components/iconbutton.h"
+#include "xx/qtmaterialiconbutton.h"
+//#include "components/iconmenuplus.h"
+#include "xx/qtmaterialiconmenu.h"
+#include "components/textfield.h"
+#include "xx/qtmaterialmenuitem.h"
+//#include "components/selectfieldplus.h"
+#include "xx/qtmaterialselectfield.h"
+#include "yy/selectfieldsettingseditor.h"
+#include "yy/iconmenusettingseditor.h"
+#include "yy/checkboxsettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
+    : QMainWindow(parent),
+      _menu(new MenuPlus)
 {
-    FlatButtonSettingsEditor *fb = new FlatButtonSettingsEditor;
-    setCentralWidget(fb);
+    CheckBoxSettingsEditor *editor = new CheckBoxSettingsEditor;
+    setCentralWidget(editor);
 
+    return;
+
+    //IconMenuSettingsEditor *editor = new IconMenuSettingsEditor;
+    //setCentralWidget(editor);
+
+    //return;
+
+    //SelectFieldSettingsEditor *editor = new SelectFieldSettingsEditor;
+    //setCentralWidget(editor);
+
+    //return;
+
+    //FlatButtonSettingsEditor *fb = new FlatButtonSettingsEditor;
+    //setCentralWidget(fb);
+
+    //RaisedButtonSettingsEditor *fb = new RaisedButtonSettingsEditor;
+    //setCentralWidget(fb);
+
+    //return;
+
+    //FloatingActionButtonSettingsEditor *fb = new FloatingActionButtonSettingsEditor;
+    //setCentralWidget(fb);
+
+    //return;
+
+    //AvatarSettingsEditor *fb = new AvatarSettingsEditor;
+    //setCentralWidget(fb);
+
+    //BadgeSettingsEditor *ed = new BadgeSettingsEditor;
+    //setCentralWidget(ed);
+
+
+    _menu->addMenuItem("Menu item #1");
+    _menu->addMenuItem("Menu item #2");
+    _menu->addMenuItem("Menu item #3");
+    //menu->setFixedSize(200, 250);
+    _menu->setMaximumHeight(250);
+    _menu->setMinimumWidth(300);
+
+    QWidget *widget = new QWidget;
+    QVBoxLayout *layout = new QVBoxLayout;
+    widget->setLayout(layout);
+    setCentralWidget(widget);
+
+    widget->setStyleSheet("QWidget { background: white; }");
+
+    //QtMaterialIconButton *btn = new QtMaterialIconButton(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+    //layout->addWidget(btn);
+
+    layout->addStretch();
+
+    QtMaterialIconMenu *im = new QtMaterialIconMenu(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+    layout->addWidget(im);
+    layout->setAlignment(im, Qt::AlignCenter);
+
+    QtMaterialSelectField *sfp = new QtMaterialSelectField;
+    //sfp->setBackgroundColor(Qt::white);
+    layout->addWidget(sfp);
+    layout->setAlignment(sfp, Qt::AlignCenter);
+
+    {
+        sfp->addItem("C");
+        sfp->addItem("C++");
+        sfp->addItem("Haskell");
+        sfp->addItem("JavaScript");
+        sfp->addItem("ECMAScript");
+        sfp->addItem("OCaml");
+        sfp->addItem("Python");
+        sfp->addItem("F#");
+        sfp->addItem("Clojure");
+        sfp->addItem("Java");
+    }
+
+    layout->addStretch();
+
+    //layout->setAlignment(sfp, Qt::AlignCenter);
+
+    //TextField *tf = new TextField;
+    //tf->setBackgroundColor(Qt::white);
+    //tf->setLabel("This is label");
+    //tf->setPlaceholderText("What is this");
+    //layout->addWidget(tf);
+
+    //layout->setAlignment(tf, Qt::AlignCenter);
+
+    {
+        QtMaterialMenuItem *b;
+
+        b = new QtMaterialMenuItem;
+        b->setText("Hello 123");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Select everything");
+        b->setIcon(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Run something");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Download internet");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Done");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Run something");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Download internet");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Done");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Select everything");
+        b->setIcon(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Run something");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Download internet");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Done");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Run something");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Download internet");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Done");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Select everything");
+        b->setIcon(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Run something");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Download internet");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Done");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Run something");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Download internet");
+        im->addMenuItem(b);
+
+        b = new QtMaterialMenuItem;
+        b->setText("Done");
+        im->addMenuItem(b);
+    }
+
+
+    /*
+    //layout->addWidget(_menu);
+
+    layout->setAlignment(im, Qt::AlignCenter);
+
+    //
+
+    QSlider *slider1 = new QSlider(Qt::Horizontal);
+    slider1->setParent(this);
+    slider1->setGeometry(10, 10, 400, 20);
+    slider1->setRange(0, 100);
+    slider1->setValue(100);
+
+    QSlider *slider2 = new QSlider(Qt::Horizontal);
+    slider2->setParent(this);
+    slider2->setGeometry(10, 30, 400, 20);
+    slider2->setRange(0, 100);
+    slider2->setValue(100);
+
+    QSlider *slider3 = new QSlider(Qt::Horizontal);
+    slider3->setParent(this);
+    slider3->setGeometry(10, 50, 400, 20);
+    slider3->setRange(0, 100);
+    slider3->setValue(100);
+
+    QSlider *slider4 = new QSlider(Qt::Horizontal);
+    slider4->setParent(this);
+    slider4->setGeometry(10, 70, 400, 20);
+    slider4->setRange(0, 100);
+    slider4->setValue(100);
+
+    QPushButton *btn1 = new QPushButton("1");
+    btn1->setGeometry(10, 90, 100, 20);
+    btn1->setParent(this);
+
+    QPushButton *btn2 = new QPushButton("2");
+    btn2->setGeometry(10, 110, 100, 20);
+    btn2->setParent(this);
+
+    QPushButton *btn3 = new QPushButton("exp");
+    btn3->setGeometry(210, 90, 100, 20);
+    btn3->setParent(this);
+
+    QPushButton *btn4 = new QPushButton("col");
+    btn4->setGeometry(210, 110, 100, 20);
+    btn4->setParent(this);
+
+    connect(slider1, SIGNAL(valueChanged(int)), this, SLOT(slider1Changed(int)));
+    connect(slider2, SIGNAL(valueChanged(int)), this, SLOT(slider2Changed(int)));
+    connect(slider3, SIGNAL(valueChanged(int)), this, SLOT(slider3Changed(int)));
+    connect(slider4, SIGNAL(valueChanged(int)), this, SLOT(slider4Changed(int)));
+    connect(btn1, SIGNAL(pressed()), this, SLOT(button1Pressed()));
+    connect(btn2, SIGNAL(pressed()), this, SLOT(button2Pressed()));
+    connect(btn3, SIGNAL(pressed()), this, SLOT(button3Pressed()));
+    connect(btn4, SIGNAL(pressed()), this, SLOT(button4Pressed()));
+
+    /-
+    QWidget *widget = new QWidget;
+    Ui::FloatingActionButtonSettingsForm *ui = new Ui::FloatingActionButtonSettingsForm;
+    ui->setupUi(widget);
+
+    setCentralWidget(widget);
+
+    QtMaterialFloatingActionButton *fab = new QtMaterialFloatingActionButton(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+    fab->setParent(this);
+    -/
 
 //    QWidget *widget = new QWidget;
 //    QVBoxLayout *layout = new QVBoxLayout;
@@ -585,3 +854,45 @@ void MainWindow::_initMenu() const
     connect(exitAction, SIGNAL(triggered(bool)), qApp, SLOT(quit()));
 }
 */
+
+void MainWindow::slider1Changed(int value)
+{
+    //_menu->_proxy->setXScale(static_cast<qreal>(value)/100);
+}
+
+void MainWindow::slider2Changed(int value)
+{
+    //_menu->_proxy->setYScale(static_cast<qreal>(value)/100);
+}
+
+void MainWindow::slider3Changed(int value)
+{
+//    _menu->_proxy->setCanvasXScale(static_cast<qreal>(value)/100);
+}
+
+void MainWindow::slider4Changed(int value)
+{
+//    _menu->_proxy->setCanvasYScale(static_cast<qreal>(value)/100);
+}
+
+void MainWindow::button1Pressed()
+{
+    QStackedLayout *sl = static_cast<QStackedLayout *>(_menu->layout());
+    sl->setCurrentIndex(0);
+}
+
+void MainWindow::button2Pressed()
+{
+    QStackedLayout *sl = static_cast<QStackedLayout *>(_menu->layout());
+    sl->setCurrentIndex(1);
+}
+
+void MainWindow::button3Pressed()
+{
+    _menu->expand();
+}
+
+void MainWindow::button4Pressed()
+{
+    _menu->collapse();
+}

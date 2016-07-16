@@ -2,8 +2,12 @@
 #include "scrollwidget_p.h"
 #include <QPainter>
 #include <QApplication>
+#include <QMouseEvent>
+#include <QStyleOptionSlider>
 #include "scrollwidget_internal.h"
-#include "lib/style.h"
+//#include "lib/style.h"
+#include "xxlib/qtmaterialstyle.h"
+#include <QDebug>
 
 ScrollBarPrivate::ScrollBarPrivate(ScrollBar *q)
     : q_ptr(q),
@@ -22,6 +26,10 @@ void ScrollBarPrivate::init()
     Q_Q(ScrollBar);
 
     q->setMouseTracking(true);
+    q->setStyle(&QtMaterialStyle::instance());
+    q->setStyleSheet("QScrollBar:vertical { margin: 0; }"
+                     "QScrollBar::add-line:vertical { height: 0; margin: 0; }"
+                     "QScrollBar::sub-line:vertical { height: 0; margin: 0; }");
 
     machine->start();
 
@@ -54,6 +62,25 @@ bool ScrollBar::useThemeColors() const
     return d->useThemeColors;
 }
 
+void ScrollBar::setCanvasColor(const QColor &color)
+{
+    Q_D(ScrollBar);
+
+    d->canvasColor = color;
+    setUseThemeColors(false);
+}
+
+QColor ScrollBar::canvasColor() const
+{
+    Q_D(const ScrollBar);
+
+    if (d->useThemeColors || !d->canvasColor.isValid()) {
+        return QtMaterialStyle::instance().themeColor("canvas");
+    } else {
+        return d->canvasColor;
+    }
+}
+
 void ScrollBar::setBackgroundColor(const QColor &color)
 {
     Q_D(ScrollBar);
@@ -67,7 +94,7 @@ QColor ScrollBar::backgroundColor() const
     Q_D(const ScrollBar);
 
     if (d->useThemeColors || !d->backgroundColor.isValid()) {
-        return Style::instance().themeColor("border").darker(110);
+        return QtMaterialStyle::instance().themeColor("border").darker(110);
     } else {
         return d->backgroundColor;
     }
@@ -86,7 +113,7 @@ QColor ScrollBar::sliderColor() const
     Q_D(const ScrollBar);
 
     if (d->useThemeColors || !d->sliderColor.isValid()) {
-        return Style::instance().themeColor("primary1");
+        return QtMaterialStyle::instance().themeColor("primary1");
     } else {
         return d->sliderColor;
     }
@@ -112,6 +139,22 @@ QSize ScrollBar::sizeHint() const
     return QSize(10, 1);
 }
 
+//void ScrollBar::mousePressEvent(QMouseEvent *event)
+//{
+//    /* Map event position coordinates to actual scrollbar's geometry */
+//    QMouseEvent e(translateEventGeometry(event));
+//
+//    QScrollBar::mousePressEvent(&e);
+//}
+//
+//void ScrollBar::mouseMoveEvent(QMouseEvent *event)
+//{
+//    /* Map event position coordinates to actual scrollbar's geometry */
+//    QMouseEvent e(translateEventGeometry(event));
+//
+//    QScrollBar::mouseMoveEvent(&e);
+//}
+
 void ScrollBar::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
@@ -120,7 +163,7 @@ void ScrollBar::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
 
-    painter.fillRect(rect(), palette().color(QPalette::Window));
+    painter.fillRect(rect(), canvasColor());
 
     int x, y, w, h;
     rect().getRect(&x, &y, &w, &h);
@@ -150,3 +193,33 @@ void ScrollBar::paintEvent(QPaintEvent *event)
 
     painter.drawRect(handle.marginsRemoved(margins));
 }
+
+//QMouseEvent ScrollBar::translateEventGeometry(QMouseEvent *event)
+//{
+//    //QStyleOptionSlider *option = new QStyleOptionSlider;
+//    //option->initFrom(this);
+//
+//    //qDebug() << style()->subControlRect(QStyle::CC_ScrollBar,option,QStyle::SC_ScrollBarSubLine,this);
+//
+//    const qreal btnSize = 20;           // @TODO
+//
+//    QPoint localPos;
+//    if (Qt::Horizontal == orientation()) {
+//        const qreal x = width();
+//        localPos = QPoint(btnSize + (event->x()*(x-2*btnSize)/x), event->y());
+//    } else {
+//        const qreal y = height();
+//        localPos = QPoint(event->x(), btnSize + (event->y()*(y-2*btnSize)/y));
+//    }
+//
+//    QPoint screenPos = mapToGlobal(localPos);
+//    QPoint windowPos = window()->mapFromGlobal(screenPos);
+//
+//    return QMouseEvent(event->type(),
+//                       localPos,
+//                       windowPos,
+//                       screenPos,
+//                       event->button(),
+//                       event->buttons(),
+//                       event->modifiers());
+//}

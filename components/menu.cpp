@@ -7,11 +7,11 @@
 MenuItem::MenuItem(QWidget *parent)
     : FlatButton(parent)
 {
-    QFont font(this->font());
-    font.setCapitalization(QFont::MixedCase);
-    font.setPointSize(11);
-    font.setStyleName("Regular");
-    setFont(font);
+    //QFont font(this->font());
+    //font.setCapitalization(QFont::MixedCase);
+    //font.setPointSize(11);
+    //font.setStyleName("Regular");
+    //setFont(font);
 
     setShowHalo(false);
 }
@@ -19,11 +19,11 @@ MenuItem::MenuItem(QWidget *parent)
 MenuItem::MenuItem(const QString &text, QWidget *parent)
     : FlatButton(text, parent)
 {
-    QFont font(this->font());
-    font.setCapitalization(QFont::MixedCase);
-    font.setPointSize(11);
-    font.setStyleName("Regular");
-    setFont(font);
+    //QFont font(this->font());
+    //font.setCapitalization(QFont::MixedCase);
+    //font.setPointSize(11);
+    //font.setStyleName("Regular");
+    //setFont(font);
 
     setShowHalo(false);
 }

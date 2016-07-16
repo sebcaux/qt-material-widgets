@@ -26,7 +26,8 @@ void CheckBoxPrivate::init()
     animation = new QPropertyAnimation(checkedIcon, "iconSize", q);
     animation->setStartValue(0);
     animation->setEndValue(24);
-    animation->setDuration(250);
+    animation->setDuration(280);
+    //animation->setDuration(6250);
     uncheckedTransition->addAnimation(animation);
 
     animation = new QPropertyAnimation(uncheckedIcon, "color", q);
@@ -36,18 +37,22 @@ void CheckBoxPrivate::init()
     //
 
     animation = new QPropertyAnimation(uncheckedIcon, "color", q);
-    animation->setDuration(550);
+    animation->setDuration(1550);
     checkedTransition->addAnimation(animation);
 
     animation = new QPropertyAnimation(checkedIcon, "opacity", q);
-    animation->setDuration(450);
+    animation->setDuration(650);
     checkedTransition->addAnimation(animation);
 
     //
 
     checkedState->assignProperty(checkedIcon, "iconSize", 24);
     checkedState->assignProperty(checkedIcon, "opacity", 1);
+    checkedState->assignProperty(uncheckedIcon, "opacity", 0);
+
     uncheckedState->assignProperty(checkedIcon, "opacity", 0);
+    uncheckedState->assignProperty(uncheckedIcon, "opacity", 1);
+
     disabledCheckedState->assignProperty(checkedIcon, "opacity", 1);
     disabledUncheckedState->assignProperty(uncheckedIcon, "opacity", 1);
 }

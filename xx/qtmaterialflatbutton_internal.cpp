@@ -182,7 +182,8 @@ void QtMaterialFlatButtonStateMachine::updateCheckedStatus()
     }
 }
 
-bool QtMaterialFlatButtonStateMachine::eventFilter(QObject *watched, QEvent *event)
+bool QtMaterialFlatButtonStateMachine::eventFilter(QObject *watched,
+                                                   QEvent  *event)
 {
     if (QEvent::FocusIn == event->type()) {
         QFocusEvent *focusEvent = static_cast<QFocusEvent *>(event);

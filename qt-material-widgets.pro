@@ -87,7 +87,33 @@ SOURCES += main.cpp\
     xx/qtmaterialflatbutton_internal.cpp \
     xxlib/qtmaterialstyle.cpp \
     xxlib/qtmaterialtheme.cpp \
-    yy/flatbuttonsettingseditor.cpp
+    yy/flatbuttonsettingseditor.cpp \
+    xx/qtmaterialraisedbutton.cpp \
+    yy/raisedbuttonsettingseditor.cpp \
+    xx/qtmaterialfab.cpp \
+    yy/fabsettingseditor.cpp \
+    xx/qtmaterialavatar.cpp \
+    yy/avatarsettingseditor.cpp \
+    xx/qtmaterialbadge.cpp \
+    yy/badgesettingseditor.cpp \
+    components/menuplus.cpp \
+    components/menuitemplus.cpp \
+    components/menuplusproxy.cpp \
+    xx/qtmaterialmenuitem.cpp \
+    xx/qtmaterialiconbutton.cpp \
+    components/iconmenuplus.cpp \
+    xx/qtmaterialcollapsiblemenu.cpp \
+    xx/qtmaterialcollapsiblemenu_internal.cpp \
+    xx/qtmaterialscrollbar.cpp \
+    xx/qtmaterialscrollbar_internal.cpp \
+    xx/qtmaterialiconmenu.cpp \
+    components/selectfieldplus.cpp \
+    xx/qtmaterialselectfield.cpp \
+    yy/iconmenusettingseditor.cpp \
+    yy/selectfieldsettingseditor.cpp \
+    yy/checkboxsettingseditor.cpp \
+    xxlib/qtmaterialcheckable.cpp \
+    xxlib/qtmaterialcheckable_internal.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -192,7 +218,53 @@ HEADERS  += mainwindow.h \
     xxlib/qtmaterialstyle.h \
     xxlib/qtmaterialstyle_p.h \
     xxlib/qtmaterialtheme_p.h \
-    yy/flatbuttonsettingseditor.h
+    yy/flatbuttonsettingseditor.h \
+    xx/qtmaterialraisedbutton.h \
+    xx/qtmaterialraisedbutton_p.h \
+    yy/raisedbuttonsettingseditor.h \
+    xx/qtmaterialfab.h \
+    xx/qtmaterialfab_p.h \
+    yy/fabsettingseditor.h \
+    xx/qtmaterialavatar.h \
+    xx/qtmaterialavatar_p.h \
+    yy/avatarsettingseditor.h \
+    xx/qtmaterialbadge.h \
+    xx/qtmaterialbadge_p.h \
+    yy/badgesettingseditor.h \
+    components/menuplus.h \
+    components/menuitemplus.h \
+    components/menuplusproxy.h \
+    xx/qtmaterialmenuitem.h \
+    xx/qtmaterialmenuitem_p.h \
+    xx/qtmaterialiconbutton.h \
+    xx/qtmaterialiconbutton_p.h \
+    components/iconmenuplus.h \
+    xx/qtmaterialcollapsiblemenu.h \
+    xx/qtmaterialcollapsiblemenu_p.h \
+    xx/qtmaterialcollapsiblemenu_internal.h \
+    xx/qtmaterialscrollbar.h \
+    xx/qtmaterialscrollbar_p.h \
+    xx/qtmaterialscrollbar_internal.h \
+    xx/qtmaterialiconmenu.h \
+    xx/qtmaterialiconmenu_p.h \
+    components/selectfieldplus.h \
+    xx/qtmaterialselectfield.h \
+    xx/qtmaterialselectfield_p.h \
+    yy/iconmenusettingseditor.h \
+    yy/selectfieldsettingseditor.h \
+    yy/checkboxsettingseditor.h \
+    xxlib/qtmaterialcheckable.h \
+    xxlib/qtmaterialcheckable_p.h \
+    xxlib/qtmaterialcheckable_internal.h
 
 RESOURCES += \
     resources.qrc
+
+FORMS += \
+    yy/flatbuttonsettingsform.ui \
+    yy/fabsettingsform.ui \
+    yy/avatarsettingsform.ui \
+    yy/badgesettingsform.ui \
+    yy/iconmenusettingsform.ui \
+    yy/selectfieldsettingsform.ui \
+    yy/checkboxsettingsform.ui

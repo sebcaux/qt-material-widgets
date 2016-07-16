@@ -18,17 +18,13 @@ class QtMaterialFlatButton : public QPushButton
     Q_PROPERTY(QColor disabledBackgroundColor WRITE setDisabledBackgroundColor READ disabledBackgroundColor)
     Q_PROPERTY(qreal fontSize WRITE setFontSize READ fontSize)
 
-    enum {
-        IconPadding = 12
-    };
-
 public:
-    explicit QtMaterialFlatButton(XXMaterial::ButtonPreset preset = XXMaterial::FlatPreset, QWidget *parent = 0);
-    explicit QtMaterialFlatButton(const QString &text, XXMaterial::ButtonPreset preset = XXMaterial::FlatPreset, QWidget *parent = 0);
-    QtMaterialFlatButton(const QString &text, XXMaterial::Role role, XXMaterial::ButtonPreset preset = XXMaterial::FlatPreset, QWidget *parent = 0);
+    explicit QtMaterialFlatButton(QWidget *parent = 0, XXMaterial::ButtonPreset preset = XXMaterial::FlatPreset);
+    explicit QtMaterialFlatButton(const QString &text, QWidget *parent = 0, XXMaterial::ButtonPreset preset = XXMaterial::FlatPreset);
+    QtMaterialFlatButton(const QString &text, XXMaterial::Role role, QWidget *parent = 0, XXMaterial::ButtonPreset preset = XXMaterial::FlatPreset);
     ~QtMaterialFlatButton();
 
-    virtual void applyPreset(XXMaterial::ButtonPreset preset);
+    void applyPreset(XXMaterial::ButtonPreset preset);
 
     void setUseThemeColors(bool value);
     bool useThemeColors() const;
@@ -77,20 +73,31 @@ public:
 
     void setCheckable(bool value);
 
+    void setHasFixedRippleRadius(bool value);
+    bool hasFixedRippleRadius() const;
+
+    void setFixedRippleRadius(qreal radius);
+
     QSize sizeHint() const Q_DECL_OVERRIDE;
 
 protected:
+    enum {
+        IconPadding = 12
+    };
+
+    QtMaterialFlatButton(QtMaterialFlatButtonPrivate &d, QWidget *parent = 0, XXMaterial::ButtonPreset preset = XXMaterial::FlatPreset);
+
     void checkStateSet() Q_DECL_OVERRIDE;
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
-    void paintBackground(QPainter *painter);
-    void paintHalo(QPainter *painter);
-    void paintForeground(QPainter *painter);
+    virtual void paintBackground(QPainter *painter);
+    virtual void paintHalo(QPainter *painter);
+    virtual void paintForeground(QPainter *painter);
 
-    void updateClipPath();
+    virtual void updateClipPath();
 
     const QScopedPointer<QtMaterialFlatButtonPrivate> d_ptr;
 

@@ -1,576 +1,290 @@
 #include "yy/flatbuttonsettingseditor.h"
-#include <QCheckBox>
-#include <QComboBox>
-#include <QLabel>
-#include <QLineEdit>
-#include <QSlider>
-#include <QLayout>
-#include <QPainter>
 #include <QColorDialog>
-#include <QGroupBox>
-#include <QDebug>
 #include "xx/qtmaterialflatbutton.h"
 
 FlatButtonSettingsEditor::FlatButtonSettingsEditor(QWidget *parent)
     : QWidget(parent),
-      m_flatbutton(new QtMaterialFlatButton("I am flat"))
+      ui(new Ui::FlatButtonSettingsForm),
+      m_button(new QtMaterialFlatButton("I'm flat"))
 {
-    QCheckBox *checkbox;
-    QComboBox *combo;
-    QLabel *label;
-    QLineEdit *edit;
-    QSlider *slider;
-    QVBoxLayout *vlayout;
-    QHBoxLayout *groupboxlayout;
-    QGridLayout *grid;
-    QGroupBox *groupbox;
-
-    vlayout = new QVBoxLayout;
-    setLayout(vlayout);
-
-    groupbox = new QGroupBox;
-    groupbox->setTitle("Properties");
-    groupboxlayout = new QHBoxLayout;
-    groupbox->setLayout(groupboxlayout);
-
-    QVBoxLayout *vlayout2 = new QVBoxLayout;
-
-    groupboxlayout->addLayout(vlayout2);
-    groupboxlayout->addSpacing(40);
-
-    vlayout->addStretch(1);
-    vlayout->addWidget(m_flatbutton);
-    m_flatbutton->setFixedWidth(400);
-    vlayout->setAlignment(m_flatbutton, Qt::AlignCenter);
-
-    connect(m_flatbutton, SIGNAL(toggled(bool)), this, SLOT(buttonToggled()));
-
-    vlayout->addSpacing(40);
-
-    vlayout->addWidget(groupbox);
-
-    //
-
-    checkbox = new QCheckBox;
-    checkbox->setText("Disabled");
-    vlayout2->addWidget(checkbox);
-
-    connect(checkbox, SIGNAL(clicked(bool)), this, SLOT(settingDisabledToggled(bool)));
-
-    //
-
-    checkbox = new QCheckBox;
-    checkbox->setText("Checkable");
-    vlayout2->addWidget(checkbox);
-
-    connect(checkbox, SIGNAL(clicked(bool)), this, SLOT(settingCheckableToggled(bool)));
-    connect(checkbox, SIGNAL(clicked(bool)), this, SLOT(buttonToggled()));
-
-    //
-
-    m_checkedCheckbox = new QCheckBox;
-    m_checkedCheckbox->setText("Checked");
-    m_checkedCheckbox->setDisabled(true);
-    vlayout2->addWidget(m_checkedCheckbox);
-
-    connect(m_checkedCheckbox, SIGNAL(clicked(bool)), this, SLOT(setButtonChecked(bool)));
-
-    //
-
-    checkbox = new QCheckBox;
-    checkbox->setText("Show halo");
-    checkbox->setChecked(true);
-    vlayout2->addWidget(checkbox);
-
-    connect(checkbox, SIGNAL(clicked(bool)), this, SLOT(settingShowHaloToggled(bool)));
-
-    //
-
-    checkbox = new QCheckBox;
-    checkbox->setText("Transparent background");
-    checkbox->setChecked(true);
-    vlayout2->addWidget(checkbox);
-
-    connect(checkbox, SIGNAL(clicked(bool)), this, SLOT(settingTransparentBgToggled(bool)));
-
-    //
-
-    checkbox = new QCheckBox;
-    checkbox->setText("Icon");
-    vlayout2->addWidget(checkbox);
-
-    connect(checkbox, SIGNAL(clicked(bool)), this, SLOT(settingIconToggled(bool)));
-
-    //
-
-    vlayout2->addStretch();
-
-    //
-
-    grid = new QGridLayout;
-
-    label = new QLabel("Button role");
-
-    combo = new QComboBox;
-    combo->addItem("Default");
-    combo->addItem("Primary");
-    combo->addItem("Secondary");
-
-    grid->addWidget(label, 0, 0);
-    grid->addWidget(combo, 0, 2);
-
-    connect(combo, SIGNAL(currentIndexChanged(int)), this, SLOT(settingRoleChanged(int)));
-
-    //
-
-    label = new QLabel("Ripple style");
-
-    combo = new QComboBox;
-    combo->addItem("Positioned");
-    combo->addItem("Centered");
-
-    grid->addWidget(label, 1, 0);
-    grid->addWidget(combo, 1, 2);
-
-    connect(combo, SIGNAL(currentIndexChanged(int)), this, SLOT(settingRipplePositionChanged(int)));
-
-    //
-
-    label = new QLabel("Hover style");
-
-    m_overlayStyleCombo = new QComboBox;
-    m_overlayStyleCombo->addItem("No overlay");
-    m_overlayStyleCombo->addItem("Tinted");
-    m_overlayStyleCombo->addItem("Gray");
-    m_overlayStyleCombo->setCurrentIndex(0);
-
-    grid->addWidget(label, 2, 0);
-    grid->addWidget(m_overlayStyleCombo, 2, 2);
-
-    connect(m_overlayStyleCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(settingOverlayStyleChanged(int)));
-
-    //
-
-    label = new QLabel("Icon placement");
-
-    combo = new QComboBox;
-    combo->addItem("Left");
-    combo->addItem("Right");
-
-    grid->addWidget(label, 3, 0);
-    grid->addWidget(combo, 3, 2);
-
-    connect(combo, SIGNAL(currentIndexChanged(int)), this, SLOT(settingIconPlacementChanged(int)));
-
-    //
-
-    label = new QLabel("Corner radius");
-    m_cornerRadiusEdit = new QLineEdit;
-    m_cornerRadiusEdit->setReadOnly(true);
-
-    slider = new QSlider(Qt::Horizontal);
-    slider->setRange(0, 220);
-    slider->setSliderPosition(m_flatbutton->cornerRadius());
-    m_cornerRadiusEdit->setText("3");
-
-    grid->setColumnStretch(2, 3);
-
-    grid->addWidget(label, 4, 0);
-    grid->addWidget(m_cornerRadiusEdit, 4, 1);
-    grid->addWidget(slider, 4, 2);
-
-    connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(settingCornerRadiusChanged(int)));
-
-    //
-
-    label = new QLabel("Overlay opacity");
-    m_baseOpacityEdit = new QLineEdit;
-    m_baseOpacityEdit->setReadOnly(true);
-
-    slider = new QSlider(Qt::Horizontal);
-    slider->setRange(0, 100);
-    slider->setSliderPosition(m_flatbutton->baseOpacity()*100);
-
-    QString s;
-    s.setNum(m_flatbutton->baseOpacity());
-    m_baseOpacityEdit->setText(s);
-
-    grid->addWidget(label, 5, 0);
-    grid->addWidget(m_baseOpacityEdit, 5, 1);
-    grid->addWidget(slider, 5, 2);
-
-    connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(settingBaseOpacityChanged(int)));
-
-    //
-
-    label = new QLabel("Icon size");
-    m_iconSizeEdit = new QLineEdit;
-    m_iconSizeEdit->setReadOnly(true);
-
-    slider = new QSlider(Qt::Horizontal);
-    slider->setRange(4, 148);
-    slider->setSliderPosition(m_flatbutton->iconSize().width());
-    m_iconSizeEdit->setText(QString::number(slider->value()));
-
-    grid->addWidget(label, 6, 0);
-    grid->addWidget(m_iconSizeEdit, 6, 1);
-    grid->addWidget(slider, 6, 2);
-
-    connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(settingIconSizeChanged(int)));
-
-    //
-
-    label = new QLabel("Font size");
-    m_fontSizeEdit = new QLineEdit;
-    m_fontSizeEdit->setReadOnly(true);
-
-    slider = new QSlider(Qt::Horizontal);
-    slider->setRange(10, 80);
-    slider->setSliderPosition(m_flatbutton->fontSize()*2);
-
-    s.setNum(m_flatbutton->fontSize());
-    m_fontSizeEdit->setText(s);
-
-    grid->addWidget(label, 7, 0);
-    grid->addWidget(m_fontSizeEdit, 7, 1);
-    grid->addWidget(slider, 7, 2);
-
-    connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(settingFontSizeChanged(int)));
-
-    //
-
-    label = new QLabel("Button text");
-
-    edit = new QLineEdit("I am flat");
-
-    grid->addWidget(label, 8, 0);
-    grid->addWidget(edit, 8, 1, 1, 2);
-
-    connect(edit, SIGNAL(textChanged(QString)), this, SLOT(settingButtonTextChanged(QString)));
-
-    //
-
-    groupboxlayout->addLayout(grid);
-    grid = new QGridLayout;
-
-    groupbox = new QGroupBox;
-    groupbox->setTitle("Colors");
-    groupbox->setLayout(grid);
-
-    vlayout->addWidget(groupbox);
-
-    //
-
-    QCheckBox *themeColorsCheckbox;
-
-    themeColorsCheckbox = new QCheckBox;
-    themeColorsCheckbox->setText("Use theme colors");
-    themeColorsCheckbox->setChecked(true);
-    grid->addWidget(themeColorsCheckbox, 9, 0, 1, 2);
-
-    connect(themeColorsCheckbox, SIGNAL(clicked(bool)), this, SLOT(settingThemeColorsToggled(bool)));
-
-    //
-
-    label = new QLabel("Background color");
-    m_backgroundColorValue = new QPushButton("Click to select");
-    m_backgroundColorValue->setFlat(true);
-
-    label->setDisabled(true);
-    m_backgroundColorValue->setDisabled(true);
-
-    connect(themeColorsCheckbox, SIGNAL(toggled(bool)), label, SLOT(setDisabled(bool)));
-    connect(themeColorsCheckbox, SIGNAL(toggled(bool)), m_backgroundColorValue, SLOT(setDisabled(bool)));
-
-    connect(m_backgroundColorValue, SIGNAL(clicked(bool)), this, SLOT(selectBackgroundColor()));
-
-    grid->addWidget(label, 10, 0);
-    grid->addWidget(m_backgroundColorValue, 10, 1);
-
-    //
-
-    label = new QLabel("Foreground color");
-    m_foregroundColorValue = new QPushButton("Click to select");
-    m_foregroundColorValue->setFlat(true);
-
-    label->setDisabled(true);
-    m_foregroundColorValue->setDisabled(true);
-
-    connect(themeColorsCheckbox, SIGNAL(toggled(bool)), label, SLOT(setDisabled(bool)));
-    connect(themeColorsCheckbox, SIGNAL(toggled(bool)), m_foregroundColorValue, SLOT(setDisabled(bool)));
-
-    connect(m_foregroundColorValue, SIGNAL(clicked(bool)), this, SLOT(selectForegroundColor()));
-
-    grid->addWidget(label, 11, 0);
-    grid->addWidget(m_foregroundColorValue, 11, 1);
-
-    //
-
-    label = new QLabel("Overlay color");
-    m_overlayColorValue = new QPushButton("Click to select");
-    m_overlayColorValue->setFlat(true);
-
-    label->setDisabled(true);
-    m_overlayColorValue->setDisabled(true);
-
-    connect(themeColorsCheckbox, SIGNAL(toggled(bool)), label, SLOT(setDisabled(bool)));
-    connect(themeColorsCheckbox, SIGNAL(toggled(bool)), m_overlayColorValue, SLOT(setDisabled(bool)));
-
-    connect(m_overlayColorValue, SIGNAL(clicked(bool)), this, SLOT(selectOverlayColor()));
-
-    grid->addWidget(label, 12, 0);
-    grid->addWidget(m_overlayColorValue, 12, 1);
-
-    //
-
-    label = new QLabel("Disabled background color");
-    m_disabledBackgroundColorValue = new QPushButton("Click to select");
-    m_disabledBackgroundColorValue->setFlat(true);
-
-    connect(themeColorsCheckbox, SIGNAL(toggled(bool)), label, SLOT(setDisabled(bool)));
-    connect(themeColorsCheckbox, SIGNAL(toggled(bool)), m_disabledBackgroundColorValue, SLOT(setDisabled(bool)));
-
-    label->setDisabled(true);
-    m_disabledBackgroundColorValue->setDisabled(true);
-
-    connect(m_disabledBackgroundColorValue, SIGNAL(clicked(bool)), this, SLOT(selectDisabledBackgroundColor()));
-
-    grid->addWidget(label, 13, 0);
-    grid->addWidget(m_disabledBackgroundColorValue, 13, 1);
-
-    //
-
-    label = new QLabel("Disabled foreground color");
-    m_disabledForegroundColorValue = new QPushButton("Click to select");
-    m_disabledForegroundColorValue->setFlat(true);
-
-    connect(themeColorsCheckbox, SIGNAL(toggled(bool)), label, SLOT(setDisabled(bool)));
-    connect(themeColorsCheckbox, SIGNAL(toggled(bool)), m_disabledForegroundColorValue, SLOT(setDisabled(bool)));
-
-    connect(m_disabledForegroundColorValue, SIGNAL(clicked(bool)), this, SLOT(selectDisabledForegroundColor()));
-
-    label->setDisabled(true);
-    m_disabledForegroundColorValue->setDisabled(true);
-
-    grid->addWidget(label, 14, 0);
-    grid->addWidget(m_disabledForegroundColorValue, 14, 1);
-
-    //
-
-    vlayout->addStretch(1);
+    init();
 }
 
 FlatButtonSettingsEditor::~FlatButtonSettingsEditor()
 {
+    delete ui;
 }
 
-void FlatButtonSettingsEditor::paintEvent(QPaintEvent *event)
+FlatButtonSettingsEditor::FlatButtonSettingsEditor(QtMaterialFlatButton *button, QWidget *parent)
+    : QWidget(parent),
+      ui(new Ui::FlatButtonSettingsForm),
+      m_button(button)
 {
-    QPainter painter(this);
-
-    QRect r(m_flatbutton->geometry());
-
-    painter.fillRect(r.adjusted(-160, -60, 160, 60), Qt::white);
-
-    QWidget::paintEvent(event);
+    init();
 }
 
-void FlatButtonSettingsEditor::settingDisabledToggled(bool value)
+void FlatButtonSettingsEditor::setupForm()
 {
-    m_flatbutton->setDisabled(value);
-}
-
-void FlatButtonSettingsEditor::settingCheckableToggled(bool value)
-{
-    m_flatbutton->setCheckable(value);
-    m_checkedCheckbox->setEnabled(value);
-    m_checkedCheckbox->setChecked(false);
-}
-
-void FlatButtonSettingsEditor::setButtonChecked(bool value)
-{
-    m_flatbutton->setChecked(value);
-}
-
-void FlatButtonSettingsEditor::settingShowHaloToggled(bool value)
-{
-    m_flatbutton->setHaloVisible(value);
-}
-
-void FlatButtonSettingsEditor::settingTransparentBgToggled(bool value)
-{
-    m_flatbutton->setBackgroundMode(value ? Qt::TransparentMode : Qt::OpaqueMode);
-}
-
-void FlatButtonSettingsEditor::settingThemeColorsToggled(bool value)
-{
-    m_flatbutton->setUseThemeColors(value);
-}
-
-void FlatButtonSettingsEditor::settingIconToggled(bool value)
-{
-    if (value) {
-        m_flatbutton->setIcon(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
-    } else {
-        m_flatbutton->setIcon(QIcon());
+    switch (m_button->role())
+    {
+    case XXMaterial::Default:
+        ui->buttonRoleComboBox->setCurrentIndex(0);
+        break;
+    case XXMaterial::Primary:
+        ui->buttonRoleComboBox->setCurrentIndex(1);
+        break;
+    case XXMaterial::Secondary:
+        ui->buttonRoleComboBox->setCurrentIndex(2);
+        break;
+    default:
+        break;
     }
+
+    switch (m_button->overlayStyle())
+    {
+    case XXMaterial::NoOverlay:
+        ui->hoverStyleComboBox->setCurrentIndex(0);
+        break;
+    case XXMaterial::TintedOverlay:
+        ui->hoverStyleComboBox->setCurrentIndex(1);
+        break;
+    case XXMaterial::GrayOverlay:
+        ui->hoverStyleComboBox->setCurrentIndex(2);
+        break;
+    default:
+        break;
+    }
+
+    switch (m_button->rippleStyle())
+    {
+    case XXMaterial::CenteredRipple:
+        ui->rippleStyleComboBox->setCurrentIndex(0);
+        break;
+    case XXMaterial::PositionedRipple:
+        ui->rippleStyleComboBox->setCurrentIndex(1);
+        break;
+    case XXMaterial::NoRipple:
+        ui->rippleStyleComboBox->setCurrentIndex(2);
+        break;
+    default:
+        break;
+    }
+
+    switch (m_button->iconPlacement())
+    {
+    case XXMaterial::LeftIcon:
+        ui->iconPlacementComboBox->setCurrentIndex(0);
+        break;
+    case XXMaterial::RightIcon:
+        ui->iconPlacementComboBox->setCurrentIndex(1);
+        break;
+    }
+
+    ui->checkedCheckBox->setEnabled(m_button->isCheckable());
+
+    ui->disabledCheckBox->setChecked(!m_button->isEnabled());
+    ui->checkableCheckBox->setChecked(m_button->isCheckable());
+    ui->checkedCheckBox->setChecked(m_button->isChecked());
+    ui->showHaloCheckBox->setChecked(m_button->isHaloVisible());
+    ui->iconCheckBox->setChecked(!m_button->icon().isNull());
+    ui->useThemeColorsCheckBox->setChecked(m_button->useThemeColors());
+    ui->transparentCheckBox->setChecked(Qt::TransparentMode == m_button->backgroundMode());
+    ui->cornerRadiusSpinBox->setValue(m_button->cornerRadius());
+    ui->overlayOpacityDoubleSpinBox->setValue(m_button->baseOpacity());
+    ui->iconSizeSpinBox->setValue(m_button->iconSize().width());
+    ui->fontSizeDoubleSpinBox->setValue(m_button->fontSize());
+    ui->buttonTextLineEdit->setText(m_button->text());
 }
 
-void FlatButtonSettingsEditor::settingRoleChanged(int index)
+void FlatButtonSettingsEditor::updateWidget()
 {
-    switch (index)
+    switch (ui->buttonRoleComboBox->currentIndex())
     {
     case 0:
-        m_flatbutton->setRole(XXMaterial::Default);
+        m_button->setRole(XXMaterial::Default);
         break;
     case 1:
-        m_flatbutton->setRole(XXMaterial::Primary);
+        m_button->setRole(XXMaterial::Primary);
         break;
     case 2:
-        m_flatbutton->setRole(XXMaterial::Secondary);
+        m_button->setRole(XXMaterial::Secondary);
         break;
     default:
         break;
     }
-}
 
-void FlatButtonSettingsEditor::settingRipplePositionChanged(int index)
-{
-    switch (index)
+    switch (ui->hoverStyleComboBox->currentIndex())
     {
     case 0:
-        m_flatbutton->setRippleStyle(XXMaterial::PositionedRipple);
+        m_button->setOverlayStyle(XXMaterial::NoOverlay);
         break;
     case 1:
-        m_flatbutton->setRippleStyle(XXMaterial::CenteredRipple);
-        break;
-    default:
-        break;
-    }
-}
-
-void FlatButtonSettingsEditor::settingOverlayStyleChanged(int index)
-{
-    switch (index)
-    {
-    case 0:
-        m_flatbutton->setOverlayStyle(XXMaterial::NoOverlay);
-        break;
-    case 1:
-        m_flatbutton->setOverlayStyle(XXMaterial::TintedOverlay);
+        m_button->setOverlayStyle(XXMaterial::TintedOverlay);
         break;
     case 2:
-        m_flatbutton->setOverlayStyle(XXMaterial::GrayOverlay);
+        m_button->setOverlayStyle(XXMaterial::GrayOverlay);
         break;
     default:
         break;
     }
-}
 
-void FlatButtonSettingsEditor::settingIconPlacementChanged(int index)
-{
-    switch (index)
+    switch (ui->rippleStyleComboBox->currentIndex())
     {
     case 0:
-        m_flatbutton->setIconPlacement(XXMaterial::LeftIcon);
+        m_button->setRippleStyle(XXMaterial::CenteredRipple);
         break;
     case 1:
-        m_flatbutton->setIconPlacement(XXMaterial::RightIcon);
+        m_button->setRippleStyle(XXMaterial::PositionedRipple);
+        break;
+    case 2:
+        m_button->setRippleStyle(XXMaterial::NoRipple);
         break;
     default:
         break;
     }
+
+    switch (ui->iconPlacementComboBox->currentIndex())
+    {
+    case 0:
+        m_button->setIconPlacement(XXMaterial::LeftIcon);
+        break;
+    case 1:
+        m_button->setIconPlacement(XXMaterial::RightIcon);
+        break;
+    default:
+        break;
+    }
+
+    m_button->setDisabled(ui->disabledCheckBox->isChecked());
+    m_button->setCheckable(ui->checkableCheckBox->isChecked());
+    m_button->setChecked(ui->checkedCheckBox->isChecked());
+    m_button->setHaloVisible(ui->showHaloCheckBox->isChecked());
+    m_button->setIcon(ui->iconCheckBox->isChecked() ? QIcon("../qt-material-widgets/ic_star_black_24px.svg")
+                                                    : QIcon());
+    m_button->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
+    m_button->setBackgroundMode(ui->transparentCheckBox->isChecked()
+                                ? Qt::TransparentMode : Qt::OpaqueMode);
+    m_button->setCornerRadius(ui->cornerRadiusSpinBox->value());
+    m_button->setBaseOpacity(ui->overlayOpacityDoubleSpinBox->value());
+    m_button->setIconSize(QSize(ui->iconSizeSpinBox->value(), ui->iconSizeSpinBox->value()));
+    m_button->setFontSize(ui->fontSizeDoubleSpinBox->value());
+    m_button->setText(ui->buttonTextLineEdit->text());
+
+    ui->checkedCheckBox->setEnabled(m_button->isCheckable());
 }
 
-void FlatButtonSettingsEditor::settingCornerRadiusChanged(int value)
-{
-    m_flatbutton->setCornerRadius(value);
-    m_cornerRadiusEdit->setText(QString::number(value));
-}
-
-void FlatButtonSettingsEditor::settingBaseOpacityChanged(int value)
-{
-    const qreal r = static_cast<qreal>(value)/100;
-    m_flatbutton->setBaseOpacity(r);
-
-    QString s;
-    s.setNum(r);
-    m_baseOpacityEdit->setText(s);
-}
-
-void FlatButtonSettingsEditor::settingIconSizeChanged(int value)
-{
-    m_flatbutton->setIconSize(QSize(value, value));
-    m_iconSizeEdit->setText(QString::number(value));
-}
-
-void FlatButtonSettingsEditor::settingFontSizeChanged(int value)
-{
-    const qreal r = static_cast<qreal>(value)/2;
-    m_flatbutton->setFontSize(r);
-
-    QString s;
-    s.setNum(r);
-    m_fontSizeEdit->setText(s);
-}
-
-void FlatButtonSettingsEditor::settingButtonTextChanged(QString text)
-{
-    m_flatbutton->setText(text);
-}
-
-void FlatButtonSettingsEditor::buttonToggled()
-{
-    m_checkedCheckbox->setChecked(m_flatbutton->isChecked());
-}
-
-void FlatButtonSettingsEditor::selectBackgroundColor()
+void FlatButtonSettingsEditor::selectColor()
 {
     QColorDialog dialog;
     if (dialog.exec()) {
         QColor color = dialog.selectedColor();
-        m_flatbutton->setBackgroundColor(color);
-        m_backgroundColorValue->setText(color.name(QColor::HexRgb));
+        QString senderName = sender()->objectName();
+        if ("foregroundColorToolButton" == senderName) {
+            m_button->setForegroundColor(color);
+            ui->foregroundColorLineEdit->setText(color.name(QColor::HexRgb));
+        } else if ("backgroundColorToolButton" == senderName) {
+            m_button->setBackgroundColor(color);
+            ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
+        } else if ("overlayColorToolButton" == senderName) {
+            m_button->setOverlayColor(color);
+            ui->overlayColorLineEdit->setText(color.name(QColor::HexRgb));
+        } else if ("disabledFgColorToolButton" == senderName) {
+            m_button->setDisabledForegroundColor(color);
+            ui->disableFgColorLineEdit->setText(color.name(QColor::HexRgb));
+        } else if ("disabledBgColorToolButton" == senderName) {
+            m_button->setDisabledBackgroundColor(color);
+            ui->disabledBgColorLineEdit->setText(color.name(QColor::HexRgb));
+        }
     }
+    setupForm();
 }
 
-void FlatButtonSettingsEditor::selectForegroundColor()
+void FlatButtonSettingsEditor::applyDefaultPreset()
 {
-    QColorDialog dialog;
-    if (dialog.exec()) {
-        QColor color = dialog.selectedColor();
-        m_flatbutton->setForegroundColor(color);
-        m_foregroundColorValue->setText(color.name(QColor::HexRgb));
-    }
+    m_button->setRole(XXMaterial::Default);
+    m_button->setRippleStyle(XXMaterial::PositionedRipple);
+    m_button->setIconPlacement(XXMaterial::LeftIcon);
+    m_button->setOverlayStyle(XXMaterial::GrayOverlay);
+    m_button->setBackgroundMode(Qt::TransparentMode);
+    m_button->setCornerRadius(3);
+    m_button->setBaseOpacity(0.13);
+    m_button->setFontSize(10);
+    m_button->setUseThemeColors(true);
+    m_button->setHaloVisible(true);
+    m_button->setCheckable(false);
+    m_button->setEnabled(true);
+    m_button->applyPreset(XXMaterial::FlatPreset);
+    setupForm();
 }
 
-void FlatButtonSettingsEditor::selectOverlayColor()
+void FlatButtonSettingsEditor::applyCheckablePreset()
 {
-    QColorDialog dialog;
-    if (dialog.exec()) {
-        QColor color = dialog.selectedColor();
-        m_flatbutton->setOverlayColor(color);
-        m_overlayColorValue->setText(color.name(QColor::HexRgb));
-        m_overlayStyleCombo->setCurrentIndex(1);
-    }
+    m_button->setRole(XXMaterial::Default);
+    m_button->setRippleStyle(XXMaterial::PositionedRipple);
+    m_button->setIconPlacement(XXMaterial::LeftIcon);
+    m_button->setOverlayStyle(XXMaterial::GrayOverlay);
+    m_button->setBackgroundMode(Qt::TransparentMode);
+    m_button->setCornerRadius(3);
+    m_button->setBaseOpacity(0.13);
+    m_button->setFontSize(10);
+    m_button->setUseThemeColors(true);
+    m_button->setHaloVisible(true);
+    m_button->setCheckable(true);
+    m_button->setEnabled(true);
+    m_button->applyPreset(XXMaterial::CheckablePreset);
+    setupForm();
 }
 
-void FlatButtonSettingsEditor::selectDisabledBackgroundColor()
+void FlatButtonSettingsEditor::init()
 {
-    QColorDialog dialog;
-    if (dialog.exec()) {
-        QColor color = dialog.selectedColor();
-        m_flatbutton->setDisabledBackgroundColor(color);
-        m_disabledBackgroundColorValue->setText(color.name(QColor::HexRgb));
-    }
-}
+    QVBoxLayout *layout = new QVBoxLayout;
+    setLayout(layout);
 
-void FlatButtonSettingsEditor::selectDisabledForegroundColor()
-{
-    QColorDialog dialog;
-    if (dialog.exec()) {
-        QColor color = dialog.selectedColor();
-        m_flatbutton->setDisabledForegroundColor(color);
-        m_disabledForegroundColorValue->setText(color.name(QColor::HexRgb));
-    }
+    QWidget *widget = new QWidget;
+    layout->addWidget(widget);
+
+    QWidget *canvas = new QWidget;
+    canvas->setStyleSheet("QWidget { background: white; }");
+    layout->addWidget(canvas);
+
+    ui->setupUi(widget);
+    layout->setContentsMargins(20, 20, 20, 20);
+
+    m_button->setFixedWidth(300);
+
+    layout = new QVBoxLayout;
+    canvas->setLayout(layout);
+    layout->addWidget(m_button);
+    layout->setAlignment(m_button, Qt::AlignCenter);
+
+    setupForm();
+
+    connect(ui->disabledCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->checkableCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->checkedCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->showHaloCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->iconCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->transparentCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->buttonRoleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
+    connect(ui->rippleStyleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
+    connect(ui->hoverStyleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
+    connect(ui->iconPlacementComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
+    connect(ui->cornerRadiusSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
+    connect(ui->overlayOpacityDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
+    connect(ui->iconSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
+    connect(ui->fontSizeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
+    connect(ui->buttonTextLineEdit, SIGNAL(textChanged(QString)), this, SLOT(updateWidget()));
+    connect(ui->useThemeColorsCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->foregroundColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
+    connect(ui->backgroundColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
+    connect(ui->disabledFgColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
+    connect(ui->disabledBgColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
+    connect(ui->overlayColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
+    connect(ui->cornerRadiusSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
+    connect(ui->overlayOpacityDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
+    connect(ui->iconSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
+    connect(ui->fontSizeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
+    connect(ui->buttonTextLineEdit, SIGNAL(textChanged(QString)), this, SLOT(updateWidget()));
+    connect(ui->defaultPresetPushButton, SIGNAL(pressed()), this, SLOT(applyDefaultPreset()));
+    connect(ui->checkablePresetPushButton, SIGNAL(pressed()), this, SLOT(applyCheckablePreset()));
 }

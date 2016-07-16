@@ -5,6 +5,8 @@
 #include <QPoint>
 #include "iconbutton.h"
 
+class QtMaterialOverlayWidget;
+
 class MenuOverlay : public QWidget
 {
     Q_OBJECT
@@ -47,7 +49,8 @@ protected:
     void updateOverlayGeometry();
 
 private:
-    MenuOverlay            *const _menuOverlay;
+    //MenuOverlay            *const _menuOverlay;
+    QtMaterialOverlayWidget *const _menuOverlay;
     Menu                   *const _menu;
     QPropertyAnimation     *const _animation;
     //ScaleEffect        *const _effect;

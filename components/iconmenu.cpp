@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QPainter>
 #include "menu.h"
+#include "xxlib/qtmaterialoverlaywidget.h"
 //#include "lib/scaleeffect.h"
 
 MenuOverlay::MenuOverlay(QWidget *parent)
@@ -20,7 +21,7 @@ MenuOverlay::~MenuOverlay()
 
 IconMenu::IconMenu(const QIcon &icon, QWidget *parent)
     : IconButton(icon, parent),
-      _menuOverlay(new MenuOverlay),
+      _menuOverlay(new QtMaterialOverlayWidget),
       _menu(new Menu(_menuOverlay)),
       _animation(new QPropertyAnimation(this)),
       //_effect(new ScaleEffect(this)),
@@ -50,7 +51,7 @@ IconMenu::IconMenu(const QIcon &icon, QWidget *parent)
     _menuOverlay->setGraphicsEffect(effect);
     */
 
-    _menuOverlay->installEventFilter(this);
+    //_menuOverlay->installEventFilter(this);
 
     connect(this, SIGNAL(clicked(bool)), this, SLOT(toggleMenu()));
     connect(_animation, SIGNAL(finished()), this, SLOT(animationFinished()));

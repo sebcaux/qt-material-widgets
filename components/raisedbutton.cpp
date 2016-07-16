@@ -34,14 +34,14 @@ void RaisedButtonPrivate::init()
     q->setPeakOpacity(0.25);
 
     effect->setBlurRadius(7);
-    effect->setOffset(QPointF(0, 0));
+    effect->setOffset(QPointF(0, 2));
     effect->setColor(QColor(0, 0, 0, 60));
     q->setGraphicsEffect(effect);
 
     machine->addState(normalState);
     machine->addState(pressedState);
 
-    normalState->assignProperty(effect, "offset", QPointF(0, 0));
+    normalState->assignProperty(effect, "offset", QPointF(0, 2));
     normalState->assignProperty(effect, "blurRadius", 7);
 
     pressedState->assignProperty(effect, "offset", QPointF(0, 6));

@@ -22,6 +22,7 @@ public:
     ScrollBarStateMachine *const machine;
     QColor                       backgroundColor;
     QColor                       sliderColor;
+    QColor                       canvasColor;
     bool                         hideOnMouseOut;
     bool                         useThemeColors;
 };

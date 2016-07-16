@@ -3,8 +3,10 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QApplication>
+#include <QFontDatabase>
 #include "textfield_internal.h"
-#include "lib/style.h"
+//#include "lib/style.h"
+#include "xxlib/qtmaterialstyle.h"
 
 TextFieldPrivate::TextFieldPrivate(TextField *q)
     : q_ptr(q),
@@ -21,7 +23,15 @@ void TextFieldPrivate::init()
 {
     Q_Q(TextField);
 
-    q->setTextMargins(0, 2, 0, 0);
+    q->setStyle(&QtMaterialStyle::instance());
+    q->setAttribute(Qt::WA_Hover);
+    q->setMouseTracking(true);
+
+    QFontDatabase db;
+    QFont font(db.font("Roboto", "Regular", 11));
+    q->setFont(font);
+
+    q->setTextMargins(0, 2, 0, 4);
 
     machine = new TextFieldStateMachine(q);
     machine->start();
@@ -128,7 +138,7 @@ QColor TextField::textColor() const
     Q_D(const TextField);
 
     if (d->useThemeColors || !d->textColor.isValid()) {
-        return Style::instance().themeColor("text");
+        return QtMaterialStyle::instance().themeColor("text");
     } else {
         return d->textColor;
     }
@@ -166,7 +176,7 @@ QColor TextField::inkColor() const
     Q_D(const TextField);
 
     if (d->useThemeColors || !d->inkColor.isValid()) {
-        return Style::instance().themeColor("primary1");
+        return QtMaterialStyle::instance().themeColor("primary1");
     } else {
         return d->inkColor;
     }
@@ -185,7 +195,7 @@ QColor TextField::underlineColor() const
     Q_D(const TextField);
 
     if (d->useThemeColors || !d->underlineColor.isValid()) {
-        return Style::instance().themeColor("border");
+        return QtMaterialStyle::instance().themeColor("border");
     } else {
         return d->underlineColor;
     }
@@ -204,7 +214,7 @@ QColor TextField::hintColor() const
     Q_D(const TextField);
 
     if (d->useThemeColors || !d->hintColor.isValid()) {
-        return Style::instance().themeColor("accent3");
+        return QtMaterialStyle::instance().themeColor("accent3");
     } else {
         return d->hintColor;
     }

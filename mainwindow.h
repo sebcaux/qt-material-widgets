@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+class MenuPlus;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -14,8 +16,20 @@ public:
 protected:
     void paintEvent(QPaintEvent *event);
 
+protected slots:
+    void slider1Changed(int value);
+    void slider2Changed(int value);
+    void slider3Changed(int value);
+    void slider4Changed(int value);
+    void button1Pressed();
+    void button2Pressed();
+    void button3Pressed();
+    void button4Pressed();
+
 private:
     void _initMenu() const;
+
+    MenuPlus *_menu;
 };
 
 /*

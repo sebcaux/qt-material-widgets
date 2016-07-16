@@ -1,4 +1,4 @@
-#include "qtmaterialrippleoverlay.h"
+#include "xxlib/qtmaterialrippleoverlay.h"
 #include <QPainter>
 #include "xxlib/qtmaterialripple.h"
 
@@ -11,6 +11,8 @@ QtMaterialRippleOverlay::QtMaterialRippleOverlay(QWidget *parent)
     : QtMaterialOverlayWidget(parent),
       m_useClip(false)
 {
+    setAttribute(Qt::WA_TransparentForMouseEvents);
+    setAttribute(Qt::WA_NoSystemBackground);
 }
 
 QtMaterialRippleOverlay::~QtMaterialRippleOverlay()

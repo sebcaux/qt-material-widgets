@@ -59,12 +59,13 @@ void QtMaterialFlatButtonPrivate::init()
     q->setMouseTracking(true);
 
     QFontDatabase db;
-    QFont font(db.font("Roboto", "Regular", fontSize));
+    QFont font(db.font("Roboto", "Medium", fontSize));
     font.setCapitalization(QFont::AllUppercase);
-    font.setStyleName("Medium");
     q->setFont(font);
 
-    q->updateClipPath();
+    QPainterPath path;
+    path.addRoundedRect(q->rect(), cornerRadius, cornerRadius);
+    rippleOverlay->setClipPath(path);
     rippleOverlay->setClipping(true);
 
     stateMachine->setupProperties();
@@ -75,7 +76,7 @@ void QtMaterialFlatButtonPrivate::init()
  *  \class QtMaterialFlatButton
  */
 
-QtMaterialFlatButton::QtMaterialFlatButton(XXMaterial::ButtonPreset preset, QWidget *parent)
+QtMaterialFlatButton::QtMaterialFlatButton(QWidget *parent, XXMaterial::ButtonPreset preset)
     : QPushButton(parent),
       d_ptr(new QtMaterialFlatButtonPrivate(this))
 {
@@ -84,7 +85,7 @@ QtMaterialFlatButton::QtMaterialFlatButton(XXMaterial::ButtonPreset preset, QWid
     applyPreset(preset);
 }
 
-QtMaterialFlatButton::QtMaterialFlatButton(const QString &text, XXMaterial::ButtonPreset preset, QWidget *parent)
+QtMaterialFlatButton::QtMaterialFlatButton(const QString &text, QWidget *parent, XXMaterial::ButtonPreset preset)
     : QPushButton(text, parent),
       d_ptr(new QtMaterialFlatButtonPrivate(this))
 {
@@ -93,7 +94,7 @@ QtMaterialFlatButton::QtMaterialFlatButton(const QString &text, XXMaterial::Butt
     applyPreset(preset);
 }
 
-QtMaterialFlatButton::QtMaterialFlatButton(const QString &text, XXMaterial::Role role, XXMaterial::ButtonPreset preset, QWidget *parent)
+QtMaterialFlatButton::QtMaterialFlatButton(const QString &text, XXMaterial::Role role, QWidget *parent, XXMaterial::ButtonPreset preset)
     : QPushButton(text, parent),
       d_ptr(new QtMaterialFlatButtonPrivate(this))
 {
@@ -405,6 +406,28 @@ void QtMaterialFlatButton::setCheckable(bool value)
     QPushButton::setCheckable(value);
 }
 
+void QtMaterialFlatButton::setHasFixedRippleRadius(bool value)
+{
+    Q_D(QtMaterialFlatButton);
+
+    d->useFixedRippleRadius = value;
+}
+
+bool QtMaterialFlatButton::hasFixedRippleRadius() const
+{
+    Q_D(const QtMaterialFlatButton);
+
+    return d->useFixedRippleRadius;
+}
+
+void QtMaterialFlatButton::setFixedRippleRadius(qreal radius)
+{
+    Q_D(QtMaterialFlatButton);
+
+    d->fixedRippleRadius = radius;
+    setHasFixedRippleRadius(true);
+}
+
 /*!
  *  \reimp
  */
@@ -421,6 +444,15 @@ QSize QtMaterialFlatButton::sizeHint() const
         h = qMax(h, iconSize().height());
     }
     return QSize(w, 20 + h);
+}
+
+QtMaterialFlatButton::QtMaterialFlatButton(QtMaterialFlatButtonPrivate &d,QWidget *parent, XXMaterial::ButtonPreset preset)
+    : QPushButton(parent),
+      d_ptr(&d)
+{
+    d_func()->init();
+
+    applyPreset(preset);
 }
 
 /*!
@@ -506,14 +538,21 @@ void QtMaterialFlatButton::paintEvent(QPaintEvent *event)
 
     const qreal cr = d->cornerRadius;
 
-    QPainterPath path;
-    path.addRoundedRect(rect(), cr, cr);
+    if (cr > 0)
+    {
+        QPainterPath path;
+        path.addRoundedRect(rect(), cr, cr);
 
-    painter.setClipPath(path);
-    painter.setClipping(true);
+        painter.setClipPath(path);
+        painter.setClipping(true);
+    }
 
     paintBackground(&painter);
     paintHalo(&painter);
+
+    painter.setOpacity(1);
+    painter.setClipping(false);
+
     paintForeground(&painter);
 }
 
@@ -606,9 +645,6 @@ void QtMaterialFlatButton::paintHalo(QPainter *painter)
 void QtMaterialFlatButton::paintForeground(QPainter *painter)
 {
     Q_D(QtMaterialFlatButton);
-
-    painter->setOpacity(1);
-    painter->setClipping(false);
 
     if (isEnabled()) {
         painter->setPen(foregroundColor());
