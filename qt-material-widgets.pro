@@ -113,7 +113,8 @@ SOURCES += main.cpp\
     yy/selectfieldsettingseditor.cpp \
     yy/checkboxsettingseditor.cpp \
     xxlib/qtmaterialcheckable.cpp \
-    xxlib/qtmaterialcheckable_internal.cpp
+    xxlib/qtmaterialcheckable_internal.cpp \
+    xx/qtmaterialcheckbox.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -255,7 +256,9 @@ HEADERS  += mainwindow.h \
     yy/checkboxsettingseditor.h \
     xxlib/qtmaterialcheckable.h \
     xxlib/qtmaterialcheckable_p.h \
-    xxlib/qtmaterialcheckable_internal.h
+    xxlib/qtmaterialcheckable_internal.h \
+    xx/qtmaterialcheckbox.h \
+    xx/qtmaterialcheckbox_p.h
 
 RESOURCES += \
     resources.qrc

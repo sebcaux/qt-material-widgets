@@ -5,6 +5,8 @@
 #include <QColor>
 #include <QIcon>
 
+class QtMaterialCheckable;
+
 class QtMaterialCheckableIcon : public QWidget
 {
     Q_OBJECT
@@ -14,7 +16,7 @@ class QtMaterialCheckableIcon : public QWidget
     Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
 
 public:
-    explicit QtMaterialCheckableIcon(const QIcon &icon, QWidget *parent = 0);
+    QtMaterialCheckableIcon(const QIcon &icon, QtMaterialCheckable *parent);
     ~QtMaterialCheckableIcon();
 
     QSize sizeHint() const Q_DECL_OVERRIDE;
@@ -37,10 +39,11 @@ protected:
 private:
     Q_DISABLE_COPY(QtMaterialCheckableIcon)
 
-    QColor m_color;
-    QIcon  m_icon;
-    qreal  m_iconSize;
-    qreal  m_opacity;
+    QtMaterialCheckable *const m_checkable;
+    QColor                     m_color;
+    QIcon                      m_icon;
+    qreal                      m_iconSize;
+    qreal                      m_opacity;
 };
 
 inline void QtMaterialCheckableIcon::setIcon(const QIcon &icon)

@@ -32,10 +32,10 @@ void QtMaterialRaisedButtonPrivate::init()
 {
     Q_Q(QtMaterialRaisedButton);
 
-    shadowMachine = new QStateMachine(q);
-    normalState   = new QState;
-    pressedState  = new QState;
-    effect        = new QGraphicsDropShadowEffect;
+    shadowStateMachine = new QStateMachine(q);
+    normalState        = new QState;
+    pressedState       = new QState;
+    effect             = new QGraphicsDropShadowEffect;
 
     effect->setBlurRadius(7);
     effect->setOffset(QPointF(0, 2));
@@ -46,8 +46,8 @@ void QtMaterialRaisedButtonPrivate::init()
     q->setGraphicsEffect(effect);
     q->setBaseOpacity(0.3);
 
-    shadowMachine->addState(normalState);
-    shadowMachine->addState(pressedState);
+    shadowStateMachine->addState(normalState);
+    shadowStateMachine->addState(pressedState);
 
     normalState->assignProperty(effect, "offset", QPointF(0, 2));
     normalState->assignProperty(effect, "blurRadius", 7);
@@ -73,14 +73,14 @@ void QtMaterialRaisedButtonPrivate::init()
 
     animation = new QPropertyAnimation(effect, "offset", q);
     animation->setDuration(100);
-    shadowMachine->addDefaultAnimation(animation);
+    shadowStateMachine->addDefaultAnimation(animation);
 
     animation = new QPropertyAnimation(effect, "blurRadius", q);
     animation->setDuration(100);
-    shadowMachine->addDefaultAnimation(animation);
+    shadowStateMachine->addDefaultAnimation(animation);
 
-    shadowMachine->setInitialState(normalState);
-    shadowMachine->start();
+    shadowStateMachine->setInitialState(normalState);
+    shadowStateMachine->start();
 }
 
 /*!
@@ -117,10 +117,10 @@ bool QtMaterialRaisedButton::event(QEvent *event)
 
     if (QEvent::EnabledChange == event->type()) {
         if (isEnabled()) {
-            d->shadowMachine->start();
+            d->shadowStateMachine->start();
             d->effect->setEnabled(true);
         } else {
-            d->shadowMachine->stop();
+            d->shadowStateMachine->stop();
             d->effect->setEnabled(false);
         }
     }

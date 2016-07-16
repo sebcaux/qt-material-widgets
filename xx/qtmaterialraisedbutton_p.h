@@ -19,11 +19,7 @@ public:
 
     void init();
 
-    QRect fabGeometry() const;
-
-    void assignAnimationProperties();
-
-    QStateMachine             *shadowMachine;
+    QStateMachine             *shadowStateMachine;
     QState                    *normalState;
     QState                    *pressedState;
     QGraphicsDropShadowEffect *effect;

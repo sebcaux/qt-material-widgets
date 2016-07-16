@@ -287,4 +287,6 @@ void FlatButtonSettingsEditor::init()
     connect(ui->buttonTextLineEdit, SIGNAL(textChanged(QString)), this, SLOT(updateWidget()));
     connect(ui->defaultPresetPushButton, SIGNAL(pressed()), this, SLOT(applyDefaultPreset()));
     connect(ui->checkablePresetPushButton, SIGNAL(pressed()), this, SLOT(applyCheckablePreset()));
+    connect(m_button, SIGNAL(toggled(bool)), this, SLOT(setupForm()));
 }
+

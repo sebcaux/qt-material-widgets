@@ -62,6 +62,8 @@ MainWindow::MainWindow(QWidget *parent)
     //FlatButtonSettingsEditor *fb = new FlatButtonSettingsEditor;
     //setCentralWidget(fb);
 
+    //return;
+
     //RaisedButtonSettingsEditor *fb = new RaisedButtonSettingsEditor;
     //setCentralWidget(fb);
 
