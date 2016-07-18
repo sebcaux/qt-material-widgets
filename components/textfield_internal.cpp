@@ -3,6 +3,7 @@
 #include <QPropertyAnimation>
 #include <QPainter>
 #include <QDebug>
+#include <QFontDatabase>
 #include "textfield.h"
 
 TextFieldStateMachine::TextFieldStateMachine(TextField *parent)
@@ -29,7 +30,7 @@ TextFieldStateMachine::TextFieldStateMachine(TextField *parent)
 
     animation = new QPropertyAnimation(this, "progress", this);
     animation->setEasingCurve(QEasingCurve::InCubic);
-    animation->setDuration(340);
+    animation->setDuration(310);
     transition->addAnimation(animation);
 
     transition = new QEventTransition(parent, QEvent::FocusOut);
@@ -38,7 +39,7 @@ TextFieldStateMachine::TextFieldStateMachine(TextField *parent)
 
     animation = new QPropertyAnimation(this, "progress", this);
     animation->setEasingCurve(QEasingCurve::OutCubic);
-    animation->setDuration(340);
+    animation->setDuration(310);
     transition->addAnimation(animation);
 
     _normalState->assignProperty(this, "progress", 0);
@@ -92,9 +93,9 @@ void TextFieldStateMachine::setProgress(qreal progress)
 
 void TextFieldStateMachine::assignProperties()
 {
-    QPalette p;
-    p.setColor(QPalette::Normal, QPalette::Base, textField->backgroundColor());
-    textField->setPalette(p);
+    //QPalette p;
+    //p.setColor(QPalette::Normal, QPalette::Base, textField->backgroundColor());
+    //textField->setPalette(p);
 
     if (_label)
     {
@@ -109,6 +110,12 @@ void TextFieldStateMachine::assignProperties()
         }
         _focusedState->assignProperty(_label, "color", textField->inkColor());
         _normalState->assignProperty(_label, "color", textField->hintColor());
+
+        if (0 != _label->offset().y() && !textField->text().isEmpty()) {
+            _label->setOffset(QPointF(0, 0-m));
+        } else if (!textField->hasFocus() && _label->offset().y() <= 0 && textField->text().isEmpty()) {
+            _label->setOffset(QPointF(0, 26));
+        }
     }
 }
 
@@ -120,11 +127,16 @@ TextFieldLabel::TextFieldLabel(TextField *parent)
       _posY(26),
       _color(parent->hintColor())
 {
-    QFont f;
-    f.setPointSizeF(parent->labelFontSize());
-    f.setStyleName("Medium");
-    f.setLetterSpacing(QFont::PercentageSpacing, 102);
-    setFont(f);
+    //QFont f;
+    //f.setPointSizeF(parent->labelFontSize());
+    //f.setStyleName("Medium");
+    //f.setLetterSpacing(QFont::PercentageSpacing, 102);
+    //setFont(f);
+
+    QFontDatabase db;
+    QFont font(db.font("Roboto", "Medium", parent->labelFontSize()));
+    font.setLetterSpacing(QFont::PercentageSpacing, 102);
+    setFont(font);
 }
 
 TextFieldLabel::~TextFieldLabel()
@@ -134,6 +146,10 @@ TextFieldLabel::~TextFieldLabel()
 void TextFieldLabel::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
+
+    if (!label->hasLabel()) {
+        return;
+    }
 
     QPainter painter(this);
 

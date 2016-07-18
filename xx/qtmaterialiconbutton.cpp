@@ -5,6 +5,11 @@
 #include "xxlib/qtmaterialstyle.h"
 #include "xxlib/qtmaterialrippleoverlay.h"
 
+/*!
+ *  \class QtMaterialIconButtonPrivate
+ *  \internal
+ */
+
 QtMaterialIconButtonPrivate::QtMaterialIconButtonPrivate(QtMaterialIconButton *q)
     : q_ptr(q)
 {
@@ -21,12 +26,18 @@ void QtMaterialIconButtonPrivate::init()
     rippleOverlay  = new QtMaterialRippleOverlay(q->parentWidget());
     useThemeColors = true;
 
+    q->setStyle(&QtMaterialStyle::instance());
+
     QSizePolicy policy;
     policy.setWidthForHeight(true);
     q->setSizePolicy(policy);
 
     rippleOverlay->installEventFilter(q);
 }
+
+/*!
+ *  \class QtMaterialIconButton
+ */
 
 QtMaterialIconButton::QtMaterialIconButton(const QIcon &icon, QWidget *parent)
     : QAbstractButton(parent),
@@ -41,6 +52,9 @@ QtMaterialIconButton::~QtMaterialIconButton()
 {
 }
 
+/*!
+ *  \reimp
+ */
 QSize QtMaterialIconButton::sizeHint() const
 {
     return iconSize();
@@ -49,6 +63,10 @@ QSize QtMaterialIconButton::sizeHint() const
 void QtMaterialIconButton::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialIconButton);
+
+    if (d->useThemeColors == value) {
+        return;
+    }
 
     d->useThemeColors = value;
     update();
@@ -104,6 +122,9 @@ QtMaterialIconButton::QtMaterialIconButton(QtMaterialIconButtonPrivate &d, QWidg
     d_func()->init();
 }
 
+/*!
+ *  \reimp
+ */
 bool QtMaterialIconButton::event(QEvent *event)
 {
     Q_D(QtMaterialIconButton);
@@ -123,6 +144,9 @@ bool QtMaterialIconButton::event(QEvent *event)
     return QAbstractButton::event(event);
 }
 
+/*!
+ *  \reimp
+ */
 bool QtMaterialIconButton::eventFilter(QObject *obj, QEvent *event)
 {
     if (QEvent::Resize == event->type())
@@ -135,6 +159,9 @@ bool QtMaterialIconButton::eventFilter(QObject *obj, QEvent *event)
     return QAbstractButton::eventFilter(obj, event);
 }
 
+/*!
+ *  \reimp
+ */
 void QtMaterialIconButton::mousePressEvent(QMouseEvent *event)
 {
     Q_D(QtMaterialIconButton);
@@ -147,6 +174,9 @@ void QtMaterialIconButton::mousePressEvent(QMouseEvent *event)
     QAbstractButton::mousePressEvent(event);
 }
 
+/*!
+ *  \reimp
+ */
 void QtMaterialIconButton::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)

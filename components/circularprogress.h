@@ -33,7 +33,7 @@ public:
     void setColor(const QColor &color);
     QColor color() const;
 
-    QSize sizeHint() const;
+    QSize sizeHint() const Q_DECL_OVERRIDE;
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;

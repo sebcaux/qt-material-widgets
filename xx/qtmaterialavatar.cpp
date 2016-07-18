@@ -89,6 +89,10 @@ void QtMaterialAvatar::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialAvatar);
 
+    if (d->useThemeColors == value) {
+        return;
+    }
+
     d->useThemeColors = value;
     update();
 }

@@ -12,7 +12,7 @@ TabsPrivate::TabsPrivate(Tabs *q)
       tabLayout(new QHBoxLayout),
       tab(-1),
       useThemeColors(true),
-      showHalo(false),
+      showHalo(true),
       rippleStyle(Material::CenteredRipple)
 {
 }
@@ -22,6 +22,8 @@ void TabsPrivate::init()
     Q_Q(Tabs);
 
     q->setLayout(tabLayout);
+    q->setStyle(&Style::instance());
+
     tabLayout->setSpacing(0);
     tabLayout->setMargin(0);
 }

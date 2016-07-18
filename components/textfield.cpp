@@ -7,6 +7,7 @@
 #include "textfield_internal.h"
 //#include "lib/style.h"
 #include "xxlib/qtmaterialstyle.h"
+#include <QDebug>
 
 TextFieldPrivate::TextFieldPrivate(TextField *q)
     : q_ptr(q),
@@ -37,6 +38,10 @@ void TextFieldPrivate::init()
     machine->start();
 
     QCoreApplication::processEvents();
+
+    //QPalette p;
+    //p.setColor(QPalette::Active, QPalette::Text, Qt::red);
+    //q->setPalette(p);
 }
 
 TextField::TextField(QWidget *parent)
@@ -69,7 +74,11 @@ void TextField::setShowLabel(bool value)
 {
     Q_D(TextField);
 
-    if (!d->label) {
+    if (d->showLabel == value) {
+        return;
+    }
+
+    if (!d->label && value) {
         d->label = new TextFieldLabel(this);
         d->machine->setLabel(d->label);
     }
@@ -100,6 +109,11 @@ void TextField::setLabelFontSize(qreal size)
         QFont f(d->label->font());
         f.setPointSizeF(size);
         d->label->setFont(f);
+
+        //QFontDatabase db;
+        //QFont font(db.font("Roboto", "Medium", size));
+        ////q->setFont(font);
+        //d->label->setFont(font);
     }
 }
 
@@ -116,6 +130,7 @@ void TextField::setLabel(const QString &label)
 
     d->labelString = label;
     setShowLabel(true);
+    d->label->update();
 }
 
 QString TextField::label() const
@@ -220,6 +235,11 @@ QColor TextField::hintColor() const
     }
 }
 
+QSize TextField::sizeHint() const
+{
+    return QLineEdit::sizeHint();
+}
+
 bool TextField::event(QEvent *event)
 {
     Q_D(TextField);
@@ -252,7 +272,8 @@ void TextField::paintEvent(QPaintEvent *event)
         bgBrush.setStyle(Qt::SolidPattern);
         bgBrush.setColor(backgroundColor());
         painter.setOpacity(1-d->machine->progress());
-        painter.fillRect(rect(), bgBrush);
+        //painter.fillRect(rect(), bgBrush);
+        painter.fillRect(rect(), parentWidget()->palette().color(backgroundRole()));
     }
 
     const int y = height()-1;

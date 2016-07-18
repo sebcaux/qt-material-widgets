@@ -116,6 +116,9 @@ void QtMaterialIconMenu::collapseDelayed()
     }
 }
 
+/*!
+ *  \reimp
+ */
 bool QtMaterialIconMenu::event(QEvent *event)
 {
     Q_D(QtMaterialIconMenu);
@@ -152,6 +155,9 @@ bool QtMaterialIconMenu::event(QEvent *event)
     return QtMaterialIconButton::event(event);
 }
 
+/*!
+ *  \reimp
+ */
 bool QtMaterialIconMenu::eventFilter(QObject *obj, QEvent *event)
 {
     Q_D(QtMaterialIconMenu);

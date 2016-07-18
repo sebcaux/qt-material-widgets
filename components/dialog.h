@@ -24,6 +24,7 @@ protected slots:
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
+    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
     const QScopedPointer<DialogPrivate> d_ptr;

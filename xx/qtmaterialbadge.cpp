@@ -82,6 +82,10 @@ void QtMaterialBadge::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialBadge);
 
+    if (d->useThemeColors == value) {
+        return;
+    }
+
     d->useThemeColors = value;
     update();
 }

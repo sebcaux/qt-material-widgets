@@ -116,6 +116,9 @@ QtMaterialFloatingActionButton::~QtMaterialFloatingActionButton()
 {
 }
 
+/*!
+ *  \reimp
+ */
 QSize QtMaterialFloatingActionButton::sizeHint() const
 {
     Q_D(const QtMaterialFloatingActionButton);
@@ -224,6 +227,9 @@ int QtMaterialFloatingActionButton::yOffset() const
     return d->offsY;
 }
 
+/*!
+ *  \reimp
+ */
 bool QtMaterialFloatingActionButton::event(QEvent *event)
 {
     Q_D(QtMaterialFloatingActionButton);
@@ -250,6 +256,9 @@ bool QtMaterialFloatingActionButton::event(QEvent *event)
     return QtMaterialRaisedButton::event(event);
 }
 
+/*!
+ *  \reimp
+ */
 bool QtMaterialFloatingActionButton::eventFilter(QObject *obj, QEvent *event)
 {
     const QEvent::Type type = event->type();
@@ -263,6 +272,9 @@ bool QtMaterialFloatingActionButton::eventFilter(QObject *obj, QEvent *event)
     return QtMaterialRaisedButton::eventFilter(obj, event);
 }
 
+/*!
+ *  \reimp
+ */
 void QtMaterialFloatingActionButton::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)

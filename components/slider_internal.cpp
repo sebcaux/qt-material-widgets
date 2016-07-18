@@ -368,6 +368,8 @@ void SliderTrack::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
 
+    painter.drawRect(rect());
+
     QBrush fg;
     fg.setStyle(Qt::SolidPattern);
     fg.setColor(slider->isEnabled() ? slider->thumbColor()

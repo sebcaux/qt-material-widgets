@@ -109,7 +109,7 @@ QColor Progress::backgroundColor() const
     Q_D(const Progress);
 
     if (d->useThemeColors || !d->backgroundColor.isValid()) {
-        return Style::instance().themeColor("accent3");
+        return Style::instance().themeColor("border");
     } else {
         return d->backgroundColor;
     }
@@ -126,7 +126,8 @@ void Progress::paintEvent(QPaintEvent *event)
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(backgroundColor());
+    brush.setColor(isEnabled() ? backgroundColor()
+                               : Style::instance().themeColor("disabled"));
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
@@ -136,16 +137,16 @@ void Progress::paintEvent(QPaintEvent *event)
 
     painter.drawRect(0, 0, width(), height());
 
-    brush.setColor(progressColor());
-    painter.setBrush(brush);
+    if (isEnabled())
+    {
+        brush.setColor(progressColor());
+        painter.setBrush(brush);
 
-    if (Material::IndeterminateProgress == d->progressType)
-    {
-        painter.drawRect(d->delegate->offset()*width()*2-width(), 0, width(), height());
-    }
-    else
-    {
-        qreal p = static_cast<qreal>(width())*(value()-minimum())/(maximum()-minimum());
-        painter.drawRect(0, 0, p, height());
+        if (Material::IndeterminateProgress == d->progressType) {
+            painter.drawRect(d->delegate->offset()*width()*2-width(), 0, width(), height());
+        } else {
+            qreal p = static_cast<qreal>(width())*(value()-minimum())/(maximum()-minimum());
+            painter.drawRect(0, 0, p, height());
+        }
     }
 }

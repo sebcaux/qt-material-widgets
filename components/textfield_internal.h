@@ -52,14 +52,20 @@ public:
     TextFieldLabel(TextField *parent);
     ~TextFieldLabel();
 
-    inline void setScale(qreal scale) { _scale = scale; update(); }
-    inline qreal scale() const { return _scale; }
+    inline void setScale(qreal scale)
+    { _scale = scale; update(); }
+    inline qreal scale() const
+    { return _scale; }
 
-    inline void setOffset(const QPointF &pos) { _posX = pos.x(); _posY = pos.y(); update(); }
-    inline QPointF offset() const { return QPointF(_posX, _posY); }
+    inline void setOffset(const QPointF &pos)
+    { _posX = pos.x(); _posY = pos.y(); update(); }
+    inline QPointF offset() const
+    { return QPointF(_posX, _posY); }
 
-    inline void setColor(const QColor &color) { _color = color; update(); }
-    inline QColor color() const { return _color; }
+    inline void setColor(const QColor &color)
+    { _color = color; update(); }
+    inline QColor color() const
+    { return _color; }
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;

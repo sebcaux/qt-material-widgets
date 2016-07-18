@@ -114,7 +114,23 @@ SOURCES += main.cpp\
     yy/checkboxsettingseditor.cpp \
     xxlib/qtmaterialcheckable.cpp \
     xxlib/qtmaterialcheckable_internal.cpp \
-    xx/qtmaterialcheckbox.cpp
+    xx/qtmaterialcheckbox.cpp \
+    yy/radiobuttonsettingseditor.cpp \
+    xx/qtmaterialradiobutton.cpp \
+    yy/circularprogresssettingseditor.cpp \
+    xx/qtmaterialcircularprogress.cpp \
+    xx/qtmaterialcircularprogress_internal.cpp \
+    yy/progresssettingseditor.cpp \
+    xx/qtmaterialprogress.cpp \
+    xx/qtmaterialprogress_internal.cpp \
+    xx/qtmaterialtextfield.cpp \
+    xx/qtmaterialtextfield_internal.cpp \
+    yy/textfieldsettingseditor.cpp \
+    xx/qtmaterialtabs.cpp \
+    xx/qtmaterialtabs_internal.cpp \
+    xx/qtmaterialslider.cpp \
+    xx/qtmaterialslider_internal.cpp \
+    yy/slidersettingseditor.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -258,7 +274,29 @@ HEADERS  += mainwindow.h \
     xxlib/qtmaterialcheckable_p.h \
     xxlib/qtmaterialcheckable_internal.h \
     xx/qtmaterialcheckbox.h \
-    xx/qtmaterialcheckbox_p.h
+    xx/qtmaterialcheckbox_p.h \
+    yy/radiobuttonsettingseditor.h \
+    xx/qtmaterialradiobutton.h \
+    xx/qtmaterialradiobutton_p.h \
+    yy/circularprogresssettingseditor.h \
+    xx/qtmaterialcircularprogress.h \
+    xx/qtmaterialcircularprogress_p.h \
+    xx/qtmaterialcircularprogress_internal.h \
+    yy/progresssettingseditor.h \
+    xx/qtmaterialprogress.h \
+    xx/qtmaterialprogress_p.h \
+    xx/qtmaterialprogress_internal.h \
+    xx/qtmaterialtextfield.h \
+    xx/qtmaterialtextfield_p.h \
+    xx/qtmaterialtextfield_internal.h \
+    yy/textfieldsettingseditor.h \
+    xx/qtmaterialtabs.h \
+    xx/qtmaterialtabs_p.h \
+    xx/qtmaterialtabs_internal.h \
+    xx/qtmaterialslider.h \
+    xx/qtmaterialslider_p.h \
+    xx/qtmaterialslider_internal.h \
+    yy/slidersettingseditor.h
 
 RESOURCES += \
     resources.qrc
@@ -270,4 +308,9 @@ FORMS += \
     yy/badgesettingsform.ui \
     yy/iconmenusettingsform.ui \
     yy/selectfieldsettingsform.ui \
-    yy/checkboxsettingsform.ui
+    yy/checkboxsettingsform.ui \
+    yy/radiobuttonsettingsform.ui \
+    yy/circularprogresssettingsform.ui \
+    yy/progresssettingsform.ui \
+    yy/textfieldsettingsform.ui \
+    yy/slidersettingsform.ui

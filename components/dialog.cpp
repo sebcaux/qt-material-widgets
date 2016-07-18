@@ -6,10 +6,12 @@
 #include <QSignalTransition>
 #include <QPropertyAnimation>
 #include <QEvent>
+#include <QMouseEvent>
 #include <QPushButton>
 #include <QGraphicsDropShadowEffect>
 #include "lib/transparencyproxy.h"
 #include "dialog_internal.h"
+#include <QDebug>
 
 DialogPrivate::DialogPrivate(Dialog *q)
     : q_ptr(q),
@@ -183,6 +185,16 @@ bool Dialog::eventFilter(QObject *obj, QEvent *event)
         }
     }
     return QWidget::eventFilter(obj, event);
+}
+
+void Dialog::mousePressEvent(QMouseEvent *event)
+{
+    Q_D(Dialog);
+
+    QRect rect(d->window->mapToGlobal(QPoint(0, 0)), d->window->size());
+    if (!rect.contains(event->globalPos())) {
+        hideDialog();
+    }
 }
 
 void Dialog::paintEvent(QPaintEvent *event)

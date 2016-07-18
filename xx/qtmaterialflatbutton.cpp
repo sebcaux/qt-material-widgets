@@ -129,6 +129,10 @@ void QtMaterialFlatButton::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialFlatButton);
 
+    if (d->useThemeColors == value) {
+        return;
+    }
+
     d->useThemeColors = value;
     d->stateMachine->setupProperties();
 }

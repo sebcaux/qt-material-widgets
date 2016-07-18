@@ -39,15 +39,53 @@
 #include "yy/selectfieldsettingseditor.h"
 #include "yy/iconmenusettingseditor.h"
 #include "yy/checkboxsettingseditor.h"
+#include "yy/radiobuttonsettingseditor.h"
+#include "components/circularprogress.h"
+#include "yy/circularprogresssettingseditor.h"
+#include "yy/progresssettingseditor.h"
+#include "components/textfield.h"
+#include "components/dialog.h"
+#include "yy/textfieldsettingseditor.h"
+#include "components/tabs.h"
+#include "xx/qtmaterialtabs.h"
+#include "components/slider.h"
+#include "components/toggle.h"
+#include "xx/qtmaterialslider.h"
+#include "yy/slidersettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       _menu(new MenuPlus)
 {
-    CheckBoxSettingsEditor *editor = new CheckBoxSettingsEditor;
+    SliderSettingsEditor *editor = new SliderSettingsEditor;
     setCentralWidget(editor);
 
     return;
+
+    //TextFieldSettingsEditor *editor = new TextFieldSettingsEditor;
+    //setCentralWidget(editor);
+
+    //return;
+
+    //ProgressSettingsEditor *editor = new ProgressSettingsEditor;
+    //setCentralWidget(editor);
+
+    //return;
+
+    //CircularProgressSettingsEditor *editor = new CircularProgressSettingsEditor;
+    //setCentralWidget(editor);
+
+    //return;
+
+    //RadioButtonSettingsEditor *editor = new RadioButtonSettingsEditor;
+    //setCentralWidget(editor);
+
+    //return;
+
+    //CheckBoxSettingsEditor *editor = new CheckBoxSettingsEditor;
+    //setCentralWidget(editor);
+
+    //return;
 
     //IconMenuSettingsEditor *editor = new IconMenuSettingsEditor;
     //setCentralWidget(editor);
@@ -95,14 +133,97 @@ MainWindow::MainWindow(QWidget *parent)
 
     widget->setStyleSheet("QWidget { background: white; }");
 
-    //QtMaterialIconButton *btn = new QtMaterialIconButton(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
-    //layout->addWidget(btn);
+
+    Slider *sldr = new Slider;
+    Slider *sldr2 = new Slider;
+    QtMaterialSlider *sldr3 = new QtMaterialSlider;
+
+    Toggle *tgl = new Toggle;
 
     layout->addStretch();
+    layout->addWidget(sldr);
+    layout->addWidget(sldr2);
+    layout->addWidget(sldr3);
+    layout->addWidget(tgl);
+    layout->addStretch();
+
+    return;
+
+    QStackedLayout *stack = new QStackedLayout;
+    stack->addWidget(new QLabel("<center>First</center>"));
+    stack->addWidget(new QLabel("<center>Second</center>"));
+    stack->addWidget(new QLabel("<center>Third</center>"));
+
+    Tabs *tabs = new Tabs;
+    layout->addWidget(tabs);
+    layout->addLayout(stack);
+    layout->setContentsMargins(0, 0, 0, 0);
+
+    tabs->addTab("First", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+    tabs->addTab("Second", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+    tabs->addTab("Third", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+
+    //
+
+    QtMaterialTabs *_tabs = new QtMaterialTabs;
+    layout->addWidget(_tabs);
+    layout->setContentsMargins(0, 0, 0, 0);
+
+    _tabs->addTab("First", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+    _tabs->addTab("Second", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+    _tabs->addTab("Third", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+
+    QStackedLayout *stack2 = new QStackedLayout;
+    stack2->addWidget(new QLabel("<center>First</center>"));
+    stack2->addWidget(new QLabel("<center>Second</center>"));
+    stack2->addWidget(new QLabel("<center>Third</center>"));
+
+    layout->addLayout(stack2);
+
+    connect(_tabs, SIGNAL(currentChanged(int)), stack2, SLOT(setCurrentIndex(int)));
+
+    /*
+    QtMaterialIconButton *btn = new QtMaterialIconButton(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+    layout->addWidget(btn);
+
+    layout->addStretch();
+
+    //CircularProgress *cp = new CircularProgress;
+    //layout->addWidget(cp);
+
+    TextField *tf = new TextField;
+    layout->addWidget(tf);
+    layout->addStretch();
+
+    Dialog *dlg = new Dialog;
+    dlg->setParent(this);
+
+    //dlg->windowLayout()->addWidget(new QPushButton("Hello"));
+    QVBoxLayout *dl = new QVBoxLayout;
+    dl->addWidget(new QPushButton("Hello"));
+    dlg->setWindowLayout(dl);
+
+    QPushButton *bbbtn = new QPushButton("Show dialog");
+    layout->addWidget(bbbtn);
+
+    connect(bbbtn, SIGNAL(pressed()), dlg, SLOT(showDialog()));
 
     QtMaterialIconMenu *im = new QtMaterialIconMenu(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
     layout->addWidget(im);
     layout->setAlignment(im, Qt::AlignCenter);
+
+    {
+        im->addMenuItem("C");
+        im->addMenuItem("C++");
+        im->addMenuItem("Haskell");
+        im->addMenuItem("JavaScript");
+        im->addMenuItem("ECMAScript");
+        im->addMenuItem("OCaml");
+        im->addMenuItem("Python");
+        im->addMenuItem("F#");
+        im->addMenuItem("Clojure");
+        im->addMenuItem("Java");
+    }
 
     QtMaterialSelectField *sfp = new QtMaterialSelectField;
     //sfp->setBackgroundColor(Qt::white);
@@ -123,6 +244,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     layout->addStretch();
+    */
 
     //layout->setAlignment(sfp, Qt::AlignCenter);
 
@@ -134,6 +256,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //layout->setAlignment(tf, Qt::AlignCenter);
 
+    /*
     {
         QtMaterialMenuItem *b;
 
@@ -229,6 +352,7 @@ MainWindow::MainWindow(QWidget *parent)
         im->addMenuItem(b);
     }
 
+    */
 
     /*
     //layout->addWidget(_menu);

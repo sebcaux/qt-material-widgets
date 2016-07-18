@@ -1,33 +1,37 @@
-#include "circularprogress.h"
-#include "circularprogress_p.h"
-#include <QPainter>
+#include "xx/qtmaterialcircularprogress.h"
+#include "xx/qtmaterialcircularprogress_p.h"
 #include <QPropertyAnimation>
-#include <QSequentialAnimationGroup>
 #include <QParallelAnimationGroup>
-#include "circularprogress_internal.h"
-#include "lib/style.h"
+#include <QPainter>
+#include "xx/qtmaterialcircularprogress_internal.h"
+#include "xxlib/qtmaterialstyle.h"
 
-CircularProgressPrivate::CircularProgressPrivate(CircularProgress *q)
-    : q_ptr(q),
-      delegate(new CircularProgressDelegate(q)),
-      progressType(Material::IndeterminateProgress),
-      size(64),
-      penWidth(6.25),
-      useThemeColors(true)
+/*!
+ *  \class QtMaterialCircularProgressPrivate
+ *  \internal
+ */
+
+QtMaterialCircularProgressPrivate::QtMaterialCircularProgressPrivate(QtMaterialCircularProgress *q)
+    : q_ptr(q)
 {
 }
 
-CircularProgressPrivate::~CircularProgressPrivate()
+QtMaterialCircularProgressPrivate::~QtMaterialCircularProgressPrivate()
 {
 }
 
-void CircularProgressPrivate::init()
+void QtMaterialCircularProgressPrivate::init()
 {
-    Q_Q(CircularProgress);
+    Q_Q(QtMaterialCircularProgress);
 
-    QSizePolicy policy(QSizePolicy::MinimumExpanding,
-                       QSizePolicy::MinimumExpanding);
-    q->setSizePolicy(policy);
+    delegate       = new QtMaterialCircularProgressDelegate(q);
+    progressType   = XXMaterial::IndeterminateProgress;
+    penWidth       = 6.25;
+    size           = 64;
+    useThemeColors = true;
+
+    q->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
+                                 QSizePolicy::MinimumExpanding));
 
     QParallelAnimationGroup *group = new QParallelAnimationGroup(q);
     group->setLoopCount(-1);
@@ -72,115 +76,127 @@ void CircularProgressPrivate::init()
     group->start();
 }
 
-CircularProgress::CircularProgress(QWidget *parent)
+/*!
+ *  \class QtMaterialCircularProgress
+ */
+
+QtMaterialCircularProgress::QtMaterialCircularProgress(QWidget *parent)
     : QProgressBar(parent),
-      d_ptr(new CircularProgressPrivate(this))
+      d_ptr(new QtMaterialCircularProgressPrivate(this))
 {
     d_func()->init();
 }
 
-CircularProgress::~CircularProgress()
+QtMaterialCircularProgress::~QtMaterialCircularProgress()
 {
 }
 
-void CircularProgress::setProgressType(Material::ProgressType type)
+void QtMaterialCircularProgress::setProgressType(XXMaterial::ProgressType type)
 {
-    Q_D(CircularProgress);
+    Q_D(QtMaterialCircularProgress);
 
     d->progressType = type;
     update();
 }
 
-Material::ProgressType CircularProgress::progressType() const
+XXMaterial::ProgressType QtMaterialCircularProgress::progressType() const
 {
-    Q_D(const CircularProgress);
+    Q_D(const QtMaterialCircularProgress);
 
     return d->progressType;
 }
 
-
-void CircularProgress::setUseThemeColors(bool state)
+void QtMaterialCircularProgress::setUseThemeColors(bool value)
 {
-    Q_D(CircularProgress);
+    Q_D(QtMaterialCircularProgress);
 
-    d->useThemeColors = state;
+    if (d->useThemeColors == value) {
+        return;
+    }
+
+    d->useThemeColors = value;
     update();
 }
 
-bool CircularProgress::useThemeColors() const
+bool QtMaterialCircularProgress::useThemeColors() const
 {
-    Q_D(const CircularProgress);
+    Q_D(const QtMaterialCircularProgress);
 
     return d->useThemeColors;
 }
 
-void CircularProgress::setLineWidth(qreal width)
+void QtMaterialCircularProgress::setLineWidth(qreal width)
 {
-    Q_D(CircularProgress);
+    Q_D(QtMaterialCircularProgress);
 
     d->penWidth = width;
     update();
     updateGeometry();
 }
 
-qreal CircularProgress::lineWidth() const
+qreal QtMaterialCircularProgress::lineWidth() const
 {
-    Q_D(const CircularProgress);
+    Q_D(const QtMaterialCircularProgress);
 
     return d->penWidth;
 }
 
-void CircularProgress::setSize(int size)
+void QtMaterialCircularProgress::setSize(int size)
 {
-    Q_D(CircularProgress);
+    Q_D(QtMaterialCircularProgress);
 
     d->size = size;
     update();
     updateGeometry();
 }
 
-int CircularProgress::size() const
+int QtMaterialCircularProgress::size() const
 {
-    Q_D(const CircularProgress);
+    Q_D(const QtMaterialCircularProgress);
 
     return d->size;
 }
 
-void CircularProgress::setColor(const QColor &color)
+void QtMaterialCircularProgress::setColor(const QColor &color)
 {
-    Q_D(CircularProgress);
+    Q_D(QtMaterialCircularProgress);
 
     d->color = color;
     setUseThemeColors(false);
 }
 
-QColor CircularProgress::color() const
+QColor QtMaterialCircularProgress::color() const
 {
-    Q_D(const CircularProgress);
+    Q_D(const QtMaterialCircularProgress);
 
     if (d->useThemeColors || !d->color.isValid()) {
-        return Style::instance().themeColor("primary1");
+        return QtMaterialStyle::instance().themeColor("primary1");
     } else {
         return d->color;
     }
 }
 
-QSize CircularProgress::sizeHint() const
+/*!
+ *  \reimp
+ */
+QSize QtMaterialCircularProgress::sizeHint() const
 {
-    Q_D(const CircularProgress);
+    Q_D(const QtMaterialCircularProgress);
 
     const qreal s = d->size+d->penWidth+8;
     return QSize(s, s);
 }
 
-void CircularProgress::paintEvent(QPaintEvent *event)
+/*!
+ *  \reimp
+ */
+void QtMaterialCircularProgress::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
-    Q_D(CircularProgress);
+    Q_D(QtMaterialCircularProgress);
 
     QPainter painter(this);
-
     painter.setRenderHint(QPainter::Antialiasing);
 
     if (!isEnabled())
@@ -188,14 +204,15 @@ void CircularProgress::paintEvent(QPaintEvent *event)
         QPen pen;
         pen.setCapStyle(Qt::RoundCap);
         pen.setWidthF(d->penWidth);
-        pen.setColor(Style::instance().themeColor("border"));
+        pen.setColor(QtMaterialStyle::instance().themeColor("border"));
         painter.setPen(pen);
         painter.drawLine(rect().center()-QPointF(20, 20), rect().center()+QPointF(20, 20));
         painter.drawLine(rect().center()+QPointF(20, -20), rect().center()-QPointF(20, -20));
         return;
     }
 
-    if (Material::IndeterminateProgress == d->progressType) {
+    if (XXMaterial::IndeterminateProgress == d->progressType)
+    {
         painter.translate(width()/2, height()/2);
         painter.rotate(d->delegate->angle());
     }
@@ -205,7 +222,7 @@ void CircularProgress::paintEvent(QPaintEvent *event)
     pen.setWidthF(d->penWidth);
     pen.setColor(color());
 
-    if (Material::IndeterminateProgress == d->progressType)
+    if (XXMaterial::IndeterminateProgress == d->progressType)
     {
         QVector<qreal> pattern;
         pattern << d->delegate->dashLength()*d->size/50 << 30*d->size/50;

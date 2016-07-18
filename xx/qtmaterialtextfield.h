@@ -1,23 +1,22 @@
-#ifndef TEXTFIELD_H
-#define TEXTFIELD_H
+#ifndef QTMATERIALTEXTFIELD_H
+#define QTMATERIALTEXTFIELD_H
 
 #include <QLineEdit>
+#include <QColor>
 
-class TextFieldPrivate;
+class QtMaterialTextFieldPrivate;
 
-class TextField : public QLineEdit
+class QtMaterialTextField : public QLineEdit
 {
     Q_OBJECT
 
     Q_PROPERTY(QColor textColor WRITE setTextColor READ textColor)
-    Q_PROPERTY(QColor backgroundColor WRITE setBackgroundColor READ backgroundColor)
     Q_PROPERTY(QColor inkColor WRITE setInkColor READ inkColor)
     Q_PROPERTY(QColor underlineColor WRITE setUnderlineColor READ underlineColor)
-    Q_PROPERTY(QColor hintColor WRITE setHintColor READ hintColor)
 
 public:
-    explicit TextField(QWidget *parent = 0);
-    ~TextField();
+    explicit QtMaterialTextField(QWidget *parent = 0);
+    ~QtMaterialTextField();
 
     void setUseThemeColors(bool value);
     bool useThemeColors() const;
@@ -34,8 +33,8 @@ public:
     void setTextColor(const QColor &color);
     QColor textColor() const;
 
-    void setBackgroundColor(const QColor &color);
-    QColor backgroundColor() const;
+    void setLabelColor(const QColor &color);
+    QColor labelColor() const;
 
     void setInkColor(const QColor &color);
     QColor inkColor() const;
@@ -43,20 +42,15 @@ public:
     void setUnderlineColor(const QColor &color);
     QColor underlineColor() const;
 
-    void setHintColor(const QColor &color);
-    QColor hintColor() const;
-
-    QSize sizeHint() const Q_DECL_OVERRIDE;
-
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
-    const QScopedPointer<TextFieldPrivate> d_ptr;
+    const QScopedPointer<QtMaterialTextFieldPrivate> d_ptr;
 
 private:
-    Q_DISABLE_COPY(TextField)
-    Q_DECLARE_PRIVATE(TextField)
+    Q_DISABLE_COPY(QtMaterialTextField)
+    Q_DECLARE_PRIVATE(QtMaterialTextField)
 };
 
-#endif // TEXTFIELD_H
+#endif // QTMATERIALTEXTFIELD_H

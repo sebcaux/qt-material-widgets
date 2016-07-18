@@ -26,6 +26,12 @@ void QtMaterialScrollBarPrivate::init()
     hideOnMouseOut = true;
     useThemeColors = true;
 
+    q->setMouseTracking(true);
+    q->setStyle(&QtMaterialStyle::instance());
+    q->setStyleSheet("QScrollBar:vertical { margin: 0; }"
+                     "QScrollBar::add-line:vertical { height: 0; margin: 0; }"
+                     "QScrollBar::sub-line:vertical { height: 0; margin: 0; }");
+
     stateMachine->start();
 }
 
@@ -44,6 +50,9 @@ QtMaterialScrollBar::~QtMaterialScrollBar()
 {
 }
 
+/*!
+ *  \reimp
+ */
 QSize QtMaterialScrollBar::sizeHint() const
 {
     if (Qt::Horizontal == orientation()) {
@@ -56,6 +65,10 @@ QSize QtMaterialScrollBar::sizeHint() const
 void QtMaterialScrollBar::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialScrollBar);
+
+    if (d->useThemeColors == value) {
+        return;
+    }
 
     d->useThemeColors = value;
     update();
@@ -140,6 +153,9 @@ bool QtMaterialScrollBar::hideOnMouseOut() const
     return d->hideOnMouseOut;
 }
 
+/*!
+ *  \reimp
+ */
 void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)

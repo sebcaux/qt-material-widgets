@@ -51,7 +51,7 @@ void QtMaterialCheckablePrivate::init()
     q->setStyle(&QtMaterialStyle::instance());
 
     QFontDatabase db;
-    QFont font(db.font("Roboto", "Medium", 11));
+    QFont font(db.font("Roboto", "Regular", 11));
     q->setFont(font);
 
     stateMachine->addState(uncheckedState);
@@ -107,6 +107,9 @@ void QtMaterialCheckablePrivate::init()
     uncheckedState->assignProperty(uncheckedIcon, "opacity", 1);
 
     disabledCheckedState->assignProperty(checkedIcon, "opacity", 1);
+    disabledCheckedState->assignProperty(uncheckedIcon, "opacity", 0);
+
+    disabledUncheckedState->assignProperty(checkedIcon, "opacity", 0);
     disabledUncheckedState->assignProperty(uncheckedIcon, "opacity", 1);
 
     checkedState->assignProperty(checkedIcon, "color", q->checkedColor());
@@ -155,6 +158,10 @@ QtMaterialCheckable::LabelPosition QtMaterialCheckable::labelPosition() const
 void QtMaterialCheckable::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialCheckable);
+
+    if (d->useThemeColors == value) {
+        return;
+    }
 
     d->useThemeColors = value;
     setupProperties();
@@ -358,7 +365,7 @@ void QtMaterialCheckable::mousePressEvent(QMouseEvent *event)
     }
     d->rippleOverlay->addRipple(ripple);
 
-    QAbstractButton::mousePressEvent(event);
+    setChecked(!isChecked());
 }
 
 /*!
@@ -371,6 +378,10 @@ void QtMaterialCheckable::paintEvent(QPaintEvent *event)
     Q_D(QtMaterialCheckable);
 
     QPainter painter(this);
+
+    QPen pen;
+    pen.setColor(isEnabled() ? textColor() : disabledColor());
+    painter.setPen(pen);
 
     if (QtMaterialCheckable::LabelPositionLeft == d->labelPosition) {
         painter.drawText(4, 25, text());

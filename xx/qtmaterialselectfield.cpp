@@ -72,6 +72,9 @@ QtMaterialSelectField::~QtMaterialSelectField()
 {
 }
 
+/*!
+ *  \reimp
+ */
 QSize QtMaterialSelectField::sizeHint() const
 {
     return QSize(300, 30);
@@ -113,6 +116,10 @@ QString QtMaterialSelectField::placeholderText() const
 void QtMaterialSelectField::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialSelectField);
+
+    if (d->useThemeColors == value) {
+        return;
+    }
 
     d->useThemeColors = value;
     update();
@@ -261,6 +268,9 @@ void QtMaterialSelectField::collapseDelayed()
     QTimer::singleShot(200, d->menu, SLOT(collapse()));
 }
 
+/*!
+ *  \reimp
+ */
 bool QtMaterialSelectField::event(QEvent *event)
 {
     Q_D(QtMaterialSelectField);
@@ -304,6 +314,9 @@ bool QtMaterialSelectField::event(QEvent *event)
     return QWidget::event(event);
 }
 
+/*!
+ *  \reimp
+ */
 bool QtMaterialSelectField::eventFilter(QObject *obj, QEvent *event)
 {
     Q_D(QtMaterialSelectField);
@@ -314,6 +327,9 @@ bool QtMaterialSelectField::eventFilter(QObject *obj, QEvent *event)
     return QWidget::eventFilter(obj, event);
 }
 
+/*!
+ *  \reimp
+ */
 void QtMaterialSelectField::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
