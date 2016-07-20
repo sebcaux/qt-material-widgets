@@ -4,6 +4,8 @@
 #include <QMainWindow>
 
 class MenuPlus;
+class Snackbar;
+class QtMaterialSnackbar;
 
 class MainWindow : public QMainWindow
 {
@@ -25,11 +27,14 @@ protected slots:
     void button2Pressed();
     void button3Pressed();
     void button4Pressed();
+    void hello();
 
 private:
     void _initMenu() const;
 
     MenuPlus *_menu;
+    Snackbar *snackbar;
+    QtMaterialSnackbar *snackbar2;
 };
 
 /*

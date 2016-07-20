@@ -60,15 +60,13 @@ void RippleOverlay::paintEvent(QPaintEvent *event)
         painter.drawEllipse(center, radius, radius);
     }
 
-#ifdef DEBUG_LAYOUT
     QPen pen;
-    pen.setColor(Qt::red);
+    pen.setColor(Qt::blue);
     pen.setWidth(2);
     painter.setOpacity(1);
     painter.setPen(pen);
     painter.setBrush(Qt::NoBrush);
     painter.drawRect(rect());
-#endif
 }
 
 void RippleOverlay::deleteRipple()

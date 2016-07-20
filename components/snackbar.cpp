@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QEvent>
 #include <QDebug>
+#include <QFontDatabase>
 #include "snackbar_internal.h"
 
 SnackbarPrivate::SnackbarPrivate(Snackbar *q)
@@ -25,8 +26,9 @@ void SnackbarPrivate::init()
 
     q->setAttribute(Qt::WA_TransparentForMouseEvents);
 
-    QFont font(q->font());
-    font.setPointSizeF(11);
+    QFontDatabase db;
+    QFont font(db.font("Roboto", "Medium", 10));
+    font.setCapitalization(QFont::AllUppercase);
     q->setFont(font);
 
     backgroundColor = QColor(0, 0, 0, 220);

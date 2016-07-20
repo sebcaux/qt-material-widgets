@@ -79,6 +79,15 @@ void ToggleThumb::paintEvent(QPaintEvent *event)
         painter.setBrush(brush);
         painter.drawEllipse(r);
     }
+
+    //
+
+    QPen p;
+    p.setWidth(2);
+    p.setColor(Qt::red);
+    painter.setPen(p);
+    painter.setBrush(Qt::NoBrush);
+    painter.drawRect(rect());
 }
 
 void ToggleThumb::updateOffset()
@@ -147,4 +156,13 @@ void ToggleTrack::paintEvent(QPaintEvent *event)
         const QRect r(w/2, 0, w, height());
         painter.drawRoundedRect(r.adjusted(4, 14, -4, -14), w/2-4, w/2-4);
     }
+
+    //
+
+    QPen p;
+    p.setWidth(2);
+    p.setColor(Qt::red);
+    painter.setPen(p);
+    painter.setBrush(Qt::NoBrush);
+    painter.drawRect(rect());
 }

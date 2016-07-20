@@ -210,7 +210,7 @@ void Dialog::paintEvent(QPaintEvent *event)
     brush.setColor(Qt::black);
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
-    painter.setOpacity(d->proxy->opacity()/2);
+    painter.setOpacity(d->proxy->opacity()/3);
 
     painter.drawRect(rect());
 }

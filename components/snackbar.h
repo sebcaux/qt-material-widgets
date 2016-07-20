@@ -23,6 +23,9 @@ public:
     void setAutoHideDuration(int duration);
     int autoHideDuration() const;
 
+    void setUseThemeColors(bool value);
+    bool useThemeColors() const;
+
     void setBackgroundColor(const QColor &color);
     QColor backgroundColor() const;
 

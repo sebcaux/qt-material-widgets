@@ -130,7 +130,12 @@ SOURCES += main.cpp\
     xx/qtmaterialtabs_internal.cpp \
     xx/qtmaterialslider.cpp \
     xx/qtmaterialslider_internal.cpp \
-    yy/slidersettingseditor.cpp
+    yy/slidersettingseditor.cpp \
+    xx/qtmaterialtoggle.cpp \
+    xx/qtmaterialtoggle_internal.cpp \
+    yy/togglesettingseditor.cpp \
+    xx/qtmaterialsnackbar.cpp \
+    xx/qtmaterialsnackbar_internal.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -296,7 +301,14 @@ HEADERS  += mainwindow.h \
     xx/qtmaterialslider.h \
     xx/qtmaterialslider_p.h \
     xx/qtmaterialslider_internal.h \
-    yy/slidersettingseditor.h
+    yy/slidersettingseditor.h \
+    xx/qtmaterialtoggle.h \
+    xx/qtmaterialtoggle_p.h \
+    xx/qtmaterialtoggle_internal.h \
+    yy/togglesettingseditor.h \
+    xx/qtmaterialsnackbar.h \
+    xx/qtmaterialsnackbar_p.h \
+    xx/qtmaterialsnackbar_internal.h
 
 RESOURCES += \
     resources.qrc
@@ -313,4 +325,5 @@ FORMS += \
     yy/circularprogresssettingsform.ui \
     yy/progresssettingsform.ui \
     yy/textfieldsettingsform.ui \
-    yy/slidersettingsform.ui
+    yy/slidersettingsform.ui \
+    yy/togglesettingsform.ui

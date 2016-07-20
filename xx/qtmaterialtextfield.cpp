@@ -256,11 +256,12 @@ void QtMaterialTextField::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
 
-    if (text().isEmpty())
+    const qreal progress = d->stateMachine->progress();
+
+    if (text().isEmpty() && progress < 1)
     {
-        painter.setOpacity(1-d->stateMachine->progress());
-        //painter.fillRect(rect(), parentWidget()->palette().color(backgroundRole()));
-        painter.fillRect(rect(), Qt::white);
+        painter.setOpacity(1-progress);
+        painter.fillRect(rect(), parentWidget()->palette().color(backgroundRole()));
     }
 
     const int y = height()-1;
@@ -276,8 +277,6 @@ void QtMaterialTextField::paintEvent(QPaintEvent *event)
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(inkColor());
-
-    const qreal progress = d->stateMachine->progress();
 
     if (progress > 0)
     {

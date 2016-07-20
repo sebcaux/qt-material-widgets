@@ -4,6 +4,8 @@
 #include <QAbstractSlider>
 #include <QScopedPointer>
 
+#define QT_MATERIAL_SLIDER_MARGIN 30
+
 class QtMaterialSliderPrivate;
 
 class QtMaterialSlider : public QAbstractSlider
@@ -35,6 +37,8 @@ public:
 
     QSize minimumSizeHint() const Q_DECL_OVERRIDE;
 
+    void setInvertedAppearance(bool value);
+
 protected:
     void sliderChange(SliderChange change) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
@@ -42,10 +46,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void leaveEvent(QEvent *event) Q_DECL_OVERRIDE;
 
-    friend class QtMaterialSliderThumb;
-    friend class QtMaterialSliderTrack;
-
-    int thumbOffset() const;
+    void updateThumbOffset();
 
     const QScopedPointer<QtMaterialSliderPrivate> d_ptr;
 

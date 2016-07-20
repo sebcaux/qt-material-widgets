@@ -77,6 +77,9 @@ public:
     inline void setHaloColor(const QColor &color);
     inline QColor haloColor() const;
 
+    inline void setOffset(int offset);
+    inline int offset() const;
+
 protected:
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
@@ -91,6 +94,7 @@ private:
     qreal                         m_diameter;
     qreal                         m_borderWidth;
     qreal                         m_haloSize;
+    int                           m_offset;
 };
 
 inline void QtMaterialSliderThumb::setDiameter(qreal diameter)
@@ -159,6 +163,17 @@ inline QColor QtMaterialSliderThumb::haloColor() const
     return m_haloColor;
 }
 
+inline void QtMaterialSliderThumb::setOffset(int offset)
+{
+    m_offset = offset;
+    update();
+}
+
+inline int QtMaterialSliderThumb::offset() const
+{
+    return m_offset;
+}
+
 class QtMaterialSliderTrack : public QtMaterialOverlayWidget
 {
     Q_OBJECT
@@ -166,7 +181,7 @@ class QtMaterialSliderTrack : public QtMaterialOverlayWidget
     Q_PROPERTY(QColor fillColor WRITE setFillColor READ fillColor)
 
 public:
-    explicit QtMaterialSliderTrack(QtMaterialSlider *slider);
+    explicit QtMaterialSliderTrack(QtMaterialSliderThumb *thumb, QtMaterialSlider *slider);
     ~QtMaterialSliderTrack();
 
     inline void setFillColor(const QColor &color);
@@ -183,6 +198,7 @@ private:
     Q_DISABLE_COPY(QtMaterialSliderTrack)
 
     const QtMaterialSlider *const m_slider;
+    QtMaterialSliderThumb  *const m_thumb;
     QColor                        m_fillColor;
     int                           m_trackWidth;
 };

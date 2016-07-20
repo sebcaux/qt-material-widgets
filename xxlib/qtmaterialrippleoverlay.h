@@ -27,6 +27,8 @@ public:
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
+    inline QList<QtMaterialRipple *> ripples() const;
+
 private:
     Q_DISABLE_COPY(QtMaterialRippleOverlay)
 
@@ -52,6 +54,11 @@ inline void QtMaterialRippleOverlay::setClipPath(const QPainterPath &path)
 {
     m_clipPath = path;
     update();
+}
+
+inline QList<QtMaterialRipple *> QtMaterialRippleOverlay::ripples() const
+{
+    return m_ripples;
 }
 
 #endif // QTMATERIALRIPPLEOVERLAY_H

@@ -16,10 +16,6 @@ class QtMaterialSliderPrivate
     Q_DECLARE_PUBLIC(QtMaterialSlider)
 
 public:
-    enum {
-        SliderMargin = 30
-    };
-
     QtMaterialSliderPrivate(QtMaterialSlider *q);
     ~QtMaterialSliderPrivate();
 

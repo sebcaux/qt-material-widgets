@@ -15,7 +15,7 @@ protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
     bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
 
-    QRect overlayGeometry() const;
+    virtual QRect overlayGeometry() const;
 
 private:
     Q_DISABLE_COPY(QtMaterialOverlayWidget)

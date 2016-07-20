@@ -52,15 +52,24 @@
 #include "components/toggle.h"
 #include "xx/qtmaterialslider.h"
 #include "yy/slidersettingseditor.h"
+#include "xx/qtmaterialtoggle.h"
+#include "yy/togglesettingseditor.h"
+#include "components/snackbar.h"
+#include "xx/qtmaterialsnackbar.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       _menu(new MenuPlus)
 {
-    SliderSettingsEditor *editor = new SliderSettingsEditor;
-    setCentralWidget(editor);
+    //ToggleSettingsEditor *editor = new ToggleSettingsEditor;
+    //setCentralWidget(editor);
 
-    return;
+    //return;
+
+    //SliderSettingsEditor *editor = new SliderSettingsEditor;
+    //setCentralWidget(editor);
+
+    //return;
 
     //TextFieldSettingsEditor *editor = new TextFieldSettingsEditor;
     //setCentralWidget(editor);
@@ -119,68 +128,73 @@ MainWindow::MainWindow(QWidget *parent)
     //setCentralWidget(ed);
 
 
-    _menu->addMenuItem("Menu item #1");
-    _menu->addMenuItem("Menu item #2");
-    _menu->addMenuItem("Menu item #3");
-    //menu->setFixedSize(200, 250);
-    _menu->setMaximumHeight(250);
-    _menu->setMinimumWidth(300);
-
+//    _menu->addMenuItem("Menu item #1");
+//    _menu->addMenuItem("Menu item #2");
+//    _menu->addMenuItem("Menu item #3");
+//    //menu->setFixedSize(200, 250);
+//    _menu->setMaximumHeight(250);
+//    _menu->setMinimumWidth(300);
+//
     QWidget *widget = new QWidget;
     QVBoxLayout *layout = new QVBoxLayout;
     widget->setLayout(layout);
     setCentralWidget(widget);
 
-    widget->setStyleSheet("QWidget { background: white; }");
-
-
-    Slider *sldr = new Slider;
-    Slider *sldr2 = new Slider;
-    QtMaterialSlider *sldr3 = new QtMaterialSlider;
-
-    Toggle *tgl = new Toggle;
-
-    layout->addStretch();
-    layout->addWidget(sldr);
-    layout->addWidget(sldr2);
-    layout->addWidget(sldr3);
-    layout->addWidget(tgl);
-    layout->addStretch();
-
-    return;
-
-    QStackedLayout *stack = new QStackedLayout;
-    stack->addWidget(new QLabel("<center>First</center>"));
-    stack->addWidget(new QLabel("<center>Second</center>"));
-    stack->addWidget(new QLabel("<center>Third</center>"));
-
-    Tabs *tabs = new Tabs;
-    layout->addWidget(tabs);
-    layout->addLayout(stack);
-    layout->setContentsMargins(0, 0, 0, 0);
-
-    tabs->addTab("First", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
-    tabs->addTab("Second", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
-    tabs->addTab("Third", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
-
-    //
-
-    QtMaterialTabs *_tabs = new QtMaterialTabs;
-    layout->addWidget(_tabs);
-    layout->setContentsMargins(0, 0, 0, 0);
-
-    _tabs->addTab("First", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
-    _tabs->addTab("Second", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
-    _tabs->addTab("Third", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
-
-    QStackedLayout *stack2 = new QStackedLayout;
-    stack2->addWidget(new QLabel("<center>First</center>"));
-    stack2->addWidget(new QLabel("<center>Second</center>"));
-    stack2->addWidget(new QLabel("<center>Third</center>"));
-
-    layout->addLayout(stack2);
-
-    connect(_tabs, SIGNAL(currentChanged(int)), stack2, SLOT(setCurrentIndex(int)));
+//    widget->setStyleSheet("QWidget { background: white; }");
+//
+//
+//    Slider *sldr = new Slider;
+//    Slider *sldr2 = new Slider;
+//    QtMaterialSlider *sldr3 = new QtMaterialSlider;
+//
+//    Toggle *tgl = new Toggle;
+//    QtMaterialToggle *tgl2 = new QtMaterialToggle;
+//
+//    layout->addStretch();
+//    //layout->addWidget(sldr);
+//    //layout->addWidget(sldr2);
+//    //layout->addWidget(sldr3);
+//    layout->addWidget(tgl);
+//    layout->addStretch();
+//    layout->addWidget(tgl2);
+//    layout->setAlignment(tgl, Qt::AlignCenter);
+//    layout->setAlignment(tgl2, Qt::AlignCenter);
+//    layout->addStretch();
+//
+//    return;
+//
+//    QStackedLayout *stack = new QStackedLayout;
+//    stack->addWidget(new QLabel("<center>First</center>"));
+//    stack->addWidget(new QLabel("<center>Second</center>"));
+//    stack->addWidget(new QLabel("<center>Third</center>"));
+//
+//    Tabs *tabs = new Tabs;
+//    layout->addWidget(tabs);
+//    layout->addLayout(stack);
+//    layout->setContentsMargins(0, 0, 0, 0);
+//
+//    tabs->addTab("First", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+//    tabs->addTab("Second", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+//    tabs->addTab("Third", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+//
+//    //
+//
+//    QtMaterialTabs *_tabs = new QtMaterialTabs;
+//    layout->addWidget(_tabs);
+//    layout->setContentsMargins(0, 0, 0, 0);
+//
+//    _tabs->addTab("First", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+//    _tabs->addTab("Second", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+//    _tabs->addTab("Third", QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
+//
+//    QStackedLayout *stack2 = new QStackedLayout;
+//    stack2->addWidget(new QLabel("<center>First</center>"));
+//    stack2->addWidget(new QLabel("<center>Second</center>"));
+//    stack2->addWidget(new QLabel("<center>Third</center>"));
+//
+//    layout->addLayout(stack2);
+//
+//    connect(_tabs, SIGNAL(currentChanged(int)), stack2, SLOT(setCurrentIndex(int)));
 
     /*
     QtMaterialIconButton *btn = new QtMaterialIconButton(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
@@ -194,9 +208,13 @@ MainWindow::MainWindow(QWidget *parent)
     TextField *tf = new TextField;
     layout->addWidget(tf);
     layout->addStretch();
+    */
+
+    Drawer *drwer = new Drawer;
+    drwer->setParent(this);
 
     Dialog *dlg = new Dialog;
-    dlg->setParent(this);
+    //dlg->setParent(this);
 
     //dlg->windowLayout()->addWidget(new QPushButton("Hello"));
     QVBoxLayout *dl = new QVBoxLayout;
@@ -206,11 +224,27 @@ MainWindow::MainWindow(QWidget *parent)
     QPushButton *bbbtn = new QPushButton("Show dialog");
     layout->addWidget(bbbtn);
 
-    connect(bbbtn, SIGNAL(pressed()), dlg, SLOT(showDialog()));
+    //connect(bbbtn, SIGNAL(pressed()), dlg, SLOT(showDialog()));
+    connect(bbbtn, SIGNAL(pressed()), drwer, SLOT(openDrawer()));
 
     QtMaterialIconMenu *im = new QtMaterialIconMenu(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
     layout->addWidget(im);
     layout->setAlignment(im, Qt::AlignCenter);
+
+    snackbar = new Snackbar;
+    snackbar->setParent(this);
+
+    snackbar2 = new QtMaterialSnackbar;
+    snackbar2->setParent(this);
+
+    //
+
+    QPushButton *btn = new QPushButton;
+    btn->setText("Show Snackbar");
+    layout->addWidget(btn);
+
+    connect(btn, SIGNAL(pressed()), this, SLOT(hello()));
+
 
     {
         im->addMenuItem("C");
@@ -223,6 +257,8 @@ MainWindow::MainWindow(QWidget *parent)
         im->addMenuItem("F#");
         im->addMenuItem("Clojure");
         im->addMenuItem("Java");
+
+        im->itemAt(8)->setDisabled(true);
     }
 
     QtMaterialSelectField *sfp = new QtMaterialSelectField;
@@ -244,7 +280,6 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     layout->addStretch();
-    */
 
     //layout->setAlignment(sfp, Qt::AlignCenter);
 
@@ -1021,4 +1056,12 @@ void MainWindow::button3Pressed()
 void MainWindow::button4Pressed()
 {
     _menu->collapse();
+}
+
+void MainWindow::hello()
+{
+    static int n = 0;
+    ++n;
+    //snackbar->addMessage(QString("Hello from the Snackbar (%1)").arg(n));
+    snackbar2->addMessage(QString("Hello from the Snackbar (%1)").arg(n));
 }
