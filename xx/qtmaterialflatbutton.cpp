@@ -405,7 +405,6 @@ void QtMaterialFlatButton::setCheckable(bool value)
     Q_D(QtMaterialFlatButton);
 
     d->stateMachine->updateCheckedStatus();
-    d->stateMachine->setCheckedOverlayProgress(0);
 
     QPushButton::setCheckable(value);
 }

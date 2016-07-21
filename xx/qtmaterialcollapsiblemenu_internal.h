@@ -94,9 +94,9 @@ public:
     inline void setOpacity(qreal opacity);
     inline qreal opacity() const;
 
-signals:
-    void expand();
-    void collapse();
+//signals:
+//    void expand();
+//    void collapse();
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;

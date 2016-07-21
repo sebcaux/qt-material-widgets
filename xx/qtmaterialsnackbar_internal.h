@@ -19,6 +19,15 @@ public:
     void setOffset(qreal offset);
     inline qreal offset() const;
 
+public slots:
+    void progress();
+
+protected slots:
+    void snackbarShown();
+
+protected:
+    bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
+
 private:
     Q_DISABLE_COPY(QtMaterialSnackbarStateMachine)
 

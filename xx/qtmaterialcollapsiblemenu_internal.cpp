@@ -1,9 +1,9 @@
 #include "xx/qtmaterialcollapsiblemenu_internal.h"
-#include <QSignalTransition>
 #include <QPropertyAnimation>
 #include <QPixmap>
 #include <QPainter>
 #include "xx/qtmaterialcollapsiblemenu.h"
+#include "xxlib/qtmaterialstatetransition.h"
 
 /*!
  *  \class QtMaterialCollapsibleMenuStateMachine
@@ -29,9 +29,9 @@ QtMaterialCollapsibleMenuStateMachine::QtMaterialCollapsibleMenuStateMachine(
     addState(m_collapsedState);
     setInitialState(m_collapsedState);
 
-    QSignalTransition *transition;
+    QtMaterialStateTransition *transition;
 
-    transition = new QSignalTransition(m_proxy, SIGNAL(expand()));
+    transition = new QtMaterialStateTransition(CollapsibleMenuExpand);
     transition->setTargetState(m_expandedState);
     m_collapsedState->addTransition(transition);
 
@@ -47,7 +47,7 @@ QtMaterialCollapsibleMenuStateMachine::QtMaterialCollapsibleMenuStateMachine(
     m_expandYAnimation->setEasingCurve(QEasingCurve::OutElastic);
     transition->addAnimation(m_expandYAnimation);
 
-    transition = new QSignalTransition(m_proxy, SIGNAL(collapse()));
+    transition = new QtMaterialStateTransition(CollapsibleMenuCollapse);
     transition->setTargetState(m_collapsedState);
     m_expandedState->addTransition(transition);
 

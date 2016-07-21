@@ -2,8 +2,11 @@
 #include "xx/qtmaterialsnackbar_p.h"
 #include <QApplication>
 #include <QPainter>
+#include <QFontDatabase>
 #include "xx/qtmaterialsnackbar_internal.h"
 #include "xxlib/qtmaterialstyle.h"
+#include "xxlib/qtmaterialstatetransition.h"
+#include <QDebug>
 
 /*!
  *  \class QtMaterialSnackbarPrivate
@@ -24,11 +27,18 @@ void QtMaterialSnackbarPrivate::init()
     Q_Q(QtMaterialSnackbar);
 
     stateMachine   = new QtMaterialSnackbarStateMachine(q);
+    bgOpacity      = 0.9;
     duration       = 3000;
     boxWidth       = 300;
+    clickDismiss   = false;
     useThemeColors = true;
 
     q->setAttribute(Qt::WA_TransparentForMouseEvents);
+
+    QFontDatabase db;
+    QFont font(db.font("Roboto", "Medium", 10));
+    font.setCapitalization(QFont::AllUppercase);
+    q->setFont(font);
 
     stateMachine->start();
     QCoreApplication::processEvents();
@@ -101,6 +111,21 @@ QColor QtMaterialSnackbar::backgroundColor() const
     }
 }
 
+void QtMaterialSnackbar::setBackgroundOpacity(qreal opacity)
+{
+    Q_D(QtMaterialSnackbar);
+
+    d->bgOpacity = opacity;
+    update();
+}
+
+qreal QtMaterialSnackbar::backgroundOpacity() const
+{
+    Q_D(const QtMaterialSnackbar);
+
+    return d->bgOpacity;
+}
+
 void QtMaterialSnackbar::setTextColor(const QColor &color)
 {
     Q_D(QtMaterialSnackbar);
@@ -149,22 +174,94 @@ int QtMaterialSnackbar::boxWidth() const
     return d->boxWidth;
 }
 
+void QtMaterialSnackbar::setClickToDismissMode(bool value)
+{
+    Q_D(QtMaterialSnackbar);
+
+    d->clickDismiss = value;
+}
+
+bool QtMaterialSnackbar::clickToDismissMode() const
+{
+    Q_D(const QtMaterialSnackbar);
+
+    return d->clickDismiss;
+}
+
 void QtMaterialSnackbar::addMessage(const QString &message)
 {
+    Q_D(QtMaterialSnackbar);
+
+    d->messages.push_back(message);
+    d->stateMachine->postEvent(new QtMaterialStateTransitionEvent(SnackbarShowTransition));
 }
 
 void QtMaterialSnackbar::addInstantMessage(const QString &message)
 {
+    Q_D(QtMaterialSnackbar);
+
+    if (d->messages.isEmpty()) {
+        d->messages.push_back(message);
+    } else {
+        d->messages.insert(1, message);
+    }
+
+    d->stateMachine->progress();
+}
+
+void QtMaterialSnackbar::dequeue()
+{
+    Q_D(QtMaterialSnackbar);
+
+    if (d->messages.isEmpty()) {
+        return;
+    }
+
+    d->messages.removeFirst();
+
+    if (!d->messages.isEmpty()) {
+        d->stateMachine->postEvent(new QtMaterialStateTransitionEvent(SnackbarNextTransition));
+    } else {
+        d->stateMachine->postEvent(new QtMaterialStateTransitionEvent(SnackbarWaitTransition));
+    }
 }
 
 void QtMaterialSnackbar::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
-    QPainter painter(this);
+    Q_D(QtMaterialSnackbar);
 
-    QPen p;
-    p.setWidth(3);
-    p.setColor(Qt::red);
-    painter.setPen(p);
+    if (d->messages.isEmpty()) {
+        return;
+    }
+
+    QString message = d->messages.first();
+
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor(backgroundColor());
+    painter.setBrush(brush);
+    painter.setOpacity(d->bgOpacity);
+
+    QRect r(0, 0, d->boxWidth, 40);
+
+    painter.setPen(Qt::white);
+    QRect br = painter.boundingRect(r, Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap, message);
+
+    painter.setPen(Qt::NoPen);
+    r = br.united(r).adjusted(-10, -10, 10, 20);
+
+    const qreal s = 1-d->stateMachine->offset();
+
+    painter.translate((width()-(r.width()-20))/2,
+                      height()+10-s*(r.height()));
+
+    br.moveCenter(r.center());
+    painter.drawRoundedRect(r.adjusted(0, 0, 0, 3), 3, 3);
+    painter.setPen(textColor());
+    painter.drawText(br, Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap, message);
 }

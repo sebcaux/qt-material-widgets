@@ -7,6 +7,7 @@
 #include <QPainter>
 #include "xx/qtmaterialslider.h"
 #include "xxlib/qtmaterialstyle.h"
+#include "xxlib/qtmaterialstatetransition.h"
 
 /*!
  *  \class QtMaterialSliderStateMachine
@@ -49,18 +50,19 @@ QtMaterialSliderStateMachine::QtMaterialSliderStateMachine(
     m_slidingState->assignProperty(thumb, "diameter", 17);
 
     QAbstractTransition *transition;
+    QtMaterialStateTransition *customTransition;
     QPropertyAnimation *animation;
 
     // Show halo on mouse enter
 
-    transition = new QSignalTransition(this, SIGNAL(noFocusMouseEnter()));
-    transition->setTargetState(m_focusState);
+    customTransition = new QtMaterialStateTransition(SliderNoFocusMouseEnter);
+    customTransition->setTargetState(m_focusState);
 
     animation = new QPropertyAnimation(thumb, "haloSize", this);
     animation->setEasingCurve(QEasingCurve::InOutSine);
-    transition->addAnimation(animation);
-    transition->addAnimation(new QPropertyAnimation(track, "fillColor", this));
-    m_inactiveState->addTransition(transition);
+    customTransition->addAnimation(animation);
+    customTransition->addAnimation(new QPropertyAnimation(track, "fillColor", this));
+    m_inactiveState->addTransition(customTransition);
 
     // Show halo on focus in
 
@@ -86,14 +88,14 @@ QtMaterialSliderStateMachine::QtMaterialSliderStateMachine(
 
     // Hide halo on mouse leave, except if widget has focus
 
-    transition = new QSignalTransition(this, SIGNAL(noFocusMouseLeave()));
-    transition->setTargetState(m_inactiveState);
+    customTransition = new QtMaterialStateTransition(SliderNoFocusMouseLeave);
+    customTransition->setTargetState(m_inactiveState);
 
     animation = new QPropertyAnimation(thumb, "haloSize", this);
     animation->setEasingCurve(QEasingCurve::InOutSine);
-    transition->addAnimation(animation);
-    transition->addAnimation(new QPropertyAnimation(track, "fillColor", this));
-    m_focusState->addTransition(transition);
+    customTransition->addAnimation(animation);
+    customTransition->addAnimation(new QPropertyAnimation(track, "fillColor", this));
+    m_focusState->addTransition(customTransition);
 
     // Pulse in
 
@@ -150,47 +152,47 @@ QtMaterialSliderStateMachine::QtMaterialSliderStateMachine(
 
     m_sndState->setInitialState(m_minState);
 
-    transition = new QSignalTransition(this, SIGNAL(changedFromMinimum()));
-    transition->setTargetState(m_normalState);
+    customTransition = new QtMaterialStateTransition(SliderChangedFromMinimum);
+    customTransition->setTargetState(m_normalState);
 
     animation = new QPropertyAnimation(thumb, "fillColor", this);
     animation->setDuration(200);
-    transition->addAnimation(animation);
+    customTransition->addAnimation(animation);
 
     animation = new QPropertyAnimation(thumb, "haloColor", this);
     animation->setDuration(300);
-    transition->addAnimation(animation);
+    customTransition->addAnimation(animation);
 
     animation = new QPropertyAnimation(thumb, "borderColor", this);
     animation->setDuration(200);
-    transition->addAnimation(animation);
+    customTransition->addAnimation(animation);
 
     animation = new QPropertyAnimation(thumb, "borderWidth", this);
     animation->setDuration(200);
-    transition->addAnimation(animation);
+    customTransition->addAnimation(animation);
 
-    m_minState->addTransition(transition);
+    m_minState->addTransition(customTransition);
 
-    transition = new QSignalTransition(this, SIGNAL(changedToMinimum()));
-    transition->setTargetState(m_minState);
+    customTransition = new QtMaterialStateTransition(SliderChangedToMinimum);
+    customTransition->setTargetState(m_minState);
 
     animation = new QPropertyAnimation(thumb, "fillColor", this);
     animation->setDuration(200);
-    transition->addAnimation(animation);
+    customTransition->addAnimation(animation);
 
     animation = new QPropertyAnimation(thumb, "haloColor", this);
     animation->setDuration(300);
-    transition->addAnimation(animation);
+    customTransition->addAnimation(animation);
 
     animation = new QPropertyAnimation(thumb, "borderColor", this);
     animation->setDuration(200);
-    transition->addAnimation(animation);
+    customTransition->addAnimation(animation);
 
     animation = new QPropertyAnimation(thumb, "borderWidth", this);
     animation->setDuration(200);
-    transition->addAnimation(animation);
+    customTransition->addAnimation(animation);
 
-    m_normalState->addTransition(transition);
+    m_normalState->addTransition(customTransition);
 
     setupProperties();
 }

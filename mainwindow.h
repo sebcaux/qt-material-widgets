@@ -28,6 +28,7 @@ protected slots:
     void button3Pressed();
     void button4Pressed();
     void hello();
+    void hello2();
 
 private:
     void _initMenu() const;

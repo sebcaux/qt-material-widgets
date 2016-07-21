@@ -22,9 +22,11 @@ public:
     QtMaterialSnackbarStateMachine *stateMachine;
     QColor                          backgroundColor;
     QColor                          textColor;
+    qreal                           bgOpacity;
     QList<QString>                  messages;
     int                             duration;
     int                             boxWidth;
+    bool                            clickDismiss;
     bool                            useThemeColors;
 };
 

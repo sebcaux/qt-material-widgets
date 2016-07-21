@@ -7,6 +7,7 @@
 #include "xx/qtmaterialmenuitem.h"
 #include "xx/qtmaterialscrollbar.h"
 #include "xxlib/qtmaterialstyle.h"
+#include "xxlib/qtmaterialstatetransitionevent.h"
 
 /*!
  *  \class QtMaterialCollapsibleMenuPrivate
@@ -197,7 +198,7 @@ void QtMaterialCollapsibleMenu::collapse()
     Q_D(QtMaterialCollapsibleMenu);
 
     d->proxyStack->setCurrentIndex(1);
-    emit d->proxy->collapse();
+    d->stateMachine->postEvent(new QtMaterialStateTransitionEvent(CollapsibleMenuCollapse));
     emit aboutToCollapse();
 }
 
@@ -206,7 +207,7 @@ void QtMaterialCollapsibleMenu::expand()
     Q_D(QtMaterialCollapsibleMenu);
 
     d->proxyStack->setCurrentIndex(1);
-    emit d->proxy->expand();
+    d->stateMachine->postEvent(new QtMaterialStateTransitionEvent(CollapsibleMenuExpand));
     emit aboutToExpand();
 }
 

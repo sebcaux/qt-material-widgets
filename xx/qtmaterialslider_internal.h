@@ -20,11 +20,11 @@ public:
 
     void setupProperties();
 
-signals:
-    void changedToMinimum();
-    void changedFromMinimum();
-    void noFocusMouseEnter();
-    void noFocusMouseLeave();
+//signals:
+//    void changedToMinimum();
+//    void changedFromMinimum();
+//    void noFocusMouseEnter();
+//    void noFocusMouseLeave();
 
 private:
     Q_DISABLE_COPY(QtMaterialSliderStateMachine)

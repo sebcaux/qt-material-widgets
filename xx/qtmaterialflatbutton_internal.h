@@ -24,7 +24,7 @@ public:
     void setOverlayOpacity(qreal opacity);
     inline qreal overlayOpacity() const;
 
-    void setCheckedOverlayProgress(qreal opacity);
+    void setCheckedOverlayProgress(qreal progress);
     inline qreal checkedOverlayProgress() const;
 
     void setHaloOpacity(qreal opacity);
@@ -51,7 +51,6 @@ protected:
 private:
     Q_DISABLE_COPY(QtMaterialFlatButtonStateMachine)
 
-    void addTransition(QObject *object, const char *signal, QState *fromState, QState *toState);
     void addTransition(QObject *object, QEvent::Type eventType, QState *fromState, QState *toState);
     void addTransition(QAbstractTransition *transition, QState *fromState, QState *toState);
 

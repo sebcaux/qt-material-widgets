@@ -4,6 +4,7 @@
 #include <QMouseEvent>
 #include "xx/qtmaterialslider_internal.h"
 #include "xxlib/qtmaterialstyle.h"
+#include "xxlib/qtmaterialstatetransitionevent.h"
 
 /*!
  *  \class QtMaterialSliderPrivate
@@ -108,9 +109,9 @@ void QtMaterialSliderPrivate::setHovered(bool status)
 
     if (!q->hasFocus()) {
         if (status) {
-            emit stateMachine->noFocusMouseEnter();
+            stateMachine->postEvent(new QtMaterialStateTransitionEvent(SliderNoFocusMouseEnter));
         } else {
-            emit stateMachine->noFocusMouseLeave();
+            stateMachine->postEvent(new QtMaterialStateTransitionEvent(SliderNoFocusMouseLeave));
         }
     }
 
@@ -254,12 +255,12 @@ void QtMaterialSlider::sliderChange(SliderChange change)
     {
         if (minimum() == value()) {
             triggerAction(SliderToMinimum);
-            emit d->stateMachine->changedToMinimum();
+            d->stateMachine->postEvent(new QtMaterialStateTransitionEvent(SliderChangedToMinimum));
         } else if (maximum() == value()) {
             triggerAction(SliderToMaximum);
         }
         if (minimum() == d->oldValue) {
-            emit d->stateMachine->changedFromMinimum();
+            d->stateMachine->postEvent(new QtMaterialStateTransitionEvent(SliderChangedFromMinimum));
         }
         d->oldValue = value();
     }

@@ -245,6 +245,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(btn, SIGNAL(pressed()), this, SLOT(hello()));
 
+    btn = new QPushButton;
+    btn->setText("Show instant Snackbar");
+    layout->addWidget(btn);
+
+    connect(btn, SIGNAL(pressed()), this, SLOT(hello2()));
+
 
     {
         im->addMenuItem("C");
@@ -1063,5 +1069,18 @@ void MainWindow::hello()
     static int n = 0;
     ++n;
     //snackbar->addMessage(QString("Hello from the Snackbar (%1)").arg(n));
-    snackbar2->addMessage(QString("Hello from the Snackbar (%1)").arg(n));
+    //snackbar2->addMessage(QString("Hello from the Snackbar (%1)").arg(n));
+    //snackbar2->setBoxWidth(80);
+
+    snackbar2->addMessage(QString(
+      "License shall mean the terms and conditions for use, reproduction,"
+      "and distribution as defined by Sections 1 through 9 of this document."
+    ));
+}
+
+void MainWindow::hello2()
+{
+    snackbar2->addInstantMessage(QString(
+      "and distribution as defined by Sections 1 through 9 of this document."
+    ));
 }

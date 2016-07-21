@@ -22,6 +22,9 @@ public:
     void setBackgroundColor(const QColor &color);
     QColor backgroundColor() const;
 
+    void setBackgroundOpacity(qreal opacity);
+    qreal backgroundOpacity() const;
+
     void setTextColor(const QColor &color);
     QColor textColor() const;
 
@@ -31,9 +34,15 @@ public:
     void setBoxWidth(int width);
     int boxWidth() const;
 
+    void setClickToDismissMode(bool value);
+    bool clickToDismissMode() const;
+
 public slots:
     void addMessage(const QString &message);
     void addInstantMessage(const QString &message);
+
+protected slots:
+    void dequeue();
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
