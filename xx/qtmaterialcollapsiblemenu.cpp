@@ -48,6 +48,12 @@ void QtMaterialCollapsibleMenuPrivate::init()
     scrollArea->setWidgetResizable(true);
     scrollArea->setWidget(mainWidget);
     scrollArea->setVerticalScrollBar(scrollBar);
+
+    scrollArea->setAutoFillBackground(true);
+    QPalette p(scrollArea->palette());
+    p.setColor(QPalette::Background, Qt::white);
+    scrollArea->setPalette(p);
+
     scrollBar->setHideOnMouseOut(false);
 
     proxyStack->addWidget(scrollArea);

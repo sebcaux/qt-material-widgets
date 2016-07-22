@@ -94,7 +94,7 @@ QColor QtMaterialScrollBar::canvasColor() const
     Q_D(const QtMaterialScrollBar);
 
     if (d->useThemeColors || !d->canvasColor.isValid()) {
-        return QtMaterialStyle::instance().themeColor("canvas");
+        return parentWidget()->palette().color(backgroundRole());
     } else {
         return d->canvasColor;
     }
@@ -182,7 +182,7 @@ void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
 
     painter.drawRect(rect().marginsRemoved(margins));
 
-    const qreal q = h / static_cast<qreal>(maximum() - minimum() + pageStep());
+    const qreal q = h / static_cast<qreal>(maximum()-minimum()+pageStep()-1);
 
     QRect handle = Qt::Horizontal == orientation()
             ? QRect(sliderPosition()*q, y, pageStep()*q, h)

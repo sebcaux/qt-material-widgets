@@ -112,7 +112,7 @@ void QtMaterialIconMenu::collapseDelayed()
     Q_D(QtMaterialIconMenu);
 
     if (d->autoCollapse) {
-        QTimer::singleShot(200, d->menu, SLOT(collapse()));
+        QTimer::singleShot(110, d->menu, SLOT(collapse()));
     }
 }
 

@@ -136,7 +136,9 @@ SOURCES += main.cpp\
     yy/togglesettingseditor.cpp \
     xx/qtmaterialsnackbar.cpp \
     xx/qtmaterialsnackbar_internal.cpp \
-    xxlib/qtmaterialstatetransition.cpp
+    xxlib/qtmaterialstatetransition.cpp \
+    xx/qtmaterialdialog.cpp \
+    xx/qtmaterialdialog_internal.cpp
 
 HEADERS  += mainwindow.h \
     components/appbar.h \
@@ -311,7 +313,10 @@ HEADERS  += mainwindow.h \
     xx/qtmaterialsnackbar_p.h \
     xx/qtmaterialsnackbar_internal.h \
     xxlib/qtmaterialstatetransitionevent.h \
-    xxlib/qtmaterialstatetransition.h
+    xxlib/qtmaterialstatetransition.h \
+    xx/qtmaterialdialog.h \
+    xx/qtmaterialdialog_internal.h \
+    xx/qtmaterialdialog_p.h
 
 RESOURCES += \
     resources.qrc

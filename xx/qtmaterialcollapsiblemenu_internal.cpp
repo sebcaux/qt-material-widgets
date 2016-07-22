@@ -30,6 +30,7 @@ QtMaterialCollapsibleMenuStateMachine::QtMaterialCollapsibleMenuStateMachine(
     setInitialState(m_collapsedState);
 
     QtMaterialStateTransition *transition;
+    QPropertyAnimation *animation;
 
     transition = new QtMaterialStateTransition(CollapsibleMenuExpand);
     transition->setTargetState(m_expandedState);
@@ -43,9 +44,16 @@ QtMaterialCollapsibleMenuStateMachine::QtMaterialCollapsibleMenuStateMachine(
 
     m_expandYAnimation->setTargetObject(m_proxy);
     m_expandYAnimation->setPropertyName("yScale");
-    m_expandYAnimation->setDuration(500);
+    m_expandYAnimation->setDuration(600);
     m_expandYAnimation->setEasingCurve(QEasingCurve::OutElastic);
     transition->addAnimation(m_expandYAnimation);
+
+    animation = new QPropertyAnimation(this);
+    animation->setTargetObject(m_proxy);
+    animation->setPropertyName("opacity");
+    animation->setDuration(220);
+    animation->setEasingCurve(QEasingCurve::OutQuad);
+    transition->addAnimation(animation);
 
     transition = new QtMaterialStateTransition(CollapsibleMenuCollapse);
     transition->setTargetState(m_collapsedState);
@@ -71,11 +79,11 @@ QtMaterialCollapsibleMenuStateMachine::QtMaterialCollapsibleMenuStateMachine(
     m_collapsedState->assignProperty(m_proxy, "yScale", 0.05);
     m_collapsedState->assignProperty(m_proxy, "opacity", 0);
 
-    QPropertyAnimation *animation = new QPropertyAnimation(this);
+    animation = new QPropertyAnimation(this);
     animation->setTargetObject(m_proxy);
     animation->setPropertyName("opacity");
-    animation->setDuration(160);
-    addDefaultAnimation(animation);
+    animation->setDuration(140);
+    transition->addAnimation(animation);
 
     connect(m_expandedState, SIGNAL(propertiesAssigned()),
             m_menu, SLOT(setOpaque()));

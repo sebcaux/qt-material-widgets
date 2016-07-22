@@ -56,6 +56,7 @@
 #include "yy/togglesettingseditor.h"
 #include "components/snackbar.h"
 #include "xx/qtmaterialsnackbar.h"
+#include "xx/qtmaterialdialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -210,11 +211,31 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addStretch();
     */
 
+    {
+        QtMaterialDialog *mdlg = new QtMaterialDialog;
+        mdlg->setParent(this);
+
+        QVBoxLayout *dl = new QVBoxLayout;
+        dl->addWidget(new QPushButton("Hello"));
+        mdlg->setWindowLayout(dl);
+
+        QPushButton *b1 = new QPushButton("1");
+        QPushButton *b2 = new QPushButton("2");
+        b1->setParent(this);
+        b2->setParent(this);
+        b1->setGeometry(10, 160, 30, 20);
+        b2->setGeometry(10, 190, 30, 20);
+
+        connect(b1, SIGNAL(pressed()), mdlg, SLOT(showDialog()));
+        connect(b2, SIGNAL(pressed()), mdlg, SLOT(hideDialog()));
+    }
+
+
     Drawer *drwer = new Drawer;
     drwer->setParent(this);
 
     Dialog *dlg = new Dialog;
-    //dlg->setParent(this);
+    dlg->setParent(this);
 
     //dlg->windowLayout()->addWidget(new QPushButton("Hello"));
     QVBoxLayout *dl = new QVBoxLayout;
@@ -224,8 +245,8 @@ MainWindow::MainWindow(QWidget *parent)
     QPushButton *bbbtn = new QPushButton("Show dialog");
     layout->addWidget(bbbtn);
 
-    //connect(bbbtn, SIGNAL(pressed()), dlg, SLOT(showDialog()));
-    connect(bbbtn, SIGNAL(pressed()), drwer, SLOT(openDrawer()));
+    connect(bbbtn, SIGNAL(pressed()), dlg, SLOT(showDialog()));
+    //connect(bbbtn, SIGNAL(pressed()), drwer, SLOT(openDrawer()));
 
     QtMaterialIconMenu *im = new QtMaterialIconMenu(QIcon("../qt-material-widgets/ic_star_black_24px.svg"));
     layout->addWidget(im);
@@ -268,6 +289,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     QtMaterialSelectField *sfp = new QtMaterialSelectField;
+    sfp->setPlaceholderText("Favorite language");
     //sfp->setBackgroundColor(Qt::white);
     layout->addWidget(sfp);
     layout->setAlignment(sfp, Qt::AlignCenter);

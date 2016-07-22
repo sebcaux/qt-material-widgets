@@ -265,7 +265,7 @@ void QtMaterialSelectField::collapseDelayed()
 {
     Q_D(QtMaterialSelectField);
 
-    QTimer::singleShot(200, d->menu, SLOT(collapse()));
+    QTimer::singleShot(100, d->menu, SLOT(collapse()));
 }
 
 /*!

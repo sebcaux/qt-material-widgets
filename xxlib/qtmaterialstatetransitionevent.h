@@ -21,7 +21,10 @@ enum QtMaterialStateTransitionType {
     SliderChangedFromMinimum,
     SliderNoFocusMouseEnter,
     SliderNoFocusMouseLeave,
-
+    // Dialog
+    DialogShowTransition,
+    DialogHideTransition,
+    //
     MaxTransitionType = 65535
 };
 
