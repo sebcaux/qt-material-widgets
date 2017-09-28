@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QScopedPointer>
 #include <QColor>
+#include <QIcon>
 
 namespace Material
 {
@@ -329,6 +330,8 @@ public:
 
     void setColor(const QString &key, const QColor &color);
     void setColor(const QString &key, Material::Color color);
+
+    static QIcon icon(QString category, QString icon);
 
 protected:
     const QScopedPointer<QtMaterialThemePrivate> d_ptr;

@@ -1,14 +1,17 @@
 #include "mainwindow.h"
 #include <QtWidgets/QVBoxLayout>
+#include <QtGui/QIcon>
 #include <qtmaterialavatar.h>
+#include <QDebug>
+#include <lib/qtmaterialtheme.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     QtMaterialAvatar *avatars[3];
-    avatars[0] = new QtMaterialAvatar(QImage("../qt-material-widgets/examples/assets/uxceo-128.jpg"));
+    avatars[0] = new QtMaterialAvatar(QImage(":/images/assets/uxceo-128.jpg"));
     avatars[1] = new QtMaterialAvatar('W');
-    avatars[2] = new QtMaterialAvatar(QIcon(":/icons/assets/ic_message_24px.svg"));
+    avatars[2] = new QtMaterialAvatar(QIcon(QtMaterialTheme::icon("communication", "message")));
 
     QWidget *widget = new QWidget;
     QVBoxLayout *layout = new QVBoxLayout;

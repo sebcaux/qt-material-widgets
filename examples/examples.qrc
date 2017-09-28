@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>assets/uxceo-128.jpg</file>
+    </qresource>
+</RCC>

@@ -1,10 +1,13 @@
 <RCC>
-    <qresource prefix="/material">
+    <qresource prefix="/fonts">
         <file>../fonts/Roboto/Roboto-Black.ttf</file>
         <file>../fonts/Roboto/Roboto-Bold.ttf</file>
         <file>../fonts/Roboto/Roboto-Medium.ttf</file>
         <file>../fonts/Roboto/Roboto-Regular.ttf</file>
         <file>../fonts/Roboto/Roboto-Light.ttf</file>
         <file>../fonts/Roboto/Roboto-Thin.ttf</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>icons/communication/svg/production/ic_message_24px.svg</file>
     </qresource>
 </RCC>
