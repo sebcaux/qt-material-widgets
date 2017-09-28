@@ -3,7 +3,7 @@
 ### Cleanup of existing code
 
 - [x] Avatar
-- [ ] Badge
+- [x] Badge
 - [ ] Check Box
 - [ ] Circular Progress
 - [ ] Dialog
