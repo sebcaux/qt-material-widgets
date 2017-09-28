@@ -11,3 +11,5 @@ HEADERS = \
     lib/qtmaterialstyle.h \
     lib/qtmaterialtheme_p.h \
     lib/qtmaterialtheme.h
+RESOURCES += \
+    resources.qrc
