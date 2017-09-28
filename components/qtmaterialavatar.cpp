@@ -110,6 +110,7 @@ void QtMaterialAvatar::setTextColor(const QColor &color)
 
     d->textColor = color;
     setUseThemeColors(false);
+    update();
 }
 
 QColor QtMaterialAvatar::textColor() const
@@ -129,6 +130,7 @@ void QtMaterialAvatar::setBackgroundColor(const QColor &color)
 
     d->backgroundColor = color;
     setUseThemeColors(false);
+    update();
 }
 
 QColor QtMaterialAvatar::backgroundColor() const

@@ -6,11 +6,11 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    //AvatarSettingsEditor *editor = new AvatarSettingsEditor;
-    //setCentralWidget(editor);
-
-    BadgeSettingsEditor *editor = new BadgeSettingsEditor;
+    AvatarSettingsEditor *editor = new AvatarSettingsEditor;
     setCentralWidget(editor);
+
+    //BadgeSettingsEditor *editor = new BadgeSettingsEditor;
+    //setCentralWidget(editor);
 }
 
 MainWindow::~MainWindow()
