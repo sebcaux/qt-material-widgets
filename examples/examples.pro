@@ -2,9 +2,11 @@ QT += core gui widgets
 TEMPLATE = app
 SOURCES = mainwindow.cpp \
     main.cpp \
-    avatarsettingseditor.cpp
+    avatarsettingseditor.cpp \
+    badgesettingseditor.cpp
 HEADERS = mainwindow.h \
-    avatarsettingseditor.h
+    avatarsettingseditor.h \
+    badgesettingseditor.h
 LIBS += ../components/libcomponents.a
 INCLUDEPATH += ../components/
 TARGET = ../examples-exe
@@ -13,4 +15,5 @@ RESOURCES += \
     examples.qrc
 
 FORMS += \
-    avatarsettingsform.ui
+    avatarsettingsform.ui \
+    badgesettingsform.ui

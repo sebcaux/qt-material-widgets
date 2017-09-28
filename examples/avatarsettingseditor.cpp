@@ -1,6 +1,7 @@
 #include "avatarsettingseditor.h"
 #include <QColorDialog>
 #include "qtmaterialavatar.h"
+#include "lib/qtmaterialtheme.h"
 
 AvatarSettingsEditor::AvatarSettingsEditor(QWidget *parent)
     : QWidget(parent),
@@ -75,7 +76,7 @@ void AvatarSettingsEditor::updateWidget()
         m_avatar->setImage(QImage(":/images/assets/sikh.jpg"));
         break;
     case 2:
-        m_avatar->setIcon(QIcon(":/icons/icons/communication/svg/production/ic_message_24px.svg"));
+        m_avatar->setIcon(QIcon(QtMaterialTheme::icon("communication", "message")));
         break;
     default:
         break;
