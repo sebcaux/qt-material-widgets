@@ -6,9 +6,9 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     QtMaterialAvatar *avatars[3];
-    avatars[0] = new QtMaterialAvatar;
+    avatars[0] = new QtMaterialAvatar(QImage("../qt-material-widgets/examples/assets/uxceo-128.jpg"));
     avatars[1] = new QtMaterialAvatar('W');
-    avatars[2] = new QtMaterialAvatar;
+    avatars[2] = new QtMaterialAvatar(QIcon(":/icons/assets/ic_message_24px.svg"));
 
     QWidget *widget = new QWidget;
     QVBoxLayout *layout = new QVBoxLayout;
