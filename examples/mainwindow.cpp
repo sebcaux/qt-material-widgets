@@ -32,6 +32,8 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Avatar");
     list->addItem("Badge");
 
+    list->setCurrentRow(0);
+
     QObject::connect(list,  &QListWidget::currentItemChanged,
         [=](QListWidgetItem *current, QListWidgetItem *previous)
     {
