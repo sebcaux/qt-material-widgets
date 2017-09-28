@@ -1,5 +1,5 @@
-#include "components/qtmaterialavatar.h"
-#include "components/qtmaterialavatar_p.h"
+#include "qtmaterialavatar.h"
+#include "qtmaterialavatar_p.h"
 #include <QPainter>
 #include "lib/qtmaterialstyle.h"
 
