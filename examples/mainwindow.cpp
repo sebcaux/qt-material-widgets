@@ -1,10 +1,12 @@
 #include "mainwindow.h"
 #include <QtWidgets/QVBoxLayout>
 #include <qtmaterialavatar.h>
+#include "avatarsettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    /*
     QtMaterialAvatar *avatars[3];
     avatars[0] = new QtMaterialAvatar(QImage("../qt-material-widgets/examples/assets/uxceo-128.jpg"));
     avatars[1] = new QtMaterialAvatar('W');
@@ -19,6 +21,10 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(avatars[0]);
     layout->addWidget(avatars[1]);
     layout->addWidget(avatars[2]);
+    */
+
+    AvatarSettingsEditor *editor = new AvatarSettingsEditor;
+    setCentralWidget(editor);
 }
 
 MainWindow::~MainWindow()

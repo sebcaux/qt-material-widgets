@@ -2,4 +2,7 @@
     <qresource prefix="/icons">
         <file>assets/ic_message_24px.svg</file>
     </qresource>
+    <qresource prefix="/images">
+        <file>assets/sikh.jpg</file>
+    </qresource>
 </RCC>
