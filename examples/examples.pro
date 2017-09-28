@@ -5,4 +5,4 @@ HEADERS = mainwindow.h
 LIBS += ../components/libcomponents.a
 INCLUDEPATH += ../components/
 TARGET = ../examples-exe
-
+RESOURCES +=  resources.qrc
