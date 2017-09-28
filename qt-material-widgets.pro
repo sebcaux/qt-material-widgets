@@ -24,6 +24,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    components/qtmaterialavatar.cpp \
+    lib/qtmaterialstyle.cpp \
+    lib/qtmaterialtheme.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    components/qtmaterialavatar_p.h \
+    components/qtmaterialavatar.h \
+    lib/qtmaterialstyle_p.h \
+    lib/qtmaterialstyle.h \
+    lib/qtmaterialtheme_p.h \
+    lib/qtmaterialtheme.h
