@@ -1,15 +1,16 @@
 QT += core gui widgets
 TEMPLATE = app
-SOURCES = \
-    mainwindow.cpp \
+SOURCES = mainwindow.cpp \
     main.cpp \
     avatarsettingseditor.cpp
-HEADERS = \
-    mainwindow.h \
+HEADERS = mainwindow.h \
     avatarsettingseditor.h
 LIBS += ../components/libcomponents.a
 INCLUDEPATH += ../components/
 TARGET = ../examples-exe
-RESOURCES += resources.qrc
+
+RESOURCES += \
+    examples.qrc
+
 FORMS += \
     avatarsettingsform.ui

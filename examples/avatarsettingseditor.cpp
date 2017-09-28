@@ -75,7 +75,7 @@ void AvatarSettingsEditor::updateWidget()
         m_avatar->setImage(QImage(":/images/assets/sikh.jpg"));
         break;
     case 2:
-        m_avatar->setIcon(QIcon(":/icons/assets/ic_message_24px.svg"));
+        m_avatar->setIcon(QIcon(":/icons/icons/communication/svg/production/ic_message_24px.svg"));
         break;
     default:
         break;

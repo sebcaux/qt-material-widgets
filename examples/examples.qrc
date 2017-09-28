@@ -1,8 +1,6 @@
 <RCC>
-    <qresource prefix="/icons">
-        <file>assets/ic_message_24px.svg</file>
-    </qresource>
     <qresource prefix="/images">
+        <file>assets/uxceo-128.jpg</file>
         <file>assets/sikh.jpg</file>
     </qresource>
 </RCC>
