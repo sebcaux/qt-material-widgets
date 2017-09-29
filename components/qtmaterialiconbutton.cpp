@@ -31,8 +31,6 @@ void QtMaterialIconButtonPrivate::init()
     QSizePolicy policy;
     policy.setWidthForHeight(true);
     q->setSizePolicy(policy);
-
-    rippleOverlay->installEventFilter(q);
 }
 
 /*!
@@ -142,21 +140,6 @@ bool QtMaterialIconButton::event(QEvent *event)
         break;
     }
     return QAbstractButton::event(event);
-}
-
-/*!
- *  \reimp
- */
-bool QtMaterialIconButton::eventFilter(QObject *obj, QEvent *event)
-{
-    if (QEvent::Resize == event->type())
-    {
-        Q_D(QtMaterialIconButton);
-
-        const int s = iconSize().width()/2;
-        d->rippleOverlay->setGeometry(geometry().adjusted(-s, -s, s, s));
-    }
-    return QAbstractButton::eventFilter(obj, event);
 }
 
 /*!

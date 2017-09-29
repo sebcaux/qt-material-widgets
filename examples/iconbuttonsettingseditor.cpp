@@ -28,12 +28,14 @@ void IconButtonSettingsEditor::setupForm()
 {
     ui->disabledCheckBox->setChecked(!m_button->isEnabled());
     ui->useThemeColorsCheckBox->setChecked(m_button->useThemeColors());
+    ui->sizeSpinBox->setValue(m_button->iconSize().width());
 }
 
 void IconButtonSettingsEditor::updateWidget()
 {
     m_button->setDisabled(ui->disabledCheckBox->isChecked());
     m_button->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
+    m_button->setIconSize(QSize(ui->sizeSpinBox->value(), ui->sizeSpinBox->value()));
 }
 
 void IconButtonSettingsEditor::selectColor()
@@ -79,4 +81,5 @@ void IconButtonSettingsEditor::init()
     connect(ui->useThemeColorsCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
     connect(ui->colorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
     connect(ui->disabledColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
+    connect(ui->sizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
 }
