@@ -34,7 +34,9 @@ SOURCES = \
     qtmaterialmenuitem_internal.cpp \
     qtmaterialmenuitem.cpp \
     qtmaterialcollapsiblemenu_internal.cpp \
-    qtmaterialcollapsiblemenu.cpp
+    qtmaterialcollapsiblemenu.cpp \
+    qtmaterialscrollbar_internal.cpp \
+    qtmaterialscrollbar.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -90,6 +92,9 @@ HEADERS = \
     qtmaterialmenuitem.h \
     qtmaterialcollapsiblemenu_internal.h \
     qtmaterialcollapsiblemenu_p.h \
-    qtmaterialcollapsiblemenu.h
+    qtmaterialcollapsiblemenu.h \
+    qtmaterialscrollbar_internal.h \
+    qtmaterialscrollbar_p.h \
+    qtmaterialscrollbar.h
 RESOURCES += \
     resources.qrc

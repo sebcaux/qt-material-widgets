@@ -2,8 +2,8 @@
 #define QTMATERIALCOLLAPSIBLEMENU_INTERNAL_H
 
 #include <QStateMachine>
-#include <QWidget>
-#include <QGraphicsDropShadowEffect>
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QGraphicsDropShadowEffect>
 #include <cmath>
 
 class QState;

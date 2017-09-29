@@ -1,7 +1,7 @@
 #ifndef QTMATERIALMENUITEM_P_H
 #define QTMATERIALMENUITEM_P_H
 
-#include "xx/qtmaterialflatbutton_p.h"
+#include "qtmaterialflatbutton_p.h"
 
 class QtMaterialMenuItem;
 class QtMaterialMenuItemStateMachine;

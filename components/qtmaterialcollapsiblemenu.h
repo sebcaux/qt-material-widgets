@@ -1,7 +1,7 @@
 #ifndef QTMATERIALCOLLAPSIBLEMENU_H
 #define QTMATERIALCOLLAPSIBLEMENU_H
 
-#include <QWidget>
+#include <QtWidgets/QWidget>
 #include <QScopedPointer>
 
 class QtMaterialCollapsibleMenuPrivate;

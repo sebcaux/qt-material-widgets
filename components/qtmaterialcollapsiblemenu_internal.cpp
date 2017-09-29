@@ -1,9 +1,9 @@
-#include "xx/qtmaterialcollapsiblemenu_internal.h"
+#include "qtmaterialcollapsiblemenu_internal.h"
 #include <QPropertyAnimation>
 #include <QPixmap>
 #include <QPainter>
-#include "xx/qtmaterialcollapsiblemenu.h"
-#include "xxlib/qtmaterialstatetransition.h"
+#include "qtmaterialcollapsiblemenu.h"
+#include "lib/qtmaterialstatetransition.h"
 
 /*!
  *  \class QtMaterialCollapsibleMenuStateMachine

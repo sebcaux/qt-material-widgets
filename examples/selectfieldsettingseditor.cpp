@@ -1,9 +1,9 @@
-#include "yy/selectfieldsettingseditor.h"
+#include "selectfieldsettingseditor.h"
 #include <QVBoxLayout>
 #include <QDebug>
 #include <QColorDialog>
-#include "xx/qtmaterialselectfield.h"
-#include "xx/qtmaterialmenuitem.h"
+#include "qtmaterialselectfield.h"
+#include "qtmaterialmenuitem.h"
 
 SelectFieldSettingsEditor::SelectFieldSettingsEditor(QWidget *parent)
     : QWidget(parent),

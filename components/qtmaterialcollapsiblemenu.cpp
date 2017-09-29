@@ -1,13 +1,13 @@
-#include "xx/qtmaterialcollapsiblemenu.h"
-#include "xx/qtmaterialcollapsiblemenu_p.h"
-#include <QScrollArea>
-#include <QStackedLayout>
+#include "qtmaterialcollapsiblemenu.h"
+#include "qtmaterialcollapsiblemenu_p.h"
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QStackedLayout>
 #include <QPropertyAnimation>
-#include "xx/qtmaterialcollapsiblemenu_internal.h"
-#include "xx/qtmaterialmenuitem.h"
-#include "xx/qtmaterialscrollbar.h"
-#include "xxlib/qtmaterialstyle.h"
-#include "xxlib/qtmaterialstatetransitionevent.h"
+#include "qtmaterialcollapsiblemenu_internal.h"
+#include "qtmaterialmenuitem.h"
+#include "qtmaterialscrollbar.h"
+#include "lib/qtmaterialstyle.h"
+#include "lib/qtmaterialstatetransitionevent.h"
 
 /*!
  *  \class QtMaterialCollapsibleMenuPrivate

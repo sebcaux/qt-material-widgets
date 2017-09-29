@@ -1,8 +1,8 @@
-#include "xx/qtmaterialmenuitem.h"
-#include "xx/qtmaterialmenuitem_p.h"
+#include "qtmaterialmenuitem.h"
+#include "qtmaterialmenuitem_p.h"
 #include <QPainter>
-#include "xx/qtmaterialmenuitem_internal.h"
-#include "xxlib/qtmaterialstyle.h"
+#include "qtmaterialmenuitem_internal.h"
+#include "lib/qtmaterialstyle.h"
 
 /*!
  *  \class QtMaterialMenuItemPrivate
@@ -39,7 +39,7 @@ void QtMaterialMenuItemPrivate::init()
     font.setStyleName("Regular");
     q->setFont(font);
 
-    q->setOverlayStyle(XXMaterial::GrayOverlay);
+    q->setOverlayStyle(Material::GrayOverlay);
     q->setForegroundColor(QtMaterialStyle::instance().themeColor("text"));
     q->setCornerRadius(0);
 }
@@ -97,7 +97,7 @@ void QtMaterialMenuItem::paintForeground(QPainter *painter)
     QRect textGeometry(QPoint(14, base.height()/2), textSize);
     QRect iconGeometry(QPoint(14, (height()-iconSize().height())/2), iconSize());
 
-    if (XXMaterial::LeftIcon == iconPlacement()) {
+    if (Material::LeftIcon == iconPlacement()) {
         textGeometry.translate(iw, 0);
     } else {
         iconGeometry.translate(textSize.width() + IconPadding, 0);
