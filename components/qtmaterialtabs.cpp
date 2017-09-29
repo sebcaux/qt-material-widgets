@@ -100,8 +100,10 @@ void QtMaterialTabs::setInkColor(const QColor &color)
     Q_D(QtMaterialTabs);
 
     d->inkColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
     d->inkBar->update();
+    update();
 }
 
 QColor QtMaterialTabs::inkColor() const
@@ -120,8 +122,10 @@ void QtMaterialTabs::setBackgroundColor(const QColor &color)
     Q_D(QtMaterialTabs);
 
     d->backgroundColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
     updateTabs();
+    update();
 }
 
 QColor QtMaterialTabs::backgroundColor() const
@@ -140,8 +144,10 @@ void QtMaterialTabs::setTextColor(const QColor &color)
     Q_D(QtMaterialTabs);
 
     d->textColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
     updateTabs();
+    update();
 }
 
 QColor QtMaterialTabs::textColor() const
