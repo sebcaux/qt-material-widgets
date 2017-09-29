@@ -24,7 +24,7 @@
 - [ ] Snackbar
 - [ ] Tabs
 - [ ] Text Field
-- [ ] Toggle
+- [x] Toggle
 
 #### Needs some work
 
