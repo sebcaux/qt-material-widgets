@@ -23,7 +23,7 @@
 - [x] Slider
 - [ ] Snackbar
 - [ ] Tabs
-- [ ] Text Field
+- [x] Text Field
 - [x] Toggle
 
 #### Needs some work
