@@ -7,14 +7,16 @@ SOURCES = mainwindow.cpp \
     checkboxsettingseditor.cpp \
     fabsettingseditor.cpp \
     raisedbuttonsettingseditor.cpp \
-    flatbuttonsettingseditor.cpp
+    flatbuttonsettingseditor.cpp \
+    iconbuttonsettingseditor.cpp
 HEADERS = mainwindow.h \
     avatarsettingseditor.h \
     badgesettingseditor.h \
     checkboxsettingseditor.h \
     fabsettingseditor.h \
     raisedbuttonsettingseditor.h \
-    flatbuttonsettingseditor.h
+    flatbuttonsettingseditor.h \
+    iconbuttonsettingseditor.h
 LIBS += ../components/libcomponents.a
 INCLUDEPATH += ../components/
 TARGET = ../examples-exe
@@ -27,4 +29,5 @@ FORMS += \
     badgesettingsform.ui \
     checkboxsettingsform.ui \
     fabsettingsform.ui \
-    flatbuttonsettingsform.ui
+    flatbuttonsettingsform.ui \
+    iconbuttonsettingsform.ui

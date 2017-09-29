@@ -8,6 +8,7 @@
 #include "fabsettingseditor.h"
 #include "raisedbuttonsettingseditor.h"
 #include "flatbuttonsettingseditor.h"
+#include "iconbuttonsettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -33,12 +34,14 @@ MainWindow::MainWindow(QWidget *parent)
     FloatingActionButtonSettingsEditor *fab = new FloatingActionButtonSettingsEditor;
     RaisedButtonSettingsEditor *raisedButton = new RaisedButtonSettingsEditor;
     FlatButtonSettingsEditor *flatButton = new FlatButtonSettingsEditor;
+    IconButtonSettingsEditor *iconButton = new IconButtonSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
     stack->addWidget(checkbox);
     stack->addWidget(fab);
     stack->addWidget(flatButton);
+    stack->addWidget(iconButton);
     stack->addWidget(raisedButton);
 
     list->addItem("Avatar");
@@ -46,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Checkbox");
     list->addItem("Floating Action Button");
     list->addItem("Flat Button");
+    list->addItem("Icon Button");
     list->addItem("Raised Button");
 
     list->setCurrentRow(0);
