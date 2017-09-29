@@ -1,11 +1,11 @@
-#include "xx/qtmaterialsnackbar.h"
-#include "xx/qtmaterialsnackbar_p.h"
-#include <QApplication>
+#include "qtmaterialsnackbar.h"
+#include "qtmaterialsnackbar_p.h"
+#include <QtWidgets/QApplication>
 #include <QPainter>
 #include <QFontDatabase>
-#include "xx/qtmaterialsnackbar_internal.h"
-#include "xxlib/qtmaterialstyle.h"
-#include "xxlib/qtmaterialstatetransition.h"
+#include "qtmaterialsnackbar_internal.h"
+#include "lib/qtmaterialstyle.h"
+#include "lib/qtmaterialstatetransition.h"
 #include <QDebug>
 
 /*!
