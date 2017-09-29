@@ -20,7 +20,7 @@
 - [x] Raised Button
 - [ ] Scroll Bar
 - [ ] Select Field
-- [ ] Slider
+- [x] Slider
 - [ ] Snackbar
 - [ ] Tabs
 - [ ] Text Field

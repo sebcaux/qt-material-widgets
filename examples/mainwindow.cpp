@@ -11,6 +11,7 @@
 #include "iconbuttonsettingseditor.h"
 #include "progresssettingseditor.h"
 #include "circularprogresssettingseditor.h"
+#include "slidersettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -39,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     IconButtonSettingsEditor *iconButton = new IconButtonSettingsEditor;
     ProgressSettingsEditor *progress = new ProgressSettingsEditor;
     CircularProgressSettingsEditor *circularProgress = new CircularProgressSettingsEditor;
+    SliderSettingsEditor *slider = new SliderSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
@@ -49,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(iconButton);
     stack->addWidget(progress);
     stack->addWidget(raisedButton);
+    stack->addWidget(slider);
 
     list->addItem("Avatar");
     list->addItem("Badge");
@@ -59,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Icon Button");
     list->addItem("Progress");
     list->addItem("Raised Button");
+    list->addItem("Slider");
 
     list->setCurrentRow(0);
 

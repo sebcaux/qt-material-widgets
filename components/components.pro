@@ -20,7 +20,9 @@ SOURCES = \
     qtmaterialprogress_internal.cpp \
     qtmaterialprogress.cpp \
     qtmaterialcircularprogress_internal.cpp \
-    qtmaterialcircularprogress.cpp
+    qtmaterialcircularprogress.cpp \
+    qtmaterialslider_internal.cpp \
+    qtmaterialslider.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -54,6 +56,9 @@ HEADERS = \
     qtmaterialprogress.h \
     qtmaterialcircularprogress_internal.h \
     qtmaterialcircularprogress_p.h \
-    qtmaterialcircularprogress.h
+    qtmaterialcircularprogress.h \
+    qtmaterialslider_internal.h \
+    qtmaterialslider_p.h \
+    qtmaterialslider.h
 RESOURCES += \
     resources.qrc
