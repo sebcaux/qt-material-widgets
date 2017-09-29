@@ -1,10 +1,10 @@
-#include "xx/qtmaterialradiobutton.h"
-#include "xx/qtmaterialradiobutton_p.h"
+#include "qtmaterialradiobutton.h"
+#include "qtmaterialradiobutton_p.h"
 #include <QStateMachine>
 #include <QState>
 #include <QPropertyAnimation>
 #include <QColor>
-#include "xxlib/qtmaterialcheckable_internal.h"
+#include "lib/qtmaterialcheckable_internal.h"
 
 /*!
  *  \class QtMaterialRadioButtonPrivate

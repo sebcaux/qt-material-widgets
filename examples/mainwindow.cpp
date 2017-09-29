@@ -12,6 +12,7 @@
 #include "progresssettingseditor.h"
 #include "circularprogresssettingseditor.h"
 #include "slidersettingseditor.h"
+#include "radiobuttonsettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -41,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     ProgressSettingsEditor *progress = new ProgressSettingsEditor;
     CircularProgressSettingsEditor *circularProgress = new CircularProgressSettingsEditor;
     SliderSettingsEditor *slider = new SliderSettingsEditor;
+    RadioButtonSettingsEditor *radioButton = new RadioButtonSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
@@ -50,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(flatButton);
     stack->addWidget(iconButton);
     stack->addWidget(progress);
+    stack->addWidget(radioButton);
     stack->addWidget(raisedButton);
     stack->addWidget(slider);
 
@@ -61,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Flat Button");
     list->addItem("Icon Button");
     list->addItem("Progress");
+    list->addItem("Radio Button");
     list->addItem("Raised Button");
     list->addItem("Slider");
 

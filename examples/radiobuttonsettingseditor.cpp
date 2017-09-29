@@ -2,7 +2,7 @@
 #include <QVBoxLayout>
 #include <QRadioButton>
 #include <QColorDialog>
-#include "xx/qtmaterialradiobutton.h"
+#include "qtmaterialradiobutton.h"
 
 RadioButtonSettingsEditor::RadioButtonSettingsEditor(QWidget *parent)
     : QWidget(parent),
