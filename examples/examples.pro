@@ -50,4 +50,5 @@ FORMS += \
     slidersettingsform.ui \
     radiobuttonsettingsform.ui \
     togglesettingsform.ui \
-    textfieldsettingsform.ui 
+    textfieldsettingsform.ui \ 
+    tabssettingsform.ui

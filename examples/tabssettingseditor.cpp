@@ -5,7 +5,7 @@
 
 TabsSettingsEditor::TabsSettingsEditor(QWidget *parent)
     : QWidget(parent),
-//      ui(new Ui::TabsSettingsForm),
+      ui(new Ui::TabsSettingsForm),
       m_tabs(new QtMaterialTabs)
 {
     QVBoxLayout *layout = new QVBoxLayout;
@@ -18,7 +18,7 @@ TabsSettingsEditor::TabsSettingsEditor(QWidget *parent)
     canvas->setStyleSheet("QWidget { background: white; }");
     layout->addWidget(canvas);
 
-//    ui->setupUi(widget);
+    ui->setupUi(widget);
     layout->setContentsMargins(20, 20, 20, 20);
 
     layout = new QVBoxLayout;
@@ -47,7 +47,7 @@ TabsSettingsEditor::TabsSettingsEditor(QWidget *parent)
 
 TabsSettingsEditor::~TabsSettingsEditor()
 {
-//    delete ui;
+    delete ui;
 }
 
 void TabsSettingsEditor::setupForm()

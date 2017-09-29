@@ -2,7 +2,7 @@
 #define TABSSETTINGSEDITOR_H
 
 #include <QWidget>
-//#include "ui_tabssettingsform.h"
+#include "ui_tabssettingsform.h"
 
 class QtMaterialTabs;
 
@@ -19,7 +19,7 @@ protected slots:
     void updateWidget();
 
 private:
-//    Ui::TabsSettingsForm *const ui;
+    Ui::TabsSettingsForm *const ui;
     QtMaterialTabs       *const m_tabs;
 };
 
