@@ -9,5 +9,13 @@
     </qresource>
     <qresource prefix="/icons">
         <file>icons/communication/svg/production/ic_message_24px.svg</file>
+        <file>icons/toggle/svg/production/ic_check_box_24px.svg</file>
+        <file>icons/toggle/svg/production/ic_check_box_outline_blank_24px.svg</file>
+        <file>icons/toggle/svg/production/ic_indeterminate_check_box_24px.svg</file>
+        <file>icons/toggle/svg/production/ic_radio_button_checked_24px.svg</file>
+        <file>icons/toggle/svg/production/ic_radio_button_unchecked_24px.svg</file>
+        <file>icons/toggle/svg/production/ic_star_24px.svg</file>
+        <file>icons/toggle/svg/production/ic_star_border_24px.svg</file>
+        <file>icons/toggle/svg/production/ic_star_half_24px.svg</file>
     </qresource>
 </RCC>

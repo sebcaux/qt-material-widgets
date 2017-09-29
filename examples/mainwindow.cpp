@@ -4,6 +4,7 @@
 #include <QtWidgets/QListWidget>
 #include "avatarsettingseditor.h"
 #include "badgesettingseditor.h"
+#include "checkboxsettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,12 +26,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     AvatarSettingsEditor *avatar = new AvatarSettingsEditor;
     BadgeSettingsEditor *badge = new BadgeSettingsEditor;
+    CheckBoxSettingsEditor *checkbox = new CheckBoxSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
+    stack->addWidget(checkbox);
 
     list->addItem("Avatar");
     list->addItem("Badge");
+    list->addItem("Checkbox");
 
     list->setCurrentRow(0);
 
