@@ -35,6 +35,9 @@ DialogSettingsEditor::DialogSettingsEditor(QWidget *parent)
 
     QPushButton *closeButton = new QPushButton("Close");
     dialogWidgetLayout->addWidget(closeButton);
+    dialogWidgetLayout->setAlignment(closeButton, Qt::AlignBottom | Qt::AlignCenter);
+
+    closeButton->setMaximumWidth(150);
 
     QVBoxLayout *dialogLayout = new QVBoxLayout;
     m_dialog->setWindowLayout(dialogLayout);
