@@ -10,7 +10,9 @@ SOURCES = \
     lib/qtmaterialcheckable_internal.cpp \
     lib/qtmaterialcheckable.cpp \
     lib/qtmaterialripple.cpp \
-    lib/qtmaterialrippleoverlay.cpp
+    lib/qtmaterialrippleoverlay.cpp \
+    qtmaterialcircularprogress_internal.cpp \
+    qtmaterialcircularprogress.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -27,6 +29,9 @@ HEADERS = \
     lib/qtmaterialcheckable_p.h \
     lib/qtmaterialripple.h \
     lib/qtmaterialrippleoverlay.h \
-    lib/qtmaterialcheckable.h
+    lib/qtmaterialcheckable.h \
+    qtmaterialcircularprogress_internal.h \
+    qtmaterialcircularprogress_p.h \
+    qtmaterialcircularprogress.h
 RESOURCES += \
     resources.qrc

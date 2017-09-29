@@ -4,11 +4,13 @@ SOURCES = mainwindow.cpp \
     main.cpp \
     avatarsettingseditor.cpp \
     badgesettingseditor.cpp \
-    checkboxsettingseditor.cpp
+    checkboxsettingseditor.cpp \
+    circularprogresssettingseditor.cpp
 HEADERS = mainwindow.h \
     avatarsettingseditor.h \
     badgesettingseditor.h \
-    checkboxsettingseditor.h
+    checkboxsettingseditor.h \
+    circularprogresssettingseditor.h
 LIBS += ../components/libcomponents.a
 INCLUDEPATH += ../components/
 TARGET = ../examples-exe
@@ -19,4 +21,5 @@ RESOURCES += \
 FORMS += \
     avatarsettingsform.ui \
     badgesettingsform.ui \
-    checkboxsettingsform.ui
+    checkboxsettingsform.ui \
+    circularprogresssettingsform.ui
