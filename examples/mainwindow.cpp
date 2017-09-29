@@ -15,6 +15,7 @@
 #include "radiobuttonsettingseditor.h"
 #include "togglesettingseditor.h"
 #include "textfieldsettingseditor.h"
+#include "tabsexamples.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,7 +28,10 @@ MainWindow::MainWindow(QWidget *parent)
     QStackedLayout *stack = new QStackedLayout;
     QListWidget *list = new QListWidget;
 
-    setCentralWidget(widget);
+    TabsExamples *te = new TabsExamples;
+
+    setCentralWidget(te);
+    return;
 
     layout->addWidget(list);
     layout->addLayout(stack);

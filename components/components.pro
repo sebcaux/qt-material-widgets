@@ -27,7 +27,9 @@ SOURCES = \
     qtmaterialtoggle_internal.cpp \
     qtmaterialtoggle.cpp \
     qtmaterialtextfield_internal.cpp \
-    qtmaterialtextfield.cpp
+    qtmaterialtextfield.cpp \
+    qtmaterialtabs_internal.cpp \
+    qtmaterialtabs.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -72,6 +74,9 @@ HEADERS = \
     qtmaterialtoggle.h \
     qtmaterialtextfield_internal.h \
     qtmaterialtextfield_p.h \
-    qtmaterialtextfield.h
+    qtmaterialtextfield.h \
+    qtmaterialtabs_internal.h \
+    qtmaterialtabs_p.h \
+    qtmaterialtabs.h
 RESOURCES += \
     resources.qrc
