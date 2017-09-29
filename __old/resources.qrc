@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/material">
+        <file>fonts/Roboto/Roboto-Black.ttf</file>
+        <file>fonts/Roboto/Roboto-Bold.ttf</file>
+        <file>fonts/Roboto/Roboto-Medium.ttf</file>
+        <file>fonts/Roboto/Roboto-Regular.ttf</file>
+        <file>fonts/Roboto/Roboto-Light.ttf</file>
+        <file>fonts/Roboto/Roboto-Thin.ttf</file>
+    </qresource>
+</RCC>
