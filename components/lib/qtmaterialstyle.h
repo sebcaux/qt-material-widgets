@@ -4,6 +4,9 @@
 #include <QtWidgets/QCommonStyle>
 #include "lib/qtmaterialstyle_p.h"
 
+#define MATERIAL_DISABLE_THEME_COLORS \
+    if (d->useThemeColors == true) { d->useThemeColors = false; }
+
 class QtMaterialTheme;
 
 class QtMaterialStyle : public QCommonStyle

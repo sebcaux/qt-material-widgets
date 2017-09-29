@@ -102,7 +102,8 @@ void QtMaterialBadge::setTextColor(const QColor &color)
     Q_D(QtMaterialBadge);
 
     d->textColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
     update();
 }
 
@@ -122,7 +123,8 @@ void QtMaterialBadge::setBackgroundColor(const QColor &color)
     Q_D(QtMaterialBadge);
 
     d->backgroundColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
     update();
 }
 

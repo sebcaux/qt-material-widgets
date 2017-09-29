@@ -179,7 +179,8 @@ void QtMaterialCheckable::setCheckedColor(const QColor &color)
     Q_D(QtMaterialCheckable);
 
     d->checkedColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
     setupProperties();
 }
 
@@ -199,7 +200,8 @@ void QtMaterialCheckable::setUncheckedColor(const QColor &color)
     Q_D(QtMaterialCheckable);
 
     d->uncheckedColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
     setupProperties();
 }
 
@@ -219,7 +221,8 @@ void QtMaterialCheckable::setTextColor(const QColor &color)
     Q_D(QtMaterialCheckable);
 
     d->textColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
     setupProperties();
 }
 
@@ -239,7 +242,8 @@ void QtMaterialCheckable::setDisabledColor(const QColor &color)
     Q_D(QtMaterialCheckable);
 
     d->disabledColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
     setupProperties();
 }
 

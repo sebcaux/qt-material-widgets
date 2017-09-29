@@ -109,7 +109,8 @@ void QtMaterialAvatar::setTextColor(const QColor &color)
     Q_D(QtMaterialAvatar);
 
     d->textColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
     update();
 }
 
@@ -129,7 +130,8 @@ void QtMaterialAvatar::setBackgroundColor(const QColor &color)
     Q_D(QtMaterialAvatar);
 
     d->backgroundColor = color;
-    setUseThemeColors(false);
+    
+    MATERIAL_DISABLE_THEME_COLORS
     update();
 }
 
