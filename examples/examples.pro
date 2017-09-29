@@ -12,7 +12,6 @@ SOURCES = mainwindow.cpp \
     progresssettingseditor.cpp \
     circularprogresssettingseditor.cpp \
     slidersettingseditor.cpp \
-    ../components/qtmaterialradiobutton.cpp \
     radiobuttonsettingseditor.cpp \
     togglesettingseditor.cpp \
     textfieldsettingseditor.cpp \
@@ -30,8 +29,6 @@ HEADERS = mainwindow.h \
     progresssettingseditor.h \
     circularprogresssettingseditor.h \
     slidersettingseditor.h \
-    ../components/qtmaterialradiobutton_p.h \
-    ../components/qtmaterialradiobutton.h \
     radiobuttonsettingseditor.h \
     togglesettingseditor.h \
     textfieldsettingseditor.h \
