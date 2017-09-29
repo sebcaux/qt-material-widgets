@@ -24,12 +24,7 @@
 - [x] Text Field
 - [x] Toggle
 
-#### Needs some more work
-
-- [x] Select Field
-- [x] Icon Menu
-
-#### Not implemented
+#### Not implemented or needs more work
 
 - [ ] App Bar
 - [ ] Autocomplete
@@ -37,9 +32,11 @@
 - [ ] Discrete Slider
 - [ ] Divider
 - [ ] Grid List
+- [ ] Icon Menu
 - [ ] List
 - [ ] Paper
 - [ ] Search Field
+- [ ] Select Field
 - [ ] Stepper
 - [ ] Table
 - [ ] Toolbar
