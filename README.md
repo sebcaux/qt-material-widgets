@@ -4,7 +4,7 @@
 
 - [x] Avatar
 - [x] Badge
-- [ ] Check Box
+- [x] Check Box
 - [ ] Circular Progress
 - [ ] Dialog
 - [ ] Drawer
