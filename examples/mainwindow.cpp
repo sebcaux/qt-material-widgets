@@ -16,6 +16,7 @@
 #include "togglesettingseditor.h"
 #include "textfieldsettingseditor.h"
 #include "tabssettingseditor.h"
+#include "snackbarsettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -49,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent)
     ToggleSettingsEditor *toggle = new ToggleSettingsEditor;
     TextFieldSettingsEditor *textField = new TextFieldSettingsEditor;
     TabsSettingsEditor *tabs = new TabsSettingsEditor;
+    SnackbarSettingsEditor *snackbar = new SnackbarSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
@@ -61,6 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(radioButton);
     stack->addWidget(raisedButton);
     stack->addWidget(slider);
+    stack->addWidget(snackbar);
     stack->addWidget(tabs);
     stack->addWidget(textField);
     stack->addWidget(toggle);
@@ -76,6 +79,7 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Radio Button");
     list->addItem("Raised Button");
     list->addItem("Slider");
+    list->addItem("Snackbar");
     list->addItem("Tabs");
     list->addItem("Text Field");
     list->addItem("Toggle");
