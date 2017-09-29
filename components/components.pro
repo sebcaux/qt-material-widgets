@@ -23,7 +23,9 @@ SOURCES = \
     qtmaterialcircularprogress.cpp \
     qtmaterialslider_internal.cpp \
     qtmaterialslider.cpp \
-    qtmaterialradiobutton.cpp
+    qtmaterialradiobutton.cpp \
+    qtmaterialtoggle_internal.cpp \
+    qtmaterialtoggle.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -62,6 +64,9 @@ HEADERS = \
     qtmaterialslider_p.h \
     qtmaterialslider.h \
     qtmaterialradiobutton_p.h \
-    qtmaterialradiobutton.h
+    qtmaterialradiobutton.h \
+    qtmaterialtoggle_internal.h \
+    qtmaterialtoggle_p.h \
+    qtmaterialtoggle.h
 RESOURCES += \
     resources.qrc
