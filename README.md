@@ -13,13 +13,12 @@
 - [x] Floating Action Button
 - [x] Flat Button
 - [x] Icon Button
-- [ ] Menu
 - [x] Progress
 - [x] Radio Button
 - [x] Raised Button
 - [ ] Scroll Bar
 - [x] Slider
-- [ ] Snackbar
+- [x] Snackbar
 - [x] Tabs
 - [x] Text Field
 - [x] Toggle
@@ -34,6 +33,7 @@
 - [ ] Grid List
 - [ ] Icon Menu
 - [ ] List
+- [ ] Menu
 - [ ] Paper
 - [ ] Search Field
 - [ ] Select Field
