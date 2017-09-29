@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SelectFieldSettingsForm</class>
+ <widget class="QWidget" name="SelectFieldSettingsForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>511</width>
+    <height>388</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="formLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>202</width>
+     <height>253</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="disabledLabel">
+      <property name="text">
+       <string>Disabled</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QCheckBox" name="disabledCheckBox"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="foregroundColorLabel">
+      <property name="text">
+       <string>Foreground color</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="underlineColorLabel">
+      <property name="text">
+       <string>Underline color</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="highlightedColorLabel">
+      <property name="text">
+       <string>Highlighted color</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLabel" name="disabledColorLabel">
+      <property name="text">
+       <string>Disabled color</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLabel" name="placeholderTextLabel">
+      <property name="text">
+       <string>Placeholder text</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0">
+     <widget class="QLabel" name="clearSelectionLabel">
+      <property name="text">
+       <string>Clear selection</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLineEdit" name="foregroundColorLineEdit"/>
+      </item>
+      <item>
+       <widget class="QToolButton" name="foregroundColorToolButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="1">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="underlineColorLineEdit"/>
+      </item>
+      <item>
+       <widget class="QToolButton" name="underlineColorToolButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="5" column="1">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLineEdit" name="highlightedColorLineEdit"/>
+      </item>
+      <item>
+       <widget class="QToolButton" name="highlightedColorToolButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="6" column="1">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLineEdit" name="disabledColorLineEdit"/>
+      </item>
+      <item>
+       <widget class="QToolButton" name="disabledColorToolButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="7" column="1">
+     <widget class="QLineEdit" name="placeholderLineEdit"/>
+    </item>
+    <item row="8" column="1">
+     <widget class="QToolButton" name="clearSelectionToolButton">
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="useThemeColorsLabel">
+      <property name="text">
+       <string>Use theme colors</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QCheckBox" name="useThemeColorsCheckBox"/>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="placeholderColorLabel">
+      <property name="text">
+       <string>Placeholder color</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QLineEdit" name="placeholderColorLineEdit"/>
+      </item>
+      <item>
+       <widget class="QToolButton" name="placeholderColorToolButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <zorder>formLayoutWidget</zorder>
+  <zorder>backgroundColorLabel</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
