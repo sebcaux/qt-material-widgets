@@ -13,7 +13,6 @@
 - [x] Floating Action Button
 - [x] Flat Button
 - [x] Icon Button
-- [ ] Icon Menu
 - [ ] Menu
 - [x] Progress
 - [x] Radio Button
@@ -28,6 +27,7 @@
 #### Needs some more work
 
 - [x] Select Field
+- [x] Icon Menu
 
 #### Not implemented
 
