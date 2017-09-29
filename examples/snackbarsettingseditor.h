@@ -17,6 +17,7 @@ public:
 protected slots:
     void setupForm();
     void updateWidget();
+    void showSnackbar();
 
 private:
     Ui::SnackbarSettingsForm *const ui;
