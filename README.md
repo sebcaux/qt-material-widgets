@@ -16,7 +16,7 @@
 - [ ] Icon Menu
 - [ ] Menu
 - [x] Progress
-- [ ] Radio Button
+- [x] Radio Button
 - [x] Raised Button
 - [ ] Scroll Bar
 - [ ] Select Field
