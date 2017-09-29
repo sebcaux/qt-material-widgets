@@ -12,7 +12,7 @@
 - [ ] Drawer
 - [x] Floating Action Button
 - [x] Flat Button
-- [ ] Icon Button
+- [x] Icon Button
 - [ ] Icon Menu
 - [ ] Menu
 - [x] Progress
