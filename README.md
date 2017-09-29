@@ -1,6 +1,8 @@
 # Qt Material Design Desktop Widgets
 
-### Cleanup of existing code
+## Cleanup of existing code
+
+#### Implemented
 
 - [x] Avatar
 - [x] Badge
@@ -23,6 +25,8 @@
 - [ ] Tabs
 - [ ] Text Field
 - [ ] Toggle
+
+#### Needs some work
 
 #### Not implemented
 
