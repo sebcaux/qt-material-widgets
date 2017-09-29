@@ -26,8 +26,8 @@ void QtMaterialRadioButtonPrivate::init()
 
     q->setAutoExclusive(true);
 
-    q->setCheckedIcon(QIcon("../qt-material-widgets/ic_radio_button_checked_black_24px.svg"));
-    q->setUncheckedIcon(QIcon("../qt-material-widgets/ic_radio_button_unchecked_black_24px.svg"));
+    q->setCheckedIcon(QIcon(":/icons/icons/toggle/svg/production/ic_radio_button_checked_24px.svg"));
+    q->setUncheckedIcon(QIcon(":/icons/icons/toggle/svg/production/ic_radio_button_unchecked_24px.svg"));
 
     uncheckedState->assignProperty(checkedIcon, "iconSize", 0);
     uncheckedState->assignProperty(uncheckedIcon, "iconSize", 24);
