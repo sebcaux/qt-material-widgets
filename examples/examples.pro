@@ -14,7 +14,8 @@ SOURCES = mainwindow.cpp \
     slidersettingseditor.cpp \
     ../components/qtmaterialradiobutton.cpp \
     radiobuttonsettingseditor.cpp \
-    togglesettingseditor.cpp
+    togglesettingseditor.cpp \
+    textfieldsettingseditor.cpp
 HEADERS = mainwindow.h \
     avatarsettingseditor.h \
     badgesettingseditor.h \
@@ -29,7 +30,8 @@ HEADERS = mainwindow.h \
     ../components/qtmaterialradiobutton_p.h \
     ../components/qtmaterialradiobutton.h \
     radiobuttonsettingseditor.h \
-    togglesettingseditor.h
+    togglesettingseditor.h \
+    textfieldsettingseditor.h
 LIBS += ../components/libcomponents.a
 INCLUDEPATH += ../components/
 TARGET = ../examples-exe
@@ -48,4 +50,5 @@ FORMS += \
     circularprogresssettingsform.ui \
     slidersettingsform.ui \
     radiobuttonsettingsform.ui \
-    togglesettingsform.ui
+    togglesettingsform.ui \
+    textfieldsettingsform.ui

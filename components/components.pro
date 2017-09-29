@@ -25,7 +25,9 @@ SOURCES = \
     qtmaterialslider.cpp \
     qtmaterialradiobutton.cpp \
     qtmaterialtoggle_internal.cpp \
-    qtmaterialtoggle.cpp
+    qtmaterialtoggle.cpp \
+    qtmaterialtextfield_internal.cpp \
+    qtmaterialtextfield.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -67,6 +69,9 @@ HEADERS = \
     qtmaterialradiobutton.h \
     qtmaterialtoggle_internal.h \
     qtmaterialtoggle_p.h \
-    qtmaterialtoggle.h
+    qtmaterialtoggle.h \
+    qtmaterialtextfield_internal.h \
+    qtmaterialtextfield_p.h \
+    qtmaterialtextfield.h
 RESOURCES += \
     resources.qrc
