@@ -10,7 +10,12 @@ SOURCES = \
     lib/qtmaterialcheckable_internal.cpp \
     lib/qtmaterialcheckable.cpp \
     lib/qtmaterialripple.cpp \
-    lib/qtmaterialrippleoverlay.cpp
+    lib/qtmaterialrippleoverlay.cpp \
+    qtmaterialfab.cpp \
+    qtmaterialraisedbutton.cpp \
+    qtmaterialflatbutton_internal.cpp \
+    qtmaterialflatbutton.cpp \
+    lib/qtmaterialstatetransition.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -27,6 +32,15 @@ HEADERS = \
     lib/qtmaterialcheckable_p.h \
     lib/qtmaterialripple.h \
     lib/qtmaterialrippleoverlay.h \
-    lib/qtmaterialcheckable.h
+    lib/qtmaterialcheckable.h \
+    qtmaterialfab_p.h \
+    qtmaterialfab.h \
+    qtmaterialraisedbutton_p.h \
+    qtmaterialraisedbutton.h \
+    qtmaterialflatbutton_internal.h \
+    qtmaterialflatbutton_p.h \
+    qtmaterialflatbutton.h \
+    lib/qtmaterialstatetransition.h \
+    lib/qtmaterialstatetransitionevent.h
 RESOURCES += \
     resources.qrc
