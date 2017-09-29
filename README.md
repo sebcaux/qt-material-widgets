@@ -22,7 +22,7 @@
 - [ ] Select Field
 - [x] Slider
 - [ ] Snackbar
-- [ ] Tabs
+- [x] Tabs
 - [x] Text Field
 - [x] Toggle
 
