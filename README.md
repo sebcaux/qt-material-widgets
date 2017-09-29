@@ -8,7 +8,7 @@
 - [x] Badge
 - [x] Check Box
 - [x] Circular Progress
-- [ ] Dialog
+- [x] Dialog
 - [ ] Drawer
 - [x] Floating Action Button
 - [x] Flat Button
