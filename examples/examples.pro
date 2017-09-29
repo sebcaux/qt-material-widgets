@@ -15,7 +15,8 @@ SOURCES = mainwindow.cpp \
     ../components/qtmaterialradiobutton.cpp \
     radiobuttonsettingseditor.cpp \
     togglesettingseditor.cpp \
-    textfieldsettingseditor.cpp
+    textfieldsettingseditor.cpp \
+    tabssettingseditor.cpp
 HEADERS = mainwindow.h \
     avatarsettingseditor.h \
     badgesettingseditor.h \
@@ -31,7 +32,8 @@ HEADERS = mainwindow.h \
     ../components/qtmaterialradiobutton.h \
     radiobuttonsettingseditor.h \
     togglesettingseditor.h \
-    textfieldsettingseditor.h
+    textfieldsettingseditor.h \
+    tabssettingseditor.h
 LIBS += ../components/libcomponents.a
 INCLUDEPATH += ../components/
 TARGET = ../examples-exe

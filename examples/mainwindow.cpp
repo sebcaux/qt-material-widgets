@@ -15,7 +15,7 @@
 #include "radiobuttonsettingseditor.h"
 #include "togglesettingseditor.h"
 #include "textfieldsettingseditor.h"
-#include "tabsexamples.h"
+#include "tabssettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -28,15 +28,12 @@ MainWindow::MainWindow(QWidget *parent)
     QStackedLayout *stack = new QStackedLayout;
     QListWidget *list = new QListWidget;
 
-    TabsExamples *te = new TabsExamples;
-
-    setCentralWidget(te);
-    return;
-
     layout->addWidget(list);
     layout->addLayout(stack);
 
     layout->setStretch(1, 2);
+
+    setCentralWidget(widget);
 
     AvatarSettingsEditor *avatar = new AvatarSettingsEditor;
     BadgeSettingsEditor *badge = new BadgeSettingsEditor;
@@ -51,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
     RadioButtonSettingsEditor *radioButton = new RadioButtonSettingsEditor;
     ToggleSettingsEditor *toggle = new ToggleSettingsEditor;
     TextFieldSettingsEditor *textField = new TextFieldSettingsEditor;
+    TabsSettingsEditor *tabs = new TabsSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
@@ -63,6 +61,7 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(radioButton);
     stack->addWidget(raisedButton);
     stack->addWidget(slider);
+    stack->addWidget(tabs);
     stack->addWidget(textField);
     stack->addWidget(toggle);
 
@@ -77,6 +76,7 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Radio Button");
     list->addItem("Raised Button");
     list->addItem("Slider");
+    list->addItem("Tabs");
     list->addItem("Text Field");
     list->addItem("Toggle");
 
