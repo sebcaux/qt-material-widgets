@@ -30,14 +30,10 @@ SOURCES = \
     qtmaterialtextfield.cpp \
     qtmaterialtabs_internal.cpp \
     qtmaterialtabs.cpp \
-    qtmaterialselectfield.cpp \
     qtmaterialmenuitem_internal.cpp \
     qtmaterialmenuitem.cpp \
-    qtmaterialcollapsiblemenu_internal.cpp \
-    qtmaterialcollapsiblemenu.cpp \
     qtmaterialscrollbar_internal.cpp \
-    qtmaterialscrollbar.cpp \
-    qtmaterialiconmenu.cpp
+    qtmaterialscrollbar.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -86,18 +82,11 @@ HEADERS = \
     qtmaterialtabs_internal.h \
     qtmaterialtabs_p.h \
     qtmaterialtabs.h \
-    qtmaterialselectfield_p.h \
-    qtmaterialselectfield.h \
     qtmaterialmenuitem_internal.h \
     qtmaterialmenuitem_p.h \
     qtmaterialmenuitem.h \
-    qtmaterialcollapsiblemenu_internal.h \
-    qtmaterialcollapsiblemenu_p.h \
-    qtmaterialcollapsiblemenu.h \
     qtmaterialscrollbar_internal.h \
     qtmaterialscrollbar_p.h \
-    qtmaterialscrollbar.h \
-    qtmaterialiconmenu_p.h \
-    qtmaterialiconmenu.h
+    qtmaterialscrollbar.h
 RESOURCES += \
     resources.qrc

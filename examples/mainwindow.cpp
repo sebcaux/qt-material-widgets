@@ -16,8 +16,6 @@
 #include "togglesettingseditor.h"
 #include "textfieldsettingseditor.h"
 #include "tabssettingseditor.h"
-#include "selectfieldsettingseditor.h"
-#include "iconmenusettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -51,8 +49,6 @@ MainWindow::MainWindow(QWidget *parent)
     ToggleSettingsEditor *toggle = new ToggleSettingsEditor;
     TextFieldSettingsEditor *textField = new TextFieldSettingsEditor;
     TabsSettingsEditor *tabs = new TabsSettingsEditor;
-    SelectFieldSettingsEditor *selectField = new SelectFieldSettingsEditor;
-    IconMenuSettingsEditor *iconMenu = new IconMenuSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
@@ -61,11 +57,9 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(fab);
     stack->addWidget(flatButton);
     stack->addWidget(iconButton);
-    stack->addWidget(iconMenu);
     stack->addWidget(progress);
     stack->addWidget(radioButton);
     stack->addWidget(raisedButton);
-    stack->addWidget(selectField);
     stack->addWidget(slider);
     stack->addWidget(tabs);
     stack->addWidget(textField);
@@ -78,11 +72,9 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Floating Action Button");
     list->addItem("Flat Button");
     list->addItem("Icon Button");
-    list->addItem("Icon Menu");
     list->addItem("Progress");
     list->addItem("Radio Button");
     list->addItem("Raised Button");
-    list->addItem("Select Field");
     list->addItem("Slider");
     list->addItem("Tabs");
     list->addItem("Text Field");
