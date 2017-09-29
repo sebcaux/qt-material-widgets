@@ -7,7 +7,7 @@
 - [x] Avatar
 - [x] Badge
 - [x] Check Box
-- [ ] Circular Progress
+- [x] Circular Progress
 - [ ] Dialog
 - [ ] Drawer
 - [ ] Floating Action Button
