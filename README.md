@@ -15,7 +15,7 @@
 - [ ] Icon Button
 - [ ] Icon Menu
 - [ ] Menu
-- [ ] Progress
+- [x] Progress
 - [ ] Radio Button
 - [x] Raised Button
 - [ ] Scroll Bar

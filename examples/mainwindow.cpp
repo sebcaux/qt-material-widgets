@@ -9,6 +9,7 @@
 #include "raisedbuttonsettingseditor.h"
 #include "flatbuttonsettingseditor.h"
 #include "iconbuttonsettingseditor.h"
+#include "progresssettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -35,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     RaisedButtonSettingsEditor *raisedButton = new RaisedButtonSettingsEditor;
     FlatButtonSettingsEditor *flatButton = new FlatButtonSettingsEditor;
     IconButtonSettingsEditor *iconButton = new IconButtonSettingsEditor;
+    ProgressSettingsEditor *progress = new ProgressSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
@@ -42,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(fab);
     stack->addWidget(flatButton);
     stack->addWidget(iconButton);
+    stack->addWidget(progress);
     stack->addWidget(raisedButton);
 
     list->addItem("Avatar");
@@ -50,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Floating Action Button");
     list->addItem("Flat Button");
     list->addItem("Icon Button");
+    list->addItem("Progress");
     list->addItem("Raised Button");
 
     list->setCurrentRow(0);
