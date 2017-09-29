@@ -39,4 +39,5 @@ FORMS += \
     iconbuttonsettingsform.ui \
     progresssettingsform.ui \
     circularprogresssettingsform.ui \
-    slidersettingsform.ui
+    slidersettingsform.ui \
+    snackbarsettingsform.ui
