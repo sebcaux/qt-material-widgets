@@ -30,8 +30,6 @@ SOURCES = \
     qtmaterialtextfield.cpp \
     qtmaterialtabs_internal.cpp \
     qtmaterialtabs.cpp \
-    qtmaterialmenuitem_internal.cpp \
-    qtmaterialmenuitem.cpp \
     qtmaterialscrollbar_internal.cpp \
     qtmaterialscrollbar.cpp
 HEADERS = \
@@ -82,9 +80,6 @@ HEADERS = \
     qtmaterialtabs_internal.h \
     qtmaterialtabs_p.h \
     qtmaterialtabs.h \
-    qtmaterialmenuitem_internal.h \
-    qtmaterialmenuitem_p.h \
-    qtmaterialmenuitem.h \
     qtmaterialscrollbar_internal.h \
     qtmaterialscrollbar_p.h \
     qtmaterialscrollbar.h
