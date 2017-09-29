@@ -47,7 +47,7 @@ void IconButtonSettingsEditor::selectColor()
         if ("colorToolButton" == senderName) {
             m_button->setColor(color);
             ui->colorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("disabledColorButton" == senderName) {
+        } else if ("disabledColorToolButton" == senderName) {
             m_button->setDisabledColor(color);
             ui->disabledColorLineEdit->setText(color.name(QColor::HexRgb));
         }
