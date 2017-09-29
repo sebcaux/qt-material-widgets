@@ -32,11 +32,20 @@ RadioButtonSettingsEditor::RadioButtonSettingsEditor(QWidget *parent)
     canvas->setLayout(layout);
     canvas->setMaximumHeight(350);
 
-    layout->addStretch();
-    layout->addWidget(m_radioButton1);
-    layout->addWidget(m_radioButton2);
-    layout->addWidget(m_radioButton3);
-    layout->addStretch();
+    QWidget *buttonWidget = new QWidget;
+    QVBoxLayout *buttonLayout = new QVBoxLayout;
+    buttonWidget->setLayout(buttonLayout);
+
+    layout->addWidget(buttonWidget);
+    buttonLayout->addWidget(m_radioButton1);
+    buttonLayout->addWidget(m_radioButton2);
+    buttonLayout->addWidget(m_radioButton3);
+
+    QSizePolicy policy;
+    policy.setHorizontalPolicy(QSizePolicy::Maximum);
+    buttonWidget->setSizePolicy(policy);
+
+    layout->setAlignment(Qt::AlignCenter);
 
     layout->setMargin(0);
     layout->setSpacing(0);
