@@ -1,7 +1,7 @@
 #ifndef QTMATERIALSELECTFIELD_H
 #define QTMATERIALSELECTFIELD_H
 
-#include <QWidget>
+#include <QtWidgets/QWidget>
 
 class QtMaterialSelectFieldPrivate;
 class QtMaterialMenuItem;

@@ -1,14 +1,14 @@
-#include "xx/qtmaterialselectfield.h"
-#include "xx/qtmaterialselectfield_p.h"
+#include "qtmaterialselectfield.h"
+#include "qtmaterialselectfield_p.h"
 #include <QEvent>
 #include <QFontDatabase>
 #include <QEasingCurve>
 #include <QTimer>
 #include <QPainter>
-#include "xxlib/qtmaterialstyle.h"
-#include "xx/qtmaterialmenuitem.h"
-#include "xx/qtmaterialcollapsiblemenu.h"
-#include "xxlib/qtmaterialoverlaywidget.h"
+#include "lib/qtmaterialstyle.h"
+#include "qtmaterialmenuitem.h"
+#include "qtmaterialcollapsiblemenu.h"
+#include "lib/qtmaterialoverlaywidget.h"
 
 /*!
  *  \class QtMaterialSelectFieldPrivate
