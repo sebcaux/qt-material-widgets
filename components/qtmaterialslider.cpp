@@ -137,6 +137,10 @@ void QtMaterialSlider::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialSlider);
 
+    if (d->useThemeColors == value) {
+        return;
+    }
+
     d->useThemeColors = value;
     d->stateMachine->setupProperties();
 }
@@ -153,7 +157,10 @@ void QtMaterialSlider::setThumbColor(const QColor &color)
     Q_D(QtMaterialSlider);
 
     d->thumbColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    d->stateMachine->setupProperties();
+    update();
 }
 
 QColor QtMaterialSlider::thumbColor() const
@@ -172,7 +179,10 @@ void QtMaterialSlider::setTrackColor(const QColor &color)
     Q_D(QtMaterialSlider);
 
     d->trackColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    d->stateMachine->setupProperties();
+    update();
 }
 
 QColor QtMaterialSlider::trackColor() const
@@ -191,7 +201,10 @@ void QtMaterialSlider::setDisabledColor(const QColor &color)
     Q_D(QtMaterialSlider);
 
     d->disabledColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    d->stateMachine->setupProperties();
+    update();
 }
 
 QColor QtMaterialSlider::disabledColor() const

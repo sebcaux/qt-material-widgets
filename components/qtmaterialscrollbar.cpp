@@ -86,7 +86,9 @@ void QtMaterialScrollBar::setCanvasColor(const QColor &color)
     Q_D(QtMaterialScrollBar);
 
     d->canvasColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    update();
 }
 
 QColor QtMaterialScrollBar::canvasColor() const
@@ -105,7 +107,9 @@ void QtMaterialScrollBar::setBackgroundColor(const QColor &color)
     Q_D(QtMaterialScrollBar);
 
     d->backgroundColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    update();
 }
 
 QColor QtMaterialScrollBar::backgroundColor() const
@@ -124,7 +128,9 @@ void QtMaterialScrollBar::setSliderColor(const QColor &color)
     Q_D(QtMaterialScrollBar);
 
     d->sliderColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    update();
 }
 
 QColor QtMaterialScrollBar::sliderColor() const

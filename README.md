@@ -19,14 +19,15 @@
 - [x] Radio Button
 - [x] Raised Button
 - [ ] Scroll Bar
-- [ ] Select Field
 - [x] Slider
 - [ ] Snackbar
 - [x] Tabs
 - [x] Text Field
 - [x] Toggle
 
-#### Needs some work
+#### Needs some more work
+
+- [x] Select Field
 
 #### Not implemented
 

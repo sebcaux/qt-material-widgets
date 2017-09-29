@@ -137,7 +137,9 @@ void QtMaterialSelectField::setUnderlineColor(const QColor &color)
     Q_D(QtMaterialSelectField);
 
     d->underlineColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    update();
 }
 
 QColor QtMaterialSelectField::underlineColor() const
@@ -155,7 +157,9 @@ void QtMaterialSelectField::setPlaceholderColor(const QColor &color)
     Q_D(QtMaterialSelectField);
 
     d->placeholderColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    update();
 }
 
 QColor QtMaterialSelectField::placeholderColor() const
@@ -173,7 +177,9 @@ void QtMaterialSelectField::setForegroundColor(const QColor &color)
     Q_D(QtMaterialSelectField);
 
     d->foregroundColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    update();
 }
 
 QColor QtMaterialSelectField::foregroundColor() const
@@ -191,7 +197,9 @@ void QtMaterialSelectField::setHighlightedColor(const QColor &color)
     Q_D(QtMaterialSelectField);
 
     d->highlightedColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    update();
 }
 
 QColor QtMaterialSelectField::highlightedColor() const
@@ -209,7 +217,9 @@ void QtMaterialSelectField::setDisabledColor(const QColor &color)
     Q_D(QtMaterialSelectField);
 
     d->disabledColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    update();
 }
 
 QColor QtMaterialSelectField::disabledColor() const
