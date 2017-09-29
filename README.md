@@ -10,14 +10,14 @@
 - [x] Circular Progress
 - [ ] Dialog
 - [ ] Drawer
-- [ ] Floating Action Button
-- [ ] Flat Button
+- [x] Floating Action Button
+- [x] Flat Button
 - [ ] Icon Button
 - [ ] Icon Menu
 - [ ] Menu
 - [ ] Progress
 - [ ] Radio Button
-- [ ] Raised Button
+- [x] Raised Button
 - [ ] Scroll Bar
 - [ ] Select Field
 - [ ] Slider
