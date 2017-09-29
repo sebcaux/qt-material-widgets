@@ -9,7 +9,8 @@ SOURCES = mainwindow.cpp \
     raisedbuttonsettingseditor.cpp \
     flatbuttonsettingseditor.cpp \
     iconbuttonsettingseditor.cpp \
-    progresssettingseditor.cpp
+    progresssettingseditor.cpp \
+    circularprogresssettingseditor.cpp
 HEADERS = mainwindow.h \
     avatarsettingseditor.h \
     badgesettingseditor.h \
@@ -18,7 +19,8 @@ HEADERS = mainwindow.h \
     raisedbuttonsettingseditor.h \
     flatbuttonsettingseditor.h \
     iconbuttonsettingseditor.h \
-    progresssettingseditor.h
+    progresssettingseditor.h \
+    circularprogresssettingseditor.h
 LIBS += ../components/libcomponents.a
 INCLUDEPATH += ../components/
 TARGET = ../examples-exe
@@ -33,4 +35,5 @@ FORMS += \
     fabsettingsform.ui \
     flatbuttonsettingsform.ui \
     iconbuttonsettingsform.ui \
-    progresssettingsform.ui
+    progresssettingsform.ui \
+    circularprogresssettingsform.ui

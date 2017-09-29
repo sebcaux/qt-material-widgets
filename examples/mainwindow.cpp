@@ -10,6 +10,7 @@
 #include "flatbuttonsettingseditor.h"
 #include "iconbuttonsettingseditor.h"
 #include "progresssettingseditor.h"
+#include "circularprogresssettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -37,10 +38,12 @@ MainWindow::MainWindow(QWidget *parent)
     FlatButtonSettingsEditor *flatButton = new FlatButtonSettingsEditor;
     IconButtonSettingsEditor *iconButton = new IconButtonSettingsEditor;
     ProgressSettingsEditor *progress = new ProgressSettingsEditor;
+    CircularProgressSettingsEditor *circularProgress = new CircularProgressSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
     stack->addWidget(checkbox);
+    stack->addWidget(circularProgress);
     stack->addWidget(fab);
     stack->addWidget(flatButton);
     stack->addWidget(iconButton);
@@ -50,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Avatar");
     list->addItem("Badge");
     list->addItem("Checkbox");
+    list->addItem("Circular Progress");
     list->addItem("Floating Action Button");
     list->addItem("Flat Button");
     list->addItem("Icon Button");

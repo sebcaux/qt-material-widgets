@@ -18,7 +18,9 @@ SOURCES = \
     lib/qtmaterialstatetransition.cpp \
     qtmaterialiconbutton.cpp \
     qtmaterialprogress_internal.cpp \
-    qtmaterialprogress.cpp
+    qtmaterialprogress.cpp \
+    qtmaterialcircularprogress_internal.cpp \
+    qtmaterialcircularprogress.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -49,6 +51,9 @@ HEADERS = \
     qtmaterialiconbutton.h \
     qtmaterialprogress_internal.h \
     qtmaterialprogress_p.h \
-    qtmaterialprogress.h
+    qtmaterialprogress.h \
+    qtmaterialcircularprogress_internal.h \
+    qtmaterialcircularprogress_p.h \
+    qtmaterialcircularprogress.h
 RESOURCES += \
     resources.qrc
