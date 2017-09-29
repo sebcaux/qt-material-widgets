@@ -17,7 +17,6 @@ public:
 protected slots:
     void setupForm();
     void updateWidget();
-    void selectColor();
 
 private:
     Ui::SliderSettingsForm *const ui;

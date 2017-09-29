@@ -79,20 +79,3 @@ void SliderSettingsEditor::updateWidget()
     m_slider->setValue(ui->valueLineEdit->text().toInt());
     m_slider->setInvertedAppearance(ui->invertedCheckBox->isChecked());
 }
-
-void SliderSettingsEditor::selectColor()
-{
-    QColorDialog dialog;
-    if (dialog.exec()) {
-        QColor color = dialog.selectedColor();
-        QString senderName = sender()->objectName();
-        //if ("textColorToolButton" == senderName) {
-        //    m_avatar->setTextColor(color);
-        //    ui->textColorLineEdit->setText(color.name(QColor::HexRgb));
-        //} else if ("backgroundColorToolButton" == senderName) {
-        //    m_avatar->setBackgroundColor(color);
-        //    ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
-        //}
-    }
-    setupForm();
-}

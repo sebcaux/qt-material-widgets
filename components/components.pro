@@ -23,7 +23,21 @@ SOURCES = \
     qtmaterialcircularprogress.cpp \
     qtmaterialslider_internal.cpp \
     qtmaterialslider.cpp \
+<<<<<<< HEAD \
+    qtmaterialsnackbar_internal.cpp \
     qtmaterialsnackbar.cpp
+    qtmaterialsnackbar.cpp
+=======
+    qtmaterialradiobutton.cpp \
+    qtmaterialtoggle_internal.cpp \
+    qtmaterialtoggle.cpp \
+    qtmaterialtextfield_internal.cpp \
+    qtmaterialtextfield.cpp \
+    qtmaterialtabs_internal.cpp \
+    qtmaterialtabs.cpp \
+    qtmaterialscrollbar_internal.cpp \
+    qtmaterialscrollbar.cpp
+>>>>>>> cleanup
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -61,7 +75,27 @@ HEADERS = \
     qtmaterialslider_internal.h \
     qtmaterialslider_p.h \
     qtmaterialslider.h \
+<<<<<<< HEAD \
+    qtmaterialsnackbar_internal.h \
     qtmaterialsnackbar_p.h \
     qtmaterialsnackbar.h
+    qtmaterialsnackbar_p.h \
+    qtmaterialsnackbar.h
+=======
+    qtmaterialradiobutton_p.h \
+    qtmaterialradiobutton.h \
+    qtmaterialtoggle_internal.h \
+    qtmaterialtoggle_p.h \
+    qtmaterialtoggle.h \
+    qtmaterialtextfield_internal.h \
+    qtmaterialtextfield_p.h \
+    qtmaterialtextfield.h \
+    qtmaterialtabs_internal.h \
+    qtmaterialtabs_p.h \
+    qtmaterialtabs.h \
+    qtmaterialscrollbar_internal.h \
+    qtmaterialscrollbar_p.h \
+    qtmaterialscrollbar.h
+>>>>>>> cleanup
 RESOURCES += \
     resources.qrc

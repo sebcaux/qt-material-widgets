@@ -12,6 +12,10 @@
 #include "progresssettingseditor.h"
 #include "circularprogresssettingseditor.h"
 #include "slidersettingseditor.h"
+#include "radiobuttonsettingseditor.h"
+#include "togglesettingseditor.h"
+#include "textfieldsettingseditor.h"
+#include "tabssettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -24,12 +28,12 @@ MainWindow::MainWindow(QWidget *parent)
     QStackedLayout *stack = new QStackedLayout;
     QListWidget *list = new QListWidget;
 
-    setCentralWidget(widget);
-
     layout->addWidget(list);
     layout->addLayout(stack);
 
     layout->setStretch(1, 2);
+
+    setCentralWidget(widget);
 
     AvatarSettingsEditor *avatar = new AvatarSettingsEditor;
     BadgeSettingsEditor *badge = new BadgeSettingsEditor;
@@ -41,6 +45,10 @@ MainWindow::MainWindow(QWidget *parent)
     ProgressSettingsEditor *progress = new ProgressSettingsEditor;
     CircularProgressSettingsEditor *circularProgress = new CircularProgressSettingsEditor;
     SliderSettingsEditor *slider = new SliderSettingsEditor;
+    RadioButtonSettingsEditor *radioButton = new RadioButtonSettingsEditor;
+    ToggleSettingsEditor *toggle = new ToggleSettingsEditor;
+    TextFieldSettingsEditor *textField = new TextFieldSettingsEditor;
+    TabsSettingsEditor *tabs = new TabsSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
@@ -50,8 +58,12 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(flatButton);
     stack->addWidget(iconButton);
     stack->addWidget(progress);
+    stack->addWidget(radioButton);
     stack->addWidget(raisedButton);
     stack->addWidget(slider);
+    stack->addWidget(tabs);
+    stack->addWidget(textField);
+    stack->addWidget(toggle);
 
     list->addItem("Avatar");
     list->addItem("Badge");
@@ -61,8 +73,12 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Flat Button");
     list->addItem("Icon Button");
     list->addItem("Progress");
+    list->addItem("Radio Button");
     list->addItem("Raised Button");
     list->addItem("Slider");
+    list->addItem("Tabs");
+    list->addItem("Text Field");
+    list->addItem("Toggle");
 
     list->setCurrentRow(0);
 

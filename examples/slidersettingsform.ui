@@ -19,7 +19,7 @@
      <x>0</x>
      <y>0</y>
      <width>361</width>
-     <height>331</height>
+     <height>111</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
@@ -75,6 +75,19 @@
      <widget class="QCheckBox" name="invertedCheckBox"/>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>171</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TODO</string>
+   </property>
   </widget>
  </widget>
  <resources/>

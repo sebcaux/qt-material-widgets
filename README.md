@@ -13,22 +13,18 @@
 - [x] Floating Action Button
 - [x] Flat Button
 - [x] Icon Button
-- [ ] Icon Menu
 - [ ] Menu
 - [x] Progress
-- [ ] Radio Button
+- [x] Radio Button
 - [x] Raised Button
 - [ ] Scroll Bar
-- [ ] Select Field
 - [x] Slider
 - [ ] Snackbar
-- [ ] Tabs
-- [ ] Text Field
-- [ ] Toggle
+- [x] Tabs
+- [x] Text Field
+- [x] Toggle
 
-#### Needs some work
-
-#### Not implemented
+#### Not implemented or needs more work
 
 - [ ] App Bar
 - [ ] Autocomplete
@@ -36,9 +32,11 @@
 - [ ] Discrete Slider
 - [ ] Divider
 - [ ] Grid List
+- [ ] Icon Menu
 - [ ] List
 - [ ] Paper
 - [ ] Search Field
+- [ ] Select Field
 - [ ] Stepper
 - [ ] Table
 - [ ] Toolbar
