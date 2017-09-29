@@ -17,6 +17,7 @@
 #include "textfieldsettingseditor.h"
 #include "tabssettingseditor.h"
 #include "snackbarsettingseditor.h"
+#include "dialogsettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -51,11 +52,13 @@ MainWindow::MainWindow(QWidget *parent)
     TextFieldSettingsEditor *textField = new TextFieldSettingsEditor;
     TabsSettingsEditor *tabs = new TabsSettingsEditor;
     SnackbarSettingsEditor *snackbar = new SnackbarSettingsEditor;
+    DialogSettingsEditor *dialog = new DialogSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
     stack->addWidget(checkbox);
     stack->addWidget(circularProgress);
+    stack->addWidget(dialog);
     stack->addWidget(fab);
     stack->addWidget(flatButton);
     stack->addWidget(iconButton);
@@ -72,6 +75,7 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Badge");
     list->addItem("Checkbox");
     list->addItem("Circular Progress");
+    list->addItem("Dialog");
     list->addItem("Floating Action Button");
     list->addItem("Flat Button");
     list->addItem("Icon Button");

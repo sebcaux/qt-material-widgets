@@ -1,14 +1,14 @@
-#include "xx/qtmaterialdialog.h"
-#include "xx/qtmaterialdialog_p.h"
-#include <QStackedLayout>
-#include <QGraphicsDropShadowEffect>
+#include "qtmaterialdialog.h"
+#include "qtmaterialdialog_p.h"
+#include <QtWidgets/QStackedLayout>
+#include <QtWidgets/QGraphicsDropShadowEffect>
 #include <QStateMachine>
 #include <QState>
-#include <QApplication>
+#include <QtWidgets/QApplication>
 #include <QPropertyAnimation>
 #include <QPainter>
-#include "xx/qtmaterialdialog_internal.h"
-#include "xxlib/qtmaterialstatetransition.h"
+#include "qtmaterialdialog_internal.h"
+#include "lib/qtmaterialstatetransition.h"
 
 /*!
  *  \class QtMaterialDialogPrivate
