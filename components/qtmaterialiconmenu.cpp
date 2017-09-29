@@ -1,9 +1,9 @@
-#include "xx/qtmaterialiconmenu.h"
-#include "xx/qtmaterialiconmenu_p.h"
+#include "qtmaterialiconmenu.h"
+#include "qtmaterialiconmenu_p.h"
 #include <QEvent>
 #include <QTimer>
-#include "xxlib/qtmaterialoverlaywidget.h"
-#include "xx/qtmaterialcollapsiblemenu.h"
+#include "lib/qtmaterialoverlaywidget.h"
+#include "qtmaterialcollapsiblemenu.h"
 
 /*!
  *  \class QtMaterialIconMenuPrivate

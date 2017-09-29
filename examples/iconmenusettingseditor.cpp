@@ -1,14 +1,14 @@
-#include "yy/iconmenusettingseditor.h"
+#include "iconmenusettingseditor.h"
 #include <QVBoxLayout>
 #include <QDebug>
 #include <QColorDialog>
-#include "xx/qtmaterialiconmenu.h"
-#include "xx/qtmaterialmenuitem.h"
+#include "qtmaterialiconmenu.h"
+#include "qtmaterialmenuitem.h"
 
 IconMenuSettingsEditor::IconMenuSettingsEditor(QWidget *parent)
     : QWidget(parent),
       ui(new Ui::IconMenuSettingsForm),
-      m_iconMenu(new QtMaterialIconMenu(QIcon("../qt-material-widgets/ic_star_black_24px.svg")))
+      m_iconMenu(new QtMaterialIconMenu(QtMaterialTheme::icon("toggle", "star")))
 {
     QVBoxLayout *layout = new QVBoxLayout;
     setLayout(layout);

@@ -1,7 +1,7 @@
 #ifndef QTMATERIALICONMENU_P_H
 #define QTMATERIALICONMENU_P_H
 
-#include "xx/qtmaterialiconbutton_p.h"
+#include "qtmaterialiconbutton_p.h"
 
 class QtMaterialIconMenu;
 class QtMaterialOverlayWidget;

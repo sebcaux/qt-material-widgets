@@ -17,7 +17,8 @@ SOURCES = mainwindow.cpp \
     togglesettingseditor.cpp \
     textfieldsettingseditor.cpp \
     tabssettingseditor.cpp \
-    selectfieldsettingseditor.cpp
+    selectfieldsettingseditor.cpp \
+    iconmenusettingseditor.cpp
 HEADERS = mainwindow.h \
     avatarsettingseditor.h \
     badgesettingseditor.h \
@@ -35,7 +36,8 @@ HEADERS = mainwindow.h \
     togglesettingseditor.h \
     textfieldsettingseditor.h \
     tabssettingseditor.h \
-    selectfieldsettingseditor.h
+    selectfieldsettingseditor.h \
+    iconmenusettingseditor.h
 LIBS += ../components/libcomponents.a
 INCLUDEPATH += ../components/
 TARGET = ../examples-exe
@@ -56,4 +58,5 @@ FORMS += \
     radiobuttonsettingsform.ui \
     togglesettingsform.ui \
     textfieldsettingsform.ui \
-    selectfieldsettingsform.ui
+    selectfieldsettingsform.ui \
+    iconmenusettingsform.ui

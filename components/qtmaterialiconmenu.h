@@ -1,7 +1,7 @@
 #ifndef QTMATERIALICONMENU_H
 #define QTMATERIALICONMENU_H
 
-#include "xx/qtmaterialiconbutton.h"
+#include "qtmaterialiconbutton.h"
 
 class QtMaterialIconMenuPrivate;
 class QtMaterialMenuItem;
