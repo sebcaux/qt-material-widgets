@@ -24,9 +24,9 @@ RadioButtonSettingsEditor::RadioButtonSettingsEditor(QWidget *parent)
     ui->setupUi(widget);
     layout->setContentsMargins(20, 20, 20, 20);
 
-    m_radioButton1->setText("Palak paneer");
-    m_radioButton2->setText("Kadai veg");
-    m_radioButton3->setText("Garlic naan");
+    m_radioButton1->setText("Coffee");
+    m_radioButton2->setText("Tea");
+    m_radioButton3->setText("Algebraic Topology");
 
     layout = new QVBoxLayout;
     canvas->setLayout(layout);
