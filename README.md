@@ -16,7 +16,7 @@
 - [x] Progress
 - [x] Radio Button
 - [x] Raised Button
-- [ ] Scroll Bar
+- [x] Scroll Bar
 - [x] Slider
 - [x] Snackbar
 - [x] Tabs
