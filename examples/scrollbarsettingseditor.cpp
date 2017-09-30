@@ -31,8 +31,8 @@ ScrollBarSettingsEditor::ScrollBarSettingsEditor(QWidget *parent)
     edit->update();
     edit->setMaximumHeight(200);
 
-    m_scrollbar->setOrientation(Qt::Vertical);
     edit->setVerticalScrollBar(m_scrollbar);
+    m_scrollbar->setHideOnMouseOut(false);
 
     layout->addWidget(edit);
     layout->setAlignment(edit, Qt::AlignHCenter);
