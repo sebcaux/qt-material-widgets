@@ -19,6 +19,7 @@
 #include "snackbarsettingseditor.h"
 #include "dialogsettingseditor.h"
 #include "drawersettingseditor.h"
+#include "scrollbarsettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -55,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
     SnackbarSettingsEditor *snackbar = new SnackbarSettingsEditor;
     DialogSettingsEditor *dialog = new DialogSettingsEditor;
     DrawerSettingsEditor *drawer = new DrawerSettingsEditor;
+    ScrollBarSettingsEditor *scrollBar = new ScrollBarSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
@@ -68,6 +70,7 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(progress);
     stack->addWidget(radioButton);
     stack->addWidget(raisedButton);
+    stack->addWidget(scrollBar);
     stack->addWidget(slider);
     stack->addWidget(snackbar);
     stack->addWidget(tabs);
@@ -86,6 +89,7 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Progress");
     list->addItem("Radio Button");
     list->addItem("Raised Button");
+    list->addItem("ScrollBar");
     list->addItem("Slider");
     list->addItem("Snackbar");
     list->addItem("Tabs");
