@@ -198,6 +198,7 @@ void QtMaterialSnackbar::addMessage(const QString &message)
 
     d->messages.push_back(message);
     d->stateMachine->postEvent(new QtMaterialStateTransitionEvent(SnackbarShowTransition));
+    raise();
 }
 
 void QtMaterialSnackbar::addInstantMessage(const QString &message)

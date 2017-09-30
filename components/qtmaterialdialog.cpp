@@ -137,6 +137,7 @@ void QtMaterialDialog::showDialog()
     Q_D(QtMaterialDialog);
 
     d->stateMachine->postEvent(new QtMaterialStateTransitionEvent(DialogShowTransition));
+    raise();
 }
 
 void QtMaterialDialog::hideDialog()

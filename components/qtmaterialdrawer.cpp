@@ -70,6 +70,7 @@ void QtMaterialDrawer::openDrawer()
     Q_D(QtMaterialDrawer);
 
     emit d->stateMachine->enterOpenedState();
+    raise();
 }
 
 void QtMaterialDrawer::closeDrawer()
