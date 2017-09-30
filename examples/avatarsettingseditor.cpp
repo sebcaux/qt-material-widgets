@@ -76,7 +76,7 @@ void AvatarSettingsEditor::updateWidget()
         m_avatar->setImage(QImage(":/images/assets/sikh.jpg"));
         break;
     case 2:
-        m_avatar->setIcon(QIcon(QtMaterialTheme::icon("communication", "message")));
+        m_avatar->setIcon(QtMaterialTheme::icon("communication", "message"));
         break;
     default:
         break;
