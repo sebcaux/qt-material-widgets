@@ -4,6 +4,8 @@
 
 I finally took the time to go through and clean up this code. The build includes an executable with a preview, and some settings to play around with for each widget. A (YouTube) video preview is [available here](http://www.youtube.com/watch?v=21UMeNVBPU4).
 
+[[https://github.com/laserpants/qt-material-widgets/blob/master/preview1.gif|alt=Preview]]
+
 #### Implemented components
 
 - [x] Avatar
