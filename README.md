@@ -4,7 +4,9 @@
 
 I finally took the time to go through and clean up this code. The build includes an executable with a preview, and some settings to play around with for each widget. A (YouTube) video preview is [available here](http://www.youtube.com/watch?v=21UMeNVBPU4).
 
-![](preview1.gif)
+| Component     | Preview                           |               
+| ------------- | --------------------------------- | 
+| Text Field    | ![Text Field](textfield.gif)      | 
 
 #### Implemented components
 
