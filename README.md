@@ -4,9 +4,7 @@
 
 I finally took the time to go through and clean up this code. The build includes an executable with a preview, and some settings to play around with for each widget.
 
-### Video preview
-
-[![Preview](http://img.youtube.com/vi/21UMeNVBPU4/0.jpg)](http://www.youtube.com/watch?v=21UMeNVBPU4 "Preview")
+A (YouTube) video preview is [available here](http://www.youtube.com/watch?v=21UMeNVBPU4).
 
 #### Implemented components
 
