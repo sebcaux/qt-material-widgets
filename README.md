@@ -1,7 +1,5 @@
 # Qt Material Design Desktop Widgets
 
-## Cleanup of existing code
-
 #### Implemented
 
 - [x] Avatar
@@ -23,7 +21,7 @@
 - [x] Text Field
 - [x] Toggle
 
-#### Not implemented or needs more work
+#### Not implemented 
 
 - [ ] App Bar
 - [ ] Autocomplete
