@@ -1,6 +1,10 @@
 # Qt Material Design Desktop Widgets
 
-#### Implemented
+## Update
+
+:hatched_chick: I finally took the time to go through and clean up this code. The build includes an executable with a preview, and some settings to play around with for each widget. :hatched_chick:
+
+#### Implemented components
 
 - [x] Avatar
 - [x] Badge
