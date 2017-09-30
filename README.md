@@ -4,24 +4,24 @@
 
 I finally took the time to go through and clean up this code. The build includes an executable with a preview, and some settings to play around with for each widget. A (YouTube) video preview is [available here](http://www.youtube.com/watch?v=21UMeNVBPU4).
 
-| Component         | Preview                                          |               
-| ----------------- | ------------------------------------------------ | 
-| Avatar            | ![Avatar](gifs/avatar.gif)                       | 
-| Check Box         | ![Check Box](gifs/checkbox.gif)                  | 
-| Circular Progress | ![Circular Progressj](gifs/circularprogress.gif) | 
-| Dialog            | ![Dialog](gifs/dialog.gif)                       | 
-| Drawer            | ![Drawer](gifs/drawer.gif)                       | 
-| FAB               | ![FAB](gifs/fab.gif)                             | 
-| Flat Button       | ![Flat Button](gifs/flatbutton.gif)              | 
-| Progress          | ![Progress](gifs/progress.gif)                   | 
-| Radio Button      | ![Radio Button](gifs/radiobutton.gif)            | 
-| Raised Button     | ![Raised Button](gifs/raisedbutton.gif)          | 
-| Scroll Bar        | ![Scroll Bar](gifs/scrollbar.gif)                | 
-| Slider            | ![Slider](gifs/slider.gif)                       | 
-| Snackbar          | ![Snackbar](gifs/snackbar.gif)                   | 
-| Tabs              | ![Tabs](gifs/tabs.gif)                           | 
-| Text Field        | ![Text Field](gifs/textfield.gif)                | 
-| Toggle            | ![checkbox](gifs/toggle.gif)                     | 
+Component         | Preview                                                         
+----------------- | ------------------------------------------------  
+Avatar            | ![Avatar](gifs/avatar.gif)                        
+Check Box         | ![Check Box](gifs/checkbox.gif)                   
+Circular Progress | ![Circular Progressj](gifs/circularprogress.gif)  
+Dialog            | ![Dialog](gifs/dialog.gif)                        
+Drawer            | ![Drawer](gifs/drawer.gif)                        
+FAB               | ![FAB](gifs/fab.gif)                              
+Flat Button       | ![Flat Button](gifs/flatbutton.gif)               
+Progress          | ![Progress](gifs/progress.gif)                    
+Radio Button      | ![Radio Button](gifs/radiobutton.gif)             
+Raised Button     | ![Raised Button](gifs/raisedbutton.gif)           
+Scroll Bar        | ![Scroll Bar](gifs/scrollbar.gif)                 
+Slider            | ![Slider](gifs/slider.gif)                        
+Snackbar          | ![Snackbar](gifs/snackbar.gif)                    
+Tabs              | ![Tabs](gifs/tabs.gif)                           
+Text Field        | ![Text Field](gifs/textfield.gif)                 
+Toggle            | ![checkbox](gifs/toggle.gif)                      
 
 #### Implemented components
 
