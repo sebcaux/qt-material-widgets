@@ -18,7 +18,7 @@ public:
     QLayout *windowLayout() const;
     void setWindowLayout(QLayout *layout);
 
-protected slots:
+public slots:
     void showDialog();
     void hideDialog();
 
