@@ -20,7 +20,7 @@ public:
     void setDrawerLayout(QLayout *layout);
     QLayout *drawerLayout() const;
 
-protected slots:
+public slots:
     void openDrawer();
     void closeDrawer();
 
