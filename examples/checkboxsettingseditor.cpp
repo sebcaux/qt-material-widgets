@@ -21,7 +21,7 @@ CheckBoxSettingsEditor::CheckBoxSettingsEditor(QWidget *parent)
     ui->setupUi(widget);
     layout->setContentsMargins(20, 20, 20, 20);
 
-    m_checkBox->setText("Palak paneer");
+    m_checkBox->setText("Extra cheese");
     m_checkBox->setChecked(true);
 
     layout = new QVBoxLayout;

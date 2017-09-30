@@ -47,5 +47,5 @@ void SnackbarSettingsEditor::updateWidget()
 
 void SnackbarSettingsEditor::showSnackbar()
 {
-    m_snackbar->addMessage(QString("Hello from the Snackbar"));
+    m_snackbar->addMessage(QString("Snack attack!"));
 }
