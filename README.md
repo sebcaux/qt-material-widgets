@@ -8,6 +8,7 @@ I finally took the time to go through and clean up this code. The build includes
 | ------------- | --------------------------------- | 
 | Text Field    | ![Text Field](textfield.gif)      | 
 | Tabs          | ![Tabs](tabs.gif)                 | 
+| Check Box     | ![checkbox](checkbox.gif)         | 
 
 #### Implemented components
 
