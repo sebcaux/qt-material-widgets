@@ -23,13 +23,12 @@ I finally took the time to go through and clean up this code. The build includes
 - [x] Snackbar
 - [x] Tabs
 - [x] Text Field
+![Text Field](textfield.gif)
 - [x] Toggle
 
 #### Preview
 
 ###### Text Field
-
-![Text Field](textfield.gif)
 
 #### Not implemented 
 
