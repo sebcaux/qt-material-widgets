@@ -9,7 +9,7 @@
 - [x] Check Box
 - [x] Circular Progress
 - [x] Dialog
-- [ ] Drawer
+- [x] Drawer
 - [x] Floating Action Button
 - [x] Flat Button
 - [x] Icon Button

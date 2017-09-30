@@ -35,7 +35,9 @@ SOURCES = \
     qtmaterialscrollbar_internal.cpp \
     qtmaterialscrollbar.cpp \
     qtmaterialdialog_internal.cpp \
-    qtmaterialdialog.cpp
+    qtmaterialdialog.cpp \
+    qtmaterialdrawer_internal.cpp \
+    qtmaterialdrawer.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -92,6 +94,9 @@ HEADERS = \
     qtmaterialscrollbar.h \
     qtmaterialdialog_internal.h \
     qtmaterialdialog_p.h \
-    qtmaterialdialog.h
+    qtmaterialdialog.h \
+    qtmaterialdrawer_internal.h \
+    qtmaterialdrawer_p.h \
+    qtmaterialdrawer.h
 RESOURCES += \
     resources.qrc

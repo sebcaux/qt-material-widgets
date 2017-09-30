@@ -17,7 +17,8 @@ SOURCES = mainwindow.cpp \
     textfieldsettingseditor.cpp \
     tabssettingseditor.cpp \
     snackbarsettingseditor.cpp \
-    dialogsettingseditor.cpp
+    dialogsettingseditor.cpp \
+    drawersettingseditor.cpp
 HEADERS = mainwindow.h \
     avatarsettingseditor.h \
     badgesettingseditor.h \
@@ -34,7 +35,8 @@ HEADERS = mainwindow.h \
     textfieldsettingseditor.h \
     tabssettingseditor.h \
     snackbarsettingseditor.h \
-    dialogsettingseditor.h
+    dialogsettingseditor.h \
+    drawersettingseditor.h
 LIBS += ../components/libcomponents.a
 INCLUDEPATH += ../components/
 TARGET = ../examples-exe
@@ -57,4 +59,5 @@ FORMS += \
     togglesettingsform.ui \
     textfieldsettingsform.ui \ 
     tabssettingsform.ui \
-    dialogsettingsform.ui
+    dialogsettingsform.ui \
+    drawersettingsform.ui

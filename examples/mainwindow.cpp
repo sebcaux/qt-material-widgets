@@ -18,6 +18,7 @@
 #include "tabssettingseditor.h"
 #include "snackbarsettingseditor.h"
 #include "dialogsettingseditor.h"
+#include "drawersettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -53,12 +54,14 @@ MainWindow::MainWindow(QWidget *parent)
     TabsSettingsEditor *tabs = new TabsSettingsEditor;
     SnackbarSettingsEditor *snackbar = new SnackbarSettingsEditor;
     DialogSettingsEditor *dialog = new DialogSettingsEditor;
+    DrawerSettingsEditor *drawer = new DrawerSettingsEditor;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
     stack->addWidget(checkbox);
     stack->addWidget(circularProgress);
     stack->addWidget(dialog);
+    stack->addWidget(drawer);
     stack->addWidget(fab);
     stack->addWidget(flatButton);
     stack->addWidget(iconButton);
@@ -76,6 +79,7 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Checkbox");
     list->addItem("Circular Progress");
     list->addItem("Dialog");
+    list->addItem("Drawer");
     list->addItem("Floating Action Button");
     list->addItem("Flat Button");
     list->addItem("Icon Button");

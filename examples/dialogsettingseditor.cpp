@@ -24,8 +24,6 @@ DialogSettingsEditor::DialogSettingsEditor(QWidget *parent)
     layout = new QVBoxLayout;
     canvas->setLayout(layout);
     canvas->setMaximumHeight(300);
-    layout->addWidget(m_dialog);
-    layout->setAlignment(m_dialog, Qt::AlignHCenter);
 
     m_dialog->setParent(this);
 

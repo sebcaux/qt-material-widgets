@@ -97,7 +97,9 @@ void QtMaterialSnackbar::setBackgroundColor(const QColor &color)
     Q_D(QtMaterialSnackbar);
 
     d->backgroundColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    update();
 }
 
 QColor QtMaterialSnackbar::backgroundColor() const
@@ -131,7 +133,9 @@ void QtMaterialSnackbar::setTextColor(const QColor &color)
     Q_D(QtMaterialSnackbar);
 
     d->textColor = color;
-    setUseThemeColors(false);
+
+    MATERIAL_DISABLE_THEME_COLORS
+    update();
 }
 
 QColor QtMaterialSnackbar::textColor() const
