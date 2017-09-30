@@ -26,7 +26,7 @@ RadioButtonSettingsEditor::RadioButtonSettingsEditor(QWidget *parent)
 
     m_radioButton1->setText("Palak paneer");
     m_radioButton2->setText("Kadai veg");
-    m_radioButton3->setText("asdfadsf");
+    m_radioButton3->setText("Garlic naan");
 
     layout = new QVBoxLayout;
     canvas->setLayout(layout);
