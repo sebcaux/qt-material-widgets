@@ -26,6 +26,8 @@ void QtMaterialIconButtonPrivate::init()
     rippleOverlay  = new QtMaterialRippleOverlay(q->parentWidget());
     useThemeColors = true;
 
+    rippleOverlay->installEventFilter(q);
+
     q->setStyle(&QtMaterialStyle::instance());
 
     QSizePolicy policy;
@@ -140,6 +142,20 @@ bool QtMaterialIconButton::event(QEvent *event)
         break;
     }
     return QAbstractButton::event(event);
+}
+
+/*!
+ *  \reimp
+ */
+bool QtMaterialIconButton::eventFilter(QObject *obj, QEvent *event)
+{
+    if (QEvent::Resize == event->type())
+    {
+        Q_D(QtMaterialIconButton);
+
+        d->rippleOverlay->setGeometry(geometry().adjusted(-8, -8, 8, 8));
+    }
+    return QAbstractButton::eventFilter(obj, event);
 }
 
 /*!
