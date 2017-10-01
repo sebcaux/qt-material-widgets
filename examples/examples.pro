@@ -42,6 +42,7 @@ HEADERS = mainwindow.h \
 LIBS += ../components/libcomponents.a
 INCLUDEPATH += ../components/
 TARGET = ../examples-exe
+PRE_TARGETDEPS += ../components/libcomponents.a
 
 RESOURCES += \
     examples.qrc
