@@ -17,6 +17,7 @@ public:
     virtual ~QtMaterialIconButtonPrivate();
 
     void init();
+    void updateRipple();
 
     QtMaterialIconButton    *const q_ptr;
     QtMaterialRippleOverlay *rippleOverlay;

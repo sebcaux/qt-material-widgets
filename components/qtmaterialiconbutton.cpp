@@ -35,6 +35,16 @@ void QtMaterialIconButtonPrivate::init()
     q->setSizePolicy(policy);
 }
 
+void QtMaterialIconButtonPrivate::updateRipple()
+{
+    Q_Q(QtMaterialIconButton);
+
+    QRect r(q->rect());
+    r.setSize(QSize(q->width()*2, q->height()*2));
+    r.moveCenter(q->geometry().center());
+    rippleOverlay->setGeometry(r);
+}
+
 /*!
  *  \class QtMaterialIconButton
  */
@@ -131,6 +141,10 @@ bool QtMaterialIconButton::event(QEvent *event)
 
     switch (event->type())
     {
+    case QEvent::Move:
+    case QEvent::Resize:
+        d->updateRipple();
+        break;
     case QEvent::ParentChange: {
         QWidget *widget;
         if ((widget = parentWidget())) {
@@ -153,7 +167,7 @@ bool QtMaterialIconButton::eventFilter(QObject *obj, QEvent *event)
     {
         Q_D(QtMaterialIconButton);
 
-        d->rippleOverlay->setGeometry(geometry().adjusted(-8, -8, 8, 8));
+        d->updateRipple();
     }
     return QAbstractButton::eventFilter(obj, event);
 }
