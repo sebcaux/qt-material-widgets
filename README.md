@@ -8,8 +8,6 @@ Component         | Preview
 ----------------- | ------------------------------------------------  
 Avatar            | ![Avatar](gifs/avatar.gif)                        
 Check Box         | ![Check Box](gifs/checkbox.gif) 
-Check Box         | <img src="gifs/checkbox.gif" style="mix-blend-mode: multiply;" /> 
-Check Box         | <img src="gifs/checkbox.gif" style="mix-blend-mode: multiply;" /> 
 Circular Progress | ![Circular Progressj](gifs/circularprogress.gif)  
 Dialog            | ![Dialog](gifs/dialog.gif)                        
 Drawer            | ![Drawer](gifs/drawer.gif)                        
