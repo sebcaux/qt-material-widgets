@@ -37,6 +37,7 @@ void QtMaterialRippleOverlay::removeRipple(QtMaterialRipple *ripple)
 {
     if (m_ripples.removeOne(ripple)) {
         delete ripple;
+        update();
     }
 }
 
