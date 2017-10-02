@@ -45,9 +45,12 @@ Toggle            | ![checkbox](gifs/toggle.gif)
 - [x] Text Field
 - [x] Toggle
 
+#### Work in progress
+
+- [x] App Bar
+
 #### Not implemented 
 
-- [ ] App Bar
 - [ ] Autocomplete
 - [ ] Chips
 - [ ] Discrete Slider
