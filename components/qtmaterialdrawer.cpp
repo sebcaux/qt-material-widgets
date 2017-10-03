@@ -2,17 +2,24 @@
 #include "qtmaterialdrawer_p.h"
 #include <QPainter>
 #include <QEvent>
+#include <QMouseEvent>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLayout>
 #include <QLinearGradient>
 #include <QtWidgets/QVBoxLayout>
 #include "qtmaterialdrawer_internal.h"
 
+/*!
+ *  \class QtMaterialDrawerPrivate
+ *  \internal
+ */
+
 QtMaterialDrawerPrivate::QtMaterialDrawerPrivate(QtMaterialDrawer *q)
     : q_ptr(q),
       stateMachine(new QtMaterialDrawerStateMachine(q)),
       window(new QWidget),
-      width(250)
+      width(250),
+      clickToClose(false)
 {
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(window);
@@ -24,6 +31,10 @@ QtMaterialDrawerPrivate::QtMaterialDrawerPrivate(QtMaterialDrawer *q)
 
     QCoreApplication::processEvents();
 }
+
+/*!
+ *  \class QtMaterialDrawer
+ */
 
 QtMaterialDrawer::QtMaterialDrawer(QWidget *parent)
     : QtMaterialOverlayWidget(parent),
@@ -65,6 +76,20 @@ QLayout *QtMaterialDrawer::drawerLayout() const
     return d->window->layout();
 }
 
+void QtMaterialDrawer::setClickOutsideToClose(bool state)
+{
+    Q_D(QtMaterialDrawer);
+
+    d->clickToClose = state;
+}
+
+bool QtMaterialDrawer::clickOutsideToClose() const
+{
+    Q_D(const QtMaterialDrawer);
+
+    return d->clickToClose;
+}
+
 void QtMaterialDrawer::openDrawer()
 {
     Q_D(QtMaterialDrawer);
@@ -82,13 +107,28 @@ void QtMaterialDrawer::closeDrawer()
 
 bool QtMaterialDrawer::eventFilter(QObject *obj, QEvent *event)
 {
-    const QEvent::Type type = event->type();
+    Q_D(QtMaterialDrawer);
 
-    if (QEvent::Move == type || QEvent::Resize == type) {
-        QLayout *t = layout();
-        if (t && 16 != t->contentsMargins().right()) {
-            t->setContentsMargins(0, 0, 16, 0);
+    switch (event->type())
+    {
+    case QEvent::MouseButtonPress: {
+        QMouseEvent *mouseEvent;
+        if ((mouseEvent = static_cast<QMouseEvent *>(event))) {
+            if (!geometry().contains(mouseEvent->pos()) && d->clickToClose) {
+                closeDrawer();
+            }
         }
+        break;
+    }
+    case QEvent::Move:
+    case QEvent::Resize: {
+        QLayout *lyut = layout();
+        if (lyut && 16 != lyut->contentsMargins().right()) {
+            lyut->setContentsMargins(0, 0, 16, 0);
+        }
+    }
+    default:
+        break;
     }
     return QtMaterialOverlayWidget::eventFilter(obj, event);
 }

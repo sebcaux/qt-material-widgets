@@ -18,6 +18,7 @@ public:
     QtMaterialDrawerStateMachine *const stateMachine;
     QWidget                      *const window;
     int                                 width;
+    bool                                clickToClose;
 };
 
 #endif // DRAWER_P_H

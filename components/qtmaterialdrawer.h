@@ -20,6 +20,9 @@ public:
     void setDrawerLayout(QLayout *layout);
     QLayout *drawerLayout() const;
 
+    void setClickOutsideToClose(bool state);
+    bool clickOutsideToClose() const;
+
 public slots:
     void openDrawer();
     void closeDrawer();
