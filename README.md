@@ -7,7 +7,7 @@ I finally took the time to go through and clean up this code. The build includes
 Component         | Preview                                                         
 ----------------- | ------------------------------------------------  
 Avatar            | ![Avatar](gifs/avatar.gif)                        
-Check Box         | ![Check Box](gifs/checkbox.gif)                   
+Check Box         | ![Check Box](gifs/checkbox.gif) 
 Circular Progress | ![Circular Progressj](gifs/circularprogress.gif)  
 Dialog            | ![Dialog](gifs/dialog.gif)                        
 Drawer            | ![Drawer](gifs/drawer.gif)                        
@@ -45,9 +45,12 @@ Toggle            | ![checkbox](gifs/toggle.gif)
 - [x] Text Field
 - [x] Toggle
 
+#### Work in progress
+
+- [x] App Bar
+
 #### Not implemented 
 
-- [ ] App Bar
 - [ ] Autocomplete
 - [ ] Chips
 - [ ] Discrete Slider
