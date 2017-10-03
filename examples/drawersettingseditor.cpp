@@ -26,6 +26,7 @@ DrawerSettingsEditor::DrawerSettingsEditor(QWidget *parent)
     canvas->setMaximumHeight(300);
 
     m_drawer->setParent(this);
+    m_drawer->setClickOutsideToClose(true);
 
     setupForm();
 
