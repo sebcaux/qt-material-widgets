@@ -170,6 +170,8 @@ void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
     Q_D(QtMaterialScrollBar);
 
     QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
     painter.fillRect(rect(), canvasColor());
 
     int x, y, w, h;
@@ -187,7 +189,13 @@ void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
         painter.setOpacity(d->stateMachine->opacity());
     }
 
-    painter.drawRect(rect().marginsRemoved(margins));
+    QRect trimmed(rect().marginsRemoved(margins));
+
+    QPainterPath path;
+    path.addRoundedRect(trimmed, 3, 3);
+    painter.setClipPath(path);
+
+    painter.drawRect(trimmed);
 
     const qreal q = h / static_cast<qreal>(maximum()-minimum()+pageStep()-1);
 
@@ -198,5 +206,5 @@ void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
     brush.setColor(sliderColor());
     painter.setBrush(brush);
 
-    painter.drawRect(handle.marginsRemoved(margins));
+    painter.drawRect(handle);
 }
