@@ -1,5 +1,6 @@
 QT += core gui widgets
 TEMPLATE = app
+CONFIG += c++11
 SOURCES = mainwindow.cpp \
     main.cpp \
     avatarsettingseditor.cpp \
