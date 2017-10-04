@@ -2,7 +2,7 @@
 #include <QVBoxLayout>
 #include <QDebug>
 #include <QColorDialog>
-#include "qtmaterialfab.h"
+#include <qtmaterialfab.h>
 
 FloatingActionButtonSettingsEditor::FloatingActionButtonSettingsEditor(QWidget *parent)
     : QWidget(parent),

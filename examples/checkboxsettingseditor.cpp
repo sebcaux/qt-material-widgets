@@ -1,7 +1,7 @@
 #include "checkboxsettingseditor.h"
 #include <QVBoxLayout>
 #include <QColorDialog>
-#include "qtmaterialcheckbox.h"
+#include <qtmaterialcheckbox.h>
 
 CheckBoxSettingsEditor::CheckBoxSettingsEditor(QWidget *parent)
     : QWidget(parent),

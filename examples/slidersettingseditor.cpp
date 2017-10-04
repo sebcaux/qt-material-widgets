@@ -1,7 +1,7 @@
 #include "slidersettingseditor.h"
 #include <QVBoxLayout>
 #include <QColorDialog>
-#include "qtmaterialslider.h"
+#include <qtmaterialslider.h>
 
 SliderSettingsEditor::SliderSettingsEditor(QWidget *parent)
     : QWidget(parent),

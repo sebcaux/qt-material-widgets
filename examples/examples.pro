@@ -40,10 +40,9 @@ HEADERS = mainwindow.h \
     dialogsettingseditor.h \
     drawersettingseditor.h \
     scrollbarsettingseditor.h
-LIBS += ../components/libcomponents.a
-INCLUDEPATH += ../components/
-TARGET = ../examples-exe
-PRE_TARGETDEPS += ../components/libcomponents.a
+LIBS += $$top_builddir/components/libcomponents.a
+INCLUDEPATH += $$top_srcdir/components/
+TARGET = $$top_builddir/examples-exe
 
 RESOURCES += \
     examples.qrc

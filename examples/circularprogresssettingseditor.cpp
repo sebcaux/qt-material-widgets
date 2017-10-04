@@ -1,7 +1,7 @@
 #include "circularprogresssettingseditor.h"
 #include <QVBoxLayout>
 #include <QColorDialog>
-#include "qtmaterialcircularprogress.h"
+#include <qtmaterialcircularprogress.h>
 
 CircularProgressSettingsEditor::CircularProgressSettingsEditor(QWidget *parent)
     : QWidget(parent),

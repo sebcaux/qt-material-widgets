@@ -1,6 +1,6 @@
 #include "flatbuttonsettingseditor.h"
 #include <QColorDialog>
-#include "qtmaterialflatbutton.h"
+#include <qtmaterialflatbutton.h>
 
 FlatButtonSettingsEditor::FlatButtonSettingsEditor(QWidget *parent)
     : QWidget(parent),

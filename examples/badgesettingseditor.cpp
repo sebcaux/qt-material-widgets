@@ -1,7 +1,7 @@
 #include "badgesettingseditor.h"
 #include <QColorDialog>
-#include "qtmaterialavatar.h"
-#include "qtmaterialbadge.h"
+#include <qtmaterialavatar.h>
+#include <qtmaterialbadge.h>
 
 BadgeSettingsEditor::BadgeSettingsEditor(QWidget *parent)
     : QWidget(parent),

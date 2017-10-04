@@ -1,7 +1,7 @@
 #include "avatarsettingseditor.h"
 #include <QColorDialog>
-#include "qtmaterialavatar.h"
-#include "lib/qtmaterialtheme.h"
+#include <qtmaterialavatar.h>
+#include <lib/qtmaterialtheme.h>
 
 AvatarSettingsEditor::AvatarSettingsEditor(QWidget *parent)
     : QWidget(parent),

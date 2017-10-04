@@ -2,7 +2,7 @@
 #include <QVBoxLayout>
 #include <QColorDialog>
 #include <QtWidgets/QTextEdit>
-#include "qtmaterialscrollbar.h"
+#include <qtmaterialscrollbar.h>
 
 ScrollBarSettingsEditor::ScrollBarSettingsEditor(QWidget *parent)
     : QWidget(parent),

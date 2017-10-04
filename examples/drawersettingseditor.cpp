@@ -1,7 +1,7 @@
 #include "drawersettingseditor.h"
 #include <QVBoxLayout>
 #include <QColorDialog>
-#include "qtmaterialdrawer.h"
+#include <qtmaterialdrawer.h>
 
 DrawerSettingsEditor::DrawerSettingsEditor(QWidget *parent)
     : QWidget(parent),
