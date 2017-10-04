@@ -42,7 +42,7 @@ HEADERS = mainwindow.h \
     scrollbarsettingseditor.h
 LIBS += $$top_builddir/components/$(OBJECTS_DIR)/libcomponents.a
 INCLUDEPATH += $$top_srcdir/components/
-TARGET = $$top_builddir/examples/examples-exe
+TARGET = examples-exe
 
 RESOURCES += \
     examples.qrc
