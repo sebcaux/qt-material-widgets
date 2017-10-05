@@ -7,6 +7,7 @@ I finally took the time to go through and clean up this code. The build includes
 Component         | Preview                                                         
 ----------------- | ------------------------------------------------  
 x                 | x
+x                 | x
 Avatar            | ![Avatar](gifs/avatar.gif)                        
 x                 | x
 Check Box         | ![Check Box](gifs/checkbox.gif) 
