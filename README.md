@@ -21,45 +21,215 @@ I finally took the time to go through and clean up this code. The build includes
       <img src="gifs/avatar.gif" />
     </td>
   </tr>
+  <tr>
+    <td>
+      Check Box
+    </td>
+    <td>
+      <code>QtMaterialCheckBox</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/checkbox.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Circular Progress
+    </td>
+    <td>
+      <code>QtMaterialCircularProgress</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/circularprogress.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Dialog
+    </td>
+    <td>
+      <code>QtMaterialDialog</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/dialog.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Drawer
+    </td>
+    <td>
+      <code>QtMaterialDrawer</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/drawer.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      FAB
+    </td>
+    <td>
+      <code>QtMaterialFloatingActionButton</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/fab.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Flat Button
+    </td>
+    <td>
+      <code>QtMaterialFlatButton</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/flatbutton.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Icon Button
+    </td>
+    <td>
+      <code>QtMaterialIconButton</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/iconbutton.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Progress
+    </td>
+    <td>
+      <code>QtMaterialProgress</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/progress.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Radio Button
+    </td>
+    <td>
+      <code>QtMaterialRadioButton</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/radiobutton.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Raised Button
+    </td>
+    <td>
+      <code>QtMaterialRaisedButton</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/raisedbutton.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Scroll Bar
+    </td>
+    <td>
+      <code>QtMaterialScrollBar</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/scrollbar.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Slider
+    </td>
+    <td>
+      <code>QtMaterialSlider</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/slider.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Snackbar
+    </td>
+    <td>
+      <code>QtMaterialSnackBar</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/snackbar.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Tabs
+    </td>
+    <td>
+      <code>QtMaterialTabs</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/tabs.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Text Field
+    </td>
+    <td>
+      <code>QtMaterialTextField</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/textfield.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Toggle
+    </td>
+    <td>
+      <code>QtMaterialToggle</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="gifs/toggle.gif" />
+    </td>
+  </tr>
 </table>
-
-Component         | Preview                                                         
------------------ | ------------------------------------------------  
-x                 | x
-x                 | x
-Avatar            | ![Avatar](gifs/avatar.gif)                        
-x                 | x
-Check Box         | ![Check Box](gifs/checkbox.gif) 
-x                 | x
-Circular Progress | ![Circular Progressj](gifs/circularprogress.gif)  
-x                 | x
-Dialog            | ![Dialog](gifs/dialog.gif)                        
-x                 | x
-Drawer            | ![Drawer](gifs/drawer.gif)                        
-x                 | x
-FAB               | ![FAB](gifs/fab.gif)                              
-x                 | x
-Flat Button       | ![Flat Button](gifs/flatbutton.gif)               
-x                 | x
-Icon Button       | ![Icon Button](gifs/iconbutton.gif)               
-x                 | x
-Progress          | ![Progress](gifs/progress.gif)                    
-x                 | x
-Radio Button      | ![Radio Button](gifs/radiobutton.gif)             
-x                 | x
-Raised Button     | ![Raised Button](gifs/raisedbutton.gif)           
-x                 | x
-Scroll Bar        | ![Scroll Bar](gifs/scrollbar.gif)                 
-x                 | x
-Slider            | ![Slider](gifs/slider.gif)                        
-x                 | x
-Snackbar          | ![Snackbar](gifs/snackbar.gif)                    
-x                 | x
-Tabs              | ![Tabs](gifs/tabs.gif)                           
-x                 | x
-Text Field        | ![Text Field](gifs/textfield.gif)                 
-x                 | x
-Toggle            | ![checkbox](gifs/toggle.gif)                      
 
 #### Implemented components
 
