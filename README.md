@@ -13,7 +13,7 @@ I finally took the time to go through and clean up this code. The build includes
       Avatar
     </td>
     <td>
-      `QtMaterialAvatar`
+      <pre>QtMaterialAvatar</pre>
     </td>
   </tr>
   <tr>
