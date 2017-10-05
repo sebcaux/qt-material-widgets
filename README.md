@@ -70,7 +70,7 @@ I finally took the time to go through and clean up this code. The build includes
       </td>
     </tr>
     <tr>
-      <td colspan="2" align="center">
+      <td colspan="2">
         <img src="gifs/drawer.gif" />
       </td>
     </tr>
