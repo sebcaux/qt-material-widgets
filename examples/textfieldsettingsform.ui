@@ -168,14 +168,14 @@
      </layout>
     </item>
     <item row="10" column="0">
-     <widget class="QLabel" name="labelShowUnderscore">
+     <widget class="QLabel" name="labelShowUnderline">
       <property name="text">
-       <string>Underscore</string>
+       <string>Underline</string>
       </property>
      </widget>
     </item>
     <item row="10" column="1">
-     <widget class="QCheckBox" name="underscoreCheckBox"/>
+     <widget class="QCheckBox" name="underlineCheckBox"/>
     </item>
    </layout>
   </widget>

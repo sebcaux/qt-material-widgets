@@ -18,7 +18,7 @@ protected slots:
     void setupForm();
     void updateWidget();
     void selectColor();
-    void setShowUnderscore();
+    void setShowUnderline();
 
 private:
     Ui::TextFieldSettingsForm *const ui;
