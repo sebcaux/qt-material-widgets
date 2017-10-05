@@ -5,6 +5,7 @@
 I finally took the time to go through and clean up this code. The build includes an executable with a preview, and some settings to play around with for each widget. A YouTube video preview is [available here](http://www.youtube.com/watch?v=21UMeNVBPU4).
 
 <table>
+<tbody>
   <tr>
     <td colspan="2"></td>
   </tr>
@@ -229,6 +230,7 @@ I finally took the time to go through and clean up this code. The build includes
       <img src="gifs/toggle.gif" />
     </td>
   </tr>
+</tbody>
 </table>
 
 #### Implemented components
