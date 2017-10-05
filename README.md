@@ -4,6 +4,33 @@
 
 I finally took the time to go through and clean up this code. The build includes an executable with a preview, and some settings to play around with for each widget. A YouTube video preview is [available here](http://www.youtube.com/watch?v=21UMeNVBPU4).
 
+<table>
+  <tr>
+    <td>
+      Avatar
+    </td>
+    <td>
+      <img src="gifs/avatar.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Avatar
+    </td>
+    <td>
+      <img src="gifs/avatar.gif" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Avatar
+    </td>
+    <td>
+      <img src="gifs/avatar.gif" />
+    </td>
+  </tr>
+</table>
+
 Component         | Preview                                                         
 ----------------- | ------------------------------------------------  
 x                 | x
