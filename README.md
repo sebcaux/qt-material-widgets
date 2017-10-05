@@ -6,22 +6,39 @@ I finally took the time to go through and clean up this code. The build includes
 
 Component         | Preview                                                         
 ----------------- | ------------------------------------------------  
+x                 | x
 Avatar            | ![Avatar](gifs/avatar.gif)                        
+x                 | x
 Check Box         | ![Check Box](gifs/checkbox.gif) 
+x                 | x
 Circular Progress | ![Circular Progressj](gifs/circularprogress.gif)  
+x                 | x
 Dialog            | ![Dialog](gifs/dialog.gif)                        
+x                 | x
 Drawer            | ![Drawer](gifs/drawer.gif)                        
+x                 | x
 FAB               | ![FAB](gifs/fab.gif)                              
+x                 | x
 Flat Button       | ![Flat Button](gifs/flatbutton.gif)               
+x                 | x
 Icon Button       | ![Icon Button](gifs/iconbutton.gif)               
+x                 | x
 Progress          | ![Progress](gifs/progress.gif)                    
+x                 | x
 Radio Button      | ![Radio Button](gifs/radiobutton.gif)             
+x                 | x
 Raised Button     | ![Raised Button](gifs/raisedbutton.gif)           
+x                 | x
 Scroll Bar        | ![Scroll Bar](gifs/scrollbar.gif)                 
+x                 | x
 Slider            | ![Slider](gifs/slider.gif)                        
+x                 | x
 Snackbar          | ![Snackbar](gifs/snackbar.gif)                    
+x                 | x
 Tabs              | ![Tabs](gifs/tabs.gif)                           
+x                 | x
 Text Field        | ![Text Field](gifs/textfield.gif)                 
+x                 | x
 Toggle            | ![checkbox](gifs/toggle.gif)                      
 
 #### Implemented components
