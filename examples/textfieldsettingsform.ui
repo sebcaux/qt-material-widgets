@@ -167,6 +167,16 @@
       </item>
      </layout>
     </item>
+    <item row="10" column="0">
+     <widget class="QLabel" name="labelShowUnderscore">
+      <property name="text">
+       <string>Underscore</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QCheckBox" name="underscoreCheckBox"/>
+    </item>
    </layout>
   </widget>
  </widget>

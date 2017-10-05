@@ -29,6 +29,7 @@ void QtMaterialTextFieldPrivate::init()
     label          = 0;
     labelFontSize  = 9.5;
     showLabel      = false;
+    showUnderscore = true;
     useThemeColors = true;
 
     q->setFrame(false);
@@ -231,6 +232,20 @@ QColor QtMaterialTextField::underlineColor() const
     }
 }
 
+void QtMaterialTextField::setShowUnderscore(bool value)
+{
+    Q_D(QtMaterialTextField);
+
+    if (d->showUnderscore == value) {
+        return;
+    }
+
+    d->showUnderscore = value;
+
+    update();
+}
+
+
 /*!
  *  \reimp
  */
@@ -274,12 +289,15 @@ void QtMaterialTextField::paintEvent(QPaintEvent *event)
     const int y = height()-1;
     const int wd = width()-5;
 
-    QPen pen;
-    pen.setWidth(1);
-    pen.setColor(underlineColor());
-    painter.setPen(pen);
-    painter.setOpacity(1);
-    painter.drawLine(2.5, y, wd, y);
+
+    if( d->showUnderscore )
+    {
+        QPen pen;
+        pen.setWidth(1);
+        pen.setColor(underlineColor());
+        painter.setPen(pen);
+        painter.setOpacity(1);
+        painter.drawLine(2.5, y, wd, y);
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
@@ -291,5 +309,6 @@ void QtMaterialTextField::paintEvent(QPaintEvent *event)
         painter.setBrush(brush);
         const int w = (1-progress)*static_cast<qreal>(wd/2);
         painter.drawRect(w+2.5, height()-2, wd-w*2, 2);
+    }
     }
 }
