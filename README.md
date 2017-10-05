@@ -32,9 +32,7 @@ I finally took the time to go through and clean up this code. The build includes
     </tr>
     <tr>
       <td colspan="2">
-        <center>
-          <img src="gifs/checkbox.gif" />
-        </center>
+        <img src="gifs/checkbox.gif" />
       </td>
     </tr>
     <tr>
