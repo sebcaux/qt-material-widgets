@@ -41,6 +41,7 @@ TextFieldSettingsEditor::TextFieldSettingsEditor(QWidget *parent)
     connect(ui->inkColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
     connect(ui->underlineColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
     connect(ui->labelColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
+    connect(ui->underscoreCheckBox, SIGNAL(toggled(bool)), this, SLOT(setShowUnderscore()));
 
     connect(m_textField, SIGNAL(textChanged(QString)), this, SLOT(setupForm()));
 }
@@ -58,6 +59,7 @@ void TextFieldSettingsEditor::setupForm()
     ui->labelCheckBox->setChecked(m_textField->hasLabel());
     ui->labelTextLineEdit->setText(m_textField->label());
     ui->useThemeColorsCheckBox->setChecked(m_textField->useThemeColors());
+    ui->underscoreCheckBox->setChecked( true );
 }
 
 void TextFieldSettingsEditor::updateWidget()
@@ -68,6 +70,7 @@ void TextFieldSettingsEditor::updateWidget()
     m_textField->setLabel(ui->labelTextLineEdit->text());
     m_textField->setShowLabel(ui->labelCheckBox->isChecked());
     m_textField->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
+    m_textField->setShowUnderscore(ui->underscoreCheckBox->isChecked());
 }
 
 void TextFieldSettingsEditor::selectColor()
@@ -91,4 +94,9 @@ void TextFieldSettingsEditor::selectColor()
         }
     }
     setupForm();
+}
+
+void TextFieldSettingsEditor::setShowUnderscore()
+{
+    m_textField->setShowUnderscore( ui->underscoreCheckBox->isChecked() );
 }

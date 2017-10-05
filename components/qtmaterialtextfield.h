@@ -41,6 +41,7 @@ public:
 
     void setUnderlineColor(const QColor &color);
     QColor underlineColor() const;
+    void setShowUnderscore(bool value);
 
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
