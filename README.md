@@ -10,22 +10,11 @@ I finally took the time to go through and clean up this code. The build includes
       Avatar
     </td>
     <td>
-      <img src="gifs/avatar.gif" />
+      QtMaterialAvatar
     </td>
   </tr>
   <tr>
-    <td>
-      Avatar
-    </td>
-    <td>
-      <img src="gifs/avatar.gif" />
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Avatar
-    </td>
-    <td>
+    <td colspan="2">
       <img src="gifs/avatar.gif" />
     </td>
   </tr>
