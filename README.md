@@ -6,11 +6,14 @@ I finally took the time to go through and clean up this code. The build includes
 
 <table>
   <tr>
+    <td colspan="2"></td>
+  </tr>
+  <tr>
     <td>
       Avatar
     </td>
     <td>
-      QtMaterialAvatar
+      `QtMaterialAvatar`
     </td>
   </tr>
   <tr>
