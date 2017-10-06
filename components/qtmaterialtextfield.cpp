@@ -299,6 +299,10 @@ void QtMaterialTextField::paintEvent(QPaintEvent *event)
         QPen pen;
         pen.setWidth(1);
         pen.setColor(inputLineColor());
+
+        if (!isEnabled()) 
+            pen.setStyle(Qt::DotLine);
+
         painter.setPen(pen);
         painter.setOpacity(1);
         painter.drawLine(QLineF(2.5, y, wd, y));
