@@ -1,6 +1,5 @@
 #include "qtmaterialflatbutton.h"
 #include "qtmaterialflatbutton_p.h"
-#include <QFontDatabase>
 #include <QPainter>
 #include <QMouseEvent>
 #include <QResizeEvent>
@@ -58,8 +57,7 @@ void QtMaterialFlatButtonPrivate::init()
     q->setAttribute(Qt::WA_Hover);
     q->setMouseTracking(true);
 
-    QFontDatabase db;
-    QFont font(db.font("Roboto", "Medium", fontSize));
+    QFont font("Roboto", fontSize, QFont::Medium);
     font.setCapitalization(QFont::AllUppercase);
     q->setFont(font);
 

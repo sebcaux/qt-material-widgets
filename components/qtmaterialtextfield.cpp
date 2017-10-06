@@ -1,6 +1,5 @@
 #include "qtmaterialtextfield.h"
 #include "qtmaterialtextfield_p.h"
-#include <QFontDatabase>
 #include <QtWidgets/QApplication>
 #include <QPainter>
 #include "qtmaterialtextfield_internal.h"
@@ -38,9 +37,7 @@ void QtMaterialTextFieldPrivate::init()
     q->setMouseTracking(true);
     q->setTextMargins(0, 2, 0, 4);
 
-    QFontDatabase db;
-    QFont font(db.font("Roboto", "Regular", 11));
-    q->setFont(font);
+    q->setFont(QFont("Roboto", 11, QFont::Normal));
 
     stateMachine->start();
     QCoreApplication::processEvents();

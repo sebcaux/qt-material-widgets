@@ -2,7 +2,6 @@
 #include <QPropertyAnimation>
 #include <QEventTransition>
 #include <QPainter>
-#include <QFontDatabase>
 #include "qtmaterialtextfield.h"
 
 /*!
@@ -134,8 +133,7 @@ QtMaterialTextFieldLabel::QtMaterialTextFieldLabel(QtMaterialTextField *parent)
 {
     Q_ASSERT(parent);
 
-    QFontDatabase db;
-    QFont font(db.font("Roboto", "Medium", parent->labelFontSize()));
+    QFont font("Roboto", parent->labelFontSize(), QFont::Medium);
     font.setLetterSpacing(QFont::PercentageSpacing, 102);
     setFont(font);
 }

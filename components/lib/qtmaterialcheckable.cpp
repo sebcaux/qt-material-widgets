@@ -1,7 +1,6 @@
 #include "lib/qtmaterialcheckable.h"
 #include "lib/qtmaterialcheckable_p.h"
 #include <QPainter>
-#include <QFontDatabase>
 #include <QEvent>
 #include <QStateMachine>
 #include <QSignalTransition>
@@ -49,10 +48,7 @@ void QtMaterialCheckablePrivate::init()
 
     q->setCheckable(true);
     q->setStyle(&QtMaterialStyle::instance());
-
-    QFontDatabase db;
-    QFont font(db.font("Roboto", "Regular", 11));
-    q->setFont(font);
+    q->setFont(QFont("Roboto", 11, QFont::Normal));
 
     stateMachine->addState(uncheckedState);
     stateMachine->addState(checkedState);

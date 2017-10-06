@@ -20,9 +20,9 @@ void QtMaterialStylePrivate::init()
 {
     Q_Q(QtMaterialStyle);
 
-    QFontDatabase::addApplicationFont(":/material/fonts/Roboto/Roboto-Regular.ttf");
-    QFontDatabase::addApplicationFont(":/material/fonts/Roboto/Roboto-Medium.ttf");
-    QFontDatabase::addApplicationFont(":/material/fonts/Roboto/Roboto-Bold.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/roboto_regular");
+    QFontDatabase::addApplicationFont(":/fonts/roboto_medium");
+    QFontDatabase::addApplicationFont(":/fonts/roboto_bold");
 
     q->setTheme(new QtMaterialTheme);
 }

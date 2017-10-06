@@ -2,7 +2,6 @@
 #include "qtmaterialsnackbar_p.h"
 #include <QtWidgets/QApplication>
 #include <QPainter>
-#include <QFontDatabase>
 #include "qtmaterialsnackbar_internal.h"
 #include "lib/qtmaterialstyle.h"
 #include "lib/qtmaterialstatetransition.h"
@@ -35,8 +34,7 @@ void QtMaterialSnackbarPrivate::init()
 
     q->setAttribute(Qt::WA_TransparentForMouseEvents);
 
-    QFontDatabase db;
-    QFont font(db.font("Roboto", "Medium", 10));
+    QFont font("Roboto", 10, QFont::Medium);
     font.setCapitalization(QFont::AllUppercase);
     q->setFont(font);
 
