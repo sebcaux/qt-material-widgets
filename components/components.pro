@@ -38,7 +38,10 @@ SOURCES = \
     qtmaterialdialog.cpp \
     qtmaterialdrawer_internal.cpp \
     qtmaterialdrawer.cpp \
-    qtmaterialappbar.cpp
+    qtmaterialappbar.cpp \
+    qtmaterialautocomplete.cpp \
+    qtmaterialpaper.cpp \
+    qtmaterialtable.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -100,6 +103,12 @@ HEADERS = \
     qtmaterialdrawer_p.h \
     qtmaterialdrawer.h \
     qtmaterialappbar.h \
-    qtmaterialappbar_p.h
+    qtmaterialappbar_p.h \
+    qtmaterialautocomplete.h \
+    qtmaterialautocomplete_p.h \
+    qtmaterialpaper.h \
+    qtmaterialpaper_p.h \
+    qtmaterialtable.h \
+    qtmaterialtable_p.h
 RESOURCES += \
     resources.qrc
