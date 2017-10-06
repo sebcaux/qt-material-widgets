@@ -206,5 +206,5 @@ void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
     brush.setColor(sliderColor());
     painter.setBrush(brush);
 
-    painter.drawRect(handle);
+    painter.drawRoundedRect(handle, 9, 9);
 }
