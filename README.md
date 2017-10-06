@@ -266,6 +266,7 @@ I finally took the time to go through and clean up this code. The build includes
 
 #### Not implemented 
 
+- [ ] Card
 - [ ] Chips
 - [ ] Discrete Slider
 - [ ] Grid List
