@@ -25,11 +25,11 @@ public:
     QColor                           textColor;
     QColor                           labelColor;
     QColor                           inkColor;
-    QColor                           underlineColor;
+    QColor                           inputLineColor;
     QString                          labelString;
     qreal                            labelFontSize;
     bool                             showLabel;
-    bool                             showUnderline;
+    bool                             showInputLine;
     bool                             useThemeColors;
 };
 

@@ -12,7 +12,7 @@ class QtMaterialTextField : public QLineEdit
 
     Q_PROPERTY(QColor textColor WRITE setTextColor READ textColor)
     Q_PROPERTY(QColor inkColor WRITE setInkColor READ inkColor)
-    Q_PROPERTY(QColor underlineColor WRITE setUnderlineColor READ underlineColor)
+    Q_PROPERTY(QColor inputLineColor WRITE setInputLineColor READ inputLineColor)
 
 public:
     explicit QtMaterialTextField(QWidget *parent = 0);
@@ -39,11 +39,11 @@ public:
     void setInkColor(const QColor &color);
     QColor inkColor() const;
 
-    void setUnderlineColor(const QColor &color);
-    QColor underlineColor() const;
+    void setInputLineColor(const QColor &color);
+    QColor inputLineColor() const;
 
-    void setShowUnderline(bool value);
-    bool hasUnderline() const;
+    void setShowInputLine(bool value);
+    bool hasInputLine() const;
 
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
