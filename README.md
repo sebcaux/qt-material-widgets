@@ -259,6 +259,8 @@ I finally took the time to go through and clean up this code. The build includes
 - [x] App Bar
 - [ ] Autocomplete
 - [ ] Divider
+- [ ] List
+- [ ] List Item
 - [ ] Paper
 - [ ] Table
 
@@ -268,7 +270,6 @@ I finally took the time to go through and clean up this code. The build includes
 - [ ] Discrete Slider
 - [ ] Grid List
 - [ ] Icon Menu
-- [ ] List
 - [ ] Menu
 - [ ] Search Field
 - [ ] Select Field
