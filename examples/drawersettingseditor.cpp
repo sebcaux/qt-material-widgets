@@ -27,6 +27,7 @@ DrawerSettingsEditor::DrawerSettingsEditor(QWidget *parent)
 
     m_drawer->setParent(this);
     m_drawer->setClickOutsideToClose(true);
+    m_drawer->setOverlayMode(true);
 
     setupForm();
 
