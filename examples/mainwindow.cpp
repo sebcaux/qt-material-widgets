@@ -58,8 +58,9 @@ MainWindow::MainWindow(QWidget *parent)
     DialogSettingsEditor *dialog = new DialogSettingsEditor;
     DrawerSettingsEditor *drawer = new DrawerSettingsEditor;
     ScrollBarSettingsEditor *scrollBar = new ScrollBarSettingsEditor;
-    AppBarSettingsEditors *appBar = new AppBarSettingsEditors;
+    AppBarSettingsEditor *appBar = new AppBarSettingsEditor;
 
+    stack->addWidget(appBar);
     stack->addWidget(avatar);
     stack->addWidget(badge);
     stack->addWidget(checkbox);
@@ -78,7 +79,6 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(tabs);
     stack->addWidget(textField);
     stack->addWidget(toggle);
-    stack->addWidget(appBar);
 
     list->addItem("App Bar");
     list->addItem("Avatar");

@@ -50,7 +50,8 @@ void QtMaterialAppBarPrivate::init()
  */
 
 QtMaterialAppBar::QtMaterialAppBar(QWidget *parent)
-    : QWidget(parent)
+    : QWidget(parent),
+      d_ptr(new QtMaterialAppBarPrivate(this))
 {
     d_func()->init();
 }

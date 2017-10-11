@@ -2,7 +2,7 @@
 #define APPBARSETTINGSEDITOR_H
 
 #include <QWidget>
-#include "ui_avatarsettingsform.h"
+#include "ui_appbarsettingsform.h"
 
 class QtMaterialAppBar;
 
