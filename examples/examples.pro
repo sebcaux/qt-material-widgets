@@ -67,4 +67,5 @@ FORMS += \
     tabssettingsform.ui \
     dialogsettingsform.ui \
     drawersettingsform.ui \
-    scrollbarsettingsform.ui
+    scrollbarsettingsform.ui \
+    appbarsettingsform.ui

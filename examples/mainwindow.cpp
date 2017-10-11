@@ -20,6 +20,7 @@
 #include "dialogsettingseditor.h"
 #include "drawersettingseditor.h"
 #include "scrollbarsettingseditor.h"
+#include "appbarsettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -57,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
     DialogSettingsEditor *dialog = new DialogSettingsEditor;
     DrawerSettingsEditor *drawer = new DrawerSettingsEditor;
     ScrollBarSettingsEditor *scrollBar = new ScrollBarSettingsEditor;
+    AppBarSettingsEditors *appBar = new AppBarSettingsEditors;
 
     stack->addWidget(avatar);
     stack->addWidget(badge);
@@ -76,7 +78,9 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(tabs);
     stack->addWidget(textField);
     stack->addWidget(toggle);
+    stack->addWidget(appBar);
 
+    list->addItem("App Bar");
     list->addItem("Avatar");
     list->addItem("Badge");
     list->addItem("Checkbox");
