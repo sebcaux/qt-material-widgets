@@ -1,5 +1,7 @@
 # Qt Material Design Desktop Widgets
 
+[![Join the chat at https://gitter.im/qt-material-widgets/Lobby](https://badges.gitter.im/qt-material-widgets/Lobby.svg)](https://gitter.im/qt-material-widgets/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## :hatched_chick: Update!
 
 I finally took the time to go through and clean up this code. The build includes an executable with a preview, and some settings to play around with for each widget. A YouTube video preview is [available here](http://www.youtube.com/watch?v=21UMeNVBPU4).
