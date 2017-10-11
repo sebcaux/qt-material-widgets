@@ -204,5 +204,9 @@ void QtMaterialIconButton::paintEvent(QPaintEvent *event)
     QPainter icon(&pixmap);
     icon.setCompositionMode(QPainter::CompositionMode_SourceIn);
     icon.fillRect(pixmap.rect(), isEnabled() ? color() : disabledColor());
-    painter.drawPixmap(0, 0, pixmap);
+
+    QRect r(rect());
+    const qreal w = pixmap.width();
+    const qreal h = pixmap.height();
+    painter.drawPixmap(QRect((r.width()-w)/2, (r.height()-h)/2, w, h), pixmap);
 }

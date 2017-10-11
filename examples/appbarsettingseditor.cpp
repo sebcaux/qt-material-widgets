@@ -15,6 +15,7 @@ AppBarSettingsEditor::AppBarSettingsEditor(QWidget *parent)
     m_appBar->appBarLayout()->addWidget(button);
     m_appBar->appBarLayout()->addStretch(1);
     button->setColor(Qt::white);
+    button->setFixedWidth(42);
 
     QVBoxLayout *layout = new QVBoxLayout;
     setLayout(layout);
