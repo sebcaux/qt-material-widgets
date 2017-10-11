@@ -94,6 +94,8 @@ void QtMaterialIconButton::setColor(const QColor &color)
     Q_D(QtMaterialIconButton);
 
     d->color = color;
+
+    MATERIAL_DISABLE_THEME_COLORS
     update();
 }
 
@@ -112,6 +114,8 @@ void QtMaterialIconButton::setDisabledColor(const QColor &color)
     Q_D(QtMaterialIconButton);
 
     d->disabledColor = color;
+
+    MATERIAL_DISABLE_THEME_COLORS
     update();
 }
 

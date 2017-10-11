@@ -1,7 +1,6 @@
 #include "qtmaterialappbar.h"
 #include "qtmaterialappbar_p.h"
 #include <QtWidgets/QGraphicsDropShadowEffect>
-#include <QtWidgets/QHBoxLayout>
 #include <QPainter>
 #include "lib/qtmaterialstyle.h"
 

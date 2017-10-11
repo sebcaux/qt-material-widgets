@@ -2,6 +2,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QColorDialog>
 #include <qtmaterialappbar.h>
+#include <qtmaterialiconbutton.h>
 #include <lib/qtmaterialtheme.h>
 
 AppBarSettingsEditor::AppBarSettingsEditor(QWidget *parent)
@@ -9,6 +10,12 @@ AppBarSettingsEditor::AppBarSettingsEditor(QWidget *parent)
       ui(new Ui::AppBarSettingsForm),
       m_appBar(new QtMaterialAppBar)
 {
+    QtMaterialIconButton *button = new QtMaterialIconButton(QtMaterialTheme::icon("navigation", "menu"));
+    button->setIconSize(QSize(24, 24));
+    m_appBar->appBarLayout()->addWidget(button);
+    m_appBar->appBarLayout()->addStretch(1);
+    button->setColor(Qt::white);
+
     QVBoxLayout *layout = new QVBoxLayout;
     setLayout(layout);
 

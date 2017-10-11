@@ -2,6 +2,7 @@
 #define QTMATERIALAPPBAR_H
 
 #include <QtWidgets/QWidget>
+#include <QtWidgets/QHBoxLayout>
 
 class QtMaterialAppBarPrivate;
 
@@ -27,6 +28,8 @@ public:
     void setBackgroundColor(const QColor &color);
     QColor backgroundColor() const;
 
+    inline QHBoxLayout *appBarLayout() const;
+
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
@@ -36,5 +39,10 @@ private:
     Q_DISABLE_COPY(QtMaterialAppBar)
     Q_DECLARE_PRIVATE(QtMaterialAppBar)
 };
+
+inline QHBoxLayout *QtMaterialAppBar::appBarLayout() const
+{
+    return static_cast<QHBoxLayout *>(layout());
+}
 
 #endif // QTMATERIALAPPBAR_H
