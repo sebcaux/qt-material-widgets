@@ -13,6 +13,30 @@ I finally took the time to go through and clean up this code. The build includes
     </tr>
     <tr>
       <td>
+        App Bar
+      </td>
+      <td>
+        <code>QtMaterialAppBar</code>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <img src="gifs/appbar.gif" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Check Box
+      </td>
+      <td>
+        <code>QtMaterialCheckBox</code>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"></td>
+    </tr>
+    <tr>
+      <td>
         Avatar
       </td>
       <td>
