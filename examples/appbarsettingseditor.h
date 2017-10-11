@@ -17,6 +17,7 @@ public:
 protected slots:
     void setupForm();
     void updateWidget();
+    void selectColor();
 
 private:
     Ui::AppBarSettingsForm *const ui;
