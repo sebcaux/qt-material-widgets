@@ -10,9 +10,21 @@ AppBarSettingsEditor::AppBarSettingsEditor(QWidget *parent)
       ui(new Ui::AppBarSettingsForm),
       m_appBar(new QtMaterialAppBar)
 {
+    QLabel *label = new QLabel("Inbox");
+    label->setAttribute(Qt::WA_TranslucentBackground);
+    label->setForegroundRole(QPalette::Foreground);
+    label->setContentsMargins(6, 0, 0, 0);
+
+    QPalette palette = label->palette();
+    palette.setColor(label->foregroundRole(), Qt::white);
+    label->setPalette(palette);
+
+    label->setFont(QFont("Roboto", 18, QFont::Normal));
+
     QtMaterialIconButton *button = new QtMaterialIconButton(QtMaterialTheme::icon("navigation", "menu"));
     button->setIconSize(QSize(24, 24));
     m_appBar->appBarLayout()->addWidget(button);
+    m_appBar->appBarLayout()->addWidget(label);
     m_appBar->appBarLayout()->addStretch(1);
     button->setColor(Qt::white);
     button->setFixedWidth(42);
