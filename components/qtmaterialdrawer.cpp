@@ -54,9 +54,6 @@ void QtMaterialDrawerPrivate::init()
 
     widget->setParent(q);
 
-    q->setAttribute(Qt::WA_TransparentForMouseEvents);
-    q->setAttribute(Qt::WA_NoSystemBackground);
-
     stateMachine->start();
     QCoreApplication::processEvents();
 }
@@ -157,10 +154,8 @@ void QtMaterialDrawer::openDrawer()
     if (d->autoRaise) {
         raise();
     }
-    if (d->overlay) {
-        setAttribute(Qt::WA_TransparentForMouseEvents, false);
-        setAttribute(Qt::WA_NoSystemBackground, false);
-    }
+    setAttribute(Qt::WA_TransparentForMouseEvents, false);
+    setAttribute(Qt::WA_NoSystemBackground, false);
 }
 
 void QtMaterialDrawer::closeDrawer()
@@ -169,8 +164,28 @@ void QtMaterialDrawer::closeDrawer()
 
     emit d->stateMachine->signalClose();
 
-    setAttribute(Qt::WA_TransparentForMouseEvents);
-    setAttribute(Qt::WA_NoSystemBackground);
+    if (d->overlay) {
+        setAttribute(Qt::WA_TransparentForMouseEvents);
+        setAttribute(Qt::WA_NoSystemBackground);
+    }
+}
+
+bool QtMaterialDrawer::event(QEvent *event)
+{
+    Q_D(QtMaterialDrawer);
+
+    switch (event->type())
+    {
+    case QEvent::Move:
+    case QEvent::Resize:
+        if (!d->overlay) {
+            setMask(QRegion(d->widget->rect()));
+        }
+        break;
+    default:
+        break;
+    }
+    return QtMaterialOverlayWidget::event(event);
 }
 
 bool QtMaterialDrawer::eventFilter(QObject *obj, QEvent *event)
@@ -191,10 +206,11 @@ bool QtMaterialDrawer::eventFilter(QObject *obj, QEvent *event)
     }
     case QEvent::Move:
     case QEvent::Resize: {
-        QLayout *lout = d->widget->layout();
-        if (lout && 16 != lout->contentsMargins().right()) {
-            lout->setContentsMargins(0, 0, 16, 0);
+        QLayout *lw = d->widget->layout();
+        if (lw && 16 != lw->contentsMargins().right()) {
+            lw->setContentsMargins(0, 0, 16, 0);
         }
+        break;
     }
     default:
         break;
@@ -211,7 +227,6 @@ void QtMaterialDrawer::paintEvent(QPaintEvent *event)
     if (!d->overlay || d->stateMachine->isInClosedState()) {
         return;
     }
-
     QPainter painter(this);
     painter.setOpacity(d->stateMachine->opacity());
     painter.fillRect(rect(), Qt::SolidPattern);
