@@ -33,6 +33,8 @@ DrawerSettingsEditor::DrawerSettingsEditor(QWidget *parent)
 
     connect(ui->showDrawerButton, SIGNAL(pressed()), m_drawer, SLOT(openDrawer()));
     connect(ui->hideDrawerButton, SIGNAL(pressed()), m_drawer, SLOT(closeDrawer()));
+    connect(ui->clickToCloseCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->overlayModeCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
 }
 
 DrawerSettingsEditor::~DrawerSettingsEditor()
@@ -42,8 +44,12 @@ DrawerSettingsEditor::~DrawerSettingsEditor()
 
 void DrawerSettingsEditor::setupForm()
 {
+    ui->clickToCloseCheckBox->setChecked(m_drawer->clickOutsideToClose());
+    ui->overlayModeCheckBox->setChecked(m_drawer->overlayMode());
 }
 
 void DrawerSettingsEditor::updateWidget()
 {
+    m_drawer->setClickOutsideToClose(ui->clickToCloseCheckBox->isChecked());
+    m_drawer->setOverlayMode(ui->overlayModeCheckBox->isChecked());
 }
