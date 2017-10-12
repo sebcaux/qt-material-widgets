@@ -5,15 +5,29 @@
 #include <QEvent>
 #include "qtmaterialflatbutton.h"
 
+/*!
+ *  \class QtMaterialAutoCompletePrivate
+ *  \internal
+ */
+
+/*!
+ *  \internal
+ */
 QtMaterialAutoCompletePrivate::QtMaterialAutoCompletePrivate(QtMaterialAutoComplete *q)
     : QtMaterialTextFieldPrivate(q)
 {
 }
 
+/*!
+ *  \internal
+ */
 QtMaterialAutoCompletePrivate::~QtMaterialAutoCompletePrivate()
 {
 }
 
+/*!
+ *  \internal
+ */
 void QtMaterialAutoCompletePrivate::init()
 {
     Q_Q(QtMaterialAutoComplete);
@@ -102,6 +116,10 @@ void QtMaterialAutoCompletePrivate::init()
         dataSource.push_back(state);
     }
 }
+
+/*!
+ *  \class QtMaterialAutoComplete
+ */
 
 QtMaterialAutoComplete::QtMaterialAutoComplete(QWidget *parent)
     : QtMaterialTextField(*new QtMaterialAutoCompletePrivate(this), parent)
