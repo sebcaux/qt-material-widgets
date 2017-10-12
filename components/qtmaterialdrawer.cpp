@@ -136,6 +136,7 @@ void QtMaterialDrawer::setOverlayMode(bool value)
     Q_D(QtMaterialDrawer);
 
     d->overlay = value;
+    update();
 }
 
 bool QtMaterialDrawer::overlayMode() const
