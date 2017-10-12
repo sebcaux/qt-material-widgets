@@ -46,6 +46,8 @@ public:
     bool hasInputLine() const;
 
 protected:
+    QtMaterialTextField(QtMaterialTextFieldPrivate &d, QWidget *parent = 0);
+
     bool event(QEvent *event) Q_DECL_OVERRIDE;
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 

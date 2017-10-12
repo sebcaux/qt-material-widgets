@@ -21,6 +21,7 @@
 #include "drawersettingseditor.h"
 #include "scrollbarsettingseditor.h"
 #include "appbarsettingseditor.h"
+#include "autocompletesettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -59,8 +60,10 @@ MainWindow::MainWindow(QWidget *parent)
     DrawerSettingsEditor *drawer = new DrawerSettingsEditor;
     ScrollBarSettingsEditor *scrollBar = new ScrollBarSettingsEditor;
     AppBarSettingsEditor *appBar = new AppBarSettingsEditor;
+    AutoCompleteSettingsEditor *autocomplete = new AutoCompleteSettingsEditor;
 
     stack->addWidget(appBar);
+    stack->addWidget(autocomplete);
     stack->addWidget(avatar);
     stack->addWidget(badge);
     stack->addWidget(checkbox);
@@ -81,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(toggle);
 
     list->addItem("App Bar");
+    list->addItem("Auto Complete");
     list->addItem("Avatar");
     list->addItem("Badge");
     list->addItem("Checkbox");

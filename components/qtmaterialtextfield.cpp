@@ -248,6 +248,13 @@ bool QtMaterialTextField::hasInputLine() const
     return d->showInputLine;
 }
 
+QtMaterialTextField::QtMaterialTextField(QtMaterialTextFieldPrivate &d, QWidget *parent)
+    : QLineEdit(parent),
+      d_ptr(&d)
+{
+    d_func()->init();
+}
+
 /*!
  *  \reimp
  */

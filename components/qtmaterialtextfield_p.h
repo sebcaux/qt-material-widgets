@@ -15,7 +15,7 @@ class QtMaterialTextFieldPrivate
 
 public:
     QtMaterialTextFieldPrivate(QtMaterialTextField *q);
-    ~QtMaterialTextFieldPrivate();
+    virtual ~QtMaterialTextFieldPrivate();
 
     void init();
 

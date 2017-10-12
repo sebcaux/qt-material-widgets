@@ -21,7 +21,8 @@ SOURCES = mainwindow.cpp \
     dialogsettingseditor.cpp \
     drawersettingseditor.cpp \
     scrollbarsettingseditor.cpp \
-    appbarsettingseditor.cpp
+    appbarsettingseditor.cpp \
+    autocompletesettingseditor.cpp
 HEADERS = mainwindow.h \
     avatarsettingseditor.h \
     badgesettingseditor.h \
@@ -41,7 +42,8 @@ HEADERS = mainwindow.h \
     dialogsettingseditor.h \
     drawersettingseditor.h \
     scrollbarsettingseditor.h \
-    appbarsettingseditor.h
+    appbarsettingseditor.h \
+    autocompletesettingseditor.h
 LIBS += $$top_builddir/components/$(OBJECTS_DIR)/libcomponents.a
 INCLUDEPATH += $$top_srcdir/components/
 TARGET = examples-exe
