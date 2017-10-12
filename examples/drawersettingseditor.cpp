@@ -29,9 +29,27 @@ DrawerSettingsEditor::DrawerSettingsEditor(QWidget *parent)
     m_drawer->setClickOutsideToClose(true);
     m_drawer->setOverlayMode(true);
 
+    //
+
     QVBoxLayout *drawerLayout = new QVBoxLayout;
     m_drawer->setDrawerLayout(drawerLayout);
+
+    QVector<QString> labels = {"Motion", "Style", "Layout", "Components", "Patterns", "Growth & communications", "Usability", "Platforms", "Resources"};
+
+    QVector<QString>::iterator it;
+    for (it = labels.begin(); it != labels.end(); ++it) {
+        QLabel *label = new QLabel(*it);
+        label->setMinimumHeight(30);
+        label->setFont(QFont("Roboto", 10, QFont::Medium));
+        drawerLayout->addWidget(label);
+    }
+
+    drawerLayout->addStretch(3);
+    m_drawer->setContentsMargins(10, 0, 0, 0);
+
     drawerLayout->addWidget(new QPushButton("abc"));
+
+    //
 
     setupForm();
 
