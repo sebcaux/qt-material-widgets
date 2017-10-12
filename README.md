@@ -39,6 +39,19 @@ I finally took the time to go through and clean up this code. The build includes
     </tr>
     <tr>
       <td>
+        Badge
+      </td>
+      <td>
+        <code>QtMaterialBadge</code>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <img src="gifs/badge.gif" />
+      </td>
+    </tr>
+    <tr>
+      <td>
         Check Box
       </td>
       <td>
