@@ -25,7 +25,7 @@ DrawerSettingsEditor::DrawerSettingsEditor(QWidget *parent)
     canvas->setLayout(layout);
     canvas->setMaximumHeight(300);
 
-    m_drawer->setParent(this);
+    m_drawer->setParent(canvas);
     m_drawer->setClickOutsideToClose(true);
     m_drawer->setOverlayMode(true);
 
