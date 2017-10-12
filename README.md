@@ -285,7 +285,7 @@ I finally took the time to go through and clean up this code. The build includes
 
 #### Work in progress
 
-- [ ] Autocomplete
+- [x] Autocomplete
 - [ ] Divider
 - [ ] List
 - [ ] List Item
