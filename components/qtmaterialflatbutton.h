@@ -78,6 +78,9 @@ public:
 
     void setFixedRippleRadius(qreal radius);
 
+    void setTextAlignment(Qt::Alignment alignment);
+    Qt::Alignment textAlignment() const;
+
     QSize sizeHint() const Q_DECL_OVERRIDE;
 
 protected:

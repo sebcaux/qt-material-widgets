@@ -28,6 +28,7 @@ public:
     Material::ButtonIconPlacement     iconPlacement;
     Material::OverlayStyle            overlayStyle;
     Qt::BGMode                        bgMode;
+    Qt::Alignment                     textAlignment;
     QColor                            backgroundColor;
     QColor                            foregroundColor;
     QColor                            overlayColor;

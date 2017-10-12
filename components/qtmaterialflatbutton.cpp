@@ -45,6 +45,7 @@ void QtMaterialFlatButtonPrivate::init()
     iconPlacement        = Material::LeftIcon;
     overlayStyle         = Material::GrayOverlay;
     bgMode               = Qt::TransparentMode;
+    textAlignment        = Qt::AlignHCenter;
     fixedRippleRadius    = 64;
     cornerRadius         = 3;
     baseOpacity          = 0.13;
@@ -438,6 +439,20 @@ void QtMaterialFlatButton::setFixedRippleRadius(qreal radius)
 
     d->fixedRippleRadius = radius;
     setHasFixedRippleRadius(true);
+}
+
+void QtMaterialFlatButton::setTextAlignment(Qt::Alignment alignment)
+{
+    Q_D(QtMaterialFlatButton);
+
+    d->textAlignment = alignment;
+}
+
+Qt::Alignment QtMaterialFlatButton::textAlignment() const
+{
+    Q_D(const QtMaterialFlatButton);
+
+    return d->textAlignment;
 }
 
 /*!
