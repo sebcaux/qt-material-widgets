@@ -29,6 +29,10 @@ DrawerSettingsEditor::DrawerSettingsEditor(QWidget *parent)
     m_drawer->setClickOutsideToClose(true);
     m_drawer->setOverlayMode(true);
 
+    QVBoxLayout *drawerLayout = new QVBoxLayout;
+    m_drawer->setDrawerLayout(drawerLayout);
+    drawerLayout->addWidget(new QPushButton("abc"));
+
     setupForm();
 
     connect(ui->showDrawerButton, SIGNAL(pressed()), m_drawer, SLOT(openDrawer()));
