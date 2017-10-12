@@ -80,6 +80,15 @@ void FlatButtonSettingsEditor::setupForm()
         break;
     }
 
+    switch (ui->textAlignmentComboBox->currentIndex())
+    {
+    case Qt::AlignLeft:
+        ui->textAlignmentComboBox->setCurrentIndex(0);
+        break;
+    default:
+        ui->textAlignmentComboBox->setCurrentIndex(1);
+    }
+
     ui->checkedCheckBox->setEnabled(m_button->isCheckable());
 
     ui->disabledCheckBox->setChecked(!m_button->isEnabled());
@@ -155,6 +164,17 @@ void FlatButtonSettingsEditor::updateWidget()
         break;
     }
 
+    switch (ui->textAlignmentComboBox->currentIndex())
+    {
+    case 0:
+        m_button->setTextAlignment(Qt::AlignLeft);
+        break;
+    case 1:
+    default:
+        m_button->setTextAlignment(Qt::AlignHCenter);
+        break;
+    }
+
     m_button->setDisabled(ui->disabledCheckBox->isChecked());
     m_button->setCheckable(ui->checkableCheckBox->isChecked());
     m_button->setChecked(ui->checkedCheckBox->isChecked());
@@ -213,6 +233,7 @@ void FlatButtonSettingsEditor::applyDefaultPreset()
     m_button->setHaloVisible(true);
     m_button->setCheckable(false);
     m_button->setEnabled(true);
+    m_button->setTextAlignment(Qt::AlignHCenter);
     m_button->applyPreset(Material::FlatPreset);
     setupForm();
 }
@@ -231,6 +252,7 @@ void FlatButtonSettingsEditor::applyCheckablePreset()
     m_button->setHaloVisible(true);
     m_button->setCheckable(true);
     m_button->setEnabled(true);
+    m_button->setTextAlignment(Qt::AlignHCenter);
     m_button->applyPreset(Material::CheckablePreset);
     setupForm();
 }
@@ -269,6 +291,7 @@ void FlatButtonSettingsEditor::init()
     connect(ui->rippleStyleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
     connect(ui->hoverStyleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
     connect(ui->iconPlacementComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
+    connect(ui->textAlignmentComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
     connect(ui->cornerRadiusSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
     connect(ui->overlayOpacityDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
     connect(ui->iconSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));

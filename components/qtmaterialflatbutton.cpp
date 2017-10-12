@@ -694,7 +694,11 @@ void QtMaterialFlatButton::paintForeground(QPainter *painter)
     }
 
     if (icon().isNull())  {
-        painter->drawText(rect(), Qt::AlignCenter, text());
+        if (Qt::AlignLeft == d->textAlignment) {
+            painter->drawText(rect().adjusted(12, 0, 0, 0), Qt::AlignLeft | Qt::AlignVCenter, text());
+        } else {
+            painter->drawText(rect(), Qt::AlignCenter, text());
+        }
         return;
     }
 
@@ -702,7 +706,7 @@ void QtMaterialFlatButton::paintForeground(QPainter *painter)
     QSize base(size()-textSize);
 
     const int iw = iconSize().width() + IconPadding;
-    QPoint pos((base.width()-iw)/2, 0);
+    QPoint pos(Qt::AlignLeft == d->textAlignment ? 12 : (base.width()-iw)/2, 0);
 
     QRect textGeometry(pos + QPoint(0, base.height()/2), textSize);
     QRect iconGeometry(pos + QPoint(0, (height()-iconSize().height())/2), iconSize());
