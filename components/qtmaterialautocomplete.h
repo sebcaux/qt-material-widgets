@@ -20,6 +20,7 @@ protected slots:
 
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(QtMaterialAutoComplete)
