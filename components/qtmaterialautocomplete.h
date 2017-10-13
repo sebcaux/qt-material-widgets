@@ -13,6 +13,8 @@ public:
     explicit QtMaterialAutoComplete(QWidget *parent = 0);
     ~QtMaterialAutoComplete();
 
+    void setDataSource(const QStringList &data);
+
 protected slots:
     void updateResults(QString text);
 

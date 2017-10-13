@@ -51,70 +51,6 @@ void QtMaterialAutoCompletePrivate::init()
     menuLayout->setSpacing(0);
 
     QObject::connect(q, SIGNAL(textChanged(QString)), q, SLOT(updateResults(QString)));
-
-    //
-
-    QStringList states =
-      { "Alabama"
-      , "Alaska"
-      , "American Samoa"
-      , "Arizona"
-      , "Arkansas"
-      , "California"
-      , "Colorado"
-      , "Connecticut"
-      , "Delaware"
-      , "District of Columbia"
-      , "Florida"
-      , "Georgia"
-      , "Guam"
-      , "Hawaii"
-      , "Idaho"
-      , "Illinois"
-      , "Indiana"
-      , "Iowa"
-      , "Kansas"
-      , "Kentucky"
-      , "Louisiana"
-      , "Maine"
-      , "Maryland"
-      , "Massachusetts"
-      , "Michigan"
-      , "Minnesota"
-      , "Mississippi"
-      , "Missouri"
-      , "Montana"
-      , "Nebraska"
-      , "Nevada"
-      , "New Hampshire"
-      , "New Jersey"
-      , "New Mexico"
-      , "New York"
-      , "North Carolina"
-      , "North Dakota"
-      , "Northern Marianas Islands"
-      , "Ohio"
-      , "Oklahoma"
-      , "Oregon"
-      , "Pennsylvania"
-      , "Puerto Rico"
-      , "Rhode Island"
-      , "South Carolina"
-      , "South Dakota"
-      , "Tennessee"
-      , "Texas"
-      , "Utah"
-      , "Vermont"
-      , "Virginia"
-      , "Virgin Islands"
-      , "Washington"
-      , "West Virginia"
-      , "Wisconsin"
-      , "Wyoming"
-    };
-    foreach (QString state, states) {
-        dataSource.push_back(state);
-    }
 }
 
 /*!
@@ -129,6 +65,14 @@ QtMaterialAutoComplete::QtMaterialAutoComplete(QWidget *parent)
 
 QtMaterialAutoComplete::~QtMaterialAutoComplete()
 {
+}
+
+void QtMaterialAutoComplete::setDataSource(const QStringList &data)
+{
+    Q_D(QtMaterialAutoComplete);
+
+    d->dataSource = data;
+    update();
 }
 
 void QtMaterialAutoComplete::updateResults(QString text)
