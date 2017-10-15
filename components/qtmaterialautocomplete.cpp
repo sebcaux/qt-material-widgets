@@ -105,6 +105,7 @@ void QtMaterialAutoComplete::updateResults(QString text)
             item->setCornerRadius(0);
             item->setHaloVisible(false);
             item->setFixedHeight(50);
+            item->setOverlayStyle(Material::TintedOverlay);
             d->menuLayout->addWidget(item);
             item->installEventFilter(this);
         }
