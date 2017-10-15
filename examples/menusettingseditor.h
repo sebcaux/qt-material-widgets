@@ -1,20 +1,20 @@
-#ifndef AUTOCOMPLETESETTINGSEDITOR_H
-#define AUTOCOMPLETESETTINGSEDITOR_H
+#ifndef MENUSETTINGSEDITOR_H
+#define MENUSETTINGSEDITOR_H
 
 #include <QWidget>
-//#include "ui_autocompletesettingsform.h"
+//#include "ui_menusettingsform.h"
 
 #include "lib/qtmaterialoverlaywidget.h"
 
-class QtMaterialAutoComplete;
+class QtMaterialMenu;
 
-class AutoCompleteSettingsEditor : public QWidget
+class MenuSettingsEditor : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit AutoCompleteSettingsEditor(QWidget *parent = 0);
-    ~AutoCompleteSettingsEditor();
+    explicit MenuSettingsEditor(QWidget *parent = 0);
+    ~MenuSettingsEditor();
 
 protected slots:
     void setupForm();
@@ -22,8 +22,8 @@ protected slots:
     void selectColor();
 
 private:
-    //Ui::AutoCompleteSettingsForm *const ui;
-    QtMaterialAutoComplete       *const m_autocomplete;
+    //Ui::MenuSettingsForm *const ui;
+    QtMaterialMenu       *const m_menu;
 };
 
-#endif // AUTOCOMPLETESETTINGSEDITOR_H
+#endif // MENUSETTINGSEDITOR_H
