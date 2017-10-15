@@ -15,6 +15,9 @@ public:
 
     void setDataSource(const QStringList &data);
 
+signals:
+    void itemSelected(QString);
+
 protected slots:
     void updateResults(QString text);
 

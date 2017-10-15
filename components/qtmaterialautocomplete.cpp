@@ -180,7 +180,9 @@ bool QtMaterialAutoComplete::eventFilter(QObject *watched, QEvent *event)
         });
         QtMaterialFlatButton *widget;
         if ((widget = static_cast<QtMaterialFlatButton *>(watched))) {
-            setText(widget->text());
+            QString text(widget->text());
+            setText(text);
+            emit itemSelected(text);
         }
         break;
     }

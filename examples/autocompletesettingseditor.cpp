@@ -18,6 +18,8 @@ AutoCompleteSettingsEditor::AutoCompleteSettingsEditor(QWidget *parent)
     canvas->setStyleSheet("QWidget { background: white; }");
     layout->addWidget(canvas);
 
+    canvas->setMinimumHeight(900); //
+
     //ui->setupUi(widget);
     layout->setContentsMargins(20, 20, 20, 20);
 
@@ -86,6 +88,7 @@ AutoCompleteSettingsEditor::AutoCompleteSettingsEditor(QWidget *parent)
     m_autocomplete->setDataSource(states);
 
     layout->addWidget(m_autocomplete);
+    layout->addSpacing(600);
     layout->setAlignment(m_autocomplete, Qt::AlignCenter);
 
     setupForm();
