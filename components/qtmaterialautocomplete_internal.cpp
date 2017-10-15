@@ -59,10 +59,6 @@ QtMaterialAutoCompleteStateMachine::QtMaterialAutoCompleteStateMachine(QWidget *
     transition = new QSignalTransition(animation, SIGNAL(finished()));
     transition->setTargetState(m_closedState);
     m_closingState->addTransition(transition);
-
-    //QObject::connect(m_closedState, &QtMaterialAutoCompleteStateMachine::entered, [=](){ qDebug() << "Closed"; });
-    //QObject::connect(m_openState, &QtMaterialAutoCompleteStateMachine::entered, [=](){ qDebug() << "Opened"; });
-    //QObject::connect(m_closingState, &QtMaterialAutoCompleteStateMachine::entered, [=](){ qDebug() << "Closing"; });
 }
 
 /*!
