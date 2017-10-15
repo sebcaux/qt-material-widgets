@@ -3,7 +3,6 @@
 #include <QtWidgets/QGraphicsDropShadowEffect>
 #include <QtWidgets/QVBoxLayout>
 #include <QEvent>
-#include <QDebug>
 #include "qtmaterialflatbutton.h"
 
 /*!
@@ -105,18 +104,14 @@ void QtMaterialAutoComplete::updateResults(QString text)
             item->setHaloVisible(false);
             item->setFixedHeight(50);
             d->menuLayout->addWidget(item);
-            //item->installEventFilter(this);
+            item->installEventFilter(this);
         }
     } else if (diff < 0) {
         for (int c = 0; c < -diff; c++) {
             QWidget *widget = d->menuLayout->itemAt(0)->widget();
             if (widget) {
                 d->menuLayout->removeWidget(widget);
-                //widget->setParent(0);
-                //qDebug() << widget->parent();
-                //qDebug() << widget->parentWidget();
-                //delete widget;
-                widget->deleteLater();
+                delete widget;
             }
         }
     }
@@ -177,7 +172,6 @@ bool QtMaterialAutoComplete::eventFilter(QObject *watched, QEvent *event)
     switch (event->type())
     {
     case QEvent::MouseButtonPress: {
-        qDebug() << "mouse pressl";
         d->menu->hide();
         break;
     }
