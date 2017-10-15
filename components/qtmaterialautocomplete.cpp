@@ -3,6 +3,8 @@
 #include <QtWidgets/QGraphicsDropShadowEffect>
 #include <QtWidgets/QVBoxLayout>
 #include <QEvent>
+#include <QTimer>
+#include <QDebug>
 #include "qtmaterialflatbutton.h"
 
 /*!
@@ -50,7 +52,7 @@ void QtMaterialAutoCompletePrivate::init()
     menuLayout->setContentsMargins(0, 0, 0, 0);
     menuLayout->setSpacing(0);
 
-    QObject::connect(q, SIGNAL(textChanged(QString)), q, SLOT(updateResults(QString)));
+    QObject::connect(q, SIGNAL(textEdited(QString)), q, SLOT(updateResults(QString)));
 }
 
 /*!
@@ -86,7 +88,7 @@ void QtMaterialAutoComplete::updateResults(QString text)
         QString lookup(trimmed.toLower());
         QStringList::iterator i;
         for (i = d->dataSource.begin(); i != d->dataSource.end(); ++i) {
-            if (i->toLower().startsWith(lookup)) {
+            if (i->toLower().indexOf(lookup) != -1) {
                 results.push_back(*i);
             }
         }
@@ -172,7 +174,13 @@ bool QtMaterialAutoComplete::eventFilter(QObject *watched, QEvent *event)
     switch (event->type())
     {
     case QEvent::MouseButtonPress: {
-        d->menu->hide();
+        QTimer::singleShot(300, this, [=](){
+            d->menu->hide();
+        });
+        QtMaterialFlatButton *widget;
+        if ((widget = static_cast<QtMaterialFlatButton *>(watched))) {
+            setText(widget->text());
+        }
         break;
     }
     default:
