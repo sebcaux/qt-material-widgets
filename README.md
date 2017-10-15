@@ -300,6 +300,7 @@ YouTube video preview [available here](http://www.youtube.com/watch?v=21UMeNVBPU
 - [ ] Divider
 - [ ] List
 - [ ] List Item
+- [ ] Menu
 - [ ] Paper
 - [ ] Snackbar Layout
 - [ ] Table
@@ -311,7 +312,6 @@ YouTube video preview [available here](http://www.youtube.com/watch?v=21UMeNVBPU
 - [ ] Discrete Slider
 - [ ] Grid List
 - [ ] Icon Menu
-- [ ] Menu
 - [ ] Search Field
 - [ ] Select Field
 - [ ] Stepper
