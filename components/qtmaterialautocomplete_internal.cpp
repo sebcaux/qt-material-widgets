@@ -53,7 +53,7 @@ QtMaterialAutoCompleteStateMachine::QtMaterialAutoCompleteStateMachine(QWidget *
     QPropertyAnimation *animation;
 
     animation = new QPropertyAnimation(effect, "opacity", this);
-    animation->setDuration(140);
+    animation->setDuration(240);
     addDefaultAnimation(animation);
 
     transition = new QSignalTransition(animation, SIGNAL(finished()));
