@@ -191,7 +191,6 @@ bool QtMaterialAutoComplete::eventFilter(QObject *watched, QEvent *event)
         {
         case QEvent::Paint: {
             QPainter painter(d->frame);
-            painter.setOpacity(0.3);
             painter.fillRect(d->frame->rect(), Qt::white);
             break;
         }
