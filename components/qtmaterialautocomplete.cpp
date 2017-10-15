@@ -4,6 +4,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QEvent>
 #include <QTimer>
+#include <QDebug>
 #include "qtmaterialautocomplete_internal.h"
 #include "qtmaterialflatbutton.h"
 
@@ -34,8 +35,8 @@ void QtMaterialAutoCompletePrivate::init()
 {
     Q_Q(QtMaterialAutoComplete);
 
-    stateMachine = new QtMaterialAutoCompleteStateMachine(q);
     menu         = new QWidget;
+    stateMachine = new QtMaterialAutoCompleteStateMachine(menu);
     menuLayout   = new QVBoxLayout;
     maxWidth     = 0;
 
@@ -46,7 +47,9 @@ void QtMaterialAutoCompletePrivate::init()
     effect->setColor(QColor(0, 0, 0, 50));
     effect->setOffset(0, 3);
 
-    menu->setGraphicsEffect(effect);
+    // create a box with geometry identical to menu, and then apply effect to it
+    //menu->setGraphicsEffect(effect);
+
     menu->setLayout(menuLayout);
     menu->setVisible(false);
 
@@ -137,9 +140,9 @@ void QtMaterialAutoComplete::updateResults(QString text)
     }
 
     if (!results.count()) {
-        d->menu->hide();
-    } else if (d->menu->isHidden()) {
-        d->menu->show();
+        emit d->stateMachine->shouldClose();
+    } else {
+        emit d->stateMachine->shouldOpen();
     }
 
     d->menu->setFixedHeight(results.length()*50);
@@ -178,9 +181,7 @@ bool QtMaterialAutoComplete::eventFilter(QObject *watched, QEvent *event)
     switch (event->type())
     {
     case QEvent::MouseButtonPress: {
-        QTimer::singleShot(300, this, [=](){
-            d->menu->hide();
-        });
+        emit d->stateMachine->shouldFade();
         QtMaterialFlatButton *widget;
         if ((widget = static_cast<QtMaterialFlatButton *>(watched))) {
             QString text(widget->text());

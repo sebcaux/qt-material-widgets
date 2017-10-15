@@ -19,8 +19,8 @@ public:
 
     void init();
 
-    QtMaterialAutoCompleteStateMachine *stateMachine;
     QWidget                            *menu;
+    QtMaterialAutoCompleteStateMachine *stateMachine;
     QVBoxLayout                        *menuLayout;
     QStringList                         dataSource;
     int                                 maxWidth;

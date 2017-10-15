@@ -9,16 +9,21 @@ class QtMaterialAutoCompleteStateMachine : public QStateMachine
     Q_OBJECT
 
 public:
-    QtMaterialAutoCompleteStateMachine(QtMaterialAutoComplete *parent);
+    explicit QtMaterialAutoCompleteStateMachine(QWidget *menu);
     ~QtMaterialAutoCompleteStateMachine();
+
+signals:
+    void shouldOpen();
+    void shouldClose();
+    void shouldFade();
 
 private:
     Q_DISABLE_COPY(QtMaterialAutoCompleteStateMachine)
 
-    QtMaterialAutoComplete *const m_autoComplete;
-    QState                 *m_closedState;
-    QState                 *m_openState;
-    QState                 *m_closingState;
+    QWidget *const m_menu;
+    QState  *m_closedState;
+    QState  *m_openState;
+    QState  *m_closingState;
 };
 
 #endif // QTMATERIALAUTOCOMPLETESTATEMACHINE_H
