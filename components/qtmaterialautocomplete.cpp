@@ -4,7 +4,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QEvent>
 #include <QTimer>
-#include <QDebug>
+#include "qtmaterialautocomplete_internal.h"
 #include "qtmaterialflatbutton.h"
 
 /*!
@@ -34,9 +34,10 @@ void QtMaterialAutoCompletePrivate::init()
 {
     Q_Q(QtMaterialAutoComplete);
 
-    menu       = new QWidget;
-    menuLayout = new QVBoxLayout;
-    maxWidth   = 0;
+    stateMachine = new QtMaterialAutoCompleteStateMachine(q);
+    menu         = new QWidget;
+    menuLayout   = new QVBoxLayout;
+    maxWidth     = 0;
 
     menu->setParent(q->parentWidget());
 
@@ -53,6 +54,8 @@ void QtMaterialAutoCompletePrivate::init()
     menuLayout->setSpacing(0);
 
     QObject::connect(q, SIGNAL(textEdited(QString)), q, SLOT(updateResults(QString)));
+
+    stateMachine->start();
 }
 
 /*!

@@ -42,7 +42,8 @@ SOURCES = \
     qtmaterialautocomplete.cpp \
     qtmaterialpaper.cpp \
     qtmaterialtable.cpp \
-    layouts/qtmaterialsnackbarlayout.cpp
+    layouts/qtmaterialsnackbarlayout.cpp \
+    qtmaterialautocomplete_internal.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -112,6 +113,7 @@ HEADERS = \
     qtmaterialtable.h \
     qtmaterialtable_p.h \
     layouts/qtmaterialsnackbarlayout.h \
-    layouts/qtmaterialsnackbarlayout_p.h
+    layouts/qtmaterialsnackbarlayout_p.h \
+    qtmaterialautocomplete_internal.h
 RESOURCES += \
     resources.qrc

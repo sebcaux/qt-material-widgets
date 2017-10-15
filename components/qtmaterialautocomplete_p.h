@@ -6,6 +6,7 @@
 class QWidget;
 class QVBoxLayout;
 class QtMaterialAutoCompleteOverlay;
+class QtMaterialAutoCompleteStateMachine;
 
 class QtMaterialAutoCompletePrivate : public QtMaterialTextFieldPrivate
 {
@@ -18,10 +19,11 @@ public:
 
     void init();
 
-    QWidget     *menu;
-    QVBoxLayout *menuLayout;
-    QStringList  dataSource;
-    int          maxWidth;
+    QtMaterialAutoCompleteStateMachine *stateMachine;
+    QWidget                            *menu;
+    QVBoxLayout                        *menuLayout;
+    QStringList                         dataSource;
+    int                                 maxWidth;
 };
 
 #endif // QTMATERIALAUTOCOMPLETE_P_H
