@@ -4,6 +4,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QEvent>
 #include <QTimer>
+#include <QPainter>
 #include <QDebug>
 #include "qtmaterialautocomplete_internal.h"
 #include "qtmaterialflatbutton.h"
@@ -36,19 +37,24 @@ void QtMaterialAutoCompletePrivate::init()
     Q_Q(QtMaterialAutoComplete);
 
     menu         = new QWidget;
+    frame        = new QWidget;
     stateMachine = new QtMaterialAutoCompleteStateMachine(menu);
     menuLayout   = new QVBoxLayout;
     maxWidth     = 0;
 
     menu->setParent(q->parentWidget());
+    frame->setParent(q->parentWidget());
+
+    menu->installEventFilter(q);
+    frame->installEventFilter(q);
 
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
     effect->setBlurRadius(11);
     effect->setColor(QColor(0, 0, 0, 50));
     effect->setOffset(0, 3);
 
-    // create a box with geometry identical to menu, and then apply effect to it
-    //menu->setGraphicsEffect(effect);
+    frame->setGraphicsEffect(effect);
+    frame->setVisible(false);
 
     menu->setLayout(menuLayout);
     menu->setVisible(false);
@@ -165,6 +171,7 @@ bool QtMaterialAutoComplete::QtMaterialAutoComplete::event(QEvent *event)
         QWidget *widget = static_cast<QWidget *>(parent());
         if (widget) {
             d->menu->setParent(widget);
+            d->frame->setParent(widget);
         }
         break;
     }
@@ -178,20 +185,59 @@ bool QtMaterialAutoComplete::eventFilter(QObject *watched, QEvent *event)
 {
     Q_D(QtMaterialAutoComplete);
 
-    switch (event->type())
+    if (d->frame == watched)
     {
-    case QEvent::MouseButtonPress: {
-        emit d->stateMachine->shouldFade();
-        QtMaterialFlatButton *widget;
-        if ((widget = static_cast<QtMaterialFlatButton *>(watched))) {
-            QString text(widget->text());
-            setText(text);
-            emit itemSelected(text);
+        switch (event->type())
+        {
+        case QEvent::Paint: {
+            QPainter painter(d->frame);
+            painter.setOpacity(0.3);
+            painter.fillRect(d->frame->rect(), Qt::white);
+            break;
         }
-        break;
+        default:
+            break;
+        }
     }
-    default:
-        break;
+    else if (d->menu == watched)
+    {
+        switch (event->type())
+        {
+        case QEvent::Resize:
+        case QEvent::Move: {
+            d->frame->setGeometry(d->menu->geometry());
+            break;
+        }
+        case QEvent::Show: {
+            d->frame->show();
+            d->menu->raise();
+            break;
+        }
+        case QEvent::Hide: {
+            d->frame->hide();
+            break;
+        }
+        default:
+            break;
+        }
+    }
+    else
+    {
+        switch (event->type())
+        {
+        case QEvent::MouseButtonPress: {
+            emit d->stateMachine->shouldFade();
+            QtMaterialFlatButton *widget;
+            if ((widget = static_cast<QtMaterialFlatButton *>(watched))) {
+                QString text(widget->text());
+                setText(text);
+                emit itemSelected(text);
+            }
+            break;
+        }
+        default:
+            break;
+        }
     }
     return QtMaterialTextField::eventFilter(watched, event);
 }

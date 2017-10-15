@@ -20,6 +20,7 @@ public:
     void init();
 
     QWidget                            *menu;
+    QWidget                            *frame;
     QtMaterialAutoCompleteStateMachine *stateMachine;
     QVBoxLayout                        *menuLayout;
     QStringList                         dataSource;
