@@ -21,8 +21,8 @@ private:
     Q_DISABLE_COPY(QtMaterialScrollBarStateMachine)
 
     QtMaterialScrollBar *const m_scrollBar;
-    QState              *m_focusState;
-    QState              *m_blurState;
+    QState              *const m_focusState;
+    QState              *const m_blurState;
     qreal                m_opacity;
 };
 

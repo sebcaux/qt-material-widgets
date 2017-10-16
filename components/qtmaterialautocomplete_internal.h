@@ -21,9 +21,9 @@ private:
     Q_DISABLE_COPY(QtMaterialAutoCompleteStateMachine)
 
     QWidget *const m_menu;
-    QState  *m_closedState;
-    QState  *m_openState;
-    QState  *m_closingState;
+    QState  *const m_closedState;
+    QState  *const m_openState;
+    QState  *const m_closingState;
 };
 
 #endif // QTMATERIALAUTOCOMPLETESTATEMACHINE_H
