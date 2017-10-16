@@ -44,7 +44,8 @@ SOURCES = \
     qtmaterialtable.cpp \
     layouts/qtmaterialsnackbarlayout.cpp \
     qtmaterialautocomplete_internal.cpp \
-    qtmaterialmenu.cpp
+    qtmaterialmenu.cpp \
+    qtmaterialmenu_internal.cpp
 HEADERS = \
     qtmaterialavatar_p.h \
     qtmaterialavatar.h \
@@ -117,6 +118,7 @@ HEADERS = \
     layouts/qtmaterialsnackbarlayout_p.h \
     qtmaterialautocomplete_internal.h \
     qtmaterialmenu.h \
-    qtmaterialmenu_p.h
+    qtmaterialmenu_p.h \
+    qtmaterialmenu_internal.h
 RESOURCES += \
     resources.qrc
