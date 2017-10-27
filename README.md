@@ -1,4 +1,4 @@
-# Qt Material Design Desktop Widgets [![Join the chat at https://gitter.im/qt-material-widgets/Lobby](https://badges.gitter.im/qt-material-widgets/Lobby.svg)](https://gitter.im/qt-material-widgets/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Qt Material Design Desktop Widgets [![Join the chat at https://gitter.im/qt-material-widgets/Lobby](https://badges.gitter.im/qt-material-widgets/Lobby.svg)](https://gitter.im/qt-material-widgets/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Language](https://img.shields.io/badge/language-c++-brightgreen.svg)]()
 
 YouTube video preview [available here](http://www.youtube.com/watch?v=21UMeNVBPU4).
 
