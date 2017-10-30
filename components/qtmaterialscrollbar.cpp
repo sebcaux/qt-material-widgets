@@ -197,7 +197,8 @@ void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
 
     painter.drawRect(trimmed);
 
-    const qreal q = h / static_cast<qreal>(maximum()-minimum()+pageStep()-1);
+    const qreal q = (Qt::Horizontal == orientation() ? w : h) /
+            static_cast<qreal>(maximum()-minimum()+pageStep()-1);
 
     QRect handle = Qt::Horizontal == orientation()
             ? QRect(sliderPosition()*q, y, pageStep()*q, h)
