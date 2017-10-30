@@ -36,9 +36,9 @@ ScrollBarSettingsEditor::ScrollBarSettingsEditor(QWidget *parent)
     edit->setVerticalScrollBar(m_verticalScrollbar);
     edit->setHorizontalScrollBar(m_horizontalScrollbar);
 
-    m_verticalScrollbar->setHideOnMouseOut(false);
+    //m_verticalScrollbar->setHideOnMouseOut(false);
 
-    m_horizontalScrollbar->setHideOnMouseOut(false);
+    //m_horizontalScrollbar->setHideOnMouseOut(false);
     m_horizontalScrollbar->setOrientation(Qt::Horizontal);
 
     layout->addWidget(edit);

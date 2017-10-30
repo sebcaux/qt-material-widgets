@@ -25,11 +25,11 @@ QtMaterialScrollBarStateMachine::QtMaterialScrollBarStateMachine(QtMaterialScrol
 
     QEventTransition *transition;
 
-    transition = new QEventTransition(parent, QEvent::HoverEnter);
+    transition = new QEventTransition(parent, QEvent::Enter);
     transition->setTargetState(m_focusState);
     m_blurState->addTransition(transition);
 
-    transition = new QEventTransition(parent, QEvent::HoverLeave);
+    transition = new QEventTransition(parent, QEvent::Leave);
     transition->setTargetState(m_blurState);
     m_focusState->addTransition(transition);
 
