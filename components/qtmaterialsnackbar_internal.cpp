@@ -51,7 +51,7 @@ QtMaterialSnackbarStateMachine::QtMaterialSnackbarStateMachine(QtMaterialSnackba
 
     animation = new QPropertyAnimation(this, "offset", this);
     animation->setEasingCurve(QEasingCurve::OutCubic);
-    animation->setDuration(400);
+    animation->setDuration(300);
     addDefaultAnimation(animation);
 
     hiddenState->assignProperty(this, "offset", 1);
