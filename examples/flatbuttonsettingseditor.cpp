@@ -222,40 +222,40 @@ void FlatButtonSettingsEditor::selectColor()
 
 void FlatButtonSettingsEditor::applyDefaultPreset()
 {
-    m_button->setRole(Material::Default);
-    m_button->setRippleStyle(Material::PositionedRipple);
-    m_button->setIconPlacement(Material::LeftIcon);
-    m_button->setOverlayStyle(Material::GrayOverlay);
-    m_button->setBackgroundMode(Qt::TransparentMode);
-    m_button->setCornerRadius(3);
-    m_button->setBaseOpacity(0.13);
-    m_button->setFontSize(10);
-    m_button->setUseThemeColors(true);
-    m_button->setHaloVisible(true);
-    m_button->setCheckable(false);
-    m_button->setEnabled(true);
-    m_button->setTextAlignment(Qt::AlignHCenter);
+    ui->buttonRoleComboBox->setCurrentIndex(0);
+    ui->rippleStyleComboBox->setCurrentIndex(1);
+    ui->iconPlacementComboBox->setCurrentIndex(0);
+    ui->hoverStyleComboBox->setCurrentIndex(2);
+    ui->textAlignmentComboBox->setCurrentIndex(1);
+    ui->transparentCheckBox->setChecked(true);
+    ui->cornerRadiusSpinBox->setValue(3);
+    ui->overlayOpacityDoubleSpinBox->setValue(0.13);
+    ui->fontSizeDoubleSpinBox->setValue(10);
+    ui->useThemeColorsCheckBox->setChecked(true);
+    ui->showHaloCheckBox->setChecked(true);
+    ui->checkableCheckBox->setChecked(false);
+    ui->disabledCheckBox->setChecked(false);
+    updateWidget();
     m_button->applyPreset(Material::FlatPreset);
-    setupForm();
 }
 
 void FlatButtonSettingsEditor::applyCheckablePreset()
 {
-    m_button->setRole(Material::Default);
-    m_button->setRippleStyle(Material::PositionedRipple);
-    m_button->setIconPlacement(Material::LeftIcon);
-    m_button->setOverlayStyle(Material::GrayOverlay);
-    m_button->setBackgroundMode(Qt::TransparentMode);
-    m_button->setCornerRadius(3);
-    m_button->setBaseOpacity(0.13);
-    m_button->setFontSize(10);
-    m_button->setUseThemeColors(true);
-    m_button->setHaloVisible(true);
-    m_button->setCheckable(true);
-    m_button->setEnabled(true);
-    m_button->setTextAlignment(Qt::AlignHCenter);
+    ui->buttonRoleComboBox->setCurrentIndex(0);
+    ui->rippleStyleComboBox->setCurrentIndex(1);
+    ui->iconPlacementComboBox->setCurrentIndex(0);
+    ui->hoverStyleComboBox->setCurrentIndex(2);
+    ui->textAlignmentComboBox->setCurrentIndex(1);
+    ui->transparentCheckBox->setChecked(true);
+    ui->cornerRadiusSpinBox->setValue(3);
+    ui->overlayOpacityDoubleSpinBox->setValue(0.13);
+    ui->fontSizeDoubleSpinBox->setValue(10);
+    ui->useThemeColorsCheckBox->setChecked(true);
+    ui->showHaloCheckBox->setChecked(true);
+    ui->checkableCheckBox->setChecked(true);
+    ui->disabledCheckBox->setChecked(false);
+    updateWidget();
     m_button->applyPreset(Material::CheckablePreset);
-    setupForm();
 }
 
 void FlatButtonSettingsEditor::init()
