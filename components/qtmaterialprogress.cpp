@@ -2,6 +2,7 @@
 #include "qtmaterialprogress_p.h"
 #include <QPropertyAnimation>
 #include <QPainter>
+#include <QPainterPath>
 #include "qtmaterialprogress_internal.h"
 #include "lib/qtmaterialstyle.h"
 
