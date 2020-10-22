@@ -3,6 +3,7 @@
 #include <QPropertyAnimation>
 #include <QParallelAnimationGroup>
 #include <QPainter>
+#include <QPainterPath>
 #include "qtmaterialcircularprogress_internal.h"
 #include "lib/qtmaterialstyle.h"
 
