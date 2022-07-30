@@ -119,7 +119,7 @@ QtMaterialTab::QtMaterialTab(QtMaterialTabs *parent)
     setBackgroundMode(Qt::OpaqueMode);
     setBaseOpacity(0.25);
 
-    connect(this, SIGNAL(clicked(bool)), this, SLOT(activateTab()));
+    connect(this, &QAbstractButton::clicked, this, &QtMaterialTab::activateTab);
 }
 
 QtMaterialTab::~QtMaterialTab()

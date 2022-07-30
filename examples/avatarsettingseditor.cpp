@@ -19,12 +19,12 @@ AvatarSettingsEditor::AvatarSettingsEditor(QWidget *parent)
 
     setupForm();
 
-    connect(ui->disabledCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->useThemeColorsCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->disabledCheckBox, &QAbstractButton::toggled, this, &AvatarSettingsEditor::updateWidget);
+    connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &AvatarSettingsEditor::updateWidget);
     connect(ui->sizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
     connect(ui->typeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->backgroundColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
-    connect(ui->textColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
+    connect(ui->backgroundColorToolButton, &QAbstractButton::pressed, this, &AvatarSettingsEditor::selectColor);
+    connect(ui->textColorToolButton, &QAbstractButton::pressed, this, &AvatarSettingsEditor::selectColor);
 
     ui->sizeSpinBox->setRange(5, 300);
 }

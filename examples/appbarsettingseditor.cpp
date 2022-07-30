@@ -41,8 +41,8 @@ AppBarSettingsEditor::AppBarSettingsEditor(QWidget *parent)
 
     setupForm();
 
-    connect(ui->useThemeColorsCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->backgroundColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
+    connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &AppBarSettingsEditor::updateWidget);
+    connect(ui->backgroundColorToolButton, &QAbstractButton::pressed, this, &AppBarSettingsEditor::selectColor);
 }
 
 AppBarSettingsEditor::~AppBarSettingsEditor()

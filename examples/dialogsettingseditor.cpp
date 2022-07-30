@@ -36,8 +36,8 @@ DialogSettingsEditor::DialogSettingsEditor(QWidget *parent)
 
     setupForm();
 
-    connect(ui->showDialogButton, SIGNAL(pressed()), m_dialog, SLOT(showDialog()));
-    connect(closeButton, SIGNAL(pressed()), m_dialog, SLOT(hideDialog()));
+    connect(ui->showDialogButton, &QAbstractButton::pressed, m_dialog, &QtMaterialDialog::showDialog);
+    connect(closeButton, &QAbstractButton::pressed, m_dialog, &QtMaterialDialog::hideDialog);
 }
 
 DialogSettingsEditor::~DialogSettingsEditor()

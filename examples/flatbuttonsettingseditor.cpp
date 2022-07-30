@@ -281,12 +281,12 @@ void FlatButtonSettingsEditor::init()
 
     setupForm();
 
-    connect(ui->disabledCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->checkableCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->checkedCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->showHaloCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->iconCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->transparentCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->disabledCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->checkableCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->checkedCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->showHaloCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->iconCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->transparentCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->buttonRoleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
     connect(ui->rippleStyleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
     connect(ui->hoverStyleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
@@ -296,21 +296,21 @@ void FlatButtonSettingsEditor::init()
     connect(ui->overlayOpacityDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
     connect(ui->iconSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
     connect(ui->fontSizeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
-    connect(ui->buttonTextLineEdit, SIGNAL(textChanged(QString)), this, SLOT(updateWidget()));
-    connect(ui->useThemeColorsCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->foregroundColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
-    connect(ui->backgroundColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
-    connect(ui->disabledFgColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
-    connect(ui->disabledBgColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
-    connect(ui->overlayColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
+    connect(ui->buttonTextLineEdit, &QLineEdit::textChanged, this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->foregroundColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
+    connect(ui->backgroundColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
+    connect(ui->disabledFgColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
+    connect(ui->disabledBgColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
+    connect(ui->overlayColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
     connect(ui->cornerRadiusSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
     connect(ui->overlayOpacityDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
     connect(ui->iconSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
     connect(ui->fontSizeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
-    connect(ui->buttonTextLineEdit, SIGNAL(textChanged(QString)), this, SLOT(updateWidget()));
-    connect(ui->defaultPresetPushButton, SIGNAL(pressed()), this, SLOT(applyDefaultPreset()));
-    connect(ui->checkablePresetPushButton, SIGNAL(pressed()), this, SLOT(applyCheckablePreset()));
-    connect(m_button, SIGNAL(clicked(bool)), ui->checkedCheckBox, SLOT(setChecked(bool)));
+    connect(ui->buttonTextLineEdit, &QLineEdit::textChanged, this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->defaultPresetPushButton, &QAbstractButton::pressed, this, &FlatButtonSettingsEditor::applyDefaultPreset);
+    connect(ui->checkablePresetPushButton, &QAbstractButton::pressed, this, &FlatButtonSettingsEditor::applyCheckablePreset);
+    connect(m_button, &QAbstractButton::clicked, ui->checkedCheckBox, &QAbstractButton::setChecked);
 
     ui->buttonRoleComboBox->setCurrentIndex(1);
 }

@@ -23,19 +23,19 @@ TextFieldSettingsEditor::TextFieldSettingsEditor(QWidget *parent)
 
     setupForm();
 
-    connect(ui->disabledCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->textLineEdit, SIGNAL(textChanged(QString)), this, SLOT(updateWidget()));
-    connect(ui->placeholderLineEdit, SIGNAL(textChanged(QString)), this, SLOT(updateWidget()));
-    connect(ui->labelCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->labelTextLineEdit, SIGNAL(textChanged(QString)), this, SLOT(updateWidget()));
-    connect(ui->useThemeColorsCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->textColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
-    connect(ui->inkColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
-    connect(ui->inputLineColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
-    connect(ui->labelColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
-    connect(ui->inputLineCheckBox, SIGNAL(toggled(bool)), this, SLOT(setShowInputLine()));
+    connect(ui->disabledCheckBox, &QAbstractButton::toggled, this, &TextFieldSettingsEditor::updateWidget);
+    connect(ui->textLineEdit, &QLineEdit::textChanged, this, &TextFieldSettingsEditor::updateWidget);
+    connect(ui->placeholderLineEdit, &QLineEdit::textChanged, this, &TextFieldSettingsEditor::updateWidget);
+    connect(ui->labelCheckBox, &QAbstractButton::toggled, this, &TextFieldSettingsEditor::updateWidget);
+    connect(ui->labelTextLineEdit, &QLineEdit::textChanged, this, &TextFieldSettingsEditor::updateWidget);
+    connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &TextFieldSettingsEditor::updateWidget);
+    connect(ui->textColorToolButton, &QAbstractButton::pressed, this, &TextFieldSettingsEditor::selectColor);
+    connect(ui->inkColorToolButton, &QAbstractButton::pressed, this, &TextFieldSettingsEditor::selectColor);
+    connect(ui->inputLineColorToolButton, &QAbstractButton::pressed, this, &TextFieldSettingsEditor::selectColor);
+    connect(ui->labelColorToolButton, &QAbstractButton::pressed, this, &TextFieldSettingsEditor::selectColor);
+    connect(ui->inputLineCheckBox, &QAbstractButton::toggled, this, &TextFieldSettingsEditor::setShowInputLine);
 
-    connect(m_textField, SIGNAL(textChanged(QString)), this, SLOT(setupForm()));
+    connect(m_textField, &QLineEdit::textChanged, this, &TextFieldSettingsEditor::setupForm);
 }
 
 TextFieldSettingsEditor::~TextFieldSettingsEditor()

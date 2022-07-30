@@ -94,8 +94,8 @@ void QtMaterialDialogPrivate::init()
     animation->setEasingCurve(QEasingCurve::OutCirc);
     stateMachine->addDefaultAnimation(animation);
 
-    QObject::connect(visibleState, SIGNAL(propertiesAssigned()), proxy, SLOT(makeOpaque()));
-    QObject::connect(hiddenState, SIGNAL(propertiesAssigned()), proxy, SLOT(makeTransparent()));
+    QObject::connect(visibleState, &QState::propertiesAssigned, proxy, &QtMaterialDialogProxy::makeOpaque);
+    QObject::connect(hiddenState, &QState::propertiesAssigned, proxy, &QtMaterialDialogProxy::makeTransparent);
 
     stateMachine->start();
     QCoreApplication::processEvents();

@@ -16,7 +16,7 @@ QtMaterialToggleRippleOverlay::QtMaterialToggleRippleOverlay(QtMaterialToggleThu
       m_thumb(thumb),
       m_track(track)
 {
-    connect(parent, SIGNAL(toggled(bool)), this, SLOT(addToggleRipple()));
+    connect(parent, &QAbstractButton::toggled, this, &QtMaterialToggleRippleOverlay::addToggleRipple);
 
     thumb->installEventFilter(this);
 }

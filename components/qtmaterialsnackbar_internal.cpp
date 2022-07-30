@@ -42,7 +42,7 @@ QtMaterialSnackbarStateMachine::QtMaterialSnackbarStateMachine(QtMaterialSnackba
     transition->setTargetState(visibleState);
     finalState->addTransition(transition);
 
-    connect(visibleState, SIGNAL(propertiesAssigned()), this, SLOT(snackbarShown()));
+    connect(visibleState, &QState::propertiesAssigned, this, &QtMaterialSnackbarStateMachine::snackbarShown);
     connect(finalState, SIGNAL(propertiesAssigned()), m_snackbar, SLOT(dequeue()));
 
     QPropertyAnimation *animation;
@@ -56,7 +56,7 @@ QtMaterialSnackbarStateMachine::QtMaterialSnackbarStateMachine(QtMaterialSnackba
     visibleState->assignProperty(this, "offset", 0);
     finalState->assignProperty(this, "offset", 1);
 
-    connect(&m_timer, SIGNAL(timeout()), this, SLOT(progress()));
+    connect(&m_timer, &QTimer::timeout, this, &QtMaterialSnackbarStateMachine::progress);
 
     m_snackbar->installEventFilter(this);
 }

@@ -72,9 +72,9 @@ void IconButtonSettingsEditor::init()
 
     setupForm();
 
-    connect(ui->disabledCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->useThemeColorsCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->colorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
-    connect(ui->disabledColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
+    connect(ui->disabledCheckBox, &QAbstractButton::toggled, this, &IconButtonSettingsEditor::updateWidget);
+    connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &IconButtonSettingsEditor::updateWidget);
+    connect(ui->colorToolButton, &QAbstractButton::clicked, this, &IconButtonSettingsEditor::selectColor);
+    connect(ui->disabledColorToolButton, &QAbstractButton::clicked, this, &IconButtonSettingsEditor::selectColor);
     connect(ui->sizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
 }

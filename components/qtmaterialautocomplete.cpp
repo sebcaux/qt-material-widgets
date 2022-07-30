@@ -62,7 +62,7 @@ void QtMaterialAutoCompletePrivate::init()
     menuLayout->setContentsMargins(0, 0, 0, 0);
     menuLayout->setSpacing(0);
 
-    QObject::connect(q, SIGNAL(textEdited(QString)), q, SLOT(updateResults(QString)));
+    QObject::connect(q, &QLineEdit::textEdited, q, &QtMaterialAutoComplete::updateResults);
 
     stateMachine->start();
 }

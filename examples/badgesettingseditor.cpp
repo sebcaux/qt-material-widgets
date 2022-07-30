@@ -25,13 +25,13 @@ BadgeSettingsEditor::BadgeSettingsEditor(QWidget *parent)
 
     setupForm();
 
-    connect(ui->disabledCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->disabledCheckBox, &QAbstractButton::toggled, this, &BadgeSettingsEditor::updateWidget);
     connect(ui->typeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->useThemeColorsCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &BadgeSettingsEditor::updateWidget);
     connect(ui->horizontalOffsetSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
     connect(ui->verticalOffsetSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->backgroundColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
-    connect(ui->textColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
+    connect(ui->backgroundColorToolButton, &QAbstractButton::pressed, this, &BadgeSettingsEditor::selectColor);
+    connect(ui->textColorToolButton, &QAbstractButton::pressed, this, &BadgeSettingsEditor::selectColor);
 
     ui->verticalOffsetSpinBox->setRange(-40, 40);
     ui->horizontalOffsetSpinBox->setRange(-40, 40);

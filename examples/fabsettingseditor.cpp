@@ -17,18 +17,18 @@ FloatingActionButtonSettingsEditor::FloatingActionButtonSettingsEditor(QWidget *
 
     setupForm();
 
-    connect(ui->disabledCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->disabledCheckBox, &QAbstractButton::toggled, this, &FloatingActionButtonSettingsEditor::updateWidget);
     connect(ui->buttonRoleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
     connect(ui->cornerComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
     connect(ui->horizontalOffsetSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
     connect(ui->verticalOffsetSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->miniCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->miniCheckBox, &QAbstractButton::toggled, this, &FloatingActionButtonSettingsEditor::updateWidget);
     connect(ui->rippleStyleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->useThemeColorsCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->foregroundColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
-    connect(ui->backgroundColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
-    connect(ui->disabledFgColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
-    connect(ui->disabledBgColorToolButton, SIGNAL(clicked(bool)), this, SLOT(selectColor()));
+    connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &FloatingActionButtonSettingsEditor::updateWidget);
+    connect(ui->foregroundColorToolButton, &QAbstractButton::clicked, this, &FloatingActionButtonSettingsEditor::selectColor);
+    connect(ui->backgroundColorToolButton, &QAbstractButton::clicked, this, &FloatingActionButtonSettingsEditor::selectColor);
+    connect(ui->disabledFgColorToolButton, &QAbstractButton::clicked, this, &FloatingActionButtonSettingsEditor::selectColor);
+    connect(ui->disabledBgColorToolButton, &QAbstractButton::clicked, this, &FloatingActionButtonSettingsEditor::selectColor);
 }
 
 FloatingActionButtonSettingsEditor::~FloatingActionButtonSettingsEditor()

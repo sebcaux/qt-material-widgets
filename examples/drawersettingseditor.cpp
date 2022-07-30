@@ -45,10 +45,10 @@ DrawerSettingsEditor::DrawerSettingsEditor(QWidget *parent)
 
     setupForm();
 
-    connect(ui->showDrawerButton, SIGNAL(pressed()), m_drawer, SLOT(openDrawer()));
-    connect(ui->hideDrawerButton, SIGNAL(pressed()), m_drawer, SLOT(closeDrawer()));
-    connect(ui->clickToCloseCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->overlayModeCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->showDrawerButton, &QAbstractButton::pressed, m_drawer, &QtMaterialDrawer::openDrawer);
+    connect(ui->hideDrawerButton, &QAbstractButton::pressed, m_drawer, &QtMaterialDrawer::closeDrawer);
+    connect(ui->clickToCloseCheckBox, &QAbstractButton::toggled, this, &DrawerSettingsEditor::updateWidget);
+    connect(ui->overlayModeCheckBox, &QAbstractButton::toggled, this, &DrawerSettingsEditor::updateWidget);
 }
 
 DrawerSettingsEditor::~DrawerSettingsEditor()

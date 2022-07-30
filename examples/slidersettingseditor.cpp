@@ -20,12 +20,12 @@ SliderSettingsEditor::SliderSettingsEditor(QWidget *parent)
 
     setupForm();
 
-    connect(ui->disabledCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->valueLineEdit, SIGNAL(textChanged(QString)), this, SLOT(updateWidget()));
+    connect(ui->disabledCheckBox, &QAbstractButton::toggled, this, &SliderSettingsEditor::updateWidget);
+    connect(ui->valueLineEdit, &QLineEdit::textChanged, this, &SliderSettingsEditor::updateWidget);
     connect(ui->orientationComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->invertedCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->invertedCheckBox, &QAbstractButton::toggled, this, &SliderSettingsEditor::updateWidget);
 
-    connect(m_slider, SIGNAL(valueChanged(int)), this, SLOT(setupForm()));
+    connect(m_slider, &QAbstractSlider::valueChanged, this, &SliderSettingsEditor::setupForm);
 }
 
 SliderSettingsEditor::~SliderSettingsEditor()

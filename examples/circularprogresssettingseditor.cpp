@@ -19,13 +19,13 @@ CircularProgressSettingsEditor::CircularProgressSettingsEditor(QWidget *parent)
 
     setupForm();
 
-    connect(ui->disabledCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->disabledCheckBox, &QAbstractButton::toggled, this, &CircularProgressSettingsEditor::updateWidget);
     connect(ui->progressTypeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->progressSlider, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
+    connect(ui->progressSlider, &QAbstractSlider::valueChanged, this, &CircularProgressSettingsEditor::updateWidget);
     connect(ui->lineWidthDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
     connect(ui->sizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->useThemeColorsCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->colorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
+    connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &CircularProgressSettingsEditor::updateWidget);
+    connect(ui->colorToolButton, &QAbstractButton::pressed, this, &CircularProgressSettingsEditor::selectColor);
 
     ui->sizeSpinBox->setRange(10, 200);
     ui->progressSlider->setRange(0, 100);

@@ -43,14 +43,14 @@ RadioButtonSettingsEditor::RadioButtonSettingsEditor(QWidget *parent)
 
     setupForm();
 
-    connect(ui->disabledCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->disabledCheckBox, &QAbstractButton::toggled, this, &RadioButtonSettingsEditor::updateWidget);
     connect(ui->labelPositionComboBox_2, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->labelTextLineEdit_2, SIGNAL(textChanged(QString)), this, SLOT(updateWidget()));
-    connect(ui->useThemeColorsCheckBox_3, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->textColorToolButton_2, SIGNAL(pressed()), this, SLOT(selectColor()));
-    connect(ui->disabledColorToolButton_2, SIGNAL(pressed()), this, SLOT(selectColor()));
-    connect(ui->checkedColorToolButton_2, SIGNAL(pressed()), this, SLOT(selectColor()));
-    connect(ui->uncheckedColorToolButton_2, SIGNAL(pressed()), this, SLOT(selectColor()));
+    connect(ui->labelTextLineEdit_2, &QLineEdit::textChanged, this, &RadioButtonSettingsEditor::updateWidget);
+    connect(ui->useThemeColorsCheckBox_3, &QAbstractButton::toggled, this, &RadioButtonSettingsEditor::updateWidget);
+    connect(ui->textColorToolButton_2, &QAbstractButton::pressed, this, &RadioButtonSettingsEditor::selectColor);
+    connect(ui->disabledColorToolButton_2, &QAbstractButton::pressed, this, &RadioButtonSettingsEditor::selectColor);
+    connect(ui->checkedColorToolButton_2, &QAbstractButton::pressed, this, &RadioButtonSettingsEditor::selectColor);
+    connect(ui->uncheckedColorToolButton_2, &QAbstractButton::pressed, this, &RadioButtonSettingsEditor::selectColor);
     connect(ui->labelPositionComboBox_2, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
 }
 

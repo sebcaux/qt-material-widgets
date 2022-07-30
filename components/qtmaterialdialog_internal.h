@@ -27,10 +27,11 @@ public:
     void setOpacity(qreal opacity);
     inline qreal opacity() const;
 
-protected slots:
+public slots:
     void makeOpaque();
     void makeTransparent();
 
+public:
     QSize sizeHint() const override;
 
 protected:

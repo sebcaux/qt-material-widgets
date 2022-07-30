@@ -52,7 +52,7 @@ QtMaterialTextFieldStateMachine::QtMaterialTextFieldStateMachine(QtMaterialTextF
 
     setupProperties();
 
-    connect(m_textField, SIGNAL(textChanged(QString)), this, SLOT(setupProperties()));
+    connect(m_textField, &QLineEdit::textChanged, this, &QtMaterialTextFieldStateMachine::setupProperties);
 }
 
 QtMaterialTextFieldStateMachine::~QtMaterialTextFieldStateMachine()

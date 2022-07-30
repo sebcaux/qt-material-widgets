@@ -116,5 +116,5 @@ void QtMaterialRipple::init()
     m_brush.setColor(Qt::black);
     m_brush.setStyle(Qt::SolidPattern);
 
-    connect(this, SIGNAL(finished()), this, SLOT(destroy()));
+    connect(this, &QAbstractAnimation::finished, this, &QtMaterialRipple::destroy);
 }

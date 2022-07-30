@@ -20,7 +20,7 @@ SnackbarSettingsEditor::SnackbarSettingsEditor(QWidget *parent)
 
     setupForm();
 
-    connect(ui->showSnackbarButton, SIGNAL(pressed()), this, SLOT(showSnackbar()));
+    connect(ui->showSnackbarButton, &QAbstractButton::pressed, this, &SnackbarSettingsEditor::showSnackbar);
 }
 
 SnackbarSettingsEditor::~SnackbarSettingsEditor()

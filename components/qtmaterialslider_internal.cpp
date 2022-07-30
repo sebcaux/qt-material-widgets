@@ -330,7 +330,13 @@ QtMaterialSliderTrack::QtMaterialSliderTrack(QtMaterialSliderThumb *thumb, QtMat
 
     setAttribute(Qt::WA_TransparentForMouseEvents, true);
 
-    connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(update()));
+    connect(slider,
+            &QtMaterialSlider::sliderMoved,
+            this,
+            [=]()
+            {
+                update();
+            });
 }
 
 QtMaterialSliderTrack::~QtMaterialSliderTrack()

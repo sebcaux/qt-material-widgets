@@ -20,16 +20,16 @@ ToggleSettingsEditor::ToggleSettingsEditor(QWidget *parent)
 
     setupForm();
 
-    connect(ui->disabledCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->checkedCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
+    connect(ui->disabledCheckBox, &QAbstractButton::toggled, this, &ToggleSettingsEditor::updateWidget);
+    connect(ui->checkedCheckBox, &QAbstractButton::toggled, this, &ToggleSettingsEditor::updateWidget);
     connect(ui->orientationComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->useThemeColorsCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateWidget()));
-    connect(ui->disabledColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
-    connect(ui->activeColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
-    connect(ui->inactiveColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
-    connect(ui->trackColorToolButton, SIGNAL(pressed()), this, SLOT(selectColor()));
+    connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &ToggleSettingsEditor::updateWidget);
+    connect(ui->disabledColorToolButton, &QAbstractButton::pressed, this, &ToggleSettingsEditor::selectColor);
+    connect(ui->activeColorToolButton, &QAbstractButton::pressed, this, &ToggleSettingsEditor::selectColor);
+    connect(ui->inactiveColorToolButton, &QAbstractButton::pressed, this, &ToggleSettingsEditor::selectColor);
+    connect(ui->trackColorToolButton, &QAbstractButton::pressed, this, &ToggleSettingsEditor::selectColor);
 
-    connect(m_toggle, SIGNAL(toggled(bool)), this, SLOT(setupForm()));
+    connect(m_toggle, &QAbstractButton::toggled, this, &ToggleSettingsEditor::setupForm);
 }
 
 ToggleSettingsEditor::~ToggleSettingsEditor()
