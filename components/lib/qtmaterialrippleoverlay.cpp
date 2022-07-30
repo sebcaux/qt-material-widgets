@@ -62,7 +62,7 @@ void QtMaterialRippleOverlay::paintEvent(QPaintEvent *event)
     }
 
     QList<QtMaterialRipple *>::const_iterator i;
-    for (i = m_ripples.begin(); i != m_ripples.end(); ++i)
+    for (i = m_ripples.cbegin(); i != m_ripples.cend(); ++i)
     {
         paintRipple(&painter, *i);
     }

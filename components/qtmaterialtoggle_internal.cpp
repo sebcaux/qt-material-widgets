@@ -59,10 +59,11 @@ bool QtMaterialToggleRippleOverlay::eventFilter(QObject *obj, QEvent *event)
     if (QEvent::Paint == event->type())
     {
         setGeometry(overlayGeometry());
-        QList<QtMaterialRipple *>::const_iterator i;
         QList<QtMaterialRipple *> items = ripples();
         QColor color = m_track->trackColor();
-        for (i = items.begin(); i != items.end(); ++i)
+
+        QList<QtMaterialRipple *>::const_iterator i;
+        for (i = items.cbegin(); i != items.cend(); ++i)
         {
             (*i)->setColor(color);
         }
