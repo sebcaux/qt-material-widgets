@@ -1,7 +1,7 @@
 #include "dialogsettingseditor.h"
 
-#include <QVBoxLayout>
 #include <QColorDialog>
+#include <QVBoxLayout>
 
 #include <qtmaterialdialog.h>
 #include <qtmaterialflatbutton.h>

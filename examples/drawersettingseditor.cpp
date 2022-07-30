@@ -1,7 +1,7 @@
 #include "drawersettingseditor.h"
 
-#include <QVBoxLayout>
 #include <QColorDialog>
+#include <QVBoxLayout>
 
 #include <qtmaterialdrawer.h>
 
@@ -28,7 +28,8 @@ DrawerSettingsEditor::DrawerSettingsEditor(QWidget *parent)
     QVector<QString> labels = {"Motion", "Style", "Layout", "Components", "Patterns", "Growth & communications", "Usability", "Platforms", "Resources"};
 
     QVector<QString>::iterator it;
-    for (it = labels.begin(); it != labels.end(); ++it) {
+    for (it = labels.begin(); it != labels.end(); ++it)
+    {
         QLabel *label = new QLabel(*it);
         label->setMinimumHeight(30);
         label->setFont(QFont("Roboto", 10, QFont::Medium));

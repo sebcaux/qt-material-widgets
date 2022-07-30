@@ -21,7 +21,7 @@ protected slots:
     void selectColor();
 
 private:
-    QtMaterialAutoComplete       *const m_autocomplete;
+    QtMaterialAutoComplete *const m_autocomplete;
 };
 
-#endif // AUTOCOMPLETESETTINGSEDITOR_H
+#endif  // AUTOCOMPLETESETTINGSEDITOR_H

@@ -23,9 +23,9 @@ protected slots:
 
 private:
     Ui::RadioButtonSettingsForm *const ui;
-    QtMaterialRadioButton       *const m_radioButton1;
-    QtMaterialRadioButton       *const m_radioButton2;
-    QtMaterialRadioButton       *const m_radioButton3;
+    QtMaterialRadioButton *const m_radioButton1;
+    QtMaterialRadioButton *const m_radioButton2;
+    QtMaterialRadioButton *const m_radioButton3;
 };
 
-#endif // RADIOBUTTONSETTINGSEDITOR_H
+#endif  // RADIOBUTTONSETTINGSEDITOR_H

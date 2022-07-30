@@ -1,11 +1,11 @@
 #include "appbarsettingseditor.h"
 
-#include <QVBoxLayout>
 #include <QColorDialog>
+#include <QVBoxLayout>
 
+#include <lib/qtmaterialtheme.h>
 #include <qtmaterialappbar.h>
 #include <qtmaterialiconbutton.h>
-#include <lib/qtmaterialtheme.h>
 
 AppBarSettingsEditor::AppBarSettingsEditor(QWidget *parent)
     : SettingsEditor(parent),
@@ -63,10 +63,12 @@ void AppBarSettingsEditor::updateWidget()
 void AppBarSettingsEditor::selectColor()
 {
     QColorDialog dialog;
-    if (dialog.exec()) {
+    if (dialog.exec())
+    {
         QColor color = dialog.selectedColor();
         QString senderName = sender()->objectName();
-        if ("backgroundColorToolButton" == senderName) {
+        if ("backgroundColorToolButton" == senderName)
+        {
             m_appBar->setBackgroundColor(color);
             ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
         }

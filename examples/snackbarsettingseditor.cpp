@@ -1,7 +1,7 @@
 #include "snackbarsettingseditor.h"
 
-#include <QVBoxLayout>
 #include <QColorDialog>
+#include <QVBoxLayout>
 
 #include <qtmaterialsnackbar.h>
 

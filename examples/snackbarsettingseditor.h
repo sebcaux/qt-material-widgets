@@ -22,7 +22,7 @@ protected slots:
 
 private:
     Ui::SnackbarSettingsForm *const ui;
-    QtMaterialSnackbar       *const m_snackbar;
+    QtMaterialSnackbar *const m_snackbar;
 };
 
-#endif // SNACKBARSETTINGSEDITOR_H
+#endif  // SNACKBARSETTINGSEDITOR_H

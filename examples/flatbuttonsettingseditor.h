@@ -33,4 +33,4 @@ private:
     QtMaterialFlatButton *const m_button;
 };
 
-#endif // FLATBUTTONSETTINGSMANAGER_H
+#endif  // FLATBUTTONSETTINGSMANAGER_H

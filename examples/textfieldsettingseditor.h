@@ -23,7 +23,7 @@ protected slots:
 
 private:
     Ui::TextFieldSettingsForm *const ui;
-    QtMaterialTextField       *const m_textField;
+    QtMaterialTextField *const m_textField;
 };
 
-#endif // TEXTFIELDSETTINGSEDITOR_H
+#endif  // TEXTFIELDSETTINGSEDITOR_H

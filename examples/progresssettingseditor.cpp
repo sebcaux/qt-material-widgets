@@ -2,8 +2,8 @@
 
 #include <QColorDialog>
 
-#include <qtmaterialprogress.h>
 #include <lib/qtmaterialtheme.h>
+#include <qtmaterialprogress.h>
 
 ProgressSettingsEditor::ProgressSettingsEditor(QWidget *parent)
     : SettingsEditor(parent),
@@ -38,14 +38,14 @@ void ProgressSettingsEditor::setupForm()
 {
     switch (m_progress->progressType())
     {
-    case Material::DeterminateProgress:
-        ui->progressTypeComboBox->setCurrentIndex(0);
-        break;
-    case Material::IndeterminateProgress:
-        ui->progressTypeComboBox->setCurrentIndex(1);
-        break;
-    default:
-        break;
+        case Material::DeterminateProgress:
+            ui->progressTypeComboBox->setCurrentIndex(0);
+            break;
+        case Material::IndeterminateProgress:
+            ui->progressTypeComboBox->setCurrentIndex(1);
+            break;
+        default:
+            break;
     }
 
     ui->disabledCheckBox->setChecked(!m_progress->isEnabled());
@@ -57,14 +57,14 @@ void ProgressSettingsEditor::updateWidget()
 {
     switch (ui->progressTypeComboBox->currentIndex())
     {
-    case 0:
-        m_progress->setProgressType(Material::DeterminateProgress);
-        break;
-    case 1:
-        m_progress->setProgressType(Material::IndeterminateProgress);
-        break;
-    default:
-        break;
+        case 0:
+            m_progress->setProgressType(Material::DeterminateProgress);
+            break;
+        case 1:
+            m_progress->setProgressType(Material::IndeterminateProgress);
+            break;
+        default:
+            break;
     }
 
     m_progress->setDisabled(ui->disabledCheckBox->isChecked());
@@ -75,13 +75,17 @@ void ProgressSettingsEditor::updateWidget()
 void ProgressSettingsEditor::selectColor()
 {
     QColorDialog dialog;
-    if (dialog.exec()) {
+    if (dialog.exec())
+    {
         QColor color = dialog.selectedColor();
         QString senderName = sender()->objectName();
-        if ("progressColorToolButton" == senderName) {
+        if ("progressColorToolButton" == senderName)
+        {
             m_progress->setProgressColor(color);
             ui->progressColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("backgroundColorToolButton" == senderName) {
+        }
+        else if ("backgroundColorToolButton" == senderName)
+        {
             m_progress->setBackgroundColor(color);
             ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
         }

@@ -30,66 +30,66 @@ void FlatButtonSettingsEditor::setupForm()
 {
     switch (m_button->role())
     {
-    case Material::Default:
-        ui->buttonRoleComboBox->setCurrentIndex(0);
-        break;
-    case Material::Primary:
-        ui->buttonRoleComboBox->setCurrentIndex(1);
-        break;
-    case Material::Secondary:
-        ui->buttonRoleComboBox->setCurrentIndex(2);
-        break;
-    default:
-        break;
+        case Material::Default:
+            ui->buttonRoleComboBox->setCurrentIndex(0);
+            break;
+        case Material::Primary:
+            ui->buttonRoleComboBox->setCurrentIndex(1);
+            break;
+        case Material::Secondary:
+            ui->buttonRoleComboBox->setCurrentIndex(2);
+            break;
+        default:
+            break;
     }
 
     switch (m_button->overlayStyle())
     {
-    case Material::NoOverlay:
-        ui->hoverStyleComboBox->setCurrentIndex(0);
-        break;
-    case Material::TintedOverlay:
-        ui->hoverStyleComboBox->setCurrentIndex(1);
-        break;
-    case Material::GrayOverlay:
-        ui->hoverStyleComboBox->setCurrentIndex(2);
-        break;
-    default:
-        break;
+        case Material::NoOverlay:
+            ui->hoverStyleComboBox->setCurrentIndex(0);
+            break;
+        case Material::TintedOverlay:
+            ui->hoverStyleComboBox->setCurrentIndex(1);
+            break;
+        case Material::GrayOverlay:
+            ui->hoverStyleComboBox->setCurrentIndex(2);
+            break;
+        default:
+            break;
     }
 
     switch (m_button->rippleStyle())
     {
-    case Material::CenteredRipple:
-        ui->rippleStyleComboBox->setCurrentIndex(0);
-        break;
-    case Material::PositionedRipple:
-        ui->rippleStyleComboBox->setCurrentIndex(1);
-        break;
-    case Material::NoRipple:
-        ui->rippleStyleComboBox->setCurrentIndex(2);
-        break;
-    default:
-        break;
+        case Material::CenteredRipple:
+            ui->rippleStyleComboBox->setCurrentIndex(0);
+            break;
+        case Material::PositionedRipple:
+            ui->rippleStyleComboBox->setCurrentIndex(1);
+            break;
+        case Material::NoRipple:
+            ui->rippleStyleComboBox->setCurrentIndex(2);
+            break;
+        default:
+            break;
     }
 
     switch (m_button->iconPlacement())
     {
-    case Material::LeftIcon:
-        ui->iconPlacementComboBox->setCurrentIndex(0);
-        break;
-    case Material::RightIcon:
-        ui->iconPlacementComboBox->setCurrentIndex(1);
-        break;
+        case Material::LeftIcon:
+            ui->iconPlacementComboBox->setCurrentIndex(0);
+            break;
+        case Material::RightIcon:
+            ui->iconPlacementComboBox->setCurrentIndex(1);
+            break;
     }
 
     switch (ui->textAlignmentComboBox->currentIndex())
     {
-    case Qt::AlignLeft:
-        ui->textAlignmentComboBox->setCurrentIndex(0);
-        break;
-    default:
-        ui->textAlignmentComboBox->setCurrentIndex(1);
+        case Qt::AlignLeft:
+            ui->textAlignmentComboBox->setCurrentIndex(0);
+            break;
+        default:
+            ui->textAlignmentComboBox->setCurrentIndex(1);
     }
 
     ui->checkedCheckBox->setEnabled(m_button->isCheckable());
@@ -112,81 +112,79 @@ void FlatButtonSettingsEditor::updateWidget()
 {
     switch (ui->buttonRoleComboBox->currentIndex())
     {
-    case 0:
-        m_button->setRole(Material::Default);
-        break;
-    case 1:
-        m_button->setRole(Material::Primary);
-        break;
-    case 2:
-        m_button->setRole(Material::Secondary);
-        break;
-    default:
-        break;
+        case 0:
+            m_button->setRole(Material::Default);
+            break;
+        case 1:
+            m_button->setRole(Material::Primary);
+            break;
+        case 2:
+            m_button->setRole(Material::Secondary);
+            break;
+        default:
+            break;
     }
 
     switch (ui->hoverStyleComboBox->currentIndex())
     {
-    case 0:
-        m_button->setOverlayStyle(Material::NoOverlay);
-        break;
-    case 1:
-        m_button->setOverlayStyle(Material::TintedOverlay);
-        break;
-    case 2:
-        m_button->setOverlayStyle(Material::GrayOverlay);
-        break;
-    default:
-        break;
+        case 0:
+            m_button->setOverlayStyle(Material::NoOverlay);
+            break;
+        case 1:
+            m_button->setOverlayStyle(Material::TintedOverlay);
+            break;
+        case 2:
+            m_button->setOverlayStyle(Material::GrayOverlay);
+            break;
+        default:
+            break;
     }
 
     switch (ui->rippleStyleComboBox->currentIndex())
     {
-    case 0:
-        m_button->setRippleStyle(Material::CenteredRipple);
-        break;
-    case 1:
-        m_button->setRippleStyle(Material::PositionedRipple);
-        break;
-    case 2:
-        m_button->setRippleStyle(Material::NoRipple);
-        break;
-    default:
-        break;
+        case 0:
+            m_button->setRippleStyle(Material::CenteredRipple);
+            break;
+        case 1:
+            m_button->setRippleStyle(Material::PositionedRipple);
+            break;
+        case 2:
+            m_button->setRippleStyle(Material::NoRipple);
+            break;
+        default:
+            break;
     }
 
     switch (ui->iconPlacementComboBox->currentIndex())
     {
-    case 0:
-        m_button->setIconPlacement(Material::LeftIcon);
-        break;
-    case 1:
-        m_button->setIconPlacement(Material::RightIcon);
-        break;
-    default:
-        break;
+        case 0:
+            m_button->setIconPlacement(Material::LeftIcon);
+            break;
+        case 1:
+            m_button->setIconPlacement(Material::RightIcon);
+            break;
+        default:
+            break;
     }
 
     switch (ui->textAlignmentComboBox->currentIndex())
     {
-    case 0:
-        m_button->setTextAlignment(Qt::AlignLeft);
-        break;
-    case 1:
-    default:
-        m_button->setTextAlignment(Qt::AlignHCenter);
-        break;
+        case 0:
+            m_button->setTextAlignment(Qt::AlignLeft);
+            break;
+        case 1:
+        default:
+            m_button->setTextAlignment(Qt::AlignHCenter);
+            break;
     }
 
     m_button->setDisabled(ui->disabledCheckBox->isChecked());
     m_button->setCheckable(ui->checkableCheckBox->isChecked());
     m_button->setChecked(ui->checkedCheckBox->isChecked());
     m_button->setHaloVisible(ui->showHaloCheckBox->isChecked());
-    m_button->setIcon(ui->iconCheckBox->isChecked() ? QtMaterialTheme::icon("toggle", "star")
-                                                    : QIcon());
+    m_button->setIcon(ui->iconCheckBox->isChecked() ? QtMaterialTheme::icon("toggle", "star") : QIcon());
     m_button->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
-    m_button->setBackgroundMode(ui->transparentCheckBox->isChecked()
-                                ? Qt::TransparentMode : Qt::OpaqueMode);
+    m_button->setBackgroundMode(ui->transparentCheckBox->isChecked() ? Qt::TransparentMode : Qt::OpaqueMode);
     m_button->setCornerRadius(ui->cornerRadiusSpinBox->value());
     m_button->setBaseOpacity(ui->overlayOpacityDoubleSpinBox->value());
     m_button->setIconSize(QSize(ui->iconSizeSpinBox->value(), ui->iconSizeSpinBox->value()));
@@ -199,22 +197,32 @@ void FlatButtonSettingsEditor::updateWidget()
 void FlatButtonSettingsEditor::selectColor()
 {
     QColorDialog dialog;
-    if (dialog.exec()) {
+    if (dialog.exec())
+    {
         QColor color = dialog.selectedColor();
         QString senderName = sender()->objectName();
-        if ("foregroundColorToolButton" == senderName) {
+        if ("foregroundColorToolButton" == senderName)
+        {
             m_button->setForegroundColor(color);
             ui->foregroundColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("backgroundColorToolButton" == senderName) {
+        }
+        else if ("backgroundColorToolButton" == senderName)
+        {
             m_button->setBackgroundColor(color);
             ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("overlayColorToolButton" == senderName) {
+        }
+        else if ("overlayColorToolButton" == senderName)
+        {
             m_button->setOverlayColor(color);
             ui->overlayColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("disabledFgColorToolButton" == senderName) {
+        }
+        else if ("disabledFgColorToolButton" == senderName)
+        {
             m_button->setDisabledForegroundColor(color);
             ui->disableFgColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("disabledBgColorToolButton" == senderName) {
+        }
+        else if ("disabledBgColorToolButton" == senderName)
+        {
             m_button->setDisabledBackgroundColor(color);
             ui->disabledBgColorLineEdit->setText(color.name(QColor::HexRgb));
         }

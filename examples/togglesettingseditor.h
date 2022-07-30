@@ -22,7 +22,7 @@ protected slots:
 
 private:
     Ui::ToggleSettingsForm *const ui;
-    QtMaterialToggle       *const m_toggle;
+    QtMaterialToggle *const m_toggle;
 };
 
-#endif // TOGGLESETTINGSEDITOR_H
+#endif  // TOGGLESETTINGSEDITOR_H

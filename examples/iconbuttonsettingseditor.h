@@ -31,4 +31,4 @@ private:
     QtMaterialIconButton *const m_button;
 };
 
-#endif // ICONBUTTONSETTINGSMANAGER_H
+#endif  // ICONBUTTONSETTINGSMANAGER_H

@@ -1,7 +1,7 @@
 #include "circularprogresssettingseditor.h"
 
-#include <QVBoxLayout>
 #include <QColorDialog>
+#include <QVBoxLayout>
 
 #include <qtmaterialcircularprogress.h>
 
@@ -40,14 +40,14 @@ void CircularProgressSettingsEditor::setupForm()
 {
     switch (m_progress->progressType())
     {
-    case Material::DeterminateProgress:
-        ui->progressTypeComboBox->setCurrentIndex(0);
-        break;
-    case Material::IndeterminateProgress:
-        ui->progressTypeComboBox->setCurrentIndex(1);
-        break;
-    default:
-        break;
+        case Material::DeterminateProgress:
+            ui->progressTypeComboBox->setCurrentIndex(0);
+            break;
+        case Material::IndeterminateProgress:
+            ui->progressTypeComboBox->setCurrentIndex(1);
+            break;
+        default:
+            break;
     }
 
     ui->disabledCheckBox->setChecked(!m_progress->isEnabled());
@@ -61,14 +61,14 @@ void CircularProgressSettingsEditor::updateWidget()
 {
     switch (ui->progressTypeComboBox->currentIndex())
     {
-    case 0:
-        m_progress->setProgressType(Material::DeterminateProgress);
-        break;
-    case 1:
-        m_progress->setProgressType(Material::IndeterminateProgress);
-        break;
-    default:
-        break;
+        case 0:
+            m_progress->setProgressType(Material::DeterminateProgress);
+            break;
+        case 1:
+            m_progress->setProgressType(Material::IndeterminateProgress);
+            break;
+        default:
+            break;
     }
 
     m_progress->setDisabled(ui->disabledCheckBox->isChecked());
@@ -81,10 +81,12 @@ void CircularProgressSettingsEditor::updateWidget()
 void CircularProgressSettingsEditor::selectColor()
 {
     QColorDialog dialog;
-    if (dialog.exec()) {
+    if (dialog.exec())
+    {
         QColor color = dialog.selectedColor();
         QString senderName = sender()->objectName();
-        if ("colorToolButton" == senderName) {
+        if ("colorToolButton" == senderName)
+        {
             m_progress->setColor(color);
             ui->colorLineEdit->setText(color.name(QColor::HexRgb));
         }

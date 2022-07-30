@@ -1,8 +1,8 @@
 #include "fabsettingseditor.h"
 
-#include <QVBoxLayout>
-#include <QDebug>
 #include <QColorDialog>
+#include <QDebug>
+#include <QVBoxLayout>
 
 #include <qtmaterialfab.h>
 
@@ -40,50 +40,50 @@ void FloatingActionButtonSettingsEditor::setupForm()
 {
     switch (m_fab->role())
     {
-    case Material::Default:
-        ui->buttonRoleComboBox->setCurrentIndex(0);
-        break;
-    case Material::Primary:
-        ui->buttonRoleComboBox->setCurrentIndex(1);
-        break;
-    case Material::Secondary:
-        ui->buttonRoleComboBox->setCurrentIndex(2);
-        break;
-    default:
-        break;
+        case Material::Default:
+            ui->buttonRoleComboBox->setCurrentIndex(0);
+            break;
+        case Material::Primary:
+            ui->buttonRoleComboBox->setCurrentIndex(1);
+            break;
+        case Material::Secondary:
+            ui->buttonRoleComboBox->setCurrentIndex(2);
+            break;
+        default:
+            break;
     }
 
     switch (m_fab->corner())
     {
-    case Qt::TopLeftCorner:
-        ui->cornerComboBox->setCurrentIndex(0);
-        break;
-    case Qt::TopRightCorner:
-        ui->cornerComboBox->setCurrentIndex(1);
-        break;
-    case Qt::BottomLeftCorner:
-        ui->cornerComboBox->setCurrentIndex(2);
-        break;
-    case Qt::BottomRightCorner:
-        ui->cornerComboBox->setCurrentIndex(3);
-        break;
-    default:
-        break;
+        case Qt::TopLeftCorner:
+            ui->cornerComboBox->setCurrentIndex(0);
+            break;
+        case Qt::TopRightCorner:
+            ui->cornerComboBox->setCurrentIndex(1);
+            break;
+        case Qt::BottomLeftCorner:
+            ui->cornerComboBox->setCurrentIndex(2);
+            break;
+        case Qt::BottomRightCorner:
+            ui->cornerComboBox->setCurrentIndex(3);
+            break;
+        default:
+            break;
     }
 
     switch (m_fab->rippleStyle())
     {
-    case Material::CenteredRipple:
-        ui->rippleStyleComboBox->setCurrentIndex(0);
-        break;
-    case Material::PositionedRipple:
-        ui->rippleStyleComboBox->setCurrentIndex(1);
-        break;
-    case Material::NoRipple:
-        ui->rippleStyleComboBox->setCurrentIndex(2);
-        break;
-    default:
-        break;
+        case Material::CenteredRipple:
+            ui->rippleStyleComboBox->setCurrentIndex(0);
+            break;
+        case Material::PositionedRipple:
+            ui->rippleStyleComboBox->setCurrentIndex(1);
+            break;
+        case Material::NoRipple:
+            ui->rippleStyleComboBox->setCurrentIndex(2);
+            break;
+        default:
+            break;
     }
 
     ui->disabledCheckBox->setChecked(!m_fab->isEnabled());
@@ -97,50 +97,50 @@ void FloatingActionButtonSettingsEditor::updateWidget()
 {
     switch (ui->buttonRoleComboBox->currentIndex())
     {
-    case 0:
-        m_fab->setRole(Material::Default);
-        break;
-    case 1:
-        m_fab->setRole(Material::Primary);
-        break;
-    case 2:
-        m_fab->setRole(Material::Secondary);
-        break;
-    default:
-        break;
+        case 0:
+            m_fab->setRole(Material::Default);
+            break;
+        case 1:
+            m_fab->setRole(Material::Primary);
+            break;
+        case 2:
+            m_fab->setRole(Material::Secondary);
+            break;
+        default:
+            break;
     }
 
     switch (ui->cornerComboBox->currentIndex())
     {
-    case 0:
-        m_fab->setCorner(Qt::TopLeftCorner);
-        break;
-    case 1:
-        m_fab->setCorner(Qt::TopRightCorner);
-        break;
-    case 2:
-        m_fab->setCorner(Qt::BottomLeftCorner);
-        break;
-    case 3:
-        m_fab->setCorner(Qt::BottomRightCorner);
-        break;
-    default:
-        break;
+        case 0:
+            m_fab->setCorner(Qt::TopLeftCorner);
+            break;
+        case 1:
+            m_fab->setCorner(Qt::TopRightCorner);
+            break;
+        case 2:
+            m_fab->setCorner(Qt::BottomLeftCorner);
+            break;
+        case 3:
+            m_fab->setCorner(Qt::BottomRightCorner);
+            break;
+        default:
+            break;
     }
 
     switch (ui->rippleStyleComboBox->currentIndex())
     {
-    case 0:
-        m_fab->setRippleStyle(Material::CenteredRipple);
-        break;
-    case 1:
-        m_fab->setRippleStyle(Material::PositionedRipple);
-        break;
-    case 2:
-        m_fab->setRippleStyle(Material::NoRipple);
-        break;
-    default:
-        break;
+        case 0:
+            m_fab->setRippleStyle(Material::CenteredRipple);
+            break;
+        case 1:
+            m_fab->setRippleStyle(Material::PositionedRipple);
+            break;
+        case 2:
+            m_fab->setRippleStyle(Material::NoRipple);
+            break;
+        default:
+            break;
     }
 
     m_fab->setDisabled(ui->disabledCheckBox->isChecked());
@@ -153,19 +153,27 @@ void FloatingActionButtonSettingsEditor::updateWidget()
 void FloatingActionButtonSettingsEditor::selectColor()
 {
     QColorDialog dialog;
-    if (dialog.exec()) {
+    if (dialog.exec())
+    {
         QColor color = dialog.selectedColor();
         QString senderName = sender()->objectName();
-        if ("foregroundColorToolButton" == senderName) {
+        if ("foregroundColorToolButton" == senderName)
+        {
             m_fab->setForegroundColor(color);
             ui->foregroundColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("backgroundColorToolButton" == senderName) {
+        }
+        else if ("backgroundColorToolButton" == senderName)
+        {
             m_fab->setBackgroundColor(color);
             ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("disabledFgColorToolButton" == senderName) {
+        }
+        else if ("disabledFgColorToolButton" == senderName)
+        {
             m_fab->setDisabledForegroundColor(color);
             ui->disabledFgColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("disabledBgColorToolButton" == senderName) {
+        }
+        else if ("disabledBgColorToolButton" == senderName)
+        {
             m_fab->setDisabledBackgroundColor(color);
             ui->disabledBgColorLineEdit->setText(color.name(QColor::HexRgb));
         }

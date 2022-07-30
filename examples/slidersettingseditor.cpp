@@ -1,7 +1,7 @@
 #include "slidersettingseditor.h"
 
-#include <QVBoxLayout>
 #include <QColorDialog>
+#include <QVBoxLayout>
 
 #include <qtmaterialslider.h>
 
@@ -14,7 +14,7 @@ SliderSettingsEditor::SliderSettingsEditor(QWidget *parent)
 
     QVBoxLayout *layout = new QVBoxLayout;
     _canvas->setLayout(layout);
-    //canvas->setMaximumHeight(300);
+    // canvas->setMaximumHeight(300);
     layout->addWidget(m_slider);
     layout->setAlignment(m_slider, Qt::AlignHCenter);
 
@@ -37,14 +37,14 @@ void SliderSettingsEditor::setupForm()
 {
     switch (m_slider->orientation())
     {
-    case Qt::Horizontal:
-        ui->orientationComboBox->setCurrentIndex(0);
-        break;
-    case Qt::Vertical:
-        ui->orientationComboBox->setCurrentIndex(1);
-        break;
-    default:
-        break;
+        case Qt::Horizontal:
+            ui->orientationComboBox->setCurrentIndex(0);
+            break;
+        case Qt::Vertical:
+            ui->orientationComboBox->setCurrentIndex(1);
+            break;
+        default:
+            break;
     }
 
     ui->disabledCheckBox->setChecked(!m_slider->isEnabled());
@@ -56,14 +56,14 @@ void SliderSettingsEditor::updateWidget()
 {
     switch (ui->orientationComboBox->currentIndex())
     {
-    case 0:
-        m_slider->setOrientation(Qt::Horizontal);
-        break;
-    case 1:
-        m_slider->setOrientation(Qt::Vertical);
-        break;
-    default:
-        break;
+        case 0:
+            m_slider->setOrientation(Qt::Horizontal);
+            break;
+        case 1:
+            m_slider->setOrientation(Qt::Vertical);
+            break;
+        default:
+            break;
     }
 
     m_slider->setDisabled(ui->disabledCheckBox->isChecked());

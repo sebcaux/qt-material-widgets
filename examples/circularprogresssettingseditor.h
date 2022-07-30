@@ -22,7 +22,7 @@ protected slots:
 
 private:
     Ui::CircularProgressSettingsForm *const ui;
-    QtMaterialCircularProgress       *const m_progress;
+    QtMaterialCircularProgress *const m_progress;
 };
 
-#endif // CIRCULARPROGRESSSETTINGSEDITOR_H
+#endif  // CIRCULARPROGRESSSETTINGSEDITOR_H

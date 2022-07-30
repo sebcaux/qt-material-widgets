@@ -19,4 +19,4 @@ protected:
     QSize sizeHint() const override;
 };
 
-#endif // SETTINGSEDITOR_H
+#endif  // SETTINGSEDITOR_H

@@ -2,8 +2,8 @@
 
 #include <QColorDialog>
 
-#include <qtmaterialavatar.h>
 #include <lib/qtmaterialtheme.h>
+#include <qtmaterialavatar.h>
 
 AvatarSettingsEditor::AvatarSettingsEditor(QWidget *parent)
     : SettingsEditor(parent),
@@ -38,17 +38,17 @@ void AvatarSettingsEditor::setupForm()
 {
     switch (m_avatar->type())
     {
-    case Material::LetterAvatar:
-        ui->typeComboBox->setCurrentIndex(0);
-        break;
-    case Material::ImageAvatar:
-        ui->typeComboBox->setCurrentIndex(1);
-        break;
-    case Material::IconAvatar:
-        ui->typeComboBox->setCurrentIndex(2);
-        break;
-    default:
-        break;
+        case Material::LetterAvatar:
+            ui->typeComboBox->setCurrentIndex(0);
+            break;
+        case Material::ImageAvatar:
+            ui->typeComboBox->setCurrentIndex(1);
+            break;
+        case Material::IconAvatar:
+            ui->typeComboBox->setCurrentIndex(2);
+            break;
+        default:
+            break;
     }
 
     ui->disabledCheckBox->setChecked(!m_avatar->isEnabled());
@@ -60,17 +60,17 @@ void AvatarSettingsEditor::updateWidget()
 {
     switch (ui->typeComboBox->currentIndex())
     {
-    case 0:
-        m_avatar->setLetter(QChar('X'));
-        break;
-    case 1:
-        m_avatar->setImage(QImage(":/images/assets/sikh.jpg"));
-        break;
-    case 2:
-        m_avatar->setIcon(QtMaterialTheme::icon("communication", "message"));
-        break;
-    default:
-        break;
+        case 0:
+            m_avatar->setLetter(QChar('X'));
+            break;
+        case 1:
+            m_avatar->setImage(QImage(":/images/assets/sikh.jpg"));
+            break;
+        case 2:
+            m_avatar->setIcon(QtMaterialTheme::icon("communication", "message"));
+            break;
+        default:
+            break;
     }
 
     m_avatar->setDisabled(ui->disabledCheckBox->isChecked());
@@ -81,13 +81,17 @@ void AvatarSettingsEditor::updateWidget()
 void AvatarSettingsEditor::selectColor()
 {
     QColorDialog dialog;
-    if (dialog.exec()) {
+    if (dialog.exec())
+    {
         QColor color = dialog.selectedColor();
         QString senderName = sender()->objectName();
-        if ("textColorToolButton" == senderName) {
+        if ("textColorToolButton" == senderName)
+        {
             m_avatar->setTextColor(color);
             ui->textColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("backgroundColorToolButton" == senderName) {
+        }
+        else if ("backgroundColorToolButton" == senderName)
+        {
             m_avatar->setBackgroundColor(color);
             ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
         }

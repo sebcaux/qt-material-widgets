@@ -21,7 +21,7 @@ protected slots:
 
 private:
     Ui::DialogSettingsForm *const ui;
-    QtMaterialDialog       *const m_dialog;
+    QtMaterialDialog *const m_dialog;
 };
 
-#endif // DIALOGSETTINGSEDITOR_H
+#endif  // DIALOGSETTINGSEDITOR_H

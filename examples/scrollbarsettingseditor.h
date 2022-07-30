@@ -21,8 +21,8 @@ protected slots:
 
 private:
     Ui::ScrollBarSettingsForm *const ui;
-    QtMaterialScrollBar       *const m_verticalScrollbar;
-    QtMaterialScrollBar       *const m_horizontalScrollbar;
+    QtMaterialScrollBar *const m_verticalScrollbar;
+    QtMaterialScrollBar *const m_horizontalScrollbar;
 };
 
-#endif // SCROLLBARSETTINGSEDITOR_H
+#endif  // SCROLLBARSETTINGSEDITOR_H

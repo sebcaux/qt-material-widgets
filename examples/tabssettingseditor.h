@@ -21,7 +21,7 @@ protected slots:
 
 private:
     Ui::TabsSettingsForm *const ui;
-    QtMaterialTabs       *const m_tabs;
+    QtMaterialTabs *const m_tabs;
 };
 
-#endif // TABSSETTINGSEDITOR_H
+#endif  // TABSSETTINGSEDITOR_H

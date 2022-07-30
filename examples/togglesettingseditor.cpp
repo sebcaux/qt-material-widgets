@@ -40,14 +40,14 @@ void ToggleSettingsEditor::setupForm()
 {
     switch (m_toggle->orientation())
     {
-    case Qt::Horizontal:
-        ui->orientationComboBox->setCurrentIndex(0);
-        break;
-    case Qt::Vertical:
-        ui->orientationComboBox->setCurrentIndex(1);
-        break;
-    default:
-        break;
+        case Qt::Horizontal:
+            ui->orientationComboBox->setCurrentIndex(0);
+            break;
+        case Qt::Vertical:
+            ui->orientationComboBox->setCurrentIndex(1);
+            break;
+        default:
+            break;
     }
 
     ui->disabledCheckBox->setChecked(!m_toggle->isEnabled());
@@ -59,14 +59,14 @@ void ToggleSettingsEditor::updateWidget()
 {
     switch (ui->orientationComboBox->currentIndex())
     {
-    case 0:
-        m_toggle->setOrientation(Qt::Horizontal);
-        break;
-    case 1:
-        m_toggle->setOrientation(Qt::Vertical);
-        break;
-    default:
-        break;
+        case 0:
+            m_toggle->setOrientation(Qt::Horizontal);
+            break;
+        case 1:
+            m_toggle->setOrientation(Qt::Vertical);
+            break;
+        default:
+            break;
     }
 
     m_toggle->setDisabled(ui->disabledCheckBox->isChecked());
@@ -77,19 +77,27 @@ void ToggleSettingsEditor::updateWidget()
 void ToggleSettingsEditor::selectColor()
 {
     QColorDialog dialog;
-    if (dialog.exec()) {
+    if (dialog.exec())
+    {
         QColor color = dialog.selectedColor();
         QString senderName = sender()->objectName();
-        if ("disabledColorToolButton" == senderName) {
+        if ("disabledColorToolButton" == senderName)
+        {
             m_toggle->setDisabledColor(color);
             ui->disabledColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("activeColorToolButton" == senderName) {
+        }
+        else if ("activeColorToolButton" == senderName)
+        {
             m_toggle->setActiveColor(color);
             ui->activeColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("inactiveColorToolButton" == senderName) {
+        }
+        else if ("inactiveColorToolButton" == senderName)
+        {
             m_toggle->setInactiveColor(color);
             ui->inactiveColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("trackColorToolButton" == senderName) {
+        }
+        else if ("trackColorToolButton" == senderName)
+        {
             m_toggle->setTrackColor(color);
             ui->trackColorLineEdit->setText(color.name(QColor::HexRgb));
         }

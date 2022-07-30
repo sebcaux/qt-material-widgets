@@ -22,7 +22,7 @@ protected slots:
 
 private:
     Ui::AvatarSettingsForm *const ui;
-    QtMaterialAvatar       *const m_avatar;
+    QtMaterialAvatar *const m_avatar;
 };
 
-#endif // AVATARSETTINGSEDITOR_H
+#endif  // AVATARSETTINGSEDITOR_H

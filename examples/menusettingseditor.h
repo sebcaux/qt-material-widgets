@@ -21,7 +21,7 @@ protected slots:
     void selectColor();
 
 private:
-    QtMaterialMenu       *const m_menu;
+    QtMaterialMenu *const m_menu;
 };
 
-#endif // MENUSETTINGSEDITOR_H
+#endif  // MENUSETTINGSEDITOR_H

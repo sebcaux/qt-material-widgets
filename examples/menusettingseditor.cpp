@@ -1,7 +1,7 @@
 #include "menusettingseditor.h"
 
-#include <QVBoxLayout>
 #include <QDebug>
+#include <QVBoxLayout>
 
 #include <qtmaterialmenu.h>
 

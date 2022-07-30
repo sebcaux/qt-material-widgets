@@ -21,7 +21,7 @@ protected slots:
 
 private:
     Ui::DrawerSettingsForm *const ui;
-    QtMaterialDrawer       *const m_drawer;
+    QtMaterialDrawer *const m_drawer;
 };
 
-#endif // DRAWERSETTINGSEDITOR_H
+#endif  // DRAWERSETTINGSEDITOR_H

@@ -3,8 +3,8 @@
 
 #include "settingseditor.h"
 
-#include <QWidget>
 #include "ui_appbarsettingsform.h"
+#include <QWidget>
 
 class QtMaterialAppBar;
 
@@ -23,7 +23,7 @@ protected slots:
 
 private:
     Ui::AppBarSettingsForm *const ui;
-    QtMaterialAppBar       *const m_appBar;
+    QtMaterialAppBar *const m_appBar;
 };
 
-#endif // APPBARSETTINGSEDITOR_H
+#endif  // APPBARSETTINGSEDITOR_H

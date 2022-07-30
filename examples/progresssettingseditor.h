@@ -22,7 +22,7 @@ protected slots:
 
 private:
     Ui::ProgressSettingsForm *const ui;
-    QtMaterialProgress       *const m_progress;
+    QtMaterialProgress *const m_progress;
 };
 
-#endif // PROGRESSSETTINGSEDITOR_H
+#endif  // PROGRESSSETTINGSEDITOR_H

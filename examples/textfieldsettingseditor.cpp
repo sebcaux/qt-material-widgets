@@ -1,7 +1,7 @@
 #include "textfieldsettingseditor.h"
 
-#include <QVBoxLayout>
 #include <QColorDialog>
+#include <QVBoxLayout>
 
 #include <qtmaterialtextfield.h>
 
@@ -68,19 +68,27 @@ void TextFieldSettingsEditor::updateWidget()
 void TextFieldSettingsEditor::selectColor()
 {
     QColorDialog dialog;
-    if (dialog.exec()) {
+    if (dialog.exec())
+    {
         QColor color = dialog.selectedColor();
         QString senderName = sender()->objectName();
-        if ("textColorToolButton" == senderName) {
+        if ("textColorToolButton" == senderName)
+        {
             m_textField->setTextColor(color);
             ui->textColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("inkColorToolButton" == senderName) {
+        }
+        else if ("inkColorToolButton" == senderName)
+        {
             m_textField->setInkColor(color);
             ui->inkColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("inputLineColorToolButton" == senderName) {
+        }
+        else if ("inputLineColorToolButton" == senderName)
+        {
             m_textField->setInputLineColor(color);
             ui->inputLineColorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("labelColorToolButton" == senderName) {
+        }
+        else if ("labelColorToolButton" == senderName)
+        {
             m_textField->setLabelColor(color);
             ui->labelColorLineEdit->setText(color.name(QColor::HexRgb));
         }
@@ -90,5 +98,5 @@ void TextFieldSettingsEditor::selectColor()
 
 void TextFieldSettingsEditor::setShowInputLine()
 {
-    m_textField->setShowInputLine( ui->inputLineCheckBox->isChecked() );
+    m_textField->setShowInputLine(ui->inputLineCheckBox->isChecked());
 }

@@ -22,7 +22,7 @@ protected slots:
 
 private:
     Ui::CheckBoxSettingsForm *const ui;
-    QtMaterialCheckable      *const m_checkBox;
+    QtMaterialCheckable *const m_checkBox;
 };
 
-#endif // CHECKBOXSETTINGSEDITOR_H
+#endif  // CHECKBOXSETTINGSEDITOR_H

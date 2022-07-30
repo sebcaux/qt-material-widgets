@@ -12,4 +12,4 @@ public:
     ~RaisedButtonSettingsEditor();
 };
 
-#endif // RAISEDBUTTONSETTINGSEDITOR_H
+#endif  // RAISEDBUTTONSETTINGSEDITOR_H

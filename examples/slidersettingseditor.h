@@ -21,7 +21,7 @@ protected slots:
 
 private:
     Ui::SliderSettingsForm *const ui;
-    QtMaterialSlider       *const m_slider;
+    QtMaterialSlider *const m_slider;
 };
 
-#endif // SLIDERSETTINGSEDITOR_H
+#endif  // SLIDERSETTINGSEDITOR_H

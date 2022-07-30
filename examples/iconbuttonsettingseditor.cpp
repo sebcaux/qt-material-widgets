@@ -2,8 +2,8 @@
 
 #include <QColorDialog>
 
-#include <qtmaterialiconbutton.h>
 #include <lib/qtmaterialtheme.h>
+#include <qtmaterialiconbutton.h>
 
 IconButtonSettingsEditor::IconButtonSettingsEditor(QWidget *parent)
     : SettingsEditor(parent),
@@ -43,13 +43,17 @@ void IconButtonSettingsEditor::updateWidget()
 void IconButtonSettingsEditor::selectColor()
 {
     QColorDialog dialog;
-    if (dialog.exec()) {
+    if (dialog.exec())
+    {
         QColor color = dialog.selectedColor();
         QString senderName = sender()->objectName();
-        if ("colorToolButton" == senderName) {
+        if ("colorToolButton" == senderName)
+        {
             m_button->setColor(color);
             ui->colorLineEdit->setText(color.name(QColor::HexRgb));
-        } else if ("disabledColorToolButton" == senderName) {
+        }
+        else if ("disabledColorToolButton" == senderName)
+        {
             m_button->setDisabledColor(color);
             ui->disabledColorLineEdit->setText(color.name(QColor::HexRgb));
         }

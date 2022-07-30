@@ -1,7 +1,7 @@
 #include "tabssettingseditor.h"
 
-#include <QVBoxLayout>
 #include <QColorDialog>
+#include <QVBoxLayout>
 
 #include <qtmaterialtabs.h>
 

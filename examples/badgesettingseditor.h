@@ -23,8 +23,8 @@ protected slots:
 
 private:
     Ui::BadgeSettingsForm *const ui;
-    QtMaterialAvatar      *const m_avatar;
-    QtMaterialBadge       *const m_badge;
+    QtMaterialAvatar *const m_avatar;
+    QtMaterialBadge *const m_badge;
 };
 
-#endif // BADGESETTINGSEDITOR_H
+#endif  // BADGESETTINGSEDITOR_H

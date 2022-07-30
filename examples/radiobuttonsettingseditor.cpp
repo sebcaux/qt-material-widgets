@@ -1,8 +1,8 @@
 #include "radiobuttonsettingseditor.h"
 
-#include <QVBoxLayout>
-#include <QRadioButton>
 #include <QColorDialog>
+#include <QRadioButton>
+#include <QVBoxLayout>
 
 #include <qtmaterialradiobutton.h>
 
@@ -63,14 +63,14 @@ void RadioButtonSettingsEditor::setupForm()
 {
     switch (m_radioButton1->labelPosition())
     {
-    case QtMaterialCheckable::LabelPositionLeft:
-        ui->labelPositionComboBox_2->setCurrentIndex(0);
-        break;
-    case QtMaterialCheckable::LabelPositionRight:
-        ui->labelPositionComboBox_2->setCurrentIndex(1);
-        break;
-    default:
-        break;
+        case QtMaterialCheckable::LabelPositionLeft:
+            ui->labelPositionComboBox_2->setCurrentIndex(0);
+            break;
+        case QtMaterialCheckable::LabelPositionRight:
+            ui->labelPositionComboBox_2->setCurrentIndex(1);
+            break;
+        default:
+            break;
     }
 
     ui->disabledCheckBox->setChecked(!m_radioButton1->isEnabled());
@@ -82,18 +82,18 @@ void RadioButtonSettingsEditor::updateWidget()
 {
     switch (ui->labelPositionComboBox_2->currentIndex())
     {
-    case 0:
-        m_radioButton1->setLabelPosition(QtMaterialCheckable::LabelPositionLeft);
-        m_radioButton2->setLabelPosition(QtMaterialCheckable::LabelPositionLeft);
-        m_radioButton3->setLabelPosition(QtMaterialCheckable::LabelPositionLeft);
-        break;
-    case 1:
-        m_radioButton1->setLabelPosition(QtMaterialCheckable::LabelPositionRight);
-        m_radioButton2->setLabelPosition(QtMaterialCheckable::LabelPositionRight);
-        m_radioButton3->setLabelPosition(QtMaterialCheckable::LabelPositionRight);
-        break;
-    default:
-        break;
+        case 0:
+            m_radioButton1->setLabelPosition(QtMaterialCheckable::LabelPositionLeft);
+            m_radioButton2->setLabelPosition(QtMaterialCheckable::LabelPositionLeft);
+            m_radioButton3->setLabelPosition(QtMaterialCheckable::LabelPositionLeft);
+            break;
+        case 1:
+            m_radioButton1->setLabelPosition(QtMaterialCheckable::LabelPositionRight);
+            m_radioButton2->setLabelPosition(QtMaterialCheckable::LabelPositionRight);
+            m_radioButton3->setLabelPosition(QtMaterialCheckable::LabelPositionRight);
+            break;
+        default:
+            break;
     }
 
     m_radioButton1->setDisabled(ui->disabledCheckBox->isChecked());
@@ -106,25 +106,33 @@ void RadioButtonSettingsEditor::updateWidget()
 void RadioButtonSettingsEditor::selectColor()
 {
     QColorDialog dialog;
-    if (dialog.exec()) {
+    if (dialog.exec())
+    {
         QColor color = dialog.selectedColor();
         QString senderName = sender()->objectName();
-        if ("textColorToolButton_2" == senderName) {
+        if ("textColorToolButton_2" == senderName)
+        {
             m_radioButton1->setTextColor(color);
             m_radioButton2->setTextColor(color);
             m_radioButton3->setTextColor(color);
             ui->textColorLineEdit_2->setText(color.name(QColor::HexRgb));
-        } else if ("disabledColorToolButton_2" == senderName) {
+        }
+        else if ("disabledColorToolButton_2" == senderName)
+        {
             m_radioButton1->setDisabledColor(color);
             m_radioButton2->setDisabledColor(color);
             m_radioButton3->setDisabledColor(color);
             ui->disabledColorLineEdit_2->setText(color.name(QColor::HexRgb));
-        } else if ("checkedColorToolButton_2" == senderName) {
+        }
+        else if ("checkedColorToolButton_2" == senderName)
+        {
             m_radioButton1->setCheckedColor(color);
             m_radioButton2->setCheckedColor(color);
             m_radioButton3->setCheckedColor(color);
             ui->checkedColorLineEdit_2->setText(color.name(QColor::HexRgb));
-        } else if ("uncheckedColorToolButton_2" == senderName) {
+        }
+        else if ("uncheckedColorToolButton_2" == senderName)
+        {
             m_radioButton1->setUncheckedColor(color);
             m_radioButton2->setUncheckedColor(color);
             m_radioButton3->setUncheckedColor(color);

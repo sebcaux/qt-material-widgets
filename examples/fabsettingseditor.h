@@ -22,7 +22,7 @@ protected slots:
 
 private:
     Ui::FloatingActionButtonSettingsForm *const ui;
-    QtMaterialFloatingActionButton       *const m_fab;
+    QtMaterialFloatingActionButton *const m_fab;
 };
 
-#endif // FABSETTINGSEDITOR_H
+#endif  // FABSETTINGSEDITOR_H

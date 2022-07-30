@@ -1,31 +1,31 @@
 #include "mainwindow.h"
 
 #include <QHBoxLayout>
-#include <QStackedLayout>
 #include <QListWidget>
 #include <QSplitter>
+#include <QStackedLayout>
 
+#include "appbarsettingseditor.h"
+#include "autocompletesettingseditor.h"
 #include "avatarsettingseditor.h"
 #include "badgesettingseditor.h"
 #include "checkboxsettingseditor.h"
-#include "fabsettingseditor.h"
-#include "raisedbuttonsettingseditor.h"
-#include "flatbuttonsettingseditor.h"
-#include "iconbuttonsettingseditor.h"
-#include "progresssettingseditor.h"
 #include "circularprogresssettingseditor.h"
-#include "slidersettingseditor.h"
-#include "radiobuttonsettingseditor.h"
-#include "togglesettingseditor.h"
-#include "textfieldsettingseditor.h"
-#include "tabssettingseditor.h"
-#include "snackbarsettingseditor.h"
 #include "dialogsettingseditor.h"
 #include "drawersettingseditor.h"
-#include "scrollbarsettingseditor.h"
-#include "appbarsettingseditor.h"
-#include "autocompletesettingseditor.h"
+#include "fabsettingseditor.h"
+#include "flatbuttonsettingseditor.h"
+#include "iconbuttonsettingseditor.h"
 #include "menusettingseditor.h"
+#include "progresssettingseditor.h"
+#include "radiobuttonsettingseditor.h"
+#include "raisedbuttonsettingseditor.h"
+#include "scrollbarsettingseditor.h"
+#include "slidersettingseditor.h"
+#include "snackbarsettingseditor.h"
+#include "tabssettingseditor.h"
+#include "textfieldsettingseditor.h"
+#include "togglesettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -111,13 +111,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     list->setCurrentRow(0);
 
-    QObject::connect(list,  &QListWidget::currentItemChanged,
-        [=](QListWidgetItem *current, QListWidgetItem *previous)
-    {
-        Q_UNUSED(current)
-        Q_UNUSED(previous)
-        stackLayout->setCurrentIndex(list->currentRow());
-    });
+    QObject::connect(list,
+                     &QListWidget::currentItemChanged,
+                     [=](QListWidgetItem *current, QListWidgetItem *previous)
+                     {
+                         Q_UNUSED(current)
+                         Q_UNUSED(previous)
+                         stackLayout->setCurrentIndex(list->currentRow());
+                     });
 }
 
 MainWindow::~MainWindow()
