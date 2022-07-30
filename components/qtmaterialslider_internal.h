@@ -1,8 +1,8 @@
 #ifndef QTMATERIALSLIDER_INTERNAL_H
 #define QTMATERIALSLIDER_INTERNAL_H
 
-#include <QStateMachine>
 #include "lib/qtmaterialoverlaywidget.h"
+#include <QStateMachine>
 
 class QtMaterialSlider;
 class QtMaterialSliderThumb;
@@ -13,9 +13,7 @@ class QtMaterialSliderStateMachine : public QStateMachine
     Q_OBJECT
 
 public:
-    QtMaterialSliderStateMachine(QtMaterialSlider *slider,
-                                 QtMaterialSliderThumb *thumb,
-                                 QtMaterialSliderTrack *track);
+    QtMaterialSliderStateMachine(QtMaterialSlider *slider, QtMaterialSliderThumb *thumb, QtMaterialSliderTrack *track);
     ~QtMaterialSliderStateMachine();
 
     void setupProperties();
@@ -23,19 +21,19 @@ public:
 private:
     Q_DISABLE_COPY(QtMaterialSliderStateMachine)
 
-    QtMaterialSlider      *const m_slider;
+    QtMaterialSlider *const m_slider;
     QtMaterialSliderThumb *const m_thumb;
     QtMaterialSliderTrack *const m_track;
-    QState                *const m_topState;
-    QState                *const m_fstState;
-    QState                *const m_sndState;
-    QState                *const m_inactiveState;
-    QState                *const m_focusState;
-    QState                *const m_slidingState;
-    QState                *const m_pulseOutState;
-    QState                *const m_pulseInState;
-    QState                *const m_minState;
-    QState                *const m_normalState;
+    QState *const m_topState;
+    QState *const m_fstState;
+    QState *const m_sndState;
+    QState *const m_inactiveState;
+    QState *const m_focusState;
+    QState *const m_slidingState;
+    QState *const m_pulseOutState;
+    QState *const m_pulseInState;
+    QState *const m_minState;
+    QState *const m_normalState;
 };
 
 class QtMaterialSliderThumb : public QtMaterialOverlayWidget
@@ -82,13 +80,13 @@ private:
     Q_DISABLE_COPY(QtMaterialSliderThumb)
 
     const QtMaterialSlider *const m_slider;
-    QColor                        m_borderColor;
-    QColor                        m_fillColor;
-    QColor                        m_haloColor;
-    qreal                         m_diameter;
-    qreal                         m_borderWidth;
-    qreal                         m_haloSize;
-    int                           m_offset;
+    QColor m_borderColor;
+    QColor m_fillColor;
+    QColor m_haloColor;
+    qreal m_diameter;
+    qreal m_borderWidth;
+    qreal m_haloSize;
+    int m_offset;
 };
 
 inline void QtMaterialSliderThumb::setDiameter(qreal diameter)
@@ -192,9 +190,9 @@ private:
     Q_DISABLE_COPY(QtMaterialSliderTrack)
 
     const QtMaterialSlider *const m_slider;
-    QtMaterialSliderThumb  *const m_thumb;
-    QColor                        m_fillColor;
-    int                           m_trackWidth;
+    QtMaterialSliderThumb *const m_thumb;
+    QColor m_fillColor;
+    int m_trackWidth;
 };
 
 inline void QtMaterialSliderTrack::setFillColor(const QColor &color)
@@ -219,4 +217,4 @@ int QtMaterialSliderTrack::trackWidth() const
     return m_trackWidth;
 }
 
-#endif // QTMATERIALSLIDER_INTERNAL_H
+#endif  // QTMATERIALSLIDER_INTERNAL_H

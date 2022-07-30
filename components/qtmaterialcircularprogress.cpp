@@ -1,11 +1,11 @@
 #include "qtmaterialcircularprogress.h"
+#include "lib/qtmaterialstyle.h"
+#include "qtmaterialcircularprogress_internal.h"
 #include "qtmaterialcircularprogress_p.h"
-#include <QPropertyAnimation>
-#include <QParallelAnimationGroup>
 #include <QPainter>
 #include <QPainterPath>
-#include "qtmaterialcircularprogress_internal.h"
-#include "lib/qtmaterialstyle.h"
+#include <QParallelAnimationGroup>
+#include <QPropertyAnimation>
 
 /*!
  *  \class QtMaterialCircularProgressPrivate
@@ -25,14 +25,13 @@ void QtMaterialCircularProgressPrivate::init()
 {
     Q_Q(QtMaterialCircularProgress);
 
-    delegate       = new QtMaterialCircularProgressDelegate(q);
-    progressType   = Material::IndeterminateProgress;
-    penWidth       = 6.25;
-    size           = 64;
+    delegate = new QtMaterialCircularProgressDelegate(q);
+    progressType = Material::IndeterminateProgress;
+    penWidth = 6.25;
+    size = 64;
     useThemeColors = true;
 
-    q->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
-                                 QSizePolicy::MinimumExpanding));
+    q->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
 
     QParallelAnimationGroup *group = new QParallelAnimationGroup(q);
     group->setLoopCount(-1);
@@ -111,7 +110,8 @@ void QtMaterialCircularProgress::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialCircularProgress);
 
-    if (d->useThemeColors == value) {
+    if (d->useThemeColors == value)
+    {
         return;
     }
 
@@ -172,9 +172,12 @@ QColor QtMaterialCircularProgress::color() const
 {
     Q_D(const QtMaterialCircularProgress);
 
-    if (d->useThemeColors || !d->color.isValid()) {
+    if (d->useThemeColors || !d->color.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("primary1");
-    } else {
+    }
+    else
+    {
         return d->color;
     }
 }
@@ -186,7 +189,7 @@ QSize QtMaterialCircularProgress::sizeHint() const
 {
     Q_D(const QtMaterialCircularProgress);
 
-    const qreal s = d->size+d->penWidth+8;
+    const qreal s = d->size + d->penWidth + 8;
     return QSize(s, s);
 }
 
@@ -209,14 +212,14 @@ void QtMaterialCircularProgress::paintEvent(QPaintEvent *event)
         pen.setWidthF(d->penWidth);
         pen.setColor(QtMaterialStyle::instance().themeColor("border"));
         painter.setPen(pen);
-        painter.drawLine(rect().center()-QPointF(20, 20), rect().center()+QPointF(20, 20));
-        painter.drawLine(rect().center()+QPointF(20, -20), rect().center()-QPointF(20, -20));
+        painter.drawLine(rect().center() - QPointF(20, 20), rect().center() + QPointF(20, 20));
+        painter.drawLine(rect().center() + QPointF(20, -20), rect().center() - QPointF(20, -20));
         return;
     }
 
     if (Material::IndeterminateProgress == d->progressType)
     {
-        painter.translate(width()/2, height()/2);
+        painter.translate(width() / 2, height() / 2);
         painter.rotate(d->delegate->angle());
     }
 
@@ -228,23 +231,23 @@ void QtMaterialCircularProgress::paintEvent(QPaintEvent *event)
     if (Material::IndeterminateProgress == d->progressType)
     {
         QVector<qreal> pattern;
-        pattern << d->delegate->dashLength()*d->size/50 << 30*d->size/50;
+        pattern << d->delegate->dashLength() * d->size / 50 << 30 * d->size / 50;
 
-        pen.setDashOffset(d->delegate->dashOffset()*d->size/50);
+        pen.setDashOffset(d->delegate->dashOffset() * d->size / 50);
         pen.setDashPattern(pattern);
 
         painter.setPen(pen);
 
-        painter.drawEllipse(QPoint(0, 0), d->size/2, d->size/2);
+        painter.drawEllipse(QPoint(0, 0), d->size / 2, d->size / 2);
     }
     else
     {
         painter.setPen(pen);
 
-        const qreal x = (width()-d->size)/2;
-        const qreal y = (height()-d->size)/2;
+        const qreal x = (width() - d->size) / 2;
+        const qreal y = (height() - d->size) / 2;
 
-        const qreal a = 360*(value()-minimum())/(maximum()-minimum());
+        const qreal a = 360 * (value() - minimum()) / (maximum() - minimum());
 
         QPainterPath path;
         path.arcMoveTo(x, y, d->size, d->size, 0);

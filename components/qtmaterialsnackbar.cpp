@@ -1,11 +1,11 @@
 #include "qtmaterialsnackbar.h"
-#include "qtmaterialsnackbar_p.h"
-#include <QtWidgets/QApplication>
-#include <QPainter>
-#include "qtmaterialsnackbar_internal.h"
-#include "lib/qtmaterialstyle.h"
 #include "lib/qtmaterialstatetransition.h"
+#include "lib/qtmaterialstyle.h"
+#include "qtmaterialsnackbar_internal.h"
+#include "qtmaterialsnackbar_p.h"
 #include <QDebug>
+#include <QPainter>
+#include <QtWidgets/QApplication>
 
 /*!
  *  \class QtMaterialSnackbarPrivate
@@ -25,11 +25,11 @@ void QtMaterialSnackbarPrivate::init()
 {
     Q_Q(QtMaterialSnackbar);
 
-    stateMachine   = new QtMaterialSnackbarStateMachine(q);
-    bgOpacity      = 0.9;
-    duration       = 3000;
-    boxWidth       = 300;
-    clickDismiss   = false;
+    stateMachine = new QtMaterialSnackbarStateMachine(q);
+    bgOpacity = 0.9;
+    duration = 3000;
+    boxWidth = 300;
+    clickDismiss = false;
     useThemeColors = true;
 
     q->setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -75,7 +75,8 @@ void QtMaterialSnackbar::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialSnackbar);
 
-    if (d->useThemeColors == value) {
+    if (d->useThemeColors == value)
+    {
         return;
     }
 
@@ -104,9 +105,12 @@ QColor QtMaterialSnackbar::backgroundColor() const
 {
     Q_D(const QtMaterialSnackbar);
 
-    if (d->useThemeColors || !d->backgroundColor.isValid()) {
+    if (d->useThemeColors || !d->backgroundColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("text");
-    } else {
+    }
+    else
+    {
         return d->backgroundColor;
     }
 }
@@ -140,9 +144,12 @@ QColor QtMaterialSnackbar::textColor() const
 {
     Q_D(const QtMaterialSnackbar);
 
-    if (d->useThemeColors || !d->textColor.isValid()) {
+    if (d->useThemeColors || !d->textColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("canvas");
-    } else {
+    }
+    else
+    {
         return d->textColor;
     }
 }
@@ -203,9 +210,12 @@ void QtMaterialSnackbar::addInstantMessage(const QString &message)
 {
     Q_D(QtMaterialSnackbar);
 
-    if (d->messages.isEmpty()) {
+    if (d->messages.isEmpty())
+    {
         d->messages.push_back(message);
-    } else {
+    }
+    else
+    {
         d->messages.insert(1, message);
     }
 
@@ -216,15 +226,19 @@ void QtMaterialSnackbar::dequeue()
 {
     Q_D(QtMaterialSnackbar);
 
-    if (d->messages.isEmpty()) {
+    if (d->messages.isEmpty())
+    {
         return;
     }
 
     d->messages.removeFirst();
 
-    if (!d->messages.isEmpty()) {
+    if (!d->messages.isEmpty())
+    {
         d->stateMachine->postEvent(new QtMaterialStateTransitionEvent(SnackbarNextTransition));
-    } else {
+    }
+    else
+    {
         d->stateMachine->postEvent(new QtMaterialStateTransitionEvent(SnackbarWaitTransition));
     }
 }
@@ -235,7 +249,8 @@ void QtMaterialSnackbar::paintEvent(QPaintEvent *event)
 
     Q_D(QtMaterialSnackbar);
 
-    if (d->messages.isEmpty()) {
+    if (d->messages.isEmpty())
+    {
         return;
     }
 
@@ -258,10 +273,9 @@ void QtMaterialSnackbar::paintEvent(QPaintEvent *event)
     painter.setPen(Qt::NoPen);
     r = br.united(r).adjusted(-10, -10, 10, 20);
 
-    const qreal s = 1-d->stateMachine->offset();
+    const qreal s = 1 - d->stateMachine->offset();
 
-    painter.translate((width()-(r.width()-20))/2,
-                      height()+10-s*(r.height()));
+    painter.translate((width() - (r.width() - 20)) / 2, height() + 10 - s * (r.height()));
 
     br.moveCenter(r.center());
     painter.drawRoundedRect(r.adjusted(0, 0, 0, 3), 3, 3);

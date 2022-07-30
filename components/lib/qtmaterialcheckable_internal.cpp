@@ -1,8 +1,8 @@
 #include "lib/qtmaterialcheckable_internal.h"
-#include <QPainter>
-#include <QIcon>
-#include <QTransform>
 #include "lib/qtmaterialcheckable.h"
+#include <QIcon>
+#include <QPainter>
+#include <QTransform>
 
 /*!
  *  \class QtMaterialCheckableIcon
@@ -43,13 +43,16 @@ void QtMaterialCheckableIcon::paintEvent(QPaintEvent *event)
 
     if (!pixmap.isNull())
     {
-        const qreal p = static_cast<qreal>((height())-m_iconSize)/2;
-        const qreal z = m_iconSize/24;
+        const qreal p = static_cast<qreal>((height()) - m_iconSize) / 2;
+        const qreal z = m_iconSize / 24;
 
         QTransform t;
-        if (QtMaterialCheckable::LabelPositionLeft == m_checkable->labelPosition()) {
-            t.translate(p+width()-42, p);
-        } else {
+        if (QtMaterialCheckable::LabelPositionLeft == m_checkable->labelPosition())
+        {
+            t.translate(p + width() - 42, p);
+        }
+        else
+        {
             t.translate(p, p);
         }
         t.scale(z, z);

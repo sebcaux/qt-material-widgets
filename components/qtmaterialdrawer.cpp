@@ -1,14 +1,14 @@
 #include "qtmaterialdrawer.h"
+#include "qtmaterialdrawer_internal.h"
 #include "qtmaterialdrawer_p.h"
-#include <QPainter>
-#include <QEvent>
 #include <QDebug>
+#include <QEvent>
+#include <QLinearGradient>
 #include <QMouseEvent>
+#include <QPainter>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLayout>
-#include <QLinearGradient>
 #include <QtWidgets/QVBoxLayout>
-#include "qtmaterialdrawer_internal.h"
 
 /*!
  *  \class QtMaterialDrawerPrivate
@@ -37,20 +37,20 @@ void QtMaterialDrawerPrivate::init()
 {
     Q_Q(QtMaterialDrawer);
 
-    widget       = new QtMaterialDrawerWidget;
+    widget = new QtMaterialDrawerWidget;
     stateMachine = new QtMaterialDrawerStateMachine(widget, q);
-    window       = new QWidget;
-    width        = 250;
+    window = new QWidget;
+    width = 250;
     clickToClose = false;
-    autoRaise    = true;
-    closed       = true;
-    overlay      = false;
+    autoRaise = true;
+    closed = true;
+    overlay = false;
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(window);
 
     widget->setLayout(layout);
-    widget->setFixedWidth(width+16);
+    widget->setFixedWidth(width + 16);
 
     widget->setParent(q);
 
@@ -79,7 +79,7 @@ void QtMaterialDrawer::setDrawerWidth(int width)
 
     d->width = width;
     d->stateMachine->updatePropertyAssignments();
-    d->widget->setFixedWidth(width+16);
+    d->widget->setFixedWidth(width + 16);
 }
 
 int QtMaterialDrawer::drawerWidth() const
@@ -152,7 +152,8 @@ void QtMaterialDrawer::openDrawer()
 
     emit d->stateMachine->signalOpen();
 
-    if (d->autoRaise) {
+    if (d->autoRaise)
+    {
         raise();
     }
     setAttribute(Qt::WA_TransparentForMouseEvents, false);
@@ -165,7 +166,8 @@ void QtMaterialDrawer::closeDrawer()
 
     emit d->stateMachine->signalClose();
 
-    if (d->overlay) {
+    if (d->overlay)
+    {
         setAttribute(Qt::WA_TransparentForMouseEvents);
         setAttribute(Qt::WA_NoSystemBackground);
     }
@@ -177,14 +179,15 @@ bool QtMaterialDrawer::event(QEvent *event)
 
     switch (event->type())
     {
-    case QEvent::Move:
-    case QEvent::Resize:
-        if (!d->overlay) {
-            setMask(QRegion(d->widget->rect()));
-        }
-        break;
-    default:
-        break;
+        case QEvent::Move:
+        case QEvent::Resize:
+            if (!d->overlay)
+            {
+                setMask(QRegion(d->widget->rect()));
+            }
+            break;
+        default:
+            break;
     }
     return QtMaterialOverlayWidget::event(event);
 }
@@ -195,26 +198,31 @@ bool QtMaterialDrawer::eventFilter(QObject *obj, QEvent *event)
 
     switch (event->type())
     {
-    case QEvent::MouseButtonPress: {
-        QMouseEvent *mouseEvent;
-        if ((mouseEvent = static_cast<QMouseEvent *>(event))) {
-            const bool canClose = d->clickToClose || d->overlay;
-            if (!d->widget->geometry().contains(mouseEvent->pos()) && canClose) {
-                closeDrawer();
+        case QEvent::MouseButtonPress:
+        {
+            QMouseEvent *mouseEvent;
+            if ((mouseEvent = static_cast<QMouseEvent *>(event)))
+            {
+                const bool canClose = d->clickToClose || d->overlay;
+                if (!d->widget->geometry().contains(mouseEvent->pos()) && canClose)
+                {
+                    closeDrawer();
+                }
             }
+            break;
         }
-        break;
-    }
-    case QEvent::Move:
-    case QEvent::Resize: {
-        QLayout *lw = d->widget->layout();
-        if (lw && 16 != lw->contentsMargins().right()) {
-            lw->setContentsMargins(0, 0, 16, 0);
+        case QEvent::Move:
+        case QEvent::Resize:
+        {
+            QLayout *lw = d->widget->layout();
+            if (lw && 16 != lw->contentsMargins().right())
+            {
+                lw->setContentsMargins(0, 0, 16, 0);
+            }
+            break;
         }
-        break;
-    }
-    default:
-        break;
+        default:
+            break;
     }
     return QtMaterialOverlayWidget::eventFilter(obj, event);
 }
@@ -225,7 +233,8 @@ void QtMaterialDrawer::paintEvent(QPaintEvent *event)
 
     Q_D(QtMaterialDrawer);
 
-    if (!d->overlay || d->stateMachine->isInClosedState()) {
+    if (!d->overlay || d->stateMachine->isInClosedState())
+    {
         return;
     }
     QPainter painter(this);

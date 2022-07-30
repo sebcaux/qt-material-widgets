@@ -1,8 +1,8 @@
 #include "qtmaterialtabs.h"
+#include "lib/qtmaterialstyle.h"
+#include "qtmaterialtabs_internal.h"
 #include "qtmaterialtabs_p.h"
 #include <QtWidgets/QHBoxLayout>
-#include "qtmaterialtabs_internal.h"
-#include "lib/qtmaterialstyle.h"
 
 /*!
  *  \QtMaterialTabsPrivate
@@ -22,11 +22,11 @@ void QtMaterialTabsPrivate::QtMaterialTabsPrivate::init()
 {
     Q_Q(QtMaterialTabs);
 
-    inkBar         = new QtMaterialTabsInkBar(q);
-    tabLayout      = new QHBoxLayout;
-    rippleStyle    = Material::CenteredRipple;
-    tab            = -1;
-    showHalo       = true;
+    inkBar = new QtMaterialTabsInkBar(q);
+    tabLayout = new QHBoxLayout;
+    rippleStyle = Material::CenteredRipple;
+    tab = -1;
+    showHalo = true;
     useThemeColors = true;
 
     q->setLayout(tabLayout);
@@ -110,9 +110,12 @@ QColor QtMaterialTabs::inkColor() const
 {
     Q_D(const QtMaterialTabs);
 
-    if (d->useThemeColors || !d->inkColor.isValid()) {
+    if (d->useThemeColors || !d->inkColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("accent1");
-    } else {
+    }
+    else
+    {
         return d->inkColor;
     }
 }
@@ -132,9 +135,12 @@ QColor QtMaterialTabs::backgroundColor() const
 {
     Q_D(const QtMaterialTabs);
 
-    if (d->useThemeColors || !d->backgroundColor.isValid()) {
+    if (d->useThemeColors || !d->backgroundColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("primary1");
-    } else {
+    }
+    else
+    {
         return d->backgroundColor;
     }
 }
@@ -154,9 +160,12 @@ QColor QtMaterialTabs::textColor() const
 {
     Q_D(const QtMaterialTabs);
 
-    if (d->useThemeColors || !d->textColor.isValid()) {
+    if (d->useThemeColors || !d->textColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("canvas");
-    } else {
+    }
+    else
+    {
         return d->textColor;
     }
 }
@@ -189,14 +198,16 @@ void QtMaterialTabs::addTab(const QString &text, const QIcon &icon)
     tab->setHaloVisible(isHaloVisible());
     tab->setRippleStyle(rippleStyle());
 
-    if (!icon.isNull()) {
+    if (!icon.isNull())
+    {
         tab->setIcon(icon);
         tab->setIconSize(QSize(22, 22));
     }
 
     d->tabLayout->addWidget(tab);
 
-    if (-1 == d->tab) {
+    if (-1 == d->tab)
+    {
         d->tab = 0;
         d->inkBar->refreshGeometry();
         d->inkBar->raise();
@@ -217,9 +228,11 @@ void QtMaterialTabs::setTabActive(int index, bool active)
 
     QtMaterialTab *tab;
 
-    if (index > -1) {
+    if (index > -1)
+    {
         tab = static_cast<QtMaterialTab *>(d->tabLayout->itemAt(index)->widget());
-        if (tab) {
+        if (tab)
+        {
             tab->setActive(active);
         }
     }
@@ -230,9 +243,11 @@ void QtMaterialTabs::updateTabs()
     Q_D(QtMaterialTabs);
 
     QtMaterialTab *tab;
-    for (int i = 0; i < d->tabLayout->count(); ++i) {
+    for (int i = 0; i < d->tabLayout->count(); ++i)
+    {
         QLayoutItem *item = d->tabLayout->itemAt(i);
-        if ((tab = static_cast<QtMaterialTab *>(item->widget()))) {
+        if ((tab = static_cast<QtMaterialTab *>(item->widget())))
+        {
             tab->setRippleStyle(d->rippleStyle);
             tab->setHaloVisible(d->showHalo);
             tab->setBackgroundColor(backgroundColor());

@@ -1,8 +1,8 @@
 #include "qtmaterialappbar.h"
-#include "qtmaterialappbar_p.h"
-#include <QtWidgets/QGraphicsDropShadowEffect>
-#include <QPainter>
 #include "lib/qtmaterialstyle.h"
+#include "qtmaterialappbar_p.h"
+#include <QPainter>
+#include <QtWidgets/QGraphicsDropShadowEffect>
 
 /*!
  *  \class QtMaterialAppBarPrivate
@@ -77,7 +77,8 @@ void QtMaterialAppBar::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialAppBar);
 
-    if (d->useThemeColors == value) {
+    if (d->useThemeColors == value)
+    {
         return;
     }
 
@@ -98,7 +99,8 @@ void QtMaterialAppBar::setForegroundColor(const QColor &color)
 
     d->foregroundColor = color;
 
-    if (d->useThemeColors == true) {
+    if (d->useThemeColors == true)
+    {
         d->useThemeColors = false;
     }
     update();
@@ -108,9 +110,12 @@ QColor QtMaterialAppBar::foregroundColor() const
 {
     Q_D(const QtMaterialAppBar);
 
-    if (d->useThemeColors || !d->foregroundColor.isValid()) {
+    if (d->useThemeColors || !d->foregroundColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("primary1");
-    } else {
+    }
+    else
+    {
         return d->foregroundColor;
     }
 }
@@ -121,7 +126,8 @@ void QtMaterialAppBar::setBackgroundColor(const QColor &color)
 
     d->backgroundColor = color;
 
-    if (d->useThemeColors == true) {
+    if (d->useThemeColors == true)
+    {
         d->useThemeColors = false;
     }
     update();
@@ -131,9 +137,12 @@ QColor QtMaterialAppBar::backgroundColor() const
 {
     Q_D(const QtMaterialAppBar);
 
-    if (d->useThemeColors || !d->backgroundColor.isValid()) {
+    if (d->useThemeColors || !d->backgroundColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("primary1");
-    } else {
+    }
+    else
+    {
         return d->backgroundColor;
     }
 }

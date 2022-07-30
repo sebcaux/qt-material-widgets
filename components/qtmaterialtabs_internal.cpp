@@ -1,11 +1,11 @@
 #include "qtmaterialtabs_internal.h"
+#include "qtmaterialtabs.h"
+#include <QDebug>
+#include <QEvent>
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QtWidgets/QLayout>
 #include <QtWidgets/QLayoutItem>
-#include <QEvent>
-#include "qtmaterialtabs.h"
-#include <QDebug>
 
 /*!
  *  \class QtMaterialTabsInkBar
@@ -42,14 +42,17 @@ void QtMaterialTabsInkBar::refreshGeometry()
     if (item)
     {
         const QRect r(item->geometry());
-        const qreal s = 1-m_tween;
+        const qreal s = 1 - m_tween;
 
-        if (QAbstractAnimation::Running != m_animation->state()) {
-            m_geometry = QRect(r.left(), r.bottom()-1, r.width(), 2);
-        } else {
-            const qreal left = m_previousGeometry.left()*s + r.left()*m_tween;
-            const qreal width = m_previousGeometry.width()*s + r.width()*m_tween;
-            m_geometry = QRect(left, r.bottom()-1, width, 2);
+        if (QAbstractAnimation::Running != m_animation->state())
+        {
+            m_geometry = QRect(r.left(), r.bottom() - 1, r.width(), 2);
+        }
+        else
+        {
+            const qreal left = m_previousGeometry.left() * s + r.left() * m_tween;
+            const qreal width = m_previousGeometry.width() * s + r.width() * m_tween;
+            m_geometry = QRect(left, r.bottom() - 1, width, 2);
         }
         m_tabs->update();
     }
@@ -71,14 +74,14 @@ bool QtMaterialTabsInkBar::eventFilter(QObject *obj, QEvent *event)
 {
     switch (event->type())
     {
-    case QEvent::Move:
-    case QEvent::Resize:
-    {
-        refreshGeometry();
-        break;
-    }
-    default:
-        break;
+        case QEvent::Move:
+        case QEvent::Resize:
+        {
+            refreshGeometry();
+            break;
+        }
+        default:
+            break;
     }
     return QtMaterialOverlayWidget::eventFilter(obj, event);
 }
@@ -125,10 +128,13 @@ QtMaterialTab::~QtMaterialTab()
 
 QSize QtMaterialTab::sizeHint() const
 {
-    if (icon().isNull()) {
+    if (icon().isNull())
+    {
         return QtMaterialFlatButton::sizeHint();
-    } else {
-        return QSize(40, iconSize().height()+46);
+    }
+    else
+    {
+        return QSize(40, iconSize().height() + 46);
     }
 }
 
@@ -141,21 +147,22 @@ void QtMaterialTab::paintForeground(QPainter *painter)
 {
     painter->setPen(foregroundColor());
 
-    if (!icon().isNull()) {
+    if (!icon().isNull())
+    {
         painter->translate(0, 12);
     }
 
     QSize textSize(fontMetrics().size(Qt::TextSingleLine, text()));
-    QSize base(size()-textSize);
+    QSize base(size() - textSize);
 
-    QRect textGeometry(QPoint(base.width(), base.height())/2, textSize);
+    QRect textGeometry(QPoint(base.width(), base.height()) / 2, textSize);
 
     painter->drawText(textGeometry, Qt::AlignCenter, text());
 
     if (!icon().isNull())
     {
         const QSize &size = iconSize();
-        QRect iconRect(QPoint((width()-size.width())/2, 0), size);
+        QRect iconRect(QPoint((width() - size.width()) / 2, 0), size);
 
         QPixmap pixmap = icon().pixmap(iconSize());
         QPainter icon(&pixmap);
@@ -166,7 +173,8 @@ void QtMaterialTab::paintForeground(QPainter *painter)
 
     if (!m_active)
     {
-        if (!icon().isNull()) {
+        if (!icon().isNull())
+        {
             painter->translate(0, -12);
         }
         QBrush overlay;

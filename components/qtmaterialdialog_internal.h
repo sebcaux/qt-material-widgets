@@ -13,17 +13,15 @@ class QtMaterialDialogProxy : public QWidget
 
     Q_PROPERTY(qreal opacity WRITE setOpacity READ opacity)
 
-    enum TransparencyMode {
+    enum TransparencyMode
+    {
         Transparent,
         SemiTransparent,
         Opaque,
     };
 
 public:
-    QtMaterialDialogProxy(QtMaterialDialogWindow *source,
-                          QStackedLayout *layout,
-                          QtMaterialDialog *dialog,
-                          QWidget *parent = 0);
+    QtMaterialDialogProxy(QtMaterialDialogWindow *source, QStackedLayout *layout, QtMaterialDialog *dialog, QWidget *parent = 0);
     ~QtMaterialDialogProxy();
 
     void setOpacity(qreal opacity);
@@ -43,10 +41,10 @@ private:
     Q_DISABLE_COPY(QtMaterialDialogProxy)
 
     QtMaterialDialogWindow *const m_source;
-    QStackedLayout         *const m_layout;
-    QtMaterialDialog       *const m_dialog;
-    qreal                         m_opacity;
-    TransparencyMode              m_mode;
+    QStackedLayout *const m_layout;
+    QtMaterialDialog *const m_dialog;
+    qreal m_opacity;
+    TransparencyMode m_mode;
 };
 
 inline qreal QtMaterialDialogProxy::opacity() const
@@ -76,4 +74,4 @@ private:
     QtMaterialDialog *const m_dialog;
 };
 
-#endif // QTMATERIALDIALOG_INTERNAL_H
+#endif  // QTMATERIALDIALOG_INTERNAL_H

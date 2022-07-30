@@ -1,10 +1,10 @@
 #include "qtmaterialflatbutton_internal.h"
-#include <QEventTransition>
-#include <QPropertyAnimation>
-#include <QFocusEvent>
-#include <QSequentialAnimationGroup>
-#include "qtmaterialflatbutton.h"
 #include "lib/qtmaterialstatetransition.h"
+#include "qtmaterialflatbutton.h"
+#include <QEventTransition>
+#include <QFocusEvent>
+#include <QPropertyAnimation>
+#include <QSequentialAnimationGroup>
 
 /*!
  *  \class QtMaterialFlatButtonStateMachine
@@ -40,8 +40,7 @@ QtMaterialFlatButtonStateMachine::QtMaterialFlatButtonStateMachine(QtMaterialFla
     addState(m_topLevelState);
     setInitialState(m_topLevelState);
 
-    m_checkableState->setInitialState(parent->isChecked() ? m_checkedState
-                                                          : m_uncheckedState);
+    m_checkableState->setInitialState(parent->isChecked() ? m_checkedState : m_uncheckedState);
     QtMaterialStateTransition *transition;
     QPropertyAnimation *animation;
 
@@ -149,9 +148,12 @@ void QtMaterialFlatButtonStateMachine::setupProperties()
 {
     QColor overlayColor;
 
-    if (Qt::TransparentMode == m_button->backgroundMode()) {
+    if (Qt::TransparentMode == m_button->backgroundMode())
+    {
         overlayColor = m_button->backgroundColor();
-    } else {
+    }
+    else
+    {
         overlayColor = m_button->foregroundColor();
     }
 
@@ -176,22 +178,27 @@ void QtMaterialFlatButtonStateMachine::setupProperties()
 void QtMaterialFlatButtonStateMachine::updateCheckedStatus()
 {
     const bool checked = m_button->isChecked();
-    if (m_wasChecked != checked) {
+    if (m_wasChecked != checked)
+    {
         m_wasChecked = checked;
-        if (checked) {
+        if (checked)
+        {
             postEvent(new QtMaterialStateTransitionEvent(FlatButtonCheckedTransition));
-        } else {
+        }
+        else
+        {
             postEvent(new QtMaterialStateTransitionEvent(FlatButtonUncheckedTransition));
         }
     }
 }
 
-bool QtMaterialFlatButtonStateMachine::eventFilter(QObject *watched,
-                                                   QEvent  *event)
+bool QtMaterialFlatButtonStateMachine::eventFilter(QObject *watched, QEvent *event)
 {
-    if (QEvent::FocusIn == event->type()) {
+    if (QEvent::FocusIn == event->type())
+    {
         QFocusEvent *focusEvent = static_cast<QFocusEvent *>(event);
-        if (focusEvent && Qt::MouseFocusReason == focusEvent->reason()) {
+        if (focusEvent && Qt::MouseFocusReason == focusEvent->reason())
+        {
             postEvent(new QtMaterialStateTransitionEvent(FlatButtonPressedTransition));
             return true;
         }
@@ -199,17 +206,12 @@ bool QtMaterialFlatButtonStateMachine::eventFilter(QObject *watched,
     return QStateMachine::eventFilter(watched, event);
 }
 
-void QtMaterialFlatButtonStateMachine::addTransition(QObject *object,
-                                                     QEvent::Type eventType,
-                                                     QState *fromState,
-                                                     QState *toState)
+void QtMaterialFlatButtonStateMachine::addTransition(QObject *object, QEvent::Type eventType, QState *fromState, QState *toState)
 {
     addTransition(new QEventTransition(object, eventType), fromState, toState);
 }
 
-void QtMaterialFlatButtonStateMachine::addTransition(QAbstractTransition *transition,
-                                                     QState *fromState,
-                                                     QState *toState)
+void QtMaterialFlatButtonStateMachine::addTransition(QAbstractTransition *transition, QState *fromState, QState *toState)
 {
     transition->setTargetState(toState);
 

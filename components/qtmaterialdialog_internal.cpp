@@ -1,20 +1,16 @@
 #include "qtmaterialdialog_internal.h"
+#include "qtmaterialdialog.h"
+#include <QEvent>
 #include <QPainter>
 #include <QPixmap>
-#include <QEvent>
 #include <QtWidgets/QStackedLayout>
-#include "qtmaterialdialog.h"
 
 /*!
  *  \class QtMaterialDialogProxy
  *  \internal
  */
 
-QtMaterialDialogProxy::QtMaterialDialogProxy(
-        QtMaterialDialogWindow *source,
-        QStackedLayout         *layout,
-        QtMaterialDialog       *dialog,
-        QWidget                *parent)
+QtMaterialDialogProxy::QtMaterialDialogProxy(QtMaterialDialogWindow *source, QStackedLayout *layout, QtMaterialDialog *dialog, QWidget *parent)
     : QWidget(parent),
       m_source(source),
       m_layout(layout),
@@ -35,7 +31,6 @@ void QtMaterialDialogProxy::setOpacity(qreal opacity)
     update();
     m_dialog->update();
 }
-
 
 void QtMaterialDialogProxy::makeOpaque()
 {
@@ -62,7 +57,8 @@ bool QtMaterialDialogProxy::event(QEvent *event)
 {
     const QEvent::Type type = event->type();
 
-    if (QEvent::Move == type || QEvent::Resize == type) {
+    if (QEvent::Move == type || QEvent::Resize == type)
+    {
         m_source->setGeometry(geometry());
     }
     return QWidget::event(event);
@@ -74,9 +70,12 @@ void QtMaterialDialogProxy::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
 
-    if (Transparent == m_mode) {
+    if (Transparent == m_mode)
+    {
         return;
-    } else if (Opaque != m_mode) {
+    }
+    else if (Opaque != m_mode)
+    {
         painter.setOpacity(m_opacity);
     }
     QPixmap pm = m_source->grab(m_source->rect());
@@ -88,9 +87,7 @@ void QtMaterialDialogProxy::paintEvent(QPaintEvent *event)
  *  \internal
  */
 
-QtMaterialDialogWindow::QtMaterialDialogWindow(
-        QtMaterialDialog *dialog,
-        QWidget          *parent)
+QtMaterialDialogWindow::QtMaterialDialogWindow(QtMaterialDialog *dialog, QWidget *parent)
     : QWidget(parent),
       m_dialog(dialog)
 {

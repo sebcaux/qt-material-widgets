@@ -1,9 +1,9 @@
 #include "qtmaterialraisedbutton.h"
 #include "qtmaterialraisedbutton_p.h"
+#include <QEventTransition>
+#include <QPropertyAnimation>
 #include <QStateMachine>
 #include <QtWidgets/QGraphicsDropShadowEffect>
-#include <QPropertyAnimation>
-#include <QEventTransition>
 
 /*!
  *  \class QtMaterialRaisedButtonPrivate
@@ -33,9 +33,9 @@ void QtMaterialRaisedButtonPrivate::init()
     Q_Q(QtMaterialRaisedButton);
 
     shadowStateMachine = new QStateMachine(q);
-    normalState        = new QState;
-    pressedState       = new QState;
-    effect             = new QGraphicsDropShadowEffect;
+    normalState = new QState;
+    pressedState = new QState;
+    effect = new QGraphicsDropShadowEffect;
 
     effect->setBlurRadius(7);
     effect->setOffset(QPointF(0, 2));
@@ -115,11 +115,15 @@ bool QtMaterialRaisedButton::event(QEvent *event)
 {
     Q_D(QtMaterialRaisedButton);
 
-    if (QEvent::EnabledChange == event->type()) {
-        if (isEnabled()) {
+    if (QEvent::EnabledChange == event->type())
+    {
+        if (isEnabled())
+        {
             d->shadowStateMachine->start();
             d->effect->setEnabled(true);
-        } else {
+        }
+        else
+        {
             d->shadowStateMachine->stop();
             d->effect->setEnabled(false);
         }

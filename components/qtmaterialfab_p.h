@@ -11,12 +11,14 @@ class QtMaterialFloatingActionButtonPrivate : public QtMaterialRaisedButtonPriva
     Q_DECLARE_PUBLIC(QtMaterialFloatingActionButton)
 
 public:
-    enum {
+    enum
+    {
         DefaultDiameter = 56,
         MiniDiameter = 40
     };
 
-    enum {
+    enum
+    {
         DefaultIconSize = 24,
         MiniIconSize = 18
     };
@@ -32,9 +34,9 @@ public:
     inline int iconSize() const;
 
     Qt::Corner corner;
-    bool       mini;
-    int        offsX;
-    int        offsY;
+    bool mini;
+    int offsX;
+    int offsY;
 };
 
 inline int QtMaterialFloatingActionButtonPrivate::diameter() const
@@ -47,4 +49,4 @@ inline int QtMaterialFloatingActionButtonPrivate::iconSize() const
     return mini ? MiniIconSize : DefaultIconSize;
 }
 
-#endif // QTMATERIALFAB_P_H
+#endif  // QTMATERIALFAB_P_H

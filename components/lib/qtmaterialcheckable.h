@@ -10,7 +10,8 @@ class QtMaterialCheckable : public QAbstractButton
     Q_OBJECT
 
 public:
-    enum LabelPosition {
+    enum LabelPosition
+    {
         LabelPositionLeft,
         LabelPositionRight,
     };
@@ -61,4 +62,4 @@ private:
     Q_DECLARE_PRIVATE(QtMaterialCheckable)
 };
 
-#endif // QTMATERIALCHECKABLE_H
+#endif  // QTMATERIALCHECKABLE_H

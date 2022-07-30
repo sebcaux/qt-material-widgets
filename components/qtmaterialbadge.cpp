@@ -1,7 +1,7 @@
 #include "qtmaterialbadge.h"
+#include "lib/qtmaterialstyle.h"
 #include "qtmaterialbadge_p.h"
 #include <QPainter>
-#include "lib/qtmaterialstyle.h"
 
 /*!
  *  \class QtMaterialBadgePrivate
@@ -30,9 +30,9 @@ void QtMaterialBadgePrivate::init()
 {
     Q_Q(QtMaterialBadge);
 
-    x              = 0;
-    y              = 0;
-    padding        = 10;
+    x = 0;
+    y = 0;
+    padding = 10;
     useThemeColors = true;
 
     q->setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -82,7 +82,8 @@ void QtMaterialBadge::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialBadge);
 
-    if (d->useThemeColors == value) {
+    if (d->useThemeColors == value)
+    {
         return;
     }
 
@@ -111,9 +112,12 @@ QColor QtMaterialBadge::textColor() const
 {
     Q_D(const QtMaterialBadge);
 
-    if (d->useThemeColors || !d->textColor.isValid()) {
+    if (d->useThemeColors || !d->textColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("canvas");
-    } else {
+    }
+    else
+    {
         return d->textColor;
     }
 }
@@ -132,9 +136,12 @@ QColor QtMaterialBadge::backgroundColor() const
 {
     Q_D(const QtMaterialBadge);
 
-    if (d->useThemeColors || !d->backgroundColor.isValid()) {
+    if (d->useThemeColors || !d->backgroundColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("accent1");
-    } else {
+    }
+    else
+    {
         return d->backgroundColor;
     }
 }
@@ -196,7 +203,7 @@ qreal QtMaterialBadge::relativeYPosition() const
 QSize QtMaterialBadge::sizeHint() const
 {
     const int s = getDiameter();
-    return QSize(s+4, s+4);
+    return QSize(s + 4, s + 4);
 }
 
 void QtMaterialBadge::setIcon(const QIcon &icon)
@@ -220,7 +227,8 @@ void QtMaterialBadge::setText(const QString &text)
 
     d->text = text;
 
-    if (!d->icon.isNull()) {
+    if (!d->icon.isNull())
+    {
         d->icon = QIcon();
     }
 
@@ -252,15 +260,14 @@ void QtMaterialBadge::paintEvent(QPaintEvent *event)
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(isEnabled() ? backgroundColor()
-                               : QtMaterialStyle::instance().themeColor("disabled"));
+    brush.setColor(isEnabled() ? backgroundColor() : QtMaterialStyle::instance().themeColor("disabled"));
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
     const int s = getDiameter();
 
     QRectF r(0, 0, s, s);
-    r.translate(QPointF((width()-s), (height()-s))/2);
+    r.translate(QPointF((width() - s), (height() - s)) / 2);
 
     if (d->icon.isNull())
     {
@@ -286,9 +293,12 @@ int QtMaterialBadge::getDiameter() const
 {
     Q_D(const QtMaterialBadge);
 
-    if (d->icon.isNull()) {
+    if (d->icon.isNull())
+    {
         return qMax(d->size.width(), d->size.height()) + d->padding;
-    } else {
+    }
+    else
+    {
         return 24;
     }
 }

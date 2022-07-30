@@ -21,4 +21,4 @@ private:
     Q_DECLARE_PRIVATE(QtMaterialRadioButton)
 };
 
-#endif // QTMATERIALRADIOBUTTON_H
+#endif  // QTMATERIALRADIOBUTTON_H

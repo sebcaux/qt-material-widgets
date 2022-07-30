@@ -44,4 +44,4 @@ private:
     Q_DECLARE_PRIVATE(QtMaterialScrollBar)
 };
 
-#endif // QTMATERIALSCROLLBAR_H
+#endif  // QTMATERIALSCROLLBAR_H

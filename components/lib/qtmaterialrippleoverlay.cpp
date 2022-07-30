@@ -1,6 +1,6 @@
 #include "lib/qtmaterialrippleoverlay.h"
-#include <QPainter>
 #include "lib/qtmaterialripple.h"
+#include <QPainter>
 
 /*!
  *  \class QtMaterialRippleOverlay
@@ -25,8 +25,8 @@ void QtMaterialRippleOverlay::addRipple(QtMaterialRipple *ripple)
     m_ripples.push_back(ripple);
     ripple->start();
 
-    connect(this, SIGNAL(destroyed(QObject*)), ripple, SLOT(stop()));
-    connect(this, SIGNAL(destroyed(QObject*)), ripple, SLOT(deleteLater()));
+    connect(this, SIGNAL(destroyed(QObject *)), ripple, SLOT(stop()));
+    connect(this, SIGNAL(destroyed(QObject *)), ripple, SLOT(deleteLater()));
 }
 
 void QtMaterialRippleOverlay::addRipple(const QPoint &position, qreal radius)
@@ -38,7 +38,8 @@ void QtMaterialRippleOverlay::addRipple(const QPoint &position, qreal radius)
 
 void QtMaterialRippleOverlay::removeRipple(QtMaterialRipple *ripple)
 {
-    if (m_ripples.removeOne(ripple)) {
+    if (m_ripples.removeOne(ripple))
+    {
         delete ripple;
         update();
     }
@@ -55,12 +56,14 @@ void QtMaterialRippleOverlay::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(Qt::NoPen);
 
-    if (m_useClip) {
+    if (m_useClip)
+    {
         painter.setClipPath(m_clipPath);
     }
 
     QList<QtMaterialRipple *>::const_iterator i;
-    for (i = m_ripples.begin(); i != m_ripples.end(); ++i) {
+    for (i = m_ripples.begin(); i != m_ripples.end(); ++i)
+    {
         paintRipple(&painter, *i);
     }
 }

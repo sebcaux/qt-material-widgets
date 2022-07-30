@@ -1,14 +1,14 @@
 #include "qtmaterialdialog.h"
-#include "qtmaterialdialog_p.h"
-#include <QtWidgets/QStackedLayout>
-#include <QtWidgets/QGraphicsDropShadowEffect>
-#include <QStateMachine>
-#include <QState>
-#include <QtWidgets/QApplication>
-#include <QPropertyAnimation>
-#include <QPainter>
-#include "qtmaterialdialog_internal.h"
 #include "lib/qtmaterialstatetransition.h"
+#include "qtmaterialdialog_internal.h"
+#include "qtmaterialdialog_p.h"
+#include <QPainter>
+#include <QPropertyAnimation>
+#include <QState>
+#include <QStateMachine>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QGraphicsDropShadowEffect>
+#include <QtWidgets/QStackedLayout>
 
 /*!
  *  \class QtMaterialDialogPrivate
@@ -29,9 +29,9 @@ void QtMaterialDialogPrivate::init()
     Q_Q(QtMaterialDialog);
 
     dialogWindow = new QtMaterialDialogWindow(q);
-    proxyStack   = new QStackedLayout;
+    proxyStack = new QStackedLayout;
     stateMachine = new QStateMachine(q);
-    proxy        = new QtMaterialDialogProxy(dialogWindow, proxyStack, q);
+    proxy = new QtMaterialDialogProxy(dialogWindow, proxyStack, q);
 
     QVBoxLayout *layout = new QVBoxLayout;
     q->setLayout(layout);
@@ -94,10 +94,8 @@ void QtMaterialDialogPrivate::init()
     animation->setEasingCurve(QEasingCurve::OutCirc);
     stateMachine->addDefaultAnimation(animation);
 
-    QObject::connect(visibleState, SIGNAL(propertiesAssigned()),
-                     proxy, SLOT(makeOpaque()));
-    QObject::connect(hiddenState, SIGNAL(propertiesAssigned()),
-                     proxy, SLOT(makeTransparent()));
+    QObject::connect(visibleState, SIGNAL(propertiesAssigned()), proxy, SLOT(makeOpaque()));
+    QObject::connect(hiddenState, SIGNAL(propertiesAssigned()), proxy, SLOT(makeTransparent()));
 
     stateMachine->start();
     QCoreApplication::processEvents();
@@ -162,6 +160,6 @@ void QtMaterialDialog::paintEvent(QPaintEvent *event)
     brush.setColor(Qt::black);
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
-    painter.setOpacity(d->proxy->opacity()/2.4);
+    painter.setOpacity(d->proxy->opacity() / 2.4);
     painter.drawRect(rect());
 }

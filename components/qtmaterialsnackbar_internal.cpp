@@ -1,8 +1,8 @@
 #include "qtmaterialsnackbar_internal.h"
-#include <QPropertyAnimation>
-#include "qtmaterialsnackbar.h"
 #include "lib/qtmaterialstatetransition.h"
+#include "qtmaterialsnackbar.h"
 #include <QDebug>
+#include <QPropertyAnimation>
 
 QtMaterialSnackbarStateMachine::QtMaterialSnackbarStateMachine(QtMaterialSnackbar *parent)
     : QStateMachine(parent),
@@ -42,10 +42,8 @@ QtMaterialSnackbarStateMachine::QtMaterialSnackbarStateMachine(QtMaterialSnackba
     transition->setTargetState(visibleState);
     finalState->addTransition(transition);
 
-    connect(visibleState, SIGNAL(propertiesAssigned()),
-            this, SLOT(snackbarShown()));
-    connect(finalState, SIGNAL(propertiesAssigned()),
-            m_snackbar, SLOT(dequeue()));
+    connect(visibleState, SIGNAL(propertiesAssigned()), this, SLOT(snackbarShown()));
+    connect(finalState, SIGNAL(propertiesAssigned()), m_snackbar, SLOT(dequeue()));
 
     QPropertyAnimation *animation;
 
@@ -69,7 +67,8 @@ QtMaterialSnackbarStateMachine::~QtMaterialSnackbarStateMachine()
 
 bool QtMaterialSnackbarStateMachine::eventFilter(QObject *watched, QEvent *event)
 {
-    if (QEvent::MouseButtonPress == event->type() && m_snackbar->clickToDismissMode()) {
+    if (QEvent::MouseButtonPress == event->type() && m_snackbar->clickToDismissMode())
+    {
         progress();
     }
     return QStateMachine::eventFilter(watched, event);
@@ -85,7 +84,8 @@ void QtMaterialSnackbarStateMachine::progress()
 {
     m_timer.stop();
     postEvent(new QtMaterialStateTransitionEvent(SnackbarHideTransition));
-    if (m_snackbar->clickToDismissMode()) {
+    if (m_snackbar->clickToDismissMode())
+    {
         m_snackbar->setAttribute(Qt::WA_TransparentForMouseEvents, true);
     }
 }
@@ -93,7 +93,8 @@ void QtMaterialSnackbarStateMachine::progress()
 void QtMaterialSnackbarStateMachine::snackbarShown()
 {
     m_timer.start(m_snackbar->autoHideDuration());
-    if (m_snackbar->clickToDismissMode()) {
+    if (m_snackbar->clickToDismissMode())
+    {
         m_snackbar->setAttribute(Qt::WA_TransparentForMouseEvents, false);
     }
 }

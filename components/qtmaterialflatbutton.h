@@ -1,9 +1,9 @@
 #ifndef QTMATERIALFLATBUTTON_H
 #define QTMATERIALFLATBUTTON_H
 
-#include <QtWidgets/QPushButton>
-#include <QScopedPointer>
 #include "lib/qtmaterialtheme.h"
+#include <QScopedPointer>
+#include <QtWidgets/QPushButton>
 
 class QtMaterialFlatButtonPrivate;
 
@@ -84,7 +84,8 @@ public:
     QSize sizeHint() const Q_DECL_OVERRIDE;
 
 protected:
-    enum {
+    enum
+    {
         IconPadding = 12
     };
 
@@ -109,4 +110,4 @@ private:
     Q_DECLARE_PRIVATE(QtMaterialFlatButton)
 };
 
-#endif // QTMATERIALFLATBUTTON_H
+#endif  // QTMATERIALFLATBUTTON_H

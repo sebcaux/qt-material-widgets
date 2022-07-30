@@ -1,10 +1,10 @@
 #include "qtmaterialdrawer_internal.h"
-#include <QState>
-#include <QPainter>
-#include <QtWidgets/QLayout>
-#include <QSignalTransition>
-#include <QPropertyAnimation>
 #include "qtmaterialdrawer.h"
+#include <QPainter>
+#include <QPropertyAnimation>
+#include <QSignalTransition>
+#include <QState>
+#include <QtWidgets/QLayout>
 
 /*!
  *  \class QtMaterialDrawerStateMachine
@@ -102,7 +102,7 @@ bool QtMaterialDrawerStateMachine::isInClosedState() const
 
 void QtMaterialDrawerStateMachine::updatePropertyAssignments()
 {
-    const qreal closedOffset = -(m_drawer->width()+32);
+    const qreal closedOffset = -(m_drawer->width() + 32);
 
     m_closingState->assignProperty(m_drawer, "offset", closedOffset);
     m_closedState->assignProperty(m_drawer, "offset", closedOffset);
@@ -134,7 +134,8 @@ void QtMaterialDrawerWidget::setOffset(int offset)
     m_offset = offset;
 
     QWidget *widget = parentWidget();
-    if (widget) {
+    if (widget)
+    {
         setGeometry(widget->rect().translated(offset, 0));
     }
     update();
@@ -154,13 +155,13 @@ void QtMaterialDrawerWidget::paintEvent(QPaintEvent *event)
 
     painter.drawRect(rect().adjusted(0, 0, -16, 0));
 
-    QLinearGradient gradient(QPointF(width()-16, 0), QPointF(width(), 0));
+    QLinearGradient gradient(QPointF(width() - 16, 0), QPointF(width(), 0));
     gradient.setColorAt(0, QColor(0, 0, 0, 80));
     gradient.setColorAt(0.5, QColor(0, 0, 0, 20));
     gradient.setColorAt(1, QColor(0, 0, 0, 0));
     painter.setBrush(QBrush(gradient));
 
-    painter.drawRect(width()-16, 0, 16, height());
+    painter.drawRect(width() - 16, 0, 16, height());
 }
 
 QRect QtMaterialDrawerWidget::overlayGeometry() const

@@ -1,13 +1,13 @@
 #include "qtmaterialautocomplete.h"
+#include "qtmaterialautocomplete_internal.h"
 #include "qtmaterialautocomplete_p.h"
+#include "qtmaterialflatbutton.h"
+#include <QDebug>
+#include <QEvent>
+#include <QPainter>
+#include <QTimer>
 #include <QtWidgets/QGraphicsDropShadowEffect>
 #include <QtWidgets/QVBoxLayout>
-#include <QEvent>
-#include <QTimer>
-#include <QPainter>
-#include <QDebug>
-#include "qtmaterialautocomplete_internal.h"
-#include "qtmaterialflatbutton.h"
 
 /*!
  *  \class QtMaterialAutoCompletePrivate
@@ -36,11 +36,11 @@ void QtMaterialAutoCompletePrivate::init()
 {
     Q_Q(QtMaterialAutoComplete);
 
-    menu         = new QWidget;
-    frame        = new QWidget;
+    menu = new QWidget;
+    frame = new QWidget;
     stateMachine = new QtMaterialAutoCompleteStateMachine(menu);
-    menuLayout   = new QVBoxLayout;
-    maxWidth     = 0;
+    menuLayout = new QVBoxLayout;
+    maxWidth = 0;
 
     menu->setParent(q->parentWidget());
     frame->setParent(q->parentWidget());
@@ -96,11 +96,14 @@ void QtMaterialAutoComplete::updateResults(QString text)
     QStringList results;
     QString trimmed(text.trimmed());
 
-    if (!trimmed.isEmpty()) {
+    if (!trimmed.isEmpty())
+    {
         QString lookup(trimmed.toLower());
         QStringList::iterator i;
-        for (i = d->dataSource.begin(); i != d->dataSource.end(); ++i) {
-            if (i->toLower().indexOf(lookup) != -1) {
+        for (i = d->dataSource.begin(); i != d->dataSource.end(); ++i)
+        {
+            if (i->toLower().indexOf(lookup) != -1)
+            {
                 results.push_back(*i);
             }
         }
@@ -109,8 +112,10 @@ void QtMaterialAutoComplete::updateResults(QString text)
     const int diff = results.length() - d->menuLayout->count();
     QFont font("Roboto", 12, QFont::Normal);
 
-    if (diff > 0) {
-        for (int c = 0; c < diff; c++) {
+    if (diff > 0)
+    {
+        for (int c = 0; c < diff; c++)
+        {
             QtMaterialFlatButton *item = new QtMaterialFlatButton;
             item->setFont(font);
             item->setTextAlignment(Qt::AlignLeft);
@@ -121,10 +126,14 @@ void QtMaterialAutoComplete::updateResults(QString text)
             d->menuLayout->addWidget(item);
             item->installEventFilter(this);
         }
-    } else if (diff < 0) {
-        for (int c = 0; c < -diff; c++) {
+    }
+    else if (diff < 0)
+    {
+        for (int c = 0; c < -diff; c++)
+        {
             QWidget *widget = d->menuLayout->itemAt(0)->widget();
-            if (widget) {
+            if (widget)
+            {
                 d->menuLayout->removeWidget(widget);
                 delete widget;
             }
@@ -134,10 +143,12 @@ void QtMaterialAutoComplete::updateResults(QString text)
     QFontMetrics *fm = new QFontMetrics(font);
     d->maxWidth = 0;
 
-    for (int i = 0; i < results.count(); ++i) {
+    for (int i = 0; i < results.count(); ++i)
+    {
         QWidget *widget = d->menuLayout->itemAt(i)->widget();
         QtMaterialFlatButton *item;
-        if ((item = static_cast<QtMaterialFlatButton *>(widget))) {
+        if ((item = static_cast<QtMaterialFlatButton *>(widget)))
+        {
             QString text = results.at(i);
             QRect rect = fm->boundingRect(text);
             d->maxWidth = qMax(d->maxWidth, rect.width());
@@ -145,13 +156,16 @@ void QtMaterialAutoComplete::updateResults(QString text)
         }
     }
 
-    if (!results.count()) {
+    if (!results.count())
+    {
         emit d->stateMachine->shouldClose();
-    } else {
+    }
+    else
+    {
         emit d->stateMachine->shouldOpen();
     }
 
-    d->menu->setFixedHeight(results.length()*50);
+    d->menu->setFixedHeight(results.length() * 50);
     d->menu->setFixedWidth(qMax(d->maxWidth + 24, width()));
     d->menu->update();
 }
@@ -162,21 +176,24 @@ bool QtMaterialAutoComplete::QtMaterialAutoComplete::event(QEvent *event)
 
     switch (event->type())
     {
-    case QEvent::Move:
-    case QEvent::Resize: {
-        d->menu->move(pos() + QPoint(0, height() + 6));
-        break;
-    }
-    case QEvent::ParentChange: {
-        QWidget *widget = static_cast<QWidget *>(parent());
-        if (widget) {
-            d->menu->setParent(widget);
-            d->frame->setParent(widget);
+        case QEvent::Move:
+        case QEvent::Resize:
+        {
+            d->menu->move(pos() + QPoint(0, height() + 6));
+            break;
         }
-        break;
-    }
-    default:
-        break;
+        case QEvent::ParentChange:
+        {
+            QWidget *widget = static_cast<QWidget *>(parent());
+            if (widget)
+            {
+                d->menu->setParent(widget);
+                d->frame->setParent(widget);
+            }
+            break;
+        }
+        default:
+            break;
     }
     return QtMaterialTextField::event(event);
 }
@@ -189,53 +206,59 @@ bool QtMaterialAutoComplete::eventFilter(QObject *watched, QEvent *event)
     {
         switch (event->type())
         {
-        case QEvent::Paint: {
-            QPainter painter(d->frame);
-            painter.fillRect(d->frame->rect(), Qt::white);
-            break;
-        }
-        default:
-            break;
+            case QEvent::Paint:
+            {
+                QPainter painter(d->frame);
+                painter.fillRect(d->frame->rect(), Qt::white);
+                break;
+            }
+            default:
+                break;
         }
     }
     else if (d->menu == watched)
     {
         switch (event->type())
         {
-        case QEvent::Resize:
-        case QEvent::Move: {
-            d->frame->setGeometry(d->menu->geometry());
-            break;
-        }
-        case QEvent::Show: {
-            d->frame->show();
-            d->menu->raise();
-            break;
-        }
-        case QEvent::Hide: {
-            d->frame->hide();
-            break;
-        }
-        default:
-            break;
+            case QEvent::Resize:
+            case QEvent::Move:
+            {
+                d->frame->setGeometry(d->menu->geometry());
+                break;
+            }
+            case QEvent::Show:
+            {
+                d->frame->show();
+                d->menu->raise();
+                break;
+            }
+            case QEvent::Hide:
+            {
+                d->frame->hide();
+                break;
+            }
+            default:
+                break;
         }
     }
     else
     {
         switch (event->type())
         {
-        case QEvent::MouseButtonPress: {
-            emit d->stateMachine->shouldFade();
-            QtMaterialFlatButton *widget;
-            if ((widget = static_cast<QtMaterialFlatButton *>(watched))) {
-                QString text(widget->text());
-                setText(text);
-                emit itemSelected(text);
+            case QEvent::MouseButtonPress:
+            {
+                emit d->stateMachine->shouldFade();
+                QtMaterialFlatButton *widget;
+                if ((widget = static_cast<QtMaterialFlatButton *>(watched)))
+                {
+                    QString text(widget->text());
+                    setText(text);
+                    emit itemSelected(text);
+                }
+                break;
             }
-            break;
-        }
-        default:
-            break;
+            default:
+                break;
         }
     }
     return QtMaterialTextField::eventFilter(watched, event);

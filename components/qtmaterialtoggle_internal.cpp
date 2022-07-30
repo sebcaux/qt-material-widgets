@@ -1,19 +1,16 @@
 #include "qtmaterialtoggle_internal.h"
-#include <QPainter>
-#include <QEvent>
-#include <QtWidgets/QGraphicsDropShadowEffect>
-#include "qtmaterialtoggle.h"
 #include "lib/qtmaterialripple.h"
+#include "qtmaterialtoggle.h"
+#include <QEvent>
+#include <QPainter>
+#include <QtWidgets/QGraphicsDropShadowEffect>
 
 /*!
  *  \class QtMaterialToggleRippleOverlay
  *  \internal
  */
 
-QtMaterialToggleRippleOverlay::QtMaterialToggleRippleOverlay(
-        QtMaterialToggleThumb *thumb,
-        QtMaterialToggleTrack *track,
-        QtMaterialToggle      *parent)
+QtMaterialToggleRippleOverlay::QtMaterialToggleRippleOverlay(QtMaterialToggleThumb *thumb, QtMaterialToggleTrack *track, QtMaterialToggle *parent)
     : QtMaterialRippleOverlay(parent->parentWidget()),
       m_toggle(parent),
       m_thumb(thumb),
@@ -30,21 +27,25 @@ QtMaterialToggleRippleOverlay::~QtMaterialToggleRippleOverlay()
 
 void QtMaterialToggleRippleOverlay::addToggleRipple()
 {
-    if (!m_toggle->isEnabled()) {
+    if (!m_toggle->isEnabled())
+    {
         return;
     }
 
     int t, w;
 
-    if (Qt::Horizontal == m_toggle->orientation()) {
-        t = m_toggle->height()/2;
-        w = m_thumb->height()/2+10;
-    } else {
-        t = m_toggle->width()/2;
-        w = m_thumb->width()/2+10;
+    if (Qt::Horizontal == m_toggle->orientation())
+    {
+        t = m_toggle->height() / 2;
+        w = m_thumb->height() / 2 + 10;
+    }
+    else
+    {
+        t = m_toggle->width() / 2;
+        w = m_thumb->width() / 2 + 10;
     }
 
-    QtMaterialRipple *ripple = new QtMaterialRipple(QPoint(10+t, 20+t));
+    QtMaterialRipple *ripple = new QtMaterialRipple(QPoint(10 + t, 20 + t));
     ripple->setColor(m_track->trackColor());
     ripple->setRadiusEndValue(w);
     ripple->setOpacityStartValue(0.8);
@@ -54,12 +55,14 @@ void QtMaterialToggleRippleOverlay::addToggleRipple()
 
 bool QtMaterialToggleRippleOverlay::eventFilter(QObject *obj, QEvent *event)
 {
-    if (QEvent::Paint == event->type()) {
+    if (QEvent::Paint == event->type())
+    {
         setGeometry(overlayGeometry());
         QList<QtMaterialRipple *>::const_iterator i;
         QList<QtMaterialRipple *> items = ripples();
         QColor color = m_track->trackColor();
-        for (i = items.begin(); i != items.end(); ++i) {
+        for (i = items.begin(); i != items.end(); ++i)
+        {
             (*i)->setColor(color);
         }
     }
@@ -69,10 +72,13 @@ bool QtMaterialToggleRippleOverlay::eventFilter(QObject *obj, QEvent *event)
 QRect QtMaterialToggleRippleOverlay::overlayGeometry() const
 {
     const qreal offset = m_thumb->offset();
-    if (Qt::Horizontal == m_toggle->orientation()) {
-        return m_toggle->geometry().adjusted(-10+offset, -20, 10+offset, 20);
-    } else {
-        return m_toggle->geometry().adjusted(-10, -20+offset, 10, 20+offset);
+    if (Qt::Horizontal == m_toggle->orientation())
+    {
+        return m_toggle->geometry().adjusted(-10 + offset, -20, 10 + offset, 20);
+    }
+    else
+    {
+        return m_toggle->geometry().adjusted(-10, -20 + offset, 10, 20 + offset);
     }
 }
 
@@ -104,7 +110,8 @@ QtMaterialToggleThumb::~QtMaterialToggleThumb()
 
 void QtMaterialToggleThumb::setShift(qreal shift)
 {
-    if (m_shift == shift) {
+    if (m_shift == shift)
+    {
         return;
     }
 
@@ -141,17 +148,21 @@ void QtMaterialToggleThumb::paintEvent(QPaintEvent *event)
     int s;
     QRectF r;
 
-    if (Qt::Horizontal == m_toggle->orientation()) {
-        s = height()-10;
-        r = QRectF(5+m_offset, 5, s, s);
-    } else {
-        s = width()-10;
-        r = QRectF(5, 5+m_offset, s, s);
+    if (Qt::Horizontal == m_toggle->orientation())
+    {
+        s = height() - 10;
+        r = QRectF(5 + m_offset, 5, s, s);
+    }
+    else
+    {
+        s = width() - 10;
+        r = QRectF(5, 5 + m_offset, s, s);
     }
 
     painter.drawEllipse(r);
 
-    if (!m_toggle->isEnabled()) {
+    if (!m_toggle->isEnabled())
+    {
         brush.setColor(m_toggle->disabledColor());
         painter.setBrush(brush);
         painter.drawEllipse(r);
@@ -160,9 +171,8 @@ void QtMaterialToggleThumb::paintEvent(QPaintEvent *event)
 
 void QtMaterialToggleThumb::updateOffset()
 {
-    const QSize s(Qt::Horizontal == m_toggle->orientation()
-        ? size() : size().transposed());
-    m_offset = m_shift*static_cast<qreal>(s.width()-s.height());
+    const QSize s(Qt::Horizontal == m_toggle->orientation() ? size() : size().transposed());
+    m_offset = m_shift * static_cast<qreal>(s.width() - s.height());
     update();
 }
 
@@ -194,7 +204,8 @@ bool QtMaterialToggleTrack::eventFilter(QObject *obj, QEvent *event)
 {
     const QEvent::Type type = event->type();
 
-    if (QEvent::Resize == type || QEvent::Move == type) {
+    if (QEvent::Resize == type || QEvent::Move == type)
+    {
         setGeometry(m_toggle->rect());
     }
     return QWidget::eventFilter(obj, event);
@@ -208,10 +219,13 @@ void QtMaterialToggleTrack::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing);
 
     QBrush brush;
-    if (m_toggle->isEnabled()) {
+    if (m_toggle->isEnabled())
+    {
         brush.setColor(m_trackColor);
         painter.setOpacity(0.8);
-    } else {
+    }
+    else
+    {
         brush.setColor(m_toggle->disabledColor());
         painter.setOpacity(0.6);
     }
@@ -219,13 +233,16 @@ void QtMaterialToggleTrack::paintEvent(QPaintEvent *event)
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
-    if (Qt::Horizontal == m_toggle->orientation()) {
-        const int h = height()/2;
-        const QRect r(0, h/2, width(), h);
-        painter.drawRoundedRect(r.adjusted(14, 4, -14, -4), h/2-4, h/2-4);
-    } else {
-        const int w = width()/2;
-        const QRect r(w/2, 0, w, height());
-        painter.drawRoundedRect(r.adjusted(4, 14, -4, -14), w/2-4, w/2-4);
+    if (Qt::Horizontal == m_toggle->orientation())
+    {
+        const int h = height() / 2;
+        const QRect r(0, h / 2, width(), h);
+        painter.drawRoundedRect(r.adjusted(14, 4, -14, -4), h / 2 - 4, h / 2 - 4);
+    }
+    else
+    {
+        const int w = width() / 2;
+        const QRect r(w / 2, 0, w, height());
+        painter.drawRoundedRect(r.adjusted(4, 14, -4, -14), w / 2 - 4, w / 2 - 4);
     }
 }

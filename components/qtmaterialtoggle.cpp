@@ -1,11 +1,11 @@
 #include "qtmaterialtoggle.h"
-#include "qtmaterialtoggle_p.h"
-#include <QtWidgets/QApplication>
-#include <QStateMachine>
-#include <QSignalTransition>
-#include <QPropertyAnimation>
-#include "qtmaterialtoggle_internal.h"
 #include "lib/qtmaterialstyle.h"
+#include "qtmaterialtoggle_internal.h"
+#include "qtmaterialtoggle_p.h"
+#include <QPropertyAnimation>
+#include <QSignalTransition>
+#include <QStateMachine>
+#include <QtWidgets/QApplication>
 
 /*!
  *  \class QtMaterialTogglePrivate
@@ -25,13 +25,13 @@ void QtMaterialTogglePrivate::init()
 {
     Q_Q(QtMaterialToggle);
 
-    track          = new QtMaterialToggleTrack(q);
-    thumb          = new QtMaterialToggleThumb(q);
-    rippleOverlay  = new QtMaterialToggleRippleOverlay(thumb, track, q);
-    stateMachine   = new QStateMachine(q);
-    offState       = new QState;
-    onState        = new QState;
-    orientation    = Qt::Horizontal;
+    track = new QtMaterialToggleTrack(q);
+    thumb = new QtMaterialToggleThumb(q);
+    rippleOverlay = new QtMaterialToggleRippleOverlay(thumb, track, q);
+    stateMachine = new QStateMachine(q);
+    offState = new QState;
+    onState = new QState;
+    orientation = Qt::Horizontal;
     useThemeColors = true;
 
     q->setCheckable(true);
@@ -110,12 +110,16 @@ void QtMaterialTogglePrivate::setupProperties()
 {
     Q_Q(QtMaterialToggle);
 
-    if (q->isEnabled()) {
+    if (q->isEnabled())
+    {
         const qreal shift = thumb->shift();
-        if (qFuzzyCompare(shift, 1)) {
+        if (qFuzzyCompare(shift, 1))
+        {
             thumb->setThumbColor(q->activeColor());
             track->setTrackColor(q->activeColor().lighter(110));
-        } else if (qFuzzyCompare(1+shift, 1)) {
+        }
+        else if (qFuzzyCompare(1 + shift, 1))
+        {
             thumb->setThumbColor(q->inactiveColor());
             track->setTrackColor(q->trackColor());
         }
@@ -174,9 +178,12 @@ QColor QtMaterialToggle::disabledColor() const
 {
     Q_D(const QtMaterialToggle);
 
-    if (d->useThemeColors || !d->disabledColor.isValid()) {
+    if (d->useThemeColors || !d->disabledColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("disabled");
-    } else {
+    }
+    else
+    {
         return d->disabledColor;
     }
 }
@@ -195,9 +202,12 @@ QColor QtMaterialToggle::activeColor() const
 {
     Q_D(const QtMaterialToggle);
 
-    if (d->useThemeColors || !d->activeColor.isValid()) {
+    if (d->useThemeColors || !d->activeColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("primary1");
-    } else {
+    }
+    else
+    {
         return d->activeColor;
     }
 }
@@ -216,9 +226,12 @@ QColor QtMaterialToggle::inactiveColor() const
 {
     Q_D(const QtMaterialToggle);
 
-    if (d->useThemeColors || !d->inactiveColor.isValid()) {
+    if (d->useThemeColors || !d->inactiveColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("canvas");
-    } else {
+    }
+    else
+    {
         return d->inactiveColor;
     }
 }
@@ -237,9 +250,12 @@ QColor QtMaterialToggle::trackColor() const
 {
     Q_D(const QtMaterialToggle);
 
-    if (d->useThemeColors || !d->trackColor.isValid()) {
+    if (d->useThemeColors || !d->trackColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("accent3");
-    } else {
+    }
+    else
+    {
         return d->trackColor;
     }
 }
@@ -248,7 +264,8 @@ void QtMaterialToggle::setOrientation(Qt::Orientation orientation)
 {
     Q_D(QtMaterialToggle);
 
-    if (d->orientation == orientation) {
+    if (d->orientation == orientation)
+    {
         return;
     }
 
@@ -267,9 +284,7 @@ QSize QtMaterialToggle::sizeHint() const
 {
     Q_D(const QtMaterialToggle);
 
-    return Qt::Horizontal == d->orientation
-        ? QSize(64, 48)
-        : QSize(48, 64);
+    return Qt::Horizontal == d->orientation ? QSize(64, 48) : QSize(48, 64);
 }
 
 bool QtMaterialToggle::event(QEvent *event)
@@ -278,16 +293,17 @@ bool QtMaterialToggle::event(QEvent *event)
 
     switch (event->type())
     {
-    case QEvent::ParentChange:
-    {
-        QWidget *widget;
-        if ((widget = parentWidget())) {
-            d->rippleOverlay->setParent(widget);
+        case QEvent::ParentChange:
+        {
+            QWidget *widget;
+            if ((widget = parentWidget()))
+            {
+                d->rippleOverlay->setParent(widget);
+            }
+            break;
         }
-        break;
-    }
-    default:
-        break;
+        default:
+            break;
     }
     return QAbstractButton::event(event);
 }

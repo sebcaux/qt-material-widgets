@@ -1,8 +1,8 @@
 #ifndef QTMATERIALPROGRESS_H
 #define QTMATERIALPROGRESS_H
 
-#include <QtWidgets/QProgressBar>
 #include "lib/qtmaterialtheme.h"
+#include <QtWidgets/QProgressBar>
 
 class QtMaterialProgressPrivate;
 
@@ -39,4 +39,4 @@ private:
     Q_DECLARE_PRIVATE(QtMaterialProgress)
 };
 
-#endif // QTMATERIALPROGRESS_H
+#endif  // QTMATERIALPROGRESS_H

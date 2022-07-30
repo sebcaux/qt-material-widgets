@@ -1,10 +1,10 @@
 #include "qtmaterialscrollbar.h"
+#include "lib/qtmaterialstyle.h"
+#include "qtmaterialscrollbar_internal.h"
 #include "qtmaterialscrollbar_p.h"
+#include <QDebug>
 #include <QPainter>
 #include <QPainterPath>
-#include <QDebug>
-#include "qtmaterialscrollbar_internal.h"
-#include "lib/qtmaterialstyle.h"
 
 /*!
  *  \class QtMaterialScrollBarPrivate
@@ -24,7 +24,7 @@ void QtMaterialScrollBarPrivate::init()
 {
     Q_Q(QtMaterialScrollBar);
 
-    stateMachine   = new QtMaterialScrollBarStateMachine(q);
+    stateMachine = new QtMaterialScrollBarStateMachine(q);
     hideOnMouseOut = true;
     useThemeColors = true;
 
@@ -57,9 +57,12 @@ QtMaterialScrollBar::~QtMaterialScrollBar()
  */
 QSize QtMaterialScrollBar::sizeHint() const
 {
-    if (Qt::Horizontal == orientation()) {
+    if (Qt::Horizontal == orientation())
+    {
         return QSize(1, 10);
-    } else {
+    }
+    else
+    {
         return QSize(10, 1);
     }
 }
@@ -68,7 +71,8 @@ void QtMaterialScrollBar::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialScrollBar);
 
-    if (d->useThemeColors == value) {
+    if (d->useThemeColors == value)
+    {
         return;
     }
 
@@ -97,9 +101,12 @@ QColor QtMaterialScrollBar::canvasColor() const
 {
     Q_D(const QtMaterialScrollBar);
 
-    if (d->useThemeColors || !d->canvasColor.isValid()) {
+    if (d->useThemeColors || !d->canvasColor.isValid())
+    {
         return parentWidget()->palette().color(backgroundRole());
-    } else {
+    }
+    else
+    {
         return d->canvasColor;
     }
 }
@@ -118,9 +125,12 @@ QColor QtMaterialScrollBar::backgroundColor() const
 {
     Q_D(const QtMaterialScrollBar);
 
-    if (d->useThemeColors || !d->backgroundColor.isValid()) {
+    if (d->useThemeColors || !d->backgroundColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("border");
-    } else {
+    }
+    else
+    {
         return d->backgroundColor;
     }
 }
@@ -139,9 +149,12 @@ QColor QtMaterialScrollBar::sliderColor() const
 {
     Q_D(const QtMaterialScrollBar);
 
-    if (d->useThemeColors || !d->sliderColor.isValid()) {
+    if (d->useThemeColors || !d->sliderColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("primary1");
-    } else {
+    }
+    else
+    {
         return d->sliderColor;
     }
 }
@@ -186,7 +199,8 @@ void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
-    if (d->hideOnMouseOut) {
+    if (d->hideOnMouseOut)
+    {
         painter.setOpacity(d->stateMachine->opacity());
     }
 
@@ -198,12 +212,9 @@ void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
 
     painter.drawRect(trimmed);
 
-    const qreal q = (Qt::Horizontal == orientation() ? w : h) /
-            static_cast<qreal>(maximum()-minimum()+pageStep()-1);
+    const qreal q = (Qt::Horizontal == orientation() ? w : h) / static_cast<qreal>(maximum() - minimum() + pageStep() - 1);
 
-    QRect handle = Qt::Horizontal == orientation()
-            ? QRect(sliderPosition()*q, y, pageStep()*q, h)
-            : QRect(x, sliderPosition()*q, w, pageStep()*q);
+    QRect handle = Qt::Horizontal == orientation() ? QRect(sliderPosition() * q, y, pageStep() * q, h) : QRect(x, sliderPosition() * q, w, pageStep() * q);
 
     brush.setColor(sliderColor());
     painter.setBrush(brush);

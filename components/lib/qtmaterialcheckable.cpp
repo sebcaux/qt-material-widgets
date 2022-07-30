@@ -1,16 +1,16 @@
 #include "lib/qtmaterialcheckable.h"
+#include "lib/qtmaterialcheckable_internal.h"
 #include "lib/qtmaterialcheckable_p.h"
-#include <QPainter>
-#include <QEvent>
-#include <QStateMachine>
-#include <QSignalTransition>
-#include <QEventTransition>
+#include "lib/qtmaterialripple.h"
+#include "lib/qtmaterialrippleoverlay.h"
+#include "lib/qtmaterialstyle.h"
 #include <QColor>
 #include <QCoreApplication>
-#include "lib/qtmaterialrippleoverlay.h"
-#include "lib/qtmaterialripple.h"
-#include "lib/qtmaterialstyle.h"
-#include "lib/qtmaterialcheckable_internal.h"
+#include <QEvent>
+#include <QEventTransition>
+#include <QPainter>
+#include <QSignalTransition>
+#include <QStateMachine>
 
 /*!
  *  \class QtMaterialCheckablePrivate
@@ -30,18 +30,18 @@ void QtMaterialCheckablePrivate::init()
 {
     Q_Q(QtMaterialCheckable);
 
-    rippleOverlay          = new QtMaterialRippleOverlay;
-    checkedIcon            = new QtMaterialCheckableIcon(QIcon(":/icons/icons/toggle/svg/production/ic_check_box_24px.svg"), q);
-    uncheckedIcon          = new QtMaterialCheckableIcon(QIcon(":/icons/icons/toggle/svg/production/ic_check_box_outline_blank_24px.svg"), q);
-    stateMachine           = new QStateMachine(q);
-    uncheckedState         = new QState;
-    checkedState           = new QState;
+    rippleOverlay = new QtMaterialRippleOverlay;
+    checkedIcon = new QtMaterialCheckableIcon(QIcon(":/icons/icons/toggle/svg/production/ic_check_box_24px.svg"), q);
+    uncheckedIcon = new QtMaterialCheckableIcon(QIcon(":/icons/icons/toggle/svg/production/ic_check_box_outline_blank_24px.svg"), q);
+    stateMachine = new QStateMachine(q);
+    uncheckedState = new QState;
+    checkedState = new QState;
     disabledUncheckedState = new QState;
-    disabledCheckedState   = new QState;
-    uncheckedTransition    = new QSignalTransition(q, SIGNAL(toggled(bool)));
-    checkedTransition      = new QSignalTransition(q, SIGNAL(toggled(bool)));
-    labelPosition          = QtMaterialCheckable::LabelPositionRight;
-    useThemeColors         = true;
+    disabledCheckedState = new QState;
+    uncheckedTransition = new QSignalTransition(q, SIGNAL(toggled(bool)));
+    checkedTransition = new QSignalTransition(q, SIGNAL(toggled(bool)));
+    labelPosition = QtMaterialCheckable::LabelPositionRight;
+    useThemeColors = true;
 
     rippleOverlay->setParent(q->parentWidget());
     rippleOverlay->installEventFilter(q);
@@ -155,7 +155,8 @@ void QtMaterialCheckable::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialCheckable);
 
-    if (d->useThemeColors == value) {
+    if (d->useThemeColors == value)
+    {
         return;
     }
 
@@ -184,9 +185,12 @@ QColor QtMaterialCheckable::checkedColor() const
 {
     Q_D(const QtMaterialCheckable);
 
-    if (d->useThemeColors || !d->checkedColor.isValid()) {
+    if (d->useThemeColors || !d->checkedColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("primary1");
-    } else {
+    }
+    else
+    {
         return d->checkedColor;
     }
 }
@@ -205,9 +209,12 @@ QColor QtMaterialCheckable::uncheckedColor() const
 {
     Q_D(const QtMaterialCheckable);
 
-    if (d->useThemeColors || !d->uncheckedColor.isValid()) {
+    if (d->useThemeColors || !d->uncheckedColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("text");
-    } else {
+    }
+    else
+    {
         return d->uncheckedColor;
     }
 }
@@ -226,9 +233,12 @@ QColor QtMaterialCheckable::textColor() const
 {
     Q_D(const QtMaterialCheckable);
 
-    if (d->useThemeColors || !d->textColor.isValid()) {
+    if (d->useThemeColors || !d->textColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("text");
-    } else {
+    }
+    else
+    {
         return d->textColor;
     }
 }
@@ -247,9 +257,12 @@ QColor QtMaterialCheckable::disabledColor() const
 {
     Q_D(const QtMaterialCheckable);
 
-    if (d->useThemeColors || !d->disabledColor.isValid()) {
+    if (d->useThemeColors || !d->disabledColor.isValid())
+    {
         return QtMaterialStyle::instance().themeColor("accent3");
-    } else {
+    }
+    else
+    {
         return d->disabledColor;
     }
 }
@@ -289,10 +302,11 @@ QIcon QtMaterialCheckable::uncheckedIcon() const
  */
 QSize QtMaterialCheckable::sizeHint() const
 {
-    if (text().isEmpty()) {
+    if (text().isEmpty())
+    {
         return QSize(40, 40);
     }
-    return QSize(fontMetrics().size(Qt::TextShowMnemonic, text()).width()+52, 40);
+    return QSize(fontMetrics().size(Qt::TextShowMnemonic, text()).width() + 52, 40);
 }
 
 QtMaterialCheckable::QtMaterialCheckable(QtMaterialCheckablePrivate &d, QWidget *parent)
@@ -311,20 +325,21 @@ bool QtMaterialCheckable::event(QEvent *event)
 
     switch (event->type())
     {
-    case QEvent::Resize:
-    case QEvent::Move:
-        d->checkedIcon->setGeometry(rect());
-        d->uncheckedIcon->setGeometry(rect());
-        d->rippleOverlay->setGeometry(geometry().adjusted(-8, -8, 8, 8));
-        break;
-    case QEvent::ParentChange:
-        QWidget *widget;
-        if ((widget = parentWidget())) {
-            d->rippleOverlay->setParent(widget);
-        }
-        break;
-    default:
-        break;
+        case QEvent::Resize:
+        case QEvent::Move:
+            d->checkedIcon->setGeometry(rect());
+            d->uncheckedIcon->setGeometry(rect());
+            d->rippleOverlay->setGeometry(geometry().adjusted(-8, -8, 8, 8));
+            break;
+        case QEvent::ParentChange:
+            QWidget *widget;
+            if ((widget = parentWidget()))
+            {
+                d->rippleOverlay->setParent(widget);
+            }
+            break;
+        default:
+            break;
     }
     return QAbstractButton::event(event);
 }
@@ -352,19 +367,24 @@ void QtMaterialCheckable::mousePressEvent(QMouseEvent *event)
 
     Q_D(QtMaterialCheckable);
 
-    if (!isEnabled()) {
+    if (!isEnabled())
+    {
         return;
     }
 
     QtMaterialRipple *ripple;
-    if (QtMaterialCheckable::LabelPositionLeft == d->labelPosition) {
-         ripple = new QtMaterialRipple(QPoint(width()-14, 28));
-    } else {
-         ripple = new QtMaterialRipple(QPoint(28, 28));
+    if (QtMaterialCheckable::LabelPositionLeft == d->labelPosition)
+    {
+        ripple = new QtMaterialRipple(QPoint(width() - 14, 28));
+    }
+    else
+    {
+        ripple = new QtMaterialRipple(QPoint(28, 28));
     }
     ripple->setRadiusEndValue(22);
     ripple->setColor(isChecked() ? checkedColor() : uncheckedColor());
-    if (isChecked()) {
+    if (isChecked())
+    {
         ripple->setOpacityStartValue(1);
     }
     d->rippleOverlay->addRipple(ripple);
@@ -387,9 +407,12 @@ void QtMaterialCheckable::paintEvent(QPaintEvent *event)
     pen.setColor(isEnabled() ? textColor() : disabledColor());
     painter.setPen(pen);
 
-    if (QtMaterialCheckable::LabelPositionLeft == d->labelPosition) {
+    if (QtMaterialCheckable::LabelPositionLeft == d->labelPosition)
+    {
         painter.drawText(4, 25, text());
-    } else {
+    }
+    else
+    {
         painter.drawText(48, 25, text());
     }
 }
@@ -404,13 +427,19 @@ void QtMaterialCheckable::setupProperties()
     d->disabledUncheckedState->assignProperty(d->uncheckedIcon, "color", disabledColor());
     d->disabledCheckedState->assignProperty(d->checkedIcon, "color", disabledColor());
 
-    if (isEnabled()) {
-        if (isChecked()) {
+    if (isEnabled())
+    {
+        if (isChecked())
+        {
             d->checkedIcon->setColor(checkedColor());
-        } else {
+        }
+        else
+        {
             d->uncheckedIcon->setColor(uncheckedColor());
         }
-    } else {
+    }
+    else
+    {
         d->checkedIcon->setColor(disabledColor());
         d->uncheckedIcon->setColor(disabledColor());
     }

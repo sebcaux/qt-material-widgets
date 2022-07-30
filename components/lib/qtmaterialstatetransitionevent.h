@@ -3,7 +3,8 @@
 
 #include <QEvent>
 
-enum QtMaterialStateTransitionType {
+enum QtMaterialStateTransitionType
+{
     // Snackbar
     SnackbarShowTransition = 1,
     SnackbarHideTransition,
@@ -39,4 +40,4 @@ struct QtMaterialStateTransitionEvent : public QEvent
     QtMaterialStateTransitionType type;
 };
 
-#endif // QTMATERIALSTATETRANSITIONEVENT_H
+#endif  // QTMATERIALSTATETRANSITIONEVENT_H
