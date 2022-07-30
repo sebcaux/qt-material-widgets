@@ -10,8 +10,8 @@ class QtMaterialCheckBox : public QtMaterialCheckable
     Q_OBJECT
 
 public:
-    explicit QtMaterialCheckBox(QWidget *parent = 0);
-    ~QtMaterialCheckBox();
+    explicit QtMaterialCheckBox(QWidget *parent = nullptr);
+    ~QtMaterialCheckBox() override;
 
 private:
     Q_DISABLE_COPY(QtMaterialCheckBox)

@@ -15,8 +15,8 @@ class QtMaterialTextField : public QLineEdit
     Q_PROPERTY(QColor inputLineColor WRITE setInputLineColor READ inputLineColor)
 
 public:
-    explicit QtMaterialTextField(QWidget *parent = 0);
-    ~QtMaterialTextField();
+    explicit QtMaterialTextField(QWidget *parent = nullptr);
+    ~QtMaterialTextField() override;
 
     void setUseThemeColors(bool value);
     bool useThemeColors() const;
@@ -46,10 +46,10 @@ public:
     bool hasInputLine() const;
 
 protected:
-    QtMaterialTextField(QtMaterialTextFieldPrivate &d, QWidget *parent = 0);
+    QtMaterialTextField(QtMaterialTextFieldPrivate &d, QWidget *parent = nullptr);
 
-    bool event(QEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    bool event(QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialTextFieldPrivate> d_ptr;
 

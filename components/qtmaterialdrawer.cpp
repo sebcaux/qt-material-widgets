@@ -201,7 +201,7 @@ bool QtMaterialDrawer::eventFilter(QObject *obj, QEvent *event)
         case QEvent::MouseButtonPress:
         {
             QMouseEvent *mouseEvent;
-            if ((mouseEvent = static_cast<QMouseEvent *>(event)))
+            if ((mouseEvent = static_cast<QMouseEvent *>(event)) != nullptr)
             {
                 const bool canClose = d->clickToClose || d->overlay;
                 if (!d->widget->geometry().contains(mouseEvent->pos()) && canClose)
@@ -215,7 +215,7 @@ bool QtMaterialDrawer::eventFilter(QObject *obj, QEvent *event)
         case QEvent::Resize:
         {
             QLayout *lw = d->widget->layout();
-            if (lw && 16 != lw->contentsMargins().right())
+            if ((lw != nullptr) && 16 != lw->contentsMargins().right())
             {
                 lw->setContentsMargins(0, 0, 16, 0);
             }

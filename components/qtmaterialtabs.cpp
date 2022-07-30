@@ -114,10 +114,8 @@ QColor QtMaterialTabs::inkColor() const
     {
         return QtMaterialStyle::instance().themeColor("accent1");
     }
-    else
-    {
-        return d->inkColor;
-    }
+
+    return d->inkColor;
 }
 
 void QtMaterialTabs::setBackgroundColor(const QColor &color)
@@ -139,10 +137,8 @@ QColor QtMaterialTabs::backgroundColor() const
     {
         return QtMaterialStyle::instance().themeColor("primary1");
     }
-    else
-    {
-        return d->backgroundColor;
-    }
+
+    return d->backgroundColor;
 }
 
 void QtMaterialTabs::setTextColor(const QColor &color)
@@ -164,10 +160,8 @@ QColor QtMaterialTabs::textColor() const
     {
         return QtMaterialStyle::instance().themeColor("canvas");
     }
-    else
-    {
-        return d->textColor;
-    }
+
+    return d->textColor;
 }
 
 void QtMaterialTabs::setCurrentTab(QtMaterialTab *tab)
@@ -231,7 +225,7 @@ void QtMaterialTabs::setTabActive(int index, bool active)
     if (index > -1)
     {
         tab = static_cast<QtMaterialTab *>(d->tabLayout->itemAt(index)->widget());
-        if (tab)
+        if (tab != nullptr)
         {
             tab->setActive(active);
         }
@@ -246,7 +240,7 @@ void QtMaterialTabs::updateTabs()
     for (int i = 0; i < d->tabLayout->count(); ++i)
     {
         QLayoutItem *item = d->tabLayout->itemAt(i);
-        if ((tab = static_cast<QtMaterialTab *>(item->widget())))
+        if ((tab = static_cast<QtMaterialTab *>(item->widget())) != nullptr)
         {
             tab->setRippleStyle(d->rippleStyle);
             tab->setHaloVisible(d->showHalo);

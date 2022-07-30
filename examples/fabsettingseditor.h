@@ -12,8 +12,8 @@ class FloatingActionButtonSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit FloatingActionButtonSettingsEditor(QWidget *parent = 0);
-    ~FloatingActionButtonSettingsEditor();
+    explicit FloatingActionButtonSettingsEditor(QWidget *parent = nullptr);
+    ~FloatingActionButtonSettingsEditor() override;
 
 protected slots:
     void setupForm();

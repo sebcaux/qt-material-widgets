@@ -14,10 +14,10 @@ class QtMaterialAppBar : public QWidget
     Q_PROPERTY(QColor backgroundColor WRITE setBackgroundColor READ backgroundColor)
 
 public:
-    explicit QtMaterialAppBar(QWidget *parent = 0);
-    ~QtMaterialAppBar();
+    explicit QtMaterialAppBar(QWidget *parent = nullptr);
+    ~QtMaterialAppBar() override;
 
-    QSize sizeHint() const Q_DECL_OVERRIDE;
+    QSize sizeHint() const override;
 
     void setUseThemeColors(bool value);
     bool useThemeColors() const;
@@ -31,7 +31,7 @@ public:
     inline QHBoxLayout *appBarLayout() const;
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialAppBarPrivate> d_ptr;
 

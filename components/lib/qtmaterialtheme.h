@@ -331,15 +331,15 @@ class QtMaterialTheme : public QObject
     Q_OBJECT
 
 public:
-    explicit QtMaterialTheme(QObject *parent = 0);
-    ~QtMaterialTheme();
+    explicit QtMaterialTheme(QObject *parent = nullptr);
+    ~QtMaterialTheme() override;
 
     QColor getColor(const QString &key) const;
 
     void setColor(const QString &key, const QColor &color);
     void setColor(const QString &key, Material::Color color);
 
-    static QIcon icon(QString category, QString icon);
+    static QIcon icon(const QString &category, const QString &icon);
 
 protected:
     const QScopedPointer<QtMaterialThemePrivate> d_ptr;

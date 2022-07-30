@@ -14,10 +14,10 @@ class QtMaterialScrollBar : public QScrollBar
     Q_PROPERTY(QColor sliderColor WRITE setSliderColor READ sliderColor)
 
 public:
-    explicit QtMaterialScrollBar(QWidget *parent = 0);
-    ~QtMaterialScrollBar();
+    explicit QtMaterialScrollBar(QWidget *parent = nullptr);
+    ~QtMaterialScrollBar() override;
 
-    QSize sizeHint() const Q_DECL_OVERRIDE;
+    QSize sizeHint() const override;
 
     void setUseThemeColors(bool value);
     bool useThemeColors() const;
@@ -35,7 +35,7 @@ public:
     bool hideOnMouseOut() const;
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialScrollBarPrivate> d_ptr;
 

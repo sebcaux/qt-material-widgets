@@ -10,11 +10,11 @@ class QtMaterialRadioButton : public QtMaterialCheckable
     Q_OBJECT
 
 public:
-    explicit QtMaterialRadioButton(QWidget *parent = 0);
-    ~QtMaterialRadioButton();
+    explicit QtMaterialRadioButton(QWidget *parent = nullptr);
+    ~QtMaterialRadioButton() override;
 
 protected:
-    void setupProperties();
+    void setupProperties() override;
 
 private:
     Q_DISABLE_COPY(QtMaterialRadioButton)

@@ -44,7 +44,7 @@ void QtMaterialFloatingActionButtonPrivate::init()
 
     setupProperties();
 
-    if (q->parentWidget())
+    if (q->parentWidget() != nullptr)
     {
         q->parentWidget()->installEventFilter(q);
     }
@@ -60,7 +60,7 @@ QRect QtMaterialFloatingActionButtonPrivate::fabGeometry() const
     Q_Q(const QtMaterialFloatingActionButton);
 
     QWidget *parent = q->parentWidget();
-    if (!parent)
+    if (parent == nullptr)
     {
         return QRect();
     }
@@ -132,10 +132,8 @@ QSize QtMaterialFloatingActionButton::sizeHint() const
     {
         return QSize(QtMaterialFloatingActionButtonPrivate::MiniDiameter, QtMaterialFloatingActionButtonPrivate::MiniDiameter);
     }
-    else
-    {
-        return QSize(QtMaterialFloatingActionButtonPrivate::DefaultDiameter, QtMaterialFloatingActionButtonPrivate::DefaultDiameter);
-    }
+
+    return QSize(QtMaterialFloatingActionButtonPrivate::DefaultDiameter, QtMaterialFloatingActionButtonPrivate::DefaultDiameter);
 }
 
 void QtMaterialFloatingActionButton::setMini(bool state)
@@ -242,7 +240,7 @@ bool QtMaterialFloatingActionButton::event(QEvent *event)
 {
     Q_D(QtMaterialFloatingActionButton);
 
-    if (!parent())
+    if (parent() == nullptr)
     {
         return QtMaterialRaisedButton::event(event);
     }

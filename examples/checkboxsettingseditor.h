@@ -12,8 +12,8 @@ class CheckBoxSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit CheckBoxSettingsEditor(QWidget *parent = 0);
-    ~CheckBoxSettingsEditor();
+    explicit CheckBoxSettingsEditor(QWidget *parent = nullptr);
+    ~CheckBoxSettingsEditor() override;
 
 protected slots:
     void setupForm();

@@ -13,8 +13,8 @@ class AppBarSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit AppBarSettingsEditor(QWidget *parent = 0);
-    ~AppBarSettingsEditor();
+    explicit AppBarSettingsEditor(QWidget *parent = nullptr);
+    ~AppBarSettingsEditor() override;
 
 protected slots:
     void setupForm();

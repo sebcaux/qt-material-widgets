@@ -209,7 +209,7 @@ void QtMaterialSliderStateMachine::setupProperties()
 
     QColor holeColor = m_slider->palette().color(QPalette::Base);
 
-    if (m_slider->parentWidget())
+    if (m_slider->parentWidget() != nullptr)
     {
         holeColor = m_slider->parentWidget()->palette().color(m_slider->backgroundRole());
     }

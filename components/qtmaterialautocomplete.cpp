@@ -89,7 +89,7 @@ void QtMaterialAutoComplete::setDataSource(const QStringList &data)
     update();
 }
 
-void QtMaterialAutoComplete::updateResults(QString text)
+void QtMaterialAutoComplete::updateResults(const QString &text)
 {
     Q_D(QtMaterialAutoComplete);
 
@@ -132,7 +132,7 @@ void QtMaterialAutoComplete::updateResults(QString text)
         for (int c = 0; c < -diff; c++)
         {
             QWidget *widget = d->menuLayout->itemAt(0)->widget();
-            if (widget)
+            if (widget != nullptr)
             {
                 d->menuLayout->removeWidget(widget);
                 delete widget;
@@ -147,16 +147,16 @@ void QtMaterialAutoComplete::updateResults(QString text)
     {
         QWidget *widget = d->menuLayout->itemAt(i)->widget();
         QtMaterialFlatButton *item;
-        if ((item = static_cast<QtMaterialFlatButton *>(widget)))
+        if ((item = static_cast<QtMaterialFlatButton *>(widget)) != nullptr)
         {
-            QString text = results.at(i);
+            const QString &text = results.at(i);
             QRect rect = fm->boundingRect(text);
             d->maxWidth = qMax(d->maxWidth, rect.width());
             item->setText(text);
         }
     }
 
-    if (!results.count())
+    if (results.count() == 0)
     {
         emit d->stateMachine->shouldClose();
     }
@@ -185,7 +185,7 @@ bool QtMaterialAutoComplete::QtMaterialAutoComplete::event(QEvent *event)
         case QEvent::ParentChange:
         {
             QWidget *widget = static_cast<QWidget *>(parent());
-            if (widget)
+            if (widget != nullptr)
             {
                 d->menu->setParent(widget);
                 d->frame->setParent(widget);
@@ -249,7 +249,7 @@ bool QtMaterialAutoComplete::eventFilter(QObject *watched, QEvent *event)
             {
                 emit d->stateMachine->shouldFade();
                 QtMaterialFlatButton *widget;
-                if ((widget = static_cast<QtMaterialFlatButton *>(watched)))
+                if ((widget = static_cast<QtMaterialFlatButton *>(watched)) != nullptr)
                 {
                     QString text(widget->text());
                     setText(text);

@@ -12,8 +12,8 @@ class QtMaterialDialog : public QtMaterialOverlayWidget
     Q_OBJECT
 
 public:
-    explicit QtMaterialDialog(QWidget *parent = 0);
-    ~QtMaterialDialog();
+    explicit QtMaterialDialog(QWidget *parent = nullptr);
+    ~QtMaterialDialog() override;
 
     QLayout *windowLayout() const;
     void setWindowLayout(QLayout *layout);
@@ -23,7 +23,7 @@ public slots:
     void hideDialog();
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialDialogPrivate> d_ptr;
 

@@ -61,10 +61,8 @@ QSize QtMaterialScrollBar::sizeHint() const
     {
         return QSize(1, 10);
     }
-    else
-    {
-        return QSize(10, 1);
-    }
+
+    return QSize(10, 1);
 }
 
 void QtMaterialScrollBar::setUseThemeColors(bool value)
@@ -105,10 +103,8 @@ QColor QtMaterialScrollBar::canvasColor() const
     {
         return parentWidget()->palette().color(backgroundRole());
     }
-    else
-    {
-        return d->canvasColor;
-    }
+
+    return d->canvasColor;
 }
 
 void QtMaterialScrollBar::setBackgroundColor(const QColor &color)
@@ -129,10 +125,8 @@ QColor QtMaterialScrollBar::backgroundColor() const
     {
         return QtMaterialStyle::instance().themeColor("border");
     }
-    else
-    {
-        return d->backgroundColor;
-    }
+
+    return d->backgroundColor;
 }
 
 void QtMaterialScrollBar::setSliderColor(const QColor &color)
@@ -153,10 +147,8 @@ QColor QtMaterialScrollBar::sliderColor() const
     {
         return QtMaterialStyle::instance().themeColor("primary1");
     }
-    else
-    {
-        return d->sliderColor;
-    }
+
+    return d->sliderColor;
 }
 
 void QtMaterialScrollBar::setHideOnMouseOut(bool value)
@@ -188,7 +180,10 @@ void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
 
     painter.fillRect(rect(), canvasColor());
 
-    int x, y, w, h;
+    int x;
+    int y;
+    int w;
+    int h;
     rect().getRect(&x, &y, &w, &h);
 
     QMargins margins(2, 2, 2, 2);

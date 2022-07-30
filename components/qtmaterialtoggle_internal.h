@@ -14,14 +14,14 @@ class QtMaterialToggleRippleOverlay : public QtMaterialRippleOverlay
 
 public:
     QtMaterialToggleRippleOverlay(QtMaterialToggleThumb *thumb, QtMaterialToggleTrack *track, QtMaterialToggle *parent);
-    ~QtMaterialToggleRippleOverlay();
+    ~QtMaterialToggleRippleOverlay() override;
 
 protected slots:
     void addToggleRipple();
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
-    QRect overlayGeometry() const Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *obj, QEvent *event) override;
+    QRect overlayGeometry() const override;
 
 private:
     Q_DISABLE_COPY(QtMaterialToggleRippleOverlay)
@@ -40,7 +40,7 @@ class QtMaterialToggleThumb : public QWidget
 
 public:
     QtMaterialToggleThumb(QtMaterialToggle *parent);
-    ~QtMaterialToggleThumb();
+    ~QtMaterialToggleThumb() override;
 
     void setShift(qreal shift);
     inline qreal shift() const;
@@ -51,8 +51,8 @@ public:
     inline QColor thumbColor() const;
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *obj, QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     Q_DISABLE_COPY(QtMaterialToggleThumb)
@@ -94,14 +94,14 @@ class QtMaterialToggleTrack : public QWidget
 
 public:
     QtMaterialToggleTrack(QtMaterialToggle *parent);
-    ~QtMaterialToggleTrack();
+    ~QtMaterialToggleTrack() override;
 
     void setTrackColor(const QColor &color);
     inline QColor trackColor() const;
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *obj, QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     Q_DISABLE_COPY(QtMaterialToggleTrack)

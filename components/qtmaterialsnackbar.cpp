@@ -109,10 +109,8 @@ QColor QtMaterialSnackbar::backgroundColor() const
     {
         return QtMaterialStyle::instance().themeColor("text");
     }
-    else
-    {
-        return d->backgroundColor;
-    }
+
+    return d->backgroundColor;
 }
 
 void QtMaterialSnackbar::setBackgroundOpacity(qreal opacity)
@@ -148,10 +146,8 @@ QColor QtMaterialSnackbar::textColor() const
     {
         return QtMaterialStyle::instance().themeColor("canvas");
     }
-    else
-    {
-        return d->textColor;
-    }
+
+    return d->textColor;
 }
 
 void QtMaterialSnackbar::setFontSize(qreal size)

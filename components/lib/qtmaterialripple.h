@@ -17,9 +17,9 @@ class QtMaterialRipple : public QParallelAnimationGroup
     Q_PROPERTY(qreal opacity WRITE setOpacity READ opacity)
 
 public:
-    explicit QtMaterialRipple(const QPoint &center, QObject *parent = 0);
-    QtMaterialRipple(const QPoint &center, QtMaterialRippleOverlay *overlay, QObject *parent = 0);
-    ~QtMaterialRipple();
+    explicit QtMaterialRipple(const QPoint &center, QObject *parent = nullptr);
+    QtMaterialRipple(const QPoint &center, QtMaterialRippleOverlay *overlay, QObject *parent = nullptr);
+    ~QtMaterialRipple() override;
 
     inline void setOverlay(QtMaterialRippleOverlay *overlay);
 

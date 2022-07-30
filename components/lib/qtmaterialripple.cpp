@@ -8,7 +8,7 @@
 
 QtMaterialRipple::QtMaterialRipple(const QPoint &center, QObject *parent)
     : QParallelAnimationGroup(parent),
-      m_overlay(0),
+      m_overlay(nullptr),
       m_radiusAnimation(animate("radius")),
       m_opacityAnimation(animate("opacity")),
       m_radius(0),
@@ -66,7 +66,7 @@ void QtMaterialRipple::setColor(const QColor &color)
     }
     m_brush.setColor(color);
 
-    if (m_overlay)
+    if (m_overlay != nullptr)
     {
         m_overlay->update();
     }
@@ -76,7 +76,7 @@ void QtMaterialRipple::setBrush(const QBrush &brush)
 {
     m_brush = brush;
 
-    if (m_overlay)
+    if (m_overlay != nullptr)
     {
         m_overlay->update();
     }

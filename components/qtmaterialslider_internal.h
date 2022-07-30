@@ -14,7 +14,7 @@ class QtMaterialSliderStateMachine : public QStateMachine
 
 public:
     QtMaterialSliderStateMachine(QtMaterialSlider *slider, QtMaterialSliderThumb *thumb, QtMaterialSliderTrack *track);
-    ~QtMaterialSliderStateMachine();
+    ~QtMaterialSliderStateMachine() override;
 
     void setupProperties();
 
@@ -49,7 +49,7 @@ class QtMaterialSliderThumb : public QtMaterialOverlayWidget
 
 public:
     explicit QtMaterialSliderThumb(QtMaterialSlider *slider);
-    ~QtMaterialSliderThumb();
+    ~QtMaterialSliderThumb() override;
 
     inline void setDiameter(qreal diameter);
     inline qreal diameter() const;
@@ -73,8 +73,8 @@ public:
     inline int offset() const;
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *obj, QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     Q_DISABLE_COPY(QtMaterialSliderThumb)
@@ -174,7 +174,7 @@ class QtMaterialSliderTrack : public QtMaterialOverlayWidget
 
 public:
     explicit QtMaterialSliderTrack(QtMaterialSliderThumb *thumb, QtMaterialSlider *slider);
-    ~QtMaterialSliderTrack();
+    ~QtMaterialSliderTrack() override;
 
     inline void setFillColor(const QColor &color);
     inline QColor fillColor() const;
@@ -183,8 +183,8 @@ public:
     inline int trackWidth() const;
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *obj, QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     Q_DISABLE_COPY(QtMaterialSliderTrack)

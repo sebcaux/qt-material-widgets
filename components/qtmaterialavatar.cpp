@@ -123,10 +123,8 @@ QColor QtMaterialAvatar::textColor() const
     {
         return QtMaterialStyle::instance().themeColor("canvas");
     }
-    else
-    {
-        return d->textColor;
-    }
+
+    return d->textColor;
 }
 
 void QtMaterialAvatar::setBackgroundColor(const QColor &color)
@@ -147,10 +145,8 @@ QColor QtMaterialAvatar::backgroundColor() const
     {
         return QtMaterialStyle::instance().themeColor("primary1");
     }
-    else
-    {
-        return d->backgroundColor;
-    }
+
+    return d->backgroundColor;
 }
 
 /*!

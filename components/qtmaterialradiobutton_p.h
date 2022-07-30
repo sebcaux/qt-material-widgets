@@ -12,7 +12,7 @@ class QtMaterialRadioButtonPrivate : public QtMaterialCheckablePrivate
 
 public:
     QtMaterialRadioButtonPrivate(QtMaterialRadioButton *q);
-    ~QtMaterialRadioButtonPrivate();
+    ~QtMaterialRadioButtonPrivate() override;
 
     void init();
 };

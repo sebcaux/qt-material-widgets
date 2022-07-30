@@ -10,10 +10,10 @@ class QtMaterialIconButton : public QAbstractButton
     Q_OBJECT
 
 public:
-    explicit QtMaterialIconButton(const QIcon &icon, QWidget *parent = 0);
-    ~QtMaterialIconButton();
+    explicit QtMaterialIconButton(const QIcon &icon, QWidget *parent = nullptr);
+    ~QtMaterialIconButton() override;
 
-    QSize sizeHint() const Q_DECL_OVERRIDE;
+    QSize sizeHint() const override;
 
     void setUseThemeColors(bool value);
     bool useThemeColors() const;
@@ -25,12 +25,12 @@ public:
     QColor disabledColor() const;
 
 protected:
-    QtMaterialIconButton(QtMaterialIconButtonPrivate &d, QWidget *parent = 0);
+    QtMaterialIconButton(QtMaterialIconButtonPrivate &d, QWidget *parent = nullptr);
 
-    bool event(QEvent *event) Q_DECL_OVERRIDE;
-    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
-    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    bool event(QEvent *event) override;
+    bool eventFilter(QObject *obj, QEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialIconButtonPrivate> d_ptr;
 

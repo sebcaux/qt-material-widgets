@@ -10,14 +10,14 @@ class QtMaterialRaisedButton : public QtMaterialFlatButton
     Q_OBJECT
 
 public:
-    explicit QtMaterialRaisedButton(QWidget *parent = 0);
-    explicit QtMaterialRaisedButton(const QString &text, QWidget *parent = 0);
-    ~QtMaterialRaisedButton();
+    explicit QtMaterialRaisedButton(QWidget *parent = nullptr);
+    explicit QtMaterialRaisedButton(const QString &text, QWidget *parent = nullptr);
+    ~QtMaterialRaisedButton() override;
 
 protected:
-    QtMaterialRaisedButton(QtMaterialRaisedButtonPrivate &d, QWidget *parent = 0);
+    QtMaterialRaisedButton(QtMaterialRaisedButtonPrivate &d, QWidget *parent = nullptr);
 
-    bool event(QEvent *event) Q_DECL_OVERRIDE;
+    bool event(QEvent *event) override;
 
 private:
     Q_DISABLE_COPY(QtMaterialRaisedButton)

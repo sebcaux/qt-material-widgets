@@ -74,7 +74,7 @@ void QtMaterialDialogProxy::paintEvent(QPaintEvent *event)
     {
         return;
     }
-    else if (Opaque != m_mode)
+    if (Opaque != m_mode)
     {
         painter.setOpacity(m_opacity);
     }

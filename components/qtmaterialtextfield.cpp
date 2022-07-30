@@ -25,7 +25,7 @@ void QtMaterialTextFieldPrivate::init()
     Q_Q(QtMaterialTextField);
 
     stateMachine = new QtMaterialTextFieldStateMachine(q);
-    label = 0;
+    label = nullptr;
     labelFontSize = 9.5;
     showLabel = false;
     showInputLine = true;
@@ -89,7 +89,7 @@ void QtMaterialTextField::setShowLabel(bool value)
 
     d->showLabel = value;
 
-    if (!d->label && value)
+    if ((d->label == nullptr) && value)
     {
         d->label = new QtMaterialTextFieldLabel(this);
         d->stateMachine->setLabel(d->label);
@@ -118,7 +118,7 @@ void QtMaterialTextField::setLabelFontSize(qreal size)
 
     d->labelFontSize = size;
 
-    if (d->label)
+    if (d->label != nullptr)
     {
         QFont font(d->label->font());
         font.setPointSizeF(size);
@@ -169,10 +169,8 @@ QColor QtMaterialTextField::textColor() const
     {
         return QtMaterialStyle::instance().themeColor("text");
     }
-    else
-    {
-        return d->textColor;
-    }
+
+    return d->textColor;
 }
 
 void QtMaterialTextField::setLabelColor(const QColor &color)
@@ -193,10 +191,8 @@ QColor QtMaterialTextField::labelColor() const
     {
         return QtMaterialStyle::instance().themeColor("accent3");
     }
-    else
-    {
-        return d->labelColor;
-    }
+
+    return d->labelColor;
 }
 
 void QtMaterialTextField::setInkColor(const QColor &color)
@@ -217,10 +213,8 @@ QColor QtMaterialTextField::inkColor() const
     {
         return QtMaterialStyle::instance().themeColor("primary1");
     }
-    else
-    {
-        return d->inkColor;
-    }
+
+    return d->inkColor;
 }
 
 void QtMaterialTextField::setInputLineColor(const QColor &color)
@@ -241,10 +235,8 @@ QColor QtMaterialTextField::inputLineColor() const
     {
         return QtMaterialStyle::instance().themeColor("border");
     }
-    else
-    {
-        return d->inputLineColor;
-    }
+
+    return d->inputLineColor;
 }
 
 void QtMaterialTextField::setShowInputLine(bool value)
@@ -286,7 +278,7 @@ bool QtMaterialTextField::event(QEvent *event)
         case QEvent::Resize:
         case QEvent::Move:
         {
-            if (d->label)
+            if (d->label != nullptr)
             {
                 d->label->setGeometry(rect());
             }
@@ -326,7 +318,9 @@ void QtMaterialTextField::paintEvent(QPaintEvent *event)
         pen.setColor(inputLineColor());
 
         if (!isEnabled())
+        {
             pen.setStyle(Qt::DashLine);
+        }
 
         painter.setPen(pen);
         painter.setOpacity(1);

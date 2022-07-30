@@ -19,7 +19,7 @@ class QtMaterialFlatButtonStateMachine : public QStateMachine
 
 public:
     explicit QtMaterialFlatButtonStateMachine(QtMaterialFlatButton *parent);
-    ~QtMaterialFlatButtonStateMachine();
+    ~QtMaterialFlatButtonStateMachine() override;
 
     void setOverlayOpacity(qreal opacity);
     inline qreal overlayOpacity() const;
@@ -46,7 +46,7 @@ signals:
     void buttonUnchecked();
 
 protected:
-    bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private:
     Q_DISABLE_COPY(QtMaterialFlatButtonStateMachine)

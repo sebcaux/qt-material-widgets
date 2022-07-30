@@ -264,10 +264,8 @@ QColor QtMaterialFlatButton::disabledForegroundColor() const
     {
         return QtMaterialStyle::instance().themeColor("disabled");
     }
-    else
-    {
-        return d->disabledColor;
-    }
+
+    return d->disabledColor;
 }
 
 void QtMaterialFlatButton::setDisabledBackgroundColor(const QColor &color)
@@ -288,10 +286,8 @@ QColor QtMaterialFlatButton::disabledBackgroundColor() const
     {
         return QtMaterialStyle::instance().themeColor("disabled3");
     }
-    else
-    {
-        return d->disabledBackgroundColor;
-    }
+
+    return d->disabledBackgroundColor;
 }
 
 void QtMaterialFlatButton::setFontSize(qreal size)

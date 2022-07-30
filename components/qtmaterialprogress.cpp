@@ -110,10 +110,8 @@ QColor QtMaterialProgress::progressColor() const
     {
         return QtMaterialStyle::instance().themeColor("primary1");
     }
-    else
-    {
-        return d->progressColor;
-    }
+
+    return d->progressColor;
 }
 
 void QtMaterialProgress::setBackgroundColor(const QColor &color)
@@ -134,10 +132,8 @@ QColor QtMaterialProgress::backgroundColor() const
     {
         return QtMaterialStyle::instance().themeColor("border");
     }
-    else
-    {
-        return d->backgroundColor;
-    }
+
+    return d->backgroundColor;
 }
 
 /*!

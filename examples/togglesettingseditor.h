@@ -12,8 +12,8 @@ class ToggleSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit ToggleSettingsEditor(QWidget *parent = 0);
-    ~ToggleSettingsEditor();
+    explicit ToggleSettingsEditor(QWidget *parent = nullptr);
+    ~ToggleSettingsEditor() override;
 
 protected slots:
     void setupForm();

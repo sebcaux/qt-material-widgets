@@ -15,7 +15,7 @@ class QtMaterialDrawerStateMachine : public QStateMachine
 
 public:
     explicit QtMaterialDrawerStateMachine(QtMaterialDrawerWidget *drawer, QtMaterialDrawer *parent);
-    ~QtMaterialDrawerStateMachine();
+    ~QtMaterialDrawerStateMachine() override;
 
     void setOpacity(qreal opacity);
     inline qreal opacity() const;
@@ -52,16 +52,16 @@ class QtMaterialDrawerWidget : public QtMaterialOverlayWidget
     Q_PROPERTY(int offset WRITE setOffset READ offset)
 
 public:
-    explicit QtMaterialDrawerWidget(QWidget *parent = 0);
-    ~QtMaterialDrawerWidget();
+    explicit QtMaterialDrawerWidget(QWidget *parent = nullptr);
+    ~QtMaterialDrawerWidget() override;
 
     void setOffset(int offset);
     inline int offset() const;
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) override;
 
-    QRect overlayGeometry() const Q_DECL_OVERRIDE;
+    QRect overlayGeometry() const override;
 
 private:
     int m_offset;

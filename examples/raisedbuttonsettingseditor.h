@@ -8,8 +8,8 @@ class RaisedButtonSettingsEditor : public FlatButtonSettingsEditor
     Q_OBJECT
 
 public:
-    explicit RaisedButtonSettingsEditor(QWidget *parent = 0);
-    ~RaisedButtonSettingsEditor();
+    explicit RaisedButtonSettingsEditor(QWidget *parent = nullptr);
+    ~RaisedButtonSettingsEditor() override;
 };
 
 #endif  // RAISEDBUTTONSETTINGSEDITOR_H

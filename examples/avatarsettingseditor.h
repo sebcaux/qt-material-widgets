@@ -12,8 +12,8 @@ class AvatarSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit AvatarSettingsEditor(QWidget *parent = 0);
-    ~AvatarSettingsEditor();
+    explicit AvatarSettingsEditor(QWidget *parent = nullptr);
+    ~AvatarSettingsEditor() override;
 
 protected slots:
     void setupForm();

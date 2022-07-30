@@ -12,11 +12,11 @@ class FlatButtonSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit FlatButtonSettingsEditor(QWidget *parent = 0);
-    ~FlatButtonSettingsEditor();
+    explicit FlatButtonSettingsEditor(QWidget *parent = nullptr);
+    ~FlatButtonSettingsEditor() override;
 
 protected:
-    explicit FlatButtonSettingsEditor(QtMaterialFlatButton *button, QWidget *parent = 0);
+    explicit FlatButtonSettingsEditor(QtMaterialFlatButton *button, QWidget *parent = nullptr);
 
     Ui::FlatButtonSettingsForm *const ui;
 

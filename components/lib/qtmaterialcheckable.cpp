@@ -189,10 +189,8 @@ QColor QtMaterialCheckable::checkedColor() const
     {
         return QtMaterialStyle::instance().themeColor("primary1");
     }
-    else
-    {
-        return d->checkedColor;
-    }
+
+    return d->checkedColor;
 }
 
 void QtMaterialCheckable::setUncheckedColor(const QColor &color)
@@ -213,10 +211,8 @@ QColor QtMaterialCheckable::uncheckedColor() const
     {
         return QtMaterialStyle::instance().themeColor("text");
     }
-    else
-    {
-        return d->uncheckedColor;
-    }
+
+    return d->uncheckedColor;
 }
 
 void QtMaterialCheckable::setTextColor(const QColor &color)
@@ -237,10 +233,8 @@ QColor QtMaterialCheckable::textColor() const
     {
         return QtMaterialStyle::instance().themeColor("text");
     }
-    else
-    {
-        return d->textColor;
-    }
+
+    return d->textColor;
 }
 
 void QtMaterialCheckable::setDisabledColor(const QColor &color)
@@ -261,10 +255,8 @@ QColor QtMaterialCheckable::disabledColor() const
     {
         return QtMaterialStyle::instance().themeColor("accent3");
     }
-    else
-    {
-        return d->disabledColor;
-    }
+
+    return d->disabledColor;
 }
 
 void QtMaterialCheckable::setCheckedIcon(const QIcon &icon)
@@ -333,7 +325,7 @@ bool QtMaterialCheckable::event(QEvent *event)
             break;
         case QEvent::ParentChange:
             QWidget *widget;
-            if ((widget = parentWidget()))
+            if ((widget = parentWidget()) != nullptr)
             {
                 d->rippleOverlay->setParent(widget);
             }

@@ -15,7 +15,7 @@ class QtMaterialTabsInkBar : public QtMaterialOverlayWidget
 
 public:
     QtMaterialTabsInkBar(QtMaterialTabs *parent);
-    ~QtMaterialTabsInkBar();
+    ~QtMaterialTabsInkBar() override;
 
     inline void setTweenValue(qreal value);
     inline qreal tweenValue() const;
@@ -24,8 +24,8 @@ public:
     void animate();
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *obj, QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     Q_DISABLE_COPY(QtMaterialTabsInkBar)
@@ -54,18 +54,18 @@ class QtMaterialTab : public QtMaterialFlatButton
 
 public:
     explicit QtMaterialTab(QtMaterialTabs *parent);
-    ~QtMaterialTab();
+    ~QtMaterialTab() override;
 
     inline void setActive(bool state);
     inline bool isActive() const;
 
-    QSize sizeHint() const Q_DECL_OVERRIDE;
+    QSize sizeHint() const override;
 
 protected slots:
     void activateTab();
 
 protected:
-    void paintForeground(QPainter *painter) Q_DECL_OVERRIDE;
+    void paintForeground(QPainter *painter) override;
 
 private:
     Q_DISABLE_COPY(QtMaterialTab)

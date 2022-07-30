@@ -14,9 +14,9 @@ QtMaterialTextFieldStateMachine::QtMaterialTextFieldStateMachine(QtMaterialTextF
       m_textField(parent),
       m_normalState(new QState),
       m_focusedState(new QState),
-      m_label(0),
-      m_offsetAnimation(0),
-      m_colorAnimation(0),
+      m_label(nullptr),
+      m_offsetAnimation(nullptr),
+      m_colorAnimation(nullptr),
       m_progress(0.0)
 {
     Q_ASSERT(parent);
@@ -61,18 +61,16 @@ QtMaterialTextFieldStateMachine::~QtMaterialTextFieldStateMachine()
 
 void QtMaterialTextFieldStateMachine::setLabel(QtMaterialTextFieldLabel *label)
 {
-    if (m_label)
-    {
-        delete m_label;
-    }
 
-    if (m_offsetAnimation)
+    delete m_label;
+
+    if (m_offsetAnimation != nullptr)
     {
         removeDefaultAnimation(m_offsetAnimation);
         delete m_offsetAnimation;
     }
 
-    if (m_colorAnimation)
+    if (m_colorAnimation != nullptr)
     {
         removeDefaultAnimation(m_colorAnimation);
         delete m_colorAnimation;
@@ -80,7 +78,7 @@ void QtMaterialTextFieldStateMachine::setLabel(QtMaterialTextFieldLabel *label)
 
     m_label = label;
 
-    if (m_label)
+    if (m_label != nullptr)
     {
         m_offsetAnimation = new QPropertyAnimation(m_label, "offset", this);
         m_offsetAnimation->setDuration(210);
@@ -97,7 +95,7 @@ void QtMaterialTextFieldStateMachine::setLabel(QtMaterialTextFieldLabel *label)
 
 void QtMaterialTextFieldStateMachine::setupProperties()
 {
-    if (m_label)
+    if (m_label != nullptr)
     {
         const int m = m_textField->textMargins().top();
 

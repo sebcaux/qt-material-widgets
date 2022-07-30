@@ -8,8 +8,8 @@ class QtMaterialMenu : public QWidget
     Q_OBJECT
 
 public:
-    explicit QtMaterialMenu(QWidget *parent = 0);
-    ~QtMaterialMenu();
+    explicit QtMaterialMenu(QWidget *parent = nullptr);
+    ~QtMaterialMenu() override;
 };
 
 #endif  // QTMATERIALMENU_H

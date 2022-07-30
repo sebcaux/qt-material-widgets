@@ -12,8 +12,8 @@ class MenuSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit MenuSettingsEditor(QWidget *parent = 0);
-    ~MenuSettingsEditor();
+    explicit MenuSettingsEditor(QWidget *parent = nullptr);
+    ~MenuSettingsEditor() override;
 
 protected slots:
     void setupForm();

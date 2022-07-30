@@ -14,10 +14,10 @@ class QtMaterialBadge : public QtMaterialOverlayWidget
     Q_PROPERTY(QPointF relativePosition WRITE setRelativePosition READ relativePosition)
 
 public:
-    explicit QtMaterialBadge(QWidget *parent = 0);
-    explicit QtMaterialBadge(const QIcon &icon, QWidget *parent = 0);
-    explicit QtMaterialBadge(const QString &text, QWidget *parent = 0);
-    ~QtMaterialBadge();
+    explicit QtMaterialBadge(QWidget *parent = nullptr);
+    explicit QtMaterialBadge(const QIcon &icon, QWidget *parent = nullptr);
+    explicit QtMaterialBadge(const QString &text, QWidget *parent = nullptr);
+    ~QtMaterialBadge() override;
 
     void setUseThemeColors(bool value);
     bool useThemeColors() const;
@@ -38,7 +38,7 @@ public:
     void setRelativeYPosition(qreal y);
     qreal relativeYPosition() const;
 
-    QSize sizeHint() const Q_DECL_OVERRIDE;
+    QSize sizeHint() const override;
 
     void setIcon(const QIcon &icon);
     QIcon icon() const;
@@ -47,7 +47,7 @@ public:
     QString text() const;
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) override;
 
     int getDiameter() const;
 

@@ -8,12 +8,12 @@ class QtMaterialOverlayWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit QtMaterialOverlayWidget(QWidget *parent = 0);
-    ~QtMaterialOverlayWidget();
+    explicit QtMaterialOverlayWidget(QWidget *parent = nullptr);
+    ~QtMaterialOverlayWidget() override;
 
 protected:
-    bool event(QEvent *event) Q_DECL_OVERRIDE;
-    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
+    bool event(QEvent *event) override;
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
     virtual QRect overlayGeometry() const;
 

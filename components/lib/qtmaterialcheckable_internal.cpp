@@ -3,17 +3,18 @@
 #include <QIcon>
 #include <QPainter>
 #include <QTransform>
+#include <utility>
 
 /*!
  *  \class QtMaterialCheckableIcon
  *  \internal
  */
 
-QtMaterialCheckableIcon::QtMaterialCheckableIcon(const QIcon &icon, QtMaterialCheckable *parent)
+QtMaterialCheckableIcon::QtMaterialCheckableIcon(QIcon icon, QtMaterialCheckable *parent)
     : QWidget(parent),
       m_checkable(parent),
       m_color(Qt::black),
-      m_icon(icon),
+      m_icon(std::move(icon)),
       m_iconSize(24),
       m_opacity(1.0)
 {

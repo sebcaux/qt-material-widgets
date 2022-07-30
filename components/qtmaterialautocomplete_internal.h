@@ -10,7 +10,7 @@ class QtMaterialAutoCompleteStateMachine : public QStateMachine
 
 public:
     explicit QtMaterialAutoCompleteStateMachine(QWidget *menu);
-    ~QtMaterialAutoCompleteStateMachine();
+    ~QtMaterialAutoCompleteStateMachine() override;
 
 signals:
     void shouldOpen();

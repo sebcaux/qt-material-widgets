@@ -182,10 +182,8 @@ QColor QtMaterialToggle::disabledColor() const
     {
         return QtMaterialStyle::instance().themeColor("disabled");
     }
-    else
-    {
-        return d->disabledColor;
-    }
+
+    return d->disabledColor;
 }
 
 void QtMaterialToggle::setActiveColor(const QColor &color)
@@ -206,10 +204,8 @@ QColor QtMaterialToggle::activeColor() const
     {
         return QtMaterialStyle::instance().themeColor("primary1");
     }
-    else
-    {
-        return d->activeColor;
-    }
+
+    return d->activeColor;
 }
 
 void QtMaterialToggle::setInactiveColor(const QColor &color)
@@ -230,10 +226,8 @@ QColor QtMaterialToggle::inactiveColor() const
     {
         return QtMaterialStyle::instance().themeColor("canvas");
     }
-    else
-    {
-        return d->inactiveColor;
-    }
+
+    return d->inactiveColor;
 }
 
 void QtMaterialToggle::setTrackColor(const QColor &color)
@@ -254,10 +248,8 @@ QColor QtMaterialToggle::trackColor() const
     {
         return QtMaterialStyle::instance().themeColor("accent3");
     }
-    else
-    {
-        return d->trackColor;
-    }
+
+    return d->trackColor;
 }
 
 void QtMaterialToggle::setOrientation(Qt::Orientation orientation)
@@ -296,7 +288,7 @@ bool QtMaterialToggle::event(QEvent *event)
         case QEvent::ParentChange:
         {
             QWidget *widget;
-            if ((widget = parentWidget()))
+            if ((widget = parentWidget()) != nullptr)
             {
                 d->rippleOverlay->setParent(widget);
             }

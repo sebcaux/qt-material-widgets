@@ -116,10 +116,8 @@ QColor QtMaterialBadge::textColor() const
     {
         return QtMaterialStyle::instance().themeColor("canvas");
     }
-    else
-    {
-        return d->textColor;
-    }
+
+    return d->textColor;
 }
 
 void QtMaterialBadge::setBackgroundColor(const QColor &color)
@@ -140,10 +138,8 @@ QColor QtMaterialBadge::backgroundColor() const
     {
         return QtMaterialStyle::instance().themeColor("accent1");
     }
-    else
-    {
-        return d->backgroundColor;
-    }
+
+    return d->backgroundColor;
 }
 
 void QtMaterialBadge::setRelativePosition(const QPointF &pos)
@@ -297,8 +293,6 @@ int QtMaterialBadge::getDiameter() const
     {
         return qMax(d->size.width(), d->size.height()) + d->padding;
     }
-    else
-    {
-        return 24;
-    }
+
+    return 24;
 }

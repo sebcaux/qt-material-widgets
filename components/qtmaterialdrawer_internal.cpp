@@ -134,7 +134,7 @@ void QtMaterialDrawerWidget::setOffset(int offset)
     m_offset = offset;
 
     QWidget *widget = parentWidget();
-    if (widget)
+    if (widget != nullptr)
     {
         setGeometry(widget->rect().translated(offset, 0));
     }

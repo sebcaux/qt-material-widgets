@@ -12,7 +12,7 @@ class QtMaterialScrollBarStateMachine : public QStateMachine
 
 public:
     QtMaterialScrollBarStateMachine(QtMaterialScrollBar *parent);
-    ~QtMaterialScrollBarStateMachine();
+    ~QtMaterialScrollBarStateMachine() override;
 
     inline void setOpacity(qreal opacity);
     inline qreal opacity() const;

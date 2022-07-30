@@ -12,8 +12,8 @@ public:
     QtMaterialStateTransition(QtMaterialStateTransitionType type);
 
 protected:
-    virtual bool eventTest(QEvent *event);
-    virtual void onTransition(QEvent *);
+    bool eventTest(QEvent *event) override;
+    void onTransition(QEvent * /*event*/) override;
 
 private:
     QtMaterialStateTransitionType m_type;

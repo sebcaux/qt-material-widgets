@@ -16,7 +16,7 @@ class QtMaterialTextFieldStateMachine : public QStateMachine
 
 public:
     QtMaterialTextFieldStateMachine(QtMaterialTextField *parent);
-    ~QtMaterialTextFieldStateMachine();
+    ~QtMaterialTextFieldStateMachine() override;
 
     void setLabel(QtMaterialTextFieldLabel *label);
 
@@ -59,7 +59,7 @@ class QtMaterialTextFieldLabel : public QWidget
 
 public:
     QtMaterialTextFieldLabel(QtMaterialTextField *parent);
-    ~QtMaterialTextFieldLabel();
+    ~QtMaterialTextFieldLabel() override;
 
     inline void setScale(qreal scale);
     inline qreal scale() const;
@@ -71,7 +71,7 @@ public:
     inline QColor color() const;
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     Q_DISABLE_COPY(QtMaterialTextFieldLabel)

@@ -14,8 +14,8 @@ class QtMaterialProgress : public QProgressBar
     Q_PROPERTY(QColor backgroundColor WRITE setProgressColor READ backgroundColor)
 
 public:
-    explicit QtMaterialProgress(QWidget *parent = 0);
-    ~QtMaterialProgress();
+    explicit QtMaterialProgress(QWidget *parent = nullptr);
+    ~QtMaterialProgress() override;
 
     void setProgressType(Material::ProgressType type);
     Material::ProgressType progressType() const;
@@ -30,7 +30,7 @@ public:
     QColor backgroundColor() const;
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialProgressPrivate> d_ptr;
 

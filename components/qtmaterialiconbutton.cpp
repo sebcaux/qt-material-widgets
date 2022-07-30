@@ -155,7 +155,7 @@ bool QtMaterialIconButton::event(QEvent *event)
         case QEvent::ParentChange:
         {
             QWidget *widget;
-            if ((widget = parentWidget()))
+            if ((widget = parentWidget()) != nullptr)
             {
                 d->rippleOverlay->setParent(widget);
             }

@@ -12,7 +12,7 @@ class QtMaterialCheckBoxPrivate : public QtMaterialCheckablePrivate
 
 public:
     QtMaterialCheckBoxPrivate(QtMaterialCheckBox *q);
-    ~QtMaterialCheckBoxPrivate();
+    ~QtMaterialCheckBoxPrivate() override;
 
     void init();
 };

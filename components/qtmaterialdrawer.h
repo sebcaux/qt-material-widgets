@@ -11,8 +11,8 @@ class QtMaterialDrawer : public QtMaterialOverlayWidget
     Q_OBJECT
 
 public:
-    explicit QtMaterialDrawer(QWidget *parent = 0);
-    ~QtMaterialDrawer();
+    explicit QtMaterialDrawer(QWidget *parent = nullptr);
+    ~QtMaterialDrawer() override;
 
     void setDrawerWidth(int width);
     int drawerWidth() const;
@@ -34,9 +34,9 @@ public slots:
     void closeDrawer();
 
 protected:
-    bool event(QEvent *event) Q_DECL_OVERRIDE;
-    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    bool event(QEvent *event) override;
+    bool eventFilter(QObject *obj, QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialDrawerPrivate> d_ptr;
 

@@ -12,8 +12,8 @@ class TabsSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit TabsSettingsEditor(QWidget *parent = 0);
-    ~TabsSettingsEditor();
+    explicit TabsSettingsEditor(QWidget *parent = nullptr);
+    ~TabsSettingsEditor() override;
 
 protected slots:
     void setupForm();

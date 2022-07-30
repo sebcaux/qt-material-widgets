@@ -12,7 +12,7 @@ class QtMaterialProgressDelegate : public QObject
 
 public:
     QtMaterialProgressDelegate(QtMaterialProgress *parent);
-    ~QtMaterialProgressDelegate();
+    ~QtMaterialProgressDelegate() override;
 
     inline void setOffset(qreal offset);
     inline qreal offset() const;

@@ -13,8 +13,8 @@ class BadgeSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit BadgeSettingsEditor(QWidget *parent = 0);
-    ~BadgeSettingsEditor();
+    explicit BadgeSettingsEditor(QWidget *parent = nullptr);
+    ~BadgeSettingsEditor() override;
 
 protected slots:
     void setupForm();

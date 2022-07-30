@@ -32,7 +32,8 @@ void QtMaterialToggleRippleOverlay::addToggleRipple()
         return;
     }
 
-    int t, w;
+    int t;
+    int w;
 
     if (Qt::Horizontal == m_toggle->orientation())
     {
@@ -76,10 +77,8 @@ QRect QtMaterialToggleRippleOverlay::overlayGeometry() const
     {
         return m_toggle->geometry().adjusted(-10 + offset, -20, 10 + offset, 20);
     }
-    else
-    {
-        return m_toggle->geometry().adjusted(-10, -20 + offset, 10, 20 + offset);
-    }
+
+    return m_toggle->geometry().adjusted(-10, -20 + offset, 10, 20 + offset);
 }
 
 /*!

@@ -12,8 +12,8 @@ class SnackbarSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit SnackbarSettingsEditor(QWidget *parent = 0);
-    ~SnackbarSettingsEditor();
+    explicit SnackbarSettingsEditor(QWidget *parent = nullptr);
+    ~SnackbarSettingsEditor() override;
 
 protected slots:
     void setupForm();

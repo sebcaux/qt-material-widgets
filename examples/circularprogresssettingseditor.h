@@ -12,8 +12,8 @@ class CircularProgressSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit CircularProgressSettingsEditor(QWidget *parent = 0);
-    ~CircularProgressSettingsEditor();
+    explicit CircularProgressSettingsEditor(QWidget *parent = nullptr);
+    ~CircularProgressSettingsEditor() override;
 
 protected slots:
     void setupForm();

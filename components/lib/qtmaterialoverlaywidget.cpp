@@ -9,7 +9,7 @@
 QtMaterialOverlayWidget::QtMaterialOverlayWidget(QWidget *parent)
     : QWidget(parent)
 {
-    if (parent)
+    if (parent != nullptr)
     {
         parent->installEventFilter(this);
     }
@@ -24,7 +24,7 @@ QtMaterialOverlayWidget::~QtMaterialOverlayWidget()
  */
 bool QtMaterialOverlayWidget::event(QEvent *event)
 {
-    if (!parent())
+    if (parent() == nullptr)
     {
         return QWidget::event(event);
     }
@@ -67,7 +67,7 @@ bool QtMaterialOverlayWidget::eventFilter(QObject *obj, QEvent *event)
 QRect QtMaterialOverlayWidget::overlayGeometry() const
 {
     QWidget *widget = parentWidget();
-    if (!widget)
+    if (widget == nullptr)
     {
         return QRect();
     }

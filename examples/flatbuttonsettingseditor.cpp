@@ -197,7 +197,7 @@ void FlatButtonSettingsEditor::updateWidget()
 void FlatButtonSettingsEditor::selectColor()
 {
     QColorDialog dialog;
-    if (dialog.exec())
+    if (dialog.exec() != 0)
     {
         QColor color = dialog.selectedColor();
         QString senderName = sender()->objectName();

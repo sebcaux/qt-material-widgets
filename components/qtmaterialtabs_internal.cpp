@@ -39,7 +39,7 @@ void QtMaterialTabsInkBar::refreshGeometry()
 {
     QLayoutItem *item = m_tabs->layout()->itemAt(m_tabs->currentIndex());
 
-    if (item)
+    if (item != nullptr)
     {
         const QRect r(item->geometry());
         const qreal s = 1 - m_tween;
@@ -132,10 +132,8 @@ QSize QtMaterialTab::sizeHint() const
     {
         return QtMaterialFlatButton::sizeHint();
     }
-    else
-    {
-        return QSize(40, iconSize().height() + 46);
-    }
+
+    return QSize(40, iconSize().height() + 46);
 }
 
 void QtMaterialTab::activateTab()

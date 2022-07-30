@@ -12,8 +12,8 @@ class AutoCompleteSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit AutoCompleteSettingsEditor(QWidget *parent = 0);
-    ~AutoCompleteSettingsEditor();
+    explicit AutoCompleteSettingsEditor(QWidget *parent = nullptr);
+    ~AutoCompleteSettingsEditor() override;
 
 protected slots:
     void setupForm();

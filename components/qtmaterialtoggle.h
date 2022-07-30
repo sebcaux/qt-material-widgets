@@ -15,8 +15,8 @@ class QtMaterialToggle : public QAbstractButton
     Q_PROPERTY(QColor trackColor WRITE setTrackColor READ trackColor)
 
 public:
-    explicit QtMaterialToggle(QWidget *parent = 0);
-    ~QtMaterialToggle();
+    explicit QtMaterialToggle(QWidget *parent = nullptr);
+    ~QtMaterialToggle() override;
 
     void setUseThemeColors(bool value);
     bool useThemeColors() const;
@@ -36,11 +36,11 @@ public:
     void setOrientation(Qt::Orientation orientation);
     Qt::Orientation orientation() const;
 
-    QSize sizeHint() const Q_DECL_OVERRIDE;
+    QSize sizeHint() const override;
 
 protected:
-    bool event(QEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    bool event(QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialTogglePrivate> d_ptr;
 

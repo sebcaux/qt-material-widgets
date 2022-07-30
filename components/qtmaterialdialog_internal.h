@@ -21,8 +21,8 @@ class QtMaterialDialogProxy : public QWidget
     };
 
 public:
-    QtMaterialDialogProxy(QtMaterialDialogWindow *source, QStackedLayout *layout, QtMaterialDialog *dialog, QWidget *parent = 0);
-    ~QtMaterialDialogProxy();
+    QtMaterialDialogProxy(QtMaterialDialogWindow *source, QStackedLayout *layout, QtMaterialDialog *dialog, QWidget *parent = nullptr);
+    ~QtMaterialDialogProxy() override;
 
     void setOpacity(qreal opacity);
     inline qreal opacity() const;
@@ -31,11 +31,11 @@ protected slots:
     void makeOpaque();
     void makeTransparent();
 
-    QSize sizeHint() const Q_DECL_OVERRIDE;
+    QSize sizeHint() const override;
 
 protected:
-    bool event(QEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    bool event(QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     Q_DISABLE_COPY(QtMaterialDialogProxy)
@@ -59,14 +59,14 @@ class QtMaterialDialogWindow : public QWidget
     Q_PROPERTY(int offset WRITE setOffset READ offset)
 
 public:
-    explicit QtMaterialDialogWindow(QtMaterialDialog *dialog, QWidget *parent = 0);
-    ~QtMaterialDialogWindow();
+    explicit QtMaterialDialogWindow(QtMaterialDialog *dialog, QWidget *parent = nullptr);
+    ~QtMaterialDialogWindow() override;
 
     void setOffset(int offset);
     int offset() const;
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     Q_DISABLE_COPY(QtMaterialDialogWindow)

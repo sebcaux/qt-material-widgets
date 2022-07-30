@@ -16,10 +16,10 @@ class QtMaterialCheckableIcon : public QWidget
     Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
 
 public:
-    QtMaterialCheckableIcon(const QIcon &icon, QtMaterialCheckable *parent);
-    ~QtMaterialCheckableIcon();
+    QtMaterialCheckableIcon(QIcon icon, QtMaterialCheckable *parent);
+    ~QtMaterialCheckableIcon() override;
 
-    QSize sizeHint() const Q_DECL_OVERRIDE;
+    QSize sizeHint() const override;
 
     inline void setIcon(const QIcon &icon);
     inline QIcon icon() const;
@@ -34,7 +34,7 @@ public:
     inline qreal opacity() const;
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     Q_DISABLE_COPY(QtMaterialCheckableIcon)

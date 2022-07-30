@@ -12,8 +12,8 @@ class DrawerSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit DrawerSettingsEditor(QWidget *parent = 0);
-    ~DrawerSettingsEditor();
+    explicit DrawerSettingsEditor(QWidget *parent = nullptr);
+    ~DrawerSettingsEditor() override;
 
 protected slots:
     void setupForm();

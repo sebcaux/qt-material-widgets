@@ -50,8 +50,7 @@ QColor QtMaterialStyle::themeColor(const QString &key) const
 }
 
 QtMaterialStyle::QtMaterialStyle()
-    : QCommonStyle(),
-      d_ptr(new QtMaterialStylePrivate(this))
+    : d_ptr(new QtMaterialStylePrivate(this))
 {
     d_func()->init();
 }

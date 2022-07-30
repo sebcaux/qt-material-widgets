@@ -10,8 +10,8 @@ class QtMaterialSnackbar : public QtMaterialOverlayWidget
     Q_OBJECT
 
 public:
-    explicit QtMaterialSnackbar(QWidget *parent = 0);
-    ~QtMaterialSnackbar();
+    explicit QtMaterialSnackbar(QWidget *parent = nullptr);
+    ~QtMaterialSnackbar() override;
 
     void setAutoHideDuration(int duration);
     int autoHideDuration() const;
@@ -45,7 +45,7 @@ protected slots:
     void dequeue();
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialSnackbarPrivate> d_ptr;
 

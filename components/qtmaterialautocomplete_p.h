@@ -1,6 +1,7 @@
 #ifndef QTMATERIALAUTOCOMPLETE_P_H
 #define QTMATERIALAUTOCOMPLETE_P_H
 
+#include "qtmaterialautocomplete.h"
 #include "qtmaterialtextfield_p.h"
 
 class QWidget;
@@ -15,7 +16,7 @@ class QtMaterialAutoCompletePrivate : public QtMaterialTextFieldPrivate
 
 public:
     QtMaterialAutoCompletePrivate(QtMaterialAutoComplete *q);
-    virtual ~QtMaterialAutoCompletePrivate();
+    ~QtMaterialAutoCompletePrivate() override;
 
     void init();
 

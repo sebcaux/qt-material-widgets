@@ -14,7 +14,7 @@ class QtMaterialCircularProgressDelegate : public QObject
 
 public:
     QtMaterialCircularProgressDelegate(QtMaterialCircularProgress *parent);
-    ~QtMaterialCircularProgressDelegate();
+    ~QtMaterialCircularProgressDelegate() override;
 
     inline void setDashOffset(qreal offset);
     inline qreal dashOffset() const;

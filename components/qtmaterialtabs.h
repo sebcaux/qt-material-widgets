@@ -13,8 +13,8 @@ class QtMaterialTabs : public QWidget
     Q_OBJECT
 
 public:
-    explicit QtMaterialTabs(QWidget *parent = 0);
-    ~QtMaterialTabs();
+    explicit QtMaterialTabs(QWidget *parent = nullptr);
+    ~QtMaterialTabs() override;
 
     void setUseThemeColors(bool value);
     bool useThemeColors() const;

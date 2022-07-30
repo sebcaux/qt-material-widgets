@@ -99,7 +99,7 @@ void QtMaterialAppBar::setForegroundColor(const QColor &color)
 
     d->foregroundColor = color;
 
-    if (d->useThemeColors == true)
+    if (d->useThemeColors)
     {
         d->useThemeColors = false;
     }
@@ -114,10 +114,8 @@ QColor QtMaterialAppBar::foregroundColor() const
     {
         return QtMaterialStyle::instance().themeColor("primary1");
     }
-    else
-    {
-        return d->foregroundColor;
-    }
+
+    return d->foregroundColor;
 }
 
 void QtMaterialAppBar::setBackgroundColor(const QColor &color)
@@ -126,7 +124,7 @@ void QtMaterialAppBar::setBackgroundColor(const QColor &color)
 
     d->backgroundColor = color;
 
-    if (d->useThemeColors == true)
+    if (d->useThemeColors)
     {
         d->useThemeColors = false;
     }
@@ -141,8 +139,6 @@ QColor QtMaterialAppBar::backgroundColor() const
     {
         return QtMaterialStyle::instance().themeColor("primary1");
     }
-    else
-    {
-        return d->backgroundColor;
-    }
+
+    return d->backgroundColor;
 }

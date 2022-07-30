@@ -11,11 +11,11 @@ class QtMaterialAvatar : public QWidget
     Q_OBJECT
 
 public:
-    explicit QtMaterialAvatar(QWidget *parent = 0);
-    explicit QtMaterialAvatar(const QIcon &icon, QWidget *parent = 0);
-    explicit QtMaterialAvatar(const QChar &letter, QWidget *parent = 0);
-    explicit QtMaterialAvatar(const QImage &image, QWidget *parent = 0);
-    ~QtMaterialAvatar();
+    explicit QtMaterialAvatar(QWidget *parent = nullptr);
+    explicit QtMaterialAvatar(const QIcon &icon, QWidget *parent = nullptr);
+    explicit QtMaterialAvatar(const QChar &letter, QWidget *parent = nullptr);
+    explicit QtMaterialAvatar(const QImage &image, QWidget *parent = nullptr);
+    ~QtMaterialAvatar() override;
 
     void setUseThemeColors(bool value);
     bool useThemeColors() const;
@@ -26,7 +26,7 @@ public:
     void setBackgroundColor(const QColor &color);
     QColor backgroundColor() const;
 
-    QSize sizeHint() const Q_DECL_OVERRIDE;
+    QSize sizeHint() const override;
 
     void setSize(int size);
     int size() const;
@@ -38,7 +38,7 @@ public:
     Material::AvatarType type() const;
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialAvatarPrivate> d_ptr;
 

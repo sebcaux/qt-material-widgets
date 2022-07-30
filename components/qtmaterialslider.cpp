@@ -164,10 +164,8 @@ QColor QtMaterialSlider::thumbColor() const
     {
         return QtMaterialStyle::instance().themeColor("primary1");
     }
-    else
-    {
-        return d->thumbColor;
-    }
+
+    return d->thumbColor;
 }
 
 void QtMaterialSlider::setTrackColor(const QColor &color)
@@ -189,10 +187,8 @@ QColor QtMaterialSlider::trackColor() const
     {
         return QtMaterialStyle::instance().themeColor("accent3");
     }
-    else
-    {
-        return d->trackColor;
-    }
+
+    return d->trackColor;
 }
 
 void QtMaterialSlider::setDisabledColor(const QColor &color)
@@ -214,10 +210,8 @@ QColor QtMaterialSlider::disabledColor() const
     {
         return QtMaterialStyle::instance().themeColor("disabled");
     }
-    else
-    {
-        return d->disabledColor;
-    }
+
+    return d->disabledColor;
 }
 
 void QtMaterialSlider::setPageStepMode(bool pageStep)

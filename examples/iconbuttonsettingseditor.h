@@ -12,11 +12,11 @@ class IconButtonSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit IconButtonSettingsEditor(QWidget *parent = 0);
-    ~IconButtonSettingsEditor();
+    explicit IconButtonSettingsEditor(QWidget *parent = nullptr);
+    ~IconButtonSettingsEditor() override;
 
 protected:
-    explicit IconButtonSettingsEditor(QtMaterialIconButton *button, QWidget *parent = 0);
+    explicit IconButtonSettingsEditor(QtMaterialIconButton *button, QWidget *parent = nullptr);
 
     Ui::IconButtonSettingsForm *const ui;
 

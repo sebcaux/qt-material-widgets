@@ -12,8 +12,8 @@ class DialogSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit DialogSettingsEditor(QWidget *parent = 0);
-    ~DialogSettingsEditor();
+    explicit DialogSettingsEditor(QWidget *parent = nullptr);
+    ~DialogSettingsEditor() override;
 
 protected slots:
     void setupForm();

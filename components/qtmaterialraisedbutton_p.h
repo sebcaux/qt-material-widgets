@@ -15,7 +15,7 @@ class QtMaterialRaisedButtonPrivate : public QtMaterialFlatButtonPrivate
 
 public:
     QtMaterialRaisedButtonPrivate(QtMaterialRaisedButton *q);
-    ~QtMaterialRaisedButtonPrivate();
+    ~QtMaterialRaisedButtonPrivate() override;
 
     void init();
 

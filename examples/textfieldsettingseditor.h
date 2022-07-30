@@ -12,8 +12,8 @@ class TextFieldSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit TextFieldSettingsEditor(QWidget *parent = 0);
-    ~TextFieldSettingsEditor();
+    explicit TextFieldSettingsEditor(QWidget *parent = nullptr);
+    ~TextFieldSettingsEditor() override;
 
 protected slots:
     void setupForm();

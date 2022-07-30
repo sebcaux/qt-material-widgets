@@ -12,8 +12,8 @@ class ScrollBarSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit ScrollBarSettingsEditor(QWidget *parent = 0);
-    ~ScrollBarSettingsEditor();
+    explicit ScrollBarSettingsEditor(QWidget *parent = nullptr);
+    ~ScrollBarSettingsEditor() override;
 
 protected slots:
     void setupForm();

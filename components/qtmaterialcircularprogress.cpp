@@ -176,10 +176,8 @@ QColor QtMaterialCircularProgress::color() const
     {
         return QtMaterialStyle::instance().themeColor("primary1");
     }
-    else
-    {
-        return d->color;
-    }
+
+    return d->color;
 }
 
 /*!

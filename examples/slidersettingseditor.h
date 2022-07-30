@@ -12,8 +12,8 @@ class SliderSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit SliderSettingsEditor(QWidget *parent = 0);
-    ~SliderSettingsEditor();
+    explicit SliderSettingsEditor(QWidget *parent = nullptr);
+    ~SliderSettingsEditor() override;
 
 protected slots:
     void setupForm();

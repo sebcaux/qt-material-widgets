@@ -12,8 +12,8 @@ class ProgressSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit ProgressSettingsEditor(QWidget *parent = 0);
-    ~ProgressSettingsEditor();
+    explicit ProgressSettingsEditor(QWidget *parent = nullptr);
+    ~ProgressSettingsEditor() override;
 
 protected slots:
     void setupForm();

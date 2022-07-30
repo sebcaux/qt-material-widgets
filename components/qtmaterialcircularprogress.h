@@ -15,8 +15,8 @@ class QtMaterialCircularProgress : public QProgressBar
     Q_PROPERTY(QColor color WRITE setColor READ color)
 
 public:
-    explicit QtMaterialCircularProgress(QWidget *parent = 0);
-    ~QtMaterialCircularProgress();
+    explicit QtMaterialCircularProgress(QWidget *parent = nullptr);
+    ~QtMaterialCircularProgress() override;
 
     void setProgressType(Material::ProgressType type);
     Material::ProgressType progressType() const;
@@ -33,10 +33,10 @@ public:
     void setColor(const QColor &color);
     QColor color() const;
 
-    QSize sizeHint() const Q_DECL_OVERRIDE;
+    QSize sizeHint() const override;
 
 protected:
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialCircularProgressPrivate> d_ptr;
 

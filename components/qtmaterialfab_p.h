@@ -24,7 +24,7 @@ public:
     };
 
     QtMaterialFloatingActionButtonPrivate(QtMaterialFloatingActionButton *q);
-    ~QtMaterialFloatingActionButtonPrivate();
+    ~QtMaterialFloatingActionButtonPrivate() override;
 
     void init();
     QRect fabGeometry() const;

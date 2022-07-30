@@ -13,8 +13,8 @@ class RadioButtonSettingsEditor : public SettingsEditor
     Q_OBJECT
 
 public:
-    explicit RadioButtonSettingsEditor(QWidget *parent = 0);
-    ~RadioButtonSettingsEditor();
+    explicit RadioButtonSettingsEditor(QWidget *parent = nullptr);
+    ~RadioButtonSettingsEditor() override;
 
 protected slots:
     void setupForm();
