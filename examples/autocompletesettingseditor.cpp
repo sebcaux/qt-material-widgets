@@ -1,30 +1,18 @@
 #include "autocompletesettingseditor.h"
+
 #include <QVBoxLayout>
 #include <QDebug>
+
 #include <qtmaterialautocomplete.h>
 
 AutoCompleteSettingsEditor::AutoCompleteSettingsEditor(QWidget *parent)
-    : QWidget(parent),
-      //ui(new Ui::AutoCompleteSettingsForm),
+    : SettingsEditor(parent),
       m_autocomplete(new QtMaterialAutoComplete)
 {
+    //_canvas->setMinimumHeight(900);
+
     QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
-
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
-
-    QWidget *canvas = new QWidget;
-    canvas->setStyleSheet("QWidget { background: white; }");
-    layout->addWidget(canvas);
-
-    canvas->setMinimumHeight(900); //
-
-    //ui->setupUi(widget);
-    layout->setContentsMargins(20, 20, 20, 20);
-
-    layout = new QVBoxLayout;
-    canvas->setLayout(layout);
+    _canvas->setLayout(layout);
 
     QStringList states =
       { "Alabama"
@@ -96,7 +84,6 @@ AutoCompleteSettingsEditor::AutoCompleteSettingsEditor(QWidget *parent)
 
 AutoCompleteSettingsEditor::~AutoCompleteSettingsEditor()
 {
-    //delete ui;
 }
 
 void AutoCompleteSettingsEditor::setupForm()

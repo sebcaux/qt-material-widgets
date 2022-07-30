@@ -1,36 +1,27 @@
 #include "radiobuttonsettingseditor.h"
+
 #include <QVBoxLayout>
 #include <QRadioButton>
 #include <QColorDialog>
+
 #include <qtmaterialradiobutton.h>
 
 RadioButtonSettingsEditor::RadioButtonSettingsEditor(QWidget *parent)
-    : QWidget(parent),
+    : SettingsEditor(parent),
       ui(new Ui::RadioButtonSettingsForm),
       m_radioButton1(new QtMaterialRadioButton),
       m_radioButton2(new QtMaterialRadioButton),
       m_radioButton3(new QtMaterialRadioButton)
 {
-    QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
-
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
-
-    QWidget *canvas = new QWidget;
-    canvas->setStyleSheet("QWidget { background: white; }");
-    layout->addWidget(canvas);
-
-    ui->setupUi(widget);
-    layout->setContentsMargins(20, 20, 20, 20);
+    ui->setupUi(_settingsWidget);
 
     m_radioButton1->setText("Coffee");
     m_radioButton2->setText("Tea");
     m_radioButton3->setText("Algebraic Topology");
 
-    layout = new QVBoxLayout;
-    canvas->setLayout(layout);
-    canvas->setMaximumHeight(350);
+    QVBoxLayout *layout = new QVBoxLayout;
+    _canvas->setLayout(layout);
+    //_canvas->setMaximumHeight(350);
 
     QWidget *buttonWidget = new QWidget;
     QVBoxLayout *buttonLayout = new QVBoxLayout;

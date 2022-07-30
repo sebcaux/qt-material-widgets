@@ -1,12 +1,13 @@
 #ifndef DIALOGSETTINGSEDITOR_H
 #define DIALOGSETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_dialogsettingsform.h"
 
 class QtMaterialDialog;
 
-class DialogSettingsEditor : public QWidget
+class DialogSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

@@ -1,14 +1,13 @@
 #ifndef MENUSETTINGSEDITOR_H
 #define MENUSETTINGSEDITOR_H
 
-#include <QWidget>
-//#include "ui_menusettingsform.h"
+#include "settingseditor.h"
 
 #include "lib/qtmaterialoverlaywidget.h"
 
 class QtMaterialMenu;
 
-class MenuSettingsEditor : public QWidget
+class MenuSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 
@@ -22,7 +21,6 @@ protected slots:
     void selectColor();
 
 private:
-    //Ui::MenuSettingsForm *const ui;
     QtMaterialMenu       *const m_menu;
 };
 

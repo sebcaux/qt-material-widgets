@@ -1,13 +1,14 @@
 #ifndef BADGESETTINGSEDITOR_H
 #define BADGESETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_badgesettingsform.h"
 
 class QtMaterialAvatar;
 class QtMaterialBadge;
 
-class BadgeSettingsEditor : public QWidget
+class BadgeSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

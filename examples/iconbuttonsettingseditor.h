@@ -1,12 +1,13 @@
 #ifndef ICONBUTTONSETTINGSMANAGER_H
 #define ICONBUTTONSETTINGSMANAGER_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_iconbuttonsettingsform.h"
 
 class QtMaterialIconButton;
 
-class IconButtonSettingsEditor : public QWidget
+class IconButtonSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

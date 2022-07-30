@@ -1,32 +1,21 @@
 #include "dialogsettingseditor.h"
+
 #include <QVBoxLayout>
 #include <QColorDialog>
+
 #include <qtmaterialdialog.h>
 #include <qtmaterialflatbutton.h>
 
 DialogSettingsEditor::DialogSettingsEditor(QWidget *parent)
-    : QWidget(parent),
+    : SettingsEditor(parent),
       ui(new Ui::DialogSettingsForm),
       m_dialog(new QtMaterialDialog)
 {
-    QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
+    ui->setupUi(_settingsWidget);
 
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
+    //_canvas->setMaximumHeight(300);
 
-    QWidget *canvas = new QWidget;
-    canvas->setStyleSheet("QWidget { background: white; }");
-    layout->addWidget(canvas);
-
-    ui->setupUi(widget);
-    layout->setContentsMargins(20, 20, 20, 20);
-
-    layout = new QVBoxLayout;
-    canvas->setLayout(layout);
-    canvas->setMaximumHeight(300);
-
-    m_dialog->setParent(this);
+    m_dialog->setParent(_canvas);
 
     QWidget *dialogWidget = new QWidget;
     QVBoxLayout *dialogWidgetLayout = new QVBoxLayout;

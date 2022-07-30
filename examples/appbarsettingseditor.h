@@ -1,12 +1,14 @@
 #ifndef APPBARSETTINGSEDITOR_H
 #define APPBARSETTINGSEDITOR_H
 
+#include "settingseditor.h"
+
 #include <QWidget>
 #include "ui_appbarsettingsform.h"
 
 class QtMaterialAppBar;
 
-class AppBarSettingsEditor : public QWidget
+class AppBarSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

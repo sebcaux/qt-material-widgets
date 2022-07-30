@@ -1,14 +1,13 @@
 #ifndef AUTOCOMPLETESETTINGSEDITOR_H
 #define AUTOCOMPLETESETTINGSEDITOR_H
 
-#include <QWidget>
-//#include "ui_autocompletesettingsform.h"
+#include "settingseditor.h"
 
 #include "lib/qtmaterialoverlaywidget.h"
 
 class QtMaterialAutoComplete;
 
-class AutoCompleteSettingsEditor : public QWidget
+class AutoCompleteSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 
@@ -22,7 +21,6 @@ protected slots:
     void selectColor();
 
 private:
-    //Ui::AutoCompleteSettingsForm *const ui;
     QtMaterialAutoComplete       *const m_autocomplete;
 };
 

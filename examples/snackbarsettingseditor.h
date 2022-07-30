@@ -1,12 +1,13 @@
 #ifndef SNACKBARSETTINGSEDITOR_H
 #define SNACKBARSETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_snackbarsettingsform.h"
 
 class QtMaterialSnackbar;
 
-class SnackbarSettingsEditor : public QWidget
+class SnackbarSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

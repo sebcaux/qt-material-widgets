@@ -1,12 +1,13 @@
 #ifndef TOGGLESETTINGSEDITOR_H
 #define TOGGLESETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_togglesettingsform.h"
 
 class QtMaterialToggle;
 
-class ToggleSettingsEditor : public QWidget
+class ToggleSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

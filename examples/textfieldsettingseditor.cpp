@@ -1,28 +1,20 @@
 #include "textfieldsettingseditor.h"
+
 #include <QVBoxLayout>
 #include <QColorDialog>
+
 #include <qtmaterialtextfield.h>
 
 TextFieldSettingsEditor::TextFieldSettingsEditor(QWidget *parent)
-    : QWidget(parent),
+    : SettingsEditor(parent),
       ui(new Ui::TextFieldSettingsForm),
       m_textField(new QtMaterialTextField)
 {
+    ui->setupUi(_settingsWidget);
+
     QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
+    _canvas->setLayout(layout);
 
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
-
-    QWidget *canvas = new QWidget;
-    canvas->setStyleSheet("QWidget { background: white; }");
-    layout->addWidget(canvas);
-
-    ui->setupUi(widget);
-    layout->setContentsMargins(20, 20, 20, 20);
-
-    layout = new QVBoxLayout;
-    canvas->setLayout(layout);
     layout->addWidget(m_textField);
     layout->setAlignment(m_textField, Qt::AlignCenter);
 

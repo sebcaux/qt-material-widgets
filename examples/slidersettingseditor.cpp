@@ -1,29 +1,20 @@
 #include "slidersettingseditor.h"
+
 #include <QVBoxLayout>
 #include <QColorDialog>
+
 #include <qtmaterialslider.h>
 
 SliderSettingsEditor::SliderSettingsEditor(QWidget *parent)
-    : QWidget(parent),
+    : SettingsEditor(parent),
       ui(new Ui::SliderSettingsForm),
       m_slider(new QtMaterialSlider)
 {
+    ui->setupUi(_settingsWidget);
+
     QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
-
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
-
-    QWidget *canvas = new QWidget;
-    canvas->setStyleSheet("QWidget { background: white; }");
-    layout->addWidget(canvas);
-
-    ui->setupUi(widget);
-    layout->setContentsMargins(20, 20, 20, 20);
-
-    layout = new QVBoxLayout;
-    canvas->setLayout(layout);
-    canvas->setMaximumHeight(300);
+    _canvas->setLayout(layout);
+    //canvas->setMaximumHeight(300);
     layout->addWidget(m_slider);
     layout->setAlignment(m_slider, Qt::AlignHCenter);
 

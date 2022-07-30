@@ -1,10 +1,12 @@
 #include "flatbuttonsettingseditor.h"
+
 #include <QColorDialog>
 #include <QDebug>
+
 #include <qtmaterialflatbutton.h>
 
 FlatButtonSettingsEditor::FlatButtonSettingsEditor(QWidget *parent)
-    : QWidget(parent),
+    : SettingsEditor(parent),
       ui(new Ui::FlatButtonSettingsForm),
       m_button(new QtMaterialFlatButton("I'm flat"))
 {
@@ -17,7 +19,7 @@ FlatButtonSettingsEditor::~FlatButtonSettingsEditor()
 }
 
 FlatButtonSettingsEditor::FlatButtonSettingsEditor(QtMaterialFlatButton *button, QWidget *parent)
-    : QWidget(parent),
+    : SettingsEditor(parent),
       ui(new Ui::FlatButtonSettingsForm),
       m_button(button)
 {
@@ -260,23 +262,12 @@ void FlatButtonSettingsEditor::applyCheckablePreset()
 
 void FlatButtonSettingsEditor::init()
 {
-    QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
-
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
-
-    QWidget *canvas = new QWidget;
-    canvas->setStyleSheet("QWidget { background: white; }");
-    layout->addWidget(canvas);
-
-    ui->setupUi(widget);
-    layout->setContentsMargins(20, 20, 20, 20);
+    ui->setupUi(_settingsWidget);
 
     m_button->setFixedWidth(300);
 
-    layout = new QVBoxLayout;
-    canvas->setLayout(layout);
+    QVBoxLayout *layout = new QVBoxLayout;
+    _canvas->setLayout(layout);
     layout->addWidget(m_button);
     layout->setAlignment(m_button, Qt::AlignCenter);
 

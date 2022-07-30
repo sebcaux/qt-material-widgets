@@ -1,12 +1,13 @@
 #ifndef FABSETTINGSEDITOR_H
 #define FABSETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_fabsettingsform.h"
 
 class QtMaterialFloatingActionButton;
 
-class FloatingActionButtonSettingsEditor : public QWidget
+class FloatingActionButtonSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

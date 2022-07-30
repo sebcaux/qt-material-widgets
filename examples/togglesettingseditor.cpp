@@ -1,29 +1,20 @@
 #include "togglesettingseditor.h"
+
 #include <QColorDialog>
+
 #include <qtmaterialtoggle.h>
 
 ToggleSettingsEditor::ToggleSettingsEditor(QWidget *parent)
-    : QWidget(parent),
+    : SettingsEditor(parent),
       ui(new Ui::ToggleSettingsForm),
       m_toggle(new QtMaterialToggle)
 {
-    QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
-
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
-
-    QWidget *canvas = new QWidget;
-    canvas->setStyleSheet("QWidget { background: white; }");
-    layout->addWidget(canvas);
-
-    ui->setupUi(widget);
-    layout->setContentsMargins(20, 20, 20, 20);
+    ui->setupUi(_settingsWidget);
 
     m_toggle->setOrientation(Qt::Vertical);
 
-    layout = new QVBoxLayout;
-    canvas->setLayout(layout);
+    QVBoxLayout *layout = new QVBoxLayout;
+    _canvas->setLayout(layout);
     layout->addWidget(m_toggle);
     layout->setAlignment(m_toggle, Qt::AlignCenter);
 

@@ -1,12 +1,13 @@
 #ifndef CIRCULARPROGRESSSETTINGSEDITOR_H
 #define CIRCULARPROGRESSSETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_circularprogresssettingsform.h"
 
 class QtMaterialCircularProgress;
 
-class CircularProgressSettingsEditor : public QWidget
+class CircularProgressSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

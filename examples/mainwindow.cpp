@@ -1,7 +1,10 @@
 #include "mainwindow.h"
-#include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QStackedLayout>
-#include <QtWidgets/QListWidget>
+
+#include <QHBoxLayout>
+#include <QStackedLayout>
+#include <QListWidget>
+#include <QSplitter>
+
 #include "avatarsettingseditor.h"
 #include "badgesettingseditor.h"
 #include "checkboxsettingseditor.h"
@@ -27,20 +30,18 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    QWidget *widget = new QWidget;
-    QHBoxLayout *layout = new QHBoxLayout;
-
-    widget->setLayout(layout);
-
-    QStackedLayout *stack = new QStackedLayout;
     QListWidget *list = new QListWidget;
+    list->setMaximumWidth(300);
 
-    layout->addWidget(list);
-    layout->addLayout(stack);
+    QWidget *stackWidget = new QWidget;
+    QStackedLayout *stackLayout = new QStackedLayout;
+    stackWidget->setLayout(stackLayout);
 
-    layout->setStretch(1, 2);
+    QSplitter *splitter = new QSplitter(Qt::Horizontal);
+    splitter->addWidget(list);
+    splitter->addWidget(stackWidget);
 
-    setCentralWidget(widget);
+    setCentralWidget(splitter);
 
     AvatarSettingsEditor *avatar = new AvatarSettingsEditor;
     BadgeSettingsEditor *badge = new BadgeSettingsEditor;
@@ -64,27 +65,27 @@ MainWindow::MainWindow(QWidget *parent)
     AutoCompleteSettingsEditor *autocomplete = new AutoCompleteSettingsEditor;
     MenuSettingsEditor *menu = new MenuSettingsEditor;
 
-    stack->addWidget(appBar);
-    stack->addWidget(autocomplete);
-    stack->addWidget(avatar);
-    stack->addWidget(badge);
-    stack->addWidget(checkbox);
-    stack->addWidget(circularProgress);
-    stack->addWidget(dialog);
-    stack->addWidget(drawer);
-    stack->addWidget(fab);
-    stack->addWidget(flatButton);
-    stack->addWidget(iconButton);
-    stack->addWidget(menu);
-    stack->addWidget(progress);
-    stack->addWidget(radioButton);
-    stack->addWidget(raisedButton);
-    stack->addWidget(scrollBar);
-    stack->addWidget(slider);
-    stack->addWidget(snackbar);
-    stack->addWidget(tabs);
-    stack->addWidget(textField);
-    stack->addWidget(toggle);
+    stackLayout->addWidget(appBar);
+    stackLayout->addWidget(autocomplete);
+    stackLayout->addWidget(avatar);
+    stackLayout->addWidget(badge);
+    stackLayout->addWidget(checkbox);
+    stackLayout->addWidget(circularProgress);
+    stackLayout->addWidget(dialog);
+    stackLayout->addWidget(drawer);
+    stackLayout->addWidget(fab);
+    stackLayout->addWidget(flatButton);
+    stackLayout->addWidget(iconButton);
+    stackLayout->addWidget(menu);
+    stackLayout->addWidget(progress);
+    stackLayout->addWidget(radioButton);
+    stackLayout->addWidget(raisedButton);
+    stackLayout->addWidget(scrollBar);
+    stackLayout->addWidget(slider);
+    stackLayout->addWidget(snackbar);
+    stackLayout->addWidget(tabs);
+    stackLayout->addWidget(textField);
+    stackLayout->addWidget(toggle);
 
     list->addItem("App Bar");
     list->addItem("Auto Complete");
@@ -115,7 +116,7 @@ MainWindow::MainWindow(QWidget *parent)
     {
         Q_UNUSED(current)
         Q_UNUSED(previous)
-        stack->setCurrentIndex(list->currentRow());
+        stackLayout->setCurrentIndex(list->currentRow());
     });
 }
 

@@ -1,10 +1,12 @@
 #include "iconbuttonsettingseditor.h"
+
 #include <QColorDialog>
+
 #include <qtmaterialiconbutton.h>
 #include <lib/qtmaterialtheme.h>
 
 IconButtonSettingsEditor::IconButtonSettingsEditor(QWidget *parent)
-    : QWidget(parent),
+    : SettingsEditor(parent),
       ui(new Ui::IconButtonSettingsForm),
       m_button(new QtMaterialIconButton(QtMaterialTheme::icon("toggle", "star")))
 {
@@ -17,7 +19,7 @@ IconButtonSettingsEditor::~IconButtonSettingsEditor()
 }
 
 IconButtonSettingsEditor::IconButtonSettingsEditor(QtMaterialIconButton *button, QWidget *parent)
-    : QWidget(parent),
+    : SettingsEditor(parent),
       ui(new Ui::IconButtonSettingsForm),
       m_button(button)
 {
@@ -57,21 +59,10 @@ void IconButtonSettingsEditor::selectColor()
 
 void IconButtonSettingsEditor::init()
 {
+    ui->setupUi(_settingsWidget);
+
     QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
-
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
-
-    QWidget *canvas = new QWidget;
-    canvas->setStyleSheet("QWidget { background: white; }");
-    layout->addWidget(canvas);
-
-    ui->setupUi(widget);
-    layout->setContentsMargins(20, 20, 20, 20);
-
-    layout = new QVBoxLayout;
-    canvas->setLayout(layout);
+    _canvas->setLayout(layout);
     layout->addWidget(m_button);
     layout->setAlignment(m_button, Qt::AlignCenter);
 

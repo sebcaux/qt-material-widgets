@@ -1,4 +1,5 @@
 #include "raisedbuttonsettingseditor.h"
+
 #include <qtmaterialraisedbutton.h>
 
 RaisedButtonSettingsEditor::RaisedButtonSettingsEditor(QWidget *parent)

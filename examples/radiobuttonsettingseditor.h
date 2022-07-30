@@ -1,13 +1,14 @@
 #ifndef RADIOBUTTONSETTINGSEDITOR_H
 #define RADIOBUTTONSETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_radiobuttonsettingsform.h"
 
 class QtMaterialRadioButton;
 class RadioButton;
 
-class RadioButtonSettingsEditor : public QWidget
+class RadioButtonSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

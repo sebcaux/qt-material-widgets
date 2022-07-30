@@ -1,12 +1,13 @@
 #ifndef AVATARSETTINGSEDITOR_H
 #define AVATARSETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_avatarsettingsform.h"
 
 class QtMaterialAvatar;
 
-class AvatarSettingsEditor : public QWidget
+class AvatarSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

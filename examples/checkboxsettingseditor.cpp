@@ -1,31 +1,22 @@
 #include "checkboxsettingseditor.h"
+
 #include <QVBoxLayout>
 #include <QColorDialog>
+
 #include <qtmaterialcheckbox.h>
 
 CheckBoxSettingsEditor::CheckBoxSettingsEditor(QWidget *parent)
-    : QWidget(parent),
+    : SettingsEditor(parent),
       ui(new Ui::CheckBoxSettingsForm),
       m_checkBox(new QtMaterialCheckBox)
 {
-    QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
-
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
-
-    QWidget *canvas = new QWidget;
-    canvas->setStyleSheet("QWidget { background: white; }");
-    layout->addWidget(canvas);
-
-    ui->setupUi(widget);
-    layout->setContentsMargins(20, 20, 20, 20);
+    ui->setupUi(_settingsWidget);
 
     m_checkBox->setText("Extra cheese");
     m_checkBox->setChecked(true);
 
-    layout = new QVBoxLayout;
-    canvas->setLayout(layout);
+    QVBoxLayout *layout = new QVBoxLayout;
+    _canvas->setLayout(layout);
     layout->addWidget(m_checkBox);
     layout->setAlignment(m_checkBox, Qt::AlignCenter);
 

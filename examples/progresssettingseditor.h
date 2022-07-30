@@ -1,12 +1,13 @@
 #ifndef PROGRESSSETTINGSEDITOR_H
 #define PROGRESSSETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_progresssettingsform.h"
 
 class QtMaterialProgress;
 
-class ProgressSettingsEditor : public QWidget
+class ProgressSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

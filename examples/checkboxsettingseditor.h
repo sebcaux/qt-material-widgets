@@ -1,12 +1,13 @@
 #ifndef CHECKBOXSETTINGSEDITOR_H
 #define CHECKBOXSETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_checkboxsettingsform.h"
 
 class QtMaterialCheckable;
 
-class CheckBoxSettingsEditor : public QWidget
+class CheckBoxSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

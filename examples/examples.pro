@@ -12,6 +12,7 @@ SOURCES = mainwindow.cpp \
     iconbuttonsettingseditor.cpp \
     progresssettingseditor.cpp \
     circularprogresssettingseditor.cpp \
+    settingseditor.cpp \
     slidersettingseditor.cpp \
     radiobuttonsettingseditor.cpp \
     togglesettingseditor.cpp \
@@ -34,6 +35,7 @@ HEADERS = mainwindow.h \
     iconbuttonsettingseditor.h \
     progresssettingseditor.h \
     circularprogresssettingseditor.h \
+    settingseditor.h \
     slidersettingseditor.h \
     radiobuttonsettingseditor.h \
     togglesettingseditor.h \

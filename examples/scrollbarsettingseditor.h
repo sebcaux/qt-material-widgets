@@ -1,12 +1,13 @@
 #ifndef SCROLLBARSETTINGSEDITOR_H
 #define SCROLLBARSETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_scrollbarsettingsform.h"
 
 class QtMaterialScrollBar;
 
-class ScrollBarSettingsEditor : public QWidget
+class ScrollBarSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

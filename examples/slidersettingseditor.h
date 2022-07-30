@@ -1,12 +1,13 @@
 #ifndef SLIDERSETTINGSEDITOR_H
 #define SLIDERSETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_slidersettingsform.h"
 
 class QtMaterialSlider;
 
-class SliderSettingsEditor : public QWidget
+class SliderSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

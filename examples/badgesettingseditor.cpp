@@ -1,29 +1,20 @@
 #include "badgesettingseditor.h"
+
 #include <QColorDialog>
+
 #include <qtmaterialavatar.h>
 #include <qtmaterialbadge.h>
 
 BadgeSettingsEditor::BadgeSettingsEditor(QWidget *parent)
-    : QWidget(parent),
+    : SettingsEditor(parent),
       ui(new Ui::BadgeSettingsForm),
       m_avatar(new QtMaterialAvatar(QImage(":/images/assets/sikh.jpg"))),
       m_badge(new QtMaterialBadge)
 {
+    ui->setupUi(_settingsWidget);
+
     QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
-
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
-
-    QWidget *canvas = new QWidget;
-    canvas->setStyleSheet("QWidget { background: white; }");
-    layout->addWidget(canvas);
-
-    ui->setupUi(widget);
-    layout->setContentsMargins(20, 20, 20, 20);
-
-    layout = new QVBoxLayout;
-    canvas->setLayout(layout);
+    _canvas->setLayout(layout);
     layout->addWidget(m_avatar);
     layout->setAlignment(m_avatar, Qt::AlignCenter);
     m_avatar->setSize(60);

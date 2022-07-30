@@ -1,31 +1,22 @@
 #include "drawersettingseditor.h"
+
 #include <QVBoxLayout>
 #include <QColorDialog>
+
 #include <qtmaterialdrawer.h>
 
 DrawerSettingsEditor::DrawerSettingsEditor(QWidget *parent)
-    : QWidget(parent),
+    : SettingsEditor(parent),
       ui(new Ui::DrawerSettingsForm),
       m_drawer(new QtMaterialDrawer)
 {
+    ui->setupUi(_settingsWidget);
+
     QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
+    _canvas->setLayout(layout);
+    //_canvas->setMaximumHeight(300);
 
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
-
-    QWidget *canvas = new QWidget;
-    canvas->setStyleSheet("QWidget { background: white; }");
-    layout->addWidget(canvas);
-
-    ui->setupUi(widget);
-    layout->setContentsMargins(20, 20, 20, 20);
-
-    layout = new QVBoxLayout;
-    canvas->setLayout(layout);
-    canvas->setMaximumHeight(300);
-
-    m_drawer->setParent(canvas);
+    m_drawer->setParent(_canvas);
     m_drawer->setClickOutsideToClose(true);
     m_drawer->setOverlayMode(true);
 

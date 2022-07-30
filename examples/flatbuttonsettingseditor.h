@@ -1,12 +1,13 @@
 #ifndef FLATBUTTONSETTINGSMANAGER_H
 #define FLATBUTTONSETTINGSMANAGER_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_flatbuttonsettingsform.h"
 
 class QtMaterialFlatButton;
 
-class FlatButtonSettingsEditor : public QWidget
+class FlatButtonSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

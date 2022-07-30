@@ -1,12 +1,13 @@
 #ifndef DRAWERSETTINGSEDITOR_H
 #define DRAWERSETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_drawersettingsform.h"
 
 class QtMaterialDrawer;
 
-class DrawerSettingsEditor : public QWidget
+class DrawerSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 

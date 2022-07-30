@@ -1,12 +1,13 @@
 #ifndef TABSSETTINGSEDITOR_H
 #define TABSSETTINGSEDITOR_H
 
-#include <QWidget>
+#include "settingseditor.h"
+
 #include "ui_tabssettingsform.h"
 
 class QtMaterialTabs;
 
-class TabsSettingsEditor : public QWidget
+class TabsSettingsEditor : public SettingsEditor
 {
     Q_OBJECT
 
