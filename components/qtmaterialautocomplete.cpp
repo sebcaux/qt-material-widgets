@@ -140,7 +140,7 @@ void QtMaterialAutoComplete::updateResults(const QString &text)
         }
     }
 
-    QFontMetrics *fm = new QFontMetrics(font);
+    QFontMetrics fm(font);
     d->maxWidth = 0;
 
     for (int i = 0; i < results.count(); ++i)
@@ -150,7 +150,7 @@ void QtMaterialAutoComplete::updateResults(const QString &text)
         if ((item = static_cast<QtMaterialFlatButton *>(widget)) != nullptr)
         {
             const QString &text = results.at(i);
-            QRect rect = fm->boundingRect(text);
+            QRect rect = fm.boundingRect(text);
             d->maxWidth = qMax(d->maxWidth, rect.width());
             item->setText(text);
         }
