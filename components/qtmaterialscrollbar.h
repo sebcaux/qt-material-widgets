@@ -42,6 +42,10 @@ protected:
 private:
     Q_DISABLE_COPY(QtMaterialScrollBar)
     Q_DECLARE_PRIVATE(QtMaterialScrollBar)
+
+    // QAbstractSlider interface
+protected:
+    void sliderChange(SliderChange change) override;
 };
 
 #endif  // QTMATERIALSCROLLBAR_H

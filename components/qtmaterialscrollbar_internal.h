@@ -1,8 +1,11 @@
 #ifndef QTMATERIALSCROLLBAR_INTERNAL_H
 #define QTMATERIALSCROLLBAR_INTERNAL_H
 
-#include "qtmaterialscrollbar.h"
 #include <QStateMachine>
+
+#include "qtmaterialscrollbar.h"
+
+class QTimer;
 
 class QtMaterialScrollBarStateMachine : public QStateMachine
 {
@@ -22,7 +25,9 @@ private:
 
     QtMaterialScrollBar *const m_scrollBar;
     QState *const m_focusState;
+    QState *const m_scrollState;
     QState *const m_blurState;
+    QTimer *const m_scrollOutTimer;
     qreal m_opacity;
 };
 

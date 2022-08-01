@@ -25,6 +25,8 @@ enum QtMaterialStateTransitionType
     // Dialog
     DialogShowTransition,
     DialogHideTransition,
+    // Scrollbar
+    ScrollbarValueMoved,
     //
     MaxTransitionType = 65535
 };

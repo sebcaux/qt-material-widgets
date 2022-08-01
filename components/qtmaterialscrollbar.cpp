@@ -1,4 +1,5 @@
 #include "qtmaterialscrollbar.h"
+#include "lib/qtmaterialstatetransitionevent.h"
 #include "lib/qtmaterialstyle.h"
 #include "qtmaterialscrollbar_internal.h"
 #include "qtmaterialscrollbar_p.h"
@@ -215,4 +216,16 @@ void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
     painter.setBrush(brush);
 
     painter.drawRoundedRect(handle, 9, 9);
+}
+
+void QtMaterialScrollBar::sliderChange(SliderChange change)
+{
+    Q_D(QtMaterialScrollBar);
+
+    if (change == QAbstractSlider::SliderValueChange)
+    {
+        d->stateMachine->postEvent(new QtMaterialStateTransitionEvent(ScrollbarValueMoved));
+    }
+
+    QScrollBar::sliderChange(change);
 }
