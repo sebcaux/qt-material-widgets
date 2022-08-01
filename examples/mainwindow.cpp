@@ -16,7 +16,6 @@
 #include "fabsettingseditor.h"
 #include "flatbuttonsettingseditor.h"
 #include "iconbuttonsettingseditor.h"
-#include "menusettingseditor.h"
 #include "progresssettingseditor.h"
 #include "radiobuttonsettingseditor.h"
 #include "raisedbuttonsettingseditor.h"
@@ -63,7 +62,6 @@ MainWindow::MainWindow(QWidget *parent)
     ScrollBarSettingsEditor *scrollBar = new ScrollBarSettingsEditor;
     AppBarSettingsEditor *appBar = new AppBarSettingsEditor;
     AutoCompleteSettingsEditor *autocomplete = new AutoCompleteSettingsEditor;
-    MenuSettingsEditor *menu = new MenuSettingsEditor;
 
     stackLayout->addWidget(appBar);
     stackLayout->addWidget(autocomplete);
@@ -76,7 +74,6 @@ MainWindow::MainWindow(QWidget *parent)
     stackLayout->addWidget(fab);
     stackLayout->addWidget(flatButton);
     stackLayout->addWidget(iconButton);
-    stackLayout->addWidget(menu);
     stackLayout->addWidget(progress);
     stackLayout->addWidget(radioButton);
     stackLayout->addWidget(raisedButton);
@@ -98,7 +95,6 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem("Floating Action Button");
     list->addItem("Flat Button");
     list->addItem("Icon Button");
-    list->addItem("Menu");
     list->addItem("Progress");
     list->addItem("Radio Button");
     list->addItem("Raised Button");

@@ -16,7 +16,6 @@ SOURCES = \
     $$PWD/iconbuttonsettingseditor.cpp \
     $$PWD/main.cpp \
     $$PWD/mainwindow.cpp \
-    $$PWD/menusettingseditor.cpp \
     $$PWD/progresssettingseditor.cpp \
     $$PWD/radiobuttonsettingseditor.cpp \
     $$PWD/raisedbuttonsettingseditor.cpp \
@@ -41,7 +40,6 @@ HEADERS = \
     $$PWD/flatbuttonsettingseditor.h \
     $$PWD/iconbuttonsettingseditor.h \
     $$PWD/mainwindow.h \
-    $$PWD/menusettingseditor.h \
     $$PWD/progresssettingseditor.h \
     $$PWD/radiobuttonsettingseditor.h \
     $$PWD/raisedbuttonsettingseditor.h \
