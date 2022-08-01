@@ -2,10 +2,10 @@
 #define QTMATERIALICONBUTTON_P_H
 
 #include <QtGlobal>
+#include <QColor>
 
 class QtMaterialIconButton;
 class QtMaterialRippleOverlay;
-class QColor;
 
 class QtMaterialIconButtonPrivate
 {

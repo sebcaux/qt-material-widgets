@@ -1,11 +1,11 @@
 #ifndef QTMATERIALTOGGLE_P_H
 #define QTMATERIALTOGGLE_P_H
 
-#include <Qt>
+#include <QtGlobal>
+#include <QColor>
 
 class QStateMachine;
 class QState;
-class QColor;
 class QtMaterialToggle;
 class QtMaterialToggleTrack;
 class QtMaterialToggleThumb;
