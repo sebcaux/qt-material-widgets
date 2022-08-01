@@ -1,8 +1,9 @@
 #ifndef QTMATERIALCIRCULARPROGRESS_INTERNAL_H
 #define QTMATERIALCIRCULARPROGRESS_INTERNAL_H
 
-#include "qtmaterialcircularprogress.h"
 #include <QObject>
+
+#include "qtmaterialcircularprogress.h"
 
 class QtMaterialCircularProgressDelegate : public QObject
 {

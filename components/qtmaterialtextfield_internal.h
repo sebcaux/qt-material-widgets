@@ -1,9 +1,11 @@
 #ifndef QTMATERIALTEXTFIELD_INTERNAL_H
 #define QTMATERIALTEXTFIELD_INTERNAL_H
 
-#include "qtmaterialtextfield.h"
 #include <QStateMachine>
-#include <QtWidgets/QWidget>
+
+#include "qtmaterialtextfield.h"
+
+#include <QWidget>
 
 class QPropertyAnimation;
 class QtMaterialTextFieldLabel;

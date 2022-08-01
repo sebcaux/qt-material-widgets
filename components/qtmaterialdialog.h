@@ -2,6 +2,7 @@
 #define QTMATERIALDIALOG_H
 
 #include "lib/qtmaterialoverlaywidget.h"
+
 #include <QScopedPointer>
 
 class QLayout;

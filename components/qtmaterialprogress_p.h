@@ -1,9 +1,10 @@
 #ifndef QTMATERIALPROGRESS_P_H
 #define QTMATERIALPROGRESS_P_H
 
-#include "lib/qtmaterialtheme.h"
 #include <QColor>
 #include <QtGlobal>
+
+#include "lib/qtmaterialtheme.h"
 
 class QtMaterialProgress;
 class QtMaterialProgressDelegate;

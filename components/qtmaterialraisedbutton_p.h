@@ -3,10 +3,11 @@
 
 #include "qtmaterialflatbutton_p.h"
 
+#include "qtmaterialraisedbutton.h"
+
 class QStateMachine;
 class QState;
 class QGraphicsDropShadowEffect;
-class QtMaterialRaisedButton;
 
 class QtMaterialRaisedButtonPrivate : public QtMaterialFlatButtonPrivate
 {

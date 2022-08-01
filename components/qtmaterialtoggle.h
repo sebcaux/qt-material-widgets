@@ -1,7 +1,7 @@
 #ifndef QTMATERIALTOGGLE_H
 #define QTMATERIALTOGGLE_H
 
-#include <QtWidgets/QAbstractButton>
+#include <QAbstractButton>
 
 class QtMaterialTogglePrivate;
 

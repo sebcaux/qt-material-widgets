@@ -1,9 +1,10 @@
 #ifndef QTMATERIALRIPPLE_H
 #define QTMATERIALRIPPLE_H
 
+#include <QParallelAnimationGroup>
+
 #include <QBrush>
 #include <QEasingCurve>
-#include <QParallelAnimationGroup>
 #include <QPoint>
 #include <QPropertyAnimation>
 

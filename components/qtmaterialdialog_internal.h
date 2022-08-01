@@ -1,7 +1,7 @@
 #ifndef QTMATERIALDIALOG_INTERNAL_H
 #define QTMATERIALDIALOG_INTERNAL_H
 
-#include <QtWidgets/QWidget>
+#include <QWidget>
 
 class QStackedLayout;
 class QtMaterialDialog;

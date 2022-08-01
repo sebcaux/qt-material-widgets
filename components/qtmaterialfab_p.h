@@ -3,6 +3,8 @@
 
 #include "qtmaterialraisedbutton_p.h"
 
+#include "qtmaterialfab.h"
+
 class QtMaterialFloatingActionButton;
 
 class QtMaterialFloatingActionButtonPrivate : public QtMaterialRaisedButtonPrivate

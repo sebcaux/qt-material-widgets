@@ -1,7 +1,7 @@
 #ifndef QTMATERIALSCROLLBAR_H
 #define QTMATERIALSCROLLBAR_H
 
-#include <QtWidgets/QScrollBar>
+#include <QScrollBar>
 
 class QtMaterialScrollBarPrivate;
 

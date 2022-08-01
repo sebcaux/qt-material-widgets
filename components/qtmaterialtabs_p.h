@@ -1,8 +1,9 @@
 #ifndef QTMATERIALTABS_P_H
 #define QTMATERIALTABS_P_H
 
-#include "lib/qtmaterialtheme.h"
 #include <QtGlobal>
+
+#include "lib/qtmaterialtheme.h"
 
 class QHBoxLayout;
 class QtMaterialTabs;

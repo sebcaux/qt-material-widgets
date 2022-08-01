@@ -6,9 +6,9 @@
 #include <QPropertyAnimation>
 #include <QState>
 #include <QStateMachine>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QGraphicsDropShadowEffect>
-#include <QtWidgets/QStackedLayout>
+#include <QApplication>
+#include <QGraphicsDropShadowEffect>
+#include <QStackedLayout>
 
 /*!
  *  \class QtMaterialDialogPrivate

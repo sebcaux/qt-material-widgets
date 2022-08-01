@@ -1,8 +1,9 @@
 #ifndef QTMATERIALTEXTFIELD_H
 #define QTMATERIALTEXTFIELD_H
 
+#include <QLineEdit>
+
 #include <QColor>
-#include <QtWidgets/QLineEdit>
 
 class QtMaterialTextFieldPrivate;
 

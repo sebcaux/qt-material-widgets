@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <QPropertyAnimation>
 #include <QSignalTransition>
-#include <QtWidgets/QGraphicsOpacityEffect>
+#include <QGraphicsOpacityEffect>
 
 /*!
  *  \class QtMaterialAutoCompleteStateMachine

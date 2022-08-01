@@ -2,6 +2,7 @@
 #define QTMATERIALRIPPLEOVERLAY_H
 
 #include "lib/qtmaterialoverlaywidget.h"
+
 #include <QPainterPath>
 
 class QtMaterialRipple;

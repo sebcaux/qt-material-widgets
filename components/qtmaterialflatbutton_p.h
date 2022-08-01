@@ -1,9 +1,10 @@
 #ifndef QTMATERIALFLATBUTTON_P_H
 #define QTMATERIALFLATBUTTON_P_H
 
-#include "lib/qtmaterialtheme.h"
 #include <QColor>
 #include <QtGlobal>
+
+#include "lib/qtmaterialtheme.h"
 
 class QtMaterialFlatButton;
 class QtMaterialRippleOverlay;

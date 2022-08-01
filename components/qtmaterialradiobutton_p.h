@@ -3,7 +3,7 @@
 
 #include "lib/qtmaterialcheckable_p.h"
 
-class QtMaterialRadioButton;
+#include "qtmaterialradiobutton.h"
 
 class QtMaterialRadioButtonPrivate : public QtMaterialCheckablePrivate
 {

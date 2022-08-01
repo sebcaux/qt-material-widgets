@@ -4,7 +4,7 @@
 #include "qtmaterialtextfield_p.h"
 #include <QDebug>
 #include <QPainter>
-#include <QtWidgets/QApplication>
+#include <QApplication>
 
 /*!
  *  \class QtMaterialTextFieldPrivate

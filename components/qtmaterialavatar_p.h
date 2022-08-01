@@ -2,6 +2,7 @@
 #define QTMATERIALAVATAR_P_H
 
 #include "lib/qtmaterialtheme.h"
+
 #include <QChar>
 #include <QColor>
 #include <QIcon>

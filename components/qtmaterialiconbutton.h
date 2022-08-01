@@ -1,7 +1,7 @@
 #ifndef QTMATERIALICONBUTTON_H
 #define QTMATERIALICONBUTTON_H
 
-#include <QtWidgets/QAbstractButton>
+#include <QAbstractButton>
 
 class QtMaterialIconButtonPrivate;
 

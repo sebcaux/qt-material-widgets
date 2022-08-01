@@ -2,6 +2,7 @@
 #define QTMATERIALSNACKBAR_INTERNAL_H
 
 #include <QStateMachine>
+
 #include <QTimer>
 
 class QtMaterialSnackbar;

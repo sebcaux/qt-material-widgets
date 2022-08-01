@@ -1,8 +1,9 @@
 #ifndef QTMATERIALSLIDER_H
 #define QTMATERIALSLIDER_H
 
+#include <QAbstractSlider>
+
 #include <QScopedPointer>
-#include <QtWidgets/QAbstractSlider>
 
 #define QT_MATERIAL_SLIDER_MARGIN 30
 

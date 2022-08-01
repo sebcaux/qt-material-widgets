@@ -3,7 +3,7 @@
 #include <QEventTransition>
 #include <QPropertyAnimation>
 #include <QStateMachine>
-#include <QtWidgets/QGraphicsDropShadowEffect>
+#include <QGraphicsDropShadowEffect>
 
 /*!
  *  \class QtMaterialRaisedButtonPrivate

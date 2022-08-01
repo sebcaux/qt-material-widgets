@@ -4,8 +4,8 @@
 #include <QEvent>
 #include <QPainter>
 #include <QPropertyAnimation>
-#include <QtWidgets/QLayout>
-#include <QtWidgets/QLayoutItem>
+#include <QLayout>
+#include <QLayoutItem>
 
 /*!
  *  \class QtMaterialTabsInkBar

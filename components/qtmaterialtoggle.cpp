@@ -5,7 +5,7 @@
 #include <QPropertyAnimation>
 #include <QSignalTransition>
 #include <QStateMachine>
-#include <QtWidgets/QApplication>
+#include <QApplication>
 
 /*!
  *  \class QtMaterialTogglePrivate

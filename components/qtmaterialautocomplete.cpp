@@ -6,8 +6,8 @@
 #include <QEvent>
 #include <QPainter>
 #include <QTimer>
-#include <QtWidgets/QGraphicsDropShadowEffect>
-#include <QtWidgets/QVBoxLayout>
+#include <QGraphicsDropShadowEffect>
+#include <QVBoxLayout>
 
 /*!
  *  \class QtMaterialAutoCompletePrivate

@@ -3,7 +3,7 @@
 #include <QEvent>
 #include <QPainter>
 #include <QPixmap>
-#include <QtWidgets/QStackedLayout>
+#include <QStackedLayout>
 
 /*!
  *  \class QtMaterialDialogProxy

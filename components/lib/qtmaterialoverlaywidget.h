@@ -1,7 +1,7 @@
 #ifndef QTMATERIALOVERLAYWIDGET_H
 #define QTMATERIALOVERLAYWIDGET_H
 
-#include <QtWidgets/QWidget>
+#include <QWidget>
 
 class QtMaterialOverlayWidget : public QWidget
 {

@@ -2,6 +2,7 @@
 #define QTMATERIALCHECKABLE_P_H
 
 #include "lib/qtmaterialcheckable.h"
+
 #include <QtGlobal>
 
 class QStateMachine;

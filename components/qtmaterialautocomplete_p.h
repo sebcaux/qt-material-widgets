@@ -1,8 +1,9 @@
 #ifndef QTMATERIALAUTOCOMPLETE_P_H
 #define QTMATERIALAUTOCOMPLETE_P_H
 
-#include "qtmaterialautocomplete.h"
 #include "qtmaterialtextfield_p.h"
+
+#include "qtmaterialautocomplete.h"
 
 class QWidget;
 class QVBoxLayout;

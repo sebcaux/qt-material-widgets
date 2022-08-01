@@ -1,8 +1,9 @@
 #ifndef QTMATERIALSTATETRANSITION_H
 #define QTMATERIALSTATETRANSITION_H
 
-#include "lib/qtmaterialstatetransitionevent.h"
 #include <QAbstractTransition>
+
+#include "lib/qtmaterialstatetransitionevent.h"
 
 class QtMaterialStateTransition : public QAbstractTransition
 {

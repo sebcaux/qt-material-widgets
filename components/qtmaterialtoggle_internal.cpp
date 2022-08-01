@@ -3,7 +3,7 @@
 #include "qtmaterialtoggle.h"
 #include <QEvent>
 #include <QPainter>
-#include <QtWidgets/QGraphicsDropShadowEffect>
+#include <QGraphicsDropShadowEffect>
 
 /*!
  *  \class QtMaterialToggleRippleOverlay

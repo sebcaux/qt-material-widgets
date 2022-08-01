@@ -6,9 +6,9 @@
 #include <QLinearGradient>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QLayout>
-#include <QtWidgets/QVBoxLayout>
+#include <QApplication>
+#include <QLayout>
+#include <QVBoxLayout>
 
 /*!
  *  \class QtMaterialDrawerPrivate

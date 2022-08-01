@@ -4,7 +4,7 @@
 #include <QPropertyAnimation>
 #include <QSignalTransition>
 #include <QState>
-#include <QtWidgets/QLayout>
+#include <QLayout>
 
 /*!
  *  \class QtMaterialDrawerStateMachine

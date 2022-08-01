@@ -4,7 +4,7 @@
 #include <QEvent>
 #include <QPainter>
 #include <QState>
-#include <QtWidgets/QGraphicsDropShadowEffect>
+#include <QGraphicsDropShadowEffect>
 
 /*!
  *  \class QtMaterialFloatingActionButtonPrivate

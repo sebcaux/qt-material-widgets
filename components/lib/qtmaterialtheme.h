@@ -1,9 +1,10 @@
 #ifndef QTMATERIALTHEME_H
 #define QTMATERIALTHEME_H
 
+#include <QObject>
+
 #include <QColor>
 #include <QIcon>
-#include <QObject>
 #include <QScopedPointer>
 
 namespace Material

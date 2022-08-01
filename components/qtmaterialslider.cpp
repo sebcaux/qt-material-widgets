@@ -4,7 +4,7 @@
 #include "qtmaterialslider_internal.h"
 #include "qtmaterialslider_p.h"
 #include <QMouseEvent>
-#include <QtWidgets/QApplication>
+#include <QApplication>
 
 /*!
  *  \class QtMaterialSliderPrivate

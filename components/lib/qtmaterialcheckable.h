@@ -1,7 +1,7 @@
 #ifndef QTMATERIALCHECKABLE_H
 #define QTMATERIALCHECKABLE_H
 
-#include <QtWidgets/QAbstractButton>
+#include <QAbstractButton>
 
 class QtMaterialCheckablePrivate;
 

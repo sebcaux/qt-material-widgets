@@ -1,8 +1,9 @@
 #ifndef QTMATERIALPROGRESS_INTERNAL_H
 #define QTMATERIALPROGRESS_INTERNAL_H
 
-#include "qtmaterialprogress.h"
 #include <QObject>
+
+#include "qtmaterialprogress.h"
 
 class QtMaterialProgressDelegate : public QObject
 {

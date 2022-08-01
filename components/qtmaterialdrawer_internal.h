@@ -1,8 +1,9 @@
 #ifndef DRAWER_INTERNAL_H
 #define DRAWER_INTERNAL_H
 
-#include "lib/qtmaterialoverlaywidget.h"
 #include <QStateMachine>
+
+#include "lib/qtmaterialoverlaywidget.h"
 
 class QtMaterialDrawer;
 class QtMaterialDrawerWidget;

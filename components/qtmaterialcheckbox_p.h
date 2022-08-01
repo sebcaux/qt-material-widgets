@@ -3,6 +3,8 @@
 
 #include "lib/qtmaterialcheckable_p.h"
 
+#include "qtmaterialcheckbox.h"
+
 class QtMaterialCheckBox;
 
 class QtMaterialCheckBoxPrivate : public QtMaterialCheckablePrivate

@@ -1,5 +1,6 @@
 TEMPLATE = lib
 CONFIG += staticlib
+QT += core gui widgets
 
 SOURCES = \
     $$PWD/layouts/qtmaterialsnackbarlayout.cpp \

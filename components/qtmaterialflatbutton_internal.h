@@ -1,8 +1,9 @@
 #ifndef QTMATERIALFLATBUTTON_INTERNAL_H
 #define QTMATERIALFLATBUTTON_INTERNAL_H
 
-#include <QColor>
 #include <QStateMachine>
+
+#include <QColor>
 
 class QtMaterialFlatButton;
 class QSequentialAnimationGroup;

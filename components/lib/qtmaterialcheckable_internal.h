@@ -3,7 +3,7 @@
 
 #include <QColor>
 #include <QIcon>
-#include <QtWidgets/QWidget>
+#include <QWidget>
 
 class QtMaterialCheckable;
 

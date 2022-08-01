@@ -1,8 +1,9 @@
 #ifndef QTMATERIALSLIDER_INTERNAL_H
 #define QTMATERIALSLIDER_INTERNAL_H
 
-#include "lib/qtmaterialoverlaywidget.h"
 #include <QStateMachine>
+
+#include "lib/qtmaterialoverlaywidget.h"
 
 class QtMaterialSlider;
 class QtMaterialSliderThumb;
