@@ -8,6 +8,7 @@
 #include <QCoreApplication>
 #include <QEvent>
 #include <QEventTransition>
+#include <QMouseEvent>
 #include <QPainter>
 #include <QSignalTransition>
 #include <QStateMachine>
@@ -353,13 +354,12 @@ bool QtMaterialCheckable::eventFilter(QObject *obj, QEvent *event)
 /*!
  *  \reimp
  */
-void QtMaterialCheckable::mousePressEvent(QMouseEvent *event)
+void QtMaterialCheckable::mouseReleaseEvent(QMouseEvent *event)
 {
-    Q_UNUSED(event)
-
     Q_D(QtMaterialCheckable);
 
-    if (!isEnabled())
+    QAbstractButton::mouseReleaseEvent(event);
+    if (!event->isAccepted())
     {
         return;
     }
@@ -381,7 +381,6 @@ void QtMaterialCheckable::mousePressEvent(QMouseEvent *event)
     }
     d->rippleOverlay->addRipple(ripple);
 
-    setChecked(!isChecked());
 }
 
 /*!

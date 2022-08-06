@@ -48,9 +48,10 @@ public:
 protected:
     QtMaterialCheckable(QtMaterialCheckablePrivate &d, QWidget *parent = nullptr);
 
+    // QWidget interface
     bool event(QEvent *event) override;
     bool eventFilter(QObject *obj, QEvent *event) override;
-    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
 
     virtual void setupProperties();
