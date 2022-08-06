@@ -11,6 +11,7 @@ class QtMaterialCheckBox : public QtMaterialCheckable
 
 public:
     explicit QtMaterialCheckBox(QWidget *parent = nullptr);
+    explicit QtMaterialCheckBox(const QString &text, QWidget *parent = nullptr);
     ~QtMaterialCheckBox() override;
 
 private:

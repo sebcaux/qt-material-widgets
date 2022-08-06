@@ -84,6 +84,13 @@ QtMaterialRadioButton::QtMaterialRadioButton(QWidget *parent)
     d_func()->init();
 }
 
+QtMaterialRadioButton::QtMaterialRadioButton(const QString &text, QWidget *parent)
+    : QtMaterialCheckable(*new QtMaterialRadioButtonPrivate(this), parent)
+{
+    d_func()->init();
+    setText(text);
+}
+
 QtMaterialRadioButton::~QtMaterialRadioButton()
 {
 }

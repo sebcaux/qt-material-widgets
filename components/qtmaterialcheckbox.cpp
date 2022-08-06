@@ -80,6 +80,13 @@ QtMaterialCheckBox::QtMaterialCheckBox(QWidget *parent)
     d_func()->init();
 }
 
+QtMaterialCheckBox::QtMaterialCheckBox(const QString &text, QWidget *parent)
+    : QtMaterialCheckable(*new QtMaterialCheckBoxPrivate(this), parent)
+{
+    d_func()->init();
+    setText(text);
+}
+
 QtMaterialCheckBox::~QtMaterialCheckBox()
 {
 }

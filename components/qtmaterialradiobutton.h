@@ -11,6 +11,7 @@ class QtMaterialRadioButton : public QtMaterialCheckable
 
 public:
     explicit QtMaterialRadioButton(QWidget *parent = nullptr);
+    explicit QtMaterialRadioButton(const QString &text, QWidget *parent = nullptr);
     ~QtMaterialRadioButton() override;
 
 protected:
