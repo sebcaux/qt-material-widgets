@@ -189,7 +189,6 @@ void QtMaterialIconButton::mousePressEvent(QMouseEvent *event)
     Q_D(QtMaterialIconButton);
 
     d->rippleOverlay->addRipple(QPoint(d->rippleOverlay->width(), d->rippleOverlay->height()) / 2, iconSize().width());
-    emit clicked();
 
     QAbstractButton::mousePressEvent(event);
 }
