@@ -2,6 +2,10 @@ TEMPLATE = lib
 CONFIG += staticlib
 QT += core gui widgets
 
+greaterThan(QT_MAJOR_VERSION, 5) {
+    QT += statemachine
+}
+
 SOURCES = \
     $$PWD/layouts/qtmaterialsnackbarlayout.cpp \
     $$PWD/lib/qtmaterialcheckable.cpp \

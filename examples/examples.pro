@@ -2,6 +2,10 @@ QT += core gui widgets
 TEMPLATE = app
 CONFIG += c++11
 
+greaterThan(QT_MAJOR_VERSION, 5) {
+    QT += statemachine
+}
+
 SOURCES = \
     $$PWD/appbarsettingseditor.cpp \
     $$PWD/autocompletesettingseditor.cpp \
