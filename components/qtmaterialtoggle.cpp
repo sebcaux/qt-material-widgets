@@ -50,7 +50,7 @@ void QtMaterialTogglePrivate::init()
 
     //
 
-    transition = new QSignalTransition(q, SIGNAL(toggled(bool)));
+    transition = new QSignalTransition(q, &QtMaterialToggle::toggled);
     transition->setTargetState(onState);
     offState->addTransition(transition);
 
@@ -75,7 +75,7 @@ void QtMaterialTogglePrivate::init()
 
     //
 
-    transition = new QSignalTransition(q, SIGNAL(toggled(bool)));
+    transition = new QSignalTransition(q, &QtMaterialToggle::toggled);
     transition->setTargetState(offState);
     onState->addTransition(transition);
 

@@ -38,8 +38,8 @@ void QtMaterialCheckablePrivate::init()
     checkedState = new QState;
     disabledUncheckedState = new QState;
     disabledCheckedState = new QState;
-    uncheckedTransition = new QSignalTransition(q, SIGNAL(toggled(bool)));
-    checkedTransition = new QSignalTransition(q, SIGNAL(toggled(bool)));
+    uncheckedTransition = new QSignalTransition(q, &QtMaterialCheckable::toggled);
+    checkedTransition = new QSignalTransition(q, &QtMaterialCheckable::toggled);
     labelPosition = QtMaterialCheckable::LabelPositionRight;
     useThemeColors = true;
 
@@ -86,11 +86,11 @@ void QtMaterialCheckablePrivate::init()
     transition->setTargetState(checkedState);
     disabledCheckedState->addTransition(transition);
 
-    transition = new QSignalTransition(q, SIGNAL(toggled(bool)));
+    transition = new QSignalTransition(q, &QtMaterialCheckable::toggled);
     transition->setTargetState(disabledCheckedState);
     disabledUncheckedState->addTransition(transition);
 
-    transition = new QSignalTransition(q, SIGNAL(toggled(bool)));
+    transition = new QSignalTransition(q, &QtMaterialCheckable::toggled);
     transition->setTargetState(disabledUncheckedState);
     disabledCheckedState->addTransition(transition);
 

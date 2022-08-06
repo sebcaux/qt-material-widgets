@@ -31,7 +31,7 @@ QtMaterialDrawerStateMachine::QtMaterialDrawerStateMachine(QtMaterialDrawerWidge
     QSignalTransition *transition;
     QPropertyAnimation *animation;
 
-    transition = new QSignalTransition(this, SIGNAL(signalOpen()));
+    transition = new QSignalTransition(this, &QtMaterialDrawerStateMachine::signalOpen);
     transition->setTargetState(m_openingState);
     m_closedState->addTransition(transition);
 
@@ -44,11 +44,11 @@ QtMaterialDrawerStateMachine::QtMaterialDrawerStateMachine(QtMaterialDrawerWidge
     animation->setDuration(220);
     transition->addAnimation(animation);
 
-    transition = new QSignalTransition(animation, SIGNAL(finished()));
+    transition = new QSignalTransition(animation, &QPropertyAnimation::finished);
     transition->setTargetState(m_openedState);
     m_openingState->addTransition(transition);
 
-    transition = new QSignalTransition(this, SIGNAL(signalClose()));
+    transition = new QSignalTransition(this, &QtMaterialDrawerStateMachine::signalClose);
     transition->setTargetState(m_closingState);
     m_openingState->addTransition(transition);
 
@@ -61,11 +61,11 @@ QtMaterialDrawerStateMachine::QtMaterialDrawerStateMachine(QtMaterialDrawerWidge
     animation->setEasingCurve(QEasingCurve::InCirc);
     transition->addAnimation(animation);
 
-    transition = new QSignalTransition(animation, SIGNAL(finished()));
+    transition = new QSignalTransition(animation, &QPropertyAnimation::finished);
     transition->setTargetState(m_closedState);
     m_closingState->addTransition(transition);
 
-    transition = new QSignalTransition(this, SIGNAL(signalClose()));
+    transition = new QSignalTransition(this, &QtMaterialDrawerStateMachine::signalClose);
     transition->setTargetState(m_closingState);
     m_openedState->addTransition(transition);
 
@@ -78,7 +78,7 @@ QtMaterialDrawerStateMachine::QtMaterialDrawerStateMachine(QtMaterialDrawerWidge
     animation->setDuration(220);
     transition->addAnimation(animation);
 
-    transition = new QSignalTransition(animation, SIGNAL(finished()));
+    transition = new QSignalTransition(animation, &QPropertyAnimation::finished);
     transition->setTargetState(m_closedState);
     m_closingState->addTransition(transition);
 

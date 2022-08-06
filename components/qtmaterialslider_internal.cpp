@@ -96,7 +96,7 @@ QtMaterialSliderStateMachine::QtMaterialSliderStateMachine(QtMaterialSlider *sli
 
     // Pulse in
 
-    transition = new QSignalTransition(m_pulseOutState, SIGNAL(propertiesAssigned()));
+    transition = new QSignalTransition(m_pulseOutState, &QState::propertiesAssigned);
     transition->setTargetState(m_pulseInState);
 
     animation = new QPropertyAnimation(thumb, "haloSize", this);
@@ -107,7 +107,7 @@ QtMaterialSliderStateMachine::QtMaterialSliderStateMachine(QtMaterialSlider *sli
 
     // Pulse out
 
-    transition = new QSignalTransition(m_pulseInState, SIGNAL(propertiesAssigned()));
+    transition = new QSignalTransition(m_pulseInState, &QState::propertiesAssigned);
     transition->setTargetState(m_pulseOutState);
 
     animation = new QPropertyAnimation(thumb, "haloSize", this);
@@ -118,7 +118,7 @@ QtMaterialSliderStateMachine::QtMaterialSliderStateMachine(QtMaterialSlider *sli
 
     // Slider pressed
 
-    transition = new QSignalTransition(slider, SIGNAL(sliderPressed()));
+    transition = new QSignalTransition(slider, &QtMaterialSlider::sliderPressed);
     transition->setTargetState(m_slidingState);
     animation = new QPropertyAnimation(thumb, "diameter", this);
     animation->setDuration(70);
@@ -131,7 +131,7 @@ QtMaterialSliderStateMachine::QtMaterialSliderStateMachine(QtMaterialSlider *sli
 
     // Slider released
 
-    transition = new QSignalTransition(slider, SIGNAL(sliderReleased()));
+    transition = new QSignalTransition(slider, &QtMaterialSlider::sliderReleased);
     transition->setTargetState(m_focusState);
     animation = new QPropertyAnimation(thumb, "diameter", this);
     animation->setDuration(70);
