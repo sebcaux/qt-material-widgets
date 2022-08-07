@@ -7,7 +7,7 @@ greaterThan(QT_MAJOR_VERSION, 5) {
 }
 
 SOURCES = \
-    $$PWD/layouts/qtmaterialsnackbarlayout.cpp \
+    $$PWD/layouts/qtmaterialslidelayout.cpp \
     $$PWD/lib/qtmaterialcheckable.cpp \
     $$PWD/lib/qtmaterialcheckable_internal.cpp \
     $$PWD/lib/qtmaterialoverlaywidget.cpp \
@@ -50,8 +50,8 @@ SOURCES = \
     $$PWD/qtmaterialtoggle_internal.cpp
 
 HEADERS = \
-    $$PWD/layouts/qtmaterialsnackbarlayout.h \
-    $$PWD/layouts/qtmaterialsnackbarlayout_p.h \
+    $$PWD/layouts/qtmaterialslidelayout.h \
+    $$PWD/layouts/qtmaterialslidelayout_p.h \
     $$PWD/lib/qtmaterialcheckable.h \
     $$PWD/lib/qtmaterialcheckable_internal.h \
     $$PWD/lib/qtmaterialcheckable_p.h \
