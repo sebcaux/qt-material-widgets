@@ -147,6 +147,14 @@ QtMaterialToggle::QtMaterialToggle(QWidget *parent)
     d_func()->init();
 }
 
+QtMaterialToggle::QtMaterialToggle(const QString &text, QWidget *parent)
+    : QAbstractButton(parent),
+      d_ptr(new QtMaterialTogglePrivate(this))
+{
+    d_func()->init();
+    setText(text);
+}
+
 QtMaterialToggle::~QtMaterialToggle()
 {
 }

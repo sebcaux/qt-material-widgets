@@ -16,6 +16,7 @@ class QtMaterialToggle : public QAbstractButton
 
 public:
     explicit QtMaterialToggle(QWidget *parent = nullptr);
+    explicit QtMaterialToggle(const QString &text, QWidget *parent = nullptr);
     ~QtMaterialToggle() override;
 
     void setUseThemeColors(bool value);
