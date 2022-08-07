@@ -1,6 +1,8 @@
 #include "qtmaterialavatar.h"
+
 #include "lib/qtmaterialstyle.h"
 #include "qtmaterialavatar_p.h"
+
 #include <QPainter>
 #include <QPainterPath>
 

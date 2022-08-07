@@ -1,8 +1,8 @@
 #ifndef QTMATERIALICONBUTTON_P_H
 #define QTMATERIALICONBUTTON_P_H
 
-#include <QtGlobal>
 #include <QColor>
+#include <QtGlobal>
 
 class QtMaterialIconButton;
 class QtMaterialRippleOverlay;

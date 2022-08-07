@@ -1,9 +1,11 @@
 #include "qtmaterialflatbutton.h"
+
 #include "lib/qtmaterialripple.h"
 #include "lib/qtmaterialrippleoverlay.h"
 #include "lib/qtmaterialstyle.h"
 #include "qtmaterialflatbutton_internal.h"
 #include "qtmaterialflatbutton_p.h"
+
 #include <QBitmap>
 #include <QIcon>
 #include <QMouseEvent>

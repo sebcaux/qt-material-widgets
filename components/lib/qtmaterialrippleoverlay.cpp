@@ -1,5 +1,7 @@
 #include "lib/qtmaterialrippleoverlay.h"
+
 #include "lib/qtmaterialripple.h"
+
 #include <QPainter>
 
 /*!

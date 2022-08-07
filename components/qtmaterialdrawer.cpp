@@ -1,13 +1,15 @@
 #include "qtmaterialdrawer.h"
+
 #include "qtmaterialdrawer_internal.h"
 #include "qtmaterialdrawer_p.h"
+
+#include <QApplication>
 #include <QDebug>
 #include <QEvent>
+#include <QLayout>
 #include <QLinearGradient>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QApplication>
-#include <QLayout>
 #include <QVBoxLayout>
 
 /*!

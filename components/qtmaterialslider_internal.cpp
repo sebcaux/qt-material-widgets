@@ -1,7 +1,8 @@
 #include "qtmaterialslider_internal.h"
+
 #include "lib/qtmaterialstatetransition.h"
-#include "lib/qtmaterialstyle.h"
 #include "qtmaterialslider.h"
+
 #include <QAbstractTransition>
 #include <QEventTransition>
 #include <QPainter>

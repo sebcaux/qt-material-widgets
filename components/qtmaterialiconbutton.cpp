@@ -1,8 +1,11 @@
 #include "qtmaterialiconbutton.h"
+
 #include "lib/qtmaterialrippleoverlay.h"
 #include "lib/qtmaterialstyle.h"
 #include "qtmaterialiconbutton_p.h"
+
 #include <QEvent>
+#include <QMouseEvent>
 #include <QPainter>
 
 /*!

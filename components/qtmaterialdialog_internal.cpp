@@ -1,5 +1,7 @@
 #include "qtmaterialdialog_internal.h"
+
 #include "qtmaterialdialog.h"
+
 #include <QEvent>
 #include <QPainter>
 #include <QPixmap>

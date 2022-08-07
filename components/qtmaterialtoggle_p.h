@@ -1,8 +1,8 @@
 #ifndef QTMATERIALTOGGLE_P_H
 #define QTMATERIALTOGGLE_P_H
 
-#include <QtGlobal>
 #include <QColor>
+#include <QtGlobal>
 
 class QStateMachine;
 class QState;

@@ -1,11 +1,12 @@
 #include "qtmaterialtabs_internal.h"
+
 #include "qtmaterialtabs.h"
-#include <QDebug>
+
 #include <QEvent>
-#include <QPainter>
-#include <QPropertyAnimation>
 #include <QLayout>
 #include <QLayoutItem>
+#include <QPainter>
+#include <QPropertyAnimation>
 
 /*!
  *  \class QtMaterialTabsInkBar

@@ -1,7 +1,9 @@
 #include "qtmaterialtabs.h"
+
 #include "lib/qtmaterialstyle.h"
 #include "qtmaterialtabs_internal.h"
 #include "qtmaterialtabs_p.h"
+
 #include <QHBoxLayout>
 
 /*!

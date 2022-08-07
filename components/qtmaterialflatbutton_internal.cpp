@@ -1,6 +1,8 @@
 #include "qtmaterialflatbutton_internal.h"
+
 #include "lib/qtmaterialstatetransition.h"
 #include "qtmaterialflatbutton.h"
+
 #include <QEventTransition>
 #include <QFocusEvent>
 #include <QPropertyAnimation>

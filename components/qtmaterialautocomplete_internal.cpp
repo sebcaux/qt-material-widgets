@@ -1,8 +1,8 @@
 #include "qtmaterialautocomplete_internal.h"
-#include <QDebug>
+
+#include <QGraphicsOpacityEffect>
 #include <QPropertyAnimation>
 #include <QSignalTransition>
-#include <QGraphicsOpacityEffect>
 
 /*!
  *  \class QtMaterialAutoCompleteStateMachine

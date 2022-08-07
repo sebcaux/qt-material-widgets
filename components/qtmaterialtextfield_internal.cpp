@@ -1,5 +1,7 @@
 #include "qtmaterialtextfield_internal.h"
+
 #include "qtmaterialtextfield.h"
+
 #include <QEventTransition>
 #include <QPainter>
 #include <QPropertyAnimation>

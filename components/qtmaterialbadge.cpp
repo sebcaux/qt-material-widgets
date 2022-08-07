@@ -1,6 +1,8 @@
 #include "qtmaterialbadge.h"
+
 #include "lib/qtmaterialstyle.h"
 #include "qtmaterialbadge_p.h"
+
 #include <QPainter>
 
 /*!

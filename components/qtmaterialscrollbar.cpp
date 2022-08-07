@@ -1,9 +1,10 @@
 #include "qtmaterialscrollbar.h"
+
 #include "lib/qtmaterialstatetransitionevent.h"
 #include "lib/qtmaterialstyle.h"
 #include "qtmaterialscrollbar_internal.h"
 #include "qtmaterialscrollbar_p.h"
-#include <QDebug>
+
 #include <QPainter>
 #include <QPainterPath>
 
