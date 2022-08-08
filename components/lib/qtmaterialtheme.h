@@ -4,12 +4,14 @@
 #include <QObject>
 
 #include <QColor>
+#include <QFont>
 #include <QIcon>
 #include <QScopedPointer>
 
 namespace Material
 {
 enum Color : unsigned int;
+enum FontType : unsigned int;
 }
 
 class QtMaterialThemePrivate;
@@ -22,11 +24,17 @@ public:
     explicit QtMaterialTheme(QObject *parent = nullptr);
     ~QtMaterialTheme() override;
 
+    // Colors
     QColor getColor(const QString &key) const;
 
     void setColor(const QString &key, const QColor &color);
     void setColor(const QString &key, Material::Color color);
 
+    // Fonts
+    const QFont &font(Material::FontType fontType) const;
+    void setFont(Material::FontType fontType, const QFont &font);
+
+    // Icons
     static QIcon icon(const QString &category, const QString &icon);
 
 protected:
@@ -83,6 +91,24 @@ enum AvatarType
     ImageAvatar,
     IconAvatar,
     LetterAvatar
+};
+
+enum FontType : unsigned int
+{
+    FontHeadline1,
+    FontHeadline2,
+    FontHeadline3,
+    FontHeadline4,
+    FontHeadline5,
+    FontHeadline6,
+    FontSubtitle1,
+    FontSubtitle2,
+    FontBody1,
+    FontBody2,
+    FontButton,
+    FontOverline,
+    FontCaption,
+    FontTypesCount
 };
 
 enum Color : unsigned int

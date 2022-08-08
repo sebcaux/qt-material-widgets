@@ -14,6 +14,7 @@
 QtMaterialThemePrivate::QtMaterialThemePrivate(QtMaterialTheme *q)
     : q_ptr(q)
 {
+    fonts.resize(Material::FontTypesCount);
 }
 
 QtMaterialThemePrivate::~QtMaterialThemePrivate()
@@ -35,6 +36,61 @@ QtMaterialTheme::QtMaterialTheme(QObject *parent)
     : QObject(parent),
       d_ptr(new QtMaterialThemePrivate(this))
 {
+    // Infos from https://material.io/design/typography/the-type-system.html#type-scale
+
+    QFont headline1Font("Roboto", 96, QFont::Light);
+    headline1Font.setLetterSpacing(QFont::AbsoluteSpacing, -1.5);
+    setFont(Material::FontHeadline1, headline1Font);
+
+    QFont headline2Font("Roboto", 60, QFont::Light);
+    headline2Font.setLetterSpacing(QFont::AbsoluteSpacing, -0.5);
+    setFont(Material::FontHeadline2, headline2Font);
+
+    QFont headline3Font("Roboto", 48, QFont::Medium);
+    headline3Font.setLetterSpacing(QFont::AbsoluteSpacing, 0);
+    setFont(Material::FontHeadline3, headline3Font);
+
+    QFont headline4Font("Roboto", 34, QFont::Medium);
+    headline4Font.setLetterSpacing(QFont::AbsoluteSpacing, 0.25);
+    setFont(Material::FontHeadline4, headline4Font);
+
+    QFont headline5Font("Roboto", 24, QFont::Normal);
+    headline5Font.setLetterSpacing(QFont::AbsoluteSpacing, 0);
+    setFont(Material::FontHeadline5, headline5Font);
+
+    QFont headline6Font("Roboto", 20, QFont::Medium);
+    headline6Font.setLetterSpacing(QFont::AbsoluteSpacing, 0.15);
+    setFont(Material::FontHeadline6, headline6Font);
+
+    QFont subtitle1Font("Roboto", 16, QFont::Normal);
+    subtitle1Font.setLetterSpacing(QFont::AbsoluteSpacing, 0.15);
+    setFont(Material::FontSubtitle1, subtitle1Font);
+
+    QFont subtitle2Font("Roboto", 14, QFont::Medium);
+    subtitle2Font.setLetterSpacing(QFont::AbsoluteSpacing, 0.1);
+    setFont(Material::FontSubtitle2, subtitle2Font);
+
+    QFont body1Font("Roboto", 16, QFont::Normal);
+    body1Font.setLetterSpacing(QFont::AbsoluteSpacing, 0.5);
+    setFont(Material::FontBody1, body1Font);
+
+    QFont body2Font("Roboto", 14, QFont::Normal);
+    body2Font.setLetterSpacing(QFont::AbsoluteSpacing, 0.25);
+    setFont(Material::FontBody2, body2Font);
+
+    QFont buttonFont("Roboto", 14, QFont::Medium);
+    buttonFont.setCapitalization(QFont::AllUppercase);
+    buttonFont.setLetterSpacing(QFont::AbsoluteSpacing, 1.25);
+    setFont(Material::FontButton, buttonFont);
+
+    QFont captionFont("Roboto", 12, QFont::Normal);
+    captionFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.4);
+    setFont(Material::FontOverline, captionFont);
+
+    QFont overlineFont("Roboto", 10, QFont::Normal);
+    overlineFont.setLetterSpacing(QFont::AbsoluteSpacing, 1.5);
+    setFont(Material::FontCaption, overlineFont);
+
     setColor("primary1", Material::cyan500);
     setColor("primary2", Material::cyan700);
     setColor("primary3", Material::lightBlack);
@@ -125,6 +181,30 @@ void QtMaterialTheme::setColor(const QString &key, Material::Color color)
         d->rgba(255, 255, 255, 0.54)};
 
     d->colors.insert(key, palette[color]);
+}
+
+const QFont &QtMaterialTheme::font(Material::FontType fontType) const
+{
+    Q_D(const QtMaterialTheme);
+
+    if (fontType >= Material::FontTypesCount)
+    {
+        return d->fonts.at(Material::FontBody1);
+    }
+
+    return d->fonts.at(fontType);
+}
+
+void QtMaterialTheme::setFont(Material::FontType fontType, const QFont &font)
+{
+    Q_D(QtMaterialTheme);
+
+    if (fontType >= Material::FontTypesCount)
+    {
+        return;
+    }
+
+    d->fonts.replace(fontType, font);
 }
 
 QIcon QtMaterialTheme::icon(const QString &category, const QString &icon)
