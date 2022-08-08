@@ -9,6 +9,36 @@
 
 namespace Material
 {
+enum Color : unsigned int;
+}
+
+class QtMaterialThemePrivate;
+
+class QtMaterialTheme : public QObject
+{
+    Q_OBJECT
+
+public:
+    explicit QtMaterialTheme(QObject *parent = nullptr);
+    ~QtMaterialTheme() override;
+
+    QColor getColor(const QString &key) const;
+
+    void setColor(const QString &key, const QColor &color);
+    void setColor(const QString &key, Material::Color color);
+
+    static QIcon icon(const QString &category, const QString &icon);
+
+protected:
+    const QScopedPointer<QtMaterialThemePrivate> d_ptr;
+
+private:
+    Q_DISABLE_COPY(QtMaterialTheme)
+    Q_DECLARE_PRIVATE(QtMaterialTheme)
+};
+
+namespace Material
+{
 enum ButtonPreset
 {
     FlatPreset,
@@ -55,7 +85,7 @@ enum AvatarType
     LetterAvatar
 };
 
-enum Color
+enum Color : unsigned int
 {
     red50,
     red100,
@@ -324,30 +354,5 @@ enum Color
     lightWhite
 };
 }  // namespace Material
-
-class QtMaterialThemePrivate;
-
-class QtMaterialTheme : public QObject
-{
-    Q_OBJECT
-
-public:
-    explicit QtMaterialTheme(QObject *parent = nullptr);
-    ~QtMaterialTheme() override;
-
-    QColor getColor(const QString &key) const;
-
-    void setColor(const QString &key, const QColor &color);
-    void setColor(const QString &key, Material::Color color);
-
-    static QIcon icon(const QString &category, const QString &icon);
-
-protected:
-    const QScopedPointer<QtMaterialThemePrivate> d_ptr;
-
-private:
-    Q_DISABLE_COPY(QtMaterialTheme)
-    Q_DECLARE_PRIVATE(QtMaterialTheme)
-};
 
 #endif  // QTMATERIALTHEME_H
