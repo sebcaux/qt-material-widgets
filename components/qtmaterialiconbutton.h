@@ -29,7 +29,7 @@ protected:
 
     bool event(QEvent *event) override;
     bool eventFilter(QObject *obj, QEvent *event) override;
-    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialIconButtonPrivate> d_ptr;
