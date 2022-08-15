@@ -21,6 +21,7 @@ public:
     ~QtMaterialAppBarPrivate();
 
     void init();
+    void updateChildrenColor();
 
     void setNavIconType(Material::NavIconType type);
 

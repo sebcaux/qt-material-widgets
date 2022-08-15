@@ -41,12 +41,10 @@ void QtMaterialAppBarPrivate::init()
     titleLabel->setAttribute(Qt::WA_TranslucentBackground);
     titleLabel->setForegroundRole(QPalette::WindowText);
     titleLabel->setContentsMargins(6, 0, 0, 0);
-    QPalette palette = titleLabel->palette();
-    palette.setColor(titleLabel->foregroundRole(), Qt::white);
-    titleLabel->setPalette(palette);
     titleLabel->setFont(QtMaterialStyle::instance().themeFont(Material::FontHeadline3));
 
     useThemeColors = true;
+    updateChildrenColor();
 
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
     effect->setBlurRadius(11);
@@ -57,6 +55,20 @@ void QtMaterialAppBarPrivate::init()
     layout = new QtMaterialAppBarLayout(q);
     layout->setTitleLabel(titleLabel);
     q->setLayout(layout);
+}
+
+void QtMaterialAppBarPrivate::updateChildrenColor()
+{
+    Q_Q(QtMaterialAppBar);
+
+    QPalette palette = titleLabel->palette();
+    palette.setColor(titleLabel->foregroundRole(), q->foregroundColor());
+    titleLabel->setPalette(palette);
+
+    if (navButton != nullptr)
+    {
+        navButton->setColor(q->foregroundColor());
+    }
 }
 
 /*!
@@ -70,7 +82,7 @@ void QtMaterialAppBarPrivate::setNavIconType(Material::NavIconType type)
     {
         navButton = new QtMaterialIconButton(QIcon(), q);
         navButton->setIconSize(QSize(48, 48));
-        navButton->setColor(QtMaterialStyle::instance().themeColor("alternateText"));
+        navButton->setColor(q->foregroundColor());
         navButton->setFixedWidth(64);
         layout->setNavButton(navButton);
     }
@@ -167,6 +179,7 @@ void QtMaterialAppBar::setUseThemeColors(bool value)
     }
 
     d->useThemeColors = value;
+    d->updateChildrenColor();
     update();
 }
 
@@ -187,6 +200,7 @@ void QtMaterialAppBar::setForegroundColor(const QColor &color)
     {
         d->useThemeColors = false;
     }
+    d->updateChildrenColor();
     update();
 }
 
@@ -196,7 +210,7 @@ QColor QtMaterialAppBar::foregroundColor() const
 
     if (d->useThemeColors || !d->foregroundColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("primary1");
+        return QtMaterialStyle::instance().themeColor("alternateText");
     }
 
     return d->foregroundColor;
