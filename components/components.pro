@@ -91,8 +91,6 @@ HEADERS = \
     $$PWD/qtmaterialflatbutton_p.h \
     $$PWD/qtmaterialiconbutton.h \
     $$PWD/qtmaterialiconbutton_p.h \
-    $$PWD/qtmaterialpaper.h \
-    $$PWD/qtmaterialpaper_p.h \
     $$PWD/qtmaterialprogress.h \
     $$PWD/qtmaterialprogress_internal.h \
     $$PWD/qtmaterialprogress_p.h \
