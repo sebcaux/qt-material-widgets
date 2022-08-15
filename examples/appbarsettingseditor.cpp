@@ -14,28 +14,11 @@ AppBarSettingsEditor::AppBarSettingsEditor(QWidget *parent)
 {
     ui->setupUi(_settingsWidget);
 
-    QLabel *label = new QLabel("Inbox");
-    label->setAttribute(Qt::WA_TranslucentBackground);
-    label->setForegroundRole(QPalette::WindowText);
-    label->setContentsMargins(6, 0, 0, 0);
-
-    QPalette palette = label->palette();
-    palette.setColor(label->foregroundRole(), Qt::white);
-    label->setPalette(palette);
-
-    label->setFont(QFont("Roboto", 18, QFont::Normal));
-
-    QtMaterialIconButton *button = new QtMaterialIconButton(QtMaterialTheme::icon("navigation", "menu"));
-    button->setIconSize(QSize(24, 24));
-    m_appBar->appBarLayout()->addWidget(button);
-    m_appBar->appBarLayout()->addWidget(label);
-    m_appBar->appBarLayout()->addStretch(1);
-    button->setColor(Qt::white);
-    button->setFixedWidth(42);
+    m_appBar->setTitle("Inbox");
+    m_appBar->setNavIconType(Material::NavIconMenu);
 
     QVBoxLayout *layout = new QVBoxLayout;
     _canvas->setLayout(layout);
-    //_canvas->setMaximumHeight(300);
     layout->addWidget(m_appBar);
     layout->addStretch(1);
 
@@ -43,6 +26,7 @@ AppBarSettingsEditor::AppBarSettingsEditor(QWidget *parent)
 
     connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &AppBarSettingsEditor::updateWidget);
     connect(ui->backgroundColorToolButton, &QAbstractButton::pressed, this, &AppBarSettingsEditor::selectColor);
+    connect(ui->foregroundColorToolButton, &QAbstractButton::pressed, this, &AppBarSettingsEditor::selectColor);
 }
 
 AppBarSettingsEditor::~AppBarSettingsEditor()
@@ -71,6 +55,11 @@ void AppBarSettingsEditor::selectColor()
         {
             m_appBar->setBackgroundColor(color);
             ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
+        }
+        if ("foregroundColorToolButton" == senderName)
+        {
+            m_appBar->setForegroundColor(color);
+            ui->foregroundColorLineEdit->setText(color.name(QColor::HexRgb));
         }
     }
     setupForm();
