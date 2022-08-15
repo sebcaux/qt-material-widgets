@@ -3,47 +3,39 @@
 
 #include <QWidget>
 
-#include <QHBoxLayout>
-
 class QtMaterialAppBarPrivate;
 
 class QtMaterialAppBar : public QWidget
 {
     Q_OBJECT
 
-    Q_PROPERTY(QColor foregroundColor WRITE setForegroundColor READ foregroundColor)
-    Q_PROPERTY(QColor backgroundColor WRITE setBackgroundColor READ backgroundColor)
+    Q_PROPERTY(QColor foregroundColor READ foregroundColor WRITE setForegroundColor)
+    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
 
 public:
     explicit QtMaterialAppBar(QWidget *parent = nullptr);
     ~QtMaterialAppBar() override;
 
-    QSize sizeHint() const override;
-
-    void setUseThemeColors(bool value);
     bool useThemeColors() const;
-
-    void setForegroundColor(const QColor &color);
+    void setUseThemeColors(bool value);
     QColor foregroundColor() const;
-
-    void setBackgroundColor(const QColor &color);
+    void setForegroundColor(const QColor &color);
     QColor backgroundColor() const;
-
-    inline QHBoxLayout *appBarLayout() const;
+    void setBackgroundColor(const QColor &color);
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
-
     const QScopedPointer<QtMaterialAppBarPrivate> d_ptr;
 
 private:
     Q_DISABLE_COPY(QtMaterialAppBar)
     Q_DECLARE_PRIVATE(QtMaterialAppBar)
-};
 
-inline QHBoxLayout *QtMaterialAppBar::appBarLayout() const
-{
-    return static_cast<QHBoxLayout *>(layout());
-}
+    // QWidget interface
+public:
+    QSize sizeHint() const override;
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
+};
 
 #endif  // QTMATERIALAPPBAR_H
