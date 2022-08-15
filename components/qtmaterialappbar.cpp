@@ -4,8 +4,10 @@
 #include "qtmaterialappbar_internal.h"
 #include "qtmaterialappbar_p.h"
 
+#include <QActionEvent>
 #include <QGraphicsDropShadowEffect>
 #include <QPainter>
+#include <QWidgetAction>
 
 /*!
  *  \class QtMaterialAppBarPrivate
@@ -44,7 +46,6 @@ void QtMaterialAppBarPrivate::init()
     titleLabel->setFont(QtMaterialStyle::instance().themeFont(Material::FontHeadline3));
 
     useThemeColors = true;
-    updateChildrenColor();
 
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
     effect->setBlurRadius(11);
@@ -55,6 +56,8 @@ void QtMaterialAppBarPrivate::init()
     layout = new QtMaterialAppBarLayout(q);
     layout->setTitleLabel(titleLabel);
     q->setLayout(layout);
+
+    updateChildrenColor();
 }
 
 void QtMaterialAppBarPrivate::updateChildrenColor()
@@ -69,6 +72,8 @@ void QtMaterialAppBarPrivate::updateChildrenColor()
     {
         navButton->setColor(q->foregroundColor());
     }
+
+    layout->updateActions();
 }
 
 /*!
@@ -253,4 +258,35 @@ void QtMaterialAppBar::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     painter.fillRect(rect(), backgroundColor());
+}
+
+void QtMaterialAppBar::actionEvent(QActionEvent *event)
+{
+    Q_D(QtMaterialAppBar);
+
+    QAction *action = event->action();
+    QWidgetAction *widgetAction = qobject_cast<QWidgetAction *>(action);
+    switch (event->type())
+    {
+        case QEvent::ActionAdded:
+        {
+            if (widgetAction != nullptr)
+            {
+                widgetAction->setParent(this);
+            }
+            d->layout->insertAction(0, action);
+            break;
+        }
+        case QEvent::ActionChanged:
+            d->layout->invalidate();
+            break;
+
+        case QEvent::ActionRemoved:
+        {
+            // TODO
+        }
+
+        default:
+            break;
+    }
 }

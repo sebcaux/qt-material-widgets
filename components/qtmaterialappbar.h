@@ -47,6 +47,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void actionEvent(QActionEvent *event) override;
 };
 
 #endif  // QTMATERIALAPPBAR_H

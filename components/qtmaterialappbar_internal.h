@@ -5,14 +5,24 @@
 
 #include <QLabel>
 
-#include "qtmaterialiconbutton.h"
+class QtMaterialAppBar;
+class QtMaterialIconButton;
+
+class QtMaterialAppBarLayoutItem : public QWidgetItem
+{
+public:
+    QtMaterialAppBarLayoutItem(QWidget *widget);
+    bool isEmpty() const override;
+
+    QAction *action;
+};
 
 class QtMaterialAppBarLayout : public QLayout
 {
     Q_DISABLE_COPY(QtMaterialAppBarLayout)
 
 public:
-    QtMaterialAppBarLayout(QWidget *parent = nullptr);
+    QtMaterialAppBarLayout(QtMaterialAppBar *parent = nullptr);
     ~QtMaterialAppBarLayout();
 
     QLabel *titleLabel() const;
@@ -20,9 +30,14 @@ public:
     QtMaterialIconButton *navButton() const;
     void setNavButton(QtMaterialIconButton *navButton);
 
+    void insertAction(int index, QAction *action);
+
+    void updateActions();
+
 protected:
     QtMaterialIconButton *_navButton;
     QLabel *_titleLabel;
+    QList<QtMaterialAppBarLayoutItem *> _actionIconButtons;
 
     // QLayoutItem interface
 public:
@@ -38,6 +53,7 @@ public:
     QSize maximumSize() const override;
     Qt::Orientations expandingDirections() const override;
     void setGeometry(const QRect &) override;
+    const QList<QtMaterialAppBarLayoutItem *> &actionIconButtons() const;
 };
 
 #endif  // QTMATERIALAPPBARLAYOUT_H
