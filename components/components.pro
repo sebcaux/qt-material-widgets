@@ -22,6 +22,7 @@ SOURCES = \
     $$PWD/qtmaterialautocomplete_internal.cpp \
     $$PWD/qtmaterialavatar.cpp \
     $$PWD/qtmaterialbadge.cpp \
+    $$PWD/qtmaterialcanvas.cpp \
     $$PWD/qtmaterialcheckbox.cpp \
     $$PWD/qtmaterialcircularprogress.cpp \
     $$PWD/qtmaterialcircularprogress_internal.cpp \
@@ -75,6 +76,8 @@ HEADERS = \
     $$PWD/qtmaterialavatar_p.h \
     $$PWD/qtmaterialbadge.h \
     $$PWD/qtmaterialbadge_p.h \
+    $$PWD/qtmaterialcanvas.h \
+    $$PWD/qtmaterialcanvas_p.h \
     $$PWD/qtmaterialcheckbox.h \
     $$PWD/qtmaterialcheckbox_p.h \
     $$PWD/qtmaterialcircularprogress.h \
