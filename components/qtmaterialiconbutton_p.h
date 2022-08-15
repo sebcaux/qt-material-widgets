@@ -19,11 +19,13 @@ public:
     void init();
     void updateRipple();
 
-    QtMaterialIconButton *const q_ptr;
-    QtMaterialRippleOverlay *rippleOverlay;
+    bool useThemeColors;
     QColor color;
     QColor disabledColor;
-    bool useThemeColors;
+
+    QtMaterialRippleOverlay *rippleOverlay;
+
+    QtMaterialIconButton *const q_ptr;
 };
 
 #endif  // QTMATERIALICONBUTTON_P_H
