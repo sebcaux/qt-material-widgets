@@ -1,10 +1,15 @@
 #ifndef QTMATERIALAPPBAR_P_H
 #define QTMATERIALAPPBAR_P_H
 
+#include "lib/qtmaterialtheme.h"
+#include "qtmaterialiconbutton.h"
+
 #include <QColor>
+#include <QLabel>
 #include <QtGlobal>
 
 class QtMaterialAppBar;
+class QtMaterialAppBarLayout;
 
 class QtMaterialAppBarPrivate
 {
@@ -17,7 +22,17 @@ public:
 
     void init();
 
+    void setNavIconType(Material::NavIconType type);
+
     QtMaterialAppBar *const q_ptr;
+
+    QtMaterialAppBarLayout *layout;
+    QtMaterialIconButton *navButton;
+    QLabel *titleLabel;
+
+    Material::NavIconType navIconType;
+    QString title;
+
     bool useThemeColors;
     QColor foregroundColor;
     QColor backgroundColor;

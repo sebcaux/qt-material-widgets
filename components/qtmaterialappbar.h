@@ -3,18 +3,29 @@
 
 #include <QWidget>
 
+#include "lib/qtmaterialtheme.h"
+
 class QtMaterialAppBarPrivate;
 
 class QtMaterialAppBar : public QWidget
 {
     Q_OBJECT
 
+    Q_PROPERTY(QString title READ title WRITE setTitle)
+    Q_PROPERTY(Material::NavIconType navIconType READ navIconType WRITE setNavIconType)
     Q_PROPERTY(QColor foregroundColor READ foregroundColor WRITE setForegroundColor)
     Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
 
 public:
+    explicit QtMaterialAppBar(const QString &title, QWidget *parent = nullptr);
     explicit QtMaterialAppBar(QWidget *parent = nullptr);
     ~QtMaterialAppBar() override;
+
+    const QString &title() const;
+    void setTitle(const QString &title);
+
+    Material::NavIconType navIconType() const;
+    void setNavIconType(Material::NavIconType navIconType);
 
     bool useThemeColors() const;
     void setUseThemeColors(bool value);

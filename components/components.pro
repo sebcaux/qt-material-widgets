@@ -17,6 +17,7 @@ SOURCES = \
     $$PWD/lib/qtmaterialstyle.cpp \
     $$PWD/lib/qtmaterialtheme.cpp \
     $$PWD/qtmaterialappbar.cpp \
+    $$PWD/qtmaterialappbar_internal.cpp \
     $$PWD/qtmaterialautocomplete.cpp \
     $$PWD/qtmaterialautocomplete_internal.cpp \
     $$PWD/qtmaterialavatar.cpp \
@@ -65,6 +66,7 @@ HEADERS = \
     $$PWD/lib/qtmaterialtheme.h \
     $$PWD/lib/qtmaterialtheme_p.h \
     $$PWD/qtmaterialappbar.h \
+    $$PWD/qtmaterialappbar_internal.h \
     $$PWD/qtmaterialappbar_p.h \
     $$PWD/qtmaterialautocomplete.h \
     $$PWD/qtmaterialautocomplete_internal.h \

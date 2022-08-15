@@ -53,6 +53,13 @@ enum ButtonPreset
     CheckablePreset
 };
 
+enum NavIconType {
+    NavIconNone,
+    NavIconMenu,
+    NavIconPrevious,
+    NavIconUpper
+};
+
 enum RippleStyle
 {
     CenteredRipple,

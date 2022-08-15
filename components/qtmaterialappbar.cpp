@@ -1,6 +1,7 @@
 #include "qtmaterialappbar.h"
 
 #include "lib/qtmaterialstyle.h"
+#include "qtmaterialappbar_internal.h"
 #include "qtmaterialappbar_p.h"
 
 #include <QGraphicsDropShadowEffect>
@@ -33,22 +34,85 @@ void QtMaterialAppBarPrivate::init()
 {
     Q_Q(QtMaterialAppBar);
 
+    navIconType = Material::NavIconNone;
+    navButton = nullptr;
+
+    titleLabel = new QLabel(q);
+    titleLabel->setAttribute(Qt::WA_TranslucentBackground);
+    titleLabel->setForegroundRole(QPalette::WindowText);
+    titleLabel->setContentsMargins(6, 0, 0, 0);
+    QPalette palette = titleLabel->palette();
+    palette.setColor(titleLabel->foregroundRole(), Qt::white);
+    titleLabel->setPalette(palette);
+    titleLabel->setFont(QtMaterialStyle::instance().themeFont(Material::FontHeadline3));
+
     useThemeColors = true;
 
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
     effect->setBlurRadius(11);
     effect->setColor(QColor(0, 0, 0, 50));
     effect->setOffset(0, 3);
-
     q->setGraphicsEffect(effect);
 
-    QHBoxLayout *layout = new QHBoxLayout;
+    layout = new QtMaterialAppBarLayout(q);
+    layout->setTitleLabel(titleLabel);
     q->setLayout(layout);
+}
+
+/*!
+ *  \internal
+ */
+void QtMaterialAppBarPrivate::setNavIconType(Material::NavIconType type)
+{
+    Q_Q(QtMaterialAppBar);
+
+    if (navButton == nullptr && type != Material::NavIconNone)
+    {
+        navButton = new QtMaterialIconButton(QIcon(), q);
+        navButton->setIconSize(QSize(48, 48));
+        navButton->setColor(QtMaterialStyle::instance().themeColor("alternateText"));
+        navButton->setFixedWidth(64);
+        layout->setNavButton(navButton);
+    }
+
+    switch (type)
+    {
+        case Material::NavIconNone:
+            if (navButton != nullptr)
+            {
+                layout->setNavButton(nullptr);
+                navButton = nullptr;
+                delete navButton;
+            }
+            break;
+
+        case Material::NavIconMenu:
+            navButton->setIcon(QtMaterialTheme::icon("navigation", "menu"));
+            break;
+
+        case Material::NavIconPrevious:
+            navButton->setIcon(QtMaterialTheme::icon("navigation", "arrow_back"));
+            break;
+
+        case Material::NavIconUpper:
+            navButton->setIcon(QtMaterialTheme::icon("navigation", "expand_less"));
+            break;
+    }
+    navIconType = type;
 }
 
 /*!
  *  \class QtMaterialAppBar
  */
+
+QtMaterialAppBar::QtMaterialAppBar(const QString &title, QWidget *parent)
+    : QWidget(parent),
+      d_ptr(new QtMaterialAppBarPrivate(this))
+{
+    d_func()->init();
+
+    setTitle(title);
+}
 
 QtMaterialAppBar::QtMaterialAppBar(QWidget *parent)
     : QWidget(parent),
@@ -61,18 +125,36 @@ QtMaterialAppBar::~QtMaterialAppBar()
 {
 }
 
-QSize QtMaterialAppBar::sizeHint() const
+const QString &QtMaterialAppBar::title() const
 {
-    return QSize(-1, 64);
+    Q_D(const QtMaterialAppBar);
+
+    return d->title;
 }
 
-void QtMaterialAppBar::paintEvent(QPaintEvent *event)
+void QtMaterialAppBar::setTitle(const QString &title)
 {
-    Q_UNUSED(event)
+    Q_D(QtMaterialAppBar);
 
-    QPainter painter(this);
+    d->title = title;
+    if (d->titleLabel != nullptr)
+    {
+        d->titleLabel->setText(title);
+    }
+}
 
-    painter.fillRect(rect(), backgroundColor());
+Material::NavIconType QtMaterialAppBar::navIconType() const
+{
+    Q_D(const QtMaterialAppBar);
+
+    return d->navIconType;
+}
+
+void QtMaterialAppBar::setNavIconType(Material::NavIconType navIconType)
+{
+    Q_D(QtMaterialAppBar);
+
+    d->setNavIconType(navIconType);
 }
 
 void QtMaterialAppBar::setUseThemeColors(bool value)
@@ -143,4 +225,18 @@ QColor QtMaterialAppBar::backgroundColor() const
     }
 
     return d->backgroundColor;
+}
+
+QSize QtMaterialAppBar::sizeHint() const
+{
+    return QSize(-1, 64);
+}
+
+void QtMaterialAppBar::paintEvent(QPaintEvent *event)
+{
+    Q_UNUSED(event)
+
+    QPainter painter(this);
+
+    painter.fillRect(rect(), backgroundColor());
 }
