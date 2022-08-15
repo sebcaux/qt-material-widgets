@@ -34,6 +34,9 @@ public:
     QColor backgroundColor() const;
     void setBackgroundColor(const QColor &color);
 
+signals:
+    void navIconClicked();
+
 protected:
     const QScopedPointer<QtMaterialAppBarPrivate> d_ptr;
 

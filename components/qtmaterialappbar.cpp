@@ -90,6 +90,7 @@ void QtMaterialAppBarPrivate::setNavIconType(Material::NavIconType type)
         navButton->setColor(q->foregroundColor());
         navButton->setFixedWidth(64);
         layout->setNavButton(navButton);
+        QObject::connect(navButton, &QtMaterialIconButton::clicked, q, &QtMaterialAppBar::navIconClicked);
     }
 
     switch (type)
