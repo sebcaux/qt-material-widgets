@@ -46,11 +46,11 @@ QtMaterialTheme::QtMaterialTheme(QObject *parent)
     headline2Font.setLetterSpacing(QFont::AbsoluteSpacing, -0.5);
     setFont(Material::FontHeadline2, headline2Font);
 
-    QFont headline3Font("Roboto", 48, QFont::Medium);
+    QFont headline3Font("Roboto", 48, QFont::Normal);
     headline3Font.setLetterSpacing(QFont::AbsoluteSpacing, 0);
     setFont(Material::FontHeadline3, headline3Font);
 
-    QFont headline4Font("Roboto", 34, QFont::Medium);
+    QFont headline4Font("Roboto", 34, QFont::Normal);
     headline4Font.setLetterSpacing(QFont::AbsoluteSpacing, 0.25);
     setFont(Material::FontHeadline4, headline4Font);
 

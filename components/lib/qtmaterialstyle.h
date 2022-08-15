@@ -4,14 +4,13 @@
 #include <QCommonStyle>
 
 #include "lib/qtmaterialstyle_p.h"
+#include "lib/qtmaterialtheme.h"
 
 #define MATERIAL_DISABLE_THEME_COLORS                                                                                                                                              \
     if (d->useThemeColors == true)                                                                                                                                                 \
     {                                                                                                                                                                              \
         d->useThemeColors = false;                                                                                                                                                 \
     }
-
-class QtMaterialTheme;
 
 class QtMaterialStyle : public QCommonStyle
 {
@@ -21,7 +20,9 @@ public:
     inline static QtMaterialStyle &instance();
 
     void setTheme(QtMaterialTheme *theme);
+
     QColor themeColor(const QString &key) const;
+    const QFont &themeFont(Material::FontType fontType) const;
 
 protected:
     const QScopedPointer<QtMaterialStylePrivate> d_ptr;

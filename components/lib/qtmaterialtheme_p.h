@@ -2,6 +2,7 @@
 #define QTMATERIALTHEME_P_H
 
 #include <QColor>
+#include <QFont>
 #include <QHash>
 
 class QtMaterialTheme;
@@ -19,6 +20,7 @@ public:
 
     QtMaterialTheme *const q_ptr;
     QHash<QString, QColor> colors;
+    QVector<QFont> fonts;  // QVector to garentee same funtionnalities on Qt5 as Qt6
 };
 
 #endif  // QTMATERIALTHEME_P_H

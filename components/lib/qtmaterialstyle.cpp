@@ -51,6 +51,15 @@ QColor QtMaterialStyle::themeColor(const QString &key) const
     return d->theme->getColor(key);
 }
 
+const QFont &QtMaterialStyle::themeFont(Material::FontType fontType) const
+{
+    Q_D(const QtMaterialStyle);
+
+    Q_ASSERT(d->theme);
+
+    return d->theme->font(fontType);
+}
+
 QtMaterialStyle::QtMaterialStyle()
     : d_ptr(new QtMaterialStylePrivate(this))
 {
