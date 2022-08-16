@@ -36,6 +36,11 @@ void QtMaterialIconButtonPrivate::init()
     QSizePolicy policy;
     policy.setWidthForHeight(true);
     q->setSizePolicy(policy);
+
+    if (q->parentWidget() != nullptr)
+    {
+        rippleOverlay->show();
+    }
 }
 
 void QtMaterialIconButtonPrivate::updateRipple()
@@ -155,12 +160,14 @@ bool QtMaterialIconButton::event(QEvent *event)
         case QEvent::Resize:
             d->updateRipple();
             break;
+
         case QEvent::ParentChange:
         {
             QWidget *widget;
             if ((widget = parentWidget()) != nullptr)
             {
                 d->rippleOverlay->setParent(widget);
+                d->rippleOverlay->show();
             }
             break;
         }
