@@ -214,6 +214,11 @@ void QtMaterialIconButton::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
+    if (icon().isNull())
+    {
+        return;
+    }
+
     QPainter painter(this);
 
     QPixmap pixmap = icon().pixmap(iconSize());
