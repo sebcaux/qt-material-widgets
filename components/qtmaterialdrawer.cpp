@@ -57,6 +57,7 @@ void QtMaterialDrawerPrivate::init()
     widget->setParent(q);
 
     stateMachine->start();
+    q->hide();
     QCoreApplication::processEvents();
 }
 
