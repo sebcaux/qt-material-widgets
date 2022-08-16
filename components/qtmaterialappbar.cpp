@@ -122,8 +122,9 @@ void QtMaterialAppBarPrivate::setNavIconType(Material::NavIconType type)
             if (navButton != nullptr)
             {
                 layout->setNavButton(nullptr);
-                navButton = nullptr;
+                navButton->hide();
                 delete navButton;
+                navButton = nullptr;
             }
             break;
 

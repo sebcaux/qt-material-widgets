@@ -57,6 +57,11 @@ QtMaterialIconButton *QtMaterialAppBarLayout::navButton() const
 void QtMaterialAppBarLayout::setNavButton(QtMaterialIconButton *navButton)
 {
     _navButton = navButton;
+    if (_navButton)
+    {
+        addChildWidget(_navButton);
+    }
+    invalidate();
 }
 
 /*!
@@ -73,9 +78,11 @@ void QtMaterialAppBarLayout::insertAction(int index, QAction *action)
     iconButton->setColor(appBar->foregroundColor());
     int size = appBar->iconSize().width() * 1.33;
     iconButton->setFixedSize(size, size);
+    addChildWidget(iconButton);
     connect(iconButton, &QtMaterialIconButton::clicked, action, &QAction::trigger);
 
     _actionIconButtons.push_back(new QtMaterialAppBarLayoutItem(iconButton));
+    invalidate();
 }
 
 /*!
@@ -118,6 +125,11 @@ QLabel *QtMaterialAppBarLayout::titleLabel() const
 void QtMaterialAppBarLayout::setTitleLabel(QLabel *titleLabel)
 {
     _titleLabel = titleLabel;
+    if (_titleLabel)
+    {
+        addChildWidget(_titleLabel);
+    }
+    invalidate();
 }
 
 /*!
