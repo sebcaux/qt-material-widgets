@@ -13,6 +13,7 @@ class QtMaterialAppBar : public QWidget
 
     Q_PROPERTY(QString title READ title WRITE setTitle)
     Q_PROPERTY(Material::NavIconType navIconType READ navIconType WRITE setNavIconType)
+    Q_PROPERTY(QSize iconSize READ iconSize WRITE setIconSize)
     Q_PROPERTY(QColor foregroundColor READ foregroundColor WRITE setForegroundColor)
     Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
 
@@ -26,6 +27,10 @@ public:
 
     Material::NavIconType navIconType() const;
     void setNavIconType(Material::NavIconType navIconType);
+
+    const QSize &iconSize() const;
+    void setIconSize(const QSize &iconSize);
+    void setIconSize(int w, int h);
 
     bool useThemeColors() const;
     void setUseThemeColors(bool value);

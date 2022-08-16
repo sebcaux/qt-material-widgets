@@ -45,6 +45,8 @@ void QtMaterialAppBarPrivate::init()
     titleLabel->setContentsMargins(6, 0, 0, 0);
     titleLabel->setFont(QtMaterialStyle::instance().themeFont(Material::FontHeadline3));
 
+    iconSize = QSize(48, 48);
+
     useThemeColors = true;
 
     /*QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
@@ -60,6 +62,9 @@ void QtMaterialAppBarPrivate::init()
     updateChildrenColor();
 }
 
+/*!
+ *  \internal
+ */
 void QtMaterialAppBarPrivate::updateChildrenColor()
 {
     Q_Q(QtMaterialAppBar);
@@ -79,16 +84,34 @@ void QtMaterialAppBarPrivate::updateChildrenColor()
 /*!
  *  \internal
  */
+void QtMaterialAppBarPrivate::setIconSize(const QSize &iconSize)
+{
+    this->iconSize = iconSize;
+    if (navButton != nullptr)
+    {
+        int size = iconSize.width() * 1.33;
+        navButton->setIconSize(iconSize);
+        navButton->setFixedSize(size, size);
+    }
+
+    layout->updateActions();
+    layout->invalidate();
+}
+
+/*!
+ *  \internal
+ */
 void QtMaterialAppBarPrivate::setNavIconType(Material::NavIconType type)
 {
     Q_Q(QtMaterialAppBar);
 
     if (navButton == nullptr && type != Material::NavIconNone)
     {
+        int size = iconSize.width() * 1.33;
         navButton = new QtMaterialIconButton(QIcon(), q);
-        navButton->setIconSize(QSize(48, 48));
+        navButton->setIconSize(iconSize);
         navButton->setColor(q->foregroundColor());
-        navButton->setFixedWidth(64);
+        navButton->setFixedSize(size, size);
         layout->setNavButton(navButton);
         QObject::connect(navButton, &QtMaterialIconButton::clicked, q, &QtMaterialAppBar::navIconClicked);
     }
@@ -175,6 +198,25 @@ void QtMaterialAppBar::setNavIconType(Material::NavIconType navIconType)
     d->setNavIconType(navIconType);
 }
 
+const QSize &QtMaterialAppBar::iconSize() const
+{
+    Q_D(const QtMaterialAppBar);
+
+    return d->iconSize;
+}
+
+void QtMaterialAppBar::setIconSize(const QSize &iconSize)
+{
+    Q_D(QtMaterialAppBar);
+
+    d->setIconSize(iconSize);
+}
+
+void QtMaterialAppBar::setIconSize(int w, int h)
+{
+    setIconSize(QSize(w, h));
+}
+
 void QtMaterialAppBar::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialAppBar);
@@ -249,7 +291,7 @@ QColor QtMaterialAppBar::backgroundColor() const
 
 QSize QtMaterialAppBar::sizeHint() const
 {
-    return QSize(-1, 64);
+    return QSize(-1, iconSize().width() * 1.33);
 }
 
 void QtMaterialAppBar::paintEvent(QPaintEvent *event)

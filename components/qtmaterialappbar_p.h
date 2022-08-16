@@ -22,6 +22,7 @@ public:
 
     void init();
     void updateChildrenColor();
+    void setIconSize(const QSize &iconSize);
 
     void setNavIconType(Material::NavIconType type);
 
@@ -33,6 +34,7 @@ public:
 
     Material::NavIconType navIconType;
     QString title;
+    QSize iconSize;
 
     bool useThemeColors;
     QColor foregroundColor;
