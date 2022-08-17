@@ -187,7 +187,7 @@ QColor QtMaterialTabs::textColor() const
     return d->textColor;
 }
 
-void QtMaterialTabs::setCurrentTab(int index)
+void QtMaterialTabs::setCurrentIndex(int index)
 {
     Q_D(QtMaterialTabs);
 
@@ -220,10 +220,10 @@ void QtMaterialTabs::addTab(const QString &text, const QIcon &icon)
             this,
             [=]()
             {
-                setCurrentTab(d->tabLayout->indexOf(tab));
+                setCurrentIndex(d->tabLayout->indexOf(tab));
             });
 
-    if (-1 == d->tab)
+    if (d->tab == -1)
     {
         d->tab = 0;
         d->inkBar->refreshGeometry();
@@ -250,11 +250,9 @@ void QtMaterialTabs::setTabActive(int index, bool active)
 {
     Q_D(QtMaterialTabs);
 
-    QtMaterialTab *tab;
-
     if (index > -1)
     {
-        tab = static_cast<QtMaterialTab *>(d->tabLayout->itemAt(index)->widget());
+        QtMaterialTab *tab = static_cast<QtMaterialTab *>(d->tabLayout->itemAt(index)->widget());
         if (tab != nullptr)
         {
             tab->setActive(active);
@@ -266,11 +264,11 @@ void QtMaterialTabs::updateTabs()
 {
     Q_D(QtMaterialTabs);
 
-    QtMaterialTab *tab;
     for (int i = 0; i < d->tabLayout->count(); ++i)
     {
         QLayoutItem *item = d->tabLayout->itemAt(i);
-        if ((tab = static_cast<QtMaterialTab *>(item->widget())) != nullptr)
+        QtMaterialTab *tab = static_cast<QtMaterialTab *>(item->widget());
+        if (tab != nullptr)
         {
             tab->setRippleStyle(d->rippleStyle);
             tab->setHaloVisible(d->showHalo);

@@ -20,7 +20,7 @@ public:
     ~QtMaterialTabs() override;
 
     void addTab(const QString &text, const QIcon &icon = QIcon());
-    void setCurrentTab(int index);
+    void setCurrentIndex(int index);
     int currentIndex() const;
     int count() const;
 
