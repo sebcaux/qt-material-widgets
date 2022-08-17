@@ -9,6 +9,7 @@
 
 class QtMaterialTabsPrivate;
 class QtMaterialTab;
+class QTabbar;
 
 class QtMaterialTabs : public QWidget
 {
@@ -18,29 +19,25 @@ public:
     explicit QtMaterialTabs(QWidget *parent = nullptr);
     ~QtMaterialTabs() override;
 
-    void setUseThemeColors(bool value);
-    bool useThemeColors() const;
-
-    void setHaloVisible(bool value);
-    bool isHaloVisible() const;
-
-    void setRippleStyle(Material::RippleStyle style);
-    Material::RippleStyle rippleStyle() const;
-
-    void setInkColor(const QColor &color);
-    QColor inkColor() const;
-
-    void setBackgroundColor(const QColor &color);
-    QColor backgroundColor() const;
-
-    void setTextColor(const QColor &color);
-    QColor textColor() const;
-
     void addTab(const QString &text, const QIcon &icon = QIcon());
-
     void setCurrentTab(int index);
-
     int currentIndex() const;
+    int count() const;
+
+    bool isHaloVisible() const;
+    void setHaloVisible(bool value);
+
+    Material::RippleStyle rippleStyle() const;
+    void setRippleStyle(Material::RippleStyle style);
+
+    bool useThemeColors() const;
+    void setUseThemeColors(bool value);
+    QColor inkColor() const;
+    void setInkColor(const QColor &color);
+    QColor backgroundColor() const;
+    void setBackgroundColor(const QColor &color);
+    QColor textColor() const;
+    void setTextColor(const QColor &color);
 
 signals:
     void currentChanged(int);

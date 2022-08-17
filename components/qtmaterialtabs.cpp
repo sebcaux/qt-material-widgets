@@ -20,7 +20,7 @@ QtMaterialTabsPrivate::~QtMaterialTabsPrivate()
 {
 }
 
-void QtMaterialTabsPrivate::QtMaterialTabsPrivate::init()
+void QtMaterialTabsPrivate::init()
 {
     Q_Q(QtMaterialTabs);
 
@@ -216,6 +216,13 @@ int QtMaterialTabs::currentIndex() const
     Q_D(const QtMaterialTabs);
 
     return d->tab;
+}
+
+int QtMaterialTabs::count() const
+{
+    Q_D(const QtMaterialTabs);
+
+    return d->tabLayout->count();
 }
 
 void QtMaterialTabs::setTabActive(int index, bool active)
