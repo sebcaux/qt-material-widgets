@@ -62,9 +62,6 @@ public:
 
     QSize sizeHint() const override;
 
-protected slots:
-    void activateTab();
-
 protected:
     void paintForeground(QPainter *painter) override;
 

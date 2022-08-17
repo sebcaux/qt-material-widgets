@@ -38,7 +38,6 @@ public:
 
     void addTab(const QString &text, const QIcon &icon = QIcon());
 
-    void setCurrentTab(QtMaterialTab *tab);
     void setCurrentTab(int index);
 
     int currentIndex() const;

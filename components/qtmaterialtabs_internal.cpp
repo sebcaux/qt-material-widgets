@@ -119,8 +119,6 @@ QtMaterialTab::QtMaterialTab(QtMaterialTabs *parent)
     setRole(Material::Primary);
     setBackgroundMode(Qt::OpaqueMode);
     setBaseOpacity(0.25);
-
-    connect(this, &QAbstractButton::clicked, this, &QtMaterialTab::activateTab);
 }
 
 QtMaterialTab::~QtMaterialTab()
@@ -135,11 +133,6 @@ QSize QtMaterialTab::sizeHint() const
     }
 
     return QSize(40, iconSize().height() + 46);
-}
-
-void QtMaterialTab::activateTab()
-{
-    m_tabs->setCurrentTab(this);
 }
 
 void QtMaterialTab::paintForeground(QPainter *painter)

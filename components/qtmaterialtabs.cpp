@@ -166,13 +166,6 @@ QColor QtMaterialTabs::textColor() const
     return d->textColor;
 }
 
-void QtMaterialTabs::setCurrentTab(QtMaterialTab *tab)
-{
-    Q_D(QtMaterialTabs);
-
-    setCurrentTab(d->tabLayout->indexOf(tab));
-}
-
 void QtMaterialTabs::setCurrentTab(int index)
 {
     Q_D(QtMaterialTabs);
@@ -201,6 +194,13 @@ void QtMaterialTabs::addTab(const QString &text, const QIcon &icon)
     }
 
     d->tabLayout->addWidget(tab);
+    connect(tab,
+            &QtMaterialTab::clicked,
+            this,
+            [=]()
+            {
+                setCurrentTab(d->tabLayout->indexOf(tab));
+            });
 
     if (-1 == d->tab)
     {
