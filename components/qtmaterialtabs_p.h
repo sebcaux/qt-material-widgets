@@ -23,13 +23,16 @@ public:
     QtMaterialTabs *const q_ptr;
     QtMaterialTabsInkBar *inkBar;
     QHBoxLayout *tabLayout;
+
     Material::RippleStyle rippleStyle;
+    int tab;
+    QSize iconSize;
+    bool showHalo;
+
+    bool useThemeColors;
     QColor inkColor;
     QColor backgroundColor;
     QColor textColor;
-    int tab;
-    bool showHalo;
-    bool useThemeColors;
 };
 
 #endif  // QTMATERIALTABS_P_H

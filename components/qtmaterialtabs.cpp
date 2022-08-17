@@ -30,6 +30,7 @@ void QtMaterialTabsPrivate::init()
     tab = -1;
     showHalo = true;
     useThemeColors = true;
+    iconSize = QSize(24, 24);
 
     q->setLayout(tabLayout);
     q->setStyle(&QtMaterialStyle::instance());
@@ -65,6 +66,26 @@ bool QtMaterialTabs::useThemeColors() const
     Q_D(const QtMaterialTabs);
 
     return d->useThemeColors;
+}
+
+const QSize &QtMaterialTabs::iconSize() const
+{
+    Q_D(const QtMaterialTabs);
+
+    return d->iconSize;
+}
+
+void QtMaterialTabs::setIconSize(const QSize &iconSize)
+{
+    Q_D(QtMaterialTabs);
+
+    d->iconSize = iconSize;
+    updateTabs();
+}
+
+void QtMaterialTabs::setIconSize(int w, int h)
+{
+    setIconSize(QSize(w, h));
 }
 
 void QtMaterialTabs::setHaloVisible(bool value)
@@ -184,13 +205,13 @@ void QtMaterialTabs::addTab(const QString &text, const QIcon &icon)
 
     QtMaterialTab *tab = new QtMaterialTab(this);
     tab->setText(text);
-    tab->setHaloVisible(isHaloVisible());
-    tab->setRippleStyle(rippleStyle());
+    tab->setHaloVisible(d->showHalo);
+    tab->setRippleStyle(d->rippleStyle);
 
     if (!icon.isNull())
     {
         tab->setIcon(icon);
-        tab->setIconSize(QSize(22, 22));
+        tab->setIconSize(d->iconSize);
     }
 
     d->tabLayout->addWidget(tab);
@@ -255,6 +276,7 @@ void QtMaterialTabs::updateTabs()
             tab->setHaloVisible(d->showHalo);
             tab->setBackgroundColor(backgroundColor());
             tab->setForegroundColor(textColor());
+            tab->setIconSize(d->iconSize);
         }
     }
 }

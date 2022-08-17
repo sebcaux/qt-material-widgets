@@ -24,6 +24,10 @@ public:
     int currentIndex() const;
     int count() const;
 
+    const QSize &iconSize() const;
+    void setIconSize(const QSize &iconSize);
+    void setIconSize(int w, int h);
+
     bool isHaloVisible() const;
     void setHaloVisible(bool value);
 
