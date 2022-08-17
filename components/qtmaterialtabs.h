@@ -15,6 +15,13 @@ class QtMaterialTabs : public QWidget
 {
     Q_OBJECT
 
+    Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex NOTIFY currentChanged)
+    Q_PROPERTY(int count READ count)
+    Q_PROPERTY(QSize iconSize READ iconSize WRITE setIconSize)
+    Q_PROPERTY(QColor inkColor READ inkColor WRITE setInkColor)
+    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
+    Q_PROPERTY(QColor textColor READ textColor WRITE setTextColor)
+
 public:
     explicit QtMaterialTabs(QWidget *parent = nullptr);
     ~QtMaterialTabs() override;
