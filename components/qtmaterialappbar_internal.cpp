@@ -9,9 +9,9 @@
  *  \class QToolBarItem
  *  \internal
  */
-QtMaterialAppBarLayoutItem::QtMaterialAppBarLayoutItem(QWidget *widget)
+QtMaterialAppBarLayoutItem::QtMaterialAppBarLayoutItem(QWidget *widget, QAction *action)
     : QWidgetItem(widget),
-      action(nullptr)
+      action(action)
 {
 }
 
@@ -76,12 +76,13 @@ void QtMaterialAppBarLayout::insertAction(int index, QAction *action)
     QtMaterialIconButton *iconButton = new QtMaterialIconButton(action->icon(), appBar);
     iconButton->setIconSize(appBar->iconSize());
     iconButton->setColor(appBar->foregroundColor());
+    iconButton->setToolTip(action->text());
     int size = appBar->iconSize().width() * 1.33;
     iconButton->setFixedSize(size, size);
     addChildWidget(iconButton);
     connect(iconButton, &QtMaterialIconButton::clicked, action, &QAction::trigger);
 
-    _actionIconButtons.push_back(new QtMaterialAppBarLayoutItem(iconButton));
+    _actionIconButtons.push_back(new QtMaterialAppBarLayoutItem(iconButton, action));
     invalidate();
 }
 
@@ -89,6 +90,20 @@ void QtMaterialAppBarLayout::insertAction(int index, QAction *action)
  *  \internal
  */
 void QtMaterialAppBarLayout::updateActions()
+{
+    for (QtMaterialAppBarLayoutItem *item : qAsConst(_actionIconButtons))
+    {
+        QtMaterialIconButton *iconButton = dynamic_cast<QtMaterialIconButton *>(item->widget());
+
+        iconButton->setIcon(item->action->icon());
+        iconButton->setToolTip(item->action->text());
+    }
+}
+
+/*!
+ *  \internal
+ */
+void QtMaterialAppBarLayout::updateButtons()
 {
     QtMaterialAppBar *appBar = dynamic_cast<QtMaterialAppBar *>(parentWidget());
 

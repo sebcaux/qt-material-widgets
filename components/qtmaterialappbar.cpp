@@ -78,7 +78,7 @@ void QtMaterialAppBarPrivate::updateChildrenColor()
         navButton->setColor(q->foregroundColor());
     }
 
-    layout->updateActions();
+    layout->updateButtons();
 }
 
 /*!
@@ -94,7 +94,7 @@ void QtMaterialAppBarPrivate::setIconSize(const QSize &iconSize)
         navButton->setFixedSize(size, size);
     }
 
-    layout->updateActions();
+    layout->updateButtons();
     layout->invalidate();
 }
 
@@ -322,6 +322,7 @@ void QtMaterialAppBar::actionEvent(QActionEvent *event)
             break;
         }
         case QEvent::ActionChanged:
+            d->layout->updateActions();
             d->layout->invalidate();
             break;
 

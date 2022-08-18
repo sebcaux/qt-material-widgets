@@ -11,7 +11,7 @@ class QtMaterialIconButton;
 class QtMaterialAppBarLayoutItem : public QWidgetItem
 {
 public:
-    QtMaterialAppBarLayoutItem(QWidget *widget);
+    QtMaterialAppBarLayoutItem(QWidget *widget, QAction *action);
     bool isEmpty() const override;
 
     QAction *action;
@@ -19,6 +19,8 @@ public:
 
 class QtMaterialAppBarLayout : public QLayout
 {
+    Q_OBJECT
+
     Q_DISABLE_COPY(QtMaterialAppBarLayout)
 
 public:
@@ -33,6 +35,7 @@ public:
     void insertAction(int index, QAction *action);
 
     void updateActions();
+    void updateButtons();
 
 protected:
     QtMaterialIconButton *_navButton;
