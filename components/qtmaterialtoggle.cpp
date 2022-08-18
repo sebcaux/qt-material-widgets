@@ -147,12 +147,12 @@ QtMaterialToggle::QtMaterialToggle(QWidget *parent)
     d_func()->init();
 }
 
-QtMaterialToggle::QtMaterialToggle(const QString &text, QWidget *parent)
+QtMaterialToggle::QtMaterialToggle(Qt::Orientation orientation, QWidget *parent)
     : QAbstractButton(parent),
       d_ptr(new QtMaterialTogglePrivate(this))
 {
     d_func()->init();
-    setText(text);
+    setOrientation(orientation);
 }
 
 QtMaterialToggle::~QtMaterialToggle()
@@ -286,7 +286,7 @@ QSize QtMaterialToggle::sizeHint() const
 {
     Q_D(const QtMaterialToggle);
 
-    return Qt::Horizontal == d->orientation ? QSize(64, 48) : QSize(48, 64);
+    return (d->orientation == Qt::Horizontal) ? QSize(64, 48) : QSize(48, 64);
 }
 
 bool QtMaterialToggle::event(QEvent *event)
