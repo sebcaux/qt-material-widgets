@@ -13,40 +13,30 @@ class QtMaterialSlider : public QAbstractSlider
 {
     Q_OBJECT
 
-    Q_PROPERTY(QColor thumbColor WRITE setThumbColor READ thumbColor)
-    Q_PROPERTY(QColor trackColor WRITE setTrackColor READ trackColor)
-    Q_PROPERTY(QColor disabledColor WRITE setDisabledColor READ disabledColor)
+    Q_PROPERTY(bool pageStepMode READ pageStepMode WRITE setPageStepMode)
+    Q_PROPERTY(QColor thumbColor READ thumbColor WRITE setThumbColor)
+    Q_PROPERTY(QColor trackColor READ trackColor WRITE setTrackColor)
+    Q_PROPERTY(QColor disabledColor READ disabledColor WRITE setDisabledColor)
 
 public:
     explicit QtMaterialSlider(QWidget *parent = nullptr);
     ~QtMaterialSlider() override;
 
-    void setUseThemeColors(bool value);
-    bool useThemeColors() const;
-
-    void setThumbColor(const QColor &color);
-    QColor thumbColor() const;
-
-    void setTrackColor(const QColor &color);
-    QColor trackColor() const;
-
-    void setDisabledColor(const QColor &color);
-    QColor disabledColor() const;
-
-    void setPageStepMode(bool pageStep);
     bool pageStepMode() const;
-
-    QSize minimumSizeHint() const override;
+    void setPageStepMode(bool pageStep);
 
     void setInvertedAppearance(bool value);
 
-protected:
-    void sliderChange(SliderChange change) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override;
-    void leaveEvent(QEvent *event) override;
+    bool useThemeColors() const;
+    void setUseThemeColors(bool value);
+    QColor thumbColor() const;
+    void setThumbColor(const QColor &color);
+    QColor trackColor() const;
+    void setTrackColor(const QColor &color);
+    QColor disabledColor() const;
+    void setDisabledColor(const QColor &color);
 
+protected:
     void updateThumbOffset();
 
     const QScopedPointer<QtMaterialSliderPrivate> d_ptr;
@@ -54,6 +44,17 @@ protected:
 private:
     Q_DISABLE_COPY(QtMaterialSlider)
     Q_DECLARE_PRIVATE(QtMaterialSlider)
+
+    // QWidget interface
+public:
+    QSize minimumSizeHint() const override;
+
+protected:
+    void sliderChange(SliderChange change) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void leaveEvent(QEvent *event) override;
 };
 
 #endif  // QTMATERIALSLIDER_H
