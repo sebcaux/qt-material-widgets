@@ -158,7 +158,7 @@ void QtMaterialTextFieldLabel::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
-    if (!m_textField->hasLabel())
+    if (!m_textField->labelVisible())
     {
         return;
     }
@@ -170,5 +170,5 @@ void QtMaterialTextFieldLabel::paintEvent(QPaintEvent *event)
     painter.setOpacity(1);
 
     QPointF pos(2 + m_posX, height() - 36 + m_posY);
-    painter.drawText(pos.x(), pos.y(), m_textField->label());
+    painter.drawText(pos.x(), pos.y(), m_textField->labelText());
 }

@@ -27,9 +27,10 @@ void QtMaterialTextFieldPrivate::init()
 
     stateMachine = new QtMaterialTextFieldStateMachine(q);
     label = nullptr;
+
     labelFontSize = 9.5;
-    showLabel = false;
-    showInputLine = true;
+    labelVisible = false;
+    inputLineVisible = true;
     useThemeColors = true;
 
     q->setFrame(false);
@@ -79,16 +80,16 @@ bool QtMaterialTextField::useThemeColors() const
     return d->useThemeColors;
 }
 
-void QtMaterialTextField::setShowLabel(bool value)
+void QtMaterialTextField::setLabelVisible(bool value)
 {
     Q_D(QtMaterialTextField);
 
-    if (d->showLabel == value)
+    if (d->labelVisible == value)
     {
         return;
     }
 
-    d->showLabel = value;
+    d->labelVisible = value;
 
     if ((d->label == nullptr) && value)
     {
@@ -106,11 +107,11 @@ void QtMaterialTextField::setShowLabel(bool value)
     }
 }
 
-bool QtMaterialTextField::hasLabel() const
+bool QtMaterialTextField::labelVisible() const
 {
     Q_D(const QtMaterialTextField);
 
-    return d->showLabel;
+    return d->labelVisible;
 }
 
 void QtMaterialTextField::setLabelFontSize(qreal size)
@@ -135,20 +136,20 @@ qreal QtMaterialTextField::labelFontSize() const
     return d->labelFontSize;
 }
 
-void QtMaterialTextField::setLabel(const QString &label)
+void QtMaterialTextField::setLabelText(const QString &label)
 {
     Q_D(QtMaterialTextField);
 
-    d->labelString = label;
-    setShowLabel(true);
+    d->labelText = label;
+    setLabelVisible(true);
     d->label->update();
 }
 
-QString QtMaterialTextField::label() const
+QString QtMaterialTextField::labelText() const
 {
     Q_D(const QtMaterialTextField);
 
-    return d->labelString;
+    return d->labelText;
 }
 
 void QtMaterialTextField::setTextColor(const QColor &color)
@@ -240,24 +241,24 @@ QColor QtMaterialTextField::inputLineColor() const
     return d->inputLineColor;
 }
 
-void QtMaterialTextField::setShowInputLine(bool value)
+void QtMaterialTextField::setInputLineVisible(bool value)
 {
     Q_D(QtMaterialTextField);
 
-    if (d->showInputLine == value)
+    if (d->inputLineVisible == value)
     {
         return;
     }
 
-    d->showInputLine = value;
+    d->inputLineVisible = value;
     update();
 }
 
-bool QtMaterialTextField::hasInputLine() const
+bool QtMaterialTextField::inputLineVisible() const
 {
     Q_D(const QtMaterialTextField);
 
-    return d->showInputLine;
+    return d->inputLineVisible;
 }
 
 QtMaterialTextField::QtMaterialTextField(QtMaterialTextFieldPrivate &d, QWidget *parent)
@@ -312,7 +313,7 @@ void QtMaterialTextField::paintEvent(QPaintEvent *event)
     const int y = height() - 1;
     const int wd = width() - 5;
 
-    if (d->showInputLine)
+    if (d->inputLineVisible)
     {
         QPen pen;
         pen.setWidth(1);

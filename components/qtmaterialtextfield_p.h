@@ -20,17 +20,20 @@ public:
     void init();
 
     QtMaterialTextField *const q_ptr;
+
     QtMaterialTextFieldStateMachine *stateMachine;
     QtMaterialTextFieldLabel *label;
+
+    QString labelText;
+    qreal labelFontSize;
+    bool labelVisible;
+    bool inputLineVisible;
+
+    bool useThemeColors;
     QColor textColor;
     QColor labelColor;
     QColor inkColor;
     QColor inputLineColor;
-    QString labelString;
-    qreal labelFontSize;
-    bool showLabel;
-    bool showInputLine;
-    bool useThemeColors;
 };
 
 #endif  // QTMATERIALTEXTFIELD_P_H

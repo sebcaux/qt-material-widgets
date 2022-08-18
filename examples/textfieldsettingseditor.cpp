@@ -18,7 +18,7 @@ TextFieldSettingsEditor::TextFieldSettingsEditor(QWidget *parent)
     layout->addWidget(m_textField);
     layout->setAlignment(m_textField, Qt::AlignCenter);
 
-    m_textField->setLabel("Wat is this");
+    m_textField->setLabelText("Wat is this");
     m_textField->setMinimumWidth(250);
 
     setupForm();
@@ -48,10 +48,10 @@ void TextFieldSettingsEditor::setupForm()
     ui->disabledCheckBox->setChecked(!m_textField->isEnabled());
     ui->textLineEdit->setText(m_textField->text());
     ui->placeholderLineEdit->setText(m_textField->placeholderText());
-    ui->labelCheckBox->setChecked(m_textField->hasLabel());
-    ui->labelTextLineEdit->setText(m_textField->label());
+    ui->labelCheckBox->setChecked(m_textField->labelVisible());
+    ui->labelTextLineEdit->setText(m_textField->labelText());
     ui->useThemeColorsCheckBox->setChecked(m_textField->useThemeColors());
-    ui->inputLineCheckBox->setChecked(m_textField->hasInputLine());
+    ui->inputLineCheckBox->setChecked(m_textField->inputLineVisible());
 }
 
 void TextFieldSettingsEditor::updateWidget()
@@ -59,10 +59,10 @@ void TextFieldSettingsEditor::updateWidget()
     m_textField->setDisabled(ui->disabledCheckBox->isChecked());
     m_textField->setText(ui->textLineEdit->text());
     m_textField->setPlaceholderText(ui->placeholderLineEdit->text());
-    m_textField->setLabel(ui->labelTextLineEdit->text());
-    m_textField->setShowLabel(ui->labelCheckBox->isChecked());
+    m_textField->setLabelText(ui->labelTextLineEdit->text());
+    m_textField->setLabelVisible(ui->labelCheckBox->isChecked());
     m_textField->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
-    m_textField->setShowInputLine(ui->inputLineCheckBox->isChecked());
+    m_textField->setInputLineVisible(ui->inputLineCheckBox->isChecked());
 }
 
 void TextFieldSettingsEditor::selectColor()
@@ -98,5 +98,5 @@ void TextFieldSettingsEditor::selectColor()
 
 void TextFieldSettingsEditor::setShowInputLine()
 {
-    m_textField->setShowInputLine(ui->inputLineCheckBox->isChecked());
+    m_textField->setInputLineVisible(ui->inputLineCheckBox->isChecked());
 }

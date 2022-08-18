@@ -11,52 +11,55 @@ class QtMaterialTextField : public QLineEdit
 {
     Q_OBJECT
 
-    Q_PROPERTY(QColor textColor WRITE setTextColor READ textColor)
-    Q_PROPERTY(QColor inkColor WRITE setInkColor READ inkColor)
-    Q_PROPERTY(QColor inputLineColor WRITE setInputLineColor READ inputLineColor)
+    Q_PROPERTY(bool labelVisible READ labelVisible WRITE setLabelVisible)
+    Q_PROPERTY(qreal labelFontSize READ labelFontSize WRITE setLabelFontSize)
+    Q_PROPERTY(QString labelText READ labelText WRITE setLabelText)
+    Q_PROPERTY(bool inputLineVisible READ inputLineVisible WRITE setInputLineVisible)
+    Q_PROPERTY(QColor textColor READ textColor WRITE setTextColor)
+    Q_PROPERTY(QColor labelColor READ labelColor WRITE setLabelColor)
+    Q_PROPERTY(QColor inkColor READ inkColor WRITE setInkColor)
+    Q_PROPERTY(QColor inputLineColor READ inputLineColor WRITE setInputLineColor)
 
 public:
     explicit QtMaterialTextField(QWidget *parent = nullptr);
     ~QtMaterialTextField() override;
 
-    void setUseThemeColors(bool value);
-    bool useThemeColors() const;
+    bool labelVisible() const;
+    void setLabelVisible(bool value);
 
-    void setShowLabel(bool value);
-    bool hasLabel() const;
-
-    void setLabelFontSize(qreal size);
     qreal labelFontSize() const;
+    void setLabelFontSize(qreal size);
 
-    void setLabel(const QString &label);
-    QString label() const;
+    QString labelText() const;
+    void setLabelText(const QString &label);
 
-    void setTextColor(const QColor &color);
+    bool inputLineVisible() const;
+    void setInputLineVisible(bool value);
+
+    bool useThemeColors() const;
+    void setUseThemeColors(bool value);
     QColor textColor() const;
-
-    void setLabelColor(const QColor &color);
+    void setTextColor(const QColor &color);
     QColor labelColor() const;
-
-    void setInkColor(const QColor &color);
+    void setLabelColor(const QColor &color);
     QColor inkColor() const;
-
-    void setInputLineColor(const QColor &color);
+    void setInkColor(const QColor &color);
     QColor inputLineColor() const;
-
-    void setShowInputLine(bool value);
-    bool hasInputLine() const;
+    void setInputLineColor(const QColor &color);
 
 protected:
     QtMaterialTextField(QtMaterialTextFieldPrivate &d, QWidget *parent = nullptr);
-
-    bool event(QEvent *event) override;
-    void paintEvent(QPaintEvent *event) override;
 
     const QScopedPointer<QtMaterialTextFieldPrivate> d_ptr;
 
 private:
     Q_DISABLE_COPY(QtMaterialTextField)
     Q_DECLARE_PRIVATE(QtMaterialTextField)
+
+    // QWidget interface
+protected:
+    bool event(QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 };
 
 #endif  // QTMATERIALTEXTFIELD_H
