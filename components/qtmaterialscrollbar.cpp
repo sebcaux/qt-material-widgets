@@ -50,6 +50,13 @@ QtMaterialScrollBar::QtMaterialScrollBar(QWidget *parent)
     d_func()->init();
 }
 
+QtMaterialScrollBar::QtMaterialScrollBar(Qt::Orientation orientation, QWidget *parent)
+    : QScrollBar(orientation, parent),
+      d_ptr(new QtMaterialScrollBarPrivate(this))
+{
+    d_func()->init();
+}
+
 QtMaterialScrollBar::~QtMaterialScrollBar()
 {
 }
@@ -209,9 +216,9 @@ void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
 
     painter.drawRect(trimmed);
 
-    const qreal q = (Qt::Horizontal == orientation() ? w : h) / static_cast<qreal>(maximum() - minimum() + pageStep() - 1);
+    const qreal q = ((orientation() == Qt::Horizontal) ? w : h) / static_cast<qreal>(maximum() - minimum() + pageStep() - 1);
 
-    QRect handle = Qt::Horizontal == orientation() ? QRect(sliderPosition() * q, y, pageStep() * q, h) : QRect(x, sliderPosition() * q, w, pageStep() * q);
+    QRect handle = (orientation() == Qt::Horizontal) ? QRect(sliderPosition() * q, y, pageStep() * q, h) : QRect(x, sliderPosition() * q, w, pageStep() * q);
 
     brush.setColor(sliderColor());
     painter.setBrush(brush);

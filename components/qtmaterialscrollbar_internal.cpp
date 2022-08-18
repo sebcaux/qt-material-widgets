@@ -44,7 +44,13 @@ QtMaterialScrollBarStateMachine::QtMaterialScrollBarStateMachine(QtMaterialScrol
     QtMaterialStateTransition *transitionScroll = new QtMaterialStateTransition(ScrollbarValueMoved);
     transitionScroll->setTargetState(m_scrollState);
     m_blurState->addTransition(transitionScroll);
-    connect(m_scrollState, &QState::entered, m_scrollOutTimer, [=]{m_scrollOutTimer->start(600);});
+    connect(m_scrollState,
+            &QState::entered,
+            m_scrollOutTimer,
+            [=]
+            {
+                m_scrollOutTimer->start(1000);
+            });
 
     QSignalTransition *transitionScrollout = new QSignalTransition(m_scrollOutTimer, &QTimer::timeout);
     transitionScrollout->setTargetState(m_blurState);

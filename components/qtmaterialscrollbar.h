@@ -9,39 +9,41 @@ class QtMaterialScrollBar : public QScrollBar
 {
     Q_OBJECT
 
-    Q_PROPERTY(QColor canvasColor WRITE setCanvasColor READ canvasColor)
-    Q_PROPERTY(QColor backgroundColor WRITE setBackgroundColor READ backgroundColor)
-    Q_PROPERTY(QColor sliderColor WRITE setSliderColor READ sliderColor)
+    Q_PROPERTY(bool hideOnMouseOut READ hideOnMouseOut WRITE setHideOnMouseOut)
+    Q_PROPERTY(QColor canvasColor READ canvasColor WRITE setCanvasColor)
+    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
+    Q_PROPERTY(QColor sliderColor READ sliderColor WRITE setSliderColor)
 
 public:
     explicit QtMaterialScrollBar(QWidget *parent = nullptr);
+    explicit QtMaterialScrollBar(Qt::Orientation orientation, QWidget *parent = nullptr);
     ~QtMaterialScrollBar() override;
 
-    QSize sizeHint() const override;
-
-    void setUseThemeColors(bool value);
-    bool useThemeColors() const;
-
-    void setCanvasColor(const QColor &color);
-    QColor canvasColor() const;
-
-    void setBackgroundColor(const QColor &color);
-    QColor backgroundColor() const;
-
-    void setSliderColor(const QColor &color);
-    QColor sliderColor() const;
-
-    void setHideOnMouseOut(bool value);
     bool hideOnMouseOut() const;
+    void setHideOnMouseOut(bool value);
+
+    bool useThemeColors() const;
+    void setUseThemeColors(bool value);
+    QColor canvasColor() const;
+    void setCanvasColor(const QColor &color);
+    QColor backgroundColor() const;
+    void setBackgroundColor(const QColor &color);
+    QColor sliderColor() const;
+    void setSliderColor(const QColor &color);
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
-
     const QScopedPointer<QtMaterialScrollBarPrivate> d_ptr;
 
 private:
     Q_DISABLE_COPY(QtMaterialScrollBar)
     Q_DECLARE_PRIVATE(QtMaterialScrollBar)
+
+    // QWidget interface
+public:
+    QSize sizeHint() const override;
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
 
     // QAbstractSlider interface
 protected:
