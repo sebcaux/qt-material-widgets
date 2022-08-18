@@ -87,8 +87,8 @@ void FloatingActionButtonSettingsEditor::setupForm()
     }
 
     ui->disabledCheckBox->setChecked(!m_fab->isEnabled());
-    ui->horizontalOffsetSpinBox->setValue(m_fab->xOffset());
-    ui->verticalOffsetSpinBox->setValue(m_fab->yOffset());
+    ui->horizontalOffsetSpinBox->setValue(m_fab->offset().x());
+    ui->verticalOffsetSpinBox->setValue(m_fab->offset().y());
     ui->miniCheckBox->setChecked(m_fab->isMini());
     ui->useThemeColorsCheckBox->setChecked(m_fab->useThemeColors());
 }
@@ -144,8 +144,7 @@ void FloatingActionButtonSettingsEditor::updateWidget()
     }
 
     m_fab->setDisabled(ui->disabledCheckBox->isChecked());
-    m_fab->setXOffset(ui->horizontalOffsetSpinBox->value());
-    m_fab->setYOffset(ui->verticalOffsetSpinBox->value());
+    m_fab->setOffset(ui->horizontalOffsetSpinBox->value(), ui->verticalOffsetSpinBox->value());
     m_fab->setMini(ui->miniCheckBox->isChecked());
     m_fab->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
 }

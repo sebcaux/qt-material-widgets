@@ -37,8 +37,7 @@ void QtMaterialFloatingActionButtonPrivate::init()
 
     corner = Qt::BottomRightCorner;
     mini = false;
-    offsX = 34;
-    offsY = 36;
+    offset = QPoint(34, 36);
 
     q->setRole(Material::Primary);
     q->setFixedSize(DefaultDiameter, DefaultDiameter);
@@ -72,16 +71,16 @@ QRect QtMaterialFloatingActionButtonPrivate::fabGeometry() const
     switch (corner)
     {
         case Qt::TopLeftCorner:
-            return QRect(offsX, offsY, s, s);
+            return QRect(offset.x(), offset.y(), s, s);
         case Qt::TopRightCorner:
-            return QRect(parent->width() - (offsX + s), offsY, s, s);
+            return QRect(parent->width() - (offset.x() + s), offset.y(), s, s);
         case Qt::BottomLeftCorner:
-            return QRect(offsX, parent->height() - (offsY + s), s, s);
+            return QRect(offset.x(), parent->height() - (offset.y() + s), s, s);
         case Qt::BottomRightCorner:
         default:
             break;
     }
-    return QRect(parent->width() - (offsX + s), parent->height() - (offsY + s), s, s);
+    return QRect(parent->width() - (offset.x() + s), parent->height() - (offset.y() + s), s, s);
 }
 
 /*!
@@ -186,53 +185,25 @@ Qt::Corner QtMaterialFloatingActionButton::corner() const
     return d->corner;
 }
 
+QPoint QtMaterialFloatingActionButton::offset() const
+{
+    Q_D(const QtMaterialFloatingActionButton);
+
+    return d->offset;
+}
+
+void QtMaterialFloatingActionButton::setOffset(const QPoint &offset)
+{
+    Q_D(QtMaterialFloatingActionButton);
+
+    d->offset = offset;
+    setGeometry(d->fabGeometry());
+    update();
+}
+
 void QtMaterialFloatingActionButton::setOffset(int x, int y)
 {
-    Q_D(QtMaterialFloatingActionButton);
-
-    d->offsX = x;
-    d->offsY = y;
-    setGeometry(d->fabGeometry());
-    update();
-}
-
-QSize QtMaterialFloatingActionButton::offset() const
-{
-    Q_D(const QtMaterialFloatingActionButton);
-
-    return QSize(d->offsX, d->offsY);
-}
-
-void QtMaterialFloatingActionButton::setXOffset(int x)
-{
-    Q_D(QtMaterialFloatingActionButton);
-
-    d->offsX = x;
-    setGeometry(d->fabGeometry());
-    update();
-}
-
-int QtMaterialFloatingActionButton::xOffset() const
-{
-    Q_D(const QtMaterialFloatingActionButton);
-
-    return d->offsX;
-}
-
-void QtMaterialFloatingActionButton::setYOffset(int y)
-{
-    Q_D(QtMaterialFloatingActionButton);
-
-    d->offsY = y;
-    setGeometry(d->fabGeometry());
-    update();
-}
-
-int QtMaterialFloatingActionButton::yOffset() const
-{
-    Q_D(const QtMaterialFloatingActionButton);
-
-    return d->offsY;
+    setOffset(QPoint(x, y));
 }
 
 /*!

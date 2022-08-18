@@ -9,26 +9,31 @@ class QtMaterialFloatingActionButton : public QtMaterialRaisedButton
 {
     Q_OBJECT
 
+    Q_PROPERTY(bool mini READ isMini WRITE setMini)
+    Q_PROPERTY(Qt::Corner corner READ corner WRITE setCorner)
+    Q_PROPERTY(QPoint offset READ offset WRITE setOffset)
+
 public:
     explicit QtMaterialFloatingActionButton(const QIcon &icon, QWidget *parent = nullptr);
     ~QtMaterialFloatingActionButton() override;
 
-    QSize sizeHint() const override;
-
-    void setMini(bool state);
     bool isMini() const;
+    void setMini(bool state);
 
-    void setCorner(Qt::Corner corner);
     Qt::Corner corner() const;
+    void setCorner(Qt::Corner corner);
 
+    QPoint offset() const;
+    void setOffset(const QPoint &offset);
     void setOffset(int x, int y);
-    QSize offset() const;
 
-    void setXOffset(int x);
-    int xOffset() const;
+private:
+    Q_DISABLE_COPY(QtMaterialFloatingActionButton)
+    Q_DECLARE_PRIVATE(QtMaterialFloatingActionButton)
 
-    void setYOffset(int y);
-    int yOffset() const;
+    // QWidget
+public:
+    QSize sizeHint() const override;
 
 protected:
     bool event(QEvent *event) override;
@@ -36,10 +41,6 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
     void updateClipPath() override;
-
-private:
-    Q_DISABLE_COPY(QtMaterialFloatingActionButton)
-    Q_DECLARE_PRIVATE(QtMaterialFloatingActionButton)
 };
 
 #endif  // QTMATERIALFAB_H

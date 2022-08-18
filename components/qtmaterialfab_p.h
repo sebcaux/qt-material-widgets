@@ -37,8 +37,7 @@ public:
 
     Qt::Corner corner;
     bool mini;
-    int offsX;
-    int offsY;
+    QPoint offset;
 };
 
 inline int QtMaterialFloatingActionButtonPrivate::diameter() const
