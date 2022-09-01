@@ -132,7 +132,7 @@ QColor QtMaterialScrollBar::backgroundColor() const
 
     if (d->useThemeColors || !d->backgroundColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("border");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeBorder);
     }
 
     return d->backgroundColor;
@@ -154,7 +154,7 @@ QColor QtMaterialScrollBar::sliderColor() const
 
     if (d->useThemeColors || !d->sliderColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("primary1");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
     }
 
     return d->sliderColor;

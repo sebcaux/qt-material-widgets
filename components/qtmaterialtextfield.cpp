@@ -169,7 +169,7 @@ QColor QtMaterialTextField::textColor() const
 
     if (d->useThemeColors || !d->textColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("text");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeText);
     }
 
     return d->textColor;
@@ -191,7 +191,7 @@ QColor QtMaterialTextField::labelColor() const
 
     if (d->useThemeColors || !d->labelColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("accent3");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent3);
     }
 
     return d->labelColor;
@@ -213,7 +213,7 @@ QColor QtMaterialTextField::inkColor() const
 
     if (d->useThemeColors || !d->inkColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("primary1");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
     }
 
     return d->inkColor;
@@ -235,7 +235,7 @@ QColor QtMaterialTextField::inputLineColor() const
 
     if (d->useThemeColors || !d->inputLineColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("border");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeBorder);
     }
 
     return d->inputLineColor;

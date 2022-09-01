@@ -5,7 +5,7 @@
 #include <QFont>
 #include <QHash>
 
-class QtMaterialTheme;
+#include "qtmaterialtheme.h"
 
 class QtMaterialThemePrivate
 {
@@ -19,7 +19,7 @@ public:
     QColor rgba(int r, int g, int b, qreal a) const;
 
     QtMaterialTheme *const q_ptr;
-    QHash<QString, QColor> colors;
+    QVector<QColor> colors;
     QVector<QFont> fonts;  // QVector to garentee same funtionnalities on Qt5 as Qt6
 };
 

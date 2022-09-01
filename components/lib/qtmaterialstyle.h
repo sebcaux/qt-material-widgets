@@ -21,7 +21,7 @@ public:
 
     void setTheme(QtMaterialTheme *theme);
 
-    QColor themeColor(const QString &key) const;
+    QColor themeColor(Material::ThemeColor colorTheme) const;
     const QFont &themeFont(Material::FontType fontType) const;
 
 protected:

@@ -259,7 +259,7 @@ QColor QtMaterialAppBar::foregroundColor() const
 
     if (d->useThemeColors || !d->foregroundColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("alternateText");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAlternateText);
     }
 
     return d->foregroundColor;
@@ -284,7 +284,7 @@ QColor QtMaterialAppBar::backgroundColor() const
 
     if (d->useThemeColors || !d->backgroundColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("primary1");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
     }
 
     return d->backgroundColor;

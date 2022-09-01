@@ -190,7 +190,7 @@ QColor QtMaterialCheckable::checkedColor() const
 
     if (d->useThemeColors || !d->checkedColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("primary1");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
     }
 
     return d->checkedColor;
@@ -212,7 +212,7 @@ QColor QtMaterialCheckable::uncheckedColor() const
 
     if (d->useThemeColors || !d->uncheckedColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("text");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeText);
     }
 
     return d->uncheckedColor;
@@ -234,7 +234,7 @@ QColor QtMaterialCheckable::textColor() const
 
     if (d->useThemeColors || !d->textColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("text");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeText);
     }
 
     return d->textColor;
@@ -256,7 +256,7 @@ QColor QtMaterialCheckable::disabledColor() const
 
     if (d->useThemeColors || !d->disabledColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("accent3");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent3);
     }
 
     return d->disabledColor;

@@ -190,7 +190,7 @@ QColor QtMaterialToggle::disabledColor() const
 
     if (d->useThemeColors || !d->disabledColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("disabled");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeDisabled1);
     }
 
     return d->disabledColor;
@@ -212,7 +212,7 @@ QColor QtMaterialToggle::activeColor() const
 
     if (d->useThemeColors || !d->activeColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("primary1");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
     }
 
     return d->activeColor;
@@ -234,7 +234,7 @@ QColor QtMaterialToggle::inactiveColor() const
 
     if (d->useThemeColors || !d->inactiveColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("canvas");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeCanvas);
     }
 
     return d->inactiveColor;
@@ -256,7 +256,7 @@ QColor QtMaterialToggle::trackColor() const
 
     if (d->useThemeColors || !d->trackColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("accent3");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent3);
     }
 
     return d->trackColor;

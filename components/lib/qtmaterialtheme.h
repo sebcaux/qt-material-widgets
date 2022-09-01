@@ -10,8 +10,9 @@
 
 namespace Material
 {
-enum Color : unsigned int;
 enum FontType : unsigned int;
+enum ThemeColor : unsigned int;
+enum Color : unsigned int;
 }
 
 class QtMaterialThemePrivate;
@@ -25,10 +26,10 @@ public:
     ~QtMaterialTheme() override;
 
     // Colors
-    QColor getColor(const QString &key) const;
-
-    void setColor(const QString &key, const QColor &color);
-    void setColor(const QString &key, Material::Color color);
+    const QColor &color(Material::ThemeColor colorTheme) const;
+    const QColor &color(Material::Color stdColor) const;
+    void setColor(Material::ThemeColor colorTheme, const QColor &color);
+    void setColor(Material::ThemeColor colorTheme, Material::Color color);
 
     // Fonts
     const QFont &font(Material::FontType fontType) const;
@@ -116,6 +117,24 @@ enum FontType : unsigned int
     FontOverline,
     FontCaption,
     FontTypesCount
+};
+
+enum ThemeColor : unsigned int
+{
+    ColorThemePrimary1,
+    ColorThemePrimary2,
+    ColorThemePrimary3,
+    ColorThemeAccent1,
+    ColorThemeAccent2,
+    ColorThemeAccent3,
+    ColorThemeText,
+    ColorThemeAlternateText,
+    ColorThemeCanvas,
+    ColorThemeBorder,
+    ColorThemeDisabled1,
+    ColorThemeDisabled2,
+    ColorThemeDisabled3,
+    ColorThemesCount
 };
 
 enum Color : unsigned int

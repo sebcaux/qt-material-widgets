@@ -135,7 +135,7 @@ QColor QtMaterialTabs::inkColor() const
 
     if (d->useThemeColors || !d->inkColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("accent1");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent1);
     }
 
     return d->inkColor;
@@ -158,7 +158,7 @@ QColor QtMaterialTabs::backgroundColor() const
 
     if (d->useThemeColors || !d->backgroundColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("primary1");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
     }
 
     return d->backgroundColor;
@@ -181,7 +181,7 @@ QColor QtMaterialTabs::textColor() const
 
     if (d->useThemeColors || !d->textColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("canvas");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeCanvas);
     }
 
     return d->textColor;

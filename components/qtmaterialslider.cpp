@@ -164,7 +164,7 @@ QColor QtMaterialSlider::thumbColor() const
 
     if (d->useThemeColors || !d->thumbColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("primary1");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
     }
 
     return d->thumbColor;
@@ -187,7 +187,7 @@ QColor QtMaterialSlider::trackColor() const
 
     if (d->useThemeColors || !d->trackColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("accent3");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent3);
     }
 
     return d->trackColor;
@@ -210,7 +210,7 @@ QColor QtMaterialSlider::disabledColor() const
 
     if (d->useThemeColors || !d->disabledColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("disabled");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeDisabled1);
     }
 
     return d->disabledColor;

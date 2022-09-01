@@ -42,13 +42,13 @@ void QtMaterialStyle::setTheme(QtMaterialTheme *theme)
     theme->setParent(this);
 }
 
-QColor QtMaterialStyle::themeColor(const QString &key) const
+QColor QtMaterialStyle::themeColor(Material::ThemeColor themeColor) const
 {
     Q_D(const QtMaterialStyle);
 
     Q_ASSERT(d->theme);
 
-    return d->theme->getColor(key);
+    return d->theme->color(themeColor);
 }
 
 const QFont &QtMaterialStyle::themeFont(Material::FontType fontType) const

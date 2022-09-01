@@ -114,7 +114,7 @@ QColor QtMaterialIconButton::color() const
 
     if (d->useThemeColors || !d->color.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("text");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeText);
     }
     return d->color;
 }
@@ -135,7 +135,7 @@ QColor QtMaterialIconButton::disabledColor() const
 
     if (d->useThemeColors || !d->disabledColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor("disabled");
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeDisabled1);
     }
     return d->disabledColor;
 }
