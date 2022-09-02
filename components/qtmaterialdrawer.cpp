@@ -157,6 +157,7 @@ void QtMaterialDrawer::openDrawer()
 
     if (d->autoRaise)
     {
+        show();
         raise();
     }
     setAttribute(Qt::WA_TransparentForMouseEvents, false);
@@ -189,6 +190,7 @@ bool QtMaterialDrawer::event(QEvent *event)
                 setMask(QRegion(d->widget->rect()));
             }
             break;
+
         default:
             break;
     }
@@ -206,7 +208,7 @@ bool QtMaterialDrawer::eventFilter(QObject *obj, QEvent *event)
             QMouseEvent *mouseEvent;
             if ((mouseEvent = static_cast<QMouseEvent *>(event)) != nullptr)
             {
-                const bool canClose = d->clickToClose || d->overlay;
+                const bool canClose = d->clickToClose;
                 if (!d->widget->geometry().contains(mouseEvent->pos()) && canClose)
                 {
                     closeDrawer();
@@ -214,6 +216,7 @@ bool QtMaterialDrawer::eventFilter(QObject *obj, QEvent *event)
             }
             break;
         }
+
         case QEvent::Move:
         case QEvent::Resize:
         {
@@ -224,6 +227,7 @@ bool QtMaterialDrawer::eventFilter(QObject *obj, QEvent *event)
             }
             break;
         }
+
         default:
             break;
     }
