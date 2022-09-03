@@ -8,6 +8,8 @@
 #include <QPainter>
 #include <QPropertyAnimation>
 
+#include <lib/qtmaterialstyle.h>
+
 /*!
  *  \class QtMaterialTabsInkBar
  *  \internal
@@ -47,13 +49,13 @@ void QtMaterialTabsInkBar::refreshGeometry()
 
         if (QAbstractAnimation::Running != m_animation->state())
         {
-            m_geometry = QRect(r.left(), r.bottom() - 1, r.width(), 2);
+            m_geometry = QRect(r.left(), r.bottom() - 3, r.width(), 4);
         }
         else
         {
             const qreal left = m_previousGeometry.left() * s + r.left() * m_tween;
             const qreal width = m_previousGeometry.width() * s + r.width() * m_tween;
-            m_geometry = QRect(left, r.bottom() - 1, width, 2);
+            m_geometry = QRect(left, r.bottom() - 3, width, 4);
         }
         m_tabs->update();
     }
@@ -111,9 +113,7 @@ QtMaterialTab::QtMaterialTab(QtMaterialTabs *parent)
 
     setMinimumHeight(50);
 
-    QFont f(font());
-    f.setStyleName("Normal");
-    setFont(f);
+    setFont(QtMaterialStyle::instance().themeFont(Material::FontButton));
 
     setCornerRadius(0);
     setRole(Material::Primary);
