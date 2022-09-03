@@ -1,8 +1,6 @@
 #include "flatbuttonsettingseditor.h"
 
 #include <QColorDialog>
-#include <QDebug>
-
 #include <qtmaterialflatbutton.h>
 
 FlatButtonSettingsEditor::FlatButtonSettingsEditor(QWidget *parent)
@@ -33,12 +31,15 @@ void FlatButtonSettingsEditor::setupForm()
         case Material::Default:
             ui->buttonRoleComboBox->setCurrentIndex(0);
             break;
+
         case Material::Primary:
             ui->buttonRoleComboBox->setCurrentIndex(1);
             break;
+
         case Material::Secondary:
             ui->buttonRoleComboBox->setCurrentIndex(2);
             break;
+
         default:
             break;
     }
@@ -48,12 +49,15 @@ void FlatButtonSettingsEditor::setupForm()
         case Material::NoOverlay:
             ui->hoverStyleComboBox->setCurrentIndex(0);
             break;
+
         case Material::TintedOverlay:
             ui->hoverStyleComboBox->setCurrentIndex(1);
             break;
+
         case Material::GrayOverlay:
             ui->hoverStyleComboBox->setCurrentIndex(2);
             break;
+
         default:
             break;
     }
@@ -63,12 +67,15 @@ void FlatButtonSettingsEditor::setupForm()
         case Material::CenteredRipple:
             ui->rippleStyleComboBox->setCurrentIndex(0);
             break;
+
         case Material::PositionedRipple:
             ui->rippleStyleComboBox->setCurrentIndex(1);
             break;
+
         case Material::NoRipple:
             ui->rippleStyleComboBox->setCurrentIndex(2);
             break;
+
         default:
             break;
     }
@@ -78,6 +85,7 @@ void FlatButtonSettingsEditor::setupForm()
         case Material::LeftIcon:
             ui->iconPlacementComboBox->setCurrentIndex(0);
             break;
+
         case Material::RightIcon:
             ui->iconPlacementComboBox->setCurrentIndex(1);
             break;
@@ -88,6 +96,7 @@ void FlatButtonSettingsEditor::setupForm()
         case Qt::AlignLeft:
             ui->textAlignmentComboBox->setCurrentIndex(0);
             break;
+
         default:
             ui->textAlignmentComboBox->setCurrentIndex(1);
     }
@@ -115,12 +124,15 @@ void FlatButtonSettingsEditor::updateWidget()
         case 0:
             m_button->setRole(Material::Default);
             break;
+
         case 1:
             m_button->setRole(Material::Primary);
             break;
+
         case 2:
             m_button->setRole(Material::Secondary);
             break;
+
         default:
             break;
     }
@@ -130,12 +142,15 @@ void FlatButtonSettingsEditor::updateWidget()
         case 0:
             m_button->setOverlayStyle(Material::NoOverlay);
             break;
+
         case 1:
             m_button->setOverlayStyle(Material::TintedOverlay);
             break;
+
         case 2:
             m_button->setOverlayStyle(Material::GrayOverlay);
             break;
+
         default:
             break;
     }
@@ -145,12 +160,15 @@ void FlatButtonSettingsEditor::updateWidget()
         case 0:
             m_button->setRippleStyle(Material::CenteredRipple);
             break;
+
         case 1:
             m_button->setRippleStyle(Material::PositionedRipple);
             break;
+
         case 2:
             m_button->setRippleStyle(Material::NoRipple);
             break;
+
         default:
             break;
     }
@@ -160,9 +178,11 @@ void FlatButtonSettingsEditor::updateWidget()
         case 0:
             m_button->setIconPlacement(Material::LeftIcon);
             break;
+
         case 1:
             m_button->setIconPlacement(Material::RightIcon);
             break;
+
         default:
             break;
     }
@@ -172,6 +192,7 @@ void FlatButtonSettingsEditor::updateWidget()
         case 0:
             m_button->setTextAlignment(Qt::AlignLeft);
             break;
+
         case 1:
         default:
             m_button->setTextAlignment(Qt::AlignHCenter);
@@ -246,6 +267,7 @@ void FlatButtonSettingsEditor::applyDefaultPreset()
     ui->checkableCheckBox->setChecked(false);
     ui->disabledCheckBox->setChecked(false);
     updateWidget();
+
     m_button->applyPreset(Material::FlatPreset);
 }
 
@@ -265,6 +287,7 @@ void FlatButtonSettingsEditor::applyCheckablePreset()
     ui->checkableCheckBox->setChecked(true);
     ui->disabledCheckBox->setChecked(false);
     updateWidget();
+
     m_button->applyPreset(Material::CheckablePreset);
 }
 
@@ -287,15 +310,15 @@ void FlatButtonSettingsEditor::init()
     connect(ui->showHaloCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->iconCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->transparentCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
-    connect(ui->buttonRoleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->rippleStyleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->hoverStyleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->iconPlacementComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->textAlignmentComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->cornerRadiusSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->overlayOpacityDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
-    connect(ui->iconSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->fontSizeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
+    connect(ui->buttonRoleComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->rippleStyleComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->hoverStyleComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->iconPlacementComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->textAlignmentComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->cornerRadiusSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->overlayOpacityDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->iconSizeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->fontSizeDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->buttonTextLineEdit, &QLineEdit::textChanged, this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->foregroundColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
@@ -303,10 +326,10 @@ void FlatButtonSettingsEditor::init()
     connect(ui->disabledFgColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
     connect(ui->disabledBgColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
     connect(ui->overlayColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
-    connect(ui->cornerRadiusSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->overlayOpacityDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
-    connect(ui->iconSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->fontSizeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(updateWidget()));
+    connect(ui->cornerRadiusSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->overlayOpacityDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->iconSizeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->fontSizeDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->buttonTextLineEdit, &QLineEdit::textChanged, this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->defaultPresetPushButton, &QAbstractButton::pressed, this, &FlatButtonSettingsEditor::applyDefaultPreset);
     connect(ui->checkablePresetPushButton, &QAbstractButton::pressed, this, &FlatButtonSettingsEditor::applyCheckablePreset);
