@@ -73,11 +73,6 @@ void QtMaterialAppBarPrivate::updateChildrenColor()
     palette.setColor(titleLabel->foregroundRole(), q->foregroundColor());
     titleLabel->setPalette(palette);
 
-    if (navButton != nullptr)
-    {
-        navButton->setColor(q->foregroundColor());
-    }
-
     layout->updateButtons();
 }
 
@@ -87,13 +82,6 @@ void QtMaterialAppBarPrivate::updateChildrenColor()
 void QtMaterialAppBarPrivate::setIconSize(const QSize &iconSize)
 {
     this->iconSize = iconSize;
-    if (navButton != nullptr)
-    {
-        int size = iconSize.width() * 1.33;
-        navButton->setIconSize(iconSize);
-        navButton->setFixedSize(size, size);
-    }
-
     layout->updateButtons();
     layout->invalidate();
 }
@@ -107,11 +95,9 @@ void QtMaterialAppBarPrivate::setNavIconType(Material::NavIconType type)
 
     if (navButton == nullptr && type != Material::NavIconNone)
     {
-        int size = iconSize.width() * 1.33;
         navButton = new QtMaterialIconButton(QIcon(), q);
         navButton->setIconSize(iconSize);
         navButton->setColor(q->foregroundColor());
-        navButton->setFixedSize(size, size);
         layout->setNavButton(navButton);
         QObject::connect(navButton, &QtMaterialIconButton::clicked, q, &QtMaterialAppBar::navIconClicked);
     }
@@ -275,6 +261,7 @@ void QtMaterialAppBar::setBackgroundColor(const QColor &color)
     {
         d->useThemeColors = false;
     }
+    d->updateChildrenColor();
     update();
 }
 

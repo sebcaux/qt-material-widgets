@@ -5,6 +5,7 @@
 
 #include <QLabel>
 
+class QtMaterialButtonList;
 class QtMaterialAppBar;
 class QtMaterialIconButton;
 
@@ -33,14 +34,18 @@ public:
     void setNavButton(QtMaterialIconButton *navButton);
 
     void insertAction(int index, QAction *action);
+    QtMaterialIconButton *createIconButton(QAction *action);
+    void createMenu();
 
     void updateActions();
     void updateButtons();
 
 protected:
+    QtMaterialAppBar *_appBar;
     QtMaterialIconButton *_navButton;
     QLabel *_titleLabel;
     QList<QtMaterialAppBarLayoutItem *> _actionIconButtons;
+    QList<QtMaterialIconButton *> _visibleButtons;
 
     // QLayoutItem interface
 public:

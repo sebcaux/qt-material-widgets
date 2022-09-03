@@ -1,6 +1,7 @@
 #include "qtmaterialappbar_internal.h"
 
 #include "qtmaterialappbar.h"
+#include "qtmaterialbuttonlist.h"
 #include "qtmaterialiconbutton.h"
 
 #include <QAction>
@@ -34,6 +35,8 @@ bool QtMaterialAppBarLayoutItem::isEmpty() const
 QtMaterialAppBarLayout::QtMaterialAppBarLayout(QtMaterialAppBar *parent)
     : QLayout(parent)
 {
+    _appBar = dynamic_cast<QtMaterialAppBar *>(parentWidget());
+    _navButton = nullptr;
 }
 
 /*!
@@ -71,19 +74,29 @@ void QtMaterialAppBarLayout::insertAction(int index, QAction *action)
 {
     Q_UNUSED(index);
 
-    QtMaterialAppBar *appBar = dynamic_cast<QtMaterialAppBar *>(parentWidget());
+    if (_actionIconButtons.count() < 3)
+    {
+        QtMaterialIconButton *iconButton = createIconButton(action);
+        _actionIconButtons.push_back(new QtMaterialAppBarLayoutItem(iconButton, action));
+        _visibleButtons.push_back(iconButton);
+    }
 
-    QtMaterialIconButton *iconButton = new QtMaterialIconButton(action->icon(), appBar);
-    iconButton->setIconSize(appBar->iconSize());
-    iconButton->setColor(appBar->foregroundColor());
+    invalidate();
+}
+
+/*!
+ *  \internal
+ */
+QtMaterialIconButton *QtMaterialAppBarLayout::createIconButton(QAction *action)
+{
+    QtMaterialIconButton *iconButton = new QtMaterialIconButton(action->icon(), _appBar);
+    iconButton->setIconSize(_appBar->iconSize());
+    iconButton->setColor(_appBar->foregroundColor());
     iconButton->setToolTip(action->text());
-    int size = appBar->iconSize().width() * 1.33;
-    iconButton->setFixedSize(size, size);
     addChildWidget(iconButton);
     connect(iconButton, &QtMaterialIconButton::clicked, action, &QAction::trigger);
 
-    _actionIconButtons.push_back(new QtMaterialAppBarLayoutItem(iconButton, action));
-    invalidate();
+    return iconButton;
 }
 
 /*!
@@ -107,14 +120,17 @@ void QtMaterialAppBarLayout::updateButtons()
 {
     QtMaterialAppBar *appBar = dynamic_cast<QtMaterialAppBar *>(parentWidget());
 
-    int size = appBar->iconSize().width() * 1.33;
+    if (_navButton != nullptr)
+    {
+        _navButton->setColor(appBar->foregroundColor());
+        _navButton->setIconSize(appBar->iconSize());
+    }
     for (QtMaterialAppBarLayoutItem *item : qAsConst(_actionIconButtons))
     {
         QtMaterialIconButton *iconButton = dynamic_cast<QtMaterialIconButton *>(item->widget());
 
         iconButton->setColor(appBar->foregroundColor());
         iconButton->setIconSize(appBar->iconSize());
-        iconButton->setFixedSize(size, size);
     }
 }
 
@@ -225,25 +241,24 @@ Qt::Orientations QtMaterialAppBarLayout::expandingDirections() const
 void QtMaterialAppBarLayout::setGeometry(const QRect &rect)
 {
     QtMaterialAppBar *appBar = dynamic_cast<QtMaterialAppBar *>(parentWidget());
-    int size = appBar->iconSize().width() * 1.33;
 
-    int h = size;
+    int size = qMax(static_cast<int>(appBar->iconSize().height() * 1.33), _titleLabel->fontMetrics().height());
     int x = 0;
     int w = rect.width();
 
     if (_navButton != nullptr)
     {
-        _navButton->setGeometry(0, 0, size, h);
-        x += h;
+        _navButton->setGeometry(0, 0, size, size);
+        x += size;
     }
 
-    int itemId = _actionIconButtons.count();
-    for (QtMaterialAppBarLayoutItem *item : qAsConst(_actionIconButtons))
+    int itemId = _visibleButtons.count();
+    for (QtMaterialIconButton *icon : qAsConst(_visibleButtons))
     {
-        item->widget()->setGeometry(rect.width() - itemId * size, 0, size, size);
+        icon->setGeometry(rect.width() - itemId * size, 0, size, size);
         itemId--;
         w -= size;
     }
 
-    _titleLabel->setGeometry(x, 0, w - x, h);
+    _titleLabel->setGeometry(x, 0, w - x, size);
 }

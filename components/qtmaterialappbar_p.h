@@ -6,7 +6,6 @@
 
 #include <QColor>
 #include <QLabel>
-#include <QtGlobal>
 
 class QtMaterialAppBar;
 class QtMaterialAppBarLayout;
