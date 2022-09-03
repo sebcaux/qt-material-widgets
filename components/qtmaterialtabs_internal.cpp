@@ -113,8 +113,6 @@ QtMaterialTab::QtMaterialTab(QtMaterialTabs *parent)
 
     setMinimumHeight(50);
 
-    setFont(QtMaterialStyle::instance().themeFont(Material::FontButton));
-
     setCornerRadius(0);
     setRole(Material::Primary);
     setBackgroundMode(Qt::OpaqueMode);

@@ -25,18 +25,19 @@ void QtMaterialTabsPrivate::init()
     Q_Q(QtMaterialTabs);
 
     inkBar = new QtMaterialTabsInkBar(q);
-    tabLayout = new QHBoxLayout;
     rippleStyle = Material::CenteredRipple;
     tab = -1;
-    showHalo = true;
+    showHalo = false;
     useThemeColors = true;
     iconSize = QSize(24, 24);
 
-    q->setLayout(tabLayout);
     q->setStyle(&QtMaterialStyle::instance());
+    q->setFont(QtMaterialStyle::instance().themeFont(Material::FontButton));
 
+    tabLayout = new QHBoxLayout;
     tabLayout->setSpacing(0);
     tabLayout->setContentsMargins(0, 0, 0, 0);
+    q->setLayout(tabLayout);
 }
 
 /*!
