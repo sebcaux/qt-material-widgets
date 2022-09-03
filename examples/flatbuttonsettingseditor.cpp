@@ -91,7 +91,7 @@ void FlatButtonSettingsEditor::setupForm()
             break;
     }
 
-    switch (ui->textAlignmentComboBox->currentIndex())
+    switch (m_button->textAlignment())
     {
         case Qt::AlignLeft:
             ui->textAlignmentComboBox->setCurrentIndex(0);
