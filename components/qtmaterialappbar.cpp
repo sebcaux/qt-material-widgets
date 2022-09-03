@@ -279,7 +279,10 @@ QColor QtMaterialAppBar::backgroundColor() const
 
 QSize QtMaterialAppBar::sizeHint() const
 {
-    return QSize(-1, iconSize().width() * 1.33);
+    Q_D(const QtMaterialAppBar);
+
+    int height = qMax(static_cast<int>(iconSize().height() * 1.33), d->titleLabel->fontMetrics().height());
+    return QSize(-1, height);
 }
 
 void QtMaterialAppBar::paintEvent(QPaintEvent *event)
