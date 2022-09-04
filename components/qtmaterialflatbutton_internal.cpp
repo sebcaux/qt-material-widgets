@@ -85,8 +85,6 @@ QtMaterialFlatButtonStateMachine::QtMaterialFlatButtonStateMachine(QtMaterialFla
     m_hoveredFocusedState->assignProperty(this, "haloSize", 0.7);
 
     QPropertyAnimation *grow = new QPropertyAnimation(this);
-    QPropertyAnimation *shrink = new QPropertyAnimation(this);
-
     grow->setTargetObject(this);
     grow->setPropertyName("haloScaleFactor");
     grow->setStartValue(0.56);
@@ -94,6 +92,7 @@ QtMaterialFlatButtonStateMachine::QtMaterialFlatButtonStateMachine(QtMaterialFla
     grow->setEasingCurve(QEasingCurve::InOutSine);
     grow->setDuration(840);
 
+    QPropertyAnimation *shrink = new QPropertyAnimation(this);
     shrink->setTargetObject(this);
     shrink->setPropertyName("haloScaleFactor");
     shrink->setStartValue(0.63);
@@ -197,7 +196,7 @@ bool QtMaterialFlatButtonStateMachine::eventFilter(QObject *watched, QEvent *eve
     if (QEvent::FocusIn == event->type())
     {
         QFocusEvent *focusEvent = static_cast<QFocusEvent *>(event);
-        if ((focusEvent != nullptr) && Qt::MouseFocusReason == focusEvent->reason())
+        if ((focusEvent != nullptr) && focusEvent->reason() == Qt::MouseFocusReason)
         {
             postEvent(new QtMaterialStateTransitionEvent(FlatButtonPressedTransition));
             return true;

@@ -40,8 +40,6 @@ void QtMaterialFlatButtonPrivate::init()
 {
     Q_Q(QtMaterialFlatButton);
 
-    rippleOverlay = new QtMaterialRippleOverlay(q);
-    stateMachine = new QtMaterialFlatButtonStateMachine(q);
     role = Material::Default;
     type = Material::ButtonText;
     rippleStyle = Material::PositionedRipple;
@@ -51,7 +49,7 @@ void QtMaterialFlatButtonPrivate::init()
     fixedRippleRadius = 64;
     cornerRadius = 3;
     baseOpacity = 0.13;
-    fontSize = 10;  // 10.5;
+    fontSize = 10;
     useThemeColors = true;
     useFixedRippleRadius = false;
     haloVisible = true;
@@ -64,9 +62,11 @@ void QtMaterialFlatButtonPrivate::init()
 
     QPainterPath path;
     path.addRoundedRect(q->rect(), cornerRadius, cornerRadius);
+    rippleOverlay = new QtMaterialRippleOverlay(q);
     rippleOverlay->setClipPath(path);
     rippleOverlay->setClipping(true);
 
+    stateMachine = new QtMaterialFlatButtonStateMachine(q);
     stateMachine->setupProperties();
     stateMachine->startAnimations();
 }
@@ -364,6 +364,7 @@ void QtMaterialFlatButton::setFontSize(qreal size)
     f.setPointSizeF(size);
     setFont(f);
 
+    updateGeometry();
     update();
 }
 
@@ -516,10 +517,10 @@ QSize QtMaterialFlatButton::sizeHint() const
 {
     ensurePolished();
 
-    QSize label(fontMetrics().size(Qt::TextSingleLine, text()));
+    QSize labelSize(fontMetrics().size(Qt::TextSingleLine, text()));
 
-    int w = 20 + label.width();
-    int h = label.height();
+    int w = 20 + labelSize.width();
+    int h = labelSize.height();
     if (!icon().isNull())
     {
         w += iconSize().width() + QtMaterialFlatButton::IconPadding;

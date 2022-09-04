@@ -34,28 +34,27 @@ void QtMaterialRaisedButtonPrivate::init()
 {
     Q_Q(QtMaterialRaisedButton);
 
-    shadowStateMachine = new QStateMachine(q);
-    normalState = new QState;
-    pressedState = new QState;
     effect = new QGraphicsDropShadowEffect;
-
     effect->setBlurRadius(7);
     effect->setOffset(QPointF(0, 2));
     effect->setColor(QColor(0, 0, 0, 75));
+    q->setGraphicsEffect(effect);
 
     q->setType(Material::ButtonRaised);
     q->setMinimumHeight(42);
-    q->setGraphicsEffect(effect);
     q->setBaseOpacity(0.3);
 
-    shadowStateMachine->addState(normalState);
-    shadowStateMachine->addState(pressedState);
+    shadowStateMachine = new QStateMachine(q);
 
+    normalState = new QState;
     normalState->assignProperty(effect, "offset", QPointF(0, 2));
     normalState->assignProperty(effect, "blurRadius", 7);
+    shadowStateMachine->addState(normalState);
 
+    pressedState = new QState;
     pressedState->assignProperty(effect, "offset", QPointF(0, 5));
     pressedState->assignProperty(effect, "blurRadius", 29);
+    shadowStateMachine->addState(pressedState);
 
     QAbstractTransition *transition;
 
