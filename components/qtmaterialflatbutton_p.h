@@ -24,7 +24,9 @@ public:
     QtMaterialFlatButton *const q_ptr;
     QtMaterialRippleOverlay *rippleOverlay;
     QtMaterialFlatButtonStateMachine *stateMachine;
+
     Material::Role role;
+    Material::ButtonType type;
     Material::RippleStyle rippleStyle;
     Material::ButtonIconPlacement iconPlacement;
     Material::OverlayStyle overlayStyle;

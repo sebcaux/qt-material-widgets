@@ -14,6 +14,7 @@ class QtMaterialFlatButton : public QPushButton
     Q_OBJECT
 
     Q_PROPERTY(Material::Role role READ role WRITE setRole)
+    Q_PROPERTY(Material::ButtonType type READ type WRITE setType)
     Q_PROPERTY(qreal fontSize READ fontSize WRITE setFontSize)
     Q_PROPERTY(bool haloVisible READ isHaloVisible WRITE setHaloVisible)
     Q_PROPERTY(Material::OverlayStyle overlayStyle READ overlayStyle WRITE setOverlayStyle)
@@ -29,13 +30,18 @@ class QtMaterialFlatButton : public QPushButton
     Q_PROPERTY(QColor disabledBackgroundColor READ disabledBackgroundColor WRITE setDisabledBackgroundColor)
 
 public:
-    explicit QtMaterialFlatButton(QWidget *parent = nullptr, Material::ButtonPreset preset = Material::FlatPreset);
-    explicit QtMaterialFlatButton(const QString &text, QWidget *parent = nullptr, Material::ButtonPreset preset = Material::FlatPreset);
-    QtMaterialFlatButton(const QString &text, Material::Role role, QWidget *parent = nullptr, Material::ButtonPreset preset = Material::FlatPreset);
+    explicit QtMaterialFlatButton(QWidget *parent = nullptr);
+    explicit QtMaterialFlatButton(const QString &text, Material::ButtonPreset preset = Material::ButtonTextDefault, QWidget *parent = nullptr);
+    explicit QtMaterialFlatButton(const QIcon &icon, const QString &text, Material::ButtonPreset preset = Material::ButtonTextDefault, QWidget *parent = nullptr);
     ~QtMaterialFlatButton() override;
+
+    void applyPreset(Material::ButtonPreset preset);
 
     Material::Role role() const;
     void setRole(Material::Role role);
+
+    Material::ButtonType type() const;
+    void setType(Material::ButtonType type);
 
     qreal fontSize() const;
     void setFontSize(qreal size);
@@ -70,8 +76,6 @@ public:
     Qt::Alignment textAlignment() const;
     void setTextAlignment(Qt::Alignment alignment);
 
-    void applyPreset(Material::ButtonPreset preset);
-
     bool useThemeColors() const;
     void setUseThemeColors(bool value);
     QColor foregroundColor() const;
@@ -91,7 +95,7 @@ protected:
         IconPadding = 12
     };
 
-    QtMaterialFlatButton(QtMaterialFlatButtonPrivate &d, QWidget *parent = nullptr, Material::ButtonPreset preset = Material::FlatPreset);
+    QtMaterialFlatButton(QtMaterialFlatButtonPrivate &d, QWidget *parent = nullptr, Material::ButtonPreset preset = Material::ButtonTextDefault);
 
     virtual void paintBackground(QPainter *painter);
     virtual void paintHalo(QPainter *painter);

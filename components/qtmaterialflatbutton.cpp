@@ -75,16 +75,16 @@ void QtMaterialFlatButtonPrivate::init()
  *  \class QtMaterialFlatButton
  */
 
-QtMaterialFlatButton::QtMaterialFlatButton(QWidget *parent, Material::ButtonPreset preset)
+QtMaterialFlatButton::QtMaterialFlatButton(QWidget *parent)
     : QPushButton(parent),
       d_ptr(new QtMaterialFlatButtonPrivate(this))
 {
     d_func()->init();
 
-    applyPreset(preset);
+    applyPreset(Material::ButtonTextDefault);
 }
 
-QtMaterialFlatButton::QtMaterialFlatButton(const QString &text, QWidget *parent, Material::ButtonPreset preset)
+QtMaterialFlatButton::QtMaterialFlatButton(const QString &text, Material::ButtonPreset preset, QWidget *parent)
     : QPushButton(text, parent),
       d_ptr(new QtMaterialFlatButtonPrivate(this))
 {
@@ -93,14 +93,14 @@ QtMaterialFlatButton::QtMaterialFlatButton(const QString &text, QWidget *parent,
     applyPreset(preset);
 }
 
-QtMaterialFlatButton::QtMaterialFlatButton(const QString &text, Material::Role role, QWidget *parent, Material::ButtonPreset preset)
+QtMaterialFlatButton::QtMaterialFlatButton(const QIcon &icon, const QString &text, Material::ButtonPreset preset, QWidget *parent)
     : QPushButton(text, parent),
       d_ptr(new QtMaterialFlatButtonPrivate(this))
 {
     d_func()->init();
 
     applyPreset(preset);
-    setRole(role);
+    setIcon(icon);
 }
 
 QtMaterialFlatButton::~QtMaterialFlatButton()
@@ -111,17 +111,51 @@ void QtMaterialFlatButton::applyPreset(Material::ButtonPreset preset)
 {
     switch (preset)
     {
-        case Material::FlatPreset:
-            setOverlayStyle(Material::NoOverlay);
+        case Material::ButtonTextDefault:
+        case Material::ButtonTextPrimary:
+        case Material::ButtonTextSecondary:
+            setType(Material::ButtonText);
             break;
 
-        case Material::CheckablePreset:
-            setOverlayStyle(Material::NoOverlay);
-            setCheckable(true);
-            setHaloVisible(false);
+        case Material::ButtonOutlinedDefault:
+        case Material::ButtonOutlinedPrimary:
+        case Material::ButtonOutlinedSecondary:
+            setType(Material::ButtonOutlined);
             break;
 
-        default:
+        case Material::ButtonRaisedDefault:
+        case Material::ButtonRaisedPrimary:
+        case Material::ButtonRaisedSecondary:
+            setType(Material::ButtonRaised);
+            break;
+
+        case Material::ButtonFlatDefault:
+        case Material::ButtonFlatPrimary:
+        case Material::ButtonFlatSecondary:
+            setType(Material::ButtonFlat);
+            break;
+    }
+    switch (preset)
+    {
+        case Material::ButtonTextDefault:
+        case Material::ButtonOutlinedDefault:
+        case Material::ButtonRaisedDefault:
+        case Material::ButtonFlatDefault:
+            setRole(Material::Default);
+            break;
+
+        case Material::ButtonTextPrimary:
+        case Material::ButtonOutlinedPrimary:
+        case Material::ButtonRaisedPrimary:
+        case Material::ButtonFlatPrimary:
+            setRole(Material::Primary);
+            break;
+
+        case Material::ButtonTextSecondary:
+        case Material::ButtonOutlinedSecondary:
+        case Material::ButtonRaisedSecondary:
+        case Material::ButtonFlatSecondary:
+            setRole(Material::Secondary);
             break;
     }
 }
@@ -159,6 +193,21 @@ Material::Role QtMaterialFlatButton::role() const
     Q_D(const QtMaterialFlatButton);
 
     return d->role;
+}
+
+void QtMaterialFlatButton::setType(Material::ButtonType type)
+{
+    Q_D(QtMaterialFlatButton);
+
+    d->type = type;
+    d->stateMachine->setupProperties();
+}
+
+Material::ButtonType QtMaterialFlatButton::type() const
+{
+    Q_D(const QtMaterialFlatButton);
+
+    return d->type;
 }
 
 void QtMaterialFlatButton::setForegroundColor(const QColor &color)

@@ -42,7 +42,7 @@ QtMaterialFlatButton *QtMaterialButtonListPrivate::createButton(const QString &t
 {
     Q_Q(QtMaterialButtonList);
 
-    QtMaterialFlatButton *button = new QtMaterialFlatButton(text, q);
+    QtMaterialFlatButton *button = new QtMaterialFlatButton(text, Material::ButtonTextDefault, q);
     button->setFont(q->font());
     button->setTextAlignment(Qt::AlignLeft);
     button->setIcon(icon);

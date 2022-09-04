@@ -48,10 +48,35 @@ private:
 
 namespace Material
 {
+enum ButtonType
+{
+    ButtonText,
+    ButtonOutlined,
+    ButtonRaised,
+    ButtonFlat,
+};
+
+enum Role
+{
+    Default,
+    Primary,
+    Secondary
+};
+
 enum ButtonPreset
 {
-    FlatPreset,
-    CheckablePreset
+    ButtonTextDefault,
+    ButtonTextPrimary,
+    ButtonTextSecondary,
+    ButtonOutlinedDefault,
+    ButtonOutlinedPrimary,
+    ButtonOutlinedSecondary,
+    ButtonRaisedDefault,
+    ButtonRaisedPrimary,
+    ButtonRaisedSecondary,
+    ButtonFlatDefault,
+    ButtonFlatPrimary,
+    ButtonFlatSecondary,
 };
 
 enum NavIconType {
@@ -73,13 +98,6 @@ enum OverlayStyle
     NoOverlay,
     TintedOverlay,
     GrayOverlay
-};
-
-enum Role
-{
-    Default,
-    Primary,
-    Secondary
 };
 
 enum ButtonIconPlacement
