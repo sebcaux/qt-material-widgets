@@ -60,9 +60,7 @@ void QtMaterialFlatButtonPrivate::init()
     q->setAttribute(Qt::WA_Hover);
     q->setMouseTracking(true);
 
-    QFont font("Roboto", fontSize, QFont::Medium);
-    font.setCapitalization(QFont::AllUppercase);
-    q->setFont(font);
+    q->setFont(QtMaterialStyle::instance().themeFont(Material::FontButton));
 
     QPainterPath path;
     path.addRoundedRect(q->rect(), cornerRadius, cornerRadius);
