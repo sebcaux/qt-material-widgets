@@ -684,12 +684,12 @@ void QtMaterialFlatButton::paintBackground(QPainter *painter)
         return;
     }
 
-    QBrush brush;
-    brush.setStyle(Qt::SolidPattern);
     painter->setPen(Qt::NoPen);
 
-    if ((Material::NoOverlay != d->overlayStyle) && (overlayOpacity > 0))
+    if ((d->overlayStyle != Material::NoOverlay) && (overlayOpacity > 0))
     {
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
         if (d->overlayStyle == Material::TintedOverlay)
         {
             brush.setColor(overlayColor());
@@ -705,6 +705,8 @@ void QtMaterialFlatButton::paintBackground(QPainter *painter)
 
     if (isCheckable() && checkedProgress > 0)
     {
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
         const qreal q = (d->isTranparent()) ? 0.45 : 0.7;
         brush.setColor(foregroundColor());
         painter->setOpacity(q * checkedProgress);
@@ -769,6 +771,12 @@ void QtMaterialFlatButton::paintForeground(QPainter *painter)
     else
     {
         painter->setPen(disabledForegroundColor());
+    }
+
+    if (d->type == Material::ButtonOutlined)
+    {
+        painter->setBrush(Qt::NoBrush);
+        painter->drawPath(painter->clipPath());
     }
 
     if (icon().isNull())
