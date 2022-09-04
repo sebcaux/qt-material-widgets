@@ -116,11 +116,13 @@ void QtMaterialFlatButton::applyPreset(Material::ButtonPreset preset)
         case Material::FlatPreset:
             setOverlayStyle(Material::NoOverlay);
             break;
+
         case Material::CheckablePreset:
             setOverlayStyle(Material::NoOverlay);
             setCheckable(true);
             setHaloVisible(false);
             break;
+
         default:
             break;
     }
@@ -177,7 +179,7 @@ QColor QtMaterialFlatButton::foregroundColor() const
 
     if (d->useThemeColors || !d->foregroundColor.isValid())
     {
-        if (Qt::OpaqueMode == d->bgMode)
+        if (d->bgMode == Qt::OpaqueMode)
         {
             return QtMaterialStyle::instance().themeColor(Material::ColorThemeCanvas);
         }
@@ -185,8 +187,10 @@ QColor QtMaterialFlatButton::foregroundColor() const
         {
             case Material::Primary:
                 return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
+
             case Material::Secondary:
                 return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent1);
+
             case Material::Default:
             default:
                 return QtMaterialStyle::instance().themeColor(Material::ColorThemeText);
@@ -215,8 +219,10 @@ QColor QtMaterialFlatButton::backgroundColor() const
         {
             case Material::Primary:
                 return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
+
             case Material::Secondary:
                 return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent1);
+
             case Material::Default:
             default:
                 return QtMaterialStyle::instance().themeColor(Material::ColorThemeText);
@@ -509,12 +515,12 @@ void QtMaterialFlatButton::mousePressEvent(QMouseEvent *event)
 {
     Q_D(QtMaterialFlatButton);
 
-    if (Material::NoRipple != d->rippleStyle)
+    if (d->rippleStyle != Material::NoRipple)
     {
         QPoint pos;
         qreal radiusEndValue;
 
-        if (Material::CenteredRipple == d->rippleStyle)
+        if (d->rippleStyle == Material::CenteredRipple)
         {
             pos = rect().center();
         }
@@ -558,6 +564,9 @@ void QtMaterialFlatButton::mouseReleaseEvent(QMouseEvent *event)
     d->stateMachine->updateCheckedStatus();
 }
 
+/*!
+ *  \reimp
+ */
 void QtMaterialFlatButton::resizeEvent(QResizeEvent *event)
 {
     QPushButton::resizeEvent(event);
@@ -589,7 +598,11 @@ void QtMaterialFlatButton::paintEvent(QPaintEvent *event)
     }
 
     paintBackground(&painter);
-    paintHalo(&painter);
+
+    if (d->haloVisible)
+    {
+        paintHalo(&painter);
+    }
 
     painter.setOpacity(1);
     painter.setClipping(false);
@@ -607,7 +620,7 @@ void QtMaterialFlatButton::paintBackground(QPainter *painter)
     const qreal overlayOpacity = d->stateMachine->overlayOpacity();
     const qreal checkedProgress = d->stateMachine->checkedOverlayProgress();
 
-    if (Qt::OpaqueMode == d->bgMode)
+    if (d->bgMode == Qt::OpaqueMode)
     {
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
@@ -625,18 +638,18 @@ void QtMaterialFlatButton::paintBackground(QPainter *painter)
         painter->drawRect(rect());
     }
 
-    QBrush brush;
-    brush.setStyle(Qt::SolidPattern);
-    painter->setPen(Qt::NoPen);
-
     if (!isEnabled())
     {
         return;
     }
 
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+    painter->setPen(Qt::NoPen);
+
     if ((Material::NoOverlay != d->overlayStyle) && (overlayOpacity > 0))
     {
-        if (Material::TintedOverlay == d->overlayStyle)
+        if (d->overlayStyle == Material::TintedOverlay)
         {
             brush.setColor(overlayColor());
         }
@@ -651,7 +664,7 @@ void QtMaterialFlatButton::paintBackground(QPainter *painter)
 
     if (isCheckable() && checkedProgress > 0)
     {
-        const qreal q = Qt::TransparentMode == d->bgMode ? 0.45 : 0.7;
+        const qreal q = (d->bgMode == Qt::TransparentMode) ? 0.45 : 0.7;
         brush.setColor(foregroundColor());
         painter->setOpacity(q * checkedProgress);
         painter->setBrush(brush);
@@ -667,11 +680,6 @@ void QtMaterialFlatButton::paintBackground(QPainter *painter)
 void QtMaterialFlatButton::paintHalo(QPainter *painter)
 {
     Q_D(QtMaterialFlatButton);
-
-    if (!d->haloVisible)
-    {
-        return;
-    }
 
     const qreal opacity = d->stateMachine->haloOpacity();
     const qreal s = d->stateMachine->haloScaleFactor() * d->stateMachine->haloSize();
@@ -706,7 +714,7 @@ void QtMaterialFlatButton::paintForeground(QPainter *painter)
         if (isCheckable() && progress > 0)
         {
             QColor source = foregroundColor();
-            QColor dest = Qt::TransparentMode == d->bgMode ? Qt::white : backgroundColor();
+            QColor dest = (d->bgMode == Qt::TransparentMode) ? Qt::white : backgroundColor();
             if (qFuzzyCompare(1, progress))
             {
                 painter->setPen(dest);
@@ -724,7 +732,7 @@ void QtMaterialFlatButton::paintForeground(QPainter *painter)
 
     if (icon().isNull())
     {
-        if (Qt::AlignLeft == d->textAlignment)
+        if (d->textAlignment == Qt::AlignLeft)
         {
             painter->drawText(rect().adjusted(12, 0, 0, 0), Qt::AlignLeft | Qt::AlignVCenter, text());
         }
@@ -739,12 +747,12 @@ void QtMaterialFlatButton::paintForeground(QPainter *painter)
     QSize base(size() - textSize);
 
     const int iw = iconSize().width() + IconPadding;
-    QPoint pos(Qt::AlignLeft == d->textAlignment ? 12 : (base.width() - iw) / 2, 0);
+    QPoint pos((d->textAlignment == Qt::AlignLeft) ? 12 : (base.width() - iw) / 2, 0);
 
     QRect textGeometry(pos + QPoint(0, base.height() / 2), textSize);
     QRect iconGeometry(pos + QPoint(0, (height() - iconSize().height()) / 2), iconSize());
 
-    if (Material::LeftIcon == d->iconPlacement)
+    if (d->iconPlacement == Material::LeftIcon)
     {
         textGeometry.translate(iw, 0);
     }
