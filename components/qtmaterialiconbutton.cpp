@@ -194,17 +194,25 @@ bool QtMaterialIconButton::eventFilter(QObject *obj, QEvent *event)
 /*!
  *  \reimp
  */
-void QtMaterialIconButton::mouseReleaseEvent(QMouseEvent *event)
+void QtMaterialIconButton::mousePressEvent(QMouseEvent *event)
 {
+    QAbstractButton::mousePressEvent(event);
+
     Q_D(QtMaterialIconButton);
 
+    d->rippleOverlay->addRipple(QPoint(d->rippleOverlay->width(), d->rippleOverlay->height()) / 2, iconSize().width());
+}
+
+/*!
+ *  \reimp
+ */
+void QtMaterialIconButton::mouseReleaseEvent(QMouseEvent *event)
+{
     QAbstractButton::mouseReleaseEvent(event);
     if (!event->isAccepted())
     {
         return;
     }
-
-    d->rippleOverlay->addRipple(QPoint(d->rippleOverlay->width(), d->rippleOverlay->height()) / 2, iconSize().width());
 }
 
 /*!
