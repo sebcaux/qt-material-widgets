@@ -115,7 +115,7 @@ QtMaterialTab::QtMaterialTab(QtMaterialTabs *parent)
 
     setCornerRadius(0);
     setRole(Material::Primary);
-    setBackgroundMode(Qt::OpaqueMode);
+    setType(Material::ButtonFlat);
     setBaseOpacity(0.25);
 }
 

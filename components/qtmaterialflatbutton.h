@@ -21,7 +21,6 @@ class QtMaterialFlatButton : public QPushButton
     Q_PROPERTY(Material::RippleStyle rippleStyle READ rippleStyle WRITE setRippleStyle)
     Q_PROPERTY(Material::ButtonIconPlacement iconPlacement READ iconPlacement WRITE setIconPlacement)
     Q_PROPERTY(qreal cornerRadius READ cornerRadius WRITE setCornerRadius)
-    Q_PROPERTY(Qt::BGMode backgroundMode READ backgroundMode WRITE setBackgroundMode)
     Q_PROPERTY(qreal baseOpacity READ baseOpacity WRITE setBaseOpacity)
     Q_PROPERTY(QColor foregroundColor READ foregroundColor WRITE setForegroundColor)
     Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
@@ -60,9 +59,6 @@ public:
 
     qreal cornerRadius() const;
     void setCornerRadius(qreal radius);
-
-    Qt::BGMode backgroundMode() const;
-    void setBackgroundMode(Qt::BGMode mode);
 
     qreal baseOpacity() const;
     void setBaseOpacity(qreal opacity);

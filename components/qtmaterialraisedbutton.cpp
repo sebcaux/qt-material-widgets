@@ -43,7 +43,7 @@ void QtMaterialRaisedButtonPrivate::init()
     effect->setOffset(QPointF(0, 2));
     effect->setColor(QColor(0, 0, 0, 75));
 
-    q->setBackgroundMode(Qt::OpaqueMode);
+    q->setType(Material::ButtonRaised);
     q->setMinimumHeight(42);
     q->setGraphicsEffect(effect);
     q->setBaseOpacity(0.3);

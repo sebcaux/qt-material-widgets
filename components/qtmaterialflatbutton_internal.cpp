@@ -149,8 +149,7 @@ void QtMaterialFlatButtonStateMachine::startAnimations()
 void QtMaterialFlatButtonStateMachine::setupProperties()
 {
     QColor overlayColor;
-
-    if (Qt::TransparentMode == m_button->backgroundMode())
+    if (m_button->type() == Material::ButtonText || m_button->type() == Material::ButtonOutlined)
     {
         overlayColor = m_button->backgroundColor();
     }
@@ -160,7 +159,6 @@ void QtMaterialFlatButtonStateMachine::setupProperties()
     }
 
     const qreal baseOpacity = m_button->baseOpacity();
-
     m_neutralState->assignProperty(this, "overlayOpacity", 0);
     m_neutralState->assignProperty(this, "haloOpacity", 0);
     m_neutralFocusedState->assignProperty(this, "overlayOpacity", 0);

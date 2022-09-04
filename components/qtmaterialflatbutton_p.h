@@ -21,6 +21,8 @@ public:
 
     void init();
 
+    bool isTranparent() const;
+
     QtMaterialFlatButton *const q_ptr;
     QtMaterialRippleOverlay *rippleOverlay;
     QtMaterialFlatButtonStateMachine *stateMachine;
@@ -30,7 +32,6 @@ public:
     Material::RippleStyle rippleStyle;
     Material::ButtonIconPlacement iconPlacement;
     Material::OverlayStyle overlayStyle;
-    Qt::BGMode bgMode;
     Qt::Alignment textAlignment;
     QColor backgroundColor;
     QColor foregroundColor;

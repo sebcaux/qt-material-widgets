@@ -43,10 +43,10 @@ void QtMaterialFlatButtonPrivate::init()
     rippleOverlay = new QtMaterialRippleOverlay(q);
     stateMachine = new QtMaterialFlatButtonStateMachine(q);
     role = Material::Default;
+    type = Material::ButtonText;
     rippleStyle = Material::PositionedRipple;
     iconPlacement = Material::LeftIcon;
     overlayStyle = Material::GrayOverlay;
-    bgMode = Qt::TransparentMode;
     textAlignment = Qt::AlignHCenter;
     fixedRippleRadius = 64;
     cornerRadius = 3;
@@ -69,6 +69,15 @@ void QtMaterialFlatButtonPrivate::init()
 
     stateMachine->setupProperties();
     stateMachine->startAnimations();
+}
+
+bool QtMaterialFlatButtonPrivate::isTranparent() const
+{
+    if (type == Material::ButtonText || type == Material::ButtonOutlined)
+    {
+        return true;
+    }
+    return false;
 }
 
 /*!
@@ -226,7 +235,7 @@ QColor QtMaterialFlatButton::foregroundColor() const
 
     if (d->useThemeColors || !d->foregroundColor.isValid())
     {
-        if (d->bgMode == Qt::OpaqueMode)
+        if (!d->isTranparent())
         {
             return QtMaterialStyle::instance().themeColor(Material::ColorThemeCanvas);
         }
@@ -438,21 +447,6 @@ qreal QtMaterialFlatButton::cornerRadius() const
     Q_D(const QtMaterialFlatButton);
 
     return d->cornerRadius;
-}
-
-void QtMaterialFlatButton::setBackgroundMode(Qt::BGMode mode)
-{
-    Q_D(QtMaterialFlatButton);
-
-    d->bgMode = mode;
-    d->stateMachine->setupProperties();
-}
-
-Qt::BGMode QtMaterialFlatButton::backgroundMode() const
-{
-    Q_D(const QtMaterialFlatButton);
-
-    return d->bgMode;
 }
 
 void QtMaterialFlatButton::setBaseOpacity(qreal opacity)
@@ -667,7 +661,7 @@ void QtMaterialFlatButton::paintBackground(QPainter *painter)
     const qreal overlayOpacity = d->stateMachine->overlayOpacity();
     const qreal checkedProgress = d->stateMachine->checkedOverlayProgress();
 
-    if (d->bgMode == Qt::OpaqueMode)
+    if (!d->isTranparent())
     {
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
@@ -711,7 +705,7 @@ void QtMaterialFlatButton::paintBackground(QPainter *painter)
 
     if (isCheckable() && checkedProgress > 0)
     {
-        const qreal q = (d->bgMode == Qt::TransparentMode) ? 0.45 : 0.7;
+        const qreal q = (d->isTranparent()) ? 0.45 : 0.7;
         brush.setColor(foregroundColor());
         painter->setOpacity(q * checkedProgress);
         painter->setBrush(brush);
@@ -761,7 +755,7 @@ void QtMaterialFlatButton::paintForeground(QPainter *painter)
         if (isCheckable() && progress > 0)
         {
             QColor source = foregroundColor();
-            QColor dest = (d->bgMode == Qt::TransparentMode) ? Qt::white : backgroundColor();
+            QColor dest = (d->isTranparent()) ? Qt::white : backgroundColor();
             if (qFuzzyCompare(1, progress))
             {
                 painter->setPen(dest);
