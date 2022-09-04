@@ -33,10 +33,8 @@ void QtMaterialCheckablePrivate::init()
 {
     Q_Q(QtMaterialCheckable);
 
-    rippleOverlay = new QtMaterialRippleOverlay;
     checkedIcon = new QtMaterialCheckableIcon(QIcon(":/icons/icons/toggle/svg/production/ic_check_box_24px.svg"), q);
     uncheckedIcon = new QtMaterialCheckableIcon(QIcon(":/icons/icons/toggle/svg/production/ic_check_box_outline_blank_24px.svg"), q);
-    stateMachine = new QStateMachine(q);
     uncheckedState = new QState;
     checkedState = new QState;
     disabledUncheckedState = new QState;
@@ -46,13 +44,16 @@ void QtMaterialCheckablePrivate::init()
     labelPosition = QtMaterialCheckable::LabelPositionRight;
     useThemeColors = true;
 
+    rippleOverlay = new QtMaterialRippleOverlay;
     rippleOverlay->setParent(q->parentWidget());
     rippleOverlay->installEventFilter(q);
 
     q->setCheckable(true);
-    q->setStyle(&QtMaterialStyle::instance());
-    q->setFont(QFont("Roboto", 11, QFont::Normal));
 
+    q->setStyle(&QtMaterialStyle::instance());
+    q->setFont(QtMaterialStyle::instance().themeFont(Material::FontBody1));
+
+    stateMachine = new QStateMachine(q);
     stateMachine->addState(uncheckedState);
     stateMachine->addState(checkedState);
     stateMachine->addState(disabledUncheckedState);
@@ -60,12 +61,10 @@ void QtMaterialCheckablePrivate::init()
     stateMachine->setInitialState(uncheckedState);
 
     // Transition to checked
-
     uncheckedTransition->setTargetState(checkedState);
     uncheckedState->addTransition(uncheckedTransition);
 
     // Transition to unchecked
-
     checkedTransition->setTargetState(uncheckedState);
     checkedState->addTransition(checkedTransition);
 
@@ -292,18 +291,6 @@ QIcon QtMaterialCheckable::uncheckedIcon() const
     return d->uncheckedIcon->icon();
 }
 
-/*!
- *  \reimp
- */
-QSize QtMaterialCheckable::sizeHint() const
-{
-    if (text().isEmpty())
-    {
-        return QSize(40, 40);
-    }
-    return QSize(fontMetrics().size(Qt::TextShowMnemonic, text()).width() + 52, 40);
-}
-
 QtMaterialCheckable::QtMaterialCheckable(QtMaterialCheckablePrivate &d, QWidget *parent)
     : QAbstractButton(parent),
       d_ptr(&d)
@@ -326,6 +313,7 @@ bool QtMaterialCheckable::event(QEvent *event)
             d->uncheckedIcon->setGeometry(rect());
             d->rippleOverlay->setGeometry(geometry().adjusted(-8, -8, 8, 8));
             break;
+
         case QEvent::ParentChange:
             QWidget *widget;
             if ((widget = parentWidget()) != nullptr)
@@ -333,6 +321,7 @@ bool QtMaterialCheckable::event(QEvent *event)
                 d->rippleOverlay->setParent(widget);
             }
             break;
+
         default:
             break;
     }
@@ -344,7 +333,7 @@ bool QtMaterialCheckable::event(QEvent *event)
  */
 bool QtMaterialCheckable::eventFilter(QObject *obj, QEvent *event)
 {
-    if (QEvent::Resize == event->type())
+    if (event->type() == QEvent::Resize)
     {
         Q_D(QtMaterialCheckable);
 
@@ -367,7 +356,7 @@ void QtMaterialCheckable::mouseReleaseEvent(QMouseEvent *event)
     }
 
     QtMaterialRipple *ripple;
-    if (QtMaterialCheckable::LabelPositionLeft == d->labelPosition)
+    if (d->labelPosition == QtMaterialCheckable::LabelPositionLeft)
     {
         ripple = new QtMaterialRipple(QPoint(width() - 14, 28));
     }
@@ -382,7 +371,6 @@ void QtMaterialCheckable::mouseReleaseEvent(QMouseEvent *event)
         ripple->setOpacityStartValue(1);
     }
     d->rippleOverlay->addRipple(ripple);
-
 }
 
 /*!
@@ -400,13 +388,15 @@ void QtMaterialCheckable::paintEvent(QPaintEvent *event)
     pen.setColor(isEnabled() ? textColor() : disabledColor());
     painter.setPen(pen);
 
-    if (QtMaterialCheckable::LabelPositionLeft == d->labelPosition)
+    int heightText = fontMetrics().height();
+    int yText = (height() - heightText) / 2 + heightText - fontMetrics().descent();
+    if (d->labelPosition == QtMaterialCheckable::LabelPositionLeft)
     {
-        painter.drawText(4, 25, text());
+        painter.drawText(4, yText, text());
     }
     else
     {
-        painter.drawText(48, 25, text());
+        painter.drawText(48, yText, text());
     }
 }
 
@@ -438,4 +428,16 @@ void QtMaterialCheckable::setupProperties()
     }
 
     update();
+}
+
+/*!
+ *  \reimp
+ */
+QSize QtMaterialCheckable::sizeHint() const
+{
+    if (text().isEmpty())
+    {
+        return QSize(40, 40);
+    }
+    return QSize(fontMetrics().size(Qt::TextShowMnemonic, text()).width() + 52, 40);
 }

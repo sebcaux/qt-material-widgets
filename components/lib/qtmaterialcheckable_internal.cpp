@@ -31,7 +31,7 @@ QtMaterialCheckableIcon::~QtMaterialCheckableIcon()
 
 QSize QtMaterialCheckableIcon::sizeHint() const
 {
-    return QSize(m_iconSize, m_iconSize);
+    return QSize(static_cast<int>(m_iconSize), static_cast<int>(m_iconSize));
 }
 
 void QtMaterialCheckableIcon::paintEvent(QPaintEvent *event)
