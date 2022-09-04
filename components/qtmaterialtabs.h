@@ -26,9 +26,17 @@ public:
     explicit QtMaterialTabs(QWidget *parent = nullptr);
     ~QtMaterialTabs() override;
 
-    void addTab(const QString &text, const QIcon &icon = QIcon());
-    void setCurrentIndex(int index);
+    void addTab(const QString &text);
+    void addTab(const QIcon &icon, const QString &text);
+
+    QString tabText(int index) const;
+    void setTabText(int index, const QString &text);
+
+    QIcon tabIcon(int index) const;
+    void setTabIcon(int index, const QIcon &icon);
+
     int currentIndex() const;
+    void setCurrentIndex(int index);
     int count() const;
 
     const QSize &iconSize() const;

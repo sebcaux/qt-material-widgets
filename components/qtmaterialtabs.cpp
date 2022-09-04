@@ -200,7 +200,12 @@ void QtMaterialTabs::setCurrentIndex(int index)
     emit currentChanged(index);
 }
 
-void QtMaterialTabs::addTab(const QString &text, const QIcon &icon)
+void QtMaterialTabs::addTab(const QString &text)
+{
+    addTab(QIcon(), text);
+}
+
+void QtMaterialTabs::addTab(const QIcon &icon, const QString &text)
 {
     Q_D(QtMaterialTabs);
 
@@ -230,6 +235,50 @@ void QtMaterialTabs::addTab(const QString &text, const QIcon &icon)
         d->inkBar->refreshGeometry();
         d->inkBar->raise();
         tab->setActive(true);
+    }
+}
+
+QString QtMaterialTabs::tabText(int index) const
+{
+    Q_D(const QtMaterialTabs);
+
+    if (const QtMaterialTab *tab = static_cast<QtMaterialTab *>(d->tabLayout->itemAt(index)->widget()))
+    {
+        return tab->text();
+    }
+
+    return QString();
+}
+
+void QtMaterialTabs::setTabText(int index, const QString &text)
+{
+    Q_D(QtMaterialTabs);
+
+    if (QtMaterialTab *tab = static_cast<QtMaterialTab *>(d->tabLayout->itemAt(index)->widget()))
+    {
+        tab->setText(text);
+    }
+}
+
+QIcon QtMaterialTabs::tabIcon(int index) const
+{
+    Q_D(const QtMaterialTabs);
+
+    if (const QtMaterialTab *tab = static_cast<QtMaterialTab *>(d->tabLayout->itemAt(index)->widget()))
+    {
+        return tab->icon();
+    }
+
+    return QIcon();
+}
+
+void QtMaterialTabs::setTabIcon(int index, const QIcon &icon)
+{
+    Q_D(QtMaterialTabs);
+
+    if (QtMaterialTab *tab = static_cast<QtMaterialTab *>(d->tabLayout->itemAt(index)->widget()))
+    {
+        tab->setIcon(icon);
     }
 }
 
