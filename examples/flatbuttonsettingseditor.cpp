@@ -158,7 +158,7 @@ void FlatButtonSettingsEditor::updateWidget()
             break;
     }
 
-    switch (ui->buttonRoleComboBox->currentIndex())
+    switch (ui->buttonTypeComboBox->currentIndex())
     {
         case 0:
             m_button->setType(Material::ButtonText);
@@ -328,9 +328,5 @@ void FlatButtonSettingsEditor::init()
     connect(ui->disabledFgColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
     connect(ui->disabledBgColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
     connect(ui->overlayColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
-    connect(ui->cornerRadiusSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
-    connect(ui->iconSizeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
-    connect(ui->fontSizeDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
-    connect(ui->buttonTextLineEdit, &QLineEdit::textChanged, this, &FlatButtonSettingsEditor::updateWidget);
     connect(m_button, &QAbstractButton::clicked, ui->checkedCheckBox, &QAbstractButton::setChecked);
 }
