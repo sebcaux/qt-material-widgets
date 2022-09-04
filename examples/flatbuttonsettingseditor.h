@@ -24,8 +24,6 @@ protected slots:
     void setupForm();
     void updateWidget();
     void selectColor();
-    void applyDefaultPreset();
-    void applyCheckablePreset();
 
 private:
     void init();

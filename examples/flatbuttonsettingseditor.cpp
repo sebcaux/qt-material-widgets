@@ -44,6 +44,28 @@ void FlatButtonSettingsEditor::setupForm()
             break;
     }
 
+    switch (m_button->type())
+    {
+        case Material::ButtonText:
+            ui->buttonTypeComboBox->setCurrentIndex(0);
+            break;
+
+        case Material::ButtonOutlined:
+            ui->buttonTypeComboBox->setCurrentIndex(1);
+            break;
+
+        case Material::ButtonRaised:
+            ui->buttonTypeComboBox->setCurrentIndex(2);
+            break;
+
+        case Material::ButtonFlat:
+            ui->buttonTypeComboBox->setCurrentIndex(3);
+            break;
+
+        default:
+            break;
+    }
+
     switch (m_button->overlayStyle())
     {
         case Material::NoOverlay:
@@ -109,7 +131,6 @@ void FlatButtonSettingsEditor::setupForm()
     ui->showHaloCheckBox->setChecked(m_button->isHaloVisible());
     ui->iconCheckBox->setChecked(!m_button->icon().isNull());
     ui->useThemeColorsCheckBox->setChecked(m_button->useThemeColors());
-    ui->transparentCheckBox->setChecked(Qt::TransparentMode == m_button->backgroundMode());
     ui->cornerRadiusSpinBox->setValue(m_button->cornerRadius());
     ui->overlayOpacityDoubleSpinBox->setValue(m_button->baseOpacity());
     ui->iconSizeSpinBox->setValue(m_button->iconSize().width());
@@ -131,6 +152,28 @@ void FlatButtonSettingsEditor::updateWidget()
 
         case 2:
             m_button->setRole(Material::Secondary);
+            break;
+
+        default:
+            break;
+    }
+
+    switch (ui->buttonRoleComboBox->currentIndex())
+    {
+        case 0:
+            m_button->setType(Material::ButtonText);
+            break;
+
+        case 1:
+            m_button->setType(Material::ButtonOutlined);
+            break;
+
+        case 2:
+            m_button->setType(Material::ButtonRaised);
+            break;
+
+        case 3:
+            m_button->setType(Material::ButtonFlat);
             break;
 
         default:
@@ -205,7 +248,6 @@ void FlatButtonSettingsEditor::updateWidget()
     m_button->setHaloVisible(ui->showHaloCheckBox->isChecked());
     m_button->setIcon(ui->iconCheckBox->isChecked() ? QtMaterialTheme::icon("toggle", "star") : QIcon());
     m_button->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
-    m_button->setBackgroundMode(ui->transparentCheckBox->isChecked() ? Qt::TransparentMode : Qt::OpaqueMode);
     m_button->setCornerRadius(ui->cornerRadiusSpinBox->value());
     m_button->setBaseOpacity(ui->overlayOpacityDoubleSpinBox->value());
     m_button->setIconSize(QSize(ui->iconSizeSpinBox->value(), ui->iconSizeSpinBox->value()));
@@ -251,46 +293,6 @@ void FlatButtonSettingsEditor::selectColor()
     setupForm();
 }
 
-void FlatButtonSettingsEditor::applyDefaultPreset()
-{
-    ui->buttonRoleComboBox->setCurrentIndex(0);
-    ui->rippleStyleComboBox->setCurrentIndex(1);
-    ui->iconPlacementComboBox->setCurrentIndex(0);
-    ui->hoverStyleComboBox->setCurrentIndex(2);
-    ui->textAlignmentComboBox->setCurrentIndex(1);
-    ui->transparentCheckBox->setChecked(true);
-    ui->cornerRadiusSpinBox->setValue(3);
-    ui->overlayOpacityDoubleSpinBox->setValue(0.13);
-    ui->fontSizeDoubleSpinBox->setValue(10);
-    ui->useThemeColorsCheckBox->setChecked(true);
-    ui->showHaloCheckBox->setChecked(true);
-    ui->checkableCheckBox->setChecked(false);
-    ui->disabledCheckBox->setChecked(false);
-    updateWidget();
-
-    m_button->applyPreset(Material::FlatPreset);
-}
-
-void FlatButtonSettingsEditor::applyCheckablePreset()
-{
-    ui->buttonRoleComboBox->setCurrentIndex(0);
-    ui->rippleStyleComboBox->setCurrentIndex(1);
-    ui->iconPlacementComboBox->setCurrentIndex(0);
-    ui->hoverStyleComboBox->setCurrentIndex(2);
-    ui->textAlignmentComboBox->setCurrentIndex(1);
-    ui->transparentCheckBox->setChecked(true);
-    ui->cornerRadiusSpinBox->setValue(3);
-    ui->overlayOpacityDoubleSpinBox->setValue(0.13);
-    ui->fontSizeDoubleSpinBox->setValue(10);
-    ui->useThemeColorsCheckBox->setChecked(true);
-    ui->showHaloCheckBox->setChecked(true);
-    ui->checkableCheckBox->setChecked(true);
-    ui->disabledCheckBox->setChecked(false);
-    updateWidget();
-
-    m_button->applyPreset(Material::CheckablePreset);
-}
-
 void FlatButtonSettingsEditor::init()
 {
     ui->setupUi(_settingsWidget);
@@ -309,8 +311,8 @@ void FlatButtonSettingsEditor::init()
     connect(ui->checkedCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->showHaloCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->iconCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
-    connect(ui->transparentCheckBox, &QAbstractButton::toggled, this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->buttonRoleComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FlatButtonSettingsEditor::updateWidget);
+    connect(ui->buttonTypeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->rippleStyleComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->hoverStyleComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->iconPlacementComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FlatButtonSettingsEditor::updateWidget);
@@ -327,13 +329,8 @@ void FlatButtonSettingsEditor::init()
     connect(ui->disabledBgColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
     connect(ui->overlayColorToolButton, &QAbstractButton::clicked, this, &FlatButtonSettingsEditor::selectColor);
     connect(ui->cornerRadiusSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
-    connect(ui->overlayOpacityDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->iconSizeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->fontSizeDoubleSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &FlatButtonSettingsEditor::updateWidget);
     connect(ui->buttonTextLineEdit, &QLineEdit::textChanged, this, &FlatButtonSettingsEditor::updateWidget);
-    connect(ui->defaultPresetPushButton, &QAbstractButton::pressed, this, &FlatButtonSettingsEditor::applyDefaultPreset);
-    connect(ui->checkablePresetPushButton, &QAbstractButton::pressed, this, &FlatButtonSettingsEditor::applyCheckablePreset);
     connect(m_button, &QAbstractButton::clicked, ui->checkedCheckBox, &QAbstractButton::setChecked);
-
-    ui->buttonRoleComboBox->setCurrentIndex(1);
 }
