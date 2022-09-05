@@ -11,39 +11,42 @@ class QtMaterialCircularProgress : public QProgressBar
 {
     Q_OBJECT
 
-    Q_PROPERTY(qreal lineWidth WRITE setLineWidth READ lineWidth)
-    Q_PROPERTY(qreal size WRITE setSize READ size)
-    Q_PROPERTY(QColor color WRITE setColor READ color)
+    Q_PROPERTY(Material::ProgressType progressType READ progressType WRITE setProgressType)
+    Q_PROPERTY(qreal lineWidth READ lineWidth WRITE setLineWidth)
+    Q_PROPERTY(int size READ size WRITE setSize)
+    Q_PROPERTY(QColor color READ color WRITE setColor)
 
 public:
     explicit QtMaterialCircularProgress(QWidget *parent = nullptr);
     ~QtMaterialCircularProgress() override;
 
-    void setProgressType(Material::ProgressType type);
     Material::ProgressType progressType() const;
+    void setProgressType(Material::ProgressType type);
 
-    void setUseThemeColors(bool value);
-    bool useThemeColors() const;
-
-    void setLineWidth(qreal width);
     qreal lineWidth() const;
+    void setLineWidth(qreal width);
 
-    void setSize(int size);
     int size() const;
+    void setSize(int size);
 
-    void setColor(const QColor &color);
+    bool useThemeColors() const;
+    void setUseThemeColors(bool value);
     QColor color() const;
-
-    QSize sizeHint() const override;
+    void setColor(const QColor &color);
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
-
     const QScopedPointer<QtMaterialCircularProgressPrivate> d_ptr;
 
 private:
     Q_DISABLE_COPY(QtMaterialCircularProgress)
     Q_DECLARE_PRIVATE(QtMaterialCircularProgress)
+
+    // QWidget interface
+public:
+    QSize sizeHint() const override;
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
 };
 
 #endif  // QTMATERIALCIRCULARPROGRESS_H
