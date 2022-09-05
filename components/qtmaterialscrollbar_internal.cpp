@@ -60,8 +60,6 @@ QtMaterialScrollBarStateMachine::QtMaterialScrollBarStateMachine(QtMaterialScrol
     transitionEnterFromScroll->setTargetState(m_focusState);
     m_scrollState->addTransition(transitionEnterFromScroll);
 
-    startTimer(1);
-
     m_focusState->assignProperty(this, "opacity", 1);
     m_scrollState->assignProperty(this, "opacity", 1);
     m_blurState->assignProperty(this, "opacity", 0);
