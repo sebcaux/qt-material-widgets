@@ -22,11 +22,11 @@ public:
     void insertButton(int index, const QString &text);
     void insertButton(int index, const QIcon &icon, const QString &text);
 
-    QString tabText(int index) const;
-    void setTabText(int index, const QString &text);
+    QString buttonText(int index) const;
+    void setButtonText(int index, const QString &text);
 
-    QIcon tabIcon(int index) const;
-    void setTabIcon(int index, const QIcon &icon);
+    QIcon buttonIcon(int index) const;
+    void setButtonIcon(int index, const QIcon &icon);
 
     int count() const;
 

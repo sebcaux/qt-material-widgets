@@ -102,7 +102,7 @@ void QtMaterialButtonList::insertButton(int index, const QIcon &icon, const QStr
     updateGeometry();
 }
 
-QString QtMaterialButtonList::tabText(int index) const
+QString QtMaterialButtonList::buttonText(int index) const
 {
     Q_D(const QtMaterialButtonList);
 
@@ -114,7 +114,7 @@ QString QtMaterialButtonList::tabText(int index) const
     return QString();
 }
 
-void QtMaterialButtonList::setTabText(int index, const QString &text)
+void QtMaterialButtonList::setButtonText(int index, const QString &text)
 {
     Q_D(QtMaterialButtonList);
 
@@ -124,7 +124,7 @@ void QtMaterialButtonList::setTabText(int index, const QString &text)
     }
 }
 
-QIcon QtMaterialButtonList::tabIcon(int index) const
+QIcon QtMaterialButtonList::buttonIcon(int index) const
 {
     Q_D(const QtMaterialButtonList);
 
@@ -136,7 +136,7 @@ QIcon QtMaterialButtonList::tabIcon(int index) const
     return QIcon();
 }
 
-void QtMaterialButtonList::setTabIcon(int index, const QIcon &icon)
+void QtMaterialButtonList::setButtonIcon(int index, const QIcon &icon)
 {
     Q_D(QtMaterialButtonList);
 
