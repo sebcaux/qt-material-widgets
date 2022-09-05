@@ -45,6 +45,7 @@ SOURCES = \
     $$PWD/qtmaterialslider_internal.cpp \
     $$PWD/qtmaterialsnackbar.cpp \
     $$PWD/qtmaterialsnackbar_internal.cpp \
+    $$PWD/qtmaterialsystembar.cpp \
     $$PWD/qtmaterialtabs.cpp \
     $$PWD/qtmaterialtabs_internal.cpp \
     $$PWD/qtmaterialtextfield.cpp \
@@ -115,6 +116,8 @@ HEADERS = \
     $$PWD/qtmaterialsnackbar.h \
     $$PWD/qtmaterialsnackbar_internal.h \
     $$PWD/qtmaterialsnackbar_p.h \
+    $$PWD/qtmaterialsystembar.h \
+    $$PWD/qtmaterialsystembar_p.h \
     $$PWD/qtmaterialtabs.h \
     $$PWD/qtmaterialtabs_internal.h \
     $$PWD/qtmaterialtabs_p.h \
