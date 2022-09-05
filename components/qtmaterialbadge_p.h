@@ -25,8 +25,7 @@ public:
     QColor backgroundColor;
     QSize size;
     QIcon icon;
-    qreal x;
-    qreal y;
+    QPointF relativePosition;
     int padding;
     bool useThemeColors;
 };

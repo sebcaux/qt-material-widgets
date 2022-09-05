@@ -53,8 +53,8 @@ void BadgeSettingsEditor::setupForm()
         ui->typeComboBox->setCurrentIndex(1);
     }
 
-    ui->verticalOffsetSpinBox->setValue(m_badge->relativeYPosition());
-    ui->horizontalOffsetSpinBox->setValue(m_badge->relativeXPosition());
+    ui->verticalOffsetSpinBox->setValue(m_badge->relativePosition().y());
+    ui->horizontalOffsetSpinBox->setValue(m_badge->relativePosition().x());
     ui->disabledCheckBox->setChecked(!m_badge->isEnabled());
     ui->useThemeColorsCheckBox->setChecked(m_badge->useThemeColors());
 }
@@ -73,8 +73,7 @@ void BadgeSettingsEditor::updateWidget()
             break;
     }
 
-    m_badge->setRelativeYPosition(ui->verticalOffsetSpinBox->value());
-    m_badge->setRelativeXPosition(ui->horizontalOffsetSpinBox->value());
+    m_badge->setRelativePosition(ui->horizontalOffsetSpinBox->value(), ui->verticalOffsetSpinBox->value());
     m_badge->setDisabled(ui->disabledCheckBox->isChecked());
     m_badge->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
 }

@@ -19,43 +19,38 @@ public:
     explicit QtMaterialBadge(const QString &text, QWidget *parent = nullptr);
     ~QtMaterialBadge() override;
 
-    void setUseThemeColors(bool value);
-    bool useThemeColors() const;
+    const QString &text() const;
+    void setText(const QString &text);
 
-    void setTextColor(const QColor &color);
-    QColor textColor() const;
+    const QIcon &icon() const;
+    void setIcon(const QIcon &icon);
 
-    void setBackgroundColor(const QColor &color);
-    QColor backgroundColor() const;
-
+    const QPointF &relativePosition() const;
     void setRelativePosition(const QPointF &pos);
     void setRelativePosition(qreal x, qreal y);
-    QPointF relativePosition() const;
 
-    void setRelativeXPosition(qreal x);
-    qreal relativeXPosition() const;
-
-    void setRelativeYPosition(qreal y);
-    qreal relativeYPosition() const;
-
-    QSize sizeHint() const override;
-
-    void setIcon(const QIcon &icon);
-    QIcon icon() const;
-
-    void setText(const QString &text);
-    QString text() const;
+    bool useThemeColors() const;
+    void setUseThemeColors(bool value);
+    QColor textColor() const;
+    void setTextColor(const QColor &color);
+    QColor backgroundColor() const;
+    void setBackgroundColor(const QColor &color);
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
+    const QScopedPointer<QtMaterialBadgePrivate> d_ptr;
 
     int getDiameter() const;
-
-    const QScopedPointer<QtMaterialBadgePrivate> d_ptr;
 
 private:
     Q_DISABLE_COPY(QtMaterialBadge)
     Q_DECLARE_PRIVATE(QtMaterialBadge)
+
+    // QWidget interface
+public:
+    QSize sizeHint() const override;
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
 };
 
 #endif  // QTMATERIALBADGE_H
