@@ -9,9 +9,11 @@ class QtMaterialBadge : public QtMaterialOverlayWidget
 {
     Q_OBJECT
 
-    Q_PROPERTY(QColor textColor WRITE setTextColor READ textColor)
-    Q_PROPERTY(QColor backgroundColor WRITE setBackgroundColor READ backgroundColor)
-    Q_PROPERTY(QPointF relativePosition WRITE setRelativePosition READ relativePosition)
+    Q_PROPERTY(QString text READ text WRITE setText)
+    Q_PROPERTY(QIcon icon READ icon WRITE setIcon)
+    Q_PROPERTY(QColor textColor READ textColor WRITE setTextColor)
+    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
+    Q_PROPERTY(QPointF relativePosition READ relativePosition WRITE setRelativePosition)
 
 public:
     explicit QtMaterialBadge(QWidget *parent = nullptr);
