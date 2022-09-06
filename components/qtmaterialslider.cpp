@@ -231,7 +231,7 @@ bool QtMaterialSlider::pageStepMode() const
 }
 
 /*!
- *  \remip
+ *  \reimp
  */
 QSize QtMaterialSlider::minimumSizeHint() const
 {
@@ -246,7 +246,7 @@ void QtMaterialSlider::setInvertedAppearance(bool value)
 }
 
 /*!
- *  \remip
+ *  \reimp
  */
 void QtMaterialSlider::sliderChange(SliderChange change)
 {
@@ -285,7 +285,7 @@ void QtMaterialSlider::sliderChange(SliderChange change)
 }
 
 /*!
- *  \remip
+ *  \reimp
  */
 void QtMaterialSlider::mouseMoveEvent(QMouseEvent *event)
 {
@@ -321,7 +321,7 @@ void QtMaterialSlider::mouseMoveEvent(QMouseEvent *event)
 }
 
 /*!
- *  \remip
+ *  \reimp
  */
 void QtMaterialSlider::mousePressEvent(QMouseEvent *event)
 {
@@ -356,7 +356,7 @@ void QtMaterialSlider::mousePressEvent(QMouseEvent *event)
 }
 
 /*!
- *  \remip
+ *  \reimp
  */
 void QtMaterialSlider::mouseReleaseEvent(QMouseEvent *event)
 {
@@ -376,7 +376,7 @@ void QtMaterialSlider::mouseReleaseEvent(QMouseEvent *event)
 }
 
 /*!
- *  \remip
+ *  \reimp
  */
 void QtMaterialSlider::leaveEvent(QEvent *event)
 {
