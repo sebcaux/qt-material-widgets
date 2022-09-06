@@ -3,6 +3,8 @@
 
 #include "lib/qtmaterialoverlaywidget.h"
 
+#include <QIcon>
+
 class QtMaterialBadgePrivate;
 
 class QtMaterialBadge : public QtMaterialOverlayWidget
