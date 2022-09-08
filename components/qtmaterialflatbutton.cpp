@@ -87,6 +87,10 @@ void QtMaterialFlatButtonPrivate::initRaiseEffect()
     shadowEffect->setBlurRadius(7);
     shadowEffect->setOffset(QPointF(0, 2));
     shadowEffect->setColor(QColor(0, 0, 0, 75));
+    if (!q->isEnabled())
+    {
+        shadowEffect->setEnabled(false);
+    }
     q->setGraphicsEffect(shadowEffect);
 
     q->setMinimumHeight(42);
@@ -641,17 +645,23 @@ bool QtMaterialFlatButton::event(QEvent *event)
 {
     Q_D(QtMaterialFlatButton);
 
-    if (QEvent::EnabledChange == event->type())
+    if (d->shadowStateMachine != nullptr && d->shadowEffect != nullptr)
     {
-        if (isEnabled())
+        if (QEvent::EnabledChange == event->type())
         {
-            d->shadowStateMachine->start();
-            d->shadowEffect->setEnabled(true);
-        }
-        else
-        {
-            d->shadowStateMachine->stop();
-            d->shadowEffect->setEnabled(false);
+            if (isEnabled())
+            {
+                if (!d->shadowStateMachine->isRunning())
+                {
+                    d->shadowStateMachine->start();
+                }
+                d->shadowEffect->setEnabled(true);
+            }
+            else
+            {
+                d->shadowStateMachine->stop();
+                d->shadowEffect->setEnabled(false);
+            }
         }
     }
     return QPushButton::event(event);
