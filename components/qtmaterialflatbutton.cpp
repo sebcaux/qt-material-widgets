@@ -51,7 +51,6 @@ void QtMaterialFlatButtonPrivate::init()
     fixedRippleRadius = 64;
     cornerRadius = 3;
     baseOpacity = 0.13;
-    fontSize = 10;
     useThemeColors = true;
     useFixedRippleRadius = false;
     haloVisible = true;
@@ -458,9 +457,7 @@ void QtMaterialFlatButton::setFontSize(qreal size)
 
 qreal QtMaterialFlatButton::fontSize() const
 {
-    Q_D(const QtMaterialFlatButton);
-
-    return d->fontSize;
+    return font().pointSize();
 }
 
 void QtMaterialFlatButton::setHaloVisible(bool visible)
