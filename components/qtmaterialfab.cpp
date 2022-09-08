@@ -17,7 +17,7 @@
  *  \internal
  */
 QtMaterialFloatingActionButtonPrivate::QtMaterialFloatingActionButtonPrivate(QtMaterialFloatingActionButton *q)
-    : QtMaterialRaisedButtonPrivate(q)
+    : QtMaterialFlatButtonPrivate(q)
 {
 }
 
@@ -34,6 +34,8 @@ QtMaterialFloatingActionButtonPrivate::~QtMaterialFloatingActionButtonPrivate()
 void QtMaterialFloatingActionButtonPrivate::init()
 {
     Q_Q(QtMaterialFloatingActionButton);
+
+    q->setType(Material::ButtonRaised);
 
     corner = Qt::BottomRightCorner;
     mini = false;
@@ -90,19 +92,19 @@ void QtMaterialFloatingActionButtonPrivate::setupProperties()
 {
     if (mini)
     {
-        effect->setColor(QColor(0, 0, 0, 80));
-        normalState->assignProperty(effect, "offset", QPointF(0, 3));
-        normalState->assignProperty(effect, "blurRadius", 13);
-        pressedState->assignProperty(effect, "offset", QPointF(0, 7));
-        pressedState->assignProperty(effect, "blurRadius", 20);
+        shadowEffect->setColor(QColor(0, 0, 0, 80));
+        shadowNormalState->assignProperty(shadowEffect, "offset", QPointF(0, 3));
+        shadowNormalState->assignProperty(shadowEffect, "blurRadius", 13);
+        shadowPressedState->assignProperty(shadowEffect, "offset", QPointF(0, 7));
+        shadowPressedState->assignProperty(shadowEffect, "blurRadius", 20);
     }
     else
     {
-        effect->setColor(QColor(0, 0, 0, 105));
-        normalState->assignProperty(effect, "offset", QPointF(0, 6));
-        normalState->assignProperty(effect, "blurRadius", 16);
-        pressedState->assignProperty(effect, "offset", QPointF(0, 11));
-        pressedState->assignProperty(effect, "blurRadius", 28);
+        shadowEffect->setColor(QColor(0, 0, 0, 105));
+        shadowNormalState->assignProperty(shadowEffect, "offset", QPointF(0, 6));
+        shadowNormalState->assignProperty(shadowEffect, "blurRadius", 16);
+        shadowPressedState->assignProperty(shadowEffect, "offset", QPointF(0, 11));
+        shadowPressedState->assignProperty(shadowEffect, "blurRadius", 28);
     }
 }
 
@@ -111,7 +113,7 @@ void QtMaterialFloatingActionButtonPrivate::setupProperties()
  */
 
 QtMaterialFloatingActionButton::QtMaterialFloatingActionButton(const QIcon &icon, QWidget *parent)
-    : QtMaterialRaisedButton(*new QtMaterialFloatingActionButtonPrivate(this), parent)
+    : QtMaterialFlatButton(*new QtMaterialFloatingActionButtonPrivate(this), parent)
 {
     d_func()->init();
 
@@ -215,7 +217,7 @@ bool QtMaterialFloatingActionButton::event(QEvent *event)
 
     if (parent() == nullptr)
     {
-        return QtMaterialRaisedButton::event(event);
+        return QtMaterialFlatButton::event(event);
     }
     switch (event->type())
     {
@@ -233,7 +235,7 @@ bool QtMaterialFloatingActionButton::event(QEvent *event)
         default:
             break;
     }
-    return QtMaterialRaisedButton::event(event);
+    return QtMaterialFlatButton::event(event);
 }
 
 /*!
@@ -249,7 +251,7 @@ bool QtMaterialFloatingActionButton::eventFilter(QObject *obj, QEvent *event)
         setGeometry(d->fabGeometry());
     }
 
-    return QtMaterialRaisedButton::eventFilter(obj, event);
+    return QtMaterialFlatButton::eventFilter(obj, event);
 }
 
 /*!
