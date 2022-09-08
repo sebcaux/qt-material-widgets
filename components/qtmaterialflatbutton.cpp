@@ -46,14 +46,14 @@ void QtMaterialFlatButtonPrivate::init()
     type = Material::ButtonText;
     rippleStyle = Material::PositionedRipple;
     iconPlacement = Material::LeftIcon;
-    overlayStyle = Material::GrayOverlay;
+    overlayStyle = Material::NoOverlay;
     textAlignment = Qt::AlignHCenter;
     fixedRippleRadius = 64;
     cornerRadius = 3;
     baseOpacity = 0.13;
     useThemeColors = true;
     useFixedRippleRadius = false;
-    haloVisible = true;
+    haloVisible = false;
 
     q->setStyle(&QtMaterialStyle::instance());
     q->setAttribute(Qt::WA_Hover);
