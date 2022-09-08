@@ -10,6 +10,10 @@ class QtMaterialFlatButton;
 class QtMaterialRippleOverlay;
 class QtMaterialFlatButtonStateMachine;
 
+class QStateMachine;
+class QState;
+class QGraphicsDropShadowEffect;
+
 class QtMaterialFlatButtonPrivate
 {
     Q_DISABLE_COPY(QtMaterialFlatButtonPrivate)
@@ -20,12 +24,19 @@ public:
     virtual ~QtMaterialFlatButtonPrivate();
 
     void init();
+    void initRaiseEffect();
+    void removeRaiseEffect();
 
     bool isTranparent() const;
 
     QtMaterialFlatButton *const q_ptr;
     QtMaterialRippleOverlay *rippleOverlay;
     QtMaterialFlatButtonStateMachine *stateMachine;
+
+    QStateMachine *shadowStateMachine;
+    QState *shadowNormalState;
+    QState *shadowPressedState;
+    QGraphicsDropShadowEffect *shadowEffect;
 
     Material::Role role;
     Material::ButtonType type;

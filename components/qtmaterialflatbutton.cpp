@@ -7,6 +7,8 @@
 #include "qtmaterialflatbutton_p.h"
 
 #include <QBitmap>
+#include <QEventTransition>
+#include <QGraphicsDropShadowEffect>
 #include <QIcon>
 #include <QMouseEvent>
 #include <QPainter>
@@ -69,6 +71,75 @@ void QtMaterialFlatButtonPrivate::init()
     stateMachine = new QtMaterialFlatButtonStateMachine(q);
     stateMachine->setupProperties();
     stateMachine->startAnimations();
+
+    shadowEffect = nullptr;
+    shadowStateMachine = nullptr;
+}
+
+/*!
+ *  \internal
+ */
+void QtMaterialFlatButtonPrivate::initRaiseEffect()
+{
+    Q_Q(QtMaterialFlatButton);
+
+    shadowEffect = new QGraphicsDropShadowEffect;
+    shadowEffect->setBlurRadius(7);
+    shadowEffect->setOffset(QPointF(0, 2));
+    shadowEffect->setColor(QColor(0, 0, 0, 75));
+    q->setGraphicsEffect(shadowEffect);
+
+    q->setMinimumHeight(42);
+    q->setBaseOpacity(0.3);
+
+    shadowStateMachine = new QStateMachine(q);
+
+    shadowNormalState = new QState;
+    shadowNormalState->assignProperty(shadowEffect, "offset", QPointF(0, 2));
+    shadowNormalState->assignProperty(shadowEffect, "blurRadius", 7);
+    shadowStateMachine->addState(shadowNormalState);
+
+    shadowPressedState = new QState;
+    shadowPressedState->assignProperty(shadowEffect, "offset", QPointF(0, 5));
+    shadowPressedState->assignProperty(shadowEffect, "blurRadius", 29);
+    shadowStateMachine->addState(shadowPressedState);
+
+    QAbstractTransition *transition;
+
+    transition = new QEventTransition(q, QEvent::MouseButtonPress);
+    transition->setTargetState(shadowPressedState);
+    shadowNormalState->addTransition(transition);
+
+    transition = new QEventTransition(q, QEvent::MouseButtonDblClick);
+    transition->setTargetState(shadowPressedState);
+    shadowNormalState->addTransition(transition);
+
+    transition = new QEventTransition(q, QEvent::MouseButtonRelease);
+    transition->setTargetState(shadowNormalState);
+    shadowPressedState->addTransition(transition);
+
+    QPropertyAnimation *animation;
+
+    animation = new QPropertyAnimation(shadowEffect, "offset", q);
+    animation->setDuration(100);
+    shadowStateMachine->addDefaultAnimation(animation);
+
+    animation = new QPropertyAnimation(shadowEffect, "blurRadius", q);
+    animation->setDuration(100);
+    shadowStateMachine->addDefaultAnimation(animation);
+
+    shadowStateMachine->setInitialState(shadowNormalState);
+    shadowStateMachine->start();
+}
+
+void QtMaterialFlatButtonPrivate::removeRaiseEffect()
+{
+    Q_Q(QtMaterialFlatButton);
+
+    q->setGraphicsEffect(nullptr);
+    delete shadowStateMachine;
+    shadowEffect = nullptr;
+    shadowStateMachine = nullptr;
 }
 
 bool QtMaterialFlatButtonPrivate::isTranparent() const
@@ -207,6 +278,19 @@ Material::Role QtMaterialFlatButton::role() const
 void QtMaterialFlatButton::setType(Material::ButtonType type)
 {
     Q_D(QtMaterialFlatButton);
+
+    if (type == d->type)
+    {
+        return;
+    }
+    if (type == Material::ButtonRaised)
+    {
+        d->initRaiseEffect();
+    }
+    else
+    {
+        d->removeRaiseEffect();
+    }
 
     d->type = type;
     d->stateMachine->setupProperties();
@@ -548,6 +632,29 @@ void QtMaterialFlatButton::checkStateSet()
     d->stateMachine->updateCheckedStatus();
 
     QPushButton::checkStateSet();
+}
+
+/*!
+ *  \reimp
+ */
+bool QtMaterialFlatButton::event(QEvent *event)
+{
+    Q_D(QtMaterialFlatButton);
+
+    if (QEvent::EnabledChange == event->type())
+    {
+        if (isEnabled())
+        {
+            d->shadowStateMachine->start();
+            d->shadowEffect->setEnabled(true);
+        }
+        else
+        {
+            d->shadowStateMachine->stop();
+            d->shadowEffect->setEnabled(false);
+        }
+    }
+    return QPushButton::event(event);
 }
 
 /*!
