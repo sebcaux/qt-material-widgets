@@ -38,7 +38,6 @@ SOURCES = \
     $$PWD/qtmaterialprogress.cpp \
     $$PWD/qtmaterialprogress_internal.cpp \
     $$PWD/qtmaterialradiobutton.cpp \
-    $$PWD/qtmaterialraisedbutton.cpp \
     $$PWD/qtmaterialscrollbar.cpp \
     $$PWD/qtmaterialscrollbar_internal.cpp \
     $$PWD/qtmaterialslider.cpp \
@@ -105,8 +104,6 @@ HEADERS = \
     $$PWD/qtmaterialprogress_p.h \
     $$PWD/qtmaterialradiobutton.h \
     $$PWD/qtmaterialradiobutton_p.h \
-    $$PWD/qtmaterialraisedbutton.h \
-    $$PWD/qtmaterialraisedbutton_p.h \
     $$PWD/qtmaterialscrollbar.h \
     $$PWD/qtmaterialscrollbar_internal.h \
     $$PWD/qtmaterialscrollbar_p.h \

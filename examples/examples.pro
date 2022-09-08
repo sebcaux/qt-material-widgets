@@ -22,7 +22,6 @@ SOURCES = \
     $$PWD/mainwindow.cpp \
     $$PWD/progresssettingseditor.cpp \
     $$PWD/radiobuttonsettingseditor.cpp \
-    $$PWD/raisedbuttonsettingseditor.cpp \
     $$PWD/scrollbarsettingseditor.cpp \
     $$PWD/settingseditor.cpp \
     $$PWD/slidersettingseditor.cpp \
@@ -46,7 +45,6 @@ HEADERS = \
     $$PWD/mainwindow.h \
     $$PWD/progresssettingseditor.h \
     $$PWD/radiobuttonsettingseditor.h \
-    $$PWD/raisedbuttonsettingseditor.h \
     $$PWD/scrollbarsettingseditor.h \
     $$PWD/settingseditor.h \
     $$PWD/slidersettingseditor.h \

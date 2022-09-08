@@ -18,7 +18,6 @@
 #include "iconbuttonsettingseditor.h"
 #include "progresssettingseditor.h"
 #include "radiobuttonsettingseditor.h"
-#include "raisedbuttonsettingseditor.h"
 #include "scrollbarsettingseditor.h"
 #include "slidersettingseditor.h"
 #include "snackbarsettingseditor.h"
@@ -46,7 +45,6 @@ MainWindow::MainWindow(QWidget *parent)
     BadgeSettingsEditor *badge = new BadgeSettingsEditor;
     CheckBoxSettingsEditor *checkbox = new CheckBoxSettingsEditor;
     FloatingActionButtonSettingsEditor *fab = new FloatingActionButtonSettingsEditor;
-    RaisedButtonSettingsEditor *raisedButton = new RaisedButtonSettingsEditor;
     FlatButtonSettingsEditor *flatButton = new FlatButtonSettingsEditor;
     IconButtonSettingsEditor *iconButton = new IconButtonSettingsEditor;
     ProgressSettingsEditor *progress = new ProgressSettingsEditor;
@@ -76,7 +74,6 @@ MainWindow::MainWindow(QWidget *parent)
     stackLayout->addWidget(iconButton);
     stackLayout->addWidget(progress);
     stackLayout->addWidget(radioButton);
-    stackLayout->addWidget(raisedButton);
     stackLayout->addWidget(scrollBar);
     stackLayout->addWidget(slider);
     stackLayout->addWidget(snackbar);
@@ -84,37 +81,37 @@ MainWindow::MainWindow(QWidget *parent)
     stackLayout->addWidget(textField);
     stackLayout->addWidget(toggle);
 
-    list->addItem("App Bar");
-    list->addItem("Auto Complete");
-    list->addItem("Avatar");
-    list->addItem("Badge");
-    list->addItem("Checkbox");
-    list->addItem("Circular Progress");
-    list->addItem("Dialog");
-    list->addItem("Drawer");
-    list->addItem("Floating Action Button");
-    list->addItem("Flat Button");
-    list->addItem("Icon Button");
-    list->addItem("Progress");
-    list->addItem("Radio Button");
-    list->addItem("Raised Button");
-    list->addItem("ScrollBar");
-    list->addItem("Slider");
-    list->addItem("Snackbar");
-    list->addItem("Tabs");
-    list->addItem("Text Field");
-    list->addItem("Toggle");
-
-    list->setCurrentRow(0);
+    list->addItem(tr("App Bar"));
+    list->addItem(tr("Auto Complete"));
+    list->addItem(tr("Avatar"));
+    list->addItem(tr("Badge"));
+    list->addItem(tr("Checkbox"));
+    list->addItem(tr("Circular Progress"));
+    list->addItem(tr("Dialog"));
+    list->addItem(tr("Drawer"));
+    list->addItem(tr("Floating Action Button"));
+    list->addItem(tr("Flat Button"));
+    list->addItem(tr("Icon Button"));
+    list->addItem(tr("Progress"));
+    list->addItem(tr("Radio Button"));
+    list->addItem(tr("ScrollBar"));
+    list->addItem(tr("Slider"));
+    list->addItem(tr("Snackbar"));
+    list->addItem(tr("Tabs"));
+    list->addItem(tr("Text Field"));
+    list->addItem(tr("Toggle"));
 
     QObject::connect(list,
                      &QListWidget::currentItemChanged,
+                     this,
                      [=](QListWidgetItem *current, QListWidgetItem *previous)
                      {
                          Q_UNUSED(current)
                          Q_UNUSED(previous)
                          stackLayout->setCurrentIndex(list->currentRow());
                      });
+
+    list->setCurrentRow(0);
 }
 
 MainWindow::~MainWindow()
