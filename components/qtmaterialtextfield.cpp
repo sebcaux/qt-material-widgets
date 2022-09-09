@@ -145,7 +145,7 @@ void QtMaterialTextField::setLabelText(const QString &label)
     d->label->update();
 }
 
-QString QtMaterialTextField::labelText() const
+const QString &QtMaterialTextField::labelText() const
 {
     Q_D(const QtMaterialTextField);
 

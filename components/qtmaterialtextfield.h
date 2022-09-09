@@ -30,7 +30,7 @@ public:
     qreal labelFontSize() const;
     void setLabelFontSize(qreal size);
 
-    QString labelText() const;
+    const QString &labelText() const;
     void setLabelText(const QString &label);
 
     bool inputLineVisible() const;
