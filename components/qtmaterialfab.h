@@ -23,7 +23,7 @@ public:
     Qt::Corner corner() const;
     void setCorner(Qt::Corner corner);
 
-    QPoint offset() const;
+    const QPoint &offset() const;
     void setOffset(const QPoint &offset);
     void setOffset(int x, int y);
 
@@ -31,7 +31,7 @@ private:
     Q_DISABLE_COPY(QtMaterialFloatingActionButton)
     Q_DECLARE_PRIVATE(QtMaterialFloatingActionButton)
 
-    // QWidget
+    // QWidget interface
 public:
     QSize sizeHint() const override;
 

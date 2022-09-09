@@ -187,7 +187,7 @@ Qt::Corner QtMaterialFloatingActionButton::corner() const
     return d->corner;
 }
 
-QPoint QtMaterialFloatingActionButton::offset() const
+const QPoint &QtMaterialFloatingActionButton::offset() const
 {
     Q_D(const QtMaterialFloatingActionButton);
 
