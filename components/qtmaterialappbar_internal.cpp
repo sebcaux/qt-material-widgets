@@ -168,9 +168,9 @@ void QtMaterialAppBarLayout::setTitleLabel(QLabel *titleLabel)
  */
 QSize QtMaterialAppBarLayout::sizeHint() const
 {
-    QtMaterialAppBar *appBar = dynamic_cast<QtMaterialAppBar *>(parentWidget());
-    int size = appBar->iconSize().width() * 1.33;
-    return QSize(size, size);
+    int height = qMax(static_cast<int>(_appBar->iconSize().height() * 1.33), _titleLabel->fontMetrics().height());
+    height += contentsMargins().top() + contentsMargins().bottom();
+    return QSize(-1, height);
 }
 
 /*!
@@ -214,9 +214,7 @@ int QtMaterialAppBarLayout::count() const
  */
 QSize QtMaterialAppBarLayout::minimumSize() const
 {
-    QtMaterialAppBar *appBar = dynamic_cast<QtMaterialAppBar *>(parentWidget());
-    int size = appBar->iconSize().width() * 1.33;
-    return QSize(size, size);
+    return sizeHint();
 }
 
 /*!
@@ -240,25 +238,24 @@ Qt::Orientations QtMaterialAppBarLayout::expandingDirections() const
  */
 void QtMaterialAppBarLayout::setGeometry(const QRect &rect)
 {
-    QtMaterialAppBar *appBar = dynamic_cast<QtMaterialAppBar *>(parentWidget());
-
-    int size = qMax(static_cast<int>(appBar->iconSize().height() * 1.33), _titleLabel->fontMetrics().height());
-    int x = 0;
-    int w = rect.width();
+    int size = qMax(static_cast<int>(_appBar->iconSize().height() * 1.33), _titleLabel->fontMetrics().height());
+    int x = contentsMargins().left();
+    int y = contentsMargins().top();
+    int w = rect.width() - contentsMargins().left() - contentsMargins().right();
 
     if (_navButton != nullptr)
     {
-        _navButton->setGeometry(0, 0, size, size);
+        _navButton->setGeometry(x, y, size, size);
         x += size;
     }
 
     int itemId = _visibleButtons.count();
     for (QtMaterialIconButton *icon : qAsConst(_visibleButtons))
     {
-        icon->setGeometry(rect.width() - itemId * size, 0, size, size);
+        icon->setGeometry(rect.width() - itemId * size, y, size, size);
         itemId--;
         w -= size;
     }
 
-    _titleLabel->setGeometry(x, 0, w - x, size);
+    _titleLabel->setGeometry(x, y, w - x, size);
 }

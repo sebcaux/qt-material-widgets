@@ -50,10 +50,8 @@ private:
     Q_DECLARE_PRIVATE(QtMaterialAppBar)
 
     // QWidget interface
-public:
-    QSize sizeHint() const override;
-
 protected:
+    bool event(QEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     void actionEvent(QActionEvent *event) override;
 };

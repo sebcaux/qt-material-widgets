@@ -202,6 +202,7 @@ void QtMaterialAppBar::setIconSize(const QSize &iconSize)
 void QtMaterialAppBar::setIconSize(int w, int h)
 {
     setIconSize(QSize(w, h));
+    updateGeometry();
 }
 
 void QtMaterialAppBar::setUseThemeColors(bool value)
@@ -277,12 +278,13 @@ QColor QtMaterialAppBar::backgroundColor() const
     return d->backgroundColor;
 }
 
-QSize QtMaterialAppBar::sizeHint() const
+bool QtMaterialAppBar::event(QEvent *event)
 {
-    Q_D(const QtMaterialAppBar);
-
-    int height = qMax(static_cast<int>(iconSize().height() * 1.33), d->titleLabel->fontMetrics().height());
-    return QSize(-1, height);
+    if (event->type() == QEvent::FontChange)
+    {
+        updateGeometry();
+    }
+    return QWidget::event(event);
 }
 
 void QtMaterialAppBar::paintEvent(QPaintEvent *event)
