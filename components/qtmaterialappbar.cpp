@@ -280,8 +280,11 @@ QColor QtMaterialAppBar::backgroundColor() const
 
 bool QtMaterialAppBar::event(QEvent *event)
 {
+    Q_D(QtMaterialAppBar);
+
     if (event->type() == QEvent::FontChange)
     {
+        d->titleLabel->setFont(font());
         updateGeometry();
     }
     return QWidget::event(event);
