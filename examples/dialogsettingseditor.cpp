@@ -13,31 +13,36 @@ DialogSettingsEditor::DialogSettingsEditor(QWidget *parent)
 {
     ui->setupUi(_settingsWidget);
 
-    //_canvas->setMaximumHeight(300);
-
     m_dialog->setParent(_canvas);
 
     QWidget *dialogWidget = new QWidget;
     QVBoxLayout *dialogWidgetLayout = new QVBoxLayout;
+
+    dialogWidgetLayout->addWidget(new QLabel(tr("This is a beautiful material design dialog, don't you think ?")));
+    dialogWidgetLayout->addStretch(1);
+
+    QHBoxLayout *buttonsLayout = new QHBoxLayout;
+
+    QtMaterialFlatButton *okButton = new QtMaterialFlatButton(tr("OK"), Material::ButtonRaisedPrimary);
+    buttonsLayout->addWidget(okButton);
+    okButton->setMaximumWidth(150);
+
+    QtMaterialFlatButton *cancelButton = new QtMaterialFlatButton(tr("Cancel"), Material::ButtonOutlinedSecondary);
+    buttonsLayout->addWidget(cancelButton);
+    cancelButton->setMaximumWidth(150);
+
+    dialogWidgetLayout->addItem(buttonsLayout);
     dialogWidget->setLayout(dialogWidgetLayout);
 
-    QtMaterialFlatButton *closeButton = new QtMaterialFlatButton("Close");
-    dialogWidgetLayout->addWidget(closeButton);
-    dialogWidgetLayout->setAlignment(closeButton, Qt::AlignBottom | Qt::AlignCenter);
-
-    closeButton->setMaximumWidth(150);
-
     QVBoxLayout *dialogLayout = new QVBoxLayout;
-    m_dialog->setWindowLayout(dialogLayout);
-
     dialogWidget->setMinimumHeight(300);
-
     dialogLayout->addWidget(dialogWidget);
+    m_dialog->setWindowLayout(dialogLayout);
 
     setupForm();
 
-    connect(ui->showDialogButton, &QAbstractButton::pressed, m_dialog, &QtMaterialDialog::showDialog);
-    connect(closeButton, &QAbstractButton::pressed, m_dialog, &QtMaterialDialog::hideDialog);
+    connect(ui->showDialogButton, &QAbstractButton::clicked, m_dialog, &QtMaterialDialog::showDialog);
+    connect(cancelButton, &QAbstractButton::clicked, m_dialog, &QtMaterialDialog::hideDialog);
 }
 
 DialogSettingsEditor::~DialogSettingsEditor()
