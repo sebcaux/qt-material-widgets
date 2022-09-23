@@ -21,13 +21,14 @@ signals:
 protected slots:
     void updateResults(const QString &text);
 
-protected:
-    bool event(QEvent *event) override;
-    bool eventFilter(QObject *watched, QEvent *event) override;
-
 private:
     Q_DISABLE_COPY(QtMaterialAutoComplete)
     Q_DECLARE_PRIVATE(QtMaterialAutoComplete)
+
+    // QWidget interface
+protected:
+    bool event(QEvent *event) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 };
 
 #endif  // QTMATERIALAUTOCOMPLETE_H

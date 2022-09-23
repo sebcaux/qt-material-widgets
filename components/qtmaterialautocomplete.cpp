@@ -171,7 +171,7 @@ void QtMaterialAutoComplete::updateResults(const QString &text)
     d->menu->update();
 }
 
-bool QtMaterialAutoComplete::QtMaterialAutoComplete::event(QEvent *event)
+bool QtMaterialAutoComplete::event(QEvent *event)
 {
     Q_D(QtMaterialAutoComplete);
 
