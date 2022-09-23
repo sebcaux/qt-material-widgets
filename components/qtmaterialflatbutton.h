@@ -88,7 +88,8 @@ public:
 protected:
     enum
     {
-        IconPadding = 12
+        IconPadding = 12,
+        TextPadding = 12
     };
 
     QtMaterialFlatButton(QtMaterialFlatButtonPrivate &d, QWidget *parent = nullptr, Material::ButtonPreset preset = Material::ButtonTextDefault);
@@ -105,14 +106,14 @@ private:
     Q_DISABLE_COPY(QtMaterialFlatButton)
     Q_DECLARE_PRIVATE(QtMaterialFlatButton)
 
-public:
-    QSize sizeHint() const override;
-
     // QAbstractButton interface
 protected:
     void checkStateSet() override;
 
     // QWidget interface
+public:
+    QSize sizeHint() const override;
+
 protected:
     bool event(QEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;

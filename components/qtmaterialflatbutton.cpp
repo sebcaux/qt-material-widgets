@@ -604,14 +604,14 @@ QSize QtMaterialFlatButton::sizeHint() const
 
     QSize labelSize(fontMetrics().size(Qt::TextSingleLine, text()));
 
-    int w = 20 + labelSize.width();
+    int w = labelSize.width() + 20;
     int h = labelSize.height();
     if (!icon().isNull())
     {
         w += iconSize().width() + QtMaterialFlatButton::IconPadding;
         h = qMax(h, iconSize().height());
     }
-    return QSize(w, 20 + h);
+    return QSize(w, h + 20);
 }
 
 QtMaterialFlatButton::QtMaterialFlatButton(QtMaterialFlatButtonPrivate &d, QWidget *parent, Material::ButtonPreset preset)
@@ -898,23 +898,24 @@ void QtMaterialFlatButton::paintForeground(QPainter *painter)
     {
         if (d->textAlignment == Qt::AlignLeft)
         {
-            painter->drawText(rect().adjusted(12, 0, 0, 0), Qt::AlignLeft | Qt::AlignVCenter, text());
+            painter->drawText(rect().adjusted(TextPadding, 0, 0, 0), Qt::AlignLeft | Qt::AlignVCenter, text());
         }
         else
         {
-            painter->drawText(rect(), Qt::AlignCenter, text());
+            painter->drawText(rect(), Qt::AlignHCenter | Qt::AlignVCenter, text());
         }
         return;
     }
 
+    QSize iconSize(this->iconSize());
     QSize textSize(fontMetrics().size(Qt::TextSingleLine, text()));
     QSize base(size() - textSize);
 
-    const int iw = iconSize().width() + IconPadding;
-    QPoint pos((d->textAlignment == Qt::AlignLeft) ? 12 : (base.width() - iw) / 2, 0);
+    const int iw = iconSize.width() + IconPadding;
+    QPoint pos((d->textAlignment == Qt::AlignLeft) ? TextPadding : (base.width() - iw) / 2, 0);
 
     QRect textGeometry(pos + QPoint(0, base.height() / 2), textSize);
-    QRect iconGeometry(pos + QPoint(0, (height() - iconSize().height()) / 2), iconSize());
+    QRect iconGeometry(pos + QPoint(0, (height() - iconSize.height()) / 2), iconSize);
 
     if (d->iconPlacement == Material::LeftIcon)
     {
@@ -925,9 +926,9 @@ void QtMaterialFlatButton::paintForeground(QPainter *painter)
         iconGeometry.translate(textSize.width() + IconPadding, 0);
     }
 
-    painter->drawText(textGeometry, Qt::AlignCenter, text());
+    painter->drawText(textGeometry, Qt::AlignHCenter | Qt::AlignVCenter, text());
 
-    QPixmap pixmap = icon().pixmap(iconSize());
+    QPixmap pixmap = icon().pixmap(iconSize);
     QPainter icon(&pixmap);
     icon.setCompositionMode(QPainter::CompositionMode_SourceIn);
     icon.fillRect(pixmap.rect(), painter->pen().color());
