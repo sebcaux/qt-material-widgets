@@ -115,15 +115,15 @@ void QtMaterialAppBarPrivate::setNavIconType(Material::NavIconType type)
             break;
 
         case Material::NavIconMenu:
-            navButton->setIcon(QtMaterialTheme::icon("navigation", "menu"));
+            navButton->setIcon(QtMaterialTheme::icon(QStringLiteral("navigation"), QStringLiteral("menu")));
             break;
 
         case Material::NavIconPrevious:
-            navButton->setIcon(QtMaterialTheme::icon("navigation", "arrow_back"));
+            navButton->setIcon(QtMaterialTheme::icon(QStringLiteral("navigation"), QStringLiteral("arrow_back")));
             break;
 
         case Material::NavIconUpper:
-            navButton->setIcon(QtMaterialTheme::icon("navigation", "expand_less"));
+            navButton->setIcon(QtMaterialTheme::icon(QStringLiteral("navigation"), QStringLiteral("expand_less")));
             break;
     }
     navIconType = type;
@@ -169,6 +169,7 @@ void QtMaterialAppBar::setTitle(const QString &title)
     {
         d->titleLabel->setText(title);
     }
+    updateGeometry();
 }
 
 Material::NavIconType QtMaterialAppBar::navIconType() const
@@ -183,6 +184,7 @@ void QtMaterialAppBar::setNavIconType(Material::NavIconType navIconType)
     Q_D(QtMaterialAppBar);
 
     d->setNavIconType(navIconType);
+    updateGeometry();
 }
 
 const QSize &QtMaterialAppBar::iconSize() const
@@ -197,12 +199,12 @@ void QtMaterialAppBar::setIconSize(const QSize &iconSize)
     Q_D(QtMaterialAppBar);
 
     d->setIconSize(iconSize);
+    updateGeometry();
 }
 
 void QtMaterialAppBar::setIconSize(int w, int h)
 {
     setIconSize(QSize(w, h));
-    updateGeometry();
 }
 
 void QtMaterialAppBar::setUseThemeColors(bool value)
