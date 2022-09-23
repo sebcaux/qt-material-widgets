@@ -34,6 +34,13 @@ void QtMaterialStylePrivate::init()
  *  \internal
  */
 
+QtMaterialTheme *QtMaterialStyle::theme() const
+{
+    Q_D(const QtMaterialStyle);
+
+    return d->theme;
+}
+
 void QtMaterialStyle::setTheme(QtMaterialTheme *theme)
 {
     Q_D(QtMaterialStyle);
@@ -42,7 +49,7 @@ void QtMaterialStyle::setTheme(QtMaterialTheme *theme)
     theme->setParent(this);
 }
 
-QColor QtMaterialStyle::themeColor(Material::ThemeColor themeColor) const
+const QColor &QtMaterialStyle::themeColor(Material::ThemeColor themeColor) const
 {
     Q_D(const QtMaterialStyle);
 

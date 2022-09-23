@@ -19,9 +19,10 @@ class QtMaterialStyle : public QCommonStyle
 public:
     inline static QtMaterialStyle &instance();
 
+    QtMaterialTheme *theme() const;
     void setTheme(QtMaterialTheme *theme);
 
-    QColor themeColor(Material::ThemeColor colorTheme) const;
+    const QColor &themeColor(Material::ThemeColor colorTheme) const;
     const QFont &themeFont(Material::FontType fontType) const;
 
 protected:
