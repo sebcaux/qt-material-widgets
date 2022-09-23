@@ -111,32 +111,58 @@ QtMaterialFlatButtonStateMachine::~QtMaterialFlatButtonStateMachine()
 
 void QtMaterialFlatButtonStateMachine::setOverlayOpacity(qreal opacity)
 {
+    bool changed = (m_overlayOpacity != opacity);
     m_overlayOpacity = opacity;
-    m_button->update();
+    if (changed)
+    {
+        if (m_button->overlayStyle() != Material::NoOverlay)
+        {
+            m_button->update();
+        }
+    }
 }
 
 void QtMaterialFlatButtonStateMachine::setCheckedOverlayProgress(qreal progress)
 {
+    bool changed = (m_checkedOverlayProgress != progress);
     m_checkedOverlayProgress = progress;
-    m_button->update();
+    if (changed)
+    {
+        m_button->update();
+    }
 }
 
 void QtMaterialFlatButtonStateMachine::setHaloOpacity(qreal opacity)
 {
+    bool changed = (m_haloOpacity != opacity);
     m_haloOpacity = opacity;
-    m_button->update();
+    if (changed)
+    {
+        m_button->update();
+    }
 }
 
 void QtMaterialFlatButtonStateMachine::setHaloSize(qreal size)
 {
+    bool changed = (m_haloSize != size);
     m_haloSize = size;
-    m_button->update();
+    if (changed)
+    {
+        m_button->update();
+    }
 }
 
 void QtMaterialFlatButtonStateMachine::setHaloScaleFactor(qreal factor)
 {
+    bool changed = (m_haloScaleFactor != factor);
     m_haloScaleFactor = factor;
-    m_button->update();
+    if (changed)
+    {
+        if (m_button->isHaloVisible() && m_button->hasFocus())
+        {
+            m_button->update();
+        }
+    }
 }
 
 void QtMaterialFlatButtonStateMachine::startAnimations()
