@@ -6,6 +6,7 @@
 
 #include <QApplication>
 #include <QPainter>
+#include <QPainterPath>
 
 /*!
  *  \class QtMaterialTextFieldPrivate
@@ -40,6 +41,8 @@ void QtMaterialTextFieldPrivate::init()
     q->setTextMargins(0, 2, 0, 4);
 
     q->setFont(QFont("Roboto", 11, QFont::Normal));
+
+    q->setStyleSheet("QLineEdit {background-color: rgba(0, 0, 0, 0);}");
 
     stateMachine->start();
     QCoreApplication::processEvents();
@@ -298,23 +301,48 @@ void QtMaterialTextField::paintEvent(QPaintEvent *event)
 {
     Q_D(QtMaterialTextField);
 
+    const qreal progress = d->stateMachine->progress();
+
+    QPainter painterBg(this);
+
+    qreal bgBase = 70;
+    if (underMouse())
+    {
+        bgBase = 150;
+    }
+    QColor bgColor(0xe8, 0xe8, 0xe8, bgBase + progress * (255 - bgBase));
+    painterBg.setBrush(bgColor);
+    painterBg.setPen(QPen(Qt::NoPen));
+    QPainterPath path;
+    qreal w = rect().width();
+    qreal h = rect().height();
+    qreal r = 10;
+    path.arcMoveTo(0, 0, r, r, 180);
+    path.arcTo(0, 0, r, r, 180, -90);
+    path.arcTo(w - r, 0, r, r, 90, -90);
+    path.lineTo(w, h);
+    path.lineTo(0, h);
+    path.closeSubpath();
+    painterBg.drawPath(path);
+
+    painterBg.end();
+
     QLineEdit::paintEvent(event);
 
     QPainter painter(this);
 
-    const qreal progress = d->stateMachine->progress();
-
     if (text().isEmpty() && progress < 1)
     {
-        painter.setOpacity(1 - progress);
-        painter.fillRect(rect(), parentWidget()->palette().color(backgroundRole()));
+        // TODO bug when placeholder
+        painter.setBrush(bgColor);
+        painter.setPen(QPen(Qt::NoPen));
+        painter.drawPath(path);
     }
-
-    const int y = height() - 1;
-    const int wd = width() - 5;
 
     if (d->inputLineVisible)
     {
+        const int wd = width();
+        const int y = height() - 1;
         QPen pen;
         pen.setWidth(1);
         pen.setColor(inputLineColor());
@@ -337,7 +365,7 @@ void QtMaterialTextField::paintEvent(QPaintEvent *event)
             painter.setPen(Qt::NoPen);
             painter.setBrush(brush);
             const int w = (1 - progress) * static_cast<qreal>(wd / 2);
-            painter.drawRect(w + 2.5, height() - 2, wd - w * 2, 2);
+            painter.drawRect(w, height() - 2, wd - w * 2, 2);
         }
     }
 }

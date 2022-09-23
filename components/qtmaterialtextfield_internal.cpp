@@ -107,16 +107,18 @@ void QtMaterialTextFieldStateMachine::setupProperties()
         }
         else
         {
-            m_normalState->assignProperty(m_label, "offset", QPointF(0, 0 - m));
+            m_normalState->assignProperty(m_label, "offset", QPointF(0, 12 - m));
         }
 
-        m_focusedState->assignProperty(m_label, "offset", QPointF(0, 0 - m));
+        m_focusedState->assignProperty(m_label, "offset", QPointF(0, 12 - m));
         m_focusedState->assignProperty(m_label, "color", m_textField->inkColor());
+        m_focusedState->assignProperty(m_label, "scale", 0.5);
         m_normalState->assignProperty(m_label, "color", m_textField->labelColor());
+        m_normalState->assignProperty(m_label, "scale", 1);
 
-        if (0 != m_label->offset().y() && !m_textField->text().isEmpty())
+        if (m_label->offset().y() != 0 && !m_textField->text().isEmpty())
         {
-            m_label->setOffset(QPointF(0, 0 - m));
+            m_label->setOffset(QPointF(0, 12 - m));
         }
         else if (!m_textField->hasFocus() && m_label->offset().y() <= 0 && m_textField->text().isEmpty())
         {
@@ -142,7 +144,7 @@ QtMaterialTextFieldLabel::QtMaterialTextFieldLabel(QtMaterialTextField *parent)
 {
     Q_ASSERT(parent);
 
-    QFont font("Roboto", parent->labelFontSize(), QFont::Medium);
+    QFont font("Roboto", parent->labelFontSize() * 2, QFont::Medium);
     font.setLetterSpacing(QFont::PercentageSpacing, 102);
     setFont(font);
 }
@@ -170,5 +172,5 @@ void QtMaterialTextFieldLabel::paintEvent(QPaintEvent *event)
     painter.setOpacity(1);
 
     QPointF pos(2 + m_posX, height() - 36 + m_posY);
-    painter.drawText(pos.x(), pos.y(), m_textField->labelText());
+    painter.drawText(pos, m_textField->labelText());
 }
