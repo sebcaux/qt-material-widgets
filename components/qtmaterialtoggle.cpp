@@ -180,7 +180,7 @@ void QtMaterialToggle::setDisabledColor(const QColor &color)
 
     d->disabledColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     d->setupProperties();
 }
 
@@ -202,7 +202,7 @@ void QtMaterialToggle::setActiveColor(const QColor &color)
 
     d->activeColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     d->setupProperties();
 }
 
@@ -224,7 +224,7 @@ void QtMaterialToggle::setInactiveColor(const QColor &color)
 
     d->inactiveColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     d->setupProperties();
 }
 
@@ -246,7 +246,7 @@ void QtMaterialToggle::setTrackColor(const QColor &color)
 
     d->trackColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     d->setupProperties();
 }
 

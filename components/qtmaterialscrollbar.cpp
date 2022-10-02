@@ -100,7 +100,7 @@ void QtMaterialScrollBar::setCanvasColor(const QColor &color)
 
     d->canvasColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     update();
 }
 
@@ -122,7 +122,7 @@ void QtMaterialScrollBar::setBackgroundColor(const QColor &color)
 
     d->backgroundColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     update();
 }
 
@@ -144,7 +144,7 @@ void QtMaterialScrollBar::setSliderColor(const QColor &color)
 
     d->sliderColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     update();
 }
 

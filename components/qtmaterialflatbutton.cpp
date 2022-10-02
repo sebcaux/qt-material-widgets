@@ -312,7 +312,7 @@ void QtMaterialFlatButton::setForegroundColor(const QColor &color)
 
     d->foregroundColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     update();
 }
 
@@ -348,7 +348,7 @@ void QtMaterialFlatButton::setBackgroundColor(const QColor &color)
 
     d->backgroundColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     update();
 }
 
@@ -380,7 +380,7 @@ void QtMaterialFlatButton::setOverlayColor(const QColor &color)
 
     d->overlayColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
 
     setOverlayStyle(Material::TintedOverlay);
     update();
@@ -403,7 +403,7 @@ void QtMaterialFlatButton::setDisabledForegroundColor(const QColor &color)
 
     d->disabledColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     update();
 }
 
@@ -425,7 +425,7 @@ void QtMaterialFlatButton::setDisabledBackgroundColor(const QColor &color)
 
     d->disabledBackgroundColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     update();
 }
 

@@ -100,7 +100,7 @@ void QtMaterialProgress::setProgressColor(const QColor &color)
 
     d->progressColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     update();
 }
 
@@ -122,7 +122,7 @@ void QtMaterialProgress::setBackgroundColor(const QColor &color)
 
     d->backgroundColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     update();
 }
 

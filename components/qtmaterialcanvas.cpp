@@ -32,6 +32,8 @@ void QtMaterialCanvasPrivate::init()
 {
     Q_Q(QtMaterialCanvas);
 
+    useThemeColors = true;
+
     q->setVerticalScrollBar(new QtMaterialScrollBar());
     q->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 

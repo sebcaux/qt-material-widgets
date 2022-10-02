@@ -6,12 +6,6 @@
 #include "lib/qtmaterialstyle_p.h"
 #include "lib/qtmaterialtheme.h"
 
-#define MATERIAL_DISABLE_THEME_COLORS                                                                                                                                              \
-    if (d->useThemeColors == true)                                                                                                                                                 \
-    {                                                                                                                                                                              \
-        d->useThemeColors = false;                                                                                                                                                 \
-    }
-
 class QtMaterialStyle : public QCommonStyle
 {
     Q_OBJECT

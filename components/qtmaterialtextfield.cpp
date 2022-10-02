@@ -162,7 +162,7 @@ void QtMaterialTextField::setTextColor(const QColor &color)
     d->textColor = color;
     setStyleSheet(QString("QLineEdit { color: %1; }").arg(color.name()));
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     d->stateMachine->setupProperties();
 }
 
@@ -184,7 +184,7 @@ void QtMaterialTextField::setLabelColor(const QColor &color)
 
     d->labelColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     d->stateMachine->setupProperties();
 }
 
@@ -206,7 +206,7 @@ void QtMaterialTextField::setInkColor(const QColor &color)
 
     d->inkColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     d->stateMachine->setupProperties();
 }
 
@@ -228,7 +228,7 @@ void QtMaterialTextField::setInputLineColor(const QColor &color)
 
     d->inputLineColor = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     d->stateMachine->setupProperties();
 }
 

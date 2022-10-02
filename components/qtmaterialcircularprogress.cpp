@@ -166,7 +166,7 @@ void QtMaterialCircularProgress::setColor(const QColor &color)
 
     d->color = color;
 
-    MATERIAL_DISABLE_THEME_COLORS
+    d->useThemeColors = false;
     update();
 }
 
