@@ -145,7 +145,7 @@ QColor QtMaterialAvatar::backgroundColor() const
 
     if (d->useThemeColors || !d->backgroundColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
     }
 
     return d->backgroundColor;

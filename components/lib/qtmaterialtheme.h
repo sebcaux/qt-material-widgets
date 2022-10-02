@@ -139,12 +139,14 @@ enum FontType : unsigned int
 
 enum ThemeColor : unsigned int
 {
-    ColorThemePrimary1,
-    ColorThemePrimary2,
-    ColorThemePrimary3,
-    ColorThemeAccent1,
-    ColorThemeAccent2,
-    ColorThemeAccent3,
+    ColorThemePrimaryMain,
+    ColorThemePrimaryLight,
+    ColorThemePrimaryDark,
+    ColorThemePrimaryText,
+    ColorThemeSecondaryMain,
+    ColorThemeSecondaryLight,
+    ColorThemeSecondaryDark,
+    ColorThemeSecondaryText,
     ColorThemeText,
     ColorThemeAlternateText,
     ColorThemeCanvas,

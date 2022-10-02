@@ -154,7 +154,7 @@ QColor QtMaterialScrollBar::sliderColor() const
 
     if (d->useThemeColors || !d->sliderColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
     }
 
     return d->sliderColor;

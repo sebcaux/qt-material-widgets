@@ -194,7 +194,7 @@ QColor QtMaterialTextField::labelColor() const
 
     if (d->useThemeColors || !d->labelColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent3);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeSecondaryDark);
     }
 
     return d->labelColor;
@@ -216,7 +216,7 @@ QColor QtMaterialTextField::inkColor() const
 
     if (d->useThemeColors || !d->inkColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
     }
 
     return d->inkColor;

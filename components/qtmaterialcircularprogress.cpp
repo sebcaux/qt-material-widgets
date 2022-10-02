@@ -176,7 +176,7 @@ QColor QtMaterialCircularProgress::color() const
 
     if (d->useThemeColors || !d->color.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
     }
 
     return d->color;

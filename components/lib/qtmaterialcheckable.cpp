@@ -189,7 +189,7 @@ QColor QtMaterialCheckable::checkedColor() const
 
     if (d->useThemeColors || !d->checkedColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
     }
 
     return d->checkedColor;
@@ -255,7 +255,7 @@ QColor QtMaterialCheckable::disabledColor() const
 
     if (d->useThemeColors || !d->disabledColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent3);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeSecondaryDark);
     }
 
     return d->disabledColor;

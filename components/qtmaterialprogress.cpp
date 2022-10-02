@@ -110,7 +110,7 @@ QColor QtMaterialProgress::progressColor() const
 
     if (d->useThemeColors || !d->progressColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
     }
 
     return d->progressColor;

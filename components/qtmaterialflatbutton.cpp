@@ -329,10 +329,10 @@ QColor QtMaterialFlatButton::foregroundColor() const
         switch (d->role)
         {
             case Material::Primary:
-                return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
+                return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
 
             case Material::Secondary:
-                return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent1);
+                return QtMaterialStyle::instance().themeColor(Material::ColorThemeSecondaryMain);
 
             case Material::Default:
             default:
@@ -361,10 +361,10 @@ QColor QtMaterialFlatButton::backgroundColor() const
         switch (d->role)
         {
             case Material::Primary:
-                return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
+                return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
 
             case Material::Secondary:
-                return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent1);
+                return QtMaterialStyle::instance().themeColor(Material::ColorThemeSecondaryMain);
 
             case Material::Default:
             default:

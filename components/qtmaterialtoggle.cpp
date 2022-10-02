@@ -212,7 +212,7 @@ QColor QtMaterialToggle::activeColor() const
 
     if (d->useThemeColors || !d->activeColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
     }
 
     return d->activeColor;
@@ -256,7 +256,7 @@ QColor QtMaterialToggle::trackColor() const
 
     if (d->useThemeColors || !d->trackColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent3);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeSecondaryDark);
     }
 
     return d->trackColor;

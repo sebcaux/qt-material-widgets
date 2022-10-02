@@ -136,7 +136,7 @@ QColor QtMaterialTabs::inkColor() const
 
     if (d->useThemeColors || !d->inkColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent1);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeSecondaryMain);
     }
 
     return d->inkColor;
@@ -159,7 +159,7 @@ QColor QtMaterialTabs::backgroundColor() const
 
     if (d->useThemeColors || !d->backgroundColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimary1);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
     }
 
     return d->backgroundColor;

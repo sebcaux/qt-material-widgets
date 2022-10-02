@@ -136,7 +136,7 @@ QColor QtMaterialBadge::backgroundColor() const
 
     if (d->useThemeColors || !d->backgroundColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAccent1);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeSecondaryMain);
     }
 
     return d->backgroundColor;
