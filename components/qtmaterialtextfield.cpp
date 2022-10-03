@@ -160,7 +160,7 @@ void QtMaterialTextField::setTextColor(const QColor &color)
     Q_D(QtMaterialTextField);
 
     d->textColor = color;
-    setStyleSheet(QString("QLineEdit { color: %1; }").arg(color.name()));
+    setStyleSheet(QString("QLineEdit { color: %1; background-color: rgba(0, 0, 0, 0);}").arg(color.name()));
 
     d->useThemeColors = false;
     d->stateMachine->setupProperties();
