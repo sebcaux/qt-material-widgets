@@ -1,35 +1,35 @@
-#include "qtmaterialtoggle_internal.h"
+#include "qtmaterialswitch_internal.h"
 
 #include "lib/qtmaterialripple.h"
-#include "qtmaterialtoggle.h"
+#include "qtmaterialswitch.h"
 
 #include <QEvent>
 #include <QGraphicsDropShadowEffect>
 #include <QPainter>
 
 /*!
- *  \class QtMaterialToggleRippleOverlay
+ *  \class QtMaterialSwitchRippleOverlay
  *  \internal
  */
 
-QtMaterialToggleRippleOverlay::QtMaterialToggleRippleOverlay(QtMaterialToggleThumb *thumb, QtMaterialToggleTrack *track, QtMaterialToggle *parent)
+QtMaterialSwitchRippleOverlay::QtMaterialSwitchRippleOverlay(QtMaterialSwitchThumb *thumb, QtMaterialSwitchTrack *track, QtMaterialSwitch *parent)
     : QtMaterialRippleOverlay(parent->parentWidget()),
-      m_toggle(parent),
+      m_switch(parent),
       m_thumb(thumb),
       m_track(track)
 {
-    connect(parent, &QAbstractButton::toggled, this, &QtMaterialToggleRippleOverlay::addToggleRipple);
+    connect(parent, &QAbstractButton::toggled, this, &QtMaterialSwitchRippleOverlay::addSwitchRipple);
 
     thumb->installEventFilter(this);
 }
 
-QtMaterialToggleRippleOverlay::~QtMaterialToggleRippleOverlay()
+QtMaterialSwitchRippleOverlay::~QtMaterialSwitchRippleOverlay()
 {
 }
 
-void QtMaterialToggleRippleOverlay::addToggleRipple()
+void QtMaterialSwitchRippleOverlay::addSwitchRipple()
 {
-    if (!m_toggle->isEnabled())
+    if (!m_switch->isEnabled())
     {
         return;
     }
@@ -37,14 +37,14 @@ void QtMaterialToggleRippleOverlay::addToggleRipple()
     int t;
     int w;
 
-    if (Qt::Horizontal == m_toggle->orientation())
+    if (Qt::Horizontal == m_switch->orientation())
     {
-        t = m_toggle->height() / 2;
+        t = m_switch->height() / 2;
         w = m_thumb->height() / 2 + 10;
     }
     else
     {
-        t = m_toggle->width() / 2;
+        t = m_switch->width() / 2;
         w = m_thumb->width() / 2 + 10;
     }
 
@@ -56,7 +56,7 @@ void QtMaterialToggleRippleOverlay::addToggleRipple()
     addRipple(ripple);
 }
 
-bool QtMaterialToggleRippleOverlay::eventFilter(QObject *obj, QEvent *event)
+bool QtMaterialSwitchRippleOverlay::eventFilter(QObject *obj, QEvent *event)
 {
     if (QEvent::Paint == event->type())
     {
@@ -73,25 +73,25 @@ bool QtMaterialToggleRippleOverlay::eventFilter(QObject *obj, QEvent *event)
     return QtMaterialRippleOverlay::eventFilter(obj, event);
 }
 
-QRect QtMaterialToggleRippleOverlay::overlayGeometry() const
+QRect QtMaterialSwitchRippleOverlay::overlayGeometry() const
 {
     const qreal offset = m_thumb->offset();
-    if (Qt::Horizontal == m_toggle->orientation())
+    if (Qt::Horizontal == m_switch->orientation())
     {
-        return m_toggle->geometry().adjusted(-10 + offset, -20, 10 + offset, 20);
+        return m_switch->geometry().adjusted(-10 + offset, -20, 10 + offset, 20);
     }
 
-    return m_toggle->geometry().adjusted(-10, -20 + offset, 10, 20 + offset);
+    return m_switch->geometry().adjusted(-10, -20 + offset, 10, 20 + offset);
 }
 
 /*!
- *  \class QtMaterialToggleThumb
+ *  \class QtMaterialSwitchThumb
  *  \internal
  */
 
-QtMaterialToggleThumb::QtMaterialToggleThumb(QtMaterialToggle *parent)
+QtMaterialSwitchThumb::QtMaterialSwitchThumb(QtMaterialSwitch *parent)
     : QWidget(parent),
-      m_toggle(parent),
+      m_switch(parent),
       m_shift(0),
       m_offset(0)
 {
@@ -106,11 +106,11 @@ QtMaterialToggleThumb::QtMaterialToggleThumb(QtMaterialToggle *parent)
     parent->installEventFilter(this);
 }
 
-QtMaterialToggleThumb::~QtMaterialToggleThumb()
+QtMaterialSwitchThumb::~QtMaterialSwitchThumb()
 {
 }
 
-void QtMaterialToggleThumb::setShift(qreal shift)
+void QtMaterialSwitchThumb::setShift(qreal shift)
 {
     if (m_shift == shift)
     {
@@ -121,19 +121,19 @@ void QtMaterialToggleThumb::setShift(qreal shift)
     updateOffset();
 }
 
-bool QtMaterialToggleThumb::eventFilter(QObject *obj, QEvent *event)
+bool QtMaterialSwitchThumb::eventFilter(QObject *obj, QEvent *event)
 {
     const QEvent::Type type = event->type();
 
     if (QEvent::Resize == type || QEvent::Move == type)
     {
-        setGeometry(m_toggle->rect().adjusted(8, 8, -8, -8));
+        setGeometry(m_switch->rect().adjusted(8, 8, -8, -8));
         updateOffset();
     }
     return QWidget::eventFilter(obj, event);
 }
 
-void QtMaterialToggleThumb::paintEvent(QPaintEvent *event)
+void QtMaterialSwitchThumb::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
@@ -142,7 +142,7 @@ void QtMaterialToggleThumb::paintEvent(QPaintEvent *event)
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(m_toggle->isEnabled() ? m_thumbColor : Qt::white);
+    brush.setColor(m_switch->isEnabled() ? m_thumbColor : Qt::white);
 
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
@@ -150,7 +150,7 @@ void QtMaterialToggleThumb::paintEvent(QPaintEvent *event)
     int s;
     QRectF r;
 
-    if (Qt::Horizontal == m_toggle->orientation())
+    if (Qt::Horizontal == m_switch->orientation())
     {
         s = height() - 10;
         r = QRectF(5 + m_offset, 5, s, s);
@@ -163,57 +163,57 @@ void QtMaterialToggleThumb::paintEvent(QPaintEvent *event)
 
     painter.drawEllipse(r);
 
-    if (!m_toggle->isEnabled())
+    if (!m_switch->isEnabled())
     {
-        brush.setColor(m_toggle->disabledColor());
+        brush.setColor(m_switch->disabledColor());
         painter.setBrush(brush);
         painter.drawEllipse(r);
     }
 }
 
-void QtMaterialToggleThumb::updateOffset()
+void QtMaterialSwitchThumb::updateOffset()
 {
-    const QSize s(Qt::Horizontal == m_toggle->orientation() ? size() : size().transposed());
+    const QSize s(Qt::Horizontal == m_switch->orientation() ? size() : size().transposed());
     m_offset = m_shift * static_cast<qreal>(s.width() - s.height());
     update();
 }
 
 /*!
- *  \class QtMaterialToggleTrack
+ *  \class QtMaterialSwitchTrack
  *  \internal
  */
 
-QtMaterialToggleTrack::QtMaterialToggleTrack(QtMaterialToggle *parent)
+QtMaterialSwitchTrack::QtMaterialSwitchTrack(QtMaterialSwitch *parent)
     : QWidget(parent),
-      m_toggle(parent)
+      m_switch(parent)
 {
     Q_ASSERT(parent);
 
     parent->installEventFilter(this);
 }
 
-QtMaterialToggleTrack::~QtMaterialToggleTrack()
+QtMaterialSwitchTrack::~QtMaterialSwitchTrack()
 {
 }
 
-void QtMaterialToggleTrack::setTrackColor(const QColor &color)
+void QtMaterialSwitchTrack::setTrackColor(const QColor &color)
 {
     m_trackColor = color;
     update();
 }
 
-bool QtMaterialToggleTrack::eventFilter(QObject *obj, QEvent *event)
+bool QtMaterialSwitchTrack::eventFilter(QObject *obj, QEvent *event)
 {
     const QEvent::Type type = event->type();
 
     if (QEvent::Resize == type || QEvent::Move == type)
     {
-        setGeometry(m_toggle->rect());
+        setGeometry(m_switch->rect());
     }
     return QWidget::eventFilter(obj, event);
 }
 
-void QtMaterialToggleTrack::paintEvent(QPaintEvent *event)
+void QtMaterialSwitchTrack::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
@@ -221,21 +221,21 @@ void QtMaterialToggleTrack::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing);
 
     QBrush brush;
-    if (m_toggle->isEnabled())
+    if (m_switch->isEnabled())
     {
         brush.setColor(m_trackColor);
         painter.setOpacity(0.8);
     }
     else
     {
-        brush.setColor(m_toggle->disabledColor());
+        brush.setColor(m_switch->disabledColor());
         painter.setOpacity(0.6);
     }
     brush.setStyle(Qt::SolidPattern);
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
-    if (Qt::Horizontal == m_toggle->orientation())
+    if (Qt::Horizontal == m_switch->orientation())
     {
         const int h = height() / 2;
         const QRect r(0, h / 2, width(), h);

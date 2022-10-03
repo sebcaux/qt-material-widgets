@@ -28,7 +28,7 @@ SOURCES = \
     $$PWD/snackbarsettingseditor.cpp \
     $$PWD/tabssettingseditor.cpp \
     $$PWD/textfieldsettingseditor.cpp \
-    $$PWD/togglesettingseditor.cpp
+    $$PWD/switchsettingseditor.cpp
 
 HEADERS = \
     $$PWD/appbarsettingseditor.h \
@@ -51,7 +51,7 @@ HEADERS = \
     $$PWD/snackbarsettingseditor.h \
     $$PWD/tabssettingseditor.h \
     $$PWD/textfieldsettingseditor.h \
-    $$PWD/togglesettingseditor.h
+    $$PWD/switchsettingseditor.h
 
 FORMS += \
     $$PWD/appbarsettingsform.ui \

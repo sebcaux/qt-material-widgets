@@ -1,11 +1,11 @@
-#ifndef QTMATERIALTOGGLE_H
-#define QTMATERIALTOGGLE_H
+#ifndef QTMATERIALSWITCH_H
+#define QTMATERIALSWITCH_H
 
 #include <QAbstractButton>
 
-class QtMaterialTogglePrivate;
+class QtMaterialSwitchPrivate;
 
-class QtMaterialToggle : public QAbstractButton
+class QtMaterialSwitch : public QAbstractButton
 {
     Q_OBJECT
 
@@ -16,9 +16,9 @@ class QtMaterialToggle : public QAbstractButton
     Q_PROPERTY(QColor trackColor READ trackColor WRITE setTrackColor)
 
 public:
-    explicit QtMaterialToggle(QWidget *parent = nullptr);
-    explicit QtMaterialToggle(Qt::Orientation orientation, QWidget *parent = nullptr);
-    ~QtMaterialToggle() override;
+    explicit QtMaterialSwitch(QWidget *parent = nullptr);
+    explicit QtMaterialSwitch(Qt::Orientation orientation, QWidget *parent = nullptr);
+    ~QtMaterialSwitch() override;
 
     Qt::Orientation orientation() const;
     void setOrientation(Qt::Orientation orientation);
@@ -35,11 +35,11 @@ public:
     void setTrackColor(const QColor &color);
 
 protected:
-    const QScopedPointer<QtMaterialTogglePrivate> d_ptr;
+    const QScopedPointer<QtMaterialSwitchPrivate> d_ptr;
 
 private:
-    Q_DISABLE_COPY(QtMaterialToggle)
-    Q_DECLARE_PRIVATE(QtMaterialToggle)
+    Q_DISABLE_COPY(QtMaterialSwitch)
+    Q_DECLARE_PRIVATE(QtMaterialSwitch)
 
     // QWidget interface
 public:
@@ -50,4 +50,4 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 };
 
-#endif  // QTMATERIALTOGGLE_H
+#endif  // QTMATERIALSWITCH_H

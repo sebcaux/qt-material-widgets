@@ -23,7 +23,7 @@
 #include "snackbarsettingseditor.h"
 #include "tabssettingseditor.h"
 #include "textfieldsettingseditor.h"
-#include "togglesettingseditor.h"
+#include "switchsettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
     CircularProgressSettingsEditor *circularProgress = new CircularProgressSettingsEditor;
     SliderSettingsEditor *slider = new SliderSettingsEditor;
     RadioButtonSettingsEditor *radioButton = new RadioButtonSettingsEditor;
-    ToggleSettingsEditor *toggle = new ToggleSettingsEditor;
+    SwitchSettingsEditor *switchButton = new SwitchSettingsEditor;
     TextFieldSettingsEditor *textField = new TextFieldSettingsEditor;
     TabsSettingsEditor *tabs = new TabsSettingsEditor;
     SnackbarSettingsEditor *snackbar = new SnackbarSettingsEditor;
@@ -77,9 +77,9 @@ MainWindow::MainWindow(QWidget *parent)
     stackLayout->addWidget(scrollBar);
     stackLayout->addWidget(slider);
     stackLayout->addWidget(snackbar);
+    stackLayout->addWidget(switchButton);
     stackLayout->addWidget(tabs);
     stackLayout->addWidget(textField);
-    stackLayout->addWidget(toggle);
 
     list->addItem(tr("App Bar"));
     list->addItem(tr("Auto Complete"));
@@ -97,9 +97,9 @@ MainWindow::MainWindow(QWidget *parent)
     list->addItem(tr("ScrollBar"));
     list->addItem(tr("Slider"));
     list->addItem(tr("Snackbar"));
+    list->addItem(tr("Switch"));
     list->addItem(tr("Tabs"));
     list->addItem(tr("Text Field"));
-    list->addItem(tr("Toggle"));
 
     QObject::connect(list,
                      &QListWidget::currentItemChanged,

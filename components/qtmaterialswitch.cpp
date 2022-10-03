@@ -1,8 +1,8 @@
-#include "qtmaterialtoggle.h"
+#include "qtmaterialswitch.h"
 
 #include "lib/qtmaterialstyle.h"
-#include "qtmaterialtoggle_internal.h"
-#include "qtmaterialtoggle_p.h"
+#include "qtmaterialswitch_internal.h"
+#include "qtmaterialswitch_p.h"
 
 #include <QApplication>
 #include <QPropertyAnimation>
@@ -10,26 +10,26 @@
 #include <QStateMachine>
 
 /*!
- *  \class QtMaterialTogglePrivate
+ *  \class QtMaterialSwitchPrivate
  *  \internal
  */
 
-QtMaterialTogglePrivate::QtMaterialTogglePrivate(QtMaterialToggle *q)
+QtMaterialSwitchPrivate::QtMaterialSwitchPrivate(QtMaterialSwitch *q)
     : q_ptr(q)
 {
 }
 
-QtMaterialTogglePrivate::~QtMaterialTogglePrivate()
+QtMaterialSwitchPrivate::~QtMaterialSwitchPrivate()
 {
 }
 
-void QtMaterialTogglePrivate::init()
+void QtMaterialSwitchPrivate::init()
 {
-    Q_Q(QtMaterialToggle);
+    Q_Q(QtMaterialSwitch);
 
-    track = new QtMaterialToggleTrack(q);
-    thumb = new QtMaterialToggleThumb(q);
-    rippleOverlay = new QtMaterialToggleRippleOverlay(thumb, track, q);
+    track = new QtMaterialSwitchTrack(q);
+    thumb = new QtMaterialSwitchThumb(q);
+    rippleOverlay = new QtMaterialSwitchRippleOverlay(thumb, track, q);
     stateMachine = new QStateMachine(q);
     offState = new QState;
     onState = new QState;
@@ -52,7 +52,7 @@ void QtMaterialTogglePrivate::init()
 
     //
 
-    transition = new QSignalTransition(q, &QtMaterialToggle::toggled);
+    transition = new QSignalTransition(q, &QtMaterialSwitch::toggled);
     transition->setTargetState(onState);
     offState->addTransition(transition);
 
@@ -77,7 +77,7 @@ void QtMaterialTogglePrivate::init()
 
     //
 
-    transition = new QSignalTransition(q, &QtMaterialToggle::toggled);
+    transition = new QSignalTransition(q, &QtMaterialSwitch::toggled);
     transition->setTargetState(offState);
     onState->addTransition(transition);
 
@@ -108,9 +108,9 @@ void QtMaterialTogglePrivate::init()
     QCoreApplication::processEvents();
 }
 
-void QtMaterialTogglePrivate::setupProperties()
+void QtMaterialSwitchPrivate::setupProperties()
 {
-    Q_Q(QtMaterialToggle);
+    Q_Q(QtMaterialSwitch);
 
     if (q->isEnabled())
     {
@@ -137,46 +137,46 @@ void QtMaterialTogglePrivate::setupProperties()
 }
 
 /*!
- *  \class QtMaterialToggle
+ *  \class QtMaterialSwitch
  */
 
-QtMaterialToggle::QtMaterialToggle(QWidget *parent)
+QtMaterialSwitch::QtMaterialSwitch(QWidget *parent)
     : QAbstractButton(parent),
-      d_ptr(new QtMaterialTogglePrivate(this))
+      d_ptr(new QtMaterialSwitchPrivate(this))
 {
     d_func()->init();
 }
 
-QtMaterialToggle::QtMaterialToggle(Qt::Orientation orientation, QWidget *parent)
+QtMaterialSwitch::QtMaterialSwitch(Qt::Orientation orientation, QWidget *parent)
     : QAbstractButton(parent),
-      d_ptr(new QtMaterialTogglePrivate(this))
+      d_ptr(new QtMaterialSwitchPrivate(this))
 {
     d_func()->init();
     setOrientation(orientation);
 }
 
-QtMaterialToggle::~QtMaterialToggle()
+QtMaterialSwitch::~QtMaterialSwitch()
 {
 }
 
-void QtMaterialToggle::setUseThemeColors(bool value)
+void QtMaterialSwitch::setUseThemeColors(bool value)
 {
-    Q_D(QtMaterialToggle);
+    Q_D(QtMaterialSwitch);
 
     d->useThemeColors = value;
     d->setupProperties();
 }
 
-bool QtMaterialToggle::useThemeColors() const
+bool QtMaterialSwitch::useThemeColors() const
 {
-    Q_D(const QtMaterialToggle);
+    Q_D(const QtMaterialSwitch);
 
     return d->useThemeColors;
 }
 
-void QtMaterialToggle::setDisabledColor(const QColor &color)
+void QtMaterialSwitch::setDisabledColor(const QColor &color)
 {
-    Q_D(QtMaterialToggle);
+    Q_D(QtMaterialSwitch);
 
     d->disabledColor = color;
 
@@ -184,9 +184,9 @@ void QtMaterialToggle::setDisabledColor(const QColor &color)
     d->setupProperties();
 }
 
-QColor QtMaterialToggle::disabledColor() const
+QColor QtMaterialSwitch::disabledColor() const
 {
-    Q_D(const QtMaterialToggle);
+    Q_D(const QtMaterialSwitch);
 
     if (d->useThemeColors || !d->disabledColor.isValid())
     {
@@ -196,9 +196,9 @@ QColor QtMaterialToggle::disabledColor() const
     return d->disabledColor;
 }
 
-void QtMaterialToggle::setActiveColor(const QColor &color)
+void QtMaterialSwitch::setActiveColor(const QColor &color)
 {
-    Q_D(QtMaterialToggle);
+    Q_D(QtMaterialSwitch);
 
     d->activeColor = color;
 
@@ -206,9 +206,9 @@ void QtMaterialToggle::setActiveColor(const QColor &color)
     d->setupProperties();
 }
 
-QColor QtMaterialToggle::activeColor() const
+QColor QtMaterialSwitch::activeColor() const
 {
-    Q_D(const QtMaterialToggle);
+    Q_D(const QtMaterialSwitch);
 
     if (d->useThemeColors || !d->activeColor.isValid())
     {
@@ -218,9 +218,9 @@ QColor QtMaterialToggle::activeColor() const
     return d->activeColor;
 }
 
-void QtMaterialToggle::setInactiveColor(const QColor &color)
+void QtMaterialSwitch::setInactiveColor(const QColor &color)
 {
-    Q_D(QtMaterialToggle);
+    Q_D(QtMaterialSwitch);
 
     d->inactiveColor = color;
 
@@ -228,9 +228,9 @@ void QtMaterialToggle::setInactiveColor(const QColor &color)
     d->setupProperties();
 }
 
-QColor QtMaterialToggle::inactiveColor() const
+QColor QtMaterialSwitch::inactiveColor() const
 {
-    Q_D(const QtMaterialToggle);
+    Q_D(const QtMaterialSwitch);
 
     if (d->useThemeColors || !d->inactiveColor.isValid())
     {
@@ -240,9 +240,9 @@ QColor QtMaterialToggle::inactiveColor() const
     return d->inactiveColor;
 }
 
-void QtMaterialToggle::setTrackColor(const QColor &color)
+void QtMaterialSwitch::setTrackColor(const QColor &color)
 {
-    Q_D(QtMaterialToggle);
+    Q_D(QtMaterialSwitch);
 
     d->trackColor = color;
 
@@ -250,9 +250,9 @@ void QtMaterialToggle::setTrackColor(const QColor &color)
     d->setupProperties();
 }
 
-QColor QtMaterialToggle::trackColor() const
+QColor QtMaterialSwitch::trackColor() const
 {
-    Q_D(const QtMaterialToggle);
+    Q_D(const QtMaterialSwitch);
 
     if (d->useThemeColors || !d->trackColor.isValid())
     {
@@ -262,9 +262,9 @@ QColor QtMaterialToggle::trackColor() const
     return d->trackColor;
 }
 
-void QtMaterialToggle::setOrientation(Qt::Orientation orientation)
+void QtMaterialSwitch::setOrientation(Qt::Orientation orientation)
 {
-    Q_D(QtMaterialToggle);
+    Q_D(QtMaterialSwitch);
 
     if (d->orientation == orientation)
     {
@@ -275,23 +275,23 @@ void QtMaterialToggle::setOrientation(Qt::Orientation orientation)
     updateGeometry();
 }
 
-Qt::Orientation QtMaterialToggle::orientation() const
+Qt::Orientation QtMaterialSwitch::orientation() const
 {
-    Q_D(const QtMaterialToggle);
+    Q_D(const QtMaterialSwitch);
 
     return d->orientation;
 }
 
-QSize QtMaterialToggle::sizeHint() const
+QSize QtMaterialSwitch::sizeHint() const
 {
-    Q_D(const QtMaterialToggle);
+    Q_D(const QtMaterialSwitch);
 
     return (d->orientation == Qt::Horizontal) ? QSize(64, 48) : QSize(48, 64);
 }
 
-bool QtMaterialToggle::event(QEvent *event)
+bool QtMaterialSwitch::event(QEvent *event)
 {
-    Q_D(QtMaterialToggle);
+    Q_D(QtMaterialSwitch);
 
     switch (event->type())
     {
@@ -310,7 +310,7 @@ bool QtMaterialToggle::event(QEvent *event)
     return QAbstractButton::event(event);
 }
 
-void QtMaterialToggle::paintEvent(QPaintEvent *event)
+void QtMaterialSwitch::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 }
