@@ -41,9 +41,11 @@ void ProgressSettingsEditor::setupForm()
         case Material::DeterminateProgress:
             ui->progressTypeComboBox->setCurrentIndex(0);
             break;
+
         case Material::IndeterminateProgress:
             ui->progressTypeComboBox->setCurrentIndex(1);
             break;
+
         default:
             break;
     }
@@ -51,6 +53,8 @@ void ProgressSettingsEditor::setupForm()
     ui->disabledCheckBox->setChecked(!m_progress->isEnabled());
     ui->progressSlider->setValue(m_progress->value());
     ui->useThemeColorsCheckBox->setChecked(m_progress->useThemeColors());
+    ui->progressColorLineEdit->setText(m_progress->progressColor().name(QColor::HexRgb).toUpper());
+    ui->backgroundColorLineEdit->setText(m_progress->backgroundColor().name(QColor::HexRgb).toUpper());
 }
 
 void ProgressSettingsEditor::updateWidget()
@@ -60,9 +64,11 @@ void ProgressSettingsEditor::updateWidget()
         case 0:
             m_progress->setProgressType(Material::DeterminateProgress);
             break;
+
         case 1:
             m_progress->setProgressType(Material::IndeterminateProgress);
             break;
+
         default:
             break;
     }
@@ -78,17 +84,15 @@ void ProgressSettingsEditor::selectColor()
     if (dialog.exec() != 0)
     {
         QColor color = dialog.selectedColor();
-        QString senderName = sender()->objectName();
-        if ("progressColorToolButton" == senderName)
+        if (sender() == ui->progressColorToolButton)
         {
             m_progress->setProgressColor(color);
-            ui->progressColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("backgroundColorToolButton" == senderName)
+        else if (sender() == ui->backgroundColorToolButton)
         {
             m_progress->setBackgroundColor(color);
-            ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
         }
+        ui->useThemeColorsCheckBox->setChecked(false);
     }
     setupForm();
 }

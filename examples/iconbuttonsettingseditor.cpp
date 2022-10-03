@@ -31,6 +31,8 @@ void IconButtonSettingsEditor::setupForm()
     ui->disabledCheckBox->setChecked(!m_button->isEnabled());
     ui->useThemeColorsCheckBox->setChecked(m_button->useThemeColors());
     ui->sizeSpinBox->setValue(m_button->iconSize().width());
+    ui->colorLineEdit->setText(m_button->color().name(QColor::HexRgb).toUpper());
+    ui->disabledColorLineEdit->setText(m_button->disabledColor().name(QColor::HexRgb).toUpper());
 }
 
 void IconButtonSettingsEditor::updateWidget()
@@ -46,17 +48,15 @@ void IconButtonSettingsEditor::selectColor()
     if (dialog.exec() != 0)
     {
         QColor color = dialog.selectedColor();
-        QString senderName = sender()->objectName();
-        if ("colorToolButton" == senderName)
+        if (sender() == ui->colorToolButton)
         {
             m_button->setColor(color);
-            ui->colorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("disabledColorToolButton" == senderName)
+        else if (sender() == ui->disabledColorToolButton)
         {
             m_button->setDisabledColor(color);
-            ui->disabledColorLineEdit->setText(color.name(QColor::HexRgb));
         }
+        ui->useThemeColorsCheckBox->setChecked(false);
     }
     setupForm();
 }

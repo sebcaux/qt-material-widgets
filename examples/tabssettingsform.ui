@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>474</width>
-    <height>387</height>
+    <width>453</width>
+    <height>347</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,11 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>TODO</string>
-     </property>
-    </widget>
+    <layout class="QFormLayout" name="formLayout"/>
    </item>
   </layout>
  </widget>

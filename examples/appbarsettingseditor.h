@@ -4,7 +4,6 @@
 #include "settingseditor.h"
 
 #include "ui_appbarsettingsform.h"
-#include <QWidget>
 
 class QtMaterialAppBar;
 

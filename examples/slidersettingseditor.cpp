@@ -40,9 +40,11 @@ void SliderSettingsEditor::setupForm()
         case Qt::Horizontal:
             ui->orientationComboBox->setCurrentIndex(0);
             break;
+
         case Qt::Vertical:
             ui->orientationComboBox->setCurrentIndex(1);
             break;
+
         default:
             break;
     }
@@ -59,9 +61,11 @@ void SliderSettingsEditor::updateWidget()
         case 0:
             m_slider->setOrientation(Qt::Horizontal);
             break;
+
         case 1:
             m_slider->setOrientation(Qt::Vertical);
             break;
+
         default:
             break;
     }

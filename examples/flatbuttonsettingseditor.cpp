@@ -136,6 +136,11 @@ void FlatButtonSettingsEditor::setupForm()
     ui->iconSizeSpinBox->setValue(m_button->iconSize().width());
     ui->fontSizeDoubleSpinBox->setValue(m_button->fontSize());
     ui->buttonTextLineEdit->setText(m_button->text());
+    ui->foregroundColorLineEdit->setText(m_button->foregroundColor().name(QColor::HexRgb).toUpper());
+    ui->backgroundColorLineEdit->setText(m_button->backgroundColor().name(QColor::HexRgb).toUpper());
+    ui->overlayColorLineEdit->setText(m_button->overlayColor().name(QColor::HexRgb).toUpper());
+    ui->disableFgColorLineEdit->setText(m_button->disabledForegroundColor().name(QColor::HexRgb).toUpper());
+    ui->disabledBgColorLineEdit->setText(m_button->disabledBackgroundColor().name(QColor::HexRgb).toUpper());
 }
 
 void FlatButtonSettingsEditor::updateWidget()
@@ -263,32 +268,27 @@ void FlatButtonSettingsEditor::selectColor()
     if (dialog.exec() != 0)
     {
         QColor color = dialog.selectedColor();
-        QString senderName = sender()->objectName();
-        if ("foregroundColorToolButton" == senderName)
+        if (sender() == ui->foregroundColorToolButton)
         {
             m_button->setForegroundColor(color);
-            ui->foregroundColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("backgroundColorToolButton" == senderName)
+        else if (sender() == ui->backgroundColorToolButton)
         {
             m_button->setBackgroundColor(color);
-            ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("overlayColorToolButton" == senderName)
+        else if (sender() == ui->overlayColorToolButton)
         {
             m_button->setOverlayColor(color);
-            ui->overlayColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("disabledFgColorToolButton" == senderName)
+        else if (sender() == ui->disabledFgColorToolButton)
         {
             m_button->setDisabledForegroundColor(color);
-            ui->disableFgColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("disabledBgColorToolButton" == senderName)
+        else if (sender() == ui->disabledBgColorToolButton)
         {
             m_button->setDisabledBackgroundColor(color);
-            ui->disabledBgColorLineEdit->setText(color.name(QColor::HexRgb));
         }
+        ui->useThemeColorsCheckBox->setChecked(false);
     }
     setupForm();
 }

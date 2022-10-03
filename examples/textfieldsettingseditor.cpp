@@ -52,6 +52,10 @@ void TextFieldSettingsEditor::setupForm()
     ui->labelTextLineEdit->setText(m_textField->labelText());
     ui->useThemeColorsCheckBox->setChecked(m_textField->useThemeColors());
     ui->inputLineCheckBox->setChecked(m_textField->inputLineVisible());
+    ui->textColorLineEdit->setText(m_textField->textColor().name(QColor::HexRgb).toUpper());
+    ui->inkColorLineEdit->setText(m_textField->inkColor().name(QColor::HexRgb).toUpper());
+    ui->inputLineColorLineEdit->setText(m_textField->inputLineColor().name(QColor::HexRgb).toUpper());
+    ui->labelColorLineEdit->setText(m_textField->labelColor().name(QColor::HexRgb).toUpper());
 }
 
 void TextFieldSettingsEditor::updateWidget()
@@ -71,27 +75,23 @@ void TextFieldSettingsEditor::selectColor()
     if (dialog.exec() != 0)
     {
         QColor color = dialog.selectedColor();
-        QString senderName = sender()->objectName();
-        if ("textColorToolButton" == senderName)
+        if (sender() == ui->textColorToolButton)
         {
             m_textField->setTextColor(color);
-            ui->textColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("inkColorToolButton" == senderName)
+        else if (sender() == ui->inkColorToolButton)
         {
             m_textField->setInkColor(color);
-            ui->inkColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("inputLineColorToolButton" == senderName)
+        else if (sender() == ui->inputLineColorToolButton)
         {
             m_textField->setInputLineColor(color);
-            ui->inputLineColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("labelColorToolButton" == senderName)
+        else if (sender() == ui->labelColorToolButton)
         {
             m_textField->setLabelColor(color);
-            ui->labelColorLineEdit->setText(color.name(QColor::HexRgb));
         }
+        ui->useThemeColorsCheckBox->setChecked(false);
     }
     setupForm();
 }

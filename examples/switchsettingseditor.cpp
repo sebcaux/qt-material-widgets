@@ -43,9 +43,11 @@ void SwitchSettingsEditor::setupForm()
         case Qt::Horizontal:
             ui->orientationComboBox->setCurrentIndex(0);
             break;
+
         case Qt::Vertical:
             ui->orientationComboBox->setCurrentIndex(1);
             break;
+
         default:
             break;
     }
@@ -53,6 +55,10 @@ void SwitchSettingsEditor::setupForm()
     ui->disabledCheckBox->setChecked(!m_switch->isEnabled());
     ui->checkedCheckBox->setChecked(m_switch->isChecked());
     ui->useThemeColorsCheckBox->setChecked(m_switch->useThemeColors());
+    ui->disabledColorLineEdit->setText(m_switch->disabledColor().name(QColor::HexRgb).toUpper());
+    ui->activeColorLineEdit->setText(m_switch->activeColor().name(QColor::HexRgb).toUpper());
+    ui->inactiveColorLineEdit->setText(m_switch->inactiveColor().name(QColor::HexRgb).toUpper());
+    ui->trackColorLineEdit->setText(m_switch->trackColor().name(QColor::HexRgb).toUpper());
 }
 
 void SwitchSettingsEditor::updateWidget()
@@ -62,9 +68,11 @@ void SwitchSettingsEditor::updateWidget()
         case 0:
             m_switch->setOrientation(Qt::Horizontal);
             break;
+
         case 1:
             m_switch->setOrientation(Qt::Vertical);
             break;
+
         default:
             break;
     }
@@ -80,27 +88,23 @@ void SwitchSettingsEditor::selectColor()
     if (dialog.exec() != 0)
     {
         QColor color = dialog.selectedColor();
-        QString senderName = sender()->objectName();
-        if ("disabledColorToolButton" == senderName)
+        if (sender() == ui->disabledColorToolButton)
         {
             m_switch->setDisabledColor(color);
-            ui->disabledColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("activeColorToolButton" == senderName)
+        else if (sender() == ui->activeColorToolButton)
         {
             m_switch->setActiveColor(color);
-            ui->activeColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("inactiveColorToolButton" == senderName)
+        else if (sender() == ui->inactiveColorToolButton)
         {
             m_switch->setInactiveColor(color);
-            ui->inactiveColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("trackColorToolButton" == senderName)
+        else if (sender() == ui->trackColorToolButton)
         {
             m_switch->setTrackColor(color);
-            ui->trackColorLineEdit->setText(color.name(QColor::HexRgb));
         }
+        ui->useThemeColorsCheckBox->setChecked(false);
     }
     setupForm();
 }

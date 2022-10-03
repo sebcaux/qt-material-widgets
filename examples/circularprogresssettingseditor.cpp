@@ -43,9 +43,11 @@ void CircularProgressSettingsEditor::setupForm()
         case Material::DeterminateProgress:
             ui->progressTypeComboBox->setCurrentIndex(0);
             break;
+
         case Material::IndeterminateProgress:
             ui->progressTypeComboBox->setCurrentIndex(1);
             break;
+
         default:
             break;
     }
@@ -55,6 +57,7 @@ void CircularProgressSettingsEditor::setupForm()
     ui->lineWidthDoubleSpinBox->setValue(m_progress->lineWidth());
     ui->sizeSpinBox->setValue(m_progress->size());
     ui->useThemeColorsCheckBox->setChecked(m_progress->useThemeColors());
+    ui->colorLineEdit->setText(m_progress->color().name(QColor::HexRgb).toUpper());
 }
 
 void CircularProgressSettingsEditor::updateWidget()
@@ -64,9 +67,11 @@ void CircularProgressSettingsEditor::updateWidget()
         case 0:
             m_progress->setProgressType(Material::DeterminateProgress);
             break;
+
         case 1:
             m_progress->setProgressType(Material::IndeterminateProgress);
             break;
+
         default:
             break;
     }
@@ -84,12 +89,11 @@ void CircularProgressSettingsEditor::selectColor()
     if (dialog.exec() != 0)
     {
         QColor color = dialog.selectedColor();
-        QString senderName = sender()->objectName();
-        if ("colorToolButton" == senderName)
+        if (sender() == ui->colorToolButton)
         {
             m_progress->setColor(color);
-            ui->colorLineEdit->setText(color.name(QColor::HexRgb));
         }
+        ui->useThemeColorsCheckBox->setChecked(false);
     }
     setupForm();
 }

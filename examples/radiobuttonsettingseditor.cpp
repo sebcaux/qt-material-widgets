@@ -44,14 +44,14 @@ RadioButtonSettingsEditor::RadioButtonSettingsEditor(QWidget *parent)
     setupForm();
 
     connect(ui->disabledCheckBox, &QAbstractButton::toggled, this, &RadioButtonSettingsEditor::updateWidget);
-    connect(ui->labelPositionComboBox_2, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
-    connect(ui->labelTextLineEdit_2, &QLineEdit::textChanged, this, &RadioButtonSettingsEditor::updateWidget);
-    connect(ui->useThemeColorsCheckBox_3, &QAbstractButton::toggled, this, &RadioButtonSettingsEditor::updateWidget);
-    connect(ui->textColorToolButton_2, &QAbstractButton::pressed, this, &RadioButtonSettingsEditor::selectColor);
-    connect(ui->disabledColorToolButton_2, &QAbstractButton::pressed, this, &RadioButtonSettingsEditor::selectColor);
-    connect(ui->checkedColorToolButton_2, &QAbstractButton::pressed, this, &RadioButtonSettingsEditor::selectColor);
-    connect(ui->uncheckedColorToolButton_2, &QAbstractButton::pressed, this, &RadioButtonSettingsEditor::selectColor);
-    connect(ui->labelPositionComboBox_2, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
+    connect(ui->labelPositionComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
+    connect(ui->labelTextLineEdit, &QLineEdit::textChanged, this, &RadioButtonSettingsEditor::updateWidget);
+    connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &RadioButtonSettingsEditor::updateWidget);
+    connect(ui->textColorToolButton, &QAbstractButton::pressed, this, &RadioButtonSettingsEditor::selectColor);
+    connect(ui->disabledColorToolButton, &QAbstractButton::pressed, this, &RadioButtonSettingsEditor::selectColor);
+    connect(ui->checkedColorToolButton, &QAbstractButton::pressed, this, &RadioButtonSettingsEditor::selectColor);
+    connect(ui->uncheckedColorToolButton, &QAbstractButton::pressed, this, &RadioButtonSettingsEditor::selectColor);
+    connect(ui->labelPositionComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
 }
 
 RadioButtonSettingsEditor::~RadioButtonSettingsEditor()
@@ -64,43 +64,51 @@ void RadioButtonSettingsEditor::setupForm()
     switch (m_radioButton1->labelPosition())
     {
         case QtMaterialCheckable::LabelPositionLeft:
-            ui->labelPositionComboBox_2->setCurrentIndex(0);
+            ui->labelPositionComboBox->setCurrentIndex(0);
             break;
+
         case QtMaterialCheckable::LabelPositionRight:
-            ui->labelPositionComboBox_2->setCurrentIndex(1);
+            ui->labelPositionComboBox->setCurrentIndex(1);
             break;
+
         default:
             break;
     }
 
     ui->disabledCheckBox->setChecked(!m_radioButton1->isEnabled());
-    ui->labelTextLineEdit_2->setText(m_radioButton1->text());
-    ui->useThemeColorsCheckBox_3->setChecked(m_radioButton1->useThemeColors());
+    ui->labelTextLineEdit->setText(m_radioButton1->text());
+    ui->useThemeColorsCheckBox->setChecked(m_radioButton1->useThemeColors());
+    ui->textColorLineEdit->setText(m_radioButton1->textColor().name(QColor::HexRgb).toUpper());
+    ui->disabledColorLineEdit->setText(m_radioButton1->disabledColor().name(QColor::HexRgb).toUpper());
+    ui->checkedColorLineEdit->setText(m_radioButton1->checkedColor().name(QColor::HexRgb).toUpper());
+    ui->uncheckedColorLineEdit->setText(m_radioButton1->uncheckedColor().name(QColor::HexRgb).toUpper());
 }
 
 void RadioButtonSettingsEditor::updateWidget()
 {
-    switch (ui->labelPositionComboBox_2->currentIndex())
+    switch (ui->labelPositionComboBox->currentIndex())
     {
         case 0:
             m_radioButton1->setLabelPosition(QtMaterialCheckable::LabelPositionLeft);
             m_radioButton2->setLabelPosition(QtMaterialCheckable::LabelPositionLeft);
             m_radioButton3->setLabelPosition(QtMaterialCheckable::LabelPositionLeft);
             break;
+
         case 1:
             m_radioButton1->setLabelPosition(QtMaterialCheckable::LabelPositionRight);
             m_radioButton2->setLabelPosition(QtMaterialCheckable::LabelPositionRight);
             m_radioButton3->setLabelPosition(QtMaterialCheckable::LabelPositionRight);
             break;
+
         default:
             break;
     }
 
     m_radioButton1->setDisabled(ui->disabledCheckBox->isChecked());
-    m_radioButton1->setText(ui->labelTextLineEdit_2->text());
-    m_radioButton1->setUseThemeColors(ui->useThemeColorsCheckBox_3->isChecked());
-    m_radioButton2->setUseThemeColors(ui->useThemeColorsCheckBox_3->isChecked());
-    m_radioButton3->setUseThemeColors(ui->useThemeColorsCheckBox_3->isChecked());
+    m_radioButton1->setText(ui->labelTextLineEdit->text());
+    m_radioButton1->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
+    m_radioButton2->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
+    m_radioButton3->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
 }
 
 void RadioButtonSettingsEditor::selectColor()
@@ -109,35 +117,31 @@ void RadioButtonSettingsEditor::selectColor()
     if (dialog.exec() != 0)
     {
         QColor color = dialog.selectedColor();
-        QString senderName = sender()->objectName();
-        if ("textColorToolButton_2" == senderName)
+        if (sender() == ui->textColorToolButton)
         {
             m_radioButton1->setTextColor(color);
             m_radioButton2->setTextColor(color);
             m_radioButton3->setTextColor(color);
-            ui->textColorLineEdit_2->setText(color.name(QColor::HexRgb));
         }
-        else if ("disabledColorToolButton_2" == senderName)
+        else if (sender() == ui->disabledColorToolButton)
         {
             m_radioButton1->setDisabledColor(color);
             m_radioButton2->setDisabledColor(color);
             m_radioButton3->setDisabledColor(color);
-            ui->disabledColorLineEdit_2->setText(color.name(QColor::HexRgb));
         }
-        else if ("checkedColorToolButton_2" == senderName)
+        else if (sender() == ui->checkedColorToolButton)
         {
             m_radioButton1->setCheckedColor(color);
             m_radioButton2->setCheckedColor(color);
             m_radioButton3->setCheckedColor(color);
-            ui->checkedColorLineEdit_2->setText(color.name(QColor::HexRgb));
         }
-        else if ("uncheckedColorToolButton_2" == senderName)
+        else if (sender() == ui->uncheckedColorToolButton)
         {
             m_radioButton1->setUncheckedColor(color);
             m_radioButton2->setUncheckedColor(color);
             m_radioButton3->setUncheckedColor(color);
-            ui->uncheckedColorLineEdit_2->setText(color.name(QColor::HexRgb));
         }
+        ui->useThemeColorsCheckBox->setChecked(false);
     }
     setupForm();
 }

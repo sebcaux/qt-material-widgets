@@ -15,6 +15,11 @@ AppBarSettingsEditor::AppBarSettingsEditor(QWidget *parent)
 {
     ui->setupUi(_settingsWidget);
 
+    ui->navIconTypeComboBox->addItem("NavIconNone", QVariant(Material::NavIconNone));
+    ui->navIconTypeComboBox->addItem("NavIconMenu", QVariant(Material::NavIconMenu));
+    ui->navIconTypeComboBox->addItem("NavIconPrevious", QVariant(Material::NavIconPrevious));
+    ui->navIconTypeComboBox->addItem("NavIconUpper", QVariant(Material::NavIconUpper));
+
     m_appBar->setTitle("Inbox");
     m_appBar->setNavIconType(Material::NavIconMenu);
     m_appBar->addAction(new QAction(QtMaterialTheme::icon("social", "share"), tr("share")));
@@ -42,15 +47,12 @@ AppBarSettingsEditor::~AppBarSettingsEditor()
 
 void AppBarSettingsEditor::setupForm()
 {
-    ui->navIconTypeComboBox->addItem("NavIconNone", QVariant(Material::NavIconNone));
-    ui->navIconTypeComboBox->addItem("NavIconMenu", QVariant(Material::NavIconMenu));
-    ui->navIconTypeComboBox->addItem("NavIconPrevious", QVariant(Material::NavIconPrevious));
-    ui->navIconTypeComboBox->addItem("NavIconUpper", QVariant(Material::NavIconUpper));
-
     ui->titleLineEdit->setText(m_appBar->title());
     ui->navIconTypeComboBox->setCurrentIndex(m_appBar->navIconType());
     ui->iconsSizeSpinBox->setValue(m_appBar->iconSize().width());
     ui->useThemeColorsCheckBox->setChecked(m_appBar->useThemeColors());
+    ui->backgroundColorLineEdit->setText(m_appBar->backgroundColor().name(QColor::HexRgb).toUpper());
+    ui->foregroundColorLineEdit->setText(m_appBar->foregroundColor().name(QColor::HexRgb).toUpper());
 }
 
 void AppBarSettingsEditor::updateWidget()
@@ -67,17 +69,15 @@ void AppBarSettingsEditor::selectColor()
     if (dialog.exec() != 0)
     {
         QColor color = dialog.selectedColor();
-        QString senderName = sender()->objectName();
-        if ("backgroundColorToolButton" == senderName)
+        if (sender() == ui->backgroundColorToolButton)
         {
             m_appBar->setBackgroundColor(color);
-            ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        if ("foregroundColorToolButton" == senderName)
+        if (sender() == ui->foregroundColorToolButton)
         {
             m_appBar->setForegroundColor(color);
-            ui->foregroundColorLineEdit->setText(color.name(QColor::HexRgb));
         }
+        ui->useThemeColorsCheckBox->setChecked(false);
     }
     setupForm();
 }

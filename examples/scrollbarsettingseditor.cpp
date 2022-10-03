@@ -24,6 +24,12 @@ ScrollBarSettingsEditor::ScrollBarSettingsEditor(QWidget *parent)
                   "study of natural languages.</p><p>The distinction between the subjects of syntax and semantics has its origin in the study of natural languages.</p><p>The "
                   "distinction between the subjects of syntax and semantics has its origin in the study of natural languages.</p><p>The distinction between the subjects of syntax "
                   "and semantics has its origin in the study of natural languages.</p><p>The distinction between the subjects of syntax and semantics has its origin in the study "
+                  "of natural languages.</p><p>The distinction between the subjects of syntax and semantics has its origin in the study of natural languages.</p>"
+                  "<p>The distinction between the subjects of syntax and semantics has its origin in the study of natural languages.</p><p>The distinction between the subjects of "
+                  "syntax and semantics has its origin in the study of natural languages.</p><p>The distinction between the subjects of syntax and semantics has its origin in the "
+                  "study of natural languages.</p><p>The distinction between the subjects of syntax and semantics has its origin in the study of natural languages.</p><p>The "
+                  "distinction between the subjects of syntax and semantics has its origin in the study of natural languages.</p><p>The distinction between the subjects of syntax "
+                  "and semantics has its origin in the study of natural languages.</p><p>The distinction between the subjects of syntax and semantics has its origin in the study "
                   "of natural languages.</p><p>The distinction between the subjects of syntax and semantics has its origin in the study of natural languages.</p>");
     edit->setLineWrapMode(QTextEdit::NoWrap);
     edit->update();

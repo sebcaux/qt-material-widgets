@@ -46,9 +46,11 @@ void CheckBoxSettingsEditor::setupForm()
         case QtMaterialCheckable::LabelPositionLeft:
             ui->labelPositionComboBox->setCurrentIndex(0);
             break;
+
         case QtMaterialCheckable::LabelPositionRight:
             ui->labelPositionComboBox->setCurrentIndex(1);
             break;
+
         default:
             break;
     }
@@ -57,6 +59,10 @@ void CheckBoxSettingsEditor::setupForm()
     ui->labelTextLineEdit->setText(m_checkBox->text());
     ui->useThemeColorsCheckBox->setChecked(m_checkBox->useThemeColors());
     ui->checkedCheckBox->setChecked(m_checkBox->isChecked());
+    ui->textColorLineEdit->setText(m_checkBox->textColor().name(QColor::HexRgb).toUpper());
+    ui->disabledColorLineEdit->setText(m_checkBox->disabledColor().name(QColor::HexRgb).toUpper());
+    ui->checkedColorLineEdit->setText(m_checkBox->checkedColor().name(QColor::HexRgb).toUpper());
+    ui->uncheckedColorLineEdit->setText(m_checkBox->uncheckedColor().name(QColor::HexRgb).toUpper());
 }
 
 void CheckBoxSettingsEditor::updateWidget()
@@ -66,9 +72,11 @@ void CheckBoxSettingsEditor::updateWidget()
         case 0:
             m_checkBox->setLabelPosition(QtMaterialCheckable::LabelPositionLeft);
             break;
+
         case 1:
             m_checkBox->setLabelPosition(QtMaterialCheckable::LabelPositionRight);
             break;
+
         default:
             break;
     }
@@ -85,27 +93,23 @@ void CheckBoxSettingsEditor::selectColor()
     if (dialog.exec() != 0)
     {
         QColor color = dialog.selectedColor();
-        QString senderName = sender()->objectName();
-        if ("textColorToolButton" == senderName)
+        if (sender() == ui->textColorToolButton)
         {
             m_checkBox->setTextColor(color);
-            ui->textColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("disabledColorToolButton" == senderName)
+        else if (sender() == ui->disabledColorToolButton)
         {
             m_checkBox->setDisabledColor(color);
-            ui->disabledColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("checkedColorToolButton" == senderName)
+        else if (sender() == ui->checkedColorToolButton)
         {
             m_checkBox->setCheckedColor(color);
-            ui->checkedColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("uncheckedColorToolButton" == senderName)
+        else if (sender() == ui->uncheckedColorToolButton)
         {
             m_checkBox->setUncheckedColor(color);
-            ui->uncheckedColorLineEdit->setText(color.name(QColor::HexRgb));
         }
+        ui->useThemeColorsCheckBox->setChecked(false);
     }
     setupForm();
 }

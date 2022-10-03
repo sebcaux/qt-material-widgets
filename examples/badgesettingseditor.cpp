@@ -57,6 +57,8 @@ void BadgeSettingsEditor::setupForm()
     ui->horizontalOffsetSpinBox->setValue(m_badge->relativePosition().x());
     ui->disabledCheckBox->setChecked(!m_badge->isEnabled());
     ui->useThemeColorsCheckBox->setChecked(m_badge->useThemeColors());
+    ui->textColorLineEdit->setText(m_badge->textColor().name(QColor::HexRgb).toUpper());
+    ui->backgroundColorLineEdit->setText(m_badge->backgroundColor().name(QColor::HexRgb).toUpper());
 }
 
 void BadgeSettingsEditor::updateWidget()
@@ -66,9 +68,11 @@ void BadgeSettingsEditor::updateWidget()
         case 0:
             m_badge->setText("3");
             break;
+
         case 1:
             m_badge->setIcon(QIcon(QtMaterialTheme::icon("communication", "message")));
             break;
+
         default:
             break;
     }
@@ -84,17 +88,15 @@ void BadgeSettingsEditor::selectColor()
     if (dialog.exec() != 0)
     {
         QColor color = dialog.selectedColor();
-        QString senderName = sender()->objectName();
-        if ("textColorToolButton" == senderName)
+        if (sender() == ui->textColorToolButton)
         {
             m_badge->setTextColor(color);
-            ui->textColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("backgroundColorToolButton" == senderName)
+        else if (sender() == ui->backgroundColorToolButton)
         {
             m_badge->setBackgroundColor(color);
-            ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
         }
+        ui->useThemeColorsCheckBox->setChecked(false);
     }
     setupForm();
 }

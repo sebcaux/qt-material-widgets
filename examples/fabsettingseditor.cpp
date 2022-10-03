@@ -43,12 +43,15 @@ void FloatingActionButtonSettingsEditor::setupForm()
         case Material::Default:
             ui->buttonRoleComboBox->setCurrentIndex(0);
             break;
+
         case Material::Primary:
             ui->buttonRoleComboBox->setCurrentIndex(1);
             break;
+
         case Material::Secondary:
             ui->buttonRoleComboBox->setCurrentIndex(2);
             break;
+
         default:
             break;
     }
@@ -58,15 +61,19 @@ void FloatingActionButtonSettingsEditor::setupForm()
         case Qt::TopLeftCorner:
             ui->cornerComboBox->setCurrentIndex(0);
             break;
+
         case Qt::TopRightCorner:
             ui->cornerComboBox->setCurrentIndex(1);
             break;
+
         case Qt::BottomLeftCorner:
             ui->cornerComboBox->setCurrentIndex(2);
             break;
+
         case Qt::BottomRightCorner:
             ui->cornerComboBox->setCurrentIndex(3);
             break;
+
         default:
             break;
     }
@@ -76,12 +83,15 @@ void FloatingActionButtonSettingsEditor::setupForm()
         case Material::CenteredRipple:
             ui->rippleStyleComboBox->setCurrentIndex(0);
             break;
+
         case Material::PositionedRipple:
             ui->rippleStyleComboBox->setCurrentIndex(1);
             break;
+
         case Material::NoRipple:
             ui->rippleStyleComboBox->setCurrentIndex(2);
             break;
+
         default:
             break;
     }
@@ -91,6 +101,10 @@ void FloatingActionButtonSettingsEditor::setupForm()
     ui->verticalOffsetSpinBox->setValue(m_fab->offset().y());
     ui->miniCheckBox->setChecked(m_fab->isMini());
     ui->useThemeColorsCheckBox->setChecked(m_fab->useThemeColors());
+    ui->foregroundColorLineEdit->setText(m_fab->foregroundColor().name(QColor::HexRgb).toUpper());
+    ui->backgroundColorLineEdit->setText(m_fab->backgroundColor().name(QColor::HexRgb).toUpper());
+    ui->disabledFgColorLineEdit->setText(m_fab->disabledForegroundColor().name(QColor::HexRgb).toUpper());
+    ui->disabledBgColorLineEdit->setText(m_fab->disabledBackgroundColor().name(QColor::HexRgb).toUpper());
 }
 
 void FloatingActionButtonSettingsEditor::updateWidget()
@@ -100,12 +114,15 @@ void FloatingActionButtonSettingsEditor::updateWidget()
         case 0:
             m_fab->setRole(Material::Default);
             break;
+
         case 1:
             m_fab->setRole(Material::Primary);
             break;
+
         case 2:
             m_fab->setRole(Material::Secondary);
             break;
+
         default:
             break;
     }
@@ -115,15 +132,19 @@ void FloatingActionButtonSettingsEditor::updateWidget()
         case 0:
             m_fab->setCorner(Qt::TopLeftCorner);
             break;
+
         case 1:
             m_fab->setCorner(Qt::TopRightCorner);
             break;
+
         case 2:
             m_fab->setCorner(Qt::BottomLeftCorner);
             break;
+
         case 3:
             m_fab->setCorner(Qt::BottomRightCorner);
             break;
+
         default:
             break;
     }
@@ -133,12 +154,15 @@ void FloatingActionButtonSettingsEditor::updateWidget()
         case 0:
             m_fab->setRippleStyle(Material::CenteredRipple);
             break;
+
         case 1:
             m_fab->setRippleStyle(Material::PositionedRipple);
             break;
+
         case 2:
             m_fab->setRippleStyle(Material::NoRipple);
             break;
+
         default:
             break;
     }
@@ -155,27 +179,23 @@ void FloatingActionButtonSettingsEditor::selectColor()
     if (dialog.exec() != 0)
     {
         QColor color = dialog.selectedColor();
-        QString senderName = sender()->objectName();
-        if ("foregroundColorToolButton" == senderName)
+        if (sender() == ui->foregroundColorToolButton)
         {
             m_fab->setForegroundColor(color);
-            ui->foregroundColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("backgroundColorToolButton" == senderName)
+        else if (sender() == ui->backgroundColorToolButton)
         {
             m_fab->setBackgroundColor(color);
-            ui->backgroundColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("disabledFgColorToolButton" == senderName)
+        else if (sender() == ui->disabledFgColorToolButton)
         {
             m_fab->setDisabledForegroundColor(color);
-            ui->disabledFgColorLineEdit->setText(color.name(QColor::HexRgb));
         }
-        else if ("disabledBgColorToolButton" == senderName)
+        else if (sender() == ui->disabledBgColorToolButton)
         {
             m_fab->setDisabledBackgroundColor(color);
-            ui->disabledBgColorLineEdit->setText(color.name(QColor::HexRgb));
         }
+        ui->useThemeColorsCheckBox->setChecked(false);
     }
     setupForm();
 }

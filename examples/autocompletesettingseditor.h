@@ -3,8 +3,6 @@
 
 #include "settingseditor.h"
 
-#include "lib/qtmaterialoverlaywidget.h"
-
 class QtMaterialAutoComplete;
 
 class AutoCompleteSettingsEditor : public SettingsEditor

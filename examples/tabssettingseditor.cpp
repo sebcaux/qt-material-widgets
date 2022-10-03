@@ -14,7 +14,6 @@ TabsSettingsEditor::TabsSettingsEditor(QWidget *parent)
 
     QVBoxLayout *layout = new QVBoxLayout;
     _canvas->setLayout(layout);
-    //_canvas->setMaximumHeight(300);
     layout->addWidget(m_tabs);
     layout->setAlignment(m_tabs, Qt::AlignHCenter);
 
