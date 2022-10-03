@@ -71,12 +71,11 @@ FORMS += \
     $$PWD/snackbarsettingsform.ui \
     $$PWD/tabssettingsform.ui \
     $$PWD/textfieldsettingsform.ui \
-    $$PWD/togglesettingsform.ui
+    $$PWD/switchsettingsform.ui
 
 RESOURCES += \
-    examples.qrc
+    $$PWD/examples.qrc
 
 LIBS += $$top_builddir/components/$(OBJECTS_DIR)/libcomponents.a
 INCLUDEPATH += $$top_srcdir/components/
-TARGET = examples-exe
 PRE_TARGETDEPS += $$top_builddir/components/$(OBJECTS_DIR)/libcomponents.a
