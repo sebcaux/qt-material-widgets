@@ -42,7 +42,10 @@ void QtMaterialTextFieldPrivate::init()
 
     q->setFont(QFont("Roboto", 11, QFont::Normal));
 
-    q->setStyleSheet("QLineEdit {background-color: rgba(0, 0, 0, 0);}");
+    QPalette p = q->palette();
+    p.setColor(QPalette::Base, QColor(0, 0, 0, 0));
+    p.setColor(QPalette::Text, q->textColor());
+    q->setPalette(p);
 
     stateMachine->start();
     QCoreApplication::processEvents();
@@ -73,6 +76,11 @@ void QtMaterialTextField::setUseThemeColors(bool value)
     }
 
     d->useThemeColors = value;
+
+    QPalette p = palette();
+    p.setColor(QPalette::Text, textColor());
+    setPalette(p);
+
     d->stateMachine->setupProperties();
 }
 
@@ -160,9 +168,12 @@ void QtMaterialTextField::setTextColor(const QColor &color)
     Q_D(QtMaterialTextField);
 
     d->textColor = color;
-    setStyleSheet(QString("QLineEdit { color: %1; background-color: rgba(0, 0, 0, 0);}").arg(color.name()));
-
     d->useThemeColors = false;
+
+    QPalette p = palette();
+    p.setColor(QPalette::Text, d->textColor);
+    setPalette(p);
+
     d->stateMachine->setupProperties();
 }
 
