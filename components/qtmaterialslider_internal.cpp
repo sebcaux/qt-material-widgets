@@ -202,11 +202,21 @@ QtMaterialSliderStateMachine::~QtMaterialSliderStateMachine()
 void QtMaterialSliderStateMachine::setupProperties()
 {
     QColor trackColor = m_slider->trackColor();
+    QColor trackColorLighter = trackColor.lighter(130);
     QColor thumbColor = m_slider->thumbColor();
 
-    m_inactiveState->assignProperty(m_track, "fillColor", trackColor.lighter(130));
+    m_inactiveState->assignProperty(m_track, "fillColor", trackColorLighter);
     m_slidingState->assignProperty(m_track, "fillColor", trackColor);
     m_focusState->assignProperty(m_track, "fillColor", trackColor);
+
+    if (m_inactiveState->active())
+    {
+        m_track->setFillColor(trackColorLighter);
+    }
+    else
+    {
+        m_track->setFillColor(trackColor);
+    }
 
     QColor holeColor = m_slider->palette().color(QPalette::Base);
 
