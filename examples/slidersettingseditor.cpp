@@ -26,6 +26,11 @@ SliderSettingsEditor::SliderSettingsEditor(QWidget *parent)
     connect(ui->invertedCheckBox, &QAbstractButton::toggled, this, &SliderSettingsEditor::updateWidget);
 
     connect(m_slider, &QAbstractSlider::valueChanged, this, &SliderSettingsEditor::setupForm);
+
+    connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &SliderSettingsEditor::updateWidget);
+    connect(ui->thumbColorToolButton, &QAbstractButton::pressed, this, &SliderSettingsEditor::selectColor);
+    connect(ui->trackColorToolButton, &QAbstractButton::pressed, this, &SliderSettingsEditor::selectColor);
+    connect(ui->disabledColorToolButton, &QAbstractButton::pressed, this, &SliderSettingsEditor::selectColor);
 }
 
 SliderSettingsEditor::~SliderSettingsEditor()
@@ -52,6 +57,10 @@ void SliderSettingsEditor::setupForm()
     ui->disabledCheckBox->setChecked(!m_slider->isEnabled());
     ui->valueLineEdit->setText(QString::number(m_slider->value()));
     ui->invertedCheckBox->setChecked(m_slider->invertedAppearance());
+    ui->useThemeColorsCheckBox->setChecked(m_slider->useThemeColors());
+    ui->thumbColorLineEdit->setText(m_slider->thumbColor().name(QColor::HexRgb).toUpper());
+    ui->trackColorLineEdit->setText(m_slider->trackColor().name(QColor::HexRgb).toUpper());
+    ui->disabledColorLineEdit->setText(m_slider->disabledColor().name(QColor::HexRgb).toUpper());
 }
 
 void SliderSettingsEditor::updateWidget()
@@ -73,4 +82,28 @@ void SliderSettingsEditor::updateWidget()
     m_slider->setDisabled(ui->disabledCheckBox->isChecked());
     m_slider->setValue(ui->valueLineEdit->text().toInt());
     m_slider->setInvertedAppearance(ui->invertedCheckBox->isChecked());
+    m_slider->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
+}
+
+void SliderSettingsEditor::selectColor()
+{
+    QColorDialog dialog;
+    if (dialog.exec() != 0)
+    {
+        QColor color = dialog.selectedColor();
+        if (sender() == ui->thumbColorToolButton)
+        {
+            m_slider->setThumbColor(color);
+        }
+        if (sender() == ui->trackColorToolButton)
+        {
+            m_slider->setTrackColor(color);
+        }
+        if (sender() == ui->disabledColorToolButton)
+        {
+            m_slider->setDisabledColor(color);
+        }
+        ui->useThemeColorsCheckBox->setChecked(false);
+    }
+    setupForm();
 }

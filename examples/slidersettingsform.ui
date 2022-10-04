@@ -13,67 +13,150 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="disabledLabel">
-       <property name="text">
-        <string>Disabled</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QCheckBox" name="disabledCheckBox"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="valueLabel">
-       <property name="text">
-        <string>Value</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="valueLineEdit"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="orientationLabel">
-       <property name="text">
-        <string>Orientation</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QComboBox" name="orientationComboBox">
-       <item>
-        <property name="text">
-         <string>Horizontal</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Vertical</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="invertedLabel">
-       <property name="text">
-        <string>Inverted</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QCheckBox" name="invertedCheckBox"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QLabel" name="label">
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="disabledLabel">
      <property name="text">
-      <string>TODO</string>
+      <string>Disabled</string>
      </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QCheckBox" name="disabledCheckBox"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="valueLabel">
+     <property name="text">
+      <string>Value</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="valueLineEdit"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="orientationLabel">
+     <property name="text">
+      <string>Orientation</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="invertedLabel">
+     <property name="text">
+      <string>Inverted</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QCheckBox" name="invertedCheckBox"/>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QGroupBox" name="themeColorGroupBox">
+     <property name="title">
+      <string>Colors</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="useThemeColorsLabel">
+        <property name="text">
+         <string>Use theme colors</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="useThemeColorsCheckBox"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="thumbColorLabel">
+        <property name="text">
+         <string>Thumb color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QLineEdit" name="thumbColorLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="thumbColorToolButton">
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="trackColorLabel">
+        <property name="text">
+         <string>Track color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QLineEdit" name="trackColorLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="trackColorToolButton">
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="disabledColorLabel">
+        <property name="text">
+         <string>Disabled color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <widget class="QLineEdit" name="disabledColorLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="disabledColorToolButton">
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="orientationComboBox">
+     <item>
+      <property name="text">
+       <string>Horizontal</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Vertical</string>
+      </property>
+     </item>
     </widget>
    </item>
   </layout>
