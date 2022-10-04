@@ -299,6 +299,13 @@ bool QtMaterialTextField::event(QEvent *event)
                 d->label->setGeometry(rect());
             }
         }
+
+        case QEvent::StyleChange:
+        {
+            d->stateMachine->setupProperties();
+            break;
+        }
+
         default:
             break;
     }

@@ -411,3 +411,21 @@ void QtMaterialSlider::updateThumbOffset()
 
     d->thumb->setOffset(offset);
 }
+
+bool QtMaterialSlider::event(QEvent *event)
+{
+    Q_D(QtMaterialSlider);
+
+    switch (event->type())
+    {
+        case QEvent::StyleChange:
+        {
+            d->stateMachine->setupProperties();
+            break;
+        }
+
+        default:
+            break;
+    }
+    return QAbstractSlider::event(event);
+}

@@ -304,6 +304,13 @@ bool QtMaterialSwitch::event(QEvent *event)
             }
             break;
         }
+
+        case QEvent::StyleChange:
+        {
+            d->setupProperties();
+            break;
+        }
+
         default:
             break;
     }

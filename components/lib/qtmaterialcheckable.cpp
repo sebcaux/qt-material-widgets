@@ -314,6 +314,10 @@ bool QtMaterialCheckable::event(QEvent *event)
             d->rippleOverlay->setGeometry(geometry().adjusted(-8, -8, 8, 8));
             break;
 
+        case QEvent::StyleChange:
+            setupProperties();
+            break;
+
         case QEvent::ParentChange:
             QWidget *widget;
             if ((widget = parentWidget()) != nullptr)
