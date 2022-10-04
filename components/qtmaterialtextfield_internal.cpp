@@ -124,6 +124,7 @@ void QtMaterialTextFieldStateMachine::setupProperties()
         {
             m_label->setOffset(QPointF(0, 26));
         }
+        m_label->setColor(m_textField->labelColor());
     }
 
     m_textField->update();
