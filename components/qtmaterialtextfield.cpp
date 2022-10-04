@@ -40,7 +40,7 @@ void QtMaterialTextFieldPrivate::init()
     q->setMouseTracking(true);
     q->setTextMargins(0, 2, 0, 4);
 
-    q->setFont(QFont("Roboto", 11, QFont::Normal));
+    q->setFont(QtMaterialStyle::instance().themeFont(Material::FontBody1));
 
     QPalette p = q->palette();
     p.setColor(QPalette::Base, QColor(0, 0, 0, 0));

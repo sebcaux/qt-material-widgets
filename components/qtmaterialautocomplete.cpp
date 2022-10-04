@@ -3,6 +3,7 @@
 #include "qtmaterialautocomplete_internal.h"
 #include "qtmaterialautocomplete_p.h"
 #include "qtmaterialflatbutton.h"
+#include "lib/qtmaterialstyle.h"
 
 #include <QEvent>
 #include <QGraphicsDropShadowEffect>
@@ -110,9 +111,9 @@ void QtMaterialAutoComplete::updateResults(const QString &text)
         }
     }
 
-    const int diff = results.length() - d->menuLayout->count();
-    QFont font("Roboto", 12, QFont::Normal);
+    QFont font = QtMaterialStyle::instance().themeFont(Material::FontBody1);
 
+    const int diff = results.length() - d->menuLayout->count();
     if (diff > 0)
     {
         for (int c = 0; c < diff; c++)
