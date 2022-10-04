@@ -4,6 +4,7 @@
 #include "qtmaterialcanvas_p.h"
 #include "qtmaterialscrollbar.h"
 
+#include <QPainter>
 #include <QScroller>
 
 #if QT_VERSION >= 0x060000
@@ -36,6 +37,8 @@ void QtMaterialCanvasPrivate::init()
 
     q->setVerticalScrollBar(new QtMaterialScrollBar());
     q->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    q->setFrameShape(QFrame::NoFrame);
 
     QScrollerProperties ScrollerProperties = QScroller::scroller(q->viewport())->scrollerProperties();
     ScrollerProperties.setScrollMetric(QScrollerProperties::VerticalOvershootPolicy, QScrollerProperties::OvershootAlwaysOn);
@@ -106,6 +109,7 @@ void QtMaterialCanvas::setUseThemeColors(bool value)
     }
 
     d->useThemeColors = value;
+    update();
 }
 
 QColor QtMaterialCanvas::backgroundColor() const
@@ -114,7 +118,7 @@ QColor QtMaterialCanvas::backgroundColor() const
 
     if (d->useThemeColors || !d->backgroundColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeCanvas);
     }
 
     return d->backgroundColor;
@@ -131,4 +135,13 @@ void QtMaterialCanvas::setBackgroundColor(const QColor &color)
         d->useThemeColors = false;
     }
     update();
+}
+
+void QtMaterialCanvas::paintEvent(QPaintEvent *event)
+{
+    Q_UNUSED(event);
+
+    QPainter painter(viewport());
+
+    painter.fillRect(rect(), backgroundColor());
 }

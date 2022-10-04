@@ -24,6 +24,10 @@ protected:
 private:
     Q_DISABLE_COPY(QtMaterialCanvas)
     Q_DECLARE_PRIVATE(QtMaterialCanvas)
+
+    // QWidget interface
+protected:
+    void paintEvent(QPaintEvent *event) override;
 };
 
 #endif  // QTMATERIALCANVAS_H
