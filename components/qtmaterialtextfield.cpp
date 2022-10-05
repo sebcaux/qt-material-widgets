@@ -298,6 +298,7 @@ bool QtMaterialTextField::event(QEvent *event)
             {
                 d->label->setGeometry(rect());
             }
+            break;
         }
 
         case QEvent::StyleChange:
@@ -312,6 +313,7 @@ bool QtMaterialTextField::event(QEvent *event)
             {
                 setStyleSheet("QLineEdit {background-color: rgba(0, 0, 0, 0);}");
             }
+            break;
         }
 
         default:
@@ -336,7 +338,7 @@ void QtMaterialTextField::paintEvent(QPaintEvent *event)
     {
         bgBase = 150;
     }
-    QColor bgColor(0xe8, 0xe8, 0xe8, bgBase + progress * (255 - bgBase));
+    QColor bgColor(0xe8, 0xe8, 0xe8, static_cast<int>(bgBase + progress * (255 - bgBase)));
     painterBg.setBrush(bgColor);
     painterBg.setPen(QPen(Qt::NoPen));
     QPainterPath path;
@@ -382,15 +384,16 @@ void QtMaterialTextField::paintEvent(QPaintEvent *event)
         painter.setOpacity(1);
         painter.drawLine(QLineF(2.5, y, wd, y));
 
-        QBrush brush;
-        brush.setStyle(Qt::SolidPattern);
-        brush.setColor(inkColor());
-
         if (progress > 0)
         {
+            QBrush brush;
+            brush.setStyle(Qt::SolidPattern);
+            brush.setColor(inkColor());
+
             painter.setPen(Qt::NoPen);
             painter.setBrush(brush);
-            const int w = (1 - progress) * static_cast<qreal>(wd / 2);
+
+            const int w = static_cast<int>((1 - progress) * static_cast<qreal>(wd / 2.0));
             painter.drawRect(w, height() - 2, wd - w * 2, 2);
         }
     }
