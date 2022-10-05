@@ -96,13 +96,19 @@ QtMaterialTheme::QtMaterialTheme(QObject *parent)
     setColor(Material::ColorThemePrimaryMain, QColor(0x21, 0x96, 0xF3));
     setColor(Material::ColorThemePrimaryLight, QColor(0xBB, 0xDE, 0xFB));
     setColor(Material::ColorThemePrimaryDark, QColor(0x19, 0x76, 0xD2));
+    setColor(Material::ColorThemePrimaryText, Material::white);
+
+    setColor(Material::ColorThemeSecondaryMain, QColor(0xFF, 0x98, 0x00));
+    setColor(Material::ColorThemeSecondaryLight, QColor(0xFF, 0xAC, 0x33));
+    setColor(Material::ColorThemeSecondaryDark, QColor(0xB2, 0x6A, 0x00));
+    setColor(Material::ColorThemeSecondaryText, Material::black);
+
     setColor(Material::ColorThemeText, QColor(0x21, 0x21, 0x21));
     setColor(Material::ColorThemeAlternateText, QColor(0xFF, 0xFF, 0xFF));
-    setColor(Material::ColorThemeSecondaryMain, QColor(0xFF, 0x98, 0x00));
-    setColor(Material::ColorThemeSecondaryLight, Material::grey100);
-    setColor(Material::ColorThemeSecondaryDark, Material::grey500);
+
     setColor(Material::ColorThemeCanvas, Material::white);
     setColor(Material::ColorThemeBorder, Material::grey300);
+
     setColor(Material::ColorThemeDisabled1, Material::minBlack);
     setColor(Material::ColorThemeDisabled2, Material::faintBlack);
     setColor(Material::ColorThemeDisabled3, Material::grey300);

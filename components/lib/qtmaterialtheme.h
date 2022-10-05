@@ -13,7 +13,7 @@ namespace Material
 enum FontType : unsigned int;
 enum ThemeColor : unsigned int;
 enum Color : unsigned int;
-}
+}  // namespace Material
 
 class QtMaterialThemePrivate;
 
@@ -79,7 +79,8 @@ enum ButtonPreset
     ButtonFlatSecondary,
 };
 
-enum NavIconType {
+enum NavIconType
+{
     NavIconNone,
     NavIconMenu,
     NavIconPrevious,
