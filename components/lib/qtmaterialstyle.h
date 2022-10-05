@@ -15,6 +15,7 @@ public:
 
     QtMaterialTheme *theme() const;
     void setTheme(QtMaterialTheme *theme);
+    void applyThemeModifications() const;
 
     const QColor &themeColor(Material::ThemeColor colorTheme) const;
     const QFont &themeFont(Material::FontType fontType) const;

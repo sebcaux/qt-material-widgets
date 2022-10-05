@@ -2,7 +2,9 @@
 
 #include "lib/qtmaterialtheme.h"
 
+#include <QApplication>
 #include <QFontDatabase>
+#include <QWidget>
 
 /*!
  *  \class QtMaterialStylePrivate
@@ -10,7 +12,8 @@
  */
 
 QtMaterialStylePrivate::QtMaterialStylePrivate(QtMaterialStyle *q)
-    : q_ptr(q)
+    : q_ptr(q),
+      theme(nullptr)
 {
 }
 
@@ -45,8 +48,36 @@ void QtMaterialStyle::setTheme(QtMaterialTheme *theme)
 {
     Q_D(QtMaterialStyle);
 
+    if (theme == nullptr)
+    {
+        return;
+    }
+
+    QtMaterialTheme *oldTheme = d->theme;
+
     d->theme = theme;
     theme->setParent(this);
+
+    applyThemeModifications();
+
+    if (oldTheme != nullptr)
+    {
+        oldTheme->deleteLater();
+    }
+}
+
+void QtMaterialStyle::applyThemeModifications() const
+{
+    QWidgetList allWidgets = QApplication::allWidgets();
+    for (QWidget *w : allWidgets)
+    {
+        if (w->windowType() != Qt::Desktop && !w->testAttribute(Qt::WA_SetStyle))
+        {
+            QEvent e(QEvent::StyleChange);
+            QCoreApplication::sendEvent(w, &e);
+            w->update();
+        }
+    }
 }
 
 const QColor &QtMaterialStyle::themeColor(Material::ThemeColor themeColor) const
