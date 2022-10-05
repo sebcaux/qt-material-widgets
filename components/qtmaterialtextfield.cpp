@@ -306,6 +306,14 @@ bool QtMaterialTextField::event(QEvent *event)
             break;
         }
 
+        case QEvent::ParentChange:
+        {
+            if (testAttribute(Qt::WA_StyleSheet))
+            {
+                setStyleSheet("QLineEdit {background-color: rgba(0, 0, 0, 0);}");
+            }
+        }
+
         default:
             break;
     }
