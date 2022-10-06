@@ -284,10 +284,23 @@ bool QtMaterialAppBar::event(QEvent *event)
 {
     Q_D(QtMaterialAppBar);
 
-    if (event->type() == QEvent::FontChange)
+    switch (event->type())
     {
-        d->titleLabel->setFont(font());
-        updateGeometry();
+        case QEvent::FontChange:
+        {
+            d->titleLabel->setFont(font());
+            updateGeometry();
+        }
+        case QEvent::StyleChange:
+        {
+            d->updateChildrenColor();
+            update();
+            break;
+        }
+        default:
+        {
+            break;
+        }
     }
     return QWidget::event(event);
 }
@@ -318,14 +331,18 @@ void QtMaterialAppBar::actionEvent(QActionEvent *event)
             d->layout->insertAction(0, action);
             break;
         }
+
         case QEvent::ActionChanged:
+        {
             d->layout->updateActions();
             d->layout->invalidate();
             break;
+        }
 
         case QEvent::ActionRemoved:
         {
             // TODO
+            break;
         }
 
         default:
