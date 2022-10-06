@@ -24,13 +24,15 @@ public slots:
     void hideDialog();
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
-
     const QScopedPointer<QtMaterialDialogPrivate> d_ptr;
 
 private:
     Q_DISABLE_COPY(QtMaterialDialog)
     Q_DECLARE_PRIVATE(QtMaterialDialog)
+
+    // QWidget interface
+protected:
+    void paintEvent(QPaintEvent *event) override;
 };
 
 #endif  // QTMATERIALDIALOG_H
