@@ -248,7 +248,7 @@ QColor QtMaterialAppBar::foregroundColor() const
 
     if (d->useThemeColors || !d->foregroundColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAlternateText);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryText);
     }
 
     return d->foregroundColor;
