@@ -235,7 +235,7 @@ bool QtMaterialSlider::pageStepMode() const
  */
 QSize QtMaterialSlider::minimumSizeHint() const
 {
-    return Qt::Horizontal == orientation() ? QSize(130, 34) : QSize(34, 130);
+    return (Qt::Horizontal == orientation()) ? QSize(130, 34) : QSize(34, 130);
 }
 
 void QtMaterialSlider::setInvertedAppearance(bool value)
@@ -252,7 +252,7 @@ void QtMaterialSlider::sliderChange(SliderChange change)
 {
     Q_D(QtMaterialSlider);
 
-    if (SliderOrientationChange == change)
+    if (change == SliderOrientationChange)
     {
         QSizePolicy sp(QSizePolicy::Expanding, QSizePolicy::Fixed);
         if (orientation() == Qt::Vertical)
@@ -261,7 +261,7 @@ void QtMaterialSlider::sliderChange(SliderChange change)
         }
         setSizePolicy(sp);
     }
-    else if (SliderValueChange == change)
+    else if (change == SliderValueChange)
     {
         if (minimum() == value())
         {

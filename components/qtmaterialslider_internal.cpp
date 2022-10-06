@@ -226,7 +226,6 @@ void QtMaterialSliderStateMachine::setupProperties()
     }
 
     m_minState->assignProperty(m_thumb, "fillColor", holeColor);
-
     m_minState->assignProperty(m_thumb, "haloColor", trackColor);
     m_minState->assignProperty(m_thumb, "borderColor", trackColor);
 
@@ -356,7 +355,7 @@ QtMaterialSliderTrack::~QtMaterialSliderTrack()
 
 bool QtMaterialSliderTrack::eventFilter(QObject *obj, QEvent *event)
 {
-    if (QEvent::ParentChange == event->type())
+    if (event->type() == QEvent::ParentChange)
     {
         setParent(m_slider->parentWidget());
     }
