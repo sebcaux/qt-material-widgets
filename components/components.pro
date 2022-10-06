@@ -35,6 +35,7 @@ SOURCES = \
     $$PWD/qtmaterialflatbutton.cpp \
     $$PWD/qtmaterialflatbutton_internal.cpp \
     $$PWD/qtmaterialiconbutton.cpp \
+    $$PWD/qtmateriallabel.cpp \
     $$PWD/qtmaterialprogress.cpp \
     $$PWD/qtmaterialprogress_internal.cpp \
     $$PWD/qtmaterialradiobutton.cpp \
@@ -45,12 +46,12 @@ SOURCES = \
     $$PWD/qtmaterialsnackbar.cpp \
     $$PWD/qtmaterialsnackbar_internal.cpp \
     $$PWD/qtmaterialsystembar.cpp \
+    $$PWD/qtmaterialswitch.cpp \
+    $$PWD/qtmaterialswitch_internal.cpp \
     $$PWD/qtmaterialtabs.cpp \
     $$PWD/qtmaterialtabs_internal.cpp \
     $$PWD/qtmaterialtextfield.cpp \
-    $$PWD/qtmaterialtextfield_internal.cpp \
-    $$PWD/qtmaterialswitch.cpp \
-    $$PWD/qtmaterialswitch_internal.cpp
+    $$PWD/qtmaterialtextfield_internal.cpp
 
 HEADERS = \
     $$PWD/layouts/qtmaterialslidelayout.h \
@@ -99,6 +100,8 @@ HEADERS = \
     $$PWD/qtmaterialflatbutton_p.h \
     $$PWD/qtmaterialiconbutton.h \
     $$PWD/qtmaterialiconbutton_p.h \
+    $$PWD/qtmateriallabel.h \
+    $$PWD/qtmateriallabel_p.h \
     $$PWD/qtmaterialprogress.h \
     $$PWD/qtmaterialprogress_internal.h \
     $$PWD/qtmaterialprogress_p.h \
@@ -115,15 +118,15 @@ HEADERS = \
     $$PWD/qtmaterialsnackbar_p.h \
     $$PWD/qtmaterialsystembar.h \
     $$PWD/qtmaterialsystembar_p.h \
+    $$PWD/qtmaterialswitch.h \
+    $$PWD/qtmaterialswitch_internal.h \
+    $$PWD/qtmaterialswitch_p.h \
     $$PWD/qtmaterialtabs.h \
     $$PWD/qtmaterialtabs_internal.h \
     $$PWD/qtmaterialtabs_p.h \
     $$PWD/qtmaterialtextfield.h \
     $$PWD/qtmaterialtextfield_internal.h \
-    $$PWD/qtmaterialtextfield_p.h \
-    $$PWD/qtmaterialswitch.h \
-    $$PWD/qtmaterialswitch_internal.h \
-    $$PWD/qtmaterialswitch_p.h
+    $$PWD/qtmaterialtextfield_p.h
 
 RESOURCES += \
     $$PWD/resources.qrc
