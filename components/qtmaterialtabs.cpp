@@ -60,6 +60,10 @@ void QtMaterialTabs::setUseThemeColors(bool value)
     Q_D(QtMaterialTabs);
 
     d->useThemeColors = value;
+
+    updateTabs();
+    d->inkBar->update();
+    update();
 }
 
 bool QtMaterialTabs::useThemeColors() const
@@ -325,8 +329,15 @@ void QtMaterialTabs::updateTabs()
         {
             tab->setRippleStyle(d->rippleStyle);
             tab->setHaloVisible(d->showHalo);
-            tab->setBackgroundColor(backgroundColor());
-            tab->setForegroundColor(textColor());
+            if (d->useThemeColors)
+            {
+                tab->setUseThemeColors(true);
+            }
+            else
+            {
+                tab->setBackgroundColor(backgroundColor());
+                tab->setForegroundColor(textColor());
+            }
             tab->setIconSize(d->iconSize);
         }
     }
