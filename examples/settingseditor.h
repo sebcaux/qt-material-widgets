@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include <QScrollArea>
+
 class SettingsEditor : public QWidget
 {
     Q_OBJECT
@@ -10,6 +12,7 @@ public:
     explicit SettingsEditor(QWidget *parent = nullptr);
 
 protected:
+    QScrollArea *_settingsScrollArea;
     QWidget *_settingsWidget;
     QWidget *_canvas;
 
