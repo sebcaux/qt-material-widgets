@@ -24,10 +24,6 @@ public:
     void refreshGeometry();
     void animate();
 
-protected:
-    bool eventFilter(QObject *obj, QEvent *event) override;
-    void paintEvent(QPaintEvent *event) override;
-
 private:
     Q_DISABLE_COPY(QtMaterialTabsInkBar)
 
@@ -36,6 +32,11 @@ private:
     QRect m_geometry;
     QRect m_previousGeometry;
     qreal m_tween;
+
+    // QWidget interface
+protected:
+    bool eventFilter(QObject *obj, QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 };
 
 inline void QtMaterialTabsInkBar::setTweenValue(qreal value)
@@ -60,8 +61,6 @@ public:
     inline void setActive(bool state);
     inline bool isActive() const;
 
-    QSize sizeHint() const override;
-
 protected:
     void paintForeground(QPainter *painter) override;
 
@@ -70,6 +69,10 @@ private:
 
     QtMaterialTabs *const m_tabs;
     bool m_active;
+
+    // QWidget interface
+public:
+    QSize sizeHint() const override;
 };
 
 inline void QtMaterialTab::setActive(bool state)
