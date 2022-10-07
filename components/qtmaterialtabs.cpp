@@ -280,6 +280,9 @@ void QtMaterialTabs::setTabIcon(int index, const QIcon &icon)
     {
         tab->setIcon(icon);
     }
+
+    d->inkBar->refreshGeometry();
+    d->inkBar->animate();
 }
 
 int QtMaterialTabs::currentIndex() const
