@@ -130,43 +130,41 @@ QSize QtMaterialTab::sizeHint() const
         return QtMaterialFlatButton::sizeHint();
     }
 
-    return QSize(40, iconSize().height() + 46);
+    ensurePolished();
+
+    QSize labelSize(fontMetrics().size(Qt::TextSingleLine, text()));
+
+    int w = labelSize.width() + 20;
+    return QSize(w, iconSize().height() + 46);
 }
 
 void QtMaterialTab::paintForeground(QPainter *painter)
 {
     painter->setPen(foregroundColor());
 
-    if (!icon().isNull())
-    {
-        painter->translate(0, 12);
-    }
-
     QSize textSize(fontMetrics().size(Qt::TextSingleLine, text()));
     QSize base(size() - textSize);
 
     QRect textGeometry(QPoint(base.width(), base.height()) / 2, textSize);
 
-    painter->drawText(textGeometry, Qt::AlignCenter, text());
-
     if (!icon().isNull())
     {
         const QSize &size = iconSize();
-        QRect iconRect(QPoint((width() - size.width()) / 2, 0), size);
+        QRect iconRect(QPoint((width() - size.width()) / 2, textSize.height() / 2), size);
 
-        QPixmap pixmap = icon().pixmap(iconSize());
+        QPixmap pixmap = icon().pixmap(size);
         QPainter icon(&pixmap);
         icon.setCompositionMode(QPainter::CompositionMode_SourceIn);
         icon.fillRect(pixmap.rect(), painter->pen().color());
         painter->drawPixmap(iconRect, pixmap);
+
+        textGeometry.translate(0, size.height() / 2);
     }
+
+    painter->drawText(textGeometry, Qt::AlignCenter, text());
 
     if (!m_active)
     {
-        if (!icon().isNull())
-        {
-            painter->translate(0, -12);
-        }
         QBrush overlay;
         overlay.setStyle(Qt::SolidPattern);
         overlay.setColor(backgroundColor());
