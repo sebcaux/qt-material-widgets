@@ -15,9 +15,9 @@ RadioButtonSettingsEditor::RadioButtonSettingsEditor(QWidget *parent)
 {
     ui->setupUi(_settingsWidget);
 
-    m_radioButton1->setText("Coffee");
-    m_radioButton2->setText("Tea");
-    m_radioButton3->setText("Algebraic Topology");
+    m_radioButton1->setText(tr("Coffee"));
+    m_radioButton2->setText(tr("Tea"));
+    m_radioButton3->setText(tr("Algebraic Topology"));
 
     QVBoxLayout *layout = new QVBoxLayout;
     _canvas->setLayout(layout);

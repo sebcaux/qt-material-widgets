@@ -14,9 +14,8 @@ SwitchSettingsEditor::SwitchSettingsEditor(QWidget *parent)
     m_switch->setText(tr("Active"));
 
     QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(m_switch, Qt::AlignCenter);
     _canvas->setLayout(layout);
-    layout->addWidget(m_switch);
-    layout->setAlignment(m_switch, Qt::AlignCenter);
 
     setupForm();
 

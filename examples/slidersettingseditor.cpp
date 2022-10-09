@@ -13,10 +13,8 @@ SliderSettingsEditor::SliderSettingsEditor(QWidget *parent)
     ui->setupUi(_settingsWidget);
 
     QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(m_slider, Qt::AlignHCenter);
     _canvas->setLayout(layout);
-    // canvas->setMaximumHeight(300);
-    layout->addWidget(m_slider);
-    layout->setAlignment(m_slider, Qt::AlignHCenter);
 
     setupForm();
 
@@ -95,11 +93,11 @@ void SliderSettingsEditor::selectColor()
         {
             m_slider->setThumbColor(color);
         }
-        if (sender() == ui->trackColorToolButton)
+        else if (sender() == ui->trackColorToolButton)
         {
             m_slider->setTrackColor(color);
         }
-        if (sender() == ui->disabledColorToolButton)
+        else if (sender() == ui->disabledColorToolButton)
         {
             m_slider->setDisabledColor(color);
         }

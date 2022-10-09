@@ -121,6 +121,7 @@ void FlatButtonSettingsEditor::setupForm()
 
         default:
             ui->textAlignmentComboBox->setCurrentIndex(1);
+            break;
     }
 
     ui->checkedCheckBox->setEnabled(m_button->isCheckable());

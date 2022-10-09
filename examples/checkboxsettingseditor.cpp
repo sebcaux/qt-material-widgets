@@ -12,8 +12,7 @@ CheckBoxSettingsEditor::CheckBoxSettingsEditor(QWidget *parent)
 {
     ui->setupUi(_settingsWidget);
 
-    m_checkBox->setText("Extra cheese");
-    m_checkBox->setChecked(true);
+    m_checkBox->setText(tr("Extra cheese"));
 
     QVBoxLayout *layout = new QVBoxLayout;
     _canvas->setLayout(layout);

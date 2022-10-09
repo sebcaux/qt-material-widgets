@@ -13,12 +13,10 @@ TextFieldSettingsEditor::TextFieldSettingsEditor(QWidget *parent)
     ui->setupUi(_settingsWidget);
 
     QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(m_textField, Qt::AlignCenter);
     _canvas->setLayout(layout);
 
-    layout->addWidget(m_textField);
-    layout->setAlignment(m_textField, Qt::AlignCenter);
-
-    m_textField->setLabelText("Wat is this");
+    m_textField->setLabelText(tr("What is this"));
     m_textField->setMinimumWidth(250);
 
     setupForm();

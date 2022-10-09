@@ -20,7 +20,7 @@ AppBarSettingsEditor::AppBarSettingsEditor(QWidget *parent)
     ui->navIconTypeComboBox->addItem("NavIconPrevious", QVariant(Material::NavIconPrevious));
     ui->navIconTypeComboBox->addItem("NavIconUpper", QVariant(Material::NavIconUpper));
 
-    m_appBar->setTitle("Inbox");
+    m_appBar->setTitle(tr("Inbox"));
     m_appBar->setNavIconType(Material::NavIconMenu);
     m_appBar->addAction(new QAction(QtMaterialTheme::icon("social", "share"), tr("share")));
     m_appBar->addAction(new QAction(QtMaterialTheme::icon("action", "search"), tr("search")));
@@ -73,7 +73,7 @@ void AppBarSettingsEditor::selectColor()
         {
             m_appBar->setBackgroundColor(color);
         }
-        if (sender() == ui->foregroundColorToolButton)
+        else if (sender() == ui->foregroundColorToolButton)
         {
             m_appBar->setForegroundColor(color);
         }

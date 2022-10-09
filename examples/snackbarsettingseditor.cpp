@@ -12,10 +12,6 @@ SnackbarSettingsEditor::SnackbarSettingsEditor(QWidget *parent)
 {
     ui->setupUi(_settingsWidget);
 
-    QVBoxLayout *layout = new QVBoxLayout;
-    _canvas->setLayout(layout);
-    //_canvas->setMaximumHeight(300);
-
     m_snackbar->setParent(this);
 
     setupForm();
@@ -38,5 +34,5 @@ void SnackbarSettingsEditor::updateWidget()
 
 void SnackbarSettingsEditor::showSnackbar()
 {
-    m_snackbar->addMessage(QString("Snack attack!"));
+    m_snackbar->addMessage(tr("Snack attack!"));
 }

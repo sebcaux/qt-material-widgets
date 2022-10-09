@@ -13,9 +13,8 @@ TabsSettingsEditor::TabsSettingsEditor(QWidget *parent)
     ui->setupUi(_settingsWidget);
 
     QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(m_tabs, Qt::AlignHCenter);
     _canvas->setLayout(layout);
-    layout->addWidget(m_tabs);
-    layout->setAlignment(m_tabs, Qt::AlignHCenter);
 
     m_tabs->addTab(tr("Media"));
     m_tabs->addTab(tr("Audio"));
@@ -69,11 +68,11 @@ void TabsSettingsEditor::selectColor()
         {
             m_tabs->setInkColor(color);
         }
-        if (sender() == ui->backgroundColorToolButton)
+        else if (sender() == ui->backgroundColorToolButton)
         {
             m_tabs->setBackgroundColor(color);
         }
-        if (sender() == ui->textColorToolButton)
+        else if (sender() == ui->textColorToolButton)
         {
             m_tabs->setTextColor(color);
         }

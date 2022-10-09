@@ -21,22 +21,24 @@
 #include "scrollbarsettingseditor.h"
 #include "slidersettingseditor.h"
 #include "snackbarsettingseditor.h"
+#include "switchsettingseditor.h"
 #include "tabssettingseditor.h"
 #include "textfieldsettingseditor.h"
-#include "switchsettingseditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    setMinimumSize(480, 600);
+
+    QSplitter *splitter = new QSplitter(Qt::Horizontal);
+
     QListWidget *list = new QListWidget;
     list->setMaximumWidth(300);
+    splitter->addWidget(list);
 
     QWidget *stackWidget = new QWidget;
     QStackedLayout *stackLayout = new QStackedLayout;
     stackWidget->setLayout(stackLayout);
-
-    QSplitter *splitter = new QSplitter(Qt::Horizontal);
-    splitter->addWidget(list);
     splitter->addWidget(stackWidget);
 
     setCentralWidget(splitter);
