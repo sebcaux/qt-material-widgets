@@ -18,6 +18,7 @@ public:
 protected slots:
     void setupForm();
     void updateWidget();
+    void selectColor();
 
 private:
     Ui::TabsSettingsForm *const ui;
