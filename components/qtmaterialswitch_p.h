@@ -35,6 +35,7 @@ public:
     QColor activeColor;
     QColor inactiveColor;
     QColor trackColor;
+    QColor textColor;
     bool useThemeColors;
 };
 

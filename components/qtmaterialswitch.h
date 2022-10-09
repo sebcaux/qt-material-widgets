@@ -14,6 +14,7 @@ class QtMaterialSwitch : public QAbstractButton
     Q_PROPERTY(QColor activeColor READ activeColor WRITE setActiveColor)
     Q_PROPERTY(QColor inactiveColor READ inactiveColor WRITE setInactiveColor)
     Q_PROPERTY(QColor trackColor READ trackColor WRITE setTrackColor)
+    Q_PROPERTY(QColor textColor READ textColor WRITE setTextColor)
 
 public:
     explicit QtMaterialSwitch(QWidget *parent = nullptr);
@@ -33,6 +34,8 @@ public:
     void setInactiveColor(const QColor &color);
     QColor trackColor() const;
     void setTrackColor(const QColor &color);
+    QColor textColor() const;
+    void setTextColor(const QColor &color);
 
 protected:
     const QScopedPointer<QtMaterialSwitchPrivate> d_ptr;

@@ -5,6 +5,7 @@
 #include "qtmaterialswitch_p.h"
 
 #include <QApplication>
+#include <QPainter>
 #include <QPropertyAnimation>
 #include <QSignalTransition>
 #include <QStateMachine>
@@ -35,6 +36,8 @@ void QtMaterialSwitchPrivate::init()
     onState = new QState;
     orientation = Qt::Horizontal;
     useThemeColors = true;
+
+    q->setFont(QtMaterialStyle::instance().themeFont(Material::FontBody1));
 
     q->setCheckable(true);
     q->setChecked(false);
@@ -250,6 +253,28 @@ void QtMaterialSwitch::setTrackColor(const QColor &color)
     d->setupProperties();
 }
 
+QColor QtMaterialSwitch::textColor() const
+{
+    Q_D(const QtMaterialSwitch);
+
+    if (d->useThemeColors || !d->textColor.isValid())
+    {
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeText);
+    }
+
+    return d->textColor;
+}
+
+void QtMaterialSwitch::setTextColor(const QColor &color)
+{
+    Q_D(QtMaterialSwitch);
+
+    d->trackColor = color;
+
+    d->useThemeColors = false;
+    update();
+}
+
 QColor QtMaterialSwitch::trackColor() const
 {
     Q_D(const QtMaterialSwitch);
@@ -286,7 +311,16 @@ QSize QtMaterialSwitch::sizeHint() const
 {
     Q_D(const QtMaterialSwitch);
 
-    return (d->orientation == Qt::Horizontal) ? QSize(64, 48) : QSize(48, 64);
+    QSize textSize(fontMetrics().size(Qt::TextSingleLine | Qt::TextShowMnemonic, text()));
+
+    if (d->orientation == Qt::Horizontal)
+    {
+        return QSize(64 + textSize.width(), 48);
+    }
+    else
+    {
+        return QSize(48 + textSize.width(), 64);
+    }
 }
 
 bool QtMaterialSwitch::event(QEvent *event)
@@ -335,5 +369,18 @@ bool QtMaterialSwitch::event(QEvent *event)
 
 void QtMaterialSwitch::paintEvent(QPaintEvent *event)
 {
+    Q_D(QtMaterialSwitch);
+
     Q_UNUSED(event)
+
+    QPainter painter(this);
+
+    QPen pen;
+    pen.setColor(isEnabled() ? textColor() : disabledColor());
+    painter.setPen(pen);
+
+    int heightText = fontMetrics().height();
+    int yText = (height() - heightText) / 2 + heightText - fontMetrics().descent();
+    int xText = (d->orientation == Qt::Horizontal) ? 64 : 48;
+    painter.drawText(xText, yText, text());
 }
