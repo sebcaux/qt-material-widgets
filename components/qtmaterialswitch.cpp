@@ -312,8 +312,17 @@ bool QtMaterialSwitch::event(QEvent *event)
         case QEvent::Move:
         case QEvent::Resize:
         {
-            d->thumb->setGeometry(rect().adjusted(8, 8, -8, -8));
-            d->track->setGeometry(rect());
+            QRect switchGeometry;
+            if (d->orientation == Qt::Horizontal)
+            {
+                switchGeometry = QRect(0, 0, 64, 48);
+            }
+            else
+            {
+                switchGeometry = QRect(0, 0, 48, 64);
+            }
+            d->thumb->setGeometry(switchGeometry.adjusted(8, 8, -8, -8));
+            d->track->setGeometry(switchGeometry);
             break;
         }
         default:

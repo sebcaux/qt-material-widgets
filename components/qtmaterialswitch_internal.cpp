@@ -34,21 +34,17 @@ void QtMaterialSwitchRippleOverlay::addSwitchRipple()
         return;
     }
 
-    int t;
     int w;
-
-    if (Qt::Horizontal == m_switch->orientation())
+    if (m_switch->orientation() == Qt::Horizontal)
     {
-        t = m_switch->height() / 2;
-        w = m_thumb->height() / 2 + 10;
+        w = m_track->height() / 2 + 10;
     }
     else
     {
-        t = m_switch->width() / 2;
-        w = m_thumb->width() / 2 + 10;
+        w = m_track->width() / 2 + 10;
     }
 
-    QtMaterialRipple *ripple = new QtMaterialRipple(QPoint(10 + t, 20 + t));
+    QtMaterialRipple *ripple = new QtMaterialRipple(QPoint(w, w + 10));
     ripple->setColor(m_track->trackColor());
     ripple->setRadiusEndValue(w);
     ripple->setOpacityStartValue(0.8);
