@@ -11,7 +11,7 @@ SwitchSettingsEditor::SwitchSettingsEditor(QWidget *parent)
 {
     ui->setupUi(_settingsWidget);
 
-    m_switch->setOrientation(Qt::Vertical);
+    m_switch->setText(tr("Active"));
 
     QVBoxLayout *layout = new QVBoxLayout;
     _canvas->setLayout(layout);
@@ -20,6 +20,7 @@ SwitchSettingsEditor::SwitchSettingsEditor(QWidget *parent)
 
     setupForm();
 
+    connect(ui->textLineEdit, &QLineEdit::textEdited, this, &SwitchSettingsEditor::updateWidget);
     connect(ui->disabledCheckBox, &QAbstractButton::toggled, this, &SwitchSettingsEditor::updateWidget);
     connect(ui->checkedCheckBox, &QAbstractButton::toggled, this, &SwitchSettingsEditor::updateWidget);
     connect(ui->orientationComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateWidget()));
@@ -28,6 +29,7 @@ SwitchSettingsEditor::SwitchSettingsEditor(QWidget *parent)
     connect(ui->activeColorToolButton, &QAbstractButton::pressed, this, &SwitchSettingsEditor::selectColor);
     connect(ui->inactiveColorToolButton, &QAbstractButton::pressed, this, &SwitchSettingsEditor::selectColor);
     connect(ui->trackColorToolButton, &QAbstractButton::pressed, this, &SwitchSettingsEditor::selectColor);
+    connect(ui->textColorToolButton, &QAbstractButton::pressed, this, &SwitchSettingsEditor::selectColor);
 
     connect(m_switch, &QAbstractButton::toggled, this, &SwitchSettingsEditor::setupForm);
 }
@@ -54,11 +56,13 @@ void SwitchSettingsEditor::setupForm()
 
     ui->disabledCheckBox->setChecked(!m_switch->isEnabled());
     ui->checkedCheckBox->setChecked(m_switch->isChecked());
+    ui->textLineEdit->setText(m_switch->text());
     ui->useThemeColorsCheckBox->setChecked(m_switch->useThemeColors());
     ui->disabledColorLineEdit->setText(m_switch->disabledColor().name(QColor::HexRgb).toUpper());
     ui->activeColorLineEdit->setText(m_switch->activeColor().name(QColor::HexRgb).toUpper());
     ui->inactiveColorLineEdit->setText(m_switch->inactiveColor().name(QColor::HexRgb).toUpper());
     ui->trackColorLineEdit->setText(m_switch->trackColor().name(QColor::HexRgb).toUpper());
+    ui->textColorLineEdit->setText(m_switch->textColor().name(QColor::HexRgb).toUpper());
 }
 
 void SwitchSettingsEditor::updateWidget()
@@ -77,6 +81,7 @@ void SwitchSettingsEditor::updateWidget()
             break;
     }
 
+    m_switch->setText(ui->textLineEdit->text());
     m_switch->setDisabled(ui->disabledCheckBox->isChecked());
     m_switch->setChecked(ui->checkedCheckBox->isChecked());
     m_switch->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
@@ -103,6 +108,10 @@ void SwitchSettingsEditor::selectColor()
         else if (sender() == ui->trackColorToolButton)
         {
             m_switch->setTrackColor(color);
+        }
+        else if (sender() == ui->textColorToolButton)
+        {
+            m_switch->setTextColor(color);
         }
         ui->useThemeColorsCheckBox->setChecked(false);
     }
