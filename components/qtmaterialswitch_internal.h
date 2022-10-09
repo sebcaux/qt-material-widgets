@@ -51,10 +51,6 @@ public:
     inline void setThumbColor(const QColor &color);
     inline QColor thumbColor() const;
 
-protected:
-    bool eventFilter(QObject *obj, QEvent *event) override;
-    void paintEvent(QPaintEvent *event) override;
-
 private:
     Q_DISABLE_COPY(QtMaterialSwitchThumb)
 
@@ -64,6 +60,11 @@ private:
     QColor m_thumbColor;
     qreal m_shift;
     qreal m_offset;
+
+    // QWidget interface
+protected:
+    void paintEvent(QPaintEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 };
 
 inline qreal QtMaterialSwitchThumb::shift() const
@@ -100,15 +101,15 @@ public:
     void setTrackColor(const QColor &color);
     inline QColor trackColor() const;
 
-protected:
-    bool eventFilter(QObject *obj, QEvent *event) override;
-    void paintEvent(QPaintEvent *event) override;
-
 private:
     Q_DISABLE_COPY(QtMaterialSwitchTrack)
 
     QtMaterialSwitch *const m_switch;
     QColor m_trackColor;
+
+    // QWidget interface
+protected:
+    void paintEvent(QPaintEvent *event) override;
 };
 
 inline QColor QtMaterialSwitchTrack::trackColor() const

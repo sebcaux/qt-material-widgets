@@ -102,8 +102,6 @@ QtMaterialSwitchThumb::QtMaterialSwitchThumb(QtMaterialSwitch *parent)
     effect->setColor(QColor(0, 0, 0, 80));
     effect->setOffset(QPointF(0, 1));
     setGraphicsEffect(effect);
-
-    parent->installEventFilter(this);
 }
 
 QtMaterialSwitchThumb::~QtMaterialSwitchThumb()
@@ -119,18 +117,6 @@ void QtMaterialSwitchThumb::setShift(qreal shift)
 
     m_shift = shift;
     updateOffset();
-}
-
-bool QtMaterialSwitchThumb::eventFilter(QObject *obj, QEvent *event)
-{
-    const QEvent::Type type = event->type();
-
-    if (QEvent::Resize == type || QEvent::Move == type)
-    {
-        setGeometry(m_switch->rect().adjusted(8, 8, -8, -8));
-        updateOffset();
-    }
-    return QWidget::eventFilter(obj, event);
 }
 
 void QtMaterialSwitchThumb::paintEvent(QPaintEvent *event)
@@ -171,6 +157,13 @@ void QtMaterialSwitchThumb::paintEvent(QPaintEvent *event)
     }
 }
 
+void QtMaterialSwitchThumb::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event);
+
+    updateOffset();
+}
+
 void QtMaterialSwitchThumb::updateOffset()
 {
     const QSize s(Qt::Horizontal == m_switch->orientation() ? size() : size().transposed());
@@ -188,8 +181,6 @@ QtMaterialSwitchTrack::QtMaterialSwitchTrack(QtMaterialSwitch *parent)
       m_switch(parent)
 {
     Q_ASSERT(parent);
-
-    parent->installEventFilter(this);
 }
 
 QtMaterialSwitchTrack::~QtMaterialSwitchTrack()
@@ -200,17 +191,6 @@ void QtMaterialSwitchTrack::setTrackColor(const QColor &color)
 {
     m_trackColor = color;
     update();
-}
-
-bool QtMaterialSwitchTrack::eventFilter(QObject *obj, QEvent *event)
-{
-    const QEvent::Type type = event->type();
-
-    if (QEvent::Resize == type || QEvent::Move == type)
-    {
-        setGeometry(m_switch->rect());
-    }
-    return QWidget::eventFilter(obj, event);
 }
 
 void QtMaterialSwitchTrack::paintEvent(QPaintEvent *event)

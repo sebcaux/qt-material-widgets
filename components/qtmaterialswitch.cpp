@@ -304,15 +304,22 @@ bool QtMaterialSwitch::event(QEvent *event)
             }
             break;
         }
-
         case QEvent::StyleChange:
         {
             d->setupProperties();
             break;
         }
-
-        default:
+        case QEvent::Move:
+        case QEvent::Resize:
+        {
+            d->thumb->setGeometry(rect().adjusted(8, 8, -8, -8));
+            d->track->setGeometry(rect());
             break;
+        }
+        default:
+        {
+            break;
+        }
     }
     return QAbstractButton::event(event);
 }
