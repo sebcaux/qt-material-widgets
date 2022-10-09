@@ -56,8 +56,8 @@ void AvatarSettingsEditor::setupForm()
     ui->disabledCheckBox->setChecked(!m_avatar->isEnabled());
     ui->useThemeColorsCheckBox->setChecked(m_avatar->useThemeColors());
     ui->sizeSpinBox->setValue(m_avatar->size());
-    ui->textColorLineEdit->setText(m_avatar->textColor().name(QColor::HexRgb).toUpper());
-    ui->backgroundColorLineEdit->setText(m_avatar->backgroundColor().name(QColor::HexRgb).toUpper());
+    setLineEditColor(ui->textColorLineEdit, m_avatar->textColor());
+    setLineEditColor(ui->backgroundColorLineEdit, m_avatar->backgroundColor());
 }
 
 void AvatarSettingsEditor::updateWidget()

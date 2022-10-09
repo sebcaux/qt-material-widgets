@@ -101,10 +101,10 @@ void FloatingActionButtonSettingsEditor::setupForm()
     ui->verticalOffsetSpinBox->setValue(m_fab->offset().y());
     ui->miniCheckBox->setChecked(m_fab->isMini());
     ui->useThemeColorsCheckBox->setChecked(m_fab->useThemeColors());
-    ui->foregroundColorLineEdit->setText(m_fab->foregroundColor().name(QColor::HexRgb).toUpper());
-    ui->backgroundColorLineEdit->setText(m_fab->backgroundColor().name(QColor::HexRgb).toUpper());
-    ui->disabledFgColorLineEdit->setText(m_fab->disabledForegroundColor().name(QColor::HexRgb).toUpper());
-    ui->disabledBgColorLineEdit->setText(m_fab->disabledBackgroundColor().name(QColor::HexRgb).toUpper());
+    setLineEditColor(ui->foregroundColorLineEdit, m_fab->foregroundColor());
+    setLineEditColor(ui->backgroundColorLineEdit, m_fab->backgroundColor());
+    setLineEditColor(ui->disabledFgColorLineEdit, m_fab->disabledForegroundColor());
+    setLineEditColor(ui->disabledBgColorLineEdit, m_fab->disabledBackgroundColor());
 }
 
 void FloatingActionButtonSettingsEditor::updateWidget()

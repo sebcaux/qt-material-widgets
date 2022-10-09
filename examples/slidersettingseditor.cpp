@@ -58,9 +58,9 @@ void SliderSettingsEditor::setupForm()
     ui->valueLineEdit->setText(QString::number(m_slider->value()));
     ui->invertedCheckBox->setChecked(m_slider->invertedAppearance());
     ui->useThemeColorsCheckBox->setChecked(m_slider->useThemeColors());
-    ui->thumbColorLineEdit->setText(m_slider->thumbColor().name(QColor::HexRgb).toUpper());
-    ui->trackColorLineEdit->setText(m_slider->trackColor().name(QColor::HexRgb).toUpper());
-    ui->disabledColorLineEdit->setText(m_slider->disabledColor().name(QColor::HexRgb).toUpper());
+    setLineEditColor(ui->thumbColorLineEdit, m_slider->thumbColor());
+    setLineEditColor(ui->trackColorLineEdit, m_slider->trackColor());
+    setLineEditColor(ui->disabledColorLineEdit, m_slider->disabledColor());
 }
 
 void SliderSettingsEditor::updateWidget()

@@ -32,7 +32,7 @@ void IconButtonSettingsEditor::setupForm()
     ui->useThemeColorsCheckBox->setChecked(m_button->useThemeColors());
     ui->sizeSpinBox->setValue(m_button->iconSize().width());
     ui->colorLineEdit->setText(m_button->color().name(QColor::HexRgb).toUpper());
-    ui->disabledColorLineEdit->setText(m_button->disabledColor().name(QColor::HexRgb).toUpper());
+    setLineEditColor(ui->disabledColorLineEdit, m_button->disabledColor());
 }
 
 void IconButtonSettingsEditor::updateWidget()

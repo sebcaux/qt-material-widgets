@@ -57,8 +57,8 @@ void BadgeSettingsEditor::setupForm()
     ui->horizontalOffsetSpinBox->setValue(m_badge->relativePosition().x());
     ui->disabledCheckBox->setChecked(!m_badge->isEnabled());
     ui->useThemeColorsCheckBox->setChecked(m_badge->useThemeColors());
-    ui->textColorLineEdit->setText(m_badge->textColor().name(QColor::HexRgb).toUpper());
-    ui->backgroundColorLineEdit->setText(m_badge->backgroundColor().name(QColor::HexRgb).toUpper());
+    setLineEditColor(ui->textColorLineEdit, m_badge->textColor());
+    setLineEditColor(ui->backgroundColorLineEdit, m_badge->backgroundColor());
 }
 
 void BadgeSettingsEditor::updateWidget()

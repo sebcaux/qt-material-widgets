@@ -5,6 +5,8 @@
 
 #include <QScrollArea>
 
+class QLineEdit;
+
 class SettingsEditor : public QWidget
 {
     Q_OBJECT
@@ -15,6 +17,8 @@ protected:
     QScrollArea *_settingsScrollArea;
     QWidget *_settingsWidget;
     QWidget *_canvas;
+
+    void setLineEditColor(QLineEdit *lineEdit, const QColor &color);
 
     // QWidget interface
 protected:

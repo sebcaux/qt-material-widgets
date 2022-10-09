@@ -52,10 +52,10 @@ void TextFieldSettingsEditor::setupForm()
     ui->labelTextLineEdit->setText(m_textField->labelText());
     ui->useThemeColorsCheckBox->setChecked(m_textField->useThemeColors());
     ui->inputLineCheckBox->setChecked(m_textField->inputLineVisible());
-    ui->textColorLineEdit->setText(m_textField->textColor().name(QColor::HexRgb).toUpper());
-    ui->inkColorLineEdit->setText(m_textField->inkColor().name(QColor::HexRgb).toUpper());
-    ui->inputLineColorLineEdit->setText(m_textField->inputLineColor().name(QColor::HexRgb).toUpper());
-    ui->labelColorLineEdit->setText(m_textField->labelColor().name(QColor::HexRgb).toUpper());
+    setLineEditColor(ui->textColorLineEdit, m_textField->textColor());
+    setLineEditColor(ui->inkColorLineEdit, m_textField->inkColor());
+    setLineEditColor(ui->inputLineColorLineEdit, m_textField->inputLineColor());
+    setLineEditColor(ui->labelColorLineEdit, m_textField->labelColor());
 }
 
 void TextFieldSettingsEditor::updateWidget()

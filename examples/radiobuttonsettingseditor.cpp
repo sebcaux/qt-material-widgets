@@ -78,10 +78,10 @@ void RadioButtonSettingsEditor::setupForm()
     ui->disabledCheckBox->setChecked(!m_radioButton1->isEnabled());
     ui->labelTextLineEdit->setText(m_radioButton1->text());
     ui->useThemeColorsCheckBox->setChecked(m_radioButton1->useThemeColors());
-    ui->textColorLineEdit->setText(m_radioButton1->textColor().name(QColor::HexRgb).toUpper());
-    ui->disabledColorLineEdit->setText(m_radioButton1->disabledColor().name(QColor::HexRgb).toUpper());
-    ui->checkedColorLineEdit->setText(m_radioButton1->checkedColor().name(QColor::HexRgb).toUpper());
-    ui->uncheckedColorLineEdit->setText(m_radioButton1->uncheckedColor().name(QColor::HexRgb).toUpper());
+    setLineEditColor(ui->textColorLineEdit, m_radioButton1->textColor());
+    setLineEditColor(ui->disabledColorLineEdit, m_radioButton1->disabledColor());
+    setLineEditColor(ui->checkedColorLineEdit, m_radioButton1->checkedColor());
+    setLineEditColor(ui->uncheckedColorLineEdit, m_radioButton1->uncheckedColor());
 }
 
 void RadioButtonSettingsEditor::updateWidget()

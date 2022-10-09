@@ -136,11 +136,11 @@ void FlatButtonSettingsEditor::setupForm()
     ui->iconSizeSpinBox->setValue(m_button->iconSize().width());
     ui->fontSizeDoubleSpinBox->setValue(m_button->fontSize());
     ui->buttonTextLineEdit->setText(m_button->text());
-    ui->foregroundColorLineEdit->setText(m_button->foregroundColor().name(QColor::HexRgb).toUpper());
-    ui->backgroundColorLineEdit->setText(m_button->backgroundColor().name(QColor::HexRgb).toUpper());
-    ui->overlayColorLineEdit->setText(m_button->overlayColor().name(QColor::HexRgb).toUpper());
-    ui->disableFgColorLineEdit->setText(m_button->disabledForegroundColor().name(QColor::HexRgb).toUpper());
-    ui->disabledBgColorLineEdit->setText(m_button->disabledBackgroundColor().name(QColor::HexRgb).toUpper());
+    setLineEditColor(ui->foregroundColorLineEdit, m_button->foregroundColor());
+    setLineEditColor(ui->backgroundColorLineEdit, m_button->backgroundColor());
+    setLineEditColor(ui->overlayColorLineEdit, m_button->overlayColor());
+    setLineEditColor(ui->disableFgColorLineEdit, m_button->disabledForegroundColor());
+    setLineEditColor(ui->disabledBgColorLineEdit, m_button->disabledBackgroundColor());
 }
 
 void FlatButtonSettingsEditor::updateWidget()

@@ -59,10 +59,10 @@ void CheckBoxSettingsEditor::setupForm()
     ui->labelTextLineEdit->setText(m_checkBox->text());
     ui->useThemeColorsCheckBox->setChecked(m_checkBox->useThemeColors());
     ui->checkedCheckBox->setChecked(m_checkBox->isChecked());
-    ui->textColorLineEdit->setText(m_checkBox->textColor().name(QColor::HexRgb).toUpper());
-    ui->disabledColorLineEdit->setText(m_checkBox->disabledColor().name(QColor::HexRgb).toUpper());
-    ui->checkedColorLineEdit->setText(m_checkBox->checkedColor().name(QColor::HexRgb).toUpper());
-    ui->uncheckedColorLineEdit->setText(m_checkBox->uncheckedColor().name(QColor::HexRgb).toUpper());
+    setLineEditColor(ui->textColorLineEdit, m_checkBox->textColor());
+    setLineEditColor(ui->disabledColorLineEdit, m_checkBox->disabledColor());
+    setLineEditColor(ui->checkedColorLineEdit, m_checkBox->checkedColor());
+    setLineEditColor(ui->uncheckedColorLineEdit, m_checkBox->uncheckedColor());
 }
 
 void CheckBoxSettingsEditor::updateWidget()

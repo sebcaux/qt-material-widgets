@@ -51,8 +51,8 @@ void AppBarSettingsEditor::setupForm()
     ui->navIconTypeComboBox->setCurrentIndex(m_appBar->navIconType());
     ui->iconsSizeSpinBox->setValue(m_appBar->iconSize().width());
     ui->useThemeColorsCheckBox->setChecked(m_appBar->useThemeColors());
-    ui->backgroundColorLineEdit->setText(m_appBar->backgroundColor().name(QColor::HexRgb).toUpper());
-    ui->foregroundColorLineEdit->setText(m_appBar->foregroundColor().name(QColor::HexRgb).toUpper());
+    setLineEditColor(ui->backgroundColorLineEdit, m_appBar->backgroundColor());
+    setLineEditColor(ui->foregroundColorLineEdit, m_appBar->foregroundColor());
 }
 
 void AppBarSettingsEditor::updateWidget()

@@ -1,5 +1,6 @@
 #include "settingseditor.h"
 
+#include <QLineEdit>
 #include <QResizeEvent>
 
 #include "qtmaterialcanvas.h"
@@ -15,6 +16,24 @@ SettingsEditor::SettingsEditor(QWidget *parent)
     _settingsScrollArea->setWidget(_settingsWidget);
 
     _canvas = new QtMaterialCanvas(this);
+}
+
+void SettingsEditor::setLineEditColor(QLineEdit *lineEdit, const QColor &color)
+{
+    lineEdit->setText(color.name(QColor::HexRgb).toUpper());
+
+    QPalette p = lineEdit->palette();
+    p.setColor(QPalette::Base, color);
+    if (color.lightness() < 128)
+    {
+        p.setColor(QPalette::Text, Qt::white);
+    }
+    else
+    {
+        p.setColor(QPalette::Text, Qt::black);
+    }
+
+    lineEdit->setPalette(p);
 }
 
 void SettingsEditor::resizeEvent(QResizeEvent *event)

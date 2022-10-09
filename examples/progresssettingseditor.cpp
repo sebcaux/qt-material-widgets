@@ -53,8 +53,8 @@ void ProgressSettingsEditor::setupForm()
     ui->disabledCheckBox->setChecked(!m_progress->isEnabled());
     ui->progressSlider->setValue(m_progress->value());
     ui->useThemeColorsCheckBox->setChecked(m_progress->useThemeColors());
-    ui->progressColorLineEdit->setText(m_progress->progressColor().name(QColor::HexRgb).toUpper());
-    ui->backgroundColorLineEdit->setText(m_progress->backgroundColor().name(QColor::HexRgb).toUpper());
+    setLineEditColor(ui->progressColorLineEdit, m_progress->progressColor());
+    setLineEditColor(ui->backgroundColorLineEdit, m_progress->backgroundColor());
 }
 
 void ProgressSettingsEditor::updateWidget()

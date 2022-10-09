@@ -58,11 +58,11 @@ void SwitchSettingsEditor::setupForm()
     ui->checkedCheckBox->setChecked(m_switch->isChecked());
     ui->textLineEdit->setText(m_switch->text());
     ui->useThemeColorsCheckBox->setChecked(m_switch->useThemeColors());
-    ui->disabledColorLineEdit->setText(m_switch->disabledColor().name(QColor::HexRgb).toUpper());
-    ui->activeColorLineEdit->setText(m_switch->activeColor().name(QColor::HexRgb).toUpper());
-    ui->inactiveColorLineEdit->setText(m_switch->inactiveColor().name(QColor::HexRgb).toUpper());
-    ui->trackColorLineEdit->setText(m_switch->trackColor().name(QColor::HexRgb).toUpper());
-    ui->textColorLineEdit->setText(m_switch->textColor().name(QColor::HexRgb).toUpper());
+    setLineEditColor(ui->disabledColorLineEdit, m_switch->disabledColor());
+    setLineEditColor(ui->activeColorLineEdit, m_switch->activeColor());
+    setLineEditColor(ui->inactiveColorLineEdit, m_switch->inactiveColor());
+    setLineEditColor(ui->trackColorLineEdit, m_switch->trackColor());
+    setLineEditColor(ui->textColorLineEdit, m_switch->textColor());
 }
 
 void SwitchSettingsEditor::updateWidget()
