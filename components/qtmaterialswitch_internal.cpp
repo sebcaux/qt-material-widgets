@@ -54,7 +54,7 @@ void QtMaterialSwitchRippleOverlay::addSwitchRipple()
 
 bool QtMaterialSwitchRippleOverlay::eventFilter(QObject *obj, QEvent *event)
 {
-    if (QEvent::Paint == event->type())
+    if (event->type() == QEvent::Paint)
     {
         setGeometry(overlayGeometry());
         QList<QtMaterialRipple *> items = ripples();
@@ -72,7 +72,7 @@ bool QtMaterialSwitchRippleOverlay::eventFilter(QObject *obj, QEvent *event)
 QRect QtMaterialSwitchRippleOverlay::overlayGeometry() const
 {
     const qreal offset = m_thumb->offset();
-    if (Qt::Horizontal == m_switch->orientation())
+    if (m_switch->orientation() == Qt::Horizontal)
     {
         return m_switch->geometry().adjusted(-10 + offset, -20, 10 + offset, 20);
     }
@@ -106,7 +106,7 @@ QtMaterialSwitchThumb::~QtMaterialSwitchThumb()
 
 void QtMaterialSwitchThumb::setShift(qreal shift)
 {
-    if (m_shift == shift)
+    if (shift == m_shift)
     {
         return;
     }
@@ -132,7 +132,7 @@ void QtMaterialSwitchThumb::paintEvent(QPaintEvent *event)
     int s;
     QRectF r;
 
-    if (Qt::Horizontal == m_switch->orientation())
+    if (m_switch->orientation() == Qt::Horizontal)
     {
         s = height() - 10;
         r = QRectF(5 + m_offset, 5, s, s);
@@ -162,7 +162,7 @@ void QtMaterialSwitchThumb::resizeEvent(QResizeEvent *event)
 
 void QtMaterialSwitchThumb::updateOffset()
 {
-    const QSize s(Qt::Horizontal == m_switch->orientation() ? size() : size().transposed());
+    const QSize s((m_switch->orientation() == Qt::Horizontal) ? size() : size().transposed());
     m_offset = m_shift * static_cast<qreal>(s.width() - s.height());
     update();
 }
@@ -211,16 +211,21 @@ void QtMaterialSwitchTrack::paintEvent(QPaintEvent *event)
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
-    if (Qt::Horizontal == m_switch->orientation())
+    QRect trackGeometry;
+    int radius;
+    if (m_switch->orientation() == Qt::Horizontal)
     {
         const int h = height() / 2;
         const QRect r(0, h / 2, width(), h);
-        painter.drawRoundedRect(r.adjusted(14, 4, -14, -4), h / 2 - 4, h / 2 - 4);
+        trackGeometry = r.adjusted(14, 4, -14, -4);
+        radius = h / 2 - 4;
     }
     else
     {
         const int w = width() / 2;
         const QRect r(w / 2, 0, w, height());
-        painter.drawRoundedRect(r.adjusted(4, 14, -4, -14), w / 2 - 4, w / 2 - 4);
+        trackGeometry = r.adjusted(4, 14, -4, -14);
+        radius = w / 2 - 4;
     }
+    painter.drawRoundedRect(trackGeometry, radius, radius);
 }
