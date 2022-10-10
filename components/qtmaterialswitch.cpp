@@ -243,6 +243,18 @@ QColor QtMaterialSwitch::inactiveColor() const
     return d->inactiveColor;
 }
 
+QColor QtMaterialSwitch::trackColor() const
+{
+    Q_D(const QtMaterialSwitch);
+
+    if (d->useThemeColors || !d->trackColor.isValid())
+    {
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeSecondaryDark);
+    }
+
+    return d->trackColor;
+}
+
 void QtMaterialSwitch::setTrackColor(const QColor &color)
 {
     Q_D(QtMaterialSwitch);
@@ -269,22 +281,10 @@ void QtMaterialSwitch::setTextColor(const QColor &color)
 {
     Q_D(QtMaterialSwitch);
 
-    d->trackColor = color;
+    d->textColor = color;
 
     d->useThemeColors = false;
     update();
-}
-
-QColor QtMaterialSwitch::trackColor() const
-{
-    Q_D(const QtMaterialSwitch);
-
-    if (d->useThemeColors || !d->trackColor.isValid())
-    {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemeSecondaryDark);
-    }
-
-    return d->trackColor;
 }
 
 void QtMaterialSwitch::setOrientation(Qt::Orientation orientation)
