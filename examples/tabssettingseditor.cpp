@@ -26,7 +26,7 @@ TabsSettingsEditor::TabsSettingsEditor(QWidget *parent)
     setupForm();
 
     connect(ui->iconCheckBox, &QAbstractButton::toggled, this, &TabsSettingsEditor::updateWidget);
-    connect(ui->iconsSizeSpinBox, &QSpinBox::valueChanged, this, &TabsSettingsEditor::updateWidget);
+    connect(ui->iconsSizeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &TabsSettingsEditor::updateWidget);
     connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &TabsSettingsEditor::updateWidget);
     connect(ui->inkColorToolButton, &QAbstractButton::clicked, this, &TabsSettingsEditor::selectColor);
     connect(ui->backgroundColorToolButton, &QAbstractButton::clicked, this, &TabsSettingsEditor::selectColor);
