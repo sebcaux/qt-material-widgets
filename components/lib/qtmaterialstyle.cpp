@@ -66,7 +66,7 @@ void QtMaterialStyle::setTheme(QtMaterialTheme *theme)
     }
 }
 
-void QtMaterialStyle::applyThemeModifications() const
+void QtMaterialStyle::applyThemeModifications()
 {
     QWidgetList allWidgets = QApplication::allWidgets();
     for (QWidget *w : allWidgets)
@@ -78,6 +78,7 @@ void QtMaterialStyle::applyThemeModifications() const
             w->update();
         }
     }
+    emit themeChanged();
 }
 
 const QColor &QtMaterialStyle::themeColor(Material::ThemeColor themeColor) const

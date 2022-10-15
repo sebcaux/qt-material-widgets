@@ -15,10 +15,13 @@ public:
 
     QtMaterialTheme *theme() const;
     void setTheme(QtMaterialTheme *theme);
-    void applyThemeModifications() const;
+    void applyThemeModifications();
 
     const QColor &themeColor(Material::ThemeColor colorTheme) const;
     const QFont &themeFont(Material::FontType fontType) const;
+
+signals:
+    void themeChanged();
 
 protected:
     const QScopedPointer<QtMaterialStylePrivate> d_ptr;
