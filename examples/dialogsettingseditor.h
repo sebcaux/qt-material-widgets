@@ -16,8 +16,8 @@ public:
     ~DialogSettingsEditor() override;
 
 protected slots:
-    void setupForm();
-    void updateWidget();
+    void setupForm() override;
+    void updateWidget() override;
 
 private:
     Ui::DialogSettingsForm *const ui;

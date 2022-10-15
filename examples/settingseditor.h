@@ -13,6 +13,10 @@ class SettingsEditor : public QWidget
 public:
     explicit SettingsEditor(QWidget *parent = nullptr);
 
+protected slots:
+    virtual void setupForm();
+    virtual void updateWidget();
+
 protected:
     QScrollArea *_settingsScrollArea;
     QWidget *_settingsWidget;

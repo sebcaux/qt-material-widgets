@@ -16,8 +16,8 @@ public:
     ~SnackbarSettingsEditor() override;
 
 protected slots:
-    void setupForm();
-    void updateWidget();
+    void setupForm() override;
+    void updateWidget() override;
     void showSnackbar();
 
 private:

@@ -3,6 +3,7 @@
 #include <QLineEdit>
 #include <QResizeEvent>
 
+#include "lib/qtmaterialstyle.h"
 #include "qtmaterialcanvas.h"
 
 SettingsEditor::SettingsEditor(QWidget *parent)
@@ -16,6 +17,16 @@ SettingsEditor::SettingsEditor(QWidget *parent)
     _settingsScrollArea->setWidget(_settingsWidget);
 
     _canvas = new QtMaterialCanvas(this);
+
+    connect(&QtMaterialStyle::instance(), &QtMaterialStyle::themeChanged, this, &SettingsEditor::setupForm);
+}
+
+void SettingsEditor::setupForm()
+{
+}
+
+void SettingsEditor::updateWidget()
+{
 }
 
 void SettingsEditor::setLineEditColor(QLineEdit *lineEdit, const QColor &color)

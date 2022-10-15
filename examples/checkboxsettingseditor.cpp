@@ -31,6 +31,8 @@ CheckBoxSettingsEditor::CheckBoxSettingsEditor(QWidget *parent)
     connect(ui->checkedColorToolButton, &QAbstractButton::pressed, this, &CheckBoxSettingsEditor::selectColor);
     connect(ui->uncheckedColorToolButton, &QAbstractButton::pressed, this, &CheckBoxSettingsEditor::selectColor);
     connect(m_checkBox, &QAbstractButton::toggled, this, &CheckBoxSettingsEditor::setupForm);
+
+    // m_checkBox->setChecked(true);
 }
 
 CheckBoxSettingsEditor::~CheckBoxSettingsEditor()

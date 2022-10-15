@@ -16,8 +16,8 @@ public:
     ~FloatingActionButtonSettingsEditor() override;
 
 protected slots:
-    void setupForm();
-    void updateWidget();
+    void setupForm() override;
+    void updateWidget() override;
     void selectColor();
 
 private:

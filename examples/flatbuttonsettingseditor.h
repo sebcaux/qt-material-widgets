@@ -21,8 +21,8 @@ protected:
     Ui::FlatButtonSettingsForm *const ui;
 
 protected slots:
-    void setupForm();
-    void updateWidget();
+    void setupForm() override;
+    void updateWidget() override;
     void selectColor();
 
 private:
