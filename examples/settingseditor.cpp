@@ -2,6 +2,7 @@
 
 #include <QLineEdit>
 #include <QResizeEvent>
+#include <QVBoxLayout>
 
 #include "lib/qtmaterialstyle.h"
 #include "qtmaterialcanvas.h"
@@ -11,14 +12,20 @@ SettingsEditor::SettingsEditor(QWidget *parent)
 {
     setMinimumSize(QSize(640, 480));
 
+    QVBoxLayout *layout = new QVBoxLayout(this);
+
     _settingsScrollArea = new QScrollArea(this);
     _settingsWidget = new QWidget(this);
     _settingsScrollArea->setWidgetResizable(true);
     _settingsScrollArea->setWidget(_settingsWidget);
+    layout->addWidget(_settingsScrollArea);
 
     _canvas = new QtMaterialCanvas(this);
+    layout->addWidget(_canvas);
 
     connect(&QtMaterialStyle::instance(), &QtMaterialStyle::themeChanged, this, &SettingsEditor::setupForm);
+
+    setLayout(layout);
 }
 
 void SettingsEditor::setupForm()
@@ -45,12 +52,6 @@ void SettingsEditor::setLineEditColor(QLineEdit *lineEdit, const QColor &color)
     }
 
     lineEdit->setPalette(p);
-}
-
-void SettingsEditor::resizeEvent(QResizeEvent *event)
-{
-    _settingsScrollArea->setGeometry(0, 0, event->size().width(), event->size().height() / 2);
-    _canvas->setGeometry(0, event->size().height() / 2, event->size().width(), event->size().height() / 2);
 }
 
 QSize SettingsEditor::sizeHint() const
