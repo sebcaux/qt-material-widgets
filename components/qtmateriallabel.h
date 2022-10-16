@@ -14,6 +14,7 @@ class QtMaterialLabel : public QLabel
 public:
     explicit QtMaterialLabel(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
     explicit QtMaterialLabel(const QString &text, QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
+    QtMaterialLabel(const QString &text, Material::FontType fontType, QWidget *parent = nullptr);
     ~QtMaterialLabel() override;
 
     Material::FontType fontType() const;

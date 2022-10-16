@@ -77,6 +77,14 @@ QtMaterialLabel::QtMaterialLabel(const QString &text, QWidget *parent, Qt::Windo
     d_func()->init();
 }
 
+QtMaterialLabel::QtMaterialLabel(const QString &text, Material::FontType fontType, QWidget *parent)
+    : QLabel(text, parent),
+      d_ptr(new QtMaterialLabelPrivate(this))
+{
+    d_func()->init();
+    setFontType(fontType);
+}
+
 QtMaterialLabel::~QtMaterialLabel()
 {
 }
