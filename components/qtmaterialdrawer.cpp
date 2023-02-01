@@ -81,8 +81,8 @@ void QtMaterialDrawer::setDrawerWidth(int width)
     Q_D(QtMaterialDrawer);
 
     d->width = width;
-    d->stateMachine->updatePropertyAssignments();
     d->widget->setFixedWidth(width + 16);
+    d->stateMachine->updatePropertyAssignments();
 }
 
 int QtMaterialDrawer::drawerWidth() const
