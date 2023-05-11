@@ -51,7 +51,8 @@ SOURCES = \
     $$PWD/qtmaterialtabs.cpp \
     $$PWD/qtmaterialtabs_internal.cpp \
     $$PWD/qtmaterialtextfield.cpp \
-    $$PWD/qtmaterialtextfield_internal.cpp
+    $$PWD/qtmaterialtextfield_internal.cpp \
+    $$PWD/qtmaterialwidget.cpp
 
 HEADERS = \
     $$PWD/layouts/qtmaterialslidelayout.h \
@@ -126,7 +127,9 @@ HEADERS = \
     $$PWD/qtmaterialtabs_p.h \
     $$PWD/qtmaterialtextfield.h \
     $$PWD/qtmaterialtextfield_internal.h \
-    $$PWD/qtmaterialtextfield_p.h
+    $$PWD/qtmaterialtextfield_p.h \
+    $$PWD/qtmaterialwidget.h \
+    $$PWD/qtmaterialwidget_p.h
 
 RESOURCES += \
     $$PWD/resources.qrc
