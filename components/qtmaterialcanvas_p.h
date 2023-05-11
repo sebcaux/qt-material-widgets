@@ -16,9 +16,11 @@ public:
     ~QtMaterialCanvasPrivate();
 
     void init();
+    void updateOrientation();
 
     QtMaterialCanvas *const q_ptr;
 
+    Qt::Orientation orientation;
     bool useThemeColors;
     QColor backgroundColor;
 };

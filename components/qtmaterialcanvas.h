@@ -9,9 +9,15 @@ class QtMaterialCanvas : public QScrollArea
 {
     Q_OBJECT
 
+    Q_PROPERTY(Qt::Orientation orientation READ orientation WRITE setOrientation)
+
 public:
     explicit QtMaterialCanvas(QWidget *parent = nullptr);
+    explicit QtMaterialCanvas(Qt::Orientation orientation, QWidget *parent = nullptr);
     ~QtMaterialCanvas() override;
+
+    Qt::Orientation orientation() const;
+    void setOrientation(Qt::Orientation orientation);
 
     bool useThemeColors() const;
     void setUseThemeColors(bool value);
