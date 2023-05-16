@@ -16,6 +16,8 @@ SOURCES = \
     $$PWD/lib/qtmaterialstatetransition.cpp \
     $$PWD/lib/qtmaterialstyle.cpp \
     $$PWD/lib/qtmaterialtheme.cpp \
+    $$PWD/tools/qtmaterializer.cpp \
+    $$PWD/tools/materializer/qtmaterializerlabel.cpp \
     $$PWD/qtmaterialappbar.cpp \
     $$PWD/qtmaterialappbar_internal.cpp \
     $$PWD/qtmaterialautocomplete.cpp \
@@ -69,6 +71,8 @@ HEADERS = \
     $$PWD/lib/qtmaterialstyle_p.h \
     $$PWD/lib/qtmaterialtheme.h \
     $$PWD/lib/qtmaterialtheme_p.h \
+    $$PWD/tools/qtmaterializer.h \
+    $$PWD/tools/materializer/qtmaterializerlabel.h \
     $$PWD/qtmaterialappbar.h \
     $$PWD/qtmaterialappbar_internal.h \
     $$PWD/qtmaterialappbar_p.h \
