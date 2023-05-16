@@ -38,6 +38,7 @@ SOURCES = \
     $$PWD/qtmaterialflatbutton_internal.cpp \
     $$PWD/qtmaterialiconbutton.cpp \
     $$PWD/qtmateriallabel.cpp \
+    $$PWD/qtmaterialpaper.cpp \
     $$PWD/qtmaterialprogress.cpp \
     $$PWD/qtmaterialprogress_internal.cpp \
     $$PWD/qtmaterialradiobutton.cpp \
@@ -107,6 +108,8 @@ HEADERS = \
     $$PWD/qtmaterialiconbutton_p.h \
     $$PWD/qtmateriallabel.h \
     $$PWD/qtmateriallabel_p.h \
+    $$PWD/qtmaterialpaper.h \
+    $$PWD/qtmaterialpaper_p.h \
     $$PWD/qtmaterialprogress.h \
     $$PWD/qtmaterialprogress_internal.h \
     $$PWD/qtmaterialprogress_p.h \
