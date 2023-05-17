@@ -217,7 +217,7 @@ void QtMaterialCircularProgress::paintEvent(QPaintEvent *event)
         return;
     }
 
-    if (Material::IndeterminateProgress == d->progressType)
+    if (d->progressType == Material::IndeterminateProgress)
     {
         painter.translate(width() / 2, height() / 2);
         painter.rotate(d->delegate->angle());
@@ -228,7 +228,7 @@ void QtMaterialCircularProgress::paintEvent(QPaintEvent *event)
     pen.setWidthF(d->penWidth);
     pen.setColor(color());
 
-    if (Material::IndeterminateProgress == d->progressType)
+    if (d->progressType == Material::IndeterminateProgress)
     {
         QVector<qreal> pattern;
         pattern << d->delegate->dashLength() * d->size / 50 << 30 * d->size / 50;
@@ -243,16 +243,14 @@ void QtMaterialCircularProgress::paintEvent(QPaintEvent *event)
     else
     {
         painter.setPen(pen);
+        painter.fillRect(rect(), Qt::red);
 
-        const qreal x = (width() - d->size) / 2;
-        const qreal y = (height() - d->size) / 2;
+        const qreal x = (width() - d->size) / 2.0;
+        const qreal y = (height() - d->size) / 2.0;
 
-        const qreal a = 360 * (value() - minimum()) / (maximum() - minimum());
+        const qreal a = 360.0 * (value() - minimum()) / (maximum() - minimum());
 
-        QPainterPath path;
-        path.arcMoveTo(x, y, d->size, d->size, 0);
-        path.arcTo(x, y, d->size, d->size, 0, a);
-
-        painter.drawPath(path);
+        int startAngle = 90;
+        painter.drawArc(QRect(x, y, d->size, d->size), startAngle * 16, -a * 16);
     }
 }
