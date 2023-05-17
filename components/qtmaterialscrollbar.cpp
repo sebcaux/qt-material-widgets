@@ -110,7 +110,7 @@ QColor QtMaterialScrollBar::canvasColor() const
 
     if (d->useThemeColors || !d->canvasColor.isValid())
     {
-        return parentWidget()->palette().color(backgroundRole());
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeCanvas);
     }
 
     return d->canvasColor;
