@@ -243,7 +243,6 @@ void QtMaterialCircularProgress::paintEvent(QPaintEvent *event)
     else
     {
         painter.setPen(pen);
-        painter.fillRect(rect(), Qt::red);
 
         const qreal x = (width() - d->size) / 2.0;
         const qreal y = (height() - d->size) / 2.0;
