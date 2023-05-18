@@ -107,7 +107,7 @@ QColor QtMaterialSystemBar::textColor() const
 
     if (d->useThemeColors || !d->textColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemeAlternateText);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryLight);
     }
 
     return d->textColor;
@@ -129,7 +129,7 @@ QColor QtMaterialSystemBar::backgroundColor() const
 
     if (d->useThemeColors || !d->backgroundColor.isValid())
     {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemeText);
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryDark);
     }
 
     return d->backgroundColor;
