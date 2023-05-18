@@ -9,6 +9,7 @@
 
 class QtMaterialAppBar;
 class QtMaterialAppBarLayout;
+class QtMaterialLabel;
 
 class QtMaterialAppBarPrivate
 {
@@ -29,7 +30,7 @@ public:
 
     QtMaterialAppBarLayout *layout;
     QtMaterialIconButton *navButton;
-    QLabel *titleLabel;
+    QtMaterialLabel *titleLabel;
 
     Material::NavIconType navIconType;
     QString title;

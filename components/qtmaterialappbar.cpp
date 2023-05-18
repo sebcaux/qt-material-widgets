@@ -3,6 +3,7 @@
 #include "lib/qtmaterialstyle.h"
 #include "qtmaterialappbar_internal.h"
 #include "qtmaterialappbar_p.h"
+#include "qtmateriallabel.h"
 
 #include <QActionEvent>
 #include <QGraphicsDropShadowEffect>
@@ -39,11 +40,9 @@ void QtMaterialAppBarPrivate::init()
     navIconType = Material::NavIconNone;
     navButton = nullptr;
 
-    titleLabel = new QLabel(q);
-    titleLabel->setAttribute(Qt::WA_TranslucentBackground);
-    titleLabel->setForegroundRole(QPalette::WindowText);
+    titleLabel = new QtMaterialLabel(q);
+    titleLabel->setFontType(Material::FontHeadline3);
     titleLabel->setContentsMargins(6, 0, 0, 0);
-    titleLabel->setFont(QtMaterialStyle::instance().themeFont(Material::FontHeadline3));
 
     iconSize = QSize(48, 48);
 
@@ -69,9 +68,7 @@ void QtMaterialAppBarPrivate::updateChildrenColor()
 {
     Q_Q(QtMaterialAppBar);
 
-    QPalette palette = titleLabel->palette();
-    palette.setColor(titleLabel->foregroundRole(), q->foregroundColor());
-    titleLabel->setPalette(palette);
+    titleLabel->setColor(q->foregroundColor());
 
     layout->updateButtons();
 }
