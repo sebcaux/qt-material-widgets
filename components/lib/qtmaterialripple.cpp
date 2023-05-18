@@ -39,7 +39,7 @@ void QtMaterialRipple::setRadius(qreal radius)
 {
     Q_ASSERT(m_overlay);
 
-    if (m_radius == radius)
+    if (radius == m_radius)
     {
         return;
     }
@@ -51,20 +51,22 @@ void QtMaterialRipple::setOpacity(qreal opacity)
 {
     Q_ASSERT(m_overlay);
 
-    if (m_opacity == opacity)
+    if (opacity == m_opacity)
     {
         return;
     }
+
     m_opacity = opacity;
     m_overlay->update();
 }
 
 void QtMaterialRipple::setColor(const QColor &color)
 {
-    if (m_brush.color() == color)
+    if (color == m_brush.color())
     {
         return;
     }
+
     m_brush.setColor(color);
 
     if (m_overlay != nullptr)

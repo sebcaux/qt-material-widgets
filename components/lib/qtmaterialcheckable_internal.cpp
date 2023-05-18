@@ -50,7 +50,7 @@ void QtMaterialCheckableIcon::paintEvent(QPaintEvent *event)
         const qreal z = m_iconSize / 24;
 
         QTransform t;
-        if (QtMaterialCheckable::LabelPositionLeft == m_checkable->labelPosition())
+        if (m_checkable->labelPosition() == QtMaterialCheckable::LabelPositionLeft)
         {
             t.translate(p + width() - 42, p);
         }

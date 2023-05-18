@@ -63,10 +63,9 @@ void QtMaterialRippleOverlay::paintEvent(QPaintEvent *event)
         painter.setClipPath(m_clipPath);
     }
 
-    QList<QtMaterialRipple *>::const_iterator i;
-    for (i = m_ripples.cbegin(); i != m_ripples.cend(); ++i)
+    for (QtMaterialRipple *ripple : m_ripples)
     {
-        paintRipple(&painter, *i);
+        paintRipple(&painter, ripple);
     }
 }
 

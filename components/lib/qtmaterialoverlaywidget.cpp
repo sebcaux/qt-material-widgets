@@ -29,19 +29,18 @@ bool QtMaterialOverlayWidget::event(QEvent *event)
     {
         return QWidget::event(event);
     }
+
     switch (event->type())
     {
         case QEvent::ParentChange:
-        {
             parent()->installEventFilter(this);
             setGeometry(overlayGeometry());
             break;
-        }
+
         case QEvent::ParentAboutToChange:
-        {
             parent()->removeEventFilter(this);
             break;
-        }
+
         default:
             break;
     }
@@ -59,6 +58,7 @@ bool QtMaterialOverlayWidget::eventFilter(QObject *obj, QEvent *event)
         case QEvent::Resize:
             setGeometry(overlayGeometry());
             break;
+
         default:
             break;
     }
