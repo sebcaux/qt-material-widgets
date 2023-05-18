@@ -87,78 +87,68 @@ QtMaterialAvatar::~QtMaterialAvatar()
 {
 }
 
-void QtMaterialAvatar::setUseThemeColors(bool value)
+const QChar &QtMaterialAvatar::letter() const
+{
+    Q_D(const QtMaterialAvatar);
+
+    return d->letter;
+}
+
+void QtMaterialAvatar::setLetter(const QChar &letter)
 {
     Q_D(QtMaterialAvatar);
 
-    if (d->useThemeColors == value)
-    {
-        return;
-    }
-
-    d->useThemeColors = value;
+    d->letter = letter;
+    d->type = Material::LetterAvatar;
     update();
 }
 
-bool QtMaterialAvatar::useThemeColors() const
+const QImage &QtMaterialAvatar::image() const
 {
     Q_D(const QtMaterialAvatar);
 
-    return d->useThemeColors;
+    return d->image;
 }
 
-void QtMaterialAvatar::setTextColor(const QColor &color)
+void QtMaterialAvatar::setImage(const QImage &image)
 {
     Q_D(QtMaterialAvatar);
 
-    d->textColor = color;
+    d->pixmap = QPixmap::fromImage(image.scaled(d->size, d->size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
 
-    d->useThemeColors = false;
+    d->image = image;
+    d->type = Material::ImageAvatar;
     update();
 }
 
-QColor QtMaterialAvatar::textColor() const
+const QIcon &QtMaterialAvatar::icon() const
 {
     Q_D(const QtMaterialAvatar);
 
-    if (d->useThemeColors || !d->textColor.isValid())
-    {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemeCanvas);
-    }
-
-    return d->textColor;
+    return d->icon;
 }
 
-void QtMaterialAvatar::setBackgroundColor(const QColor &color)
+void QtMaterialAvatar::setIcon(const QIcon &icon)
 {
     Q_D(QtMaterialAvatar);
 
-    d->backgroundColor = color;
-
-    d->useThemeColors = false;
+    d->icon = icon;
+    d->type = Material::IconAvatar;
     update();
 }
 
-QColor QtMaterialAvatar::backgroundColor() const
+Material::AvatarType QtMaterialAvatar::type() const
 {
     Q_D(const QtMaterialAvatar);
 
-    if (d->useThemeColors || !d->backgroundColor.isValid())
-    {
-        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
-    }
-
-    return d->backgroundColor;
+    return d->type;
 }
 
-/*!
- *  \reimp
- */
-QSize QtMaterialAvatar::sizeHint() const
+int QtMaterialAvatar::size() const
 {
     Q_D(const QtMaterialAvatar);
 
-    return QSize(d->size + 2, d->size + 2);
+    return d->size;
 }
 
 void QtMaterialAvatar::setSize(int size)
@@ -179,47 +169,78 @@ void QtMaterialAvatar::setSize(int size)
     update();
 }
 
-int QtMaterialAvatar::size() const
+bool QtMaterialAvatar::useThemeColors() const
 {
     Q_D(const QtMaterialAvatar);
 
-    return d->size;
+    return d->useThemeColors;
 }
 
-void QtMaterialAvatar::setLetter(const QChar &letter)
+void QtMaterialAvatar::setUseThemeColors(bool value)
 {
     Q_D(QtMaterialAvatar);
 
-    d->letter = letter;
-    d->type = Material::LetterAvatar;
+    if (d->useThemeColors == value)
+    {
+        return;
+    }
+
+    d->useThemeColors = value;
     update();
 }
 
-void QtMaterialAvatar::setImage(const QImage &image)
-{
-    Q_D(QtMaterialAvatar);
-
-    d->image = image;
-    d->type = Material::ImageAvatar;
-
-    d->pixmap = QPixmap::fromImage(image.scaled(d->size, d->size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-    update();
-}
-
-void QtMaterialAvatar::setIcon(const QIcon &icon)
-{
-    Q_D(QtMaterialAvatar);
-
-    d->icon = icon;
-    d->type = Material::IconAvatar;
-    update();
-}
-
-Material::AvatarType QtMaterialAvatar::type() const
+QColor QtMaterialAvatar::textColor() const
 {
     Q_D(const QtMaterialAvatar);
 
-    return d->type;
+    if (d->useThemeColors || !d->textColor.isValid())
+    {
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemeCanvas);
+    }
+
+    return d->textColor;
+}
+
+void QtMaterialAvatar::setTextColor(const QColor &color)
+{
+    Q_D(QtMaterialAvatar);
+
+    d->textColor = color;
+
+    d->useThemeColors = false;
+    update();
+}
+
+QColor QtMaterialAvatar::backgroundColor() const
+{
+    Q_D(const QtMaterialAvatar);
+
+    if (d->useThemeColors || !d->backgroundColor.isValid())
+    {
+        return QtMaterialStyle::instance().themeColor(Material::ColorThemePrimaryMain);
+    }
+
+    return d->backgroundColor;
+}
+
+void QtMaterialAvatar::setBackgroundColor(const QColor &color)
+{
+    Q_D(QtMaterialAvatar);
+
+    d->backgroundColor = color;
+
+    d->useThemeColors = false;
+    update();
+}
+
+/*!
+ *  \reimp
+ */
+QSize QtMaterialAvatar::sizeHint() const
+{
+    Q_D(const QtMaterialAvatar);
+
+    return QSize(d->size + 2, d->size + 2);
 }
 
 /*!

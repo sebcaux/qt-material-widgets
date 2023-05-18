@@ -11,6 +11,9 @@ class QtMaterialAvatar : public QWidget
 {
     Q_OBJECT
 
+    Q_PROPERTY(QColor textColor READ textColor WRITE setTextColor)
+    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
+
 public:
     explicit QtMaterialAvatar(QWidget *parent = nullptr);
     explicit QtMaterialAvatar(const QIcon &icon, QWidget *parent = nullptr);
@@ -18,34 +21,38 @@ public:
     explicit QtMaterialAvatar(const QImage &image, QWidget *parent = nullptr);
     ~QtMaterialAvatar() override;
 
-    void setUseThemeColors(bool value);
-    bool useThemeColors() const;
-
-    void setTextColor(const QColor &color);
-    QColor textColor() const;
-
-    void setBackgroundColor(const QColor &color);
-    QColor backgroundColor() const;
-
-    QSize sizeHint() const override;
-
-    void setSize(int size);
-    int size() const;
-
+    const QChar &letter() const;
     void setLetter(const QChar &letter);
+    const QImage &image() const;
     void setImage(const QImage &image);
+    const QIcon &icon() const;
     void setIcon(const QIcon &icon);
 
     Material::AvatarType type() const;
 
-protected:
-    void paintEvent(QPaintEvent *event) override;
+    int size() const;
+    void setSize(int size);
 
-    const QScopedPointer<QtMaterialAvatarPrivate> d_ptr;
+    bool useThemeColors() const;
+    void setUseThemeColors(bool value);
+    QColor textColor() const;
+    void setTextColor(const QColor &color);
+    QColor backgroundColor() const;
+    void setBackgroundColor(const QColor &color);
 
 private:
     Q_DISABLE_COPY(QtMaterialAvatar)
     Q_DECLARE_PRIVATE(QtMaterialAvatar)
+
+protected:
+    const QScopedPointer<QtMaterialAvatarPrivate> d_ptr;
+
+    // QWidget interface
+public:
+    QSize sizeHint() const override;
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
 };
 
 #endif  // QTMATERIALAVATAR_H
