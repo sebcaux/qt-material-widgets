@@ -60,7 +60,7 @@ void QtMaterialStyle::setTheme(QtMaterialTheme *theme)
 
     applyThemeModifications();
 
-    if (oldTheme != nullptr)
+    if (oldTheme != nullptr && oldTheme != theme)
     {
         oldTheme->deleteLater();
     }
@@ -75,7 +75,6 @@ void QtMaterialStyle::applyThemeModifications()
         {
             QEvent e(QEvent::StyleChange);
             QCoreApplication::sendEvent(w, &e);
-            w->update();
         }
     }
     emit themeChanged();
