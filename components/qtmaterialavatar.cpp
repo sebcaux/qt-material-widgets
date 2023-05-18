@@ -101,6 +101,9 @@ void QtMaterialAvatar::setLetter(const QChar &letter)
     d->letter = letter;
     d->type = Material::LetterAvatar;
     update();
+
+    d->image = QImage();
+    d->icon = QIcon();
 }
 
 const QImage &QtMaterialAvatar::image() const
@@ -119,6 +122,9 @@ void QtMaterialAvatar::setImage(const QImage &image)
     d->image = image;
     d->type = Material::ImageAvatar;
     update();
+
+    d->letter = QChar();
+    d->icon = QIcon();
 }
 
 const QIcon &QtMaterialAvatar::icon() const
@@ -135,6 +141,9 @@ void QtMaterialAvatar::setIcon(const QIcon &icon)
     d->icon = icon;
     d->type = Material::IconAvatar;
     update();
+
+    d->letter = QChar();
+    d->image = QImage();
 }
 
 Material::AvatarType QtMaterialAvatar::type() const
