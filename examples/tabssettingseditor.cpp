@@ -26,6 +26,7 @@ TabsSettingsEditor::TabsSettingsEditor(QWidget *parent)
     setupForm();
 
     connect(ui->iconCheckBox, &QAbstractButton::toggled, this, &TabsSettingsEditor::updateWidget);
+    connect(ui->haloEnabledCheckBox, &QAbstractButton::toggled, this, &TabsSettingsEditor::updateWidget);
     connect(ui->iconsSizeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &TabsSettingsEditor::updateWidget);
     connect(ui->useThemeColorsCheckBox, &QAbstractButton::toggled, this, &TabsSettingsEditor::updateWidget);
     connect(ui->inkColorToolButton, &QAbstractButton::clicked, this, &TabsSettingsEditor::selectColor);
@@ -54,6 +55,7 @@ void TabsSettingsEditor::updateWidget()
     m_tabs->setTabIcon(2, ui->iconCheckBox->isChecked() ? QtMaterialTheme::icon("notification", "ondemand_video") : QIcon());
     m_tabs->setTabIcon(3, ui->iconCheckBox->isChecked() ? QtMaterialTheme::icon("action", "settings") : QIcon());
 
+    m_tabs->setHaloVisible(ui->haloEnabledCheckBox->isChecked());
     m_tabs->setIconSize(ui->iconsSizeSpinBox->value(), ui->iconsSizeSpinBox->value());
     m_tabs->setUseThemeColors(ui->useThemeColorsCheckBox->isChecked());
 }
