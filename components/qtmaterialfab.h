@@ -1,11 +1,13 @@
 #ifndef QTMATERIALFAB_H
 #define QTMATERIALFAB_H
 
+#include "qtmaterialwidgets.h"
+
 #include "qtmaterialflatbutton.h"
 
 class QtMaterialFloatingActionButtonPrivate;
 
-class QtMaterialFloatingActionButton : public QtMaterialFlatButton
+class QTMATERIALWIDGETS_EXPORT QtMaterialFloatingActionButton : public QtMaterialFlatButton
 {
     Q_OBJECT
 

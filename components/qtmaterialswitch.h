@@ -1,11 +1,13 @@
 #ifndef QTMATERIALSWITCH_H
 #define QTMATERIALSWITCH_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QAbstractButton>
 
 class QtMaterialSwitchPrivate;
 
-class QtMaterialSwitch : public QAbstractButton
+class QTMATERIALWIDGETS_EXPORT QtMaterialSwitch : public QAbstractButton
 {
     Q_OBJECT
 

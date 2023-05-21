@@ -1,13 +1,15 @@
 #ifndef QTMATERIALSYSTEMBAR_H
 #define QTMATERIALSYSTEMBAR_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QWidget>
 
 #include <QBasicTimer>
 
 class QtMaterialSystemBarPrivate;
 
-class QtMaterialSystemBar : public QWidget
+class QTMATERIALWIDGETS_EXPORT QtMaterialSystemBar : public QWidget
 {
     Q_OBJECT
 

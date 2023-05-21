@@ -1,12 +1,14 @@
 #ifndef QTMATERIALBUTTONLIST_H
 #define QTMATERIALBUTTONLIST_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QIcon>
 #include <QWidget>
 
 class QtMaterialButtonListPrivate;
 
-class QtMaterialButtonList : public QWidget
+class QTMATERIALWIDGETS_EXPORT QtMaterialButtonList : public QWidget
 {
     Q_OBJECT
 

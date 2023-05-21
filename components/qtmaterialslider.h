@@ -1,6 +1,8 @@
 #ifndef QTMATERIALSLIDER_H
 #define QTMATERIALSLIDER_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QAbstractSlider>
 
 #include <QScopedPointer>
@@ -9,7 +11,7 @@
 
 class QtMaterialSliderPrivate;
 
-class QtMaterialSlider : public QAbstractSlider
+class QTMATERIALWIDGETS_EXPORT QtMaterialSlider : public QAbstractSlider
 {
     Q_OBJECT
 

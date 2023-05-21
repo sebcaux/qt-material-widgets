@@ -1,13 +1,15 @@
 #ifndef QTMATERIALTEXTFIELD_H
 #define QTMATERIALTEXTFIELD_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QLineEdit>
 
 #include <QColor>
 
 class QtMaterialTextFieldPrivate;
 
-class QtMaterialTextField : public QLineEdit
+class QTMATERIALWIDGETS_EXPORT QtMaterialTextField : public QLineEdit
 {
     Q_OBJECT
 

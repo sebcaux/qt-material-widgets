@@ -1,11 +1,13 @@
 #ifndef QTMATERIALWIDGET_H
 #define QTMATERIALWIDGET_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QWidget>
 
 class QtMaterialWidgetPrivate;
 
-class QtMaterialWidget : public QWidget
+class QTMATERIALWIDGETS_EXPORT QtMaterialWidget : public QWidget
 {
     Q_OBJECT
 

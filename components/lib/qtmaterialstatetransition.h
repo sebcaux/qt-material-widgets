@@ -1,11 +1,13 @@
 #ifndef QTMATERIALSTATETRANSITION_H
 #define QTMATERIALSTATETRANSITION_H
 
+#include "../qtmaterialwidgets.h"
+
 #include <QAbstractTransition>
 
 #include "lib/qtmaterialstatetransitionevent.h"
 
-class QtMaterialStateTransition : public QAbstractTransition
+class QTMATERIALWIDGETS_EXPORT QtMaterialStateTransition : public QAbstractTransition
 {
     Q_OBJECT
 

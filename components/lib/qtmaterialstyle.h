@@ -1,12 +1,14 @@
 #ifndef QTMATERIALSTYLE_H
 #define QTMATERIALSTYLE_H
 
+#include "../qtmaterialwidgets.h"
+
 #include <QCommonStyle>
 
 #include "lib/qtmaterialstyle_p.h"
 #include "lib/qtmaterialtheme.h"
 
-class QtMaterialStyle : public QCommonStyle
+class QTMATERIALWIDGETS_EXPORT QtMaterialStyle : public QCommonStyle
 {
     Q_OBJECT
 

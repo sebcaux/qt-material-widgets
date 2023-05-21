@@ -1,13 +1,15 @@
 #ifndef QTMATERIALLABEL_H
 #define QTMATERIALLABEL_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QLabel>
 
 #include "lib/qtmaterialtheme.h"
 
 class QtMaterialLabelPrivate;
 
-class QtMaterialLabel : public QLabel
+class QTMATERIALWIDGETS_EXPORT QtMaterialLabel : public QLabel
 {
     Q_OBJECT
 

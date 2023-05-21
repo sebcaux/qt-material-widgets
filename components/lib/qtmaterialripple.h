@@ -1,6 +1,8 @@
 #ifndef QTMATERIALRIPPLE_H
 #define QTMATERIALRIPPLE_H
 
+#include "../qtmaterialwidgets.h"
+
 #include <QParallelAnimationGroup>
 
 #include <QBrush>
@@ -10,7 +12,7 @@
 
 class QtMaterialRippleOverlay;
 
-class QtMaterialRipple : public QParallelAnimationGroup
+class QTMATERIALWIDGETS_EXPORT QtMaterialRipple : public QParallelAnimationGroup
 {
     Q_OBJECT
 

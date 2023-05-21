@@ -1,6 +1,8 @@
 #ifndef QTMATERIALSTATETRANSITIONEVENT_H
 #define QTMATERIALSTATETRANSITIONEVENT_H
 
+#include "../qtmaterialwidgets.h"
+
 #include <QEvent>
 
 enum QtMaterialStateTransitionType
@@ -31,7 +33,7 @@ enum QtMaterialStateTransitionType
     MaxTransitionType = 65535
 };
 
-struct QtMaterialStateTransitionEvent : public QEvent
+struct QTMATERIALWIDGETS_EXPORT QtMaterialStateTransitionEvent : public QEvent
 {
     QtMaterialStateTransitionEvent(QtMaterialStateTransitionType type)
         : QEvent(QEvent::Type(QEvent::User + 1)),

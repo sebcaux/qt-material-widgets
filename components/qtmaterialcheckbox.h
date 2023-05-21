@@ -1,11 +1,13 @@
 #ifndef QTMATERIALCHECKBOX_H
 #define QTMATERIALCHECKBOX_H
 
+#include "qtmaterialwidgets.h"
+
 #include "lib/qtmaterialcheckable.h"
 
 class QtMaterialCheckBoxPrivate;
 
-class QtMaterialCheckBox : public QtMaterialCheckable
+class QTMATERIALWIDGETS_EXPORT QtMaterialCheckBox : public QtMaterialCheckable
 {
     Q_OBJECT
 

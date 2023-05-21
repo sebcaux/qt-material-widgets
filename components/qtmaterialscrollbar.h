@@ -1,11 +1,13 @@
 #ifndef QTMATERIALSCROLLBAR_H
 #define QTMATERIALSCROLLBAR_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QScrollBar>
 
 class QtMaterialScrollBarPrivate;
 
-class QtMaterialScrollBar : public QScrollBar
+class QTMATERIALWIDGETS_EXPORT QtMaterialScrollBar : public QScrollBar
 {
     Q_OBJECT
 

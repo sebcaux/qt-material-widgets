@@ -1,6 +1,9 @@
 TEMPLATE = lib
-CONFIG += staticlib
 QT += core gui widgets
+TARGET = qtmaterialwidgets
+DESTDIR = "$$PWD/../bin"
+
+DEFINES += QTMATERIALWIDGETS_EXPORT_LIB
 
 greaterThan(QT_MAJOR_VERSION, 5) {
     QT += statemachine
@@ -138,7 +141,8 @@ HEADERS = \
     $$PWD/qtmaterialtextfield_internal.h \
     $$PWD/qtmaterialtextfield_p.h \
     $$PWD/qtmaterialwidget.h \
-    $$PWD/qtmaterialwidget_p.h
+    $$PWD/qtmaterialwidget_p.h \
+    $$PWD/qtmaterialwidgets.h
 
 RESOURCES += \
     $$PWD/resources.qrc

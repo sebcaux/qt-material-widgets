@@ -1,11 +1,13 @@
 #ifndef QTMATERIALCANVAS_H
 #define QTMATERIALCANVAS_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QScrollArea>
 
 class QtMaterialCanvasPrivate;
 
-class QtMaterialCanvas : public QScrollArea
+class QTMATERIALWIDGETS_EXPORT QtMaterialCanvas : public QScrollArea
 {
     Q_OBJECT
 

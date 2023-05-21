@@ -1,13 +1,15 @@
 #ifndef QTMATERIALBADGE_H
 #define QTMATERIALBADGE_H
 
+#include "qtmaterialwidgets.h"
+
 #include "lib/qtmaterialoverlaywidget.h"
 
 #include <QIcon>
 
 class QtMaterialBadgePrivate;
 
-class QtMaterialBadge : public QtMaterialOverlayWidget
+class QTMATERIALWIDGETS_EXPORT QtMaterialBadge : public QtMaterialOverlayWidget
 {
     Q_OBJECT
 

@@ -1,11 +1,13 @@
 #ifndef QTMATERIALSNACKBAR_H
 #define QTMATERIALSNACKBAR_H
 
+#include "qtmaterialwidgets.h"
+
 #include "lib/qtmaterialoverlaywidget.h"
 
 class QtMaterialSnackbarPrivate;
 
-class QtMaterialSnackbar : public QtMaterialOverlayWidget
+class QTMATERIALWIDGETS_EXPORT QtMaterialSnackbar : public QtMaterialOverlayWidget
 {
     Q_OBJECT
 

@@ -1,13 +1,15 @@
 #ifndef QTMATERIALAVATAR_H
 #define QTMATERIALAVATAR_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QWidget>
 
 #include "lib/qtmaterialtheme.h"
 
 class QtMaterialAvatarPrivate;
 
-class QtMaterialAvatar : public QWidget
+class QTMATERIALWIDGETS_EXPORT QtMaterialAvatar : public QWidget
 {
     Q_OBJECT
 

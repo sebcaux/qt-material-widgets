@@ -1,13 +1,15 @@
 #ifndef QTMATERIALPROGRESS_H
 #define QTMATERIALPROGRESS_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QProgressBar>
 
 #include "lib/qtmaterialtheme.h"
 
 class QtMaterialProgressPrivate;
 
-class QtMaterialProgress : public QProgressBar
+class QTMATERIALWIDGETS_EXPORT QtMaterialProgress : public QProgressBar
 {
     Q_OBJECT
 

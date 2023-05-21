@@ -1,6 +1,8 @@
 #ifndef QTMATERIALDIALOG_H
 #define QTMATERIALDIALOG_H
 
+#include "qtmaterialwidgets.h"
+
 #include "lib/qtmaterialoverlaywidget.h"
 
 #include <QScopedPointer>
@@ -8,7 +10,7 @@
 class QLayout;
 class QtMaterialDialogPrivate;
 
-class QtMaterialDialog : public QtMaterialOverlayWidget
+class QTMATERIALWIDGETS_EXPORT QtMaterialDialog : public QtMaterialOverlayWidget
 {
     Q_OBJECT
 

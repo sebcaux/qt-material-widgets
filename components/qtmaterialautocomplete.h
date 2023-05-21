@@ -1,11 +1,13 @@
 #ifndef QTMATERIALAUTOCOMPLETE_H
 #define QTMATERIALAUTOCOMPLETE_H
 
+#include "qtmaterialwidgets.h"
+
 #include "qtmaterialtextfield.h"
 
 class QtMaterialAutoCompletePrivate;
 
-class QtMaterialAutoComplete : public QtMaterialTextField
+class QTMATERIALWIDGETS_EXPORT QtMaterialAutoComplete : public QtMaterialTextField
 {
     Q_OBJECT
 

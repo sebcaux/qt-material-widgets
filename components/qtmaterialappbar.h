@@ -1,13 +1,15 @@
 #ifndef QTMATERIALAPPBAR_H
 #define QTMATERIALAPPBAR_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QWidget>
 
 #include "lib/qtmaterialtheme.h"
 
 class QtMaterialAppBarPrivate;
 
-class QtMaterialAppBar : public QWidget
+class QTMATERIALWIDGETS_EXPORT QtMaterialAppBar : public QWidget
 {
     Q_OBJECT
 

@@ -1,6 +1,8 @@
 #ifndef QTMATERIALTHEME_H
 #define QTMATERIALTHEME_H
 
+#include "../qtmaterialwidgets.h"
+
 #include <QObject>
 
 #include <QColor>
@@ -17,7 +19,7 @@ enum Color : unsigned int;
 
 class QtMaterialThemePrivate;
 
-class QtMaterialTheme : public QObject
+class QTMATERIALWIDGETS_EXPORT QtMaterialTheme : public QObject
 {
     Q_OBJECT
 

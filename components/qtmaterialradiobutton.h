@@ -5,7 +5,7 @@
 
 class QtMaterialRadioButtonPrivate;
 
-class QtMaterialRadioButton : public QtMaterialCheckable
+class QTMATERIALWIDGETS_EXPORT QtMaterialRadioButton : public QtMaterialCheckable
 {
     Q_OBJECT
 

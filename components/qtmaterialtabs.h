@@ -1,6 +1,8 @@
 #ifndef QTMATERIALTABS_H
 #define QTMATERIALTABS_H
 
+#include "qtmaterialwidgets.h"
+
 #include <QWidget>
 
 #include "lib/qtmaterialtheme.h"
@@ -11,7 +13,7 @@ class QtMaterialTabsPrivate;
 class QtMaterialTab;
 class QTabbar;
 
-class QtMaterialTabs : public QWidget
+class QTMATERIALWIDGETS_EXPORT QtMaterialTabs : public QWidget
 {
     Q_OBJECT
 
