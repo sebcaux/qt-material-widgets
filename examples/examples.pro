@@ -78,5 +78,6 @@ FORMS += \
 RESOURCES += \
     $$PWD/examples.qrc
 
+INCLUDEPATH += $$PWD/../components
 LIBS += -L"$$PWD/../bin"
 LIBS += -lqtmaterialwidgets

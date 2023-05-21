@@ -37,6 +37,12 @@ void QtMaterialStylePrivate::init()
  *  \internal
  */
 
+QtMaterialStyle &QtMaterialStyle::instance()
+{
+    static QtMaterialStyle instance;
+    return instance;
+}
+
 QtMaterialTheme *QtMaterialStyle::theme() const
 {
     Q_D(const QtMaterialStyle);

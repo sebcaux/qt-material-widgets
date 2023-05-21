@@ -13,7 +13,7 @@ class QTMATERIALWIDGETS_EXPORT QtMaterialStyle : public QCommonStyle
     Q_OBJECT
 
 public:
-    inline static QtMaterialStyle &instance();
+    static QtMaterialStyle &instance();
 
     QtMaterialTheme *theme() const;
     void setTheme(QtMaterialTheme *theme);
@@ -29,18 +29,10 @@ protected:
     const QScopedPointer<QtMaterialStylePrivate> d_ptr;
 
 private:
+    Q_DISABLE_COPY(QtMaterialStyle)
     Q_DECLARE_PRIVATE(QtMaterialStyle)
 
     QtMaterialStyle();
-
-    QtMaterialStyle(QtMaterialStyle const &);
-    void operator=(QtMaterialStyle const &);
 };
-
-inline QtMaterialStyle &QtMaterialStyle::instance()
-{
-    static QtMaterialStyle instance;
-    return instance;
-}
 
 #endif  // QTMATERIALSTYLE_H

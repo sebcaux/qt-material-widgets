@@ -1,11 +1,13 @@
 #ifndef QTMATERIALTHEMEBUILDER_H
 #define QTMATERIALTHEMEBUILDER_H
 
+#include "../qtmaterialwidgets.h"
+
 #include "lib/qtmaterialtheme.h"
 
 #include <QColor>
 
-class QtMaterialThemeBuilder
+class QTMATERIALWIDGETS_EXPORT QtMaterialThemeBuilder
 {
 public:
     static QtMaterialTheme *createRandomTheme();

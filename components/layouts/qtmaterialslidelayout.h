@@ -1,12 +1,14 @@
 #ifndef QTMATERIALSLIDELAYOUT_H
 #define QTMATERIALSLIDELAYOUT_H
 
+#include "../qtmaterialwidgets.h"
+
 #include <QEasingCurve>
 #include <QStackedLayout>
 
 class QtMaterialSlideLayoutPrivate;
 
-class QtMaterialSlideLayout : public QStackedLayout
+class QTMATERIALWIDGETS_EXPORT QtMaterialSlideLayout : public QStackedLayout
 {
     Q_OBJECT
 

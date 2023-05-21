@@ -8,7 +8,6 @@
 #include <QColor>
 #include <QFont>
 #include <QIcon>
-#include <QScopedPointer>
 
 namespace Material
 {
