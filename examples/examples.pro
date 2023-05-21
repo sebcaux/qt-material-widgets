@@ -80,4 +80,5 @@ RESOURCES += \
 
 INCLUDEPATH += $$PWD/../components
 LIBS += -L"$$PWD/../bin"
-LIBS += -lqtmaterialwidgets
+android:LIBS += -lqtmaterialwidgets_$${QT_ARCH}
+else:LIBS += -lqtmaterialwidgets
