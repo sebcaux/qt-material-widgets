@@ -2,6 +2,8 @@
 
 #include "qtmaterialdrawer.h"
 
+#include "lib/qtmaterialstyle.h"
+
 #include <QLayout>
 #include <QPainter>
 #include <QPropertyAnimation>
@@ -151,7 +153,7 @@ void QtMaterialDrawerWidget::paintEvent(QPaintEvent *event)
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::white);
+    brush.setColor(QtMaterialStyle::instance().themeColor(Material::ColorThemeCanvas));
     painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
 
