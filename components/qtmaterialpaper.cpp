@@ -107,6 +107,7 @@ void QtMaterialPaper::paintEvent(QPaintEvent *event)
     Q_UNUSED(event);
 
     QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(Qt::NoPen);
     painter.setBrush(backgroundColor());
     painter.drawRoundedRect(rect(), 5, 5);
