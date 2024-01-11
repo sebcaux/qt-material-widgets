@@ -648,15 +648,15 @@ bool QtMaterialFlatButton::event(QEvent *event)
         {
             if (isEnabled())
             {
-                if (!d->shadowStateMachine->isRunning())
+                /*if (!d->shadowStateMachine->isRunning())
                 {
                     d->shadowStateMachine->start();
-                }
+                }*/
                 d->shadowEffect->setEnabled(true);
             }
             else
             {
-                d->shadowStateMachine->stop();
+                //d->shadowStateMachine->stop();
                 d->shadowEffect->setEnabled(false);
             }
         }
