@@ -62,6 +62,7 @@ void QtMaterialAppBarLayout::setNavButton(QtMaterialIconButton *navButton)
     _navButton = navButton;
     if (_navButton)
     {
+        _navButton->setFocusPolicy(Qt::NoFocus);
         addChildWidget(_navButton);
     }
     invalidate();
@@ -93,6 +94,7 @@ QtMaterialIconButton *QtMaterialAppBarLayout::createIconButton(QAction *action)
     iconButton->setIconSize(_appBar->iconSize());
     iconButton->setColor(_appBar->foregroundColor());
     iconButton->setToolTip(action->text());
+    iconButton->setFocusPolicy(Qt::NoFocus);
     addChildWidget(iconButton);
     connect(iconButton, &QtMaterialIconButton::clicked, action, &QAction::trigger);
 
