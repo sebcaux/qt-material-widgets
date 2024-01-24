@@ -187,7 +187,10 @@ void QtMaterialScrollBar::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    painter.fillRect(rect(), canvasColor());
+    if (autoFillBackground())
+    {
+        painter.fillRect(rect(), canvasColor());
+    }
 
     int x;
     int y;
