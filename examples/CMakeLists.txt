@@ -1,0 +1,35 @@
+set(EXEC_TARGET_NAME ${PROJECT_NAME}-examples)
+
+
+file(GLOB_RECURSE MODULE_SOURCES *.h *.hpp *.cpp *.c *.ui *.rc)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${MODULE_SOURCES})
+
+
+file(GLOB_RECURSE QRC_SOURCE_FILES *.qrc)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${QRC_SOURCE_FILES})
+
+
+add_executable(${EXEC_TARGET_NAME})
+
+
+target_sources(${EXEC_TARGET_NAME}
+  PRIVATE
+    ${MODULE_SOURCES}
+    ${QRC_SOURCE_FILES}
+)
+
+target_link_libraries(${EXEC_TARGET_NAME} 
+PRIVATE ${QT_LIBRARIES} 
+PRIVATE ${PROJECT_NAME})
+
+set_target_properties(${EXEC_TARGET_NAME}
+  PROPERTIES
+    AUTOMOC         ON
+    AUTORCC         ON
+    AUTOUIC         ON
+    OUTPUT_NAME     ${EXEC_TARGET_NAME}
+    PROJECT_LABEL   ${EXEC_TARGET_NAME}
+    SOVERSION       ${PROJECT_VERSION_MAJOR}
+    VERSION         ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    DEBUG_POSTFIX   _debug
+)
